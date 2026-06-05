@@ -1,21 +1,13 @@
 # Archetyp-Erstellung: Patchwork Man (Horror Kompendium)
-# Stand: 2026-06-04T07:47:33
-# 13 Anomalie(n) von 39 Schritten
+# Stand: 2026-06-05T09:40:13
+# 5 Anomalie(n) von 29 Schritten
 
 ## ANOMALIEN
   [!] handicap(Rachsüchtig_schwer): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent(Arkane Resistenz): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent(Berserker): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Parts: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Parts kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Undead (+2 Toughness, +2 recover Shaken): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Undead (+2 Toughness, +2 recover Shaken) kosten=0 None
-  [!] talent_mit_aufstieg(Raufbold): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Eisenkiefer): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Wildheit): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Rachsüchtig_schwer" FEHLT; handicaps: "Hässlich" FEHLT; handicaps: "Außenseiter" FEHLT; handicaps: "Schwerfällig" FEHLT; handicaps: "Schwäche (Elektrizität)" FEHLT; talente: "Kräftig" FEHLT; talente: "Zäh" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Patchwork Man, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -28,32 +20,22 @@
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
-  - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
-  - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
-  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 0} Geld=500
-  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 8, 'handicap': 0} Geld=500
-  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 0} Geld=500
-  - fertigkeit(Kämpfen): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 0} Geld=500
-  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 0} Geld=500
-  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 0} Geld=500
-  - fertigkeit(Reparieren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 0} Geld=500
-  - fertigkeit(Überleben): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 1, 'handicap': 0} Geld=500
-  - fertigkeit(Verrückte Wissenschaft): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - talent(Arkane Resistenz): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - talent(Berserker): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - talent(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 2} Geld=500
+  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 2} Geld=500
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 8, 'handicap': 2} Geld=500
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 2} Geld=500
+  - fertigkeit(Kämpfen): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 2} Geld=500
+  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 2} Geld=500
+  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 2} Geld=500
+  - fertigkeit(Reparieren): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 2} Geld=500
+  - fertigkeit(Überleben): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 1, 'handicap': 2} Geld=500
+  - fertigkeit(Verrückte Wissenschaft): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=500
+  - talent(Mut): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Kevlarwestex1): ok=True kosten=200 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Arkane Resistenz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Berserker): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Mut): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Raufbold): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Eisenkiefer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
-  - talent_mit_aufstieg(Wildheit): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
   - talent_mit_aufstieg(Raufbold): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
   - talent_mit_aufstieg(Eisenkiefer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
+  - talent_mit_aufstieg(Mut): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300
   - talent_mit_aufstieg(Wildheit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=300

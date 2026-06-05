@@ -327,6 +327,32 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
       "aktion": "macht(Tierfreund)",
       "ok": true,
       "kosten": 0,
@@ -334,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 300,
       "warnung": null
@@ -347,10 +373,101 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 300,
       "warnung": null
+    },
+    {
+      "aktion": "kaufen(Kompositbogenx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 200,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pfeile (20)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 199,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 179,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 129,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Verstrickungsbeutelx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 79,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 79,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Rauchstabx2) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rauchstab zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Fariel_A.json)",
@@ -359,22 +476,33 @@
   ],
   "anomalien": [
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist FEHLT",
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 79,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Rauchstabx2) FORCE",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
+        "handicap": 0
       },
-      "vermoegen": 300
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Rauchstab zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -441,6 +569,12 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Überleben": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Glaube": {
         "wert": 8,
         "modifier": 0,
@@ -476,12 +610,12 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 0,
       "handicap_gesamt": 4,
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Elf"
   }

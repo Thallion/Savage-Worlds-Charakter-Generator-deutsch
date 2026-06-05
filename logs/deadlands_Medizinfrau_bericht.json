@@ -379,6 +379,19 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 125,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Messerx1)",
       "ok": true,
       "kosten": 2,
@@ -386,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 123,
       "warnung": null
@@ -399,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -412,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -425,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -438,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -451,7 +464,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -464,20 +477,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 119,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -490,7 +490,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -503,7 +503,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -516,7 +516,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 119,
       "warnung": null
@@ -647,9 +647,9 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 1,
+      "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": 0.0
+      "aufstiege": 0.5
     },
     "machtpunkte": 15,
     "vermoegen": 119,

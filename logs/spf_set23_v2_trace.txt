@@ -1,0 +1,440 @@
+
+============================================================
+BAUE: Kira
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Barbar': ok=True
+  Auto: {'talente_neu': ['Barbar', 'Berserker', 'Behände', 'Kampfrausch'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Handicap: Neugierig ok, HP=2
+  Handicap: Loyal ok, HP=3
+  Handicap: Arrogant ok, HP=4
+  Volk 'Halbelf': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 6, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEW=8 ROB=5
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
+  IST-Talente: ['Barbar', 'Behände', 'Berserker', 'Kampfrausch']
+  IST-Handicaps: ['Rüstungsbeschränkung_mittelschwer', 'Neugierig', 'Loyal', 'Arrogant']
+  IST-Mächte: []
+  DIFF: []
+
+============================================================
+BAUE: Teller
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Barde)': ok=True
+  Auto: {'talente_neu': ['AH (Barde)', 'Scharfzüngig'], 'handicaps_neu': ['Behindernde Rüstung_leicht'], 'maechte_neu': []}
+  Handicap: Impulsiv ok, HP=2
+  Handicap: Kränklich ok, HP=3
+  Handicap: Dünnhäutig_leicht ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Attribut 'Geschicklichkeit': ok=True
+  Freies Talent 'Charismatisch': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  Talent 'Formationskämpfer': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  PARADE=6 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+  IST-Talente: ['AH (Barde)', 'Charismatisch', 'Formationskämpfer', 'Scharfzüngig']
+  IST-Handicaps: ['Behindernde Rüstung_leicht', 'Impulsiv', 'Kränklich', 'Dünnhäutig_leicht']
+  IST-Mächte: ['Eigenschaft erhöhen/senken', 'Empathie', 'Verwirrung']
+  DIFF: ['fertigkeiten: Schießen soll W4, ist FEHLT', 'fertigkeiten: Heimlichkeit soll W6, ist W4', 'talente: "Formationskämpfer" ZUVIEL']
+
+============================================================
+BAUE: Brokar
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Kleriker)': ok=True
+  Auto: {'talente_neu': ['AH (Kleriker)', 'Gnade', 'Energie fokussieren'], 'handicaps_neu': ['Schwur_schwer'], 'maechte_neu': []}
+  Handicap: Ehrenkodex ok, HP=2
+  Handicap: Schwerzüngig ok, HP=4
+  Volk 'Zwerg': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 8}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 8, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  PARADE=5 BEW=5 ROB=9
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 51, 'machtpunkte': 10}
+  IST-Talente: ['AH (Kleriker)', 'Energie fokussieren', 'Gnade']
+  IST-Handicaps: ['Schwur_schwer', 'Ehrenkodex', 'Schwerzüngig']
+  IST-Mächte: ['Heilung', 'Schutz']
+  DIFF: []
+
+============================================================
+BAUE: Zyril
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Kämpfer': ok=True
+  Auto: {'talente_neu': ['Kämpfer', 'Kriegerische Anpassungsfähigkeit'], 'handicaps_neu': [], 'maechte_neu': []}
+  Handicap: Einarmig ok, HP=2
+  Handicap: Loyal ok, HP=3
+  Handicap: Rachsüchtig_leicht ok, HP=4
+  Volk 'Elf': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 8}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 8, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Lieblingswaffe': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=7 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 15, 'machtpunkte': 0}
+  IST-Talente: ['Kriegerische Anpassungsfähigkeit', 'Kämpfer', 'Lieblingswaffe']
+  IST-Handicaps: ['Einarmig', 'Loyal', 'Rachsüchtig_leicht', 'Schlank']
+  IST-Mächte: []
+  DIFF: []
+
+============================================================
+BAUE: Korva
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Schurke': ok=True
+  Auto: {'talente_neu': ['Schurke', 'Hinterhältiger Angriff'], 'handicaps_neu': ['Rüstungsbeschränkung_leicht'], 'maechte_neu': []}
+  Handicap: Verpflichtung_schwer ok, HP=2
+  Handicap: Wahnvorstellungen_leicht ok, HP=3
+  Handicap: Zögerlich ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Talent 'Berechnend': ok=True
+  Freies Attribut 'Verstand': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 8, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Elan': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 86, 'machtpunkte': 0}
+  IST-Talente: ['Berechnend', 'Elan', 'Hinterhältiger Angriff', 'Schurke']
+  IST-Handicaps: ['Rüstungsbeschränkung_leicht', 'Verpflichtung_schwer', 'Wahnvorstellungen_leicht', 'Zögerlich']
+  IST-Mächte: []
+  DIFF: []
+
+============================================================
+BAUE: Paelie
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Magier)': ok=True
+  Auto: {'talente_neu': ['AH (Magier)', 'Zauberbücher', 'Arkane Verbindung', 'Schule'], 'handicaps_neu': ['Behindernde Rüstung_jede'], 'maechte_neu': []}
+  Handicap: Beschämt_schwer ok, HP=2
+  Handicap: Gierig_leicht ok, HP=3
+  Handicap: Arm ok, HP=4
+  Volk 'Halbling': ok=True, auto={'talente_neu': ['Glück'], 'handicaps_neu': ['Größe -1 (Reduzierte Robustheit)'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 8, 'Stärke': 4, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  Talent 'Arkane Resistenz': ok, HP=2
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  PARADE=5 BEW=5 ROB=4
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+  IST-Talente: ['AH (Magier)', 'Arkane Resistenz', 'Arkane Verbindung', 'Glück', 'Schule', 'Zauberbücher']
+  IST-Handicaps: ['Behindernde Rüstung_jede', 'Beschämt_schwer', 'Gierig_leicht', 'Arm', 'Größe -1 (Reduzierte Robustheit)']
+  IST-Mächte: ['Geschoss', 'Schutz']
+  DIFF: []
+
+============================================================
+BAUE: Fariel
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Druide)': ok=True
+  Auto: {'talente_neu': ['AH (Druide)', 'Bindung mit der Natur', 'Naturgespür'], 'handicaps_neu': ['Schwur_schwer', 'Behindernde Rüstung_leicht'], 'maechte_neu': []}
+  Handicap: Pech ok, HP=2
+  Handicap: Loyal ok, HP=3
+  Handicap: Stur ok, HP=4
+  Volk 'Elf': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  Talent 'Rückzug': ok, HP=2
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  PARADE=5 BEW=6 ROB=5
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+  IST-Talente: ['AH (Druide)', 'Bindung mit der Natur', 'Naturgespür', 'Rückzug']
+  IST-Handicaps: ['Schwur_schwer', 'Behindernde Rüstung_leicht', 'Pech', 'Loyal', 'Stur', 'Schlank']
+  IST-Mächte: ['Tierfreund', 'Verstricken']
+  DIFF: []
+
+============================================================
+BAUE: Marn
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Waldläufer': ok=True
+  Auto: {'talente_neu': ['Waldläufer', 'Erzfeind', 'Bevorzugtes Gelände', 'Wildnis durchqueren'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Handicap: Blutrünstig ok, HP=2
+  Handicap: Feind_leicht ok, HP=3
+  Handicap: Hässlich_leicht ok, HP=4
+  Volk 'Halbork': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 4, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 4, 'Stärke': 8, 'Konstitution': 6, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 1, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Schnell': ok, HP=0
+  ✗ Talent: Rundumschlag
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=6 BEW=6 ROB=9
+  End-Punkte: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 84, 'machtpunkte': 0}
+  IST-Talente: ['Bevorzugtes Gelände', 'Erzfeind', 'Schnell', 'Waldläufer', 'Wildnis durchqueren']
+  IST-Handicaps: ['Rüstungsbeschränkung_mittelschwer', 'Blutrünstig', 'Feind_leicht', 'Hässlich_leicht', 'Außenseiter_leicht']
+  IST-Mächte: []
+  DIFF: ['talente: "Rundumschlag" FEHLT']
+
+============================================================
+BAUE: Gnor
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Zauberer)': ok=True
+  Auto: {'talente_neu': ['AH (Zauberer)', 'Blutlinie'], 'handicaps_neu': ['Behindernde Rüstung_jede'], 'maechte_neu': []}
+  Handicap: Angetrieben_schwer ok, HP=2
+  Handicap: Fies ok, HP=3
+  Handicap: Tick ok, HP=4
+  Volk 'Zwerg': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 8, 'Konstitution': 8}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 8, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  PARADE=5 BEW=5 ROB=6
+  End-Punkte: {'attribut': 0, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 15}
+  IST-Talente: ['AH (Zauberer)', 'Blutlinie']
+  IST-Handicaps: ['Behindernde Rüstung_jede', 'Angetrieben_schwer', 'Fies', 'Tick']
+  IST-Mächte: ['Eigenschaft erhöhen/senken']
+  DIFF: ['fertigkeiten: Zaubern soll W8, ist W6']
+
+============================================================
+BAUE: Madda
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Mönch': ok=True
+  Auto: {'talente_neu': ['Mönch', 'Betäubende Fäuste', 'Beweglichkeit', 'Kämpferische Disziplin', 'Waffenloser Schlag'], 'handicaps_neu': ['Rüstungsbeschränkung_jede'], 'maechte_neu': []}
+  Handicap: Heroisch ok, HP=2
+  Handicap: Klein ok, HP=3
+  Handicap: Nichtschwimmer ok, HP=4
+  Volk 'Halbork': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 6, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Raufbold': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=7 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
+  IST-Talente: ['Betäubende Fäuste', 'Beweglichkeit', 'Kämpferische Disziplin', 'Mönch', 'Raufbold', 'Waffenloser Schlag']
+  IST-Handicaps: ['Rüstungsbeschränkung_jede', 'Heroisch', 'Klein', 'Nichtschwimmer', 'Außenseiter_leicht']
+  IST-Mächte: []
+  DIFF: ['fertigkeiten: Heimlichkeit soll W6, ist W4']
+
+============================================================
+BAUE: Sil
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Paladin': ok=True
+  Auto: {'talente_neu': ['Paladin', 'Aura der Tapferkeit', 'Böses Entdecken', 'Böses Niederstrecken'], 'handicaps_neu': ['Ehrenkodex'], 'maechte_neu': []}
+  Handicap: Loyal ok, HP=1
+  Handicap: Verpflichtung_leicht ok, HP=2
+  Handicap: Schwur_schwer ok, HP=4
+  Volk 'Elf': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 8, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Glück': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEW=6 ROB=6
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 14, 'machtpunkte': 0}
+  IST-Talente: ['Aura der Tapferkeit', 'Böses Entdecken', 'Böses Niederstrecken', 'Glück', 'Paladin']
+  IST-Handicaps: ['Ehrenkodex', 'Loyal', 'Verpflichtung_leicht', 'Schwur_schwer', 'Schlank']
+  IST-Mächte: []
+  DIFF: []
+
+============================================================
+BAUE: Darla
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Handicap: Impulsiv ok, HP=2
+  Handicap: Loyal ok, HP=3
+  Handicap: Nichtschwimmer ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Attribut 'Verstand': ok=True
+  Freies Talent 'Auserwählter': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 8, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Freier AH 'AH (Magier)' (via pathfinder_klassentalent): ok=True, auto={'talente_neu': ['AH (Magier)', 'Zauberbücher', 'Arkane Verbindung', 'Schule'], 'handicaps_neu': ['Behindernde Rüstung_jede'], 'maechte_neu': []}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  PARADE=5 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 10}
+  IST-Talente: ['AH (Magier)', 'Arkane Verbindung', 'Auserwählter', 'Schule', 'Zauberbücher']
+  IST-Handicaps: ['Impulsiv', 'Loyal', 'Nichtschwimmer', 'Behindernde Rüstung_jede']
+  IST-Mächte: ['Geschoss', 'Eigenschaft erhöhen/senken', 'Schutz']
+  DIFF: []
+
+============================================================
+BAUE: Damiel
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Alchemist': ok=True
+  Auto: {'talente_neu': ['Alchemist', 'AH (Alchemist)'], 'handicaps_neu': ['Behindernde Rüstung_leicht'], 'maechte_neu': []}
+  Handicap: Impulsiv ok, HP=2
+  Handicap: Bevorzugte Klasse_schwer ok, HP=4
+  Volk 'Elf': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Schlank'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 6, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 8, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  Talent 'Berechnend': ok, HP=2
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 15}
+  PARADE=6 BEW=6 ROB=5
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 188, 'machtpunkte': 15}
+  IST-Talente: ['AH (Alchemist)', 'Alchemist', 'Berechnend']
+  IST-Handicaps: ['Behindernde Rüstung_leicht', 'Impulsiv', 'Bevorzugte Klasse_schwer', 'Schlank']
+  IST-Mächte: ['Abwehren', 'Gestaltwandeln']
+  DIFF: []
+
+============================================================
+BAUE: Alain
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Kavalier': ok=True
+  Auto: {'talente_neu': ['Kavalier'], 'handicaps_neu': [], 'maechte_neu': []}
+  Handicap: Impulsiv ok, HP=2
+  Handicap: Rachsüchtig_leicht ok, HP=3
+  Handicap: Schwur_schwer ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Attribut 'Konstitution': ok=True
+  Freies Talent 'Lieblingswaffe': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 6, 'Stärke': 8, 'Konstitution': 8}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 8, 'Konstitution': 8, 'Willenskraft': 6}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=7 BEW=6 ROB=8
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
+  IST-Talente: ['Kavalier', 'Lieblingswaffe']
+  IST-Handicaps: ['Impulsiv', 'Rachsüchtig_leicht', 'Schwur_schwer']
+  IST-Mächte: []
+  DIFF: []
+
+============================================================
+BAUE: Imrijka
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Inquisitor': ok=True
+  Auto: {'talente_neu': ['Inquisitor'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+  Handicap: Verpflichtung_leicht ok, HP=1
+  Handicap: Skrupellos_leicht ok, HP=2
+  Handicap: Stur ok, HP=3
+  Handicap: Schwur_leicht ok, HP=4
+  Volk 'Halbork': ok=True, auto={'talente_neu': [], 'handicaps_neu': ['Außenseiter_leicht'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {}}}
+  Soll-Attribute: {'Geschicklichkeit': 8, 'Verstand': 6, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  IST-Attr: {'Geschicklichkeit': 8, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Talent 'Elan': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  PARADE=5 BEW=6 ROB=9
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 57, 'machtpunkte': 0}
+  IST-Talente: ['Elan', 'Inquisitor']
+  IST-Handicaps: ['Rüstungsbeschränkung_mittelschwer', 'Verpflichtung_leicht', 'Skrupellos_leicht', 'Stur', 'Schwur_leicht', 'Außenseiter_leicht']
+  IST-Mächte: []
+  DIFF: ['fertigkeiten: Überleben soll W4, ist FEHLT']
+
+============================================================
+BAUE: Alahazra
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Orakel)': ok=True
+  Auto: {'talente_neu': ['AH (Orakel)'], 'handicaps_neu': ['Behindernde Rüstung_mittelschwer'], 'maechte_neu': []}
+  Handicap: Pech ok, HP=2
+  Handicap: Loyal ok, HP=3
+  Handicap: Arm ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Attribut 'Willenskraft': ok=True
+  Freies Talent 'Glück': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 6, 'Willenskraft': 10, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 6, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 10}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 10}
+  PARADE=4 BEW=6 ROB=7
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 57, 'machtpunkte': 10}
+  IST-Talente: ['AH (Orakel)', 'Glück']
+  IST-Handicaps: ['Behindernde Rüstung_mittelschwer', 'Pech', 'Loyal', 'Arm']
+  IST-Mächte: ['Arkanes entdecken/verbergen', 'Schutz vor Naturgewalten', 'Heilung']
+  DIFF: []
+
+============================================================
+BAUE: Balazar
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'Beschwörer': ok=True
+  Auto: {'talente_neu': ['Beschwörer', 'AH (Beschwörer)', 'Eidolon'], 'handicaps_neu': ['Behindernde Rüstung_leicht'], 'maechte_neu': []}
+  Handicap: Feind_schwer ok, HP=2
+  Handicap: Arm ok, HP=3
+  Handicap: Geheimnis_leicht ok, HP=4
+  Volk 'Gnom': ok=True, auto={'talente_neu': ['Gnomenmagie'], 'handicaps_neu': ['Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft'], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': False, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': False, 'freie_attribute': False, 'freie_fertigkeiten': True, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freie_fertigkeit': [{'index': 0, 'value': None}]}}}
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 4, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 11}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 8, 'Stärke': 4, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 11}
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 11}
+  PARADE=5 BEW=5 ROB=4
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 3, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 21, 'machtpunkte': 11}
+  IST-Talente: ['AH (Beschwörer)', 'Beschwörer', 'Eidolon', 'Gnomenmagie']
+  IST-Handicaps: ['Behindernde Rüstung_leicht', 'Feind_schwer', 'Arm', 'Geheimnis_leicht', 'Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft']
+  IST-Mächte: ['Abwehren', 'Heilung']
+  DIFF: []
+
+============================================================
+BAUE: Feiya
+  Start: {'attribut': 5, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 0}
+  Klasse 'AH (Hexenmeister)': ok=True
+  Auto: {'talente_neu': ['AH (Hexenmeister)', 'Vertrauter'], 'handicaps_neu': ['Behindernde Rüstung_jede'], 'maechte_neu': []}
+  Handicap: Angetrieben_schwer ok, HP=2
+  Handicap: Feind_leicht ok, HP=3
+  Handicap: Loyal ok, HP=4
+  Volk 'Mensch': ok=True, auto={'talente_neu': [], 'handicaps_neu': [], 'maechte_neu': []}
+  Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+  Freies Attribut 'Willenskraft': ok=True
+  Freies Talent 'Glück': ok=True
+  Soll-Attribute: {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8, 'Stärke': 6, 'Konstitution': 6}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  IST-Attr: {'Geschicklichkeit': 6, 'Verstand': 8, 'Stärke': 6, 'Konstitution': 6, 'Willenskraft': 8}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  Talent 'Aufmerksamkeit': ok, HP=0
+  Nach HP-Fert-Fallback: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 300, 'machtpunkte': 10}
+  PARADE=4 BEW=6 ROB=5
+  End-Punkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 44, 'machtpunkte': 10}
+  IST-Talente: ['AH (Hexenmeister)', 'Aufmerksamkeit', 'Glück', 'Vertrauter']
+  IST-Handicaps: ['Behindernde Rüstung_jede', 'Angetrieben_schwer', 'Feind_leicht', 'Loyal']
+  IST-Mächte: ['Eigenschaft erhöhen/senken', 'Schutz']
+  DIFF: []
+
+============================================================
+ZUSAMMENFASSUNG
+============================================================
+  Kira                      | OK              | anomalien=2 | diff=0
+  Teller                    | OK              | anomalien=3 | diff=3
+  Brokar                    | OK              | anomalien=0 | diff=0
+  Zyril                     | OK              | anomalien=0 | diff=0
+  Korva                     | OK              | anomalien=1 | diff=0
+  Paelie                    | OK              | anomalien=2 | diff=0
+  Fariel                    | OK              | anomalien=2 | diff=0
+  Marn                      | OK              | anomalien=3 | diff=1
+  Gnor                      | OK              | anomalien=3 | diff=1
+  Madda                     | OK              | anomalien=2 | diff=1
+  Sil                       | OK              | anomalien=0 | diff=0
+  Darla                     | OK              | anomalien=1 | diff=0
+  Damiel                    | OK              | anomalien=0 | diff=0
+  Alain                     | OK              | anomalien=2 | diff=0
+  Imrijka                   | OK              | anomalien=1 | diff=1
+  Alahazra                  | OK              | anomalien=0 | diff=0
+  Balazar                   | OK              | anomalien=1 | diff=0
+  Feiya                     | OK              | anomalien=0 | diff=0

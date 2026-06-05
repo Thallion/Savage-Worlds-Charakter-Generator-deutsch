@@ -366,6 +366,123 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Morgensternx1)",
+      "ok": true,
+      "kosten": 8,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 292,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Kurzbogenx1)",
+      "ok": true,
+      "kosten": 30,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 262,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Pfeile (20)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 261,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 259,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schuppenpanzerx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 159,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 109,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heiliges Wasserx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 84,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heiliges Symbol, Silberx1)",
+      "ok": true,
+      "kosten": 25,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 59,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Sonnenzepterx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 57,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Imrijka_A.json)",
       "ok": true
     }
@@ -384,7 +501,7 @@
         "handicap_gesamt": 4,
         "aufstiege": 0
       },
-      "vermoegen": 300
+      "vermoegen": 57
     }
   ],
   "anomalien_anzahl": 1,
@@ -489,7 +606,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 300,
+    "vermoegen": 57,
     "rang": "Anfänger",
     "volk": "Halbork"
   }

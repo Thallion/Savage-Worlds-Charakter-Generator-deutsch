@@ -340,6 +340,71 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Langschwertx1)",
+      "ok": true,
+      "kosten": 15,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 285,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schuppenpanzerx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 185,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 165,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 115,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistenfeuerx5)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 15,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Zyril_A.json)",
       "ok": true
     }
@@ -446,7 +511,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 300,
+    "vermoegen": 15,
     "rang": "Anfänger",
     "volk": "Elf"
   }

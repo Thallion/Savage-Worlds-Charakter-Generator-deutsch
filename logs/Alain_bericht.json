@@ -379,12 +379,143 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Rapierx1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 280,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Leichte Armbrustx1)",
+      "ok": true,
+      "kosten": 35,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 245,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bolzen (10)x2)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 243,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 223,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 203,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 153,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 153,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Gegengift, Phiolex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gegengift, Phiole zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Alain_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 153,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
+      "aktion": "kaufen(Gegengift, Phiolex1) FORCE",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Gegengift, Phiole zum Preis 0 gekauft"
+    }
+  ],
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -489,7 +620,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

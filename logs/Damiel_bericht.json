@@ -41,6 +41,19 @@
       "warnung": null
     },
     {
+      "aktion": "handicap(Bevorzugte Klasse_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
       "aktion": "volk(Elf)",
       "ok": true,
       "kosten": 0,
@@ -48,7 +61,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -61,7 +74,7 @@
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -74,7 +87,7 @@
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -87,7 +100,7 @@
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -100,7 +113,7 @@
       "punkte": {
         "attribut": 1,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -113,7 +126,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -126,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -139,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -152,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -165,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -178,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -191,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -204,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -217,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -230,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -243,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -256,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -269,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -282,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 300,
       "warnung": null
@@ -291,6 +304,32 @@
       "aktion": "talent(Berechnend)",
       "ok": true,
       "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Diebeskunst)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Diebeskunst)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
@@ -327,28 +366,77 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Rapierx1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 280,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 278,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 258,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 238,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 188,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Damiel_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Diebeskunst soll W6, ist FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0,
-        "handicap_gesamt": 2,
-        "aufstiege": 0
-      },
-      "vermoegen": 300
-    }
-  ],
-  "anomalien_anzahl": 1,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -409,6 +497,12 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Diebeskunst": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Okkultismus": {
         "wert": 4,
         "modifier": 0,
@@ -424,6 +518,7 @@
     },
     "handicaps": [
       "Behindernde Rüstung_leicht",
+      "Bevorzugte Klasse_schwer",
       "Impulsiv",
       "Schlank"
     ],
@@ -441,11 +536,11 @@
       "attribut": 0,
       "fertigkeit": 0,
       "handicap": 0,
-      "handicap_gesamt": 2,
+      "handicap_gesamt": 4,
       "aufstiege": 0
     },
     "machtpunkte": 15,
-    "vermoegen": 300,
+    "vermoegen": 188,
     "rang": "Anfänger",
     "volk": "Elf"
   }

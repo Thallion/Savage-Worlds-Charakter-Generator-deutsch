@@ -288,6 +288,32 @@
       "warnung": null
     },
     {
+      "aktion": "talent(Beidhändig)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Beidhändiger Fernkampf)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Colt Peacemaker (.45)x2)",
       "ok": true,
       "kosten": 30,
@@ -295,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 220,
       "warnung": null
@@ -308,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 218,
       "warnung": null
@@ -321,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 215,
       "warnung": null
@@ -334,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 209,
       "warnung": null
@@ -347,33 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 207,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Beidhändig)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 207,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Beidhändiger Fernkampf)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 207,
       "warnung": null
@@ -386,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 207,
       "warnung": null
@@ -399,86 +399,44 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 207,
       "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Ruhige Hände)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 207,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 0
       },
       "vermoegen": 207,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Revolverheldin_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent_mit_aufstieg(Ruhige Hände)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 207,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 207,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Wahrnehmung soll W6, ist W4; talente: \"Ruhige Hände\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
-      "vermoegen": 207
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -528,7 +486,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -579,20 +537,21 @@
       "Beidhändig",
       "Beidhändiger Fernkampf",
       "Duellant",
-      "Meisterschütze"
+      "Meisterschütze",
+      "Ruhige Hände"
     ],
     "maechte": [],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 4,
+      "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 207,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

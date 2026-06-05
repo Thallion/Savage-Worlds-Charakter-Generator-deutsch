@@ -2341,6 +2341,15 @@
         }
     },
     "handicaps": {
+        "Fies": {
+            "name": "Fies",
+            "stufe": "leicht",
+            "punkte": 1,
+            "beschreibung": "–1 auf Überredenproben.",
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "custom": false
+        },
         "Alt": {
             "name": "Alt",
             "stufe": "schwer",

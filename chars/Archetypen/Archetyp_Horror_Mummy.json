@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -499,7 +512,7 @@
             }
         },
         "handicaps": {
-            "Hässlich": {
+            "Langsam_leicht": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -557,7 +570,22 @@
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "VER×2",
+                "dauer": "Sofort"
+            },
+            "Schlummer": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 2,
+                "reichweite": "VER",
+                "dauer": "1 Stunde"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
@@ -569,7 +597,7 @@
         }
     },
     "selected_handicaps": [
-        "Hässlich",
+        "Langsam_leicht",
         "Zögerlich",
         "Materialkomponenten_schwer",
         "Schwäche (Feuer)",
@@ -582,7 +610,10 @@
         "Machtpunkte",
         "Neue Mächte"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Flächenschlag",
+        "Schlummer"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -609,11 +640,11 @@
         "Robe (dünn)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 5,
+    "verfuegbare_maechte": 3,
     "anzahl_maechte": 5,
     "machtpunkte": 20,
     "machtstufe": "III",
@@ -659,20 +690,13 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 6,
+                "wert": 10,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
+                "name": "Konstitution",
                 "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -748,29 +772,29 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
+                "typ": "fertigkeit",
+                "name": "Recherche",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 10,
-                "zahlungsquelle": "Aufstiege",
+                "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Recherche",
+                "name": "Alchemie",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Alchemie",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Alchemie",
                 "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5

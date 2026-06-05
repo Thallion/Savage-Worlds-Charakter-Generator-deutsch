@@ -106,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Geschicklichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -119,23 +119,10 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Konstitution)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 3
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
@@ -158,7 +145,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
+      "aktion": "attribut_mit_hc(Stärke)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -169,32 +156,6 @@
       },
       "vermoegen": 500,
       "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "fertigkeit(Athletik)",
@@ -431,32 +392,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Stärke)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit_mit_aufstieg(Provozieren)",
       "ok": true,
       "kosten": 0,
@@ -497,7 +432,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +441,11 @@
         "handicap": 0
       },
       "vermoegen": 480,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Beziehungen)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +454,7 @@
         "handicap": 0
       },
       "vermoegen": 480,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Beziehungen)",
@@ -546,32 +481,6 @@
       },
       "vermoegen": 480,
       "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Beziehungen)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Mystische Kräfte)",
@@ -592,32 +501,6 @@
     }
   ],
   "anomalien": [
-    {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 1
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
     {
       "aktion": "talent(Attraktiv)",
       "ok": false,
@@ -699,32 +582,6 @@
       "vermoegen": 480
     },
     {
-      "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Beziehungen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 480,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Beziehungen)",
       "ok": false,
       "kosten": 0,
@@ -751,16 +608,31 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "ok": true,
-      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 480
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "handicaps: \"Böse\" FEHLT; handicaps: \"Schwäche (Geweihtes Wasser)\" FEHLT; handicaps: \"Schwäche (Kaltes Eisen)\" ZUVIEL",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0,
+        "handicap_gesamt": 3,
+        "aufstiege": 0.5
+      },
+      "vermoegen": 480
     }
   ],
-  "anomalien_anzahl": 15,
+  "anomalien_anzahl": 12,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -862,8 +734,7 @@
       "Beschämt",
       "Gierig_leicht",
       "Skrupellos",
-      "Böse",
-      "Schwäche (Geweihtes Wasser)"
+      "Schwäche (Kaltes Eisen)"
     ],
     "talente": [
       "Infrarotsicht",

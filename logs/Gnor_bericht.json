@@ -366,6 +366,58 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Leichte Armbrustx1)",
+      "ok": true,
+      "kosten": 35,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 265,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bolzen (10)x2)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 263,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 213,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 213,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Gnor_A.json)",
       "ok": true
     }
@@ -385,6 +437,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 213,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
       "warnung": "fertigkeiten: Zaubern soll W8, ist W6",
@@ -397,10 +462,10 @@
         "handicap_gesamt": 4,
         "aufstiege": 0
       },
-      "vermoegen": 300
+      "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 3,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -508,7 +573,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 15,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Zwerg"
   }

@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Raphael",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "mp": 0,
+    "anomalien": 1,
+    "abweichungen": []
+  },
+  {
+    "name": "Jeanne",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "mp": 0,
+    "anomalien": 1,
+    "abweichungen": []
+  },
+  {
+    "name": "Klaas",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "mp": 0,
+    "anomalien": 3,
+    "abweichungen": [
+      "fertigkeiten: Heimlichkeit soll W6, ist W4",
+      "fertigkeiten: Wahrnehmung soll W6, ist W4"
+    ]
+  },
+  {
+    "name": "Klara",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "mp": 15,
+    "anomalien": 1,
+    "abweichungen": [
+      "fertigkeiten: Schießen soll W6, ist W4",
+      "fertigkeiten: Wahrnehmung soll W6, ist W4"
+    ]
+  }
+]

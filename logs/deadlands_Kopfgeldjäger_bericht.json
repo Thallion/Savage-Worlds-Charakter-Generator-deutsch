@@ -340,6 +340,32 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Wahrnehmung)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Winchester '73 (.44-40)x1)",
       "ok": true,
       "kosten": 25,
@@ -347,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 225,
       "warnung": null
@@ -360,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 195,
       "warnung": null
@@ -373,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 187,
       "warnung": null
@@ -386,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 147,
       "warnung": null
@@ -399,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 147,
       "warnung": null
@@ -412,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 147,
       "warnung": null
@@ -425,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 147,
       "warnung": null
@@ -438,86 +464,18 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 147,
       "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 147,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 147,
-      "warnung": "Aktion lieferte False/None"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Kopfgeldjäger_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 147,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 147,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W6, ist W4; fertigkeiten: Wahrnehmung soll W6, ist W4",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
-      "vermoegen": 147
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -567,7 +525,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -585,7 +543,7 @@
         "ausgewaehlt": false
       },
       "Überleben": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -619,7 +577,7 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 0,
       "handicap_gesamt": 4,
       "aufstiege": 0
     },

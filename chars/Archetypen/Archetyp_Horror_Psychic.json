@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -534,7 +547,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Visionen": {
+            "Seher": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -599,7 +612,7 @@
         "AH (Psionischer Ermittler)",
         "Aufmerksamkeit",
         "Sechster Sinn",
-        "Visionen",
+        "Seher",
         "Kühler Kopf"
     ],
     "selected_maechte": [
@@ -794,7 +807,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Visionen",
+                "name": "Seher",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

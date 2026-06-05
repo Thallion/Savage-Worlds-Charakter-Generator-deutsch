@@ -380,7 +380,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -529,7 +529,33 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Zauberkomponentenbeutel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Zauberbuch, Magier (leer)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Schlummer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Arm",
@@ -572,11 +598,25 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
+    "selected_allgemeine_ausruestung": [
+        "Dolch",
+        "Zauberkomponentenbeutel",
+        "Zauberbuch, Magier (leer)",
+        "Abenteurerausrüstung",
+        "Schriftrolle: Schlummer"
+    ],
+    "selected_waffen": [
+        "Dolch"
+    ],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Dolch": 3,
+        "Zauberkomponentenbeutel": 1,
+        "Zauberbuch, Magier (leer)": 1,
+        "Abenteurerausrüstung": 1,
+        "Schriftrolle: Schlummer": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -589,11 +629,11 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 150,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
         "cost_entries": [
@@ -721,6 +761,20 @@
                 "name": "Arkane Resistenz",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 8,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             }
         ]
     }

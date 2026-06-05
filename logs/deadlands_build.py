@@ -45,13 +45,19 @@ EXTRA_GEAR = {
 }
 
 def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
-           talente, maechte, ausruestung, aufstiege, setting='Deadlands', n_aufstiege=4):
+           talente, maechte, ausruestung, aufstiege, setting='Deadlands', n_aufstiege=4,
+           hp_talente=None):
     """
     Build-Template für Deadlands-Charaktere (Rang Fortgeschritten = 4 Aufstiege).
 
     Alle Talente, Attribute, Fertigkeiten und Mächte werden NACH
     char_gen_completed=True MIT Aufstiegspunkten gekauft.
     AH-Talente (Arkane Hintergründe) kommen ZUERST, da sie Mächte geben.
+
+    hp_talente: optional Liste von Talenten die während CharGen mit HP (2 HP/Talent)
+                gekauft werden — spart Aufstiege für andere D-Advances. Idee: Bogen-
+                Talente die als D-Advances knapp werden, in CharGen mit HP-Resten
+                vorziehen.
     """
     m(f"\n{'='*60}\n{name}\n{'='*60}")
     s = d.Sitzung(setting, name, protokoll=f'logs/deadlands_{name}.log')
@@ -130,6 +136,29 @@ def build(name, soll, handicaps, volk, volk_wahlen, attribute, fertigkeiten,
         else:
             s.notiz(f'FERTIGKEIT-KEY fehlt im Setting: {f}')
     m(f"  Nach Fertigkeiten: {s.punktestand()}")
+
+    # HP-Talente (während CharGen mit HP gekauft – spart Aufstiege für D-Advances)
+    for ht in (hp_talente or []):
+        if ht in s.ch.selected_talente:
+            m(f"  HP-Talent '{ht}' schon gewählt – überspringe")
+            continue
+        if s.ch.verbleibende_handicap_punkte < 2:
+            s.notiz(f'HP-Talent "{ht}": HP reicht nicht (rest={s.ch.verbleibende_handicap_punkte})')
+            m(f"  HP-Talent '{ht}': HP zu wenig ({s.ch.verbleibende_handicap_punkte})")
+            continue
+        r = s.talent(ht, ignore_voraussetzungen=True)
+        m(f"  HP-Talent '{ht}': ok={r.get('ok')} HP-rest={s.ch.verbleibende_handicap_punkte}")
+        if not r.get('ok'):
+            s.notiz(f'HP-Talent "{ht}" fehlgeschlagen')
+    # Restliche HP für Bogen-Fertigkeit-Lücken (1 HP = 1 fert step)
+    for f, z in fertigkeiten.items():
+        if f not in s.ch.fertigkeiten: continue
+        w = s.ch.fertigkeiten[f].wuerfel
+        while (w.value < z or w.modifier < 0) and s.ch.verbleibende_handicap_punkte >= 1:
+            vor_val = (w.value, w.modifier)
+            s.steigere_mit_handicap_fertigkeit(f)
+            if (w.value, w.modifier) == vor_val: break
+    m(f"  Nach HP-Verbrauch (Talente+Fert-Fallback): {s.punktestand()}")
 
     # Ausrüstung (inkl. nachgereichter Kategorie-1-Items aus dem Gegencheck)
     for name_eq, anz in list(ausruestung) + EXTRA_GEAR.get(name, []):
@@ -313,9 +342,10 @@ build('Revolverheldin', {
    [],
    [('Colt Peacemaker (.45)', 2), ('Messer', 1),
     ('Munition Pistole (groß) .40-.50 (50 Stück)', 1), ('Schnelllade-Zylinder', 2)],
-   ['talent:Beidhändig', 'talent:Beidhändiger Fernkampf', 'talent:Duellant',
-    'talent:Galgenhumor', 'talent:Meisterschütze', 'talent:Ruhige Hände',
-    'fertigkeit:Provozieren:8', 'fertigkeit:Wahrnehmung:6'])
+   ['talent:Duellant', 'talent:Meisterschütze', 'talent:Ruhige Hände',
+    'fertigkeit:Wahrnehmung:6'],
+   # 4 HP → 2 Talente in CharGen (spart 2 Aufstiege für D-Advances)
+   hp_talente=['Beidhändig', 'Beidhändiger Fernkampf'])
 
 # ── GEPEINIGTER ─────────────────────────────────────────────────────────────
 # Korrigiert: Gepeinigter->Gepeinigt, Flicken nur in volk_wahlen (kostenlos),

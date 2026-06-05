@@ -15,8 +15,8 @@
       "vermoegen": 300
     },
     {
-      "aktion": "pathfinder_klassentalent(AH (Beschwörer))",
-      "ok": false,
+      "aktion": "pathfinder_klassentalent(Beschwörer)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -25,7 +25,7 @@
         "handicap": 0
       },
       "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "handicap(Feind_schwer)",
@@ -314,30 +314,121 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 150,
+      "warnung": null
+    },
+    {
       "aktion": "macht(Abwehren)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 3
       },
       "vermoegen": 150,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Heilung)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 4
+        "handicap": 3
       },
       "vermoegen": 150,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 148,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Handarmbrustx1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 128,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bolzen (10)x1)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 127,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 77,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Sonnenzepterx3)",
+      "ok": true,
+      "kosten": 6,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 71,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schriftrolle: Geschossx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 3
+      },
+      "vermoegen": 21,
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Balazar_A.json)",
@@ -346,88 +437,16 @@
   ],
   "anomalien": [
     {
-      "aktion": "pathfinder_klassentalent(AH (Beschwörer))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: KLASSE \"AH (Beschwörer)\" nicht wählbar",
+      "aktion": "NOTIZ: Ausrüstung fehlt im Katalog: Keule",
       "ok": true,
-      "warnung": "KLASSE \"AH (Beschwörer)\" nicht wählbar",
+      "warnung": "Ausrüstung fehlt im Katalog: Keule",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
-      "vermoegen": 300
-    },
-    {
-      "aktion": "macht(Abwehren)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 150,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Macht fehlt: Abwehren",
-      "ok": true,
-      "warnung": "Macht fehlt: Abwehren",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 150
-    },
-    {
-      "aktion": "macht(Heilung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4
-      },
-      "vermoegen": 150,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Macht fehlt: Heilung",
-      "ok": true,
-      "warnung": "Macht fehlt: Heilung",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 150
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Überleben soll W4, ist FEHLT; maechte: \"Abwehren\" FEHLT; maechte: \"Heilung\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 4,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
       "vermoegen": 150
     }
   ],
-  "anomalien_anzahl": 7,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -494,6 +513,12 @@
         "grundfertigkeit": false,
         "ausgewaehlt": false
       },
+      "Überleben": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
       "Reiten": {
         "wert": 4,
         "modifier": 0,
@@ -521,6 +546,7 @@
     },
     "handicaps": [
       "Arm",
+      "Behindernde Rüstung_leicht",
       "Feind_schwer",
       "Geheimnis_leicht",
       "Langsam_leicht",
@@ -528,19 +554,25 @@
       "Zwanghaft"
     ],
     "talente": [
+      "Beschwörer",
+      "AH (Beschwörer)",
+      "Eidolon",
       "Gnomenmagie"
     ],
-    "maechte": [],
+    "maechte": [
+      "Abwehren",
+      "Heilung"
+    ],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 4,
+      "handicap": 3,
       "handicap_gesamt": 4,
       "aufstiege": 0
     },
-    "machtpunkte": 1,
-    "vermoegen": 150,
+    "machtpunkte": 11,
+    "vermoegen": 21,
     "rang": "Anfänger",
     "volk": "Gnom"
   }

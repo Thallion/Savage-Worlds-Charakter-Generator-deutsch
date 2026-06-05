@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Leomara",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 2,
+    "hp_gesamt": 4,
+    "mp": 0,
+    "anomalien": 4,
+    "abweichungen": []
+  },
+  {
+    "name": "Hesindian",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 3,
+    "hp_gesamt": 4,
+    "mp": 15,
+    "anomalien": 3,
+    "abweichungen": []
+  },
+  {
+    "name": "Romoxosch",
+    "attr_rest": 0,
+    "fert_rest": 1,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "mp": 0,
+    "anomalien": 3,
+    "abweichungen": []
+  },
+  {
+    "name": "Angrond",
+    "attr_rest": 1,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 3,
+    "mp": 0,
+    "anomalien": 1,
+    "abweichungen": []
+  }
+]

@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -512,7 +525,7 @@
                 "neue_maechte": 3,
                 "machtpunkte": 10
             },
-            "Stiller Wirker": {
+            "Stillzauberer": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -568,7 +581,7 @@
     ],
     "selected_talente": [
         "AH (Okkultist)",
-        "Stiller Wirker",
+        "Stillzauberer",
         "Neue Mächte"
     ],
     "selected_maechte": [
@@ -770,7 +783,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Stiller Wirker",
+                "name": "Stillzauberer",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

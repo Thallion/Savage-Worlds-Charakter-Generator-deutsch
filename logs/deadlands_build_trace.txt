@@ -12,6 +12,7 @@ Agent
   TALENT('Agent'): ok=True, kosten=2, kostenart=Handicap-Punkte
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Mumm', 'Agent']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Ermittler: ok=True
     talent Mumm: bereits ausgewählt
@@ -37,6 +38,7 @@ Gesegneter
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}, talente=['Auserwählter', 'AH (Gesegneter)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Auserwählter: bereits ausgewählt
     talent Ermutigen: ok=True
@@ -64,6 +66,7 @@ Chi-Meisterin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}, talente=['Ausweichen', 'AH (Chi-Meister)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Finte: ok=True
     talent Kampfkünstler: ok=True
@@ -87,6 +90,7 @@ Entdecker
   Nach Attributen: {'attribut': 0, 'fertigkeit': 17, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 17, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Kundschafter']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Elan: ok=True
     talent Kundschafter: bereits ausgewählt
@@ -108,18 +112,17 @@ Revolverheldin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Galgenhumor']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  HP-Talent 'Beidhändig': ok=True HP-rest=2
+  HP-Talent 'Beidhändiger Fernkampf': ok=True HP-rest=0
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
-    talent Beidhändig: ok=True
-    talent Beidhändiger Fernkampf: ok=True
     talent Duellant: ok=True
-    talent Galgenhumor: bereits ausgewählt
     talent Meisterschütze: ok=True
-    talent Ruhige Hände: ok=False
-    fertigkeit Provozieren auf 8
-    fertigkeit Wahrnehmung auf 4
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 207, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Wahrnehmung soll W6, ist W4', 'talente: "Ruhige Hände" FEHLT']
-  → Revolverheldin anomalien=3
+    talent Ruhige Hände: ok=True
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 207, 'machtpunkte': 0}
+  DIFF: []
+  → Revolverheldin anomalien=0
 
 ============================================================
 Gepeinigter
@@ -137,6 +140,7 @@ Gepeinigter
   TALENT('Killerinstinkt'): ok=True, kosten=0, kostenart=None
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=5)', 'rang': 'Anfänger', 'aufstiege_gesamt': 5, 'verbleibende_aufstiege': 5}
     talent Killerinstinkt: ok=True
     talent Gepeinigt: ok=True
@@ -161,6 +165,7 @@ Zauberschützin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}, talente=['Berechnend', 'AH (Taschenspieler)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Neue Mächte: ok=True
     macht Munitionszauber: ok=True
@@ -185,6 +190,7 @@ Taschenspieler
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}, talente=['Falsch Spielen', 'AH (Taschenspieler)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Falsch Spielen: bereits ausgewählt
     talent AH (Taschenspieler): bereits ausgewählt
@@ -213,6 +219,7 @@ Verrückte Wissenschaftlerin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}, talente=['Wahres Genie', 'AH (Verrückte Wissenschaft)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Machtpunkte: ok=True
     talent Neue Mächte: ok=True
@@ -222,7 +229,7 @@ Verrückte Wissenschaftlerin
     fertigkeit Verrückte Wissenschaft auf 8
     macht Illusion: ok=True
     macht Wachsen/Schrumpfen: ok=True
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.5, 'vermoegen': 203, 'machtpunkte': 20}
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 1.0, 'vermoegen': 203, 'machtpunkte': 20}
   DIFF: []
   → Verrückte Wissenschaftlerin anomalien=0
 
@@ -237,6 +244,7 @@ Krieger
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Mumm']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Beidhändiger Kampf: ok=True
     talent Mach ihn nicht wütend!: ok=True
@@ -260,6 +268,7 @@ Territorialer Ranger
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Mutig']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Doppelschuss: ok=True
     talent Territorialer Ranger: ok=True
@@ -285,6 +294,7 @@ Medizinfrau
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}, talente=['Mutig', 'AH (Schamane)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 125, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=5)', 'rang': 'Anfänger', 'aufstiege_gesamt': 5, 'verbleibende_aufstiege': 5}
     talent Geschichtenerzähler: ok=True
     talent Fetisch: ok=True
@@ -296,7 +306,7 @@ Medizinfrau
     fertigkeit Wahrnehmung auf 6
     macht Linderung: ok=True
     macht Verwirrung: ok=True
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.0, 'vermoegen': 119, 'machtpunkte': 15}
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5, 'vermoegen': 119, 'machtpunkte': 15}
   DIFF: []
   → Medizinfrau anomalien=0
 
@@ -311,6 +321,7 @@ Cowgirl
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Tierempathie']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Tierempathie: bereits ausgewählt
     talent Im Sattel geboren: ok=True
@@ -333,17 +344,18 @@ Eingeborenen-Kundschafterin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Kundschafter']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Parkour: ok=True
     talent Kundschafter: bereits ausgewählt
     talent Naturbursche: ok=True
     fertigkeit Überleben auf 8
-    fertigkeit Wahrnehmung auf 6
+    fertigkeit Wahrnehmung auf 8
     fertigkeit Reiten auf 6
     fertigkeit Athletik auf 6
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 25, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Wahrnehmung soll W8, ist W6']
-  → Eingeborenen-Kundschafterin anomalien=2
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.5, 'vermoegen': 25, 'machtpunkte': 0}
+  DIFF: []
+  → Eingeborenen-Kundschafterin anomalien=0
 
 ============================================================
 Metallmagier
@@ -357,6 +369,7 @@ Metallmagier
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}, talente=['Kühler Kopf', 'AH (Verrückte Wissenschaft)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Neue Mächte: ok=True
     talent Metallmagier: ok=True
@@ -379,6 +392,7 @@ Kopfgeldjäger
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Gassenwissen']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Gassenwissen: bereits ausgewählt
     talent Keine Gnade: ok=True
@@ -386,11 +400,11 @@ Kopfgeldjäger
     talent Volltreffer: ok=True
     talent Bedrohlich: ok=True
     fertigkeit Schießen auf 8
-    fertigkeit Überleben auf 4
-    fertigkeit Wahrnehmung auf 4
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 147, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Überleben soll W6, ist W4', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
-  → Kopfgeldjäger anomalien=3
+    fertigkeit Überleben auf 6
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 147, 'machtpunkte': 0}
+  DIFF: []
+  → Kopfgeldjäger anomalien=0
 
 ============================================================
 Salonschönheit
@@ -404,17 +418,18 @@ Salonschönheit
   TALENT-LOOP: versuche 'Attraktiv', bereits_gewählt=True
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Attraktiv']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Gassenwissen: ok=True
     talent Geschichtenerzähler: ok=True
     talent Konter: ok=True
     talent Mutig: ok=True
     fertigkeit Darbietung auf 8
-    fertigkeit Überreden auf 6
-    fertigkeit Wahrnehmung auf 4
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 241, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Überreden soll W8, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
-  → Salonschönheit anomalien=3
+    fertigkeit Überreden auf 8
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 241, 'machtpunkte': 0}
+  DIFF: []
+  → Salonschönheit anomalien=0
 
 ============================================================
 Wundarzt
@@ -427,6 +442,7 @@ Wundarzt
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Galgenhumor']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Erniedrigen: ok=True
     talent Galgenhumor: bereits ausgewählt
@@ -452,6 +468,7 @@ Schamane
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}, talente=['Die Gunst des Geistes', 'AH (Schamane)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Heiliger/Unheiliger Krieger: ok=True
     talent Neue Mächte: ok=True
@@ -476,6 +493,7 @@ US-Marshal
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Eisenkiefer']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Aufmerksamkeit: ok=True
     talent Eisenkiefer: bereits ausgewählt
@@ -499,6 +517,7 @@ Vaquero
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Im Sattel geboren']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Hahnwedeln: ok=True
     talent Im Sattel geboren: bereits ausgewählt
@@ -522,6 +541,7 @@ Voodoopraktikerin
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}, talente=['Begünstigt', 'AH (Voodoopraktiker)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 15}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Machtpunkte: ok=True
     talent Neue Mächte: ok=True
@@ -531,7 +551,7 @@ Voodoopraktikerin
     fertigkeit Provozieren auf 4
     macht Heilung: ok=True
     macht Zorn der Petro-Loa: ok=True
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0.0, 'vermoegen': 248, 'machtpunkte': 20}
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 3, 'aufstiege': 0.5, 'vermoegen': 248, 'machtpunkte': 20}
   DIFF: []
   → Voodoopraktikerin anomalien=0
 
@@ -547,6 +567,7 @@ Hexe
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}, talente=['Vertrauter', 'AH (Hexe)']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 10}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Machtpunkte: ok=True
     talent Neue Mächte: ok=True
@@ -571,17 +592,18 @@ Investigativer Journalist
   Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Aufmerksamkeit']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
+  Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   → {'ok': True, 'aktion': 'abschliessen(n=4)', 'rang': 'Anfänger', 'aufstiege_gesamt': 4, 'verbleibende_aufstiege': 4}
     talent Aufmerksamkeit: bereits ausgewählt
     talent Ermittler: ok=True
     talent Geschichtenerzähler: ok=True
     talent Mumm: ok=True
-    fertigkeit Überreden auf 6
+    fertigkeit Überreden auf 8
     fertigkeit Recherche auf 8
-    fertigkeit Schießen auf 4
-    fertigkeit Wahrnehmung auf 4
-  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 205, 'machtpunkte': 0}
-  DIFF: ['fertigkeiten: Schießen soll W6, ist W4', 'fertigkeiten: Überreden soll W8, ist W6', 'fertigkeiten: Wahrnehmung soll W6, ist W4']
-  → Investigativer Journalist anomalien=4
+    fertigkeit Schießen auf 6
+    fertigkeit Wahrnehmung auf 6
+  Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 205, 'machtpunkte': 0}
+  DIFF: []
+  → Investigativer Journalist anomalien=1
 
 === FERTIG ===

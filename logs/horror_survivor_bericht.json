@@ -366,7 +366,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Schreikönigin/Schreikönig)",
+      "aktion": "talent(Scream Queen/King)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -457,7 +457,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Schreikönigin/Schreikönig)",
+      "aktion": "talent_mit_aufstieg(Scream Queen/King)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -483,7 +483,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Schreikönigin/Schreikönig)",
+      "aktion": "talent_mit_aufstieg(Scream Queen/King)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -515,7 +515,7 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(Schreikönigin/Schreikönig)",
+      "aktion": "talent(Scream Queen/King)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -647,9 +647,9 @@
     ],
     "talente": [
       "Mut",
-      "Schreikönigin/Schreikönig",
+      "Scream Queen/King",
       "Sehr Attraktiv",
-      "Schreikönigin/Schreikönig_2"
+      "Scream Queen/King_2"
     ],
     "maechte": [],
     "ausruestung": {},

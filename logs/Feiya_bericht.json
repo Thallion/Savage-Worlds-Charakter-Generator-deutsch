@@ -353,17 +353,17 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Wachsam)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
+      "aktion": "talent(Aufmerksamkeit)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Eigenschaft erhöhen/senken)",
@@ -373,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 300,
       "warnung": null
@@ -386,9 +386,100 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Stabx1)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx1)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 298,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 248,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heilertaschex1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 198,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Verstrickungsbeutelx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 148,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Sonnenzepterx2)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 144,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schriftrolle: Geschossx2)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 44,
       "warnung": null
     },
     {
@@ -396,46 +487,8 @@
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "talent(Wachsam)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Talent fehlt: Wachsam",
-      "ok": true,
-      "warnung": "Talent fehlt: Wachsam",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 300
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"Wachsam\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
-      "vermoegen": 300
-    }
-  ],
-  "anomalien_anzahl": 3,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -530,7 +583,8 @@
     "talente": [
       "AH (Hexenmeister)",
       "Vertrauter",
-      "Glück"
+      "Glück",
+      "Aufmerksamkeit"
     ],
     "maechte": [
       "Eigenschaft erhöhen/senken",
@@ -540,12 +594,12 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 0,
       "handicap_gesamt": 4,
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 300,
+    "vermoegen": 44,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

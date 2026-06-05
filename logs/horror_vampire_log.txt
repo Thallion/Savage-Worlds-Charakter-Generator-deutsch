@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Vampire (Horror Kompendium)
-# Stand: 2026-06-04T07:47:34
-# 14 Anomalie(n) von 39 Schritten
+# Stand: 2026-06-05T09:40:13
+# 9 Anomalie(n) von 35 Schritten
 
 ## ANOMALIEN
   [!] handicap(Angewohnheit_schwer): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -11,12 +11,7 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Undead: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Undead kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Charm (puppet): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Charm (puppet) kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Claws (Str+d6): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Claws (Str+d6) kosten=0 None
-  [!] talent_mit_aufstieg(Attraktiv): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] attribut_mit_aufstieg(Willenskraft): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] fertigkeit_mit_aufstieg(Einschüchtern): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] fertigkeit_mit_aufstieg(Überreden): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Angewohnheit_schwer" FEHLT kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=attribute: Willenskraft soll W6, ist W8; fertigkeiten: Einschüchtern soll W6, ist W8; fertigkeiten: Überreden soll W6, ist W8; handicaps: "Angewohnheit_schwer" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Vampire, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -32,7 +27,7 @@
   - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Stärke): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
-  - attribut_mit_hc(Stärke): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
+  - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
   - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
   - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 10, 'handicap': 0} Geld=500
   - fertigkeit(Allgemeinwissen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 0} Geld=500
@@ -48,13 +43,9 @@
   - fertigkeit(Heimlichkeit) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Attraktiv): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Robe (dünn)x1): ok=True kosten=30 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - fertigkeit_mit_aufstieg(Heimlichkeit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - fertigkeit_mit_aufstieg(Heimlichkeit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(Attraktiv): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Willenskraft): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - fertigkeit_mit_aufstieg(Einschüchtern): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - fertigkeit_mit_aufstieg(Überreden): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Attraktiv): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - attribut_mit_aufstieg(Willenskraft): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - fertigkeit_mit_aufstieg(Einschüchtern): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - fertigkeit_mit_aufstieg(Überreden): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470

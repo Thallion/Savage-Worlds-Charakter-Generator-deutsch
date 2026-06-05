@@ -14,11 +14,11 @@
 
 ### Agent ↔ AGENT
 
-- **🔴 FEHLT_KATALOG** (2): `Ersatz-GatlingTrommel`, `Marke der Agency (+1 Überreden bei gesetzestreuen Typen)`
+- **🔴 FEHLT_KATALOG** (2): `Marke der Agency (+1 Überreden bei gesetzestreuen Typen)`, `Ersatz-GatlingTrommel`
 
 ### Chi-Meisterin ↔ CHI-MEISTERIN
 
-- **🔴 FEHLT_KATALOG** (4): `Deine Fäuste (Stä+W4)`, `Seidenfächer`, `Umhängetasche`, `Mantel`
+- **🔴 FEHLT_KATALOG** (4): `Seidenfächer`, `Umhängetasche`, `Mantel`, `Deine Fäuste (Stä+W4)`
 - **⚠ ZUVIEL** (1): `Messer`
 
 ### Cowgirl ↔ COWGIRL
@@ -32,7 +32,7 @@
 
 ### Entdecker ↔ ENTDECKER
 
-- **🔴 FEHLT_KATALOG** (4): `Vergrößerungsglas`, `Jägerkleidung und -hut`, `Pfeife`, `elegantes Monokel`
+- **🔴 FEHLT_KATALOG** (4): `Jägerkleidung und -hut`, `Pfeife`, `Vergrößerungsglas`, `elegantes Monokel`
 - **⚠ ZUVIEL** (1): `Munition Gewehr (klein) .38-44 (50 Stück)`
 
 ### Gepeinigter ↔ GEPEINIGTER
@@ -49,7 +49,7 @@
 
 ### Investigativer Journalist ↔ INVESTIGATIVER JOURNALIST
 
-- **🔴 FEHLT_KATALOG** (3): `Tasche für Equipment`, `verschiedene Stifte und Griffel`, `Notizbuch`
+- **🔴 FEHLT_KATALOG** (3): `verschiedene Stifte und Griffel`, `Notizbuch`, `Tasche für Equipment`
 - **⚠ ZUVIEL** (1): `Colt Lightning (.38)`
 
 ### Kopfgeldjäger ↔ KOPFGELDJÄGER
@@ -59,7 +59,7 @@
 
 ### Medizinfrau ↔ MEDIZINFRAU
 
-- **🔴 FEHLT_KATALOG** (2): `Knochenhalskette`, `Medizinbeutel`
+- **🔴 FEHLT_KATALOG** (2): `Medizinbeutel`, `Knochenhalskette`
 
 ### Metallmagier ↔ METALLMAGIER
 
@@ -76,7 +76,7 @@
 
 ### Territorialer Ranger ↔ TERRITORIALER RANGER
 
-- **🔴 FEHLT_KATALOG** (2): `Rangerabzeichen (+1 Überreden bei gesetzestreuen Typen)`, `Buch „Flüchtige vor der Justiz in den US-Territorien"`
+- **🔴 FEHLT_KATALOG** (2): `Buch „Flüchtige vor der Justiz in den US-Territorien"`, `Rangerabzeichen (+1 Überreden bei gesetzestreuen Typen)`
 
 ### US-Marshal ↔ US-MARSHAL
 

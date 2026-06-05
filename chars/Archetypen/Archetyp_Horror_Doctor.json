@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -540,7 +553,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Unerschütterlich": {
+            "Unerbittlich": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -573,7 +586,7 @@
         "Berserker",
         "Schwer zu töten",
         "Heiler_2",
-        "Unerschütterlich"
+        "Unerbittlich"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -790,7 +803,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Unerschütterlich",
+                "name": "Unerbittlich",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

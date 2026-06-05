@@ -1,0 +1,93 @@
+
+======================================================================
+BUILD: Arthan
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=205
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['AH (Wunder)', 'Heiler']
+  Handicaps: ['Ehrenkodex', 'Pazifist_leicht', 'Sanftmütig']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Arthan_A.json | anomalien=1
+
+======================================================================
+BUILD: Beatriz
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=50
+  Parade=5 Robustheit=7 Bewegung=6 Bennys=3
+  Talente: ['Beziehungen', 'Ermittler']
+  Handicaps: ['Angewohnheit_leicht', 'Ehrenkodex', 'Loyal']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Beatriz_A.json | anomalien=0
+
+======================================================================
+BUILD: Clementine
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=490
+  Parade=4 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Gelehrter', 'McGyver', 'Reparaturgenie']
+  Handicaps: ['Misstrauisch_schwer', 'Schwerhörig_leicht', 'Tick']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Clementine_A.json | anomalien=1
+
+======================================================================
+BUILD: The_Shroud
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=250
+  Parade=6 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Akrobat', 'Ruhige Hände']
+  Handicaps: ['Blutrünstig', 'Fies', 'Skrupellos']
+  DIFF: fertigkeiten: Wahrnehmung soll W6, ist W4
+  SAVED: chars/Archetypen/Archetyp_SWAE_The_Shroud_A.json | anomalien=1
+
+======================================================================
+BUILD: Aidan
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=250
+  Parade=4 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Attraktiv', 'Starker Wille']
+  Handicaps: ['Heldenhaft', 'Loyal', 'Sanftmütig']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Aidan_A.json | anomalien=1
+
+======================================================================
+BUILD: Sozius
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=1/3 Geld=500
+  Parade=4 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Ass am Steuer']
+  Handicaps: ['Dünnhäutig', 'Impulsiv']
+  DIFF: talente: "Aufmerksamkeit" FEHLT
+  SAVED: chars/Archetypen/Archetyp_SWAE_Sozius_A.json | anomalien=4
+
+======================================================================
+BUILD: Samael
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=1/3 Geld=400
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Beidhändig']
+  Handicaps: ['Angewohnheit_leicht', 'Feind_leicht', 'Gesucht_leicht']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Samael_A.json | anomalien=3
+
+======================================================================
+BUILD: Asera
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=2/4 Geld=500
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=3
+  Talente: ['Naturbursche']
+  Handicaps: ['Angetrieben_schwer', 'Blutrünstig']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Asera_A.json | anomalien=3
+
+======================================================================
+BUILD: Zoetta
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=500
+  Parade=5 Robustheit=5 Bewegung=5 Bennys=3
+  Talente: ['Anführer']
+  Handicaps: ['Langsam_leicht', 'Loyal', 'Pech']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_SWAE_Zoetta_A.json | anomalien=3
+
+ÜBERSICHT geschrieben: logs/ulisses/swae_uebersicht.json
+Gesamt: 9/9 Builds erfolgreich

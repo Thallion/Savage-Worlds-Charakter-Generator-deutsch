@@ -2000,8 +2000,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Unerschütterlich": {
-            "name": "Unerschütterlich",
+        "Unerbittlich": {
+            "name": "Unerbittlich",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [
@@ -2013,8 +2013,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Visionen": {
-            "name": "Visionen",
+        "Seher": {
+            "name": "Seher",
             "kategorie": "Hintergrund",
             "rang": "A",
             "voraussetzungen": [],
@@ -2070,8 +2070,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Stiller Wirker": {
-            "name": "Stiller Wirker",
+        "Stillzauberer": {
+            "name": "Stillzauberer",
             "kategorie": "Macht",
             "rang": "A",
             "voraussetzungen": [
@@ -2095,8 +2095,8 @@
             "ausgewaehlt": false,
             "aktiv": true
         },
-        "Schreikönigin/Schreikönig": {
-            "name": "Schreikönigin/Schreikönig",
+        "Scream Queen/King": {
+            "name": "Scream Queen/King",
             "kategorie": "Profi",
             "rang": "V",
             "voraussetzungen": [],

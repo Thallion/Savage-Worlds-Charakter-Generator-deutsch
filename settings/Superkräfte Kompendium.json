@@ -7339,6 +7339,22 @@
             "gewicht": 0,
             "beschreibung": "Großer Mannschaftstransporter für Superhelden-Teams.",
             "aktiv": true
+        },
+        "Peregrine-Sprungjet": {
+            "name": "Peregrine-Sprungjet",
+            "kategorie": "Fahrzeuge",
+            "kosten": 0,
+            "gewicht": 0,
+            "beschreibung": "Größe 8 (Riesig), Manöver +1, 1300 km/h, Robustheit 18 (4), Besatzung 1+5. Senkrechtstarter-Jet für stilvolle Weltreisen, brauchbar im Luftkampf. Optional: verknüpfte Impulsgatlings oder zwei Lafetten à vier Sidewinder-Raketen.",
+            "aktiv": true
+        },
+        "Grizzly-Gefechtspanzer": {
+            "name": "Grizzly-Gefechtspanzer",
+            "kategorie": "Fahrzeuge",
+            "kosten": 0,
+            "gewicht": 0,
+            "beschreibung": "Größe 9 (Riesig), Manöver -1, 80 km/h, Robustheit 50 (30), Besatzung 4. Schwere Panzerung, Ketten. Waffen: 120mm-Panzergeschütz (Stabilisatoren), 2× Impulsgatlinglaser (Pivotlafette auf Geschützturm).",
+            "aktiv": true
         }
     },
     "settingregeln": {

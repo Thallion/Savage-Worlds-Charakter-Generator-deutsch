@@ -340,6 +340,84 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Kriegshammerx1)",
+      "ok": true,
+      "kosten": 12,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 288,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Leichte Armbrustx1)",
+      "ok": true,
+      "kosten": 35,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 253,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bolzen (10)x2)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 251,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schuppenpanzerx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 151,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 101,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Heilertaschex1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 51,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Brokar_A.json)",
       "ok": true
     }
@@ -454,7 +532,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 300,
+    "vermoegen": 51,
     "rang": "Anfänger",
     "volk": "Zwerg"
   }

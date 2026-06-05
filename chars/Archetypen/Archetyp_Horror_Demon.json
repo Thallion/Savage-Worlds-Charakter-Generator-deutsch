@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -514,12 +527,7 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Böse": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
-            "Schwäche (Geweihtes Wasser)": {
+            "Schwäche (Kaltes Eisen)": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -566,8 +574,7 @@
         "Beschämt",
         "Gierig_leicht",
         "Skrupellos",
-        "Böse",
-        "Schwäche (Geweihtes Wasser)"
+        "Schwäche (Kaltes Eisen)"
     ],
     "selected_talente": [
         "Infrarotsicht",
@@ -601,7 +608,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -636,13 +643,6 @@
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
                 "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -657,6 +657,13 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -750,20 +757,6 @@
                 "name": "Provozieren",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {

@@ -1,0 +1,73 @@
+
+============================================================
+Imrijka
+============================================================
+  Geladen: AP=0 FP=0 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    fertigkeit Überleben: value=4 mod=0 (vor=(4, -2)) rest_auf=3.5
+  Final: Aufst=3.5/4 Rang=Anfänger
+  Talente: ['Elan', 'Inquisitor']
+  Handicaps: ['Außenseiter_leicht', 'Rüstungsbeschränkung_mittelschwer', 'Schwur_leicht', 'Skrupellos_leicht', 'Stur', 'Verpflichtung_leicht']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Imrijka_A.json
+
+============================================================
+Madda
+============================================================
+  Geladen: AP=0 FP=0 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    fertigkeit Heimlichkeit: value=6 mod=0 (vor=(4, 0)) rest_auf=3.5
+  Final: Aufst=3.5/4 Rang=Anfänger
+  Talente: ['Betäubende Fäuste', 'Beweglichkeit', 'Kämpferische Disziplin', 'Mönch', 'Raufbold', 'Waffenloser Schlag']
+  Handicaps: ['Außenseiter_leicht', 'Heroisch', 'Klein', 'Nichtschwimmer', 'Rüstungsbeschränkung_jede']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Madda_A.json
+
+============================================================
+Marn
+============================================================
+  Geladen: AP=0 FP=1 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    talent Rundumschlag: ok=True rest_auf=3
+  Final: Aufst=3/4 Rang=Anfänger
+  Talente: ['Bevorzugtes Gelände', 'Erzfeind', 'Rundumschlag', 'Schnell', 'Waldläufer', 'Wildnis durchqueren']
+  Handicaps: ['Außenseiter_leicht', 'Blutrünstig', 'Feind_leicht', 'Hässlich_leicht', 'Rüstungsbeschränkung_mittelschwer']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Marn_A.json
+
+============================================================
+Teller
+============================================================
+  Geladen: AP=0 FP=0 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    fertigkeit Schießen: value=4 mod=0 (vor=(4, -2)) rest_auf=3.5
+    fertigkeit Heimlichkeit: value=6 mod=0 (vor=(4, 0)) rest_auf=3.0
+  Final: Aufst=3.0/4 Rang=Anfänger
+  Talente: ['AH (Barde)', 'Charismatisch', 'Formationskämpfer', 'Scharfzüngig']
+  Handicaps: ['Behindernde Rüstung_leicht', 'Dünnhäutig_leicht', 'Impulsiv', 'Kränklich']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Teller_A.json
+
+============================================================
+Darla_ohneKlasse
+============================================================
+  Geladen: AP=0 FP=0 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    klassentalent AH (Magier): ok=True rest_auf=4
+  Final: Aufst=4/4 Rang=Anfänger
+  Talente: ['AH (Magier)', 'Arkane Verbindung', 'Auserwählter', 'Schule', 'Zauberbücher']
+  Handicaps: ['Behindernde Rüstung_jede', 'Impulsiv', 'Loyal', 'Nichtschwimmer']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Darla_ohneKlasse_A.json
+
+============================================================
+Gnor
+============================================================
+  Geladen: AP=0 FP=1 HP=0/4
+  char_gen_completed = True
+  Aufstiege: gesamt=4 verbleibend=4 Rang=Anfänger
+    fertigkeit Zaubern: value=8 mod=0 (vor=(6, 0)) rest_auf=3.0
+  Final: Aufst=3.0/4 Rang=Anfänger
+  Talente: ['AH (Zauberer)', 'Blutlinie']
+  Handicaps: ['Angetrieben_schwer', 'Behindernde Rüstung_jede', 'Fies', 'Tick']
+  GESPEICHERT: chars/Archetypen/Archetyp_Savage_Pathfinder_Gnor_A.json

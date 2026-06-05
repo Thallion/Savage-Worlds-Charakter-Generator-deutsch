@@ -171,7 +171,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
+      "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -431,32 +431,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit_mit_aufstieg(Okkultismus)",
       "ok": true,
       "kosten": 0,
@@ -497,7 +471,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +480,11 @@
         "handicap": 0
       },
       "vermoegen": 478,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Starker Wille)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +493,7 @@
         "handicap": 0
       },
       "vermoegen": 478,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Einschüchtern)",
@@ -546,32 +520,6 @@
       },
       "vermoegen": 478,
       "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Starker Wille)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Rundumschlag)",
@@ -664,32 +612,6 @@
       "vermoegen": 478
     },
     {
-      "aktion": "talent_mit_aufstieg(Attraktiv)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Starker Wille)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 478,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Rundumschlag)",
       "ok": false,
       "kosten": 0,
@@ -703,9 +625,9 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "ok": true,
-      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -714,7 +636,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "fertigkeiten: Einschüchtern soll W6, ist W8; handicaps: \"Schwur\" FEHLT",
+      "warnung": "fertigkeiten: Einschüchtern soll W6, ist W8; handicaps: \"Auffällig\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -727,7 +649,7 @@
       "vermoegen": 478
     }
   ],
-  "anomalien_anzahl": 12,
+  "anomalien_anzahl": 10,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -823,7 +745,7 @@
       "Arrogant",
       "Eifersüchtig",
       "Rachsüchtig_leicht",
-      "Auffällig"
+      "Schwur_schwer"
     ],
     "talente": [
       "Flug",

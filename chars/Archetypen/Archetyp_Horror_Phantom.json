@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -579,8 +592,8 @@
     "ausruestung_mengen": {
         "Kleidung, Alltag": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -599,13 +612,6 @@
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
@@ -638,13 +644,20 @@
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 8,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -730,13 +743,6 @@
                 "name": "Provozieren",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {

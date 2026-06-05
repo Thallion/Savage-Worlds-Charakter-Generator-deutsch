@@ -159,8 +159,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -452,6 +452,11 @@
                 "stufe": "schwer",
                 "punkte": 2
             },
+            "Bevorzugte Klasse_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
             "Impulsiv": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -501,10 +506,37 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Rapier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Behindernde Rüstung_leicht",
+        "Bevorzugte Klasse_schwer",
         "Impulsiv",
         "Schlank"
     ],
@@ -539,11 +571,29 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Rapier",
+        "Dolch",
+        "Ledertunika",
+        "Lederbeinlinge",
+        "Abenteurerausrüstung"
+    ],
+    "selected_waffen": [
+        "Rapier",
+        "Dolch"
+    ],
+    "selected_ruestungen": [
+        "Ledertunika",
+        "Lederbeinlinge"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Rapier": 1,
+        "Dolch": 1,
+        "Ledertunika": 1,
+        "Lederbeinlinge": 1,
+        "Abenteurerausrüstung": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -556,10 +606,10 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 188,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 2,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
@@ -688,6 +738,20 @@
                 "name": "Berechnend",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Diebeskunst",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Diebeskunst",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             }
         ]
     }

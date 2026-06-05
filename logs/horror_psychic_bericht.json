@@ -431,7 +431,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Visionen)",
+      "aktion": "talent_mit_aufstieg(Seher)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -557,7 +557,7 @@
       "AH (Psionischer Ermittler)",
       "Aufmerksamkeit",
       "Sechster Sinn",
-      "Visionen",
+      "Seher",
       "Kühler Kopf"
     ],
     "maechte": [

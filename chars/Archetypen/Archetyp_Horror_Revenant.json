@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -504,10 +517,10 @@
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Hässlich": {
+            "Schwur_schwer": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             },
             "Skrupellos": {
                 "ausgewaehlt": true,
@@ -575,7 +588,7 @@
     },
     "selected_handicaps": [
         "Blutrünstig",
-        "Hässlich",
+        "Schwur_schwer",
         "Skrupellos",
         "Stur"
     ],
@@ -616,7 +629,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -672,14 +685,14 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 6,
+                "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 8,
+                "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -765,20 +778,6 @@
                 "name": "Schießen",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 10,
-                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {

@@ -1,10 +1,9 @@
 # Archetyp-Erstellung: Mummy (Horror Kompendium)
-# Stand: 2026-06-04T07:47:33
-# 18 Anomalie(n) von 48 Schritten
+# Stand: 2026-06-05T09:40:13
+# 12 Anomalie(n) von 44 Schritten
 
 ## ANOMALIEN
   [!] handicap(Schwerzüngig): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] NOTIZ: SKILL fehlt: Alchemie: ok=True warnung=SKILL fehlt: Alchemie kosten=0 None
   [!] talent(AH (Alchemist, Horror)): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Rohling): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] macht(Eigenschaft erhöhen/senken): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -13,14 +12,9 @@
   [!] macht(Flächenschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] macht(Schlummer): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless kosten=0 None
-  [!] talent_mit_aufstieg(AH (Alchemist, Horror)): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Rohling): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Machtpunkte): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Neue Mächte): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] macht(Flächenschlag): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] macht(Schlummer): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; handicaps: "Langsam" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT; maechte: "Flächenschlag" FEHLT; maechte: "Schlummer" FEHLT kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwerzüngig" FEHLT; handicaps: "Hässlich" FEHLT; maechte: "Eigenschaft erhöhen/senken" FEHLT; maechte: "Heilung" FEHLT; maechte: "Schutz" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Mummy, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -34,21 +28,22 @@
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut_mit_hc(Stärke): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
-  - attribut_mit_hc(Stärke): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
-  - fertigkeit(Geisteswissenschaften): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
-  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 0} Geld=500
-  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 0} Geld=500
-  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 6, 'handicap': 0} Geld=500
-  - fertigkeit(Heilen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 0} Geld=500
-  - fertigkeit(Heilen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 0} Geld=500
-  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 0} Geld=500
-  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 0} Geld=500
-  - fertigkeit(Recherche): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 1, 'handicap': 0} Geld=500
-  - fertigkeit(Recherche): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - fertigkeit(Recherche) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
+  - fertigkeit(Geisteswissenschaften): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 2} Geld=500
+  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 2} Geld=500
+  - fertigkeit(Athletik): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 2} Geld=500
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 6, 'handicap': 2} Geld=500
+  - fertigkeit(Heilen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 2} Geld=500
+  - fertigkeit(Heilen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 2} Geld=500
+  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 2} Geld=500
+  - fertigkeit(Okkultismus): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 2} Geld=500
+  - fertigkeit(Recherche): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 1, 'handicap': 2} Geld=500
+  - fertigkeit(Recherche): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=500
+  - fertigkeit(Recherche) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=500
+  - fertigkeit(Alchemie) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=500
+  - fertigkeit_mit_hc(Recherche): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 1} Geld=500
+  - fertigkeit_mit_hc(Alchemie): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(AH (Alchemist, Horror)): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Rohling): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Eigenschaft erhöhen/senken): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
@@ -57,17 +52,12 @@
   - macht(Flächenschlag): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Schlummer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Robe (dünn)x1): ok=True kosten=30 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - fertigkeit_mit_aufstieg(Recherche): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(AH (Alchemist, Horror)): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(Rohling): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(Machtpunkte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - talent_mit_aufstieg(Neue Mächte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - macht(Flächenschlag): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
-  - macht(Schlummer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - fertigkeit_mit_aufstieg(Alchemie): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - fertigkeit_mit_aufstieg(Alchemie): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(AH (Alchemist, Horror)): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Rohling): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Machtpunkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - talent_mit_aufstieg(Neue Mächte): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - macht(Flächenschlag): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
+  - macht(Schlummer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470
   - talent_mit_aufstieg(Neue Mächte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=470

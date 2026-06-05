@@ -491,7 +491,33 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Langschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schuppenpanzer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Alchemistenfeuer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Einarmig",
@@ -527,11 +553,28 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Langschwert",
+        "Schuppenpanzer",
+        "Lederbeinlinge",
+        "Abenteurerausrüstung",
+        "Alchemistenfeuer"
+    ],
+    "selected_waffen": [
+        "Langschwert"
+    ],
+    "selected_ruestungen": [
+        "Schuppenpanzer",
+        "Lederbeinlinge"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Langschwert": 1,
+        "Schuppenpanzer": 1,
+        "Lederbeinlinge": 1,
+        "Abenteurerausrüstung": 1,
+        "Alchemistenfeuer": 5
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -544,7 +587,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 15,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

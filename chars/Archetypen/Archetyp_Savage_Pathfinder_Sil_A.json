@@ -508,7 +508,38 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Langschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kompositbogen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pfeile (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kettenhemd": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Ehrenkodex",
@@ -547,11 +578,31 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Langschwert",
+        "Kompositbogen",
+        "Pfeile (20)",
+        "Kettenhemd",
+        "Lederbeinlinge",
+        "Abenteurerausrüstung"
+    ],
+    "selected_waffen": [
+        "Langschwert",
+        "Kompositbogen"
+    ],
+    "selected_ruestungen": [
+        "Kettenhemd",
+        "Lederbeinlinge"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Langschwert": 1,
+        "Kompositbogen": 1,
+        "Pfeile (20)": 1,
+        "Kettenhemd": 1,
+        "Lederbeinlinge": 1,
+        "Abenteurerausrüstung": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -564,7 +615,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 14,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

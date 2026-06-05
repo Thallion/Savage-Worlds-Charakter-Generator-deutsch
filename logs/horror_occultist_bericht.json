@@ -444,7 +444,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Stiller Wirker)",
+      "aktion": "talent_mit_aufstieg(Stillzauberer)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -573,7 +573,7 @@
     ],
     "talente": [
       "AH (Okkultist)",
-      "Stiller Wirker",
+      "Stillzauberer",
       "Neue Mächte"
     ],
     "maechte": [

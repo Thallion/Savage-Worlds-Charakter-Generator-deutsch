@@ -366,12 +366,113 @@
       "warnung": null
     },
     {
+      "aktion": "kaufen(Kurzschwertx1)",
+      "ok": true,
+      "kosten": 10,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 290,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx2)",
+      "ok": true,
+      "kosten": 4,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 286,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 266,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 246,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Diebeswerkzeugx1)",
+      "ok": true,
+      "kosten": 30,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 216,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 166,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Kletterausrüstungx1)",
+      "ok": true,
+      "kosten": 80,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 86,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Korva_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "NOTIZ: Ausrüstung fehlt im Katalog: Trank: Abwehren",
+      "ok": true,
+      "warnung": "Ausrüstung fehlt im Katalog: Trank: Abwehren",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 86
+    }
+  ],
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -473,7 +574,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 300,
+    "vermoegen": 86,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

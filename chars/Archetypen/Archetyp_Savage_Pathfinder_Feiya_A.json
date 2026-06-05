@@ -486,6 +486,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Aufmerksamkeit": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -506,7 +512,43 @@
         },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Stab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heilertasche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Verstrickungsbeutel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sonnenzepter": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Geschoss": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Angetrieben_schwer",
@@ -517,7 +559,8 @@
     "selected_talente": [
         "AH (Hexenmeister)",
         "Vertrauter",
-        "Glück"
+        "Glück",
+        "Aufmerksamkeit"
     ],
     "selected_maechte": [
         "Eigenschaft erhöhen/senken",
@@ -545,11 +588,30 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
+    "selected_allgemeine_ausruestung": [
+        "Stab",
+        "Dolch",
+        "Abenteurerausrüstung",
+        "Heilertasche",
+        "Verstrickungsbeutel",
+        "Sonnenzepter",
+        "Schriftrolle: Geschoss"
+    ],
+    "selected_waffen": [
+        "Stab",
+        "Dolch"
+    ],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Stab": 1,
+        "Dolch": 1,
+        "Abenteurerausrüstung": 1,
+        "Heilertasche": 1,
+        "Verstrickungsbeutel": 1,
+        "Sonnenzepter": 2,
+        "Schriftrolle: Geschoss": 2
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -562,11 +624,11 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 44,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
         "cost_entries": [
@@ -695,6 +757,12 @@
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Aufmerksamkeit",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             }
         ]
     }

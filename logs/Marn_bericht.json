@@ -327,6 +327,84 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "kaufen(Streitflegelx1)",
+      "ok": true,
+      "kosten": 8,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 292,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Handaxtx3)",
+      "ok": true,
+      "kosten": 18,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 274,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schuppenpanzerx1)",
+      "ok": true,
+      "kosten": 100,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 174,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 154,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 104,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Alchemistenfeuerx1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 84,
+      "warnung": null
+    },
+    {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Marn_A.json)",
       "ok": true
     }
@@ -367,7 +445,7 @@
         "handicap_gesamt": 4,
         "aufstiege": 0
       },
-      "vermoegen": 300
+      "vermoegen": 84
     }
   ],
   "anomalien_anzahl": 3,
@@ -480,7 +558,7 @@
       "aufstiege": 0
     },
     "machtpunkte": 0,
-    "vermoegen": 300,
+    "vermoegen": 84,
     "rang": "Anfänger",
     "volk": "Halbork"
   }

@@ -366,6 +366,19 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Verrückte Wissenschaft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Brillex1)",
       "ok": true,
       "kosten": 5,
@@ -373,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 245,
       "warnung": null
@@ -386,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 243,
       "warnung": null
@@ -399,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -412,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -425,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -438,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -451,20 +464,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
-      },
-      "vermoegen": 203,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Verrückte Wissenschaft)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -477,7 +477,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -490,7 +490,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 1
+        "handicap": 0
       },
       "vermoegen": 203,
       "warnung": null
@@ -614,9 +614,9 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 1,
+      "handicap": 0,
       "handicap_gesamt": 3,
-      "aufstiege": 0.5
+      "aufstiege": 1.0
     },
     "machtpunkte": 20,
     "vermoegen": 203,

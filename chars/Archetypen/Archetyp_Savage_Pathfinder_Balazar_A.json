@@ -173,7 +173,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -452,6 +452,11 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
+            "Behindernde Rüstung_leicht": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
             "Feind_schwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -479,6 +484,24 @@
             }
         },
         "talente": {
+            "Beschwörer": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "AH (Beschwörer)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Eidolon": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Gnomenmagie": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -486,13 +509,60 @@
                 "machtpunkte": 1
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Abwehren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            },
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Berührung",
+                "dauer": "Sofort"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Handarmbrust": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sonnenzepter": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schriftrolle: Geschoss": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Arm",
+        "Behindernde Rüstung_leicht",
         "Feind_schwer",
         "Geheimnis_leicht",
         "Langsam_leicht",
@@ -500,9 +570,15 @@
         "Zwanghaft"
     ],
     "selected_talente": [
+        "Beschwörer",
+        "AH (Beschwörer)",
+        "Eidolon",
         "Gnomenmagie"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Abwehren",
+        "Heilung"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -525,29 +601,46 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
+    "selected_allgemeine_ausruestung": [
+        "Dolch",
+        "Handarmbrust",
+        "Bolzen (10)",
+        "Abenteurerausrüstung",
+        "Sonnenzepter",
+        "Schriftrolle: Geschoss"
+    ],
+    "selected_waffen": [
+        "Dolch",
+        "Handarmbrust"
+    ],
     "selected_ruestungen": [],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Dolch": 1,
+        "Handarmbrust": 1,
+        "Bolzen (10)": 1,
+        "Abenteurerausrüstung": 1,
+        "Sonnenzepter": 3,
+        "Schriftrolle: Geschoss": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 1,
+    "verfuegbare_maechte": 1,
+    "anzahl_maechte": 3,
+    "machtpunkte": 11,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 150,
+    "vermoegen": 21,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 4,
-    "pathfinder_kostenlose_talente_gewaehlt": 0,
+    "verbleibende_handicap_punkte": 3,
+    "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
         "cost_entries": [
             {
@@ -667,6 +760,13 @@
                 "name": "Zaubern",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 1
             }
         ]

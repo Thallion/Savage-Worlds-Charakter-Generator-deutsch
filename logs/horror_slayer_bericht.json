@@ -67,7 +67,7 @@
       "warnung": null
     },
     {
-      "aktion": "volk_freies_talent(Mensch,Schreikönigin/Schreikönig)",
+      "aktion": "volk_freies_talent(Mensch,Scream Queen/King)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -704,7 +704,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent_mit_aufstieg(Schreikönigin/Schreikönig)",
+      "aktion": "talent_mit_aufstieg(Scream Queen/King)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -997,7 +997,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent_mit_aufstieg(Schreikönigin/Schreikönig)",
+      "aktion": "talent_mit_aufstieg(Scream Queen/King)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -1130,7 +1130,7 @@
       "Misstrauisch_leicht"
     ],
     "talente": [
-      "Schreikönigin/Schreikönig",
+      "Scream Queen/King",
       "Assassine",
       "Attraktiv",
       "Block",

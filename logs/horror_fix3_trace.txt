@@ -1,0 +1,27 @@
+
+BUILD: Angel
+  CRASH: I/O operation on closed file.
+Traceback (most recent call last):
+  File "<string>", line 1593, in <module>
+  File "<string>", line 345, in build_monstrous
+  File "<string>", line 29, in header
+ValueError: I/O operation on closed file.
+
+
+BUILD: Mummy
+  CRASH: I/O operation on closed file.
+Traceback (most recent call last):
+  File "<string>", line 1593, in <module>
+  File "<string>", line 345, in build_monstrous
+  File "<string>", line 29, in header
+ValueError: I/O operation on closed file.
+
+
+BUILD: Revenant
+  CRASH: I/O operation on closed file.
+Traceback (most recent call last):
+  File "<string>", line 1593, in <module>
+  File "<string>", line 345, in build_monstrous
+  File "<string>", line 29, in header
+ValueError: I/O operation on closed file.
+

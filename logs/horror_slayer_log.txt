@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Slayer (Horror Kompendium)
-# Stand: 2026-06-04T07:47:35
+# Stand: 2026-06-05T09:40:15
 # 19 Anomalie(n) von 61 Schritten
 
 ## ANOMALIEN
@@ -19,7 +19,7 @@
   [!] talent_mit_aufstieg(Block): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Monsterjäger): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Schreikönigin/Schreikönig): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] talent_mit_aufstieg(Scream Queen/King): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] NOTIZ: 5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=5 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
 
@@ -29,7 +29,7 @@
   - handicap(Loyal): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=500
   - handicap(Misstrauisch_leicht): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - volk_freies_talent(Mensch,Schreikönigin/Schreikönig): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
+  - volk_freies_talent(Mensch,Scream Queen/King): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=500
@@ -78,7 +78,7 @@
   - talent_mit_aufstieg(Block): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Monsterjäger): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
-  - talent_mit_aufstieg(Schreikönigin/Schreikönig): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
+  - talent_mit_aufstieg(Scream Queen/King): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Mut): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Assassine): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0
   - talent_mit_aufstieg(Attraktiv): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=0

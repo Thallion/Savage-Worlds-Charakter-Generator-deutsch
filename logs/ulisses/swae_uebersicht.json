@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Arthan",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 1,
+    "abweichungen": []
+  },
+  {
+    "name": "Beatriz",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 0,
+    "abweichungen": []
+  },
+  {
+    "name": "Clementine",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 1,
+    "abweichungen": []
+  },
+  {
+    "name": "The_Shroud",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 1,
+    "abweichungen": [
+      "fertigkeiten: Wahrnehmung soll W6, ist W4"
+    ]
+  },
+  {
+    "name": "Aidan",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 1,
+    "abweichungen": []
+  },
+  {
+    "name": "Sozius",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 1,
+    "hp_gesamt": 3,
+    "anomalien": 4,
+    "abweichungen": [
+      "talente: \"Aufmerksamkeit\" FEHLT"
+    ]
+  },
+  {
+    "name": "Samael",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 1,
+    "hp_gesamt": 3,
+    "anomalien": 3,
+    "abweichungen": []
+  },
+  {
+    "name": "Asera",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 2,
+    "hp_gesamt": 4,
+    "anomalien": 3,
+    "abweichungen": []
+  },
+  {
+    "name": "Zoetta",
+    "attr_rest": 0,
+    "fert_rest": 0,
+    "hp_rest": 0,
+    "hp_gesamt": 4,
+    "anomalien": 3,
+    "abweichungen": []
+  }
+]

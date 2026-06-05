@@ -15,19 +15,6 @@
       "vermoegen": 300
     },
     {
-      "aktion": "talent(AH (Magie))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "handicap(Impulsiv)",
       "ok": true,
       "kosten": -2,
@@ -353,8 +340,8 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Geschoss)",
-      "ok": false,
+      "aktion": "pathfinder_klassentalent(AH (Magier))",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -363,11 +350,24 @@
         "handicap": 2
       },
       "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Geschoss)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 300,
+      "warnung": null
     },
     {
       "aktion": "macht(Eigenschaft erhöhen/senken)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -376,11 +376,11 @@
         "handicap": 2
       },
       "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Schutz)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -389,7 +389,98 @@
         "handicap": 2
       },
       "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Kurzschwertx1)",
+      "ok": true,
+      "kosten": 10,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 290,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Leichte Armbrustx1)",
+      "ok": true,
+      "kosten": 35,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 255,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Bolzen (10)x2)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 253,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Ledertunikax1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 233,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Lederbeinlingex1)",
+      "ok": true,
+      "kosten": 20,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 213,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 163,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 163,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Darla_A.json)",
@@ -398,101 +489,20 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(AH (Magie))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Geschoss)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
+      "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
+      "ok": true,
+      "kosten": 163,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 2
       },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Macht fehlt: Geschoss",
-      "ok": true,
-      "warnung": "Macht fehlt: Geschoss",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 300
-    },
-    {
-      "aktion": "macht(Eigenschaft erhöhen/senken)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Macht fehlt: Eigenschaft erhöhen/senken",
-      "ok": true,
-      "warnung": "Macht fehlt: Eigenschaft erhöhen/senken",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 300
-    },
-    {
-      "aktion": "macht(Schutz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: Macht fehlt: Schutz",
-      "ok": true,
-      "warnung": "Macht fehlt: Schutz",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 300
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "talente: \"AH (Magie)\" FEHLT; maechte: \"Geschoss\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Schutz\" FEHLT",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
-      },
-      "vermoegen": 300
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Trank: schwache Heilung zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -573,14 +583,23 @@
       }
     },
     "handicaps": [
+      "Behindernde Rüstung_jede",
       "Impulsiv",
       "Loyal",
       "Nichtschwimmer"
     ],
     "talente": [
-      "Auserwählter"
+      "Auserwählter",
+      "AH (Magier)",
+      "Zauberbücher",
+      "Arkane Verbindung",
+      "Schule"
     ],
-    "maechte": [],
+    "maechte": [
+      "Geschoss",
+      "Eigenschaft erhöhen/senken",
+      "Schutz"
+    ],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
@@ -589,8 +608,8 @@
       "handicap_gesamt": 4,
       "aufstiege": 0
     },
-    "machtpunkte": 0,
-    "vermoegen": 300,
+    "machtpunkte": 10,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Mensch"
   }

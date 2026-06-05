@@ -1,0 +1,46 @@
+
+======================================================================
+BUILD: Leomara
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=2/4 Geld=0
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=3 MP=0
+  Talente: ['Anführer']
+  Handicaps: ['Ehrenkodex', 'Loyal', 'Phobie_leicht']
+  Mächte: []
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_Savage_Aventurien_Leomara_A.json | anomalien=4
+
+======================================================================
+BUILD: Hesindian
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=3/4 Geld=255
+  Parade=4 Robustheit=5 Bewegung=6 Bennys=3 MP=15
+  Talente: ['AH (Magier)', 'Arkane Verbindung', 'Schule', 'Zauberbücher']
+  Handicaps: ['Behindernde Rüstung_jede', 'Behindernde_Rüstung_schwer', 'Materialkomponenten', 'Neugierig', 'Schlechte Augen_leicht', 'Tick']
+  Mächte: ['Blenden', 'Geschoss', 'Heilung']
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_Savage_Aventurien_Hesindian_A.json | anomalien=3
+
+======================================================================
+BUILD: Romoxosch
+======================================================================
+  Endpunkte: AP=0 FP=1 HP=0/4 Geld=70
+  Parade=5 Robustheit=9 Bewegung=5 Bennys=3 MP=0
+  Talente: ['Mutig', 'Nachtsicht']
+  Handicaps: ['Gierig_schwer', 'Langsam_leicht', 'Misstrauisch_leicht', 'Nichtschwimmer', 'Phobie_leicht']
+  Mächte: []
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_Savage_Aventurien_Romoxosch_A.json | anomalien=3
+
+======================================================================
+BUILD: Angrond
+======================================================================
+  Endpunkte: AP=1 FP=0 HP=0/3 Geld=235
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=4 MP=0
+  Talente: ['Beidhändig', 'Glück']
+  Handicaps: ['Phobie_schwer', 'Tick']
+  Mächte: []
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_Savage_Aventurien_Angrond_A.json | anomalien=1
+
+ÜBERSICHT: logs/ulisses/aventurien_uebersicht.json -- 4/4 builds

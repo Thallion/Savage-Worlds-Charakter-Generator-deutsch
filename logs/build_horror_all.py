@@ -61,35 +61,24 @@ def _attr_chargen_order(data):
 # ========================================================================
 # VOLK AUTO-EINTRAEGE (aus Horror Kompendium.json)
 # ========================================================================
-VOLK_AUTO = {
-    'Mensch':  {'auto_handicaps': [], 'auto_talente': [], 'attribute_bonuses': {}},
-    'Engel':   {'auto_handicaps': ['Schwur', 'Auff\u00e4llig'],
-                'auto_talente': ['Flug'],
-                'attribute_bonuses': {'St\u00e4rke': 2, 'Konstitution': 2}},
-    'D\u00e4mon': {'auto_handicaps': ['B\u00f6se', 'Schw\u00e4che (Geweihtes Wasser)'],
-                'auto_talente': ['Infrarotsicht'],
-                'attribute_bonuses': {}},
-    'Mumie':   {'auto_handicaps': ['H\u00e4sslich', 'Langsam', 'Schw\u00e4che (Feuer)'],
-                'auto_talente': ['Z\u00e4h'],
-                'attribute_bonuses': {}},
-    'Flickenmonster': {'auto_handicaps': ['H\u00e4sslich', 'Au\u00dfenseiter', 'Schwerf\u00e4llig',
-                          'Schw\u00e4che (Feuer)', 'Schw\u00e4che (Elektrizit\u00e4t)'],
-                'auto_talente': ['Z\u00e4h', 'Kr\u00e4ftig'],
-                'attribute_bonuses': {'St\u00e4rke': 2, 'Konstitution': 2}},
-    'Phantom': {'auto_handicaps': ['Schw\u00e4che (Salz)'],
-                'auto_talente': ['Flug'],
-                'attribute_bonuses': {}},
-    'Wiederg\u00e4nger': {'auto_handicaps': ['Schwur', 'H\u00e4sslich'],
-                'auto_talente': ['Z\u00e4h'],
-                'attribute_bonuses': {}},
-    'Vampir':  {'auto_handicaps': ['Schw\u00e4che (Sonnenlicht)', 'Schw\u00e4che (Pfahl)',
-                          'Abh\u00e4ngigkeit (Blut)', 'Schw\u00e4che (Geweihtes Wasser)'],
-                'auto_talente': ['Nachtsicht', 'Z\u00e4h'],
-                'attribute_bonuses': {'St\u00e4rke': 2}},
-    'Werwolf': {'auto_handicaps': ['Blutdurst', 'Schw\u00e4che (Silber)'],
-                'auto_talente': ['Gestaltwandel', 'Infrarotsicht'],
-                'attribute_bonuses': {}},
-}
+def _load_volk_auto():
+    """Liest auto_handicaps/auto_talente/attribute_bonuses direkt aus dem Setting-JSON,
+    damit die SOLL-Erwartung IMMER den aktuellen Völkern entspricht (kein Stale-Dict mehr)."""
+    with open('settings/Horror Kompendium.json', encoding='utf-8') as _vf:
+        _vd = json.load(_vf)
+    _out = {}
+    for _vn, _v in _vd.get('voelker', {}).items():
+        _eff = _v.get('effects', {}) or {}
+        _out[_vn] = {
+            'auto_handicaps': list(_eff.get('auto_handicaps', []) or []),
+            'auto_talente': list(_eff.get('auto_talente', []) or []),
+            'attribute_bonuses': dict(_eff.get('attribute_bonuses', {}) or {}),
+        }
+    _out.setdefault('Mensch', {'auto_handicaps': [], 'auto_talente': [], 'attribute_bonuses': {}})
+    return _out
+
+
+VOLK_AUTO = _load_volk_auto()
 
 # ========================================================================
 # REPORT
@@ -667,7 +656,7 @@ psychic = {
     'advances': [
         ('talent', 'Sechster Sinn'),
         ('talent', None),  # Scan - MISSING
-        ('talent', 'Visionen'),
+        ('talent', 'Seher'),
         ('talent', 'Kühler Kopf'),
     ],
 }
@@ -817,7 +806,7 @@ doctor = {
     'advances': [
         ('attribute', 'Willenskraft', 8),
         ('talent', 'Heiler'),  # already at novice
-        ('talent', 'Unerschütterlich'),
+        ('talent', 'Unerbittlich'),
         ('talent', 'Schwer zu töten'),  # already at novice
     ],
 }
@@ -841,7 +830,7 @@ occultist = {
         ('attribute', 'Stärke', 6),
         ('skill', 'Überreden', 8),
         ('skill', 'Zaubern', 8),
-        ('talent', 'Stiller Wirker'),
+        ('talent', 'Stillzauberer'),
         ('talent', 'Neue Mächte'),
         ('power', 'Aufheben'),
     ],
@@ -1170,12 +1159,12 @@ survivor = {
         'Wahrnehmung': 6, 'Überreden': 6, 'Schießen': 6,
         'Heimlichkeit': 6, 'Überleben': 6, 'Provozieren': 6,
     },
-    'talente_novice': ['Schreikönigin/Schreikönig', 'Sehr Attraktiv'],
+    'talente_novice': ['Scream Queen/King', 'Sehr Attraktiv'],
     'powers': [],
     'gear': [('Schrotflinte', 1), ('Kevlarweste', 1), ('Taschenlampe (10" Strahl)', 1)],
 
     'advances': [
-        ('talent', 'Schreikönigin/Schreikönig'),  # already at novice
+        ('talent', 'Scream Queen/King'),  # already at novice
         ('skill', 'Kämpfen', 8),
         ('skill', 'Schießen', 6),
         ('talent', 'Mut'),  # already at novice
@@ -1401,7 +1390,7 @@ werewolf_data = {
 slayer_data = {
     'volk': 'Mensch',
     'freies_attribut': 'Willenskraft',
-    'freies_talent': 'Schreikönigin/Schreikönig',
+    'freies_talent': 'Scream Queen/King',
     'handicaps': ['Heldenhaft', 'Loyal', 'Misstrauisch_leicht'],
     'attribute': {'Geschicklichkeit': 8, 'Verstand': 8, 'Willenskraft': 10, 'Stärke': 6, 'Konstitution': 8},
     'fertigkeiten': {
@@ -1414,7 +1403,7 @@ slayer_data = {
     'monstrous_powers': ['Hardy', 'Gifts of the Night (13 pts)'],
     'gear': [('Kevlarweste', 1), ('Schrotflinte', 1), ('Kaltes-Eisen-Schwert', 1), ('Holzpfähle (5)', 1)],
     'advances': [
-        ('talent', 'Schreikönigin/Schreikönig'),
+        ('talent', 'Scream Queen/King'),
         ('skill', 'Überreden', 6), ('skill', 'Okkultismus', 6),
         ('talent', 'Mut'),
         ('attribute', 'Verstand', 8),

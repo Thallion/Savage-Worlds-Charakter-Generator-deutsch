@@ -1,0 +1,48 @@
+
+======================================================================
+BUILD: Raphael
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=65
+  Parade=6 Robustheit=6 Bewegung=6 Bennys=3 MP=0
+  Talente: ['Aristokrat', 'Kräftig']
+  Handicaps: ['Ehrenkodex', 'Schwur_schwer']
+  Mächte: []
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_HeXXen_1773_Raphael_A.json | anomalien=1
+
+======================================================================
+BUILD: Jeanne
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=55
+  Parade=5 Robustheit=5 Bewegung=6 Bennys=3 MP=0
+  Talente: ['Aufmerksamkeit']
+  Handicaps: ['Loyal', 'Schwerzüngig', 'Stur']
+  Mächte: []
+  DIFF: -- KEINE --
+  SAVED: chars/Archetypen/Archetyp_HeXXen_1773_Jeanne_A.json | anomalien=1
+
+======================================================================
+BUILD: Klaas
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=455
+  Parade=8 Robustheit=5 Bewegung=6 Bennys=3 MP=0
+  Talente: ['Finte']
+  Handicaps: ['Große Klappe', 'Impulsiv', 'Phobie_leicht']
+  Mächte: []
+  DIFF: fertigkeiten: Heimlichkeit soll W6, ist W4
+  DIFF: fertigkeiten: Wahrnehmung soll W6, ist W4
+  SAVED: chars/Archetypen/Archetyp_HeXXen_1773_Klaas_A.json | anomalien=3
+
+======================================================================
+BUILD: Klara
+======================================================================
+  Endpunkte: AP=0 FP=0 HP=0/4 Geld=305
+  Parade=4 Robustheit=5 Bewegung=6 Bennys=3 MP=15
+  Talente: ['AH (Alchemist)', 'Machtpunkte']
+  Handicaps: ['Außenseiter', 'Neugierig', 'Tick']
+  Mächte: ['Eigenschaft erhöhen/senken', 'Schutz', 'Strahl']
+  DIFF: fertigkeiten: Schießen soll W6, ist W4
+  DIFF: fertigkeiten: Wahrnehmung soll W6, ist W4
+  SAVED: chars/Archetypen/Archetyp_HeXXen_1773_Klara_A.json | anomalien=1
+
+ÜBERSICHT: logs/ulisses/hexxen_uebersicht.json -- 4/4 builds

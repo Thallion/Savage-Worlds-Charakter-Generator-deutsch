@@ -480,7 +480,48 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Rapier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Leichte Armbrust": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: schwache Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gegengift, Phiole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Impulsiv",
@@ -514,11 +555,35 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Rapier",
+        "Leichte Armbrust",
+        "Bolzen (10)",
+        "Ledertunika",
+        "Lederbeinlinge",
+        "Abenteurerausrüstung",
+        "Trank: schwache Heilung",
+        "Gegengift, Phiole"
+    ],
+    "selected_waffen": [
+        "Rapier",
+        "Leichte Armbrust"
+    ],
+    "selected_ruestungen": [
+        "Ledertunika",
+        "Lederbeinlinge"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Rapier": 1,
+        "Leichte Armbrust": 1,
+        "Bolzen (10)": 2,
+        "Ledertunika": 1,
+        "Lederbeinlinge": 1,
+        "Abenteurerausrüstung": 1,
+        "Trank: schwache Heilung": 1,
+        "Gegengift, Phiole": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -531,7 +596,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

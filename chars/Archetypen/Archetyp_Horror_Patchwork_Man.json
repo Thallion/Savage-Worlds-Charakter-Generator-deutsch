@@ -48,7 +48,7 @@
         "Stärke": {
             "attribut_name": "Stärke",
             "wert": 12,
-            "modifier": 1
+            "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -499,16 +512,6 @@
             }
         },
         "handicaps": {
-            "Außenseiter": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Hässlich": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
             "Phobie_schwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -524,42 +527,20 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Schwäche (Elektrizität)": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
             "Schwäche (Feuer)": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Schwerfällig": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Zäh": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Kräftig": {
+            "Berserker": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
             "Arkane Resistenz": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Berserker": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -583,6 +564,12 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
+            "Mut_2": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Wildheit": {
                 "ausgewaehlt": true,
                 "rang": "F",
@@ -602,23 +589,18 @@
         }
     },
     "selected_handicaps": [
-        "Außenseiter",
-        "Hässlich",
         "Phobie_schwer",
         "Verpeilt",
         "Schreihals_leicht",
-        "Schwäche (Elektrizität)",
-        "Schwäche (Feuer)",
-        "Schwerfällig"
+        "Schwäche (Feuer)"
     ],
     "selected_talente": [
-        "Zäh",
-        "Kräftig",
-        "Arkane Resistenz",
         "Berserker",
+        "Arkane Resistenz",
         "Mut",
         "Raufbold",
         "Eisenkiefer",
+        "Mut_2",
         "Wildheit"
     ],
     "selected_maechte": [],
@@ -649,7 +631,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -684,13 +666,6 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
                 "wert": 10,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -705,14 +680,14 @@
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "wert": 10,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Konstitution",
-                "wert": 10,
+                "wert": 12,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
@@ -787,29 +762,10 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 12,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Arkane Resistenz",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Berserker",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
                 "typ": "talent",
                 "name": "Mut",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "talent",
@@ -820,6 +776,12 @@
             {
                 "typ": "talent",
                 "name": "Eisenkiefer",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mut_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },

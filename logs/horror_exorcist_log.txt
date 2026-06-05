@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Exorcist (Horror Kompendium)
-# Stand: 2026-06-04T07:47:24
+# Stand: 2026-06-05T09:40:04
 # 4 Anomalie(n) von 45 Schritten
 
 ## ANOMALIEN

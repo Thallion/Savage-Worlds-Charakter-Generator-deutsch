@@ -32,10 +32,8 @@ def baue(name, klassentalent, manual_handicaps, volk, volk_wahlen,
             if not r['ok']:
                 s.notiz(f'KLASSE "{klassentalent}" nicht wählbar')
 
-        # Generischer AH (für klassenlose Charaktere)
-        if freier_ah:
-            r = s.talent(freier_ah, ignore_voraussetzungen=True)
-            m(f"  AH '{freier_ah}': ok={r['ok']}")
+        # Generischer AH (für klassenlose Charaktere) – HIER NOCH NICHT! erst nach Skills,
+        # damit Voraussetzungen (Verstand W6+, Okkultismus W6+ etc.) erfüllt sind.
 
         # 2: Manuelle Handicaps
         for h in manual_handicaps:
@@ -93,6 +91,21 @@ def baue(name, klassentalent, manual_handicaps, volk, volk_wahlen,
                 m(f"  ✗ Fertigkeit: {f}")
         m(f"  Nach Fertigkeiten: {s.punktestand()}")
 
+        # 6b: Generischer AH NACH Skills (Voraussetzungen jetzt erfüllt).
+        # Bei "klassenlosen" Chars (klassentalent=None) muss der AH über den
+        # Pathfinder-kostenloses-Talent-Pfad gewählt werden, sonst returnt der
+        # Controller "pathfinder_kostenlos_angeboten" und das Talent landet NICHT
+        # in selected_talente (Auto-Cascade Schule/Arkane Verbindung/etc. bleibt aus).
+        if freier_ah:
+            vor_ah = s.zustand()
+            r = s.pathfinder_klassentalent(freier_ah, ignore_voraussetzungen=True)
+            auto_ah = s.zeige_auto_eintraege(vor_ah)
+            m(f"  Freier AH '{freier_ah}' (via pathfinder_klassentalent): ok={r['ok']}, auto={auto_ah}")
+            if not r['ok']:
+                # Fallback: regulärer Talent-Pfad
+                r2 = s.talent(freier_ah, ignore_voraussetzungen=True)
+                m(f"  Fallback talent(): ok={r2['ok']}")
+
         # 7: Manuelle Talente (die nicht auto sind)
         for t in (manual_talente or []):
             if t not in s.ch.selected_talente:
@@ -102,6 +115,18 @@ def baue(name, klassentalent, manual_handicaps, volk, volk_wahlen,
                     m(f"  ✗ Talent: {t}")
                 else:
                     m(f"  Talent '{t}': ok, HP={s.ch.verbleibende_handicap_punkte}")
+
+        # 7b: HP-Fallback für Fertigkeiten (ungenutzte HP in Bogen-Skills fließen lassen)
+        for f, z in soll_fert.items():
+            if f not in s.ch.fertigkeiten:
+                continue
+            w = s.ch.fertigkeiten[f].wuerfel
+            while (w.value < z or w.modifier < 0) and s.ch.verbleibende_handicap_punkte >= 1:
+                vor = (w.value, w.modifier)
+                s.steigere_mit_handicap_fertigkeit(f)
+                if (w.value, w.modifier) == vor:
+                    break
+        m(f"  Nach HP-Fert-Fallback: {s.punktestand()}")
 
         # 8: Mächte
         for mm in soll_maechte:
@@ -167,7 +192,9 @@ baue('Kira',
      soll_fert={'Athletik':8, 'Allgemeinwissen':4, 'Kämpfen':6, 'Einschüchtern':4,
                 'Wahrnehmung':6, 'Okkultismus':6, 'Überreden':4, 'Heimlichkeit':8, 'Überleben':6},
      soll_handicaps=['Neugierig', 'Loyal', 'Arrogant', 'Rüstungsbeschränkung_mittelschwer'],
-     soll_talente=['Barbar', 'Berserker', 'Behände', 'Kampfrausch'],     ausruestung=[('Speer',1),('Kurzspeer/Wurfspeer',7),('Beschlagene Lederrüstung',1),('Mittlerer Schild',1),('Abenteurerausrüstung',1),('Verstrickungsbeutel',1),('Trank: schwache Heilung',1)])
+     soll_talente=['Barbar', 'Berserker', 'Behände', 'Kampfrausch'],
+     soll_maechte=[],
+     ausruestung=[('Speer',1),('Kurzspeer/Wurfspeer',7),('Beschlagene Lederrüstung',1),('Mittlerer Schild',1),('Abenteurerausrüstung',1),('Verstrickungsbeutel',1),('Trank: schwache Heilung',1)])
 
 # --- TELLER: Barde / Mensch ---
 # Bogen: Anemic(minor)→✗, Impulsive(major)=Impulsiv, Thin skinned(minor)=Dünnhäutig_leicht
@@ -419,12 +446,16 @@ baue('Darla',
      volk='Mensch',
      volk_wahlen=[{'typ':'freies_attribut','wert':'Verstand'},
                   {'typ':'freies_talent','wert':'Auserwählter'}],
-     freier_ah='AH (Magie)',
+     # AH (Magie) → AH (Magier) [korrekter SPF-Key]; freier_ah wird nach den Attributen/Skills
+     # gewählt — damit Voraussetzungen (Verstand W6+, Okkultismus W6+) bereits erfüllt sind.
+     freier_ah='AH (Magier)',
      soll_attr={'Geschicklichkeit':6, 'Verstand':8, 'Willenskraft':8, 'Stärke':6, 'Konstitution':6},
      soll_fert={'Athletik':4, 'Allgemeinwissen':6, 'Kämpfen':6, 'Wahrnehmung':6,
                 'Okkultismus':6, 'Überreden':8, 'Reiten':4, 'Zaubern':8, 'Heimlichkeit':4},
-     soll_handicaps=['Impulsiv', 'Loyal', 'Nichtschwimmer'],
-     soll_talente=['AH (Magie)', 'Auserwählter'],
+     soll_handicaps=['Impulsiv', 'Loyal', 'Nichtschwimmer',
+                     'Behindernde Rüstung_jede'],  # Auto durch AH (Magier)
+     soll_talente=['AH (Magier)', 'Auserwählter',
+                   'Schule', 'Arkane Verbindung', 'Zauberbücher'],  # Auto-Cascade durch AH (Magier)
      soll_maechte=['Geschoss', 'Eigenschaft erhöhen/senken', 'Schutz'],
      ausruestung=[('Kurzschwert',1),('Leichte Armbrust',1),('Bolzen (10)',2),('Ledertunika',1),('Lederbeinlinge',1),('Abenteurerausrüstung',1),('Trank: schwache Heilung',1)])
 
@@ -442,13 +473,14 @@ baue('Darla',
 
 baue('Damiel',
      klassentalent='Alchemist',
-     manual_handicaps=['Impulsiv'],
+     # Bogen-HC: Favored Class (major) + Impulsive (major) = Bevorzugte Klasse_schwer + Impulsiv
+     manual_handicaps=['Impulsiv', 'Bevorzugte Klasse_schwer'],
      volk='Elf',
      volk_wahlen=[],
      soll_attr={'Geschicklichkeit':8, 'Verstand':8, 'Willenskraft':6, 'Stärke':6, 'Konstitution':6},
      soll_fert={'Alchemie':8, 'Athletik':8, 'Allgemeinwissen':6, 'Kämpfen':8,
                 'Wahrnehmung':6, 'Okkultismus':4, 'Überreden':6, 'Heimlichkeit':6, 'Diebeskunst':6},
-     soll_handicaps=['Impulsiv', 'Schlank', 'Behindernde Rüstung_leicht'],
+     soll_handicaps=['Impulsiv', 'Bevorzugte Klasse_schwer', 'Schlank', 'Behindernde Rüstung_leicht'],
      soll_talente=['Alchemist', 'AH (Alchemist)', 'Berechnend'],
      soll_maechte=['Abwehren', 'Gestaltwandeln'],
      manual_talente=['Berechnend'],
@@ -472,7 +504,9 @@ baue('Alain',
                 'Wahrnehmung':6, 'Überreden':6, 'Reiten':6, 'Schießen':6,
                 'Heimlichkeit':4, 'Überleben':4},
      soll_handicaps=['Impulsiv', 'Rachsüchtig_leicht', 'Schwur_schwer'],
-     soll_talente=['Kavalier', 'Lieblingswaffe'],     ausruestung=[('Rapier',1),('Leichte Armbrust',1),('Bolzen (10)',2),('Ledertunika',1),('Lederbeinlinge',1),('Abenteurerausrüstung',1),('Trank: schwache Heilung',1),('Gegengift, Phiole',1)])
+     soll_talente=['Kavalier', 'Lieblingswaffe'],
+     soll_maechte=[],
+     ausruestung=[('Rapier',1),('Leichte Armbrust',1),('Bolzen (10)',2),('Ledertunika',1),('Lederbeinlinge',1),('Abenteurerausrüstung',1),('Trank: schwache Heilung',1),('Gegengift, Phiole',1)])
 
 # --- IMRIJKA: Inquisitor / Halbork ---
 # Bogen: Obligation(minor)=Verpflichtung_leicht, Outsider(minor)=Außenseiter_leicht (AUTO!),
@@ -537,9 +571,11 @@ baue('Balazar',
      soll_fert={'Athletik':4, 'Allgemeinwissen':6, 'Kämpfen':6, 'Heilen':4,
                 'Wahrnehmung':6, 'Okkultismus':8, 'Überreden':4, 'Reiten':4,
                 'Schießen':4, 'Zaubern':8, 'Heimlichkeit':4, 'Überleben':4},
+     # Auto-Cascade durch Beschwörer-Klassentalent: AH (Beschwörer) + Eidolon + Behindernde Rüstung_leicht
      soll_handicaps=['Feind_schwer', 'Arm', 'Geheimnis_leicht',
-                     'Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft'],
-     soll_talente=['Gnomenmagie'],
+                     'Langsam_leicht', 'Größe -1 (Reduzierte Robustheit)', 'Zwanghaft',
+                     'Behindernde Rüstung_leicht'],
+     soll_talente=['Beschwörer', 'AH (Beschwörer)', 'Eidolon', 'Gnomenmagie'],
      soll_maechte=['Abwehren', 'Heilung'],
      ausruestung=[('Keule',1),('Dolch',1),('Handarmbrust',1),('Bolzen (10)',1),('Abenteurerausrüstung',1),('Sonnenzepter',3),('Schriftrolle: Geschoss',1)])
 
@@ -561,9 +597,10 @@ baue('Feiya',
                 'Einschüchtern':6, 'Wahrnehmung':6, 'Okkultismus':6, 'Überreden':4,
                 'Zaubern':8, 'Heimlichkeit':4},
      soll_handicaps=['Angetrieben_schwer', 'Feind_leicht', 'Loyal', 'Behindernde Rüstung_jede'],
-     soll_talente=['AH (Hexenmeister)', 'Vertrauter', 'Glück', 'Wachsam'],
+     # 'Wachsam' → in SPF heißt das 'Aufmerksamkeit' (englisch: Alertness)
+     soll_talente=['AH (Hexenmeister)', 'Vertrauter', 'Glück', 'Aufmerksamkeit'],
      soll_maechte=['Eigenschaft erhöhen/senken', 'Schutz'],
-     manual_talente=['Wachsam'],
+     manual_talente=['Aufmerksamkeit'],
      ausruestung=[('Stab',1),('Dolch',1),('Abenteurerausrüstung',1),('Heilertasche',1),('Verstrickungsbeutel',1),('Sonnenzepter',2),('Schriftrolle: Geschoss',2)])
 
 

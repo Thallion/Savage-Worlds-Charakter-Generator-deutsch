@@ -145,19 +145,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
@@ -418,32 +405,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Stärke)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
@@ -484,7 +445,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Schmerzresistenz)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -493,11 +454,11 @@
         "handicap": 0
       },
       "vermoegen": 435,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Schnell)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,7 +467,7 @@
         "handicap": 0
       },
       "vermoegen": 435,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Seelenentzug)",
@@ -520,32 +481,6 @@
       },
       "vermoegen": 435,
       "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Schmerzresistenz)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Schnell)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Seelenentzug)",
@@ -616,32 +551,6 @@
       "vermoegen": 435
     },
     {
-      "aktion": "talent_mit_aufstieg(Schmerzresistenz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Schnell)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 435,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Seelenentzug)",
       "ok": false,
       "kosten": 0,
@@ -655,9 +564,9 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "ok": true,
-      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -666,7 +575,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwur\" FEHLT",
+      "warnung": "handicaps: \"Hässlich\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -679,7 +588,7 @@
       "vermoegen": 435
     }
   ],
-  "anomalien_anzahl": 10,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -767,7 +676,7 @@
     },
     "handicaps": [
       "Blutrünstig",
-      "Hässlich",
+      "Schwur_schwer",
       "Skrupellos",
       "Stur"
     ],

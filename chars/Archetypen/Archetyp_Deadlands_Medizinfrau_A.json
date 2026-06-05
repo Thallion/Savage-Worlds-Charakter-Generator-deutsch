@@ -604,7 +604,7 @@
         "Schlafsack": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -619,7 +619,7 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 3,
-    "verbleibende_handicap_punkte": 1,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -749,6 +749,13 @@
                 "kosten": 1
             },
             {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
                 "typ": "talent",
                 "name": "Geschichtenerzähler",
                 "zahlungsquelle": "Aufstiege",
@@ -777,13 +784,6 @@
                 "typ": "fertigkeit",
                 "name": "Überreden",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             },

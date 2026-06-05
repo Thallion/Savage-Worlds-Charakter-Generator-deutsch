@@ -497,7 +497,38 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Speer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kurzspeer/Wurfspeer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Mittlerer Schild": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Verstrickungsbeutel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Trank: schwache Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
         "Arrogant",
@@ -534,11 +565,30 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
+    "selected_allgemeine_ausruestung": [
+        "Speer",
+        "Kurzspeer/Wurfspeer",
+        "Mittlerer Schild",
+        "Abenteurerausrüstung",
+        "Verstrickungsbeutel",
+        "Trank: schwache Heilung"
+    ],
+    "selected_waffen": [
+        "Speer",
+        "Kurzspeer/Wurfspeer"
+    ],
     "selected_ruestungen": [],
-    "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "selected_schilde": [
+        "Mittlerer Schild"
+    ],
+    "ausruestung_mengen": {
+        "Speer": 1,
+        "Kurzspeer/Wurfspeer": 7,
+        "Mittlerer Schild": 1,
+        "Abenteurerausrüstung": 1,
+        "Verstrickungsbeutel": 1,
+        "Trank: schwache Heilung": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
@@ -551,7 +601,7 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,

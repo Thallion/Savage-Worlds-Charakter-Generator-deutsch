@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Revenant (Horror Kompendium)
-# Stand: 2026-06-04T07:47:33
-# 10 Anomalie(n) von 43 Schritten
+# Stand: 2026-06-05T09:40:13
+# 8 Anomalie(n) von 38 Schritten
 
 ## ANOMALIEN
   [!] talent(Bedrohlich): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -8,11 +8,9 @@
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Hardy: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Hardy kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Regeneration (slow): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Regeneration (slow) kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Undead: ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Undead kosten=0 None
-  [!] talent_mit_aufstieg(Schmerzresistenz): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] talent_mit_aufstieg(Schnell): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Seelenentzug): ok=False warnung=Aktion lieferte False/None kosten=0 None
-  [!] NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
-  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwur" FEHLT kosten=0 None
+  [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Hässlich" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Revenant, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -26,7 +24,6 @@
   - attribut(Willenskraft): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Verstand): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
-  - attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=500
   - attribut_mit_hc(Konstitution): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 0} Geld=500
   - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 0} Geld=500
@@ -47,14 +44,10 @@
   - kaufen(Taserx1): ok=True kosten=25 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=475
   - kaufen(Kleidung, Alltagx1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=455
   - kaufen(Taschenlampe (10" Strahl)x1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
-  - attribut_mit_aufstieg(Stärke): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
-  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - fertigkeit_mit_aufstieg(Schießen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - fertigkeit_mit_aufstieg(Heimlichkeit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - talent_mit_aufstieg(Bedrohlich): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
-  - talent_mit_aufstieg(Schmerzresistenz): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
-  - talent_mit_aufstieg(Schnell): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
-  - talent_mit_aufstieg(Seelenentzug): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - talent_mit_aufstieg(Schmerzresistenz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - talent_mit_aufstieg(Schnell): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
+  - talent_mit_aufstieg(Seelenentzug): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435
   - talent_mit_aufstieg(Seelenentzug): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=435

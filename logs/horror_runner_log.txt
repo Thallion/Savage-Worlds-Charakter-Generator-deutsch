@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Runner (Horror Kompendium)
-# Stand: 2026-06-04T07:47:25
+# Stand: 2026-06-05T09:40:05
 # 4 Anomalie(n) von 37 Schritten
 
 ## ANOMALIEN

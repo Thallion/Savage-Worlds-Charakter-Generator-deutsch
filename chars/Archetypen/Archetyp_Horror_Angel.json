@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -514,10 +527,10 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Auffällig": {
+            "Schwur_schwer": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
@@ -566,7 +579,7 @@
         "Arrogant",
         "Eifersüchtig",
         "Rachsüchtig_leicht",
-        "Auffällig"
+        "Schwur_schwer"
     ],
     "selected_talente": [
         "Flug",
@@ -602,7 +615,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -658,13 +671,13 @@
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 8,
+                "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
+                "name": "Konstitution",
                 "wert": 10,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
@@ -754,20 +767,6 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 10,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
                 "typ": "fertigkeit",
                 "name": "Okkultismus",
                 "wert": 6,
@@ -789,13 +788,6 @@
                 "kosten": 0.5
             },
             {
-                "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
                 "typ": "talent",
                 "name": "Attraktiv",
                 "zahlungsquelle": "Aufstiege",
@@ -806,6 +798,13 @@
                 "name": "Starker Wille",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "talent",

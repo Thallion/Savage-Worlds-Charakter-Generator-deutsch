@@ -353,6 +353,32 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": null
+    },
+    {
       "aktion": "kaufen(Winchester '73 (.44-40)x1)",
       "ok": true,
       "kosten": 25,
@@ -360,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 225,
       "warnung": null
@@ -373,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 223,
       "warnung": null
@@ -386,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 73,
       "warnung": null
@@ -399,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 69,
       "warnung": null
@@ -412,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 29,
       "warnung": null
@@ -425,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
       "warnung": null
@@ -438,7 +464,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
       "warnung": null
@@ -451,7 +477,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
       "warnung": null
@@ -464,33 +490,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 25,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 25,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Überleben)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
       "warnung": null
@@ -503,60 +503,31 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
       "warnung": null
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 25,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Deadlands_Eingeborenen-Kundschafterin_A.json)",
       "ok": true
     }
   ],
-  "anomalien": [
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Wahrnehmung)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 25,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Wahrnehmung soll W8, ist W6",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0.0
-      },
-      "vermoegen": 25
-    }
-  ],
-  "anomalien_anzahl": 2,
+  "anomalien": [],
+  "anomalien_anzahl": 0,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -606,7 +577,7 @@
         "ausgewaehlt": true
       },
       "Wahrnehmung": {
-        "wert": 6,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -663,13 +634,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.0
+      "aufstiege": 0.5
     },
     "machtpunkte": 0,
     "vermoegen": 25,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

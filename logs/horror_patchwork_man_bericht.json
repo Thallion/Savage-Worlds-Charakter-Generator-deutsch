@@ -132,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Stärke)",
+      "aktion": "attribut(Konstitution)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -171,19 +171,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Konstitution)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
@@ -191,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,49 +295,23 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
-      "aktion": "talent(Arkane Resistenz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Berserker)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent(Mut)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "kaufen(Kevlarwestex1)",
@@ -366,110 +327,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Arkane Resistenz)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Berserker)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Mut)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Raufbold)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Eisenkiefer)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Mut)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Wildheit)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Raufbold)",
       "ok": true,
       "kosten": 0,
@@ -484,6 +341,19 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Eisenkiefer)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 300,
+      "warnung": null
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Mut)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -528,45 +398,6 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent(Arkane Resistenz)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Berserker)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent(Mut)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless",
       "ok": true,
       "warnung": "MONSTROeSE KRAFT (nicht simulierbar): Ageless",
@@ -594,70 +425,9 @@
       "vermoegen": 300
     },
     {
-      "aktion": "talent_mit_aufstieg(Raufbold)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Eisenkiefer)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Mut)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Wildheit)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 300,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: 3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
-      "ok": true,
-      "warnung": "3 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 300
-    },
-    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT",
+      "warnung": "handicaps: \"Rachsüchtig_schwer\" FEHLT; handicaps: \"Hässlich\" FEHLT; handicaps: \"Außenseiter\" FEHLT; handicaps: \"Schwerfällig\" FEHLT; handicaps: \"Schwäche (Elektrizität)\" FEHLT; talente: \"Kräftig\" FEHLT; talente: \"Zäh\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -670,7 +440,7 @@
       "vermoegen": 300
     }
   ],
-  "anomalien_anzahl": 13,
+  "anomalien_anzahl": 5,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -683,7 +453,7 @@
       },
       "Stärke": {
         "wert": 12,
-        "modifier": 1
+        "modifier": 0
       },
       "Konstitution": {
         "wert": 12,
@@ -757,23 +527,18 @@
       }
     },
     "handicaps": [
-      "Außenseiter",
-      "Hässlich",
       "Phobie_schwer",
       "Verpeilt",
       "Schreihals_leicht",
-      "Schwäche (Elektrizität)",
-      "Schwäche (Feuer)",
-      "Schwerfällig"
+      "Schwäche (Feuer)"
     ],
     "talente": [
-      "Zäh",
-      "Kräftig",
-      "Arkane Resistenz",
       "Berserker",
+      "Arkane Resistenz",
       "Mut",
       "Raufbold",
       "Eisenkiefer",
+      "Mut_2",
       "Wildheit"
     ],
     "maechte": [],

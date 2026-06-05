@@ -145,19 +145,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 4
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
       "ok": true,
       "kosten": 0,
@@ -171,7 +158,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
+      "aktion": "attribut_mit_hc(Konstitution)",
       "ok": true,
       "kosten": 2,
       "kostenart": "Handicap-Punkte",
@@ -184,19 +171,6 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_hc(Stärke)",
-      "ok": true,
-      "kosten": 2,
-      "kostenart": "Handicap-Punkte",
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit(Geisteswissenschaften)",
       "ok": true,
       "kosten": 1,
@@ -204,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 2
       },
       "vermoegen": 500,
       "warnung": null
@@ -331,6 +305,45 @@
       "ok": true,
       "kosten": 0,
       "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Alchemie) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Recherche)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Alchemie)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
@@ -444,7 +457,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
+      "aktion": "fertigkeit_mit_aufstieg(Alchemie)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -457,33 +470,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut_mit_aufstieg(Konstitution)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Recherche)",
+      "aktion": "fertigkeit_mit_aufstieg(Alchemie)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -497,7 +484,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +493,11 @@
         "handicap": 0
       },
       "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Rohling)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,11 +506,11 @@
         "handicap": 0
       },
       "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Machtpunkte)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -532,7 +519,7 @@
         "handicap": 0
       },
       "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "talent_mit_aufstieg(Neue Mächte)",
@@ -549,7 +536,7 @@
     },
     {
       "aktion": "macht(Flächenschlag)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -558,49 +545,10 @@
         "handicap": 0
       },
       "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "macht(Schlummer)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Rohling)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": null
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Machtpunkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -643,15 +591,6 @@
       },
       "vermoegen": 500,
       "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: SKILL fehlt: Alchemie",
-      "ok": true,
-      "warnung": "SKILL fehlt: Alchemie",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
     },
     {
       "aktion": "talent(AH (Alchemist, Horror))",
@@ -754,45 +693,6 @@
       "vermoegen": 470
     },
     {
-      "aktion": "talent_mit_aufstieg(AH (Alchemist, Horror))",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Rohling)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "talent_mit_aufstieg(Machtpunkte)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "talent_mit_aufstieg(Neue Mächte)",
       "ok": false,
       "kosten": 0,
@@ -806,35 +706,9 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "macht(Flächenschlag)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "macht(Schlummer)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 470,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
-      "aktion": "NOTIZ: 4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "ok": true,
-      "warnung": "4 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
+      "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -843,7 +717,7 @@
     {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; handicaps: \"Langsam\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT; maechte: \"Flächenschlag\" FEHLT; maechte: \"Schlummer\" FEHLT",
+      "warnung": "handicaps: \"Schwerzüngig\" FEHLT; handicaps: \"Hässlich\" FEHLT; maechte: \"Eigenschaft erhöhen/senken\" FEHLT; maechte: \"Heilung\" FEHLT; maechte: \"Schutz\" FEHLT",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -851,12 +725,12 @@
         "fertigkeit": 0,
         "handicap": 0,
         "handicap_gesamt": 4,
-        "aufstiege": 0.5
+        "aufstiege": 0.0
       },
       "vermoegen": 470
     }
   ],
-  "anomalien_anzahl": 18,
+  "anomalien_anzahl": 12,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -940,10 +814,16 @@
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
+      },
+      "Alchemie": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
       }
     },
     "handicaps": [
-      "Hässlich",
+      "Langsam_leicht",
       "Zögerlich",
       "Materialkomponenten_schwer",
       "Schwäche (Feuer)",
@@ -956,14 +836,17 @@
       "Machtpunkte",
       "Neue Mächte"
     ],
-    "maechte": [],
+    "maechte": [
+      "Flächenschlag",
+      "Schlummer"
+    ],
     "ausruestung": {},
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 4,
-      "aufstiege": 0.5
+      "aufstiege": 0.0
     },
     "machtpunkte": 20,
     "vermoegen": 470,

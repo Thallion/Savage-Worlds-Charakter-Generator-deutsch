@@ -490,6 +490,19 @@
             },
             "attribut": "Willenskraft",
             "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
         }
     },
     "selected_elements": {
@@ -522,7 +535,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Schreikönigin/Schreikönig": {
+            "Scream Queen/King": {
                 "ausgewaehlt": true,
                 "rang": "V",
                 "neue_maechte": 0,
@@ -534,7 +547,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Schreikönigin/Schreikönig_2": {
+            "Scream Queen/King_2": {
                 "ausgewaehlt": true,
                 "rang": "V",
                 "neue_maechte": 0,
@@ -569,9 +582,9 @@
     ],
     "selected_talente": [
         "Mut",
-        "Schreikönigin/Schreikönig",
+        "Scream Queen/King",
         "Sehr Attraktiv",
-        "Schreikönigin/Schreikönig_2"
+        "Scream Queen/King_2"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -772,7 +785,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Schreikönigin/Schreikönig",
+                "name": "Scream Queen/King",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
@@ -784,7 +797,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Schreikönigin/Schreikönig_2",
+                "name": "Scream Queen/King_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

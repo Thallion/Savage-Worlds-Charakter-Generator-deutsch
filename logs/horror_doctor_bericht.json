@@ -496,7 +496,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Unerschütterlich)",
+      "aktion": "talent_mit_aufstieg(Unerbittlich)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -522,7 +522,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Unerschütterlich)",
+      "aktion": "talent_mit_aufstieg(Unerbittlich)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -567,7 +567,7 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "talent_mit_aufstieg(Unerschütterlich)",
+      "aktion": "talent_mit_aufstieg(Unerbittlich)",
       "ok": false,
       "kosten": 0,
       "kostenart": null,
@@ -712,7 +712,7 @@
       "Berserker",
       "Schwer zu töten",
       "Heiler_2",
-      "Unerschütterlich"
+      "Unerbittlich"
     ],
     "maechte": [],
     "ausruestung": {},

@@ -327,6 +327,32 @@
       "warnung": null
     },
     {
+      "aktion": "fertigkeit_mit_hc(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 1
+      },
+      "vermoegen": 150,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_hc(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 150,
+      "warnung": null
+    },
+    {
       "aktion": "macht(Geschoss)",
       "ok": true,
       "kosten": 0,
@@ -334,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 150,
       "warnung": null
@@ -347,10 +373,75 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 0
       },
       "vermoegen": 150,
       "warnung": null
+    },
+    {
+      "aktion": "kaufen(Dolchx3)",
+      "ok": true,
+      "kosten": 6,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 144,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Zauberkomponentenbeutelx1)",
+      "ok": true,
+      "kosten": 5,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 139,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Zauberbuch, Magier (leer)x1)",
+      "ok": true,
+      "kosten": 15,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 124,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Abenteurerausrüstungx1)",
+      "ok": true,
+      "kosten": 50,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 74,
+      "warnung": null
+    },
+    {
+      "aktion": "kaufen(Schriftrolle: Schlummerx1) FORCE",
+      "ok": true,
+      "kosten": 74,
+      "kostenart": "Vermögen",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schriftrolle: Schlummer zum Preis 0 gekauft"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Pathfinder_Paelie_A.json)",
@@ -359,22 +450,29 @@
   ],
   "anomalien": [
     {
-      "aktion": "SOLL/IST-DIFF",
-      "ok": false,
-      "warnung": "fertigkeiten: Zaubern soll W8, ist W4",
+      "aktion": "NOTIZ: Ausrüstung fehlt im Katalog: Keule",
+      "ok": true,
+      "warnung": "Ausrüstung fehlt im Katalog: Keule",
       "kosten": 0,
       "kostenart": null,
+      "punkte": {},
+      "vermoegen": 150
+    },
+    {
+      "aktion": "kaufen(Schriftrolle: Schlummerx1) FORCE",
+      "ok": true,
+      "kosten": 74,
+      "kostenart": "Vermögen",
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2,
-        "handicap_gesamt": 4,
-        "aufstiege": 0
+        "handicap": 0
       },
-      "vermoegen": 150
+      "vermoegen": 0,
+      "warnung": "Geld reichte nicht – auf 0 gesetzt und Schriftrolle: Schlummer zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 1,
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -460,7 +558,7 @@
         "ausgewaehlt": false
       },
       "Zaubern": {
-        "wert": 4,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -489,12 +587,12 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
+      "handicap": 0,
       "handicap_gesamt": 4,
       "aufstiege": 0
     },
     "machtpunkte": 10,
-    "vermoegen": 150,
+    "vermoegen": 0,
     "rang": "Anfänger",
     "volk": "Halbling"
   }
