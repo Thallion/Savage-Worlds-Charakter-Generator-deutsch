@@ -531,20 +531,40 @@ Weitere Merge-Hybride (FK-Basis + SP-`auto_talente`, ohne Handicap-Dopplung): `A
 
 ---
 
-## 11. Schritt 2 — `AH (Wunder: Gott)` je Gottheit (🔄 läuft, 1/18)
+## 11. Schritt 2 — `AH (Wunder: Gott)` je Gottheit (✅ KOMPLETT, 18/18)
 
 > Umfang: **12 Alveranische + 6 Halbgötter = 18** (Außeralveranische bewusst weggelassen). Backup je Gott.
 
 ### 11.1 Template (User-bestätigt 2026-06-05)
 - **AH (Wunder: Gott)**: `kategorie: Hintergrund`, `rang: A`, Arkane Fertigkeit **Glaube (Willenskraft)**, **10 MP**, **3 neue Mächte**, Voraussetzung **WIL W6**, `auto_handicaps: [Schwur_schwer]` (= verbindlicher Moralkodex/Tabu der Kirche). Beschreibung mit Aspekten + heiligem Symbol.
-- **Je 1 konvertierte Traditions-Sonderfertigkeit** als eigenes Talent: `kategorie: Geweihter` (neue Sammelkategorie, NICHT 18 Einzelkategorien), `rang: A`, Voraussetzung = jeweiliges `AH (Wunder: Gott)`.
+- **Je 1 Traditions-Sonderfertigkeit** wird vom AH via `auto_talente` mitaktiviert (User-Vorgabe). **Reihenfolge der Wahl:**
+  1. **Bestehendes SW-Talent bevorzugen**, wenn es thematisch passt (z.B. Phex→`Glück`, Tsa→`Schnelle Heilung`, Rondra→`Mutig`).
+  2. Nur sonst ein **neues** Talent `kategorie: Geweihter`, `rang: A`, Voraussetzung = jeweiliges AH.
+- ⚠️ **KEINE DSA-Regelbegriffe** in Beschreibungen (kein LeP, AsP, „Furcht-Stufe I–IV", Regenerationsphase, FP, QS). Nur SW-Mechanik (Bennies, Würfeltypen, +2/−2, Wunden, natürliche Heilungsprobe, Furchttabelle). Lehre aus Tsa/Phex/Rondra-Korrektur 2026-06-05.
+- Vorgehen: **Dreierblöcke**.
 
-### 11.2 Fortschritt
+### 11.2 Fortschritt (18/18 ✅)
 
-| # | Gott | AH | Traditions-SF (Talent) | Status |
+| # | Gott | AH | Traditions-SF (Talent, auto_talente) | Status |
 |--:|---|---|---|:--:|
-| 1 | **Praios** (Götterfürst; Sonne/Ordnung/Recht/Magiebann) | `AH (Wunder: Praios)` | **Magieschutz (Praios)** — +2 widerstehen ggü. arkanen Mächten (DSA: +1 Seelenkraft) | ✅ 2026-06-05 (Backup `pre_ah_wunder_praios_`) |
-| 2–12 | Rondra, Efferd, Travia, Boron, Hesinde, Firun, Tsa, Phex, Peraine, Ingerimm, Rahja | – | – | ⬜ offen |
-| 13–18 | Aves, Ifirn, Kor, Nandus, Swafnir, Angrosch (Halbgötter) | – | – | ⬜ offen |
+| 1 | **Praios** (Götterfürst; Sonne/Ordnung/Recht/Magiebann) | `AH (Wunder: Praios)` | **Arkane Resistenz** (bestehendes SW-Talent; −2 für gegnerische Mächte) | ✅ |
+| 2 | **Rondra** (Löwin; Kampf/Ehre/Sturm) | `AH (Wunder: Rondra)` | **Mutig** (bestehendes SW-Talent; +2 Furchtproben) | ✅ |
+| 3 | **Efferd** (Gezeiten; Meer/Wetter/Schifffahrt) | `AH (Wunder: Efferd)` | **Meister des Meeres (Efferd)** — +2 Bootfahren/Schwimmen/Navigation | ✅ |
+| 4 | **Travia** (Gütige Mutter; Heim/Familie/Treue) | `AH (Wunder: Travia)` | **Heimstatt (Travia)** — bis 3 Gefährten +2 natürliche Heilung beim Rasten im Haus | ✅ |
+| 5 | **Boron** (der Schweigsame; Tod/Ruhe/Dunkelheit) | `AH (Wunder: Boron)` | **Untotenschreck (Boron)** — +2 Schaden gegen Untote (DSA: doppelt) | ✅ |
+| 6 | **Hesinde** (Allwissende; Wissen/Magie/Schlange) | `AH (Wunder: Hesinde)` | **Scharfe Sinne (Hesinde)** — +2 Wahrnehmung gegen Illusionen/Täuschung | ✅ |
+| 7 | **Firun** (Weißer Jäger; Eis/Winter/Jagd) | `AH (Wunder: Firun)` | **Wildniskunde (Firun)** — +2 Überleben/Spuren lesen in Wildnis/Winter | ✅ |
+| 8 | **Tsa** (junge Göttin; Geburt/Leben/Wandel) | `AH (Wunder: Tsa)` | **Schnelle Heilung** (bestehendes SW-Talent; +2 natürliche Heilung) | ✅ |
+| 9 | **Phex** (der Listenreiche; Diebstahl/Glück/Schatten) | `AH (Wunder: Phex)` | **Glück** (bestehendes SW-Talent; +1 Benny) | ✅ |
+| 10 | **Peraine** (die Gütige; Heilkunst/Ackerbau) | `AH (Wunder: Peraine)` | **Widerstandsfähigkeit gegen Krankheiten (Peraine)** — +2 vs Krankheit/Gift, Krankheiten nur leicht | ✅ |
+| 11 | **Ingerimm** (Himmlischer Schmied; Feuer/Handwerk) | `AH (Wunder: Ingerimm)` | **Feuerschutz (Ingerimm)** — +2 vs Feuer/Hitze, −2 Feuerschaden | ✅ |
+| 12 | **Rahja** (Schöne Göttin; Liebe/Freude/Wein) | `AH (Wunder: Rahja)` | **Durchhaltevermögen (Rahja)** — +2 um Angeschlagen zu beenden | ✅ |
+| 13 | **Aves** (Herr des Horizontes; Reise/Schicksal) *[Halbgott]* | `AH (Wunder: Aves)` | **Wegfindung (Aves)** — +2 Orientierung/Reisen, verirrt sich nicht | ✅ |
+| 14 | **Ifirn** (Schwanengleiche, Tochter Firuns) *[Halbgott]* | `AH (Wunder: Ifirn)` | **Innere Wärme (Ifirn)** — +2 vs Kälte, −2 Kälteschaden | ✅ |
+| 15 | **Kor** (Herr der Schlachten; Kampf/Sold) *[Halbgott]* | `AH (Wunder: Kor)` | **Schmerzresistenz** (bestehend; ignoriert eine Stufe Wundabzüge) | ✅ |
+| 16 | **Nandus** (Halbgott des Wissens) *[Halbgott]* | `AH (Wunder: Nandus)` | **Gelehrter** (bestehend; +2 Wissensfertigkeit) | ✅ |
+| 17 | **Swafnir** (Gottwal; Thorwaler/Seefahrt) *[Halbgott]* | `AH (Wunder: Swafnir)` | **Anführer** (bestehend; rallyt Verbündete im Befehlsradius) | ✅ |
+| 18 | **Angrosch** (zwergischer Schmiedegott ≈ Ingerimm) *[Halbgott, Volk: Zwerg]* | `AH (Wunder: Angrosch)` | **Feuerschutz (Angrosch)** — +2 vs Feuer/Hitze, −2 Feuerschaden | ✅ |
 
-**Stand nach Praios:** 476 Talente. Tests grün.
+**Backups:** `pre_ah_wunder_praios_`, `_block2_` … `_block6_`, `_fix_phextsa_`. **Stand:** 503 Talente, Tests grün (116).
+**Bestehende SW-Talente als Geweihten-SF:** Praios→`Arkane Resistenz`, Rondra→`Mutig`, Tsa→`Schnelle Heilung`, Phex→`Glück`, Kor→`Schmerzresistenz`, Nandus→`Gelehrter`, Swafnir→`Anführer`. **Neue SF (Kategorie `Geweihter`, 11):** Efferd, Travia, Boron, Hesinde, Firun, Peraine, Ingerimm, Rahja, Aves, Ifirn, Angrosch.

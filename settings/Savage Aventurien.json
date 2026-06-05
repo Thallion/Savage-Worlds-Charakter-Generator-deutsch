@@ -6985,16 +6985,473 @@
       "aktiv": true,
       "auto_handicaps": [
         "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Arkane Resistenz"
       ]
     },
-    "Magieschutz (Praios)": {
-      "name": "Magieschutz (Praios)",
+    "AH (Wunder: Rondra)": {
+      "name": "AH (Wunder: Rondra)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rondra (Löwin) — Aspekte Kampf, Ehre, Sturm, Blitz und Donner. Trägt Schwert und Löwensymbol; gebunden an den Moralkodex der Rondrakirche (Ritterlichkeit, keine Armbrüste, ehrenhafter Zweikampf).",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Mutig"
+      ]
+    },
+    "AH (Wunder: Efferd)": {
+      "name": "AH (Wunder: Efferd)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Efferd (Herr der Gezeiten) — Aspekte Meer, Wasser, Wetter, Sturm und Schifffahrt. Heiliges Tier Delphin; gebunden an den Moralkodex der Efferdkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Meister des Meeres (Efferd)"
+      ]
+    },
+    "Meister des Meeres (Efferd)": {
+      "name": "Meister des Meeres (Efferd)",
       "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Wunder: Praios)"
+        "AH (Wunder: Efferd)"
       ],
-      "beschreibung": "Traditions-Sonderfertigkeit der Praioskirche: +2 auf Proben, um gegnerischen arkanen Mächten zu widerstehen (Willenskraft).",
+      "beschreibung": "Traditions-Sonderfertigkeit der Efferdkirche: +2 auf Proben für Bootfahren, Schwimmen sowie Orientierung und Navigation auf See.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Travia)": {
+      "name": "AH (Wunder: Travia)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Travia (Gütige Mutter) — Aspekte Heim, Herdfeuer, Familie, Gastfreundschaft und Treue. Heiliges Tier Wildgans; gebunden an den Moralkodex der Traviakirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Heimstatt (Travia)"
+      ]
+    },
+    "Heimstatt (Travia)": {
+      "name": "Heimstatt (Travia)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Travia)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Traviakirche: Rasten bis zu 3 benannte Gefährten gemeinsam mit der Geweihten in einem Gebäude, erhalten sie +2 auf ihre nächste natürliche Heilungsprobe.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Boron)": {
+      "name": "AH (Wunder: Boron)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Boron (der Schweigsame) — Aspekte Tod, Schlaf, Ruhe, Schweigen, Vergessen, Dunkelheit. Heiliges Tier Rabe; Totenfeind und Untotenschreck, gebunden an den Moralkodex der Boronkirche (Schutz der Totenruhe, Vernichtung von Untoten und Nekromantie).",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Untotenschreck (Boron)"
+      ]
+    },
+    "Untotenschreck (Boron)": {
+      "name": "Untotenschreck (Boron)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Boron)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Boronkirche: Angriffe des Geweihten verursachen +2 Schaden gegen Untote.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Hesinde)": {
+      "name": "AH (Wunder: Hesinde)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Hesinde (Allwissende) — Aspekte Wissen, Magie, Gelehrsamkeit, Sprache, Sterne und Wandel. Heiliges Tier Schlange (Ouroboros); gebunden an den Moralkodex der Hesindekirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Scharfe Sinne (Hesinde)"
+      ]
+    },
+    "Scharfe Sinne (Hesinde)": {
+      "name": "Scharfe Sinne (Hesinde)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Hesinde)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Hesindekirche: +2 auf Wahrnehmung, um Illusionen und Täuschungen zu durchschauen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Firun)": {
+      "name": "AH (Wunder: Firun)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Firun (Weißer Jäger) — Aspekte Eis, Winter, waidmännische Jagd, wilde Natur und Selbstüberwindung. Heiliges Tier Eisbär; gebunden an den Moralkodex der Firunkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Wildniskunde (Firun)"
+      ]
+    },
+    "Wildniskunde (Firun)": {
+      "name": "Wildniskunde (Firun)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Firun)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Firunkirche: +2 auf Überleben und Spuren lesen in Wildnis und winterlichem Gelände.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Tsa)": {
+      "name": "AH (Wunder: Tsa)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Tsa (junge Göttin) — Aspekte Geburt, Erneuerung, Wiedergeburt, Leben, Freiheit und Lebensfreude. Heiliges Tier (vielfarbige) Eidechse; gebunden an den Moralkodex der Tsakirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Schnelle Heilung"
+      ]
+    },
+    "AH (Wunder: Phex)": {
+      "name": "AH (Wunder: Phex)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Phex (der Listenreiche) — Aspekte Diebstahl, Glück, Handel, List, Nacht und Schatten. Heiliges Tier Fuchs; gebunden an den Moralkodex der Phexkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Glück"
+      ]
+    },
+    "AH (Wunder: Peraine)": {
+      "name": "AH (Wunder: Peraine)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Peraine (die Gütige) — Aspekte Heilkunst, Ackerbau, Fruchtbarkeit, Pflanzen und Hilfsbereitschaft. Heiliges Tier Storch; gebunden an den Moralkodex der Perainekirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Widerstandsfähigkeit gegen Krankheiten (Peraine)"
+      ]
+    },
+    "Widerstandsfähigkeit gegen Krankheiten (Peraine)": {
+      "name": "Widerstandsfähigkeit gegen Krankheiten (Peraine)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Peraine)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Perainekirche: +2 auf Proben gegen Krankheiten und Gift; Krankheiten verlaufen beim Geweihten stets nur leicht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Ingerimm)": {
+      "name": "AH (Wunder: Ingerimm)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Ingerimm (Himmlischer Schmied) — Aspekte Feuer, Handwerk, Schmiedekunst, Beständigkeit, Härte und Kraft. Symbol Hammer und Amboss; gebunden an den Moralkodex der Ingerimmkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Feuerschutz (Ingerimm)"
+      ]
+    },
+    "Feuerschutz (Ingerimm)": {
+      "name": "Feuerschutz (Ingerimm)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Ingerimm)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Ingerimmkirche: +2 auf Proben, um Feuer und Hitze zu widerstehen; Schaden durch Feuer ist um 2 reduziert.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Rahja)": {
+      "name": "AH (Wunder: Rahja)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rahja (Schöne Göttin) — Aspekte Liebe, Freude, Ekstase, Schönheit, Wein und Harmonie. Heiliges Tier (weiße) Stute; gebunden an den Moralkodex der Rahjakirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Durchhaltevermögen (Rahja)"
+      ]
+    },
+    "Durchhaltevermögen (Rahja)": {
+      "name": "Durchhaltevermögen (Rahja)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Rahja)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Rahjakirche: +2 auf Proben, um den Zustand Angeschlagen zu beenden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Aves)": {
+      "name": "AH (Wunder: Aves)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Aves (Herr des Horizontes) — Aspekte Reise, Wanderschaft, Abenteuer, Entdeckung und Schicksal. Heiliges Tier Paradiesvogel; gebunden an den Moralkodex der Aveskirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Wegfindung (Aves)"
+      ]
+    },
+    "Wegfindung (Aves)": {
+      "name": "Wegfindung (Aves)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Aves)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Aveskirche: +2 auf Proben für Orientierung und Reisen; der Geweihte verirrt sich unterwegs nicht.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Ifirn)": {
+      "name": "AH (Wunder: Ifirn)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Ifirn (Schwanengleiche, Tochter Firuns) — Aspekte gütige Natur, Frühling, Bogenschießen und Hilfsbereitschaft. Heiliges Tier Schwan; gebunden an den Moralkodex der Ifirnkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Innere Wärme (Ifirn)"
+      ]
+    },
+    "Innere Wärme (Ifirn)": {
+      "name": "Innere Wärme (Ifirn)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Ifirn)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Ifirnkirche: +2 auf Proben, um Kälte zu widerstehen; Schaden durch Kälte ist um 2 reduziert.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "AH (Wunder: Kor)": {
+      "name": "AH (Wunder: Kor)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Kor (Herr der Schlachten) — Aspekte Kampf, Kampfrausch, Sieg, Blut, Beute und Sold. Symbol Schwert und Mantikor; gebunden an den Moralkodex der Korkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Schmerzresistenz"
+      ]
+    },
+    "AH (Wunder: Nandus)": {
+      "name": "AH (Wunder: Nandus)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Nandus (Halbgott des Wissens) — Aspekte Bildung, Erkenntnis, Strategie, Schrift und Orakel. Symbol Buch; gebunden an den Moralkodex der Nanduskirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Gelehrter"
+      ]
+    },
+    "AH (Wunder: Swafnir)": {
+      "name": "AH (Wunder: Swafnir)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Swafnir (Gottwal; Sohn Efferds und Rondras) — Aspekte Seefahrt, Kraft, Mut, Treue und Thorwaler. Heiliges Tier Wal; gebunden an den Moralkodex der Swafnirkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Anführer"
+      ]
+    },
+    "AH (Wunder: Angrosch)": {
+      "name": "AH (Wunder: Angrosch)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6",
+        "Volk: Zwerg"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Angrosch (zwergischer Schmiedegott, dem Ingerimm entsprechend) — Aspekte Feuer, Handwerk, Schmiedekunst und Zusammenhalt der Zwerge. Symbol Hammer und Amboss; gebunden an den Moralkodex der Angroschkirche.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Schwur_schwer"
+      ],
+      "auto_talente": [
+        "Feuerschutz (Angrosch)"
+      ]
+    },
+    "Feuerschutz (Angrosch)": {
+      "name": "Feuerschutz (Angrosch)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Angrosch)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Angroschkirche: +2 auf Proben, um Feuer und Hitze zu widerstehen; Schaden durch Feuer ist um 2 reduziert.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
