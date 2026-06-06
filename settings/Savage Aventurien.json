@@ -541,7 +541,7 @@
     },
     "Barbar": {
       "name": "Barbar",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "STÄ W6",
@@ -710,7 +710,7 @@
     },
     "Kämpfer": {
       "name": "Kämpfer",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "STÄ W6",
@@ -863,7 +863,7 @@
     },
     "Mönch": {
       "name": "Mönch",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "GES W6",
@@ -926,62 +926,40 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Paladin": {
-      "name": "Paladin",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6",
-        "STÄ W6"
-      ],
-      "beschreibung": "Aura der Tapferkeit (+1 auf Furchtproben innerhalb von 10''), Ehrenkodex, Böses entdecken, Böses niederstrecken (freie Wiederholung bei Angriffswürfen gegen einen gewählten bösen Gegner pro Begegnung)",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "Aura der Tapferkeit",
-        "Böses Entdecken",
-        "Böses Niederstrecken"
-      ],
-      "auto_handicaps": [
-        "Ehrenkodex"
-      ]
-    },
-    "Mystische Mächte (Paladin)": {
-      "name": "Mystische Mächte (Paladin)",
-      "kategorie": "Paladin",
+    "Kampfsegen": {
+      "name": "Kampfsegen",
+      "kategorie": "Geweihter",
       "rang": "F",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Der Paladin hat 10 gewidmete Machtpunkte, die er für Eigenschaft stärken (Kämpfen, Stärke, Konstitution), Heilung, Linderung, Waffe verbessern nutzen kann. Alle außer Heilung und Linderung wirken nur auf den Paladin selbst.",
+      "beschreibung": "Der Geweihte erhält 10 gewidmete Machtpunkte für kämpferische und heilende Liturgien: Eigenschaft stärken (Kämpfen, Stärke, Konstitution), Heilung, Linderung, Waffe verbessern. Alle außer Heilung und Linderung wirken nur auf den Geweihten selbst.",
       "neue_maechte": 0,
       "machtpunkte": 10,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Gnade (Paladin)": {
-      "name": "Gnade (Paladin)",
-      "kategorie": "Paladin",
+    "Lindernde Hand": {
+      "name": "Lindernde Hand",
+      "kategorie": "Geweihter",
       "rang": "V",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Der Paladin kann Abgelenkt, Verwundbar, Angeschlagen bei einem Verbündeten in Willenskraft-Reichweite aufheben.",
+      "beschreibung": "Mit segnender Berührung im Namen seines Gottes kann der Geweihte Abgelenkt, Verwundbar oder Angeschlagen bei einem Verbündeten in Willenskraft-Reichweite aufheben.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Reittier (Paladin)": {
-      "name": "Reittier (Paladin)",
-      "kategorie": "Paladin",
+    "Gesegnetes Streitross": {
+      "name": "Gesegnetes Streitross",
+      "kategorie": "Geweihter",
       "rang": "H",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Der Held erhält ein loyales leichtes oder schweres Pferd als Wildcard.",
+      "beschreibung": "Der Geweihte erhält ein loyales, gesegnetes Streitross (leichtes oder schweres Pferd) als Wildcard.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -989,7 +967,7 @@
     },
     "Schurke": {
       "name": "Schurke",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "GES W6",
@@ -1036,7 +1014,7 @@
     },
     "Waldläufer": {
       "name": "Waldläufer",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "Athletik W6, Kämpfen oder Schießen W6",
@@ -1095,15 +1073,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Hexenmeister)": {
-      "name": "AH (Hexenmeister)",
-      "kategorie": "Klasse",
+    "AH (Paktierer)": {
+      "name": "AH (Paktierer)",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
-        "VER W6",
+        "WIL W6",
         "Okkultismus W4"
       ],
-      "beschreibung": "AH (Hexenmeister), Behindernde Rüstung (jede), Vertrauter, Hexerei (1 freie Hexerei aus der Liste). Arkane Fertigkeit: Zaubern. Startet mit 2 Mächten aus der Hexenmeister-Liste. Der Vertraute speichert die Zauber des Patrons; tägliche Kommunikation mit dem Vertrauten erforderlich.",
+      "beschreibung": "AH (Paktierer) [Arkane Fertigkeit: Magie (Willenskraft)]. Verbotene schwarze Tradition: Der Paktierer hat einen Pakt mit dämonischen Mächten geschlossen und empfängt dafür Zauberkraft. Behindernde Rüstung (schwer), Vertrauter (ein an den Patron gebundenes Wesen, das die Mächte speichert; tägliche Zwiesprache mit dem Patron erforderlich). Startet mit 2 Mächten aus der Paktierer-Liste.",
       "neue_maechte": 2,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -1117,12 +1095,12 @@
     },
     "Weitere Hexerei": {
       "name": "Weitere Hexerei",
-      "kategorie": "Hexenmeister",
+      "kategorie": "Paktierer",
       "rang": "F",
       "voraussetzungen": [
-        "Hexenmeister"
+        "Paktierer"
       ],
-      "beschreibung": "Der:ie Hexenmeister:in kann eine neue Hexerei auswählen. Kann einmal pro Rang genommen werden. Hexereien (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
+      "beschreibung": "Der:ie Paktierer:in kann eine neue Verfluchung auswählen. Kann einmal pro Rang genommen werden. Verfluchungen (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1130,25 +1108,25 @@
     },
     "Starke Hexerei": {
       "name": "Starke Hexerei",
-      "kategorie": "Hexenmeister",
+      "kategorie": "Paktierer",
       "rang": "V",
       "voraussetzungen": [
-        "Hexenmeister"
+        "Paktierer"
       ],
-      "beschreibung": "Der:ie Hexenmeister:in kann eine Starke Hexerei auswählen. Kann einmal pro Rang genommen werden. Starke Hexereien (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
+      "beschreibung": "Der:ie Paktierer:in kann eine Starke Verfluchung auswählen. Kann einmal pro Rang genommen werden. Starke Verfluchungen (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Arkane Meisterschaft (Hexenmeister)": {
-      "name": "Arkane Meisterschaft (Hexenmeister)",
-      "kategorie": "Hexenmeister",
+    "Arkane Meisterschaft (Paktierer)": {
+      "name": "Arkane Meisterschaft (Paktierer)",
+      "kategorie": "Paktierer",
       "rang": "H",
       "voraussetzungen": [
-        "Hexenmeister"
+        "Paktierer"
       ],
-      "beschreibung": "Durch ihren finsteren Patron erschließt die Hexe die Geheimnisse ihrer mystischen Kräfte. Erhält Zugriff auf alle Epischen Machtmodifikatoren ihrer Mächte.",
+      "beschreibung": "Durch den finsteren Patron erschließt der Paktierer die Geheimnisse seiner Zauberkraft. Erhält Zugriff auf alle Epischen Machtmodifikatoren seiner Mächte.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1156,13 +1134,13 @@
     },
     "Mächtige Hexerei": {
       "name": "Mächtige Hexerei",
-      "kategorie": "Hexenmeister",
+      "kategorie": "Paktierer",
       "rang": "L",
       "voraussetzungen": [
-        "Hexenmeister",
-        "Mindestens zwei Hexenmeister-Vorteile"
+        "Paktierer",
+        "Mindestens zwei Paktierer-Vorteile"
       ],
-      "beschreibung": "Wild Card. Der:ie Hexenmeister:in kann eine Mächtige Hexerei auswählen. Kann einmal pro Rang genommen werden. Mächtige Hexereien (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
+      "beschreibung": "Wild Card. Der:ie Paktierer:in kann eine Mächtige Verfluchung auswählen. Kann einmal pro Rang genommen werden. Mächtige Verfluchungen (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1170,7 +1148,7 @@
     },
     "Alchemist": {
       "name": "Alchemist",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "VER W6"
@@ -1228,7 +1206,7 @@
     },
     "Kavalier": {
       "name": "Kavalier",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "GES W6",
@@ -1297,13 +1275,13 @@
     },
     "Inquisitor": {
       "name": "Inquisitor",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "Athletik W6 oder Kämpfen W6 oder Schießen W6",
         "Okkultismus W4"
       ],
-      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Urteil (einmal pro Begegnung: +1 auf Angriffs- oder Schadenswürfe, oder +2 auf Eigenschaftswürfe – Wahl bei Einsatz), Monsterkunde (+2 auf Allgemeinwissen-Proben über Monster, Dämonen und Untote).",
+      "beschreibung": "Diener der Heiligen Inquisition der Praioskirche (Bannstrahler-Laienorden): jagt mit Feuer und Schwert Ketzer, Schwarzmagier, Dämonen und Untote. Rüstungsbeschränkung (mittelschwer), Urteil (einmal pro Begegnung: +1 auf Angriffs- oder Schadenswürfe, oder +2 auf Eigenschaftswürfe – Wahl bei Einsatz), Monsterkunde (+2 auf Allgemeinwissen-Proben über Dämonen, Untote und unheilige Kreaturen).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1319,7 +1297,7 @@
       "voraussetzungen": [
         "Inquisitor"
       ],
-      "beschreibung": "Der Inquisitor verzaubert seine Waffe mit Bann: Angriffe ignorieren den Übernatürlichen Schutz des Ziels und verursachen +2 Schaden gegen die gewählte Kreaturenart (festgelegt bei Aktivierung der Macht).",
+      "beschreibung": "Im Namen Praios' bannt der Inquisitor seine Waffe gegen das Unheilige: Angriffe ignorieren den Übernatürlichen Schutz des Ziels und verursachen +2 Schaden gegen die gewählte Kreaturenart (z.B. Dämon, Untoter; festgelegt bei Aktivierung der Macht).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1332,7 +1310,7 @@
       "voraussetzungen": [
         "Inquisitor"
       ],
-      "beschreibung": "Der Inquisitor brandmarkt einen Feind (Aktion, Berührungsangriff): Das Ziel gilt als Abgelenkt (-2 auf alle Proben) bis es eine Willenskraft-Probe schafft (einmal pro Runde am Ende des Zuges).",
+      "beschreibung": "Der Inquisitor versengt einen Feind mit dem Zeichen des Greifen (Aktion, Berührungsangriff): Das Ziel gilt als Abgelenkt (-2 auf alle Proben), bis es eine Willenskraft-Probe schafft (einmal pro Runde am Ende des Zuges).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1345,7 +1323,7 @@
       "voraussetzungen": [
         "Inquisitor"
       ],
-      "beschreibung": "Der Inquisitor erhält 10 gewidmete Machtpunkte für folgende Mächte: Eigenschaft erhöhen (Einschüchtern, Wahrnehmung oder Überleben), Dunkelsicht, Magie entdecken/verbergen und Aufheben. Alle Mächte wirken nur auf den Inquisitor selbst.",
+      "beschreibung": "Praios verleiht dem Inquisitor 10 gewidmete Machtpunkte für folgende Mächte: Eigenschaft erhöhen (Einschüchtern, Wahrnehmung oder Überleben), Dunkelsicht, Magie entdecken/verbergen und Aufheben. Alle Mächte wirken nur auf den Inquisitor selbst.",
       "neue_maechte": 0,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -1358,7 +1336,7 @@
       "voraussetzungen": [
         "Inquisitor"
       ],
-      "beschreibung": "Der Inquisitor kann die Umgebungsschwächen von Kreaturen gezielt auslösen (z.B. Feuer bei Untoten, Silber bei Werwölfen): Der Inquisitor verursacht mit einem Angriff automatisch die Schwachstellen-Effekte der Kreatur.",
+      "beschreibung": "Der Inquisitor kennt die Schwächen unheiliger Kreaturen und löst sie gezielt aus (z.B. heiliges Feuer bei Untoten, Silber bei Werwölfen): Ein Angriff verursacht automatisch die Schwachstellen-Effekte der Kreatur.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1373,36 +1351,20 @@
         "Inquisitor",
         "Mindestens zwei Inquisitor-Talente"
       ],
-      "beschreibung": "Wild Card. Der Inquisitor trifft sein Urteilsziel mit vernichtendem Schaden (automatischer Erfolg und eine Erhöhung auf den Angriff) und kann sofort einen neuen Feind als Urteilsziel wählen. Erfordert Legendär-Rang und mindestens zwei weitere Inquisitor-Talente.",
+      "beschreibung": "Wild Card. Im vollstreckten Urteil Praios' trifft der Inquisitor sein Urteilsziel mit vernichtendem Schaden (automatischer Erfolg und eine Erhöhung auf den Angriff) und kann sofort einen neuen Feind als Urteilsziel wählen. Erfordert Legendär-Rang und mindestens zwei weitere Inquisitor-Talente.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Orakel)": {
-      "name": "AH (Orakel)",
-      "kategorie": "Klasse",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6"
-      ],
-      "beschreibung": "AH (Orakel) [Arkane Fertigkeit: Glaube], Behindernde Rüstung (mittelschwer), Fluch (unvermeidliche Beeinträchtigung, die mit den Stufen stärker wird, z.B. Blindheit, Taubheit, Schwäche), Mysterium (wählt eine göttliche Verbindung, z.B. Tod, Flammen, Natur, Wasser).",
-      "neue_maechte": 3,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde_Rüstung_schwer"
-      ]
-    },
     "Offenbarung": {
       "name": "Offenbarung",
-      "kategorie": "Orakel",
+      "kategorie": "Geweihter",
       "rang": "F",
       "voraussetzungen": [
-        "Orakel"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Das Orakel kann eine Macht aus seinem Mysterium als begrenzte freie Aktion wirken (einmal pro Zug, ohne Machtpunkte-Abzug für die begrenzte freie Aktion). Kann mehrfach genommen werden.",
+      "beschreibung": "Der Geweihte kann eine seiner göttlichen Mächte als begrenzte freie Aktion wirken (einmal pro Zug, ohne Machtpunkte-Abzug für die begrenzte freie Aktion). Kann mehrfach genommen werden.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1410,12 +1372,12 @@
     },
     "Göttliche Meisterschaft": {
       "name": "Göttliche Meisterschaft",
-      "kategorie": "Orakel",
+      "kategorie": "Geweihter",
       "rang": "V",
       "voraussetzungen": [
-        "Orakel"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Das Orakel darf jetzt Epische Macht-Modifikatoren auf seine göttlichen Mächte anwenden.",
+      "beschreibung": "Der Geweihte darf jetzt Epische Macht-Modifikatoren auf seine göttlichen Mächte anwenden.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1423,12 +1385,12 @@
     },
     "Große Offenbarung": {
       "name": "Große Offenbarung",
-      "kategorie": "Orakel",
+      "kategorie": "Geweihter",
       "rang": "H",
       "voraussetzungen": [
-        "Orakel"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Das Orakel schaltet seine finale Offenbarung frei – die mächtigste Fähigkeit seines Mysteriums (z.B. ewiges Feuer, Totenbeschwörung, Windkörper).",
+      "beschreibung": "Der Geweihte erhält eine besonders mächtige göttliche Offenbarung – die stärkste Ausprägung einer seiner Mächte (z.B. ewiges Feuer, Totenbeschwörung, Windkörper).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1530,7 +1492,7 @@
     },
     "AH (Hexe)": {
       "name": "AH (Hexe)",
-      "kategorie": "Klasse",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "WIL W6",
@@ -1599,14 +1561,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Aura der Gerechtigkeit": {
-      "name": "Aura der Gerechtigkeit",
-      "kategorie": "Paladin",
+    "Geweihte Aura": {
+      "name": "Geweihte Aura",
+      "kategorie": "Geweihter",
       "rang": "F",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)",
+        "Niederstrecken des Unheiligen"
       ],
-      "beschreibung": "Der Paladin teilt seine Fähigkeit Böses Niederstrecken mit Verbündeten in Sichtweite (12''). Betroffene Verbündete erhalten dieselben Angriffsboni wie der Paladin gegen das gewählte Ziel für eine Runde.",
+      "beschreibung": "Der Geweihte teilt sein Niederstrecken des Unheiligen mit Verbündeten in Sichtweite (12''). Betroffene Verbündete erhalten dieselben Angriffsboni gegen das gewählte Ziel für eine Runde.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1856,7 +1819,7 @@
     },
     "Arkaner Bogenschütze": {
       "name": "Arkaner Bogenschütze",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "AH oder MM",
@@ -1870,7 +1833,7 @@
     },
     "Arkaner Bogenschütze II": {
       "name": "Arkaner Bogenschütze II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Arkaner Bogenschütze"
@@ -1883,7 +1846,7 @@
     },
     "Arkaner Bogenschütze III": {
       "name": "Arkaner Bogenschütze III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Arkaner Bogenschütze II"
@@ -1894,9 +1857,9 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Arkaner Betrüger": {
-      "name": "Arkaner Betrüger",
-      "kategorie": "Prestige",
+    "Phexens List": {
+      "name": "Phexens List",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "AH",
@@ -1908,12 +1871,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Arkaner Betrüger II": {
-      "name": "Arkaner Betrüger II",
-      "kategorie": "Prestige",
+    "Phexens List II": {
+      "name": "Phexens List II",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Arkaner Betrüger"
+        "Phexens List"
       ],
       "beschreibung": "Unsichtbarer Dieb: einmal pro Tag automatisch Unsichtbarkeit für 1 Machtpunkt mit automatischer Steigerung (kein Wurf)",
       "neue_maechte": 0,
@@ -1921,12 +1884,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Arkaner Betrüger III": {
-      "name": "Arkaner Betrüger III",
-      "kategorie": "Prestige",
+    "Phexens List III": {
+      "name": "Phexens List III",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
-        "Arkaner Betrüger II"
+        "Phexens List II"
       ],
       "beschreibung": "Überraschungszauber: Die Zauber des Helden profitieren von Hinterhältiger Angriff.",
       "neue_maechte": 0,
@@ -1951,7 +1914,7 @@
     },
     "Assassine II": {
       "name": "Assassine II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Assassine"
@@ -1964,7 +1927,7 @@
     },
     "Assassine III": {
       "name": "Assassine III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Assassine II"
@@ -1977,7 +1940,7 @@
     },
     "Duellant": {
       "name": "Duellant",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Geschicklichkeit W8",
@@ -1991,7 +1954,7 @@
     },
     "Duellant II": {
       "name": "Duellant II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Duellant"
@@ -2004,7 +1967,7 @@
     },
     "Duellant III": {
       "name": "Duellant III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Duellant II"
@@ -2015,9 +1978,9 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Kundschafter-Chronist": {
-      "name": "Kundschafter-Chronist",
-      "kategorie": "Prestige",
+    "Chronist": {
+      "name": "Chronist",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Überleben W6",
@@ -2029,12 +1992,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Kundschafter-Chronist II": {
-      "name": "Kundschafter-Chronist II",
-      "kategorie": "Prestige",
+    "Chronist II": {
+      "name": "Chronist II",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Kundschafter-Chronist"
+        "Chronist"
       ],
       "beschreibung": "Epische Geschichten: Erzähle bei der Rast eine Geschichte, um Gruppe einen Benny zu gewähren.",
       "neue_maechte": 0,
@@ -2042,12 +2005,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Kundschafter-Chronist III": {
-      "name": "Kundschafter-Chronist III",
-      "kategorie": "Prestige",
+    "Chronist III": {
+      "name": "Chronist III",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
-        "Kundschafter-Chronist II"
+        "Chronist II"
       ],
       "beschreibung": "Rufen der Legenden: Beschwöre 5 Schatten für eine Stunde.",
       "neue_maechte": 0,
@@ -2055,9 +2018,9 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mystischer Ritter": {
-      "name": "Mystischer Ritter",
-      "kategorie": "Prestige",
+    "Kampfmagier": {
+      "name": "Kampfmagier",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "AH",
@@ -2069,12 +2032,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mystischer Ritter II": {
-      "name": "Mystischer Ritter II",
-      "kategorie": "Prestige",
+    "Kampfmagier II": {
+      "name": "Kampfmagier II",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
-        "Mystischer Ritter"
+        "Kampfmagier"
       ],
       "beschreibung": "Mystischer Schlag: Gib 2 Machtpunkte nach Angriff aus, und addiere +2 auf Angriff.",
       "neue_maechte": 0,
@@ -2082,12 +2045,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mystischer Ritter III": {
-      "name": "Mystischer Ritter III",
-      "kategorie": "Prestige",
+    "Kampfmagier III": {
+      "name": "Kampfmagier III",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
-        "Mystischer Ritter II"
+        "Kampfmagier II"
       ],
       "beschreibung": "Verb. Mystischer Schlag: Gib zwei Machtpunkte aus, nachdem du einen erfolgreichen Angriffswurf abgelegt hat, um den Schaden des Angriffs um +2 zu erhöhen.",
       "neue_maechte": 0,
@@ -2097,7 +2060,7 @@
     },
     "Mystischer Theurg": {
       "name": "Mystischer Theurg",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "AH (beliebig)"
@@ -2110,7 +2073,7 @@
     },
     "Mystischer Theurg II": {
       "name": "Mystischer Theurg II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Mystischer Theurg"
@@ -2123,7 +2086,7 @@
     },
     "Mystischer Theurg III": {
       "name": "Mystischer Theurg III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Mystischer Theurg II"
@@ -2136,7 +2099,7 @@
     },
     "Schattentänzer": {
       "name": "Schattentänzer",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Darbietung W6",
@@ -2151,7 +2114,7 @@
     },
     "Schattentänzer II": {
       "name": "Schattentänzer II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Schattentänzer"
@@ -2164,7 +2127,7 @@
     },
     "Schattentänzer III": {
       "name": "Schattentänzer III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Schattentänzer II"
@@ -2177,7 +2140,7 @@
     },
     "Wissenshüter": {
       "name": "Wissenshüter",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Ver W8"
@@ -2190,7 +2153,7 @@
     },
     "Wissenshüter II": {
       "name": "Wissenshüter II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Wissenshüter"
@@ -2203,7 +2166,7 @@
     },
     "Wissenshüter III": {
       "name": "Wissenshüter III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Wissenshüter II"
@@ -2404,14 +2367,14 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Diabolist)": {
-      "name": "AH (Diabolist)",
+    "AH (Dämonologe)": {
+      "name": "AH (Dämonologe)",
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "VER W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Dämonologe der Schwarzen Gilde – verbotene Schwarzmagie der Dämonenbeschwörung (Heptagramm-Rituale, Pakte mit den Niederhöllen). In ganz Aventurien geächtet und von der Inquisition verfolgt.",
       "neue_maechte": 5,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -2421,7 +2384,7 @@
         "Behindernde_Rüstung_schwer"
       ],
       "auto_talente": [
-        "Beschwörung"
+        "Dämonenbeschwörung"
       ]
     },
     "AH (Elementarist)": {
@@ -2463,7 +2426,7 @@
       "voraussetzungen": [
         "VER W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Nekromant der Schwarzen Gilde – verbotene Magie über Tod und Untote. Von der Boronkirche und der Inquisition unerbittlich gejagt.",
       "neue_maechte": 5,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -2490,14 +2453,14 @@
         "Materialkomponenten"
       ]
     },
-    "AH (Tüftler)": {
-      "name": "AH (Tüftler)",
+    "AH (Golembauer)": {
+      "name": "AH (Golembauer)",
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "VER W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Reparieren (Verstand)",
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Golembaumeister – eine magische Tradition (Graue bzw. Schwarze Gilde) zur Erschaffung und Beseelung künstlicher Diener: Homunkuli und Golems aus Lehm, Stein oder Eisen. Außerhalb der Akademien mit Argwohn betrachtet.",
       "neue_maechte": 2,
       "machtpunkte": 15,
       "ausgewaehlt": false,
@@ -2546,27 +2509,27 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Zorn der Hölle": {
-      "name": "Zorn der Hölle",
-      "kategorie": "Diabolist",
+    "Zorn der Niederhöllen": {
+      "name": "Zorn der Niederhöllen",
+      "kategorie": "Dämonologe",
       "rang": "F",
       "voraussetzungen": [
-        "AH (Diabolist)"
+        "AH (Dämonologe)"
       ],
-      "beschreibung": "Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
+      "beschreibung": "Von dämonischer Energie der Niederhöllen durchdrungene Mächte wie Flächenschlag, Geschoss und Strahl verursachen +2 Schaden.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Infernale Rüstung": {
-      "name": "Infernale Rüstung",
-      "kategorie": "Diabolist",
+    "Dämonische Rüstung": {
+      "name": "Dämonische Rüstung",
+      "kategorie": "Dämonologe",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Diabolist)"
+        "AH (Dämonologe)"
       ],
-      "beschreibung": "Verleiht +2 Rüstung durch eine höllische Aura, macht Heimlichkeit jedoch nahezu unmöglich.",
+      "beschreibung": "Verleiht +2 Rüstung durch eine dämonische Aura der Niederhöllen, macht Heimlichkeit jedoch nahezu unmöglich.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -2726,7 +2689,7 @@
         "AH (Nekromant)",
         "Okkultismus W10"
       ],
-      "beschreibung": "Versteckt die Seele in einem Behälter, um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren.",
+      "beschreibung": "Verbotene Nekromantie: Der Nekromant verbirgt seine Seele in einem Gefäß (Phylakterium), um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren – der erste Schritt zur Lichwerdung.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -2759,27 +2722,27 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Konstrukt-Vertrauter": {
-      "name": "Konstrukt-Vertrauter",
-      "kategorie": "Tüftler",
+    "Homunkulus": {
+      "name": "Homunkulus",
+      "kategorie": "Golembauer",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Tüftler)"
+        "AH (Golembauer)"
       ],
-      "beschreibung": "Erhält einen mechanischen Tiergefährten mit speziellen Vorteilen, ähnlich wie das Talent Vertrauter.",
+      "beschreibung": "Der Golembauer erschafft einen Homunkulus – ein kleines, künstlich beseeltes Konstrukt als Gefährten mit besonderen Fähigkeiten (ähnlich einem Vertrauten).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Tüftlerrüstung": {
-      "name": "Tüftlerrüstung",
-      "kategorie": "Tüftler",
+    "Golem-Panzerung": {
+      "name": "Golem-Panzerung",
+      "kategorie": "Golembauer",
       "rang": "F",
       "voraussetzungen": [
-        "AH (Tüftler)"
+        "AH (Golembauer)"
       ],
-      "beschreibung": "Ermöglicht modifizierte Rüstung mit Boni auf Arme, Rumpf oder Beine, unterliegt jedoch Ausfällen bei Wunden.",
+      "beschreibung": "Aus golemhaften Platten gefertigte Rüstung mit Boni auf Arme, Rumpf oder Beine; bei Wunden kann die belebte Mechanik ausfallen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -3122,7 +3085,7 @@
       "kategorie": "Macht",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer, Hexenmeister)",
+        "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer, Paktierer)",
         "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
       ],
       "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
@@ -5363,27 +5326,27 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Böses Entdecken": {
-      "name": "Böses Entdecken",
-      "kategorie": "Paladin",
+    "Das Unheilige erspüren": {
+      "name": "Das Unheilige erspüren",
+      "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Als freie Aktion kann der Paladin eine Wahrnehmungsprobe ablegen, um böse übernatürliche Kreaturen oder Charaktere in einer Entfernung von 5'' (10 Metern) zu entdecken.",
+      "beschreibung": "Als freie Aktion legt der Geweihte eine Wahrnehmungsprobe ab, um unheilige übernatürliche Kreaturen (Dämonen, Untote) oder Frevler in einer Entfernung von 5'' (10 Metern) zu erspüren.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Böses Niederstrecken": {
-      "name": "Böses Niederstrecken",
-      "kategorie": "Paladin",
+    "Niederstrecken des Unheiligen": {
+      "name": "Niederstrecken des Unheiligen",
+      "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "Paladin"
+        "AH (Wunder: beliebig)"
       ],
-      "beschreibung": "Einmal pro Begegnung erhält der Paladin eine freie Wiederholung bei allen Angriffswürfen gegen einen gewählten bösen Gegner.",
+      "beschreibung": "Einmal pro Begegnung erhält der Geweihte eine freie Wiederholung bei allen Angriffswürfen gegen einen gewählten Feind seines Gottes (Dämon, Untoter oder Frevler wider die Zwölfe).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -5458,10 +5421,10 @@
     },
     "Schlachtherold": {
       "name": "Schlachtherold",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Kavalier oder Paladin",
+        "Kavalier oder AH (Wunder: beliebig)",
         "Anführer",
         "Einschüchtern W4",
         "Überreden W6"
@@ -5474,7 +5437,7 @@
     },
     "Schlachtherold II": {
       "name": "Schlachtherold II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Schlachtherold"
@@ -5487,7 +5450,7 @@
     },
     "Schlachtherold III": {
       "name": "Schlachtherold III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Schlachtherold II"
@@ -5500,7 +5463,7 @@
     },
     "Heiliger Verteidiger": {
       "name": "Heiliger Verteidiger",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Kanalisieren",
@@ -5514,7 +5477,7 @@
     },
     "Heiliger Verteidiger II": {
       "name": "Heiliger Verteidiger II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Heiliger Verteidiger"
@@ -5527,7 +5490,7 @@
     },
     "Heiliger Verteidiger III": {
       "name": "Heiliger Verteidiger III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Heiliger Verteidiger II"
@@ -5540,10 +5503,11 @@
     },
     "Meisteralchemist": {
       "name": "Meisteralchemist",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Mutagene"
+        "AH (Alchemist)",
+        "Alchemie W8"
       ],
       "beschreibung": "Mutagene Form: Verwandele dich in ein Alter Ego mit verbesserten Fähigkeiten. Gewährt Mutieren-Fähigkeit.",
       "neue_maechte": 0,
@@ -5553,7 +5517,7 @@
     },
     "Meisteralchemist II": {
       "name": "Meisteralchemist II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Meisteralchemist"
@@ -5566,7 +5530,7 @@
     },
     "Meisteralchemist III": {
       "name": "Meisteralchemist III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Meisteralchemist II"
@@ -5579,7 +5543,7 @@
     },
     "Meisterspion": {
       "name": "Meisterspion",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Aufmerksamkeit W6",
@@ -5594,7 +5558,7 @@
     },
     "Meisterspion II": {
       "name": "Meisterspion II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Meisterspion"
@@ -5607,7 +5571,7 @@
     },
     "Meisterspion III": {
       "name": "Meisterspion III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Meisterspion II"
@@ -5618,9 +5582,9 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Naturwächter": {
-      "name": "Naturwächter",
-      "kategorie": "Prestige",
+    "Hüter der Wildnis": {
+      "name": "Hüter der Wildnis",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
         "Tiermeister",
@@ -5633,12 +5597,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Naturwächter II": {
-      "name": "Naturwächter II",
-      "kategorie": "Prestige",
+    "Hüter der Wildnis II": {
+      "name": "Hüter der Wildnis II",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
-        "Naturwächter"
+        "Hüter der Wildnis"
       ],
       "beschreibung": "Eisenpranke: Teile Zaubereffekte mit Begleitern.",
       "neue_maechte": 0,
@@ -5646,12 +5610,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Naturwächter III": {
-      "name": "Naturwächter III",
-      "kategorie": "Prestige",
+    "Hüter der Wildnis III": {
+      "name": "Hüter der Wildnis III",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
-        "Naturwächter II"
+        "Hüter der Wildnis II"
       ],
       "beschreibung": "Begleiterseele: Erhalte übernatürliche Fähigkeiten mit dem Begleiter dieses Charakters.",
       "neue_maechte": 0,
@@ -5661,10 +5625,10 @@
     },
     "Unbeugsamer Verteidiger": {
       "name": "Unbeugsamer Verteidiger",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Nerven aus Stahl",
+        "KON W8",
         "Keine Rüstungsbeschränkung oder Behindernde Rüstung"
       ],
       "beschreibung": "Verteidigungshaltung: Der Charakter wird zu einem Bollwerk der Verteidigung und erhöht seine Attribute auf Kosten der Bewegungsfreiheit.",
@@ -5675,7 +5639,7 @@
     },
     "Unbeugsamer Verteidiger II": {
       "name": "Unbeugsamer Verteidiger II",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "V",
       "voraussetzungen": [
         "Unbeugsamer Verteidiger"
@@ -5688,7 +5652,7 @@
     },
     "Unbeugsamer Verteidiger III": {
       "name": "Unbeugsamer Verteidiger III",
-      "kategorie": "Prestige",
+      "kategorie": "Meisterschaft",
       "rang": "H",
       "voraussetzungen": [
         "Unbeugsamer Verteidiger II"
@@ -5755,9 +5719,10 @@
       "kategorie": "Legendär",
       "rang": "L",
       "voraussetzungen": [
-        "Mindestens zwei Paladin-Talente"
+        "AH (Wunder: beliebig)",
+        "Mindestens zwei Geweihter-Talente"
       ],
-      "beschreibung": "+2 Robustheit und verbanne Externare bei Böses-Niederstrecken-Angriffen.",
+      "beschreibung": "+2 Robustheit; verbanne Dämonen und Externare bei Angriffen mit Niederstrecken des Unheiligen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -5935,15 +5900,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Magus": {
-      "name": "Magus",
-      "kategorie": "Klasse",
+    "Schwertmagier": {
+      "name": "Schwertmagier",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "VER W6",
         "Kämpfen W6"
       ],
-      "beschreibung": "Arkaner Hintergrund (Magus), Rüstungsbehinderung (leicht), Magus-Arkana, Zauberbücher, Zauberhieb.",
+      "beschreibung": "Seltene Gildenmagier-Kampftradition: verbindet Klingenkampf mit Magie. Rüstungsbehinderung (leicht), Schwertmagier-Arkana, Zauberbücher, Zauberhieb (verbindet einen Nahkampfangriff und das Wirken einer Macht in einer Aktion).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -5954,12 +5919,12 @@
     },
     "Zauberstab-Meisterschaft": {
       "name": "Zauberstab-Meisterschaft",
-      "kategorie": "Magus",
+      "kategorie": "Schwertmagier",
       "rang": "F",
       "voraussetzungen": [
-        "Magus"
+        "Schwertmagier"
       ],
-      "beschreibung": "Der Magus kann einen Zauberstab für Zauberhiebe nutzen.",
+      "beschreibung": "Der Schwertmagier kann einen Zauberstab für Zauberhiebe nutzen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -5967,10 +5932,10 @@
     },
     "Zaubererinnerung": {
       "name": "Zaubererinnerung",
-      "kategorie": "Magus",
+      "kategorie": "Schwertmagier",
       "rang": "V",
       "voraussetzungen": [
-        "Magus"
+        "Schwertmagier"
       ],
       "beschreibung": "Stelle alle verlorenen Machtpunkte wieder her.",
       "neue_maechte": 0,
@@ -5978,25 +5943,25 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Gegenschlag (Magus)": {
-      "name": "Gegenschlag (Magus)",
-      "kategorie": "Magus",
+    "Gegenschlag (Schwertmagier)": {
+      "name": "Gegenschlag (Schwertmagier)",
+      "kategorie": "Schwertmagier",
       "rang": "H",
       "voraussetzungen": [
-        "Magus"
+        "Schwertmagier"
       ],
-      "beschreibung": "Erhalte einen freien Angriff gegen einen Gegner, der einen Zauber wirkt.",
+      "beschreibung": "Erhalte einen freien Angriff gegen einen Gegner, der eine Macht wirkt.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Wahrer Magus": {
-      "name": "Wahrer Magus",
-      "kategorie": "Magus",
+    "Wahrer Schwertmagier": {
+      "name": "Wahrer Schwertmagier",
+      "kategorie": "Schwertmagier",
       "rang": "L",
       "voraussetzungen": [
-        "Mindestens zwei Magus-Talente"
+        "Mindestens zwei Schwertmagier-Talente"
       ],
       "beschreibung": "Ignoriere Arkane Resistenz und Verbesserte Arkane Resistenz.",
       "neue_maechte": 0,
@@ -6004,15 +5969,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Ninja": {
-      "name": "Ninja",
-      "kategorie": "Klasse",
+    "Meuchler": {
+      "name": "Meuchler",
+      "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
         "Athletik W6",
         "Heimlichkeit W6"
       ],
-      "beschreibung": "Rüstungsbeschränkung (leicht), Mystische Kräfte (Ninja).",
+      "beschreibung": "Rüstungsbeschränkung (leicht). Der Meuchler ist ein ausgebildeter Auftragsmörder (Killari-nah) – Meister der Heimlichkeit, des Gifts und des lautlosen Tötens aus dem Schatten. Erhält besondere Schattenkunststücke.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6023,38 +5988,38 @@
     },
     "Keine Spur": {
       "name": "Keine Spur",
-      "kategorie": "Ninja",
+      "kategorie": "Meuchler",
       "rang": "F",
       "voraussetzungen": [
-        "Ninja"
+        "Meuchler"
       ],
-      "beschreibung": "Es ist schwerer, den Ninja zu verfolgen und zu identifizieren.",
+      "beschreibung": "Es ist schwerer, den Meuchler zu verfolgen und zu identifizieren.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Meister-Ninja-Trick": {
-      "name": "Meister-Ninja-Trick",
-      "kategorie": "Ninja",
+    "Meister-Meuchler-Trick": {
+      "name": "Meister-Meuchler-Trick",
+      "kategorie": "Meuchler",
       "rang": "V",
       "voraussetzungen": [
-        "Ninja"
+        "Meuchler"
       ],
-      "beschreibung": "Gewährt zusätzliche Mystische Kräfte.",
+      "beschreibung": "Gewährt ein zusätzliches Schattenkunststück.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Ki-Ladung": {
-      "name": "Ki-Ladung",
-      "kategorie": "Ninja",
+    "Präparierte Klinge": {
+      "name": "Präparierte Klinge",
+      "kategorie": "Meuchler",
       "rang": "H",
       "voraussetzungen": [
-        "Ninja"
+        "Meuchler"
       ],
-      "beschreibung": "Lade eine Waffe mit mystischer Energie auf, um mehr Schaden zu verursachen.",
+      "beschreibung": "Präpariere eine Waffe mit Gift oder Widerhaken, um mehr Schaden zu verursachen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6062,10 +6027,10 @@
     },
     "Unsichtbare Klinge": {
       "name": "Unsichtbare Klinge",
-      "kategorie": "Ninja",
+      "kategorie": "Meuchler",
       "rang": "L",
       "voraussetzungen": [
-        "Mindestens zwei Ninja-Talente"
+        "Mindestens zwei Meuchler-Talente"
       ],
       "beschreibung": "Gewährt leichter das Überraschungsmoment gegen einen Gegner.",
       "neue_maechte": 0,
@@ -6094,7 +6059,7 @@
         "Inquisitor",
         "Bann"
       ],
-      "beschreibung": "Teile die Vorteile von Bann mit Verbündeten.",
+      "beschreibung": "Der Inquisitor weiht auch die Waffen seiner Mitstreiter: Teile die Vorteile von Bann mit Verbündeten.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6225,7 +6190,12 @@
       "kategorie": "Macht",
       "rang": "H",
       "voraussetzungen": [
-        "AH (Kleriker, Orakel, Wunder)"
+        {
+          "oder": [
+            "AH (Kleriker)",
+            "AH (Wunder: beliebig)"
+          ]
+        }
       ],
       "beschreibung": "Gib Machtpunkte aus, um einen Gegner zu zwingen, einen Angriffswurf mit einem Malus zu wiederholen.",
       "neue_maechte": 0,
@@ -6347,14 +6317,14 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Beschwörung": {
-      "name": "Beschwörung",
-      "kategorie": "Diabolist",
+    "Dämonenbeschwörung": {
+      "name": "Dämonenbeschwörung",
+      "kategorie": "Dämonologe",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Diabolist)"
+        "AH (Dämonologe)"
       ],
-      "beschreibung": "Ermöglicht die Beschwörung von Dämonen, Geistern und bösartigen Kreaturen. Diener können als Aktion mit Machtpunkten beschworen werden.",
+      "beschreibung": "Ermöglicht die Beschwörung von Dämonen und niederhöllischen Dienern mittels Heptagramm-Ritual. Diener können als Aktion mit Machtpunkten herbeigerufen werden.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6978,7 +6948,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Praios (Götterfürst) — Aspekte Sonne, Ordnung, Recht, Magiebann. Trägt die Sonnenscheibe als heiliges Symbol und ist an den Moralkodex der Praioskirche gebunden.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Praios (Götterfürst) — Aspekte Sonne, Ordnung, Recht, Magiebann. Trägt die Sonnenscheibe als heiliges Symbol und ist an den Moralkodex der Praioskirche gebunden. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Arkane Resistenz und Wille des Götterfürsten (Praios).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -6987,7 +6957,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Arkane Resistenz"
+        "Arkane Resistenz",
+        "Wille des Götterfürsten (Praios)"
       ]
     },
     "AH (Wunder: Rondra)": {
@@ -6997,7 +6968,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rondra (Löwin) — Aspekte Kampf, Ehre, Sturm, Blitz und Donner. Trägt Schwert und Löwensymbol; gebunden an den Moralkodex der Rondrakirche (Ritterlichkeit, keine Armbrüste, ehrenhafter Zweikampf).",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rondra (Löwin) — Aspekte Kampf, Ehre, Sturm, Blitz und Donner. Trägt Schwert und Löwensymbol; gebunden an den Moralkodex der Rondrakirche (Ritterlichkeit, keine Armbrüste, ehrenhafter Zweikampf). Diese Tradition aktiviert automatisch die Sonderfertigkeiten Mutig und Heldenhafter Widerstand.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7006,7 +6977,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Mutig"
+        "Mutig",
+        "Heldenhafter Widerstand"
       ]
     },
     "AH (Wunder: Efferd)": {
@@ -7016,7 +6988,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Efferd (Herr der Gezeiten) — Aspekte Meer, Wasser, Wetter, Sturm und Schifffahrt. Heiliges Tier Delphin; gebunden an den Moralkodex der Efferdkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Efferd (Herr der Gezeiten) — Aspekte Meer, Wasser, Wetter, Sturm und Schifffahrt. Heiliges Tier Delphin; gebunden an den Moralkodex der Efferdkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Meister des Meeres (Efferd) und Kraft der Leidenschaft (Efferd).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7025,7 +6997,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Meister des Meeres (Efferd)"
+        "Meister des Meeres (Efferd)",
+        "Kraft der Leidenschaft (Efferd)"
       ]
     },
     "Meister des Meeres (Efferd)": {
@@ -7048,7 +7021,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Travia (Gütige Mutter) — Aspekte Heim, Herdfeuer, Familie, Gastfreundschaft und Treue. Heiliges Tier Wildgans; gebunden an den Moralkodex der Traviakirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Travia (Gütige Mutter) — Aspekte Heim, Herdfeuer, Familie, Gastfreundschaft und Treue. Heiliges Tier Wildgans; gebunden an den Moralkodex der Traviakirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Heimstatt (Travia) und Speisesegen (Travia).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7057,7 +7030,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Heimstatt (Travia)"
+        "Heimstatt (Travia)",
+        "Speisesegen (Travia)"
       ]
     },
     "Heimstatt (Travia)": {
@@ -7080,7 +7054,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Boron (der Schweigsame) — Aspekte Tod, Schlaf, Ruhe, Schweigen, Vergessen, Dunkelheit. Heiliges Tier Rabe; Totenfeind und Untotenschreck, gebunden an den Moralkodex der Boronkirche (Schutz der Totenruhe, Vernichtung von Untoten und Nekromantie).",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Boron (der Schweigsame) — Aspekte Tod, Schlaf, Ruhe, Schweigen, Vergessen, Dunkelheit. Heiliges Tier Rabe; Totenfeind und Untotenschreck, gebunden an den Moralkodex der Boronkirche (Schutz der Totenruhe, Vernichtung von Untoten und Nekromantie). Diese Tradition aktiviert automatisch die Sonderfertigkeiten Untotenschreck (Boron) und Nachtsicht.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7089,7 +7063,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Untotenschreck (Boron)"
+        "Untotenschreck (Boron)",
+        "Nachtsicht"
       ]
     },
     "Untotenschreck (Boron)": {
@@ -7112,7 +7087,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Hesinde (Allwissende) — Aspekte Wissen, Magie, Gelehrsamkeit, Sprache, Sterne und Wandel. Heiliges Tier Schlange (Ouroboros); gebunden an den Moralkodex der Hesindekirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Hesinde (Allwissende) — Aspekte Wissen, Magie, Gelehrsamkeit, Sprache, Sterne und Wandel. Heiliges Tier Schlange (Ouroboros); gebunden an den Moralkodex der Hesindekirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Scharfe Sinne (Hesinde) und Klarer Verstand (Hesinde).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7121,7 +7096,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Scharfe Sinne (Hesinde)"
+        "Scharfe Sinne (Hesinde)",
+        "Klarer Verstand (Hesinde)"
       ]
     },
     "Scharfe Sinne (Hesinde)": {
@@ -7144,7 +7120,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Firun (Weißer Jäger) — Aspekte Eis, Winter, waidmännische Jagd, wilde Natur und Selbstüberwindung. Heiliges Tier Eisbär; gebunden an den Moralkodex der Firunkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Firun (Weißer Jäger) — Aspekte Eis, Winter, waidmännische Jagd, wilde Natur und Selbstüberwindung. Heiliges Tier Eisbär; gebunden an den Moralkodex der Firunkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Wildniskunde (Firun) und Starker Wille.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7153,7 +7129,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Wildniskunde (Firun)"
+        "Wildniskunde (Firun)",
+        "Starker Wille"
       ]
     },
     "Wildniskunde (Firun)": {
@@ -7176,7 +7153,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Tsa (junge Göttin) — Aspekte Geburt, Erneuerung, Wiedergeburt, Leben, Freiheit und Lebensfreude. Heiliges Tier (vielfarbige) Eidechse; gebunden an den Moralkodex der Tsakirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Tsa (junge Göttin) — Aspekte Geburt, Erneuerung, Wiedergeburt, Leben, Freiheit und Lebensfreude. Heiliges Tier (vielfarbige) Eidechse; gebunden an den Moralkodex der Tsakirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Schnelle Heilung und Flexible Wunder (Tsa).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7185,7 +7162,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Schnelle Heilung"
+        "Schnelle Heilung",
+        "Flexible Wunder (Tsa)"
       ]
     },
     "AH (Wunder: Phex)": {
@@ -7195,7 +7173,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Phex (der Listenreiche) — Aspekte Diebstahl, Glück, Handel, List, Nacht und Schatten. Heiliges Tier Fuchs; gebunden an den Moralkodex der Phexkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Phex (der Listenreiche) — Aspekte Diebstahl, Glück, Handel, List, Nacht und Schatten. Heiliges Tier Fuchs; gebunden an den Moralkodex der Phexkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Glück und Feilschen mit Phex.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7204,7 +7182,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Glück"
+        "Glück",
+        "Feilschen mit Phex"
       ]
     },
     "AH (Wunder: Peraine)": {
@@ -7214,7 +7193,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Peraine (die Gütige) — Aspekte Heilkunst, Ackerbau, Fruchtbarkeit, Pflanzen und Hilfsbereitschaft. Heiliges Tier Storch; gebunden an den Moralkodex der Perainekirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Peraine (die Gütige) — Aspekte Heilkunst, Ackerbau, Fruchtbarkeit, Pflanzen und Hilfsbereitschaft. Heiliges Tier Storch; gebunden an den Moralkodex der Perainekirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Widerstandsfähigkeit gegen Krankheiten (Peraine) und Heiler.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7223,7 +7202,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Widerstandsfähigkeit gegen Krankheiten (Peraine)"
+        "Widerstandsfähigkeit gegen Krankheiten (Peraine)",
+        "Heiler"
       ]
     },
     "Widerstandsfähigkeit gegen Krankheiten (Peraine)": {
@@ -7246,7 +7226,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Ingerimm (Himmlischer Schmied) — Aspekte Feuer, Handwerk, Schmiedekunst, Beständigkeit, Härte und Kraft. Symbol Hammer und Amboss; gebunden an den Moralkodex der Ingerimmkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Ingerimm (Himmlischer Schmied; von den Zwergen Angrosch genannt) — Aspekte Feuer, Handwerk, Schmiedekunst, Beständigkeit, Härte und Kraft. Symbol Hammer und Amboss; gebunden an den Moralkodex der Ingerimmkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Feuerschutz (Ingerimm) und Meister des Handwerks (Ingerimm).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7255,7 +7235,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Feuerschutz (Ingerimm)"
+        "Feuerschutz (Ingerimm)",
+        "Meister des Handwerks (Ingerimm)"
       ]
     },
     "Feuerschutz (Ingerimm)": {
@@ -7278,7 +7259,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rahja (Schöne Göttin) — Aspekte Liebe, Freude, Ekstase, Schönheit, Wein und Harmonie. Heiliges Tier (weiße) Stute; gebunden an den Moralkodex der Rahjakirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Rahja (Schöne Göttin) — Aspekte Liebe, Freude, Ekstase, Schönheit, Wein und Harmonie. Heiliges Tier (weiße) Stute; gebunden an den Moralkodex der Rahjakirche. Diese Tradition aktiviert automatisch die Sonderfertigkeiten Durchhaltevermögen (Rahja) und Geschenk der Freude (Rahja).",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7287,7 +7268,8 @@
         "Schwur_schwer"
       ],
       "auto_talente": [
-        "Durchhaltevermögen (Rahja)"
+        "Durchhaltevermögen (Rahja)",
+        "Geschenk der Freude (Rahja)"
       ]
     },
     "Durchhaltevermögen (Rahja)": {
@@ -7310,7 +7292,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Aves (Herr des Horizontes) — Aspekte Reise, Wanderschaft, Abenteuer, Entdeckung und Schicksal. Heiliges Tier Paradiesvogel; gebunden an den Moralkodex der Aveskirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Aves (Herr des Horizontes) — Aspekte Reise, Wanderschaft, Abenteuer, Entdeckung und Schicksal. Heiliges Tier Paradiesvogel; gebunden an den Moralkodex der Aveskirche. Diese Tradition aktiviert automatisch die Sonderfertigkeit Wegfindung (Aves). Eingeschränkte Segnungen: Folgende Segnungen kann der Avesgeweihte nicht anwenden: Eidsegen, Grabsegen, Weisheitssegen.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7342,7 +7324,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Ifirn (Schwanengleiche, Tochter Firuns) — Aspekte gütige Natur, Frühling, Bogenschießen und Hilfsbereitschaft. Heiliges Tier Schwan; gebunden an den Moralkodex der Ifirnkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r der Ifirn (Schwanengleiche, Tochter Firuns) — Aspekte gütige Natur, Frühling, Bogenschießen und Hilfsbereitschaft. Heiliges Tier Schwan; gebunden an den Moralkodex der Ifirnkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeit Innere Wärme (Ifirn). Eingeschränkte Segnungen: Folgende Segnungen kann die Ifirngeweihte nicht anwenden: Glückssegen, Tranksegen, Weisheitssegen.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7374,7 +7356,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Kor (Herr der Schlachten) — Aspekte Kampf, Kampfrausch, Sieg, Blut, Beute und Sold. Symbol Schwert und Mantikor; gebunden an den Moralkodex der Korkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Kor (Herr der Schlachten) — Aspekte Kampf, Kampfrausch, Sieg, Blut, Beute und Sold. Symbol Schwert und Mantikor; gebunden an den Moralkodex der Korkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeit Schmerzresistenz. Eingeschränkte Segnungen: Folgende Segnungen kann der Korgeweihte nicht anwenden: Geburtssegen, Harmoniesegen, Kleiner Heilsegen.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7393,7 +7375,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Nandus (Halbgott des Wissens) — Aspekte Bildung, Erkenntnis, Strategie, Schrift und Orakel. Symbol Buch; gebunden an den Moralkodex der Nanduskirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Nandus (Halbgott des Wissens) — Aspekte Bildung, Erkenntnis, Strategie, Schrift und Orakel. Symbol Buch; gebunden an den Moralkodex der Nanduskirche. Diese Tradition aktiviert automatisch die Sonderfertigkeit Gelehrter. Eingeschränkte Segnungen: Folgende Segnungen kann der Nandusgeweihte nicht anwenden: Feuersegen, Kleiner Schutzsegen, Stärkungssegen.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7412,7 +7394,7 @@
       "voraussetzungen": [
         "WIL W6"
       ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Swafnir (Gottwal; Sohn Efferds und Rondras) — Aspekte Seefahrt, Kraft, Mut, Treue und Thorwaler. Heiliges Tier Wal; gebunden an den Moralkodex der Swafnirkirche.",
+      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Swafnir (Gottwal; Sohn Efferds und Rondras) — Aspekte Seefahrt, Kraft, Mut, Treue und Thorwaler. Heiliges Tier Wal; gebunden an den Moralkodex der Swafnirkirche. Diese Tradition aktiviert automatisch die Sonderfertigkeit Anführer. Eingeschränkte Segnungen: Folgende Segnungen kann der Swafnirgeweihte nicht anwenden: Feuersegen, Geburtssegen, Speisesegen.",
       "neue_maechte": 3,
       "machtpunkte": 10,
       "ausgewaehlt": false,
@@ -7424,34 +7406,105 @@
         "Anführer"
       ]
     },
-    "AH (Wunder: Angrosch)": {
-      "name": "AH (Wunder: Angrosch)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6",
-        "Volk: Zwerg"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Geweihte/r des Angrosch (zwergischer Schmiedegott, dem Ingerimm entsprechend) — Aspekte Feuer, Handwerk, Schmiedekunst und Zusammenhalt der Zwerge. Symbol Hammer und Amboss; gebunden an den Moralkodex der Angroschkirche.",
-      "neue_maechte": 3,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Schwur_schwer"
-      ],
-      "auto_talente": [
-        "Feuerschutz (Angrosch)"
-      ]
-    },
-    "Feuerschutz (Angrosch)": {
-      "name": "Feuerschutz (Angrosch)",
+    "Wille des Götterfürsten (Praios)": {
+      "name": "Wille des Götterfürsten (Praios)",
       "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Wunder: Angrosch)"
+        "AH (Wunder: Praios)"
       ],
-      "beschreibung": "Traditions-Sonderfertigkeit der Angroschkirche: +2 auf Proben, um Feuer und Hitze zu widerstehen; Schaden durch Feuer ist um 2 reduziert.",
+      "beschreibung": "Traditions-Sonderfertigkeit der Praioskirche: +2, wenn der Geweihte eine seiner Mächte mit göttlichem Nachdruck gegen den Widerstand eines Ziels durchsetzt (gegnerische arkane Probe).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kraft der Leidenschaft (Efferd)": {
+      "name": "Kraft der Leidenschaft (Efferd)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Efferd)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Efferdkirche: Steigert sich der Geweihte in eine zur Situation passende Leidenschaft hinein, erhält er +2 auf Glaube; künstlich gedämpfte Gefühle geben stattdessen -2.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Speisesegen (Travia)": {
+      "name": "Speisesegen (Travia)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Travia)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Traviakirche: Der Geweihte segnet eine Mahlzeit; bis zu 6 Gefährten, die davon essen, erhalten +1 auf ihre nächste natürliche Heilungsprobe.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Klarer Verstand (Hesinde)": {
+      "name": "Klarer Verstand (Hesinde)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Hesinde)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Hesindekirche: +2 auf Willenskraft, um geistiger Verwirrung, Täuschung oder Beeinflussung zu widerstehen und einen klaren Kopf zu bewahren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Flexible Wunder (Tsa)": {
+      "name": "Flexible Wunder (Tsa)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Tsa)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Tsakirche: Erschwernisse durch Macht-Modifikatoren (z.B. größere Reichweite oder verkürzte Wirkzeit) sind für den Geweihten um 1 reduziert.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Feilschen mit Phex": {
+      "name": "Feilschen mit Phex",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Phex)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Phexkirche: Vor einer Zeremonie oder einem Ritual kann der Geweihte Silber an Phex opfern (mindestens 5 Silbertaler), um +1 darauf zu erhalten.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Meister des Handwerks (Ingerimm)": {
+      "name": "Meister des Handwerks (Ingerimm)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Ingerimm)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Ingerimmkirche: +2 auf handwerkliche Proben (Holz-, Metall-, Stein- und Stoffbearbeitung, Schmieden und ähnliches Handwerk).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Geschenk der Freude (Rahja)": {
+      "name": "Geschenk der Freude (Rahja)",
+      "kategorie": "Geweihter",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Wunder: Rahja)"
+      ],
+      "beschreibung": "Traditions-Sonderfertigkeit der Rahjakirche: Einmal pro Tag kann die Geweihte einem anderen durch ein Geschenk oder einen Kuss eine Stufe Erschüttert oder Abgelenkt nehmen (nicht im Kampf einsetzbar).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,

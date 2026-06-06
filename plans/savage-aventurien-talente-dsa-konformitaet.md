@@ -345,9 +345,9 @@ Diese Talente sind bereits korrekt DSA-adaptiert:
 
 | Metrik | Original | Aktuell | Delta |
 |---|---|---|---|
-| Talente gesamt | 504 | 469 | **−35** |
+| Talente gesamt | 504 | **503** | −35 (Löschungen) +34 (neue AH, §10/§11) |
 | Kategorie „Revolverheld" | 5 | 0 | −5 |
-| Kategorie „Klasse" | 22 | 21 | −1 (Wandler → Gjalsker Tierkrieger) |
+| Kategorie „Klasse" | 22 | **0** ✅ | −22 (alle aufgelöst: Wandler→Gjalsker §3; 10 →Hintergrund + 4 umbenannt §12) |
 | Kategorie „Gjalsker Tierkrieger" | 0 | 4 | +4 (neu) |
 | Kategorie „Wandler" | 4 | 0 | −4 (umbenannt) |
 | Kategorie „Zauberer" | 7 | 4 | −3 (Blutlinie-Talente raus) |
@@ -370,6 +370,10 @@ Diese Talente sind bereits korrekt DSA-adaptiert:
 | `Savage Aventurien_pre_blutlinie_20260605.json` | Schritt 6 |
 | `Savage Aventurien_pre_ah_dopplung_20260605.json` | §9 (AH-Handicap-Dopplungen) |
 | `Savage Aventurien_pre_namensbugfix_20260605.json` | §7 Schritt 0a/0b (Wandler-Waise + AH-Magier-Prereqs) |
+| `Savage Aventurien_pre_klasse_hintergrund_20260606.json` | §12 (Kategorie C: Klasse→Hintergrund + 4 PF2-Umbenennungen) |
+| `Savage Aventurien_pre_inquisitor_praios_20260606.json` | §13 (Inquisitor-Block → Praios/Bannstrahler-Fluff) |
+| `Savage Aventurien_pre_geweihten_pool_20260606.json` | §13 (Paladin-Block → geteilter Geweihten-Pool + Engine-Wildcard) |
+| `Savage Aventurien_pre_seher_aufloesen_20260606.json` | §13.5 (AH (Seher) auflösen → prophetische Talente in Pool + name-Feld-Fix) |
 
 ---
 
@@ -383,9 +387,9 @@ Diese Talente sind bereits korrekt DSA-adaptiert:
 
 **Hauptaufgabe (DSA-Kodex-Essenz × FK/SWPF harmonisieren) — empfohlene Reihenfolge, je mit User-Bestätigung pro Schritt:**
 
-1. **Kategorie C – Klassen → Hintergrund (14 `Klasse`-Talente)**: Kategorie auf `Hintergrund` umstellen + DSA-Namen (WA-konform); Folge-Talent-Kategorien + Voraussetzungen mitziehen.
-2. **Kategorie B – Inquisitor-Talente (6×)** → `Boron X` (Geweihten-Tradition, WA: `AH (Wunder: Boron)`).
-3. **Kategorie B – Paladin-Talente (6×)** → `Rondra X` / `Praios X` (WA: `AH (Wunder: Gott)`).
+1. ✅ **Kategorie C – Klassen → Hintergrund (14 `Klasse`-Talente): ERLEDIGT 2026-06-06** (siehe §12, Backup `pre_klasse_hintergrund_20260606.json`). 10 weltliche/legitime Professionen nur umgehängt (kein Rename, Grundsatz 8); 4 PF2-Klassen umbenannt: Ninja→Meuchler, Magus→Schwertmagier, AH (Hexenmeister)→AH (Paktierer), AH (Orakel)→AH (Seher). 0 `Klasse` übrig, Tests grün.
+2. ✅ **Kategorie B – Inquisitor-Block (6×) → Praios/Bannstrahler: ERLEDIGT 2026-06-06** (§13). **Korrektur gegenüber Erstplanung:** Inquisitor ist DSA **Praios** (Heilige Inquisition / Orden vom Bannstrahl), **nicht Boron** (Quelle: Kodex des Götterwirkens). Name behalten (DSA-kanonisch), nur Beschreibungen reflavored.
+3. ✅ **Kategorie B – Paladin-Block (6×) → geteilter Geweihten-Pool: ERLEDIGT 2026-06-06** (§13). Statt feste Götter-Pakete: **alle göttlichen Kampf-/Wirk-Talente in einen für ALLE Geweihten wählbaren Pool** (Vor: neuer Engine-Wildcard `AH (Wunder: beliebig)`). User-Entscheidung „jeder Geweihten-Spieler schnürt sein eigenes Paket".
 4. **Kategorie B – Übrige PF2-Spezifika** (`Konstrukt-Vertrauter`, `Seelengefäß`, `Infernale Rüstung`, `Zorn der Hölle`, `Beschwörung`): DSA-Pendant prüfen, sonst Status 3.
 5. **Kategorie D – Prestige-Klassen (44 Talente, Kategorie `Prestige`)**: einzeln prüfen — behalten mit DSA-Mapping (Grundsatz 5) oder Status 3, wenn nicht sauber zuweisbar.
 6. **Querschnitt – DSA-Essenz-Abgleich**: pro behaltenem SP/FK-Talent prüfen, ob DSA-Kodex/`dsa_lexikon`/WA ein Trapping/Flair beisteuert (z.B. ikonische Zaubernamen), ohne die SW-Mechanik zu ändern.
@@ -568,3 +572,148 @@ Weitere Merge-Hybride (FK-Basis + SP-`auto_talente`, ohne Handicap-Dopplung): `A
 
 **Backups:** `pre_ah_wunder_praios_`, `_block2_` … `_block6_`, `_fix_phextsa_`. **Stand:** 503 Talente, Tests grün (116).
 **Bestehende SW-Talente als Geweihten-SF:** Praios→`Arkane Resistenz`, Rondra→`Mutig`, Tsa→`Schnelle Heilung`, Phex→`Glück`, Kor→`Schmerzresistenz`, Nandus→`Gelehrter`, Swafnir→`Anführer`. **Neue SF (Kategorie `Geweihter`, 11):** Efferd, Travia, Boron, Hesinde, Firun, Peraine, Ingerimm, Rahja, Aves, Ifirn, Angrosch.
+
+---
+
+## 12. Kategorie C — Klassen → Hintergrund (✅ ERLEDIGT 2026-06-06)
+
+> Grundsatz 7 (DSA hat kein Klassensystem) + Grundsatz 8 (nur umbenennen wenn nötig). Backup: `pre_klasse_hintergrund_20260606.json`. Talentzahl unverändert (503, reine Umkategorisierung/Umbenennung, keine Löschung).
+
+### 12.1 Nur umgehängt (Klasse → Hintergrund, **kein** Rename) — 10 Talente
+Weltliche bzw. für DSA legitime Professionen; SW-Name DSA-tauglich, DSA-Flair bleibt der späteren Querschnitts-Beschreibungspflege (§7.6) überlassen:
+`Barbar`, `Kämpfer`, `Mönch`, `Paladin`, `Schurke`, `Waldläufer`, `Kavalier`, `Inquisitor`, `Alchemist`, `AH (Hexe)`.
+- Folge-Kategorien (`Barbar`, `Mönch`, `Paladin`, `Schurke`, `Waldläufer`, `Inquisitor`, `Kavalier`, `Alchemist`, `Kämpfer`, `Hexe`) bleiben als Gruppierung erhalten; deren Voraussetzungen waren nicht betroffen.
+
+### 12.2 Umbenannt (4 PF2-Klassenkonzepte, User-Entscheidung 2026-06-06)
+Folge-Kategorie, Voraussetzungen (`[Klasse]`, „Mindestens zwei X-Talente/-Vorteile") und Beschreibungen jeweils mitgezogen; PF/asiatisches Flair entfernt:
+
+| Alt | Neu | Folge-Talente (mit umbenannt) | Mechanik-Anpassung |
+|---|---|---|---|
+| `Ninja` | **`Meuchler`** (Hintergrund) | `Keine Spur`, `Meister-Ninja-Trick`→`Meister-Meuchler-Trick`, `Ki-Ladung`→`Präparierte Klinge`, `Unsichtbare Klinge` | Ki-/Mystik-Fluff raus → mundaner Auftragsmörder (Killari-nah) |
+| `Magus` | **`Schwertmagier`** (Hintergrund) | `Zauberstab-Meisterschaft`, `Zaubererinnerung`, `Gegenschlag (Magus)`→`Gegenschlag (Schwertmagier)`, `Wahrer Magus`→`Wahrer Schwertmagier` | seltene Gildenmagier-Kampftradition; Mechanik unverändert |
+| `AH (Hexenmeister)` | **`AH (Paktierer)`** (Hintergrund) | `Weitere/Starke/Mächtige Hexerei`, `Arkane Meisterschaft (Hexenmeister)`→`(Paktierer)` | **intuitiv: Skill Zaubern→`Magie`, Vor VER W6→WIL W6**; verbotene schwarze Tradition (Dämonenpakt); „Hexen"→„Paktierer/Verfluchungen" |
+| `AH (Orakel)` | **`AH (Seher)`** (Hintergrund) | `Offenbarung`, `Göttliche Meisterschaft`, `Große Offenbarung` | Glaube/WIL bleibt; Geschicksdeuter/Hellsicht-Fluff (Hesinde-Augur, Zahori, Godi) |
+
+### 12.3 Verifikation
+- `Klasse`-Talente: **0** ✅. Talente gesamt: **503** (unverändert).
+- Parser `extrahiere_arkane_fertigkeit_aus_ah`: `AH (Paktierer)`→`Magie`/Willenskraft, `AH (Seher)`→`Glaube`/Willenskraft ✅.
+- Keine verwaisten `auto_talente`; keine Alt-Namen-Reste (Ninja/Magus/Hexenmeister/Orakel) in Namen/Voraussetzungen/Kategorien. Setting-Tests grün (42).
+- **Vorbestehende (nicht von diesem Schritt verursachte) Beobachtung:** drei Voraussetzungen nutzen Plural-Form gegen Singular-Kategorie — `Mindestens zwei Schurken-Talente` (Kat. `Schurke`), `Mindestens zwei Hexen-Talente` (Kat. `Hexe`), `Mindestens zwei Druiden-Talente` (Kat. `Druide`). Funktional über die Prereq-Prüfung abgedeckt; ggf. später kosmetisch vereinheitlichen.
+
+---
+
+## 13. Kategorie B — Geweihten-Talente (Inquisitor → Praios; Paladin → geteilter Pool) (✅ ERLEDIGT 2026-06-06)
+
+> Quelle: `Kodex_des_Götterwirkens.pdf` (pdftotext-Recherche). Backups: `pre_inquisitor_praios_`, `pre_geweihten_pool_`.
+
+### 13.1 DSA-Befund (Götterwirken)
+- **Inquisitor = Praios.** *Heilige Inquisition der Praioskirche* + *Orden vom Bannstrahl* (Bannstrahler, fanatischer **Laienorden**, „Feuer und Schwert", Ziel: Verbot jeder Magie). Tradition (Praioskirche) = **Magieschutz** = bereits gesetztes `Arkane Resistenz` bei `AH (Wunder: Praios)`. → frühere Erstplanung „Inquisitor → Boron" war **falsch**.
+- **Golgariten = Boron** (berittener Untotenjäger-Orden, „Kampf vom Pferderücken", Rabenschnabel) — als DSA-Beleg geführt; floss ins generische Pool-Reframing (Streitross/Unheiliges) ein, **nicht** als eigenes Paket.
+
+### 13.2 Inquisitor-Block → Praios (nur Reflavoring, Namen + Mechanik unverändert)
+`Inquisitor` (Hintergrund, Laienorden — **kein AH nötig**) + Folge-Talente `Bann`, `Brandmal`, `Mystische Mächte (Inquisitor)`, `Schwäche ausnutzen`, `Wahres Urteil`, `Gebrandmarkt für Vergeltung`: Beschreibungen auf Praios/Heilige Inquisition/Bannstrahler umgestellt; Feindbild = Dämonen, Untote, Ketzer, verbotene Magie.
+
+### 13.3 Paladin-Block → geteilter Geweihten-Pool (User-Entscheidung: kein festes Götter-Paket)
+**Engine-Erweiterung** (`functions/talent_funktionen.py`, `_pruefe_einzelne_voraussetzung`): neuer Wildcard **`AH (Wunder: beliebig)`** / `AH (Wunder)` = „hat irgendein `AH (Wunder: …)`" (= ist Geweihter). Funktional getestet (Geweihter ✓ / Magier abgelehnt).
+
+- **Basis `Paladin` gelöscht** (dekomponiert; `auto_handicap: Ehrenkodex` → Geweihte haben ohnehin `Schwur_schwer` via AH; `Aura der Tapferkeit` bleibt als eigenständiges `Übersinnlich`-Talent erhalten).
+- **6 Folge-Talente → Kategorie `Geweihter`, Vor `AH (Wunder: beliebig)`**, „böse"/D&D-Alignment durch DSA-Feindbild ersetzt:
+
+| alt (Paladin) | neu (Pool) | Vor. |
+|---|---|---|
+| Böses Niederstrecken | **Niederstrecken des Unheiligen** | AH (Wunder: beliebig) |
+| Aura der Gerechtigkeit | **Geweihte Aura** | AH (Wunder: beliebig) + Niederstrecken des Unheiligen |
+| Böses Entdecken | **Das Unheilige erspüren** | AH (Wunder: beliebig) |
+| Reittier (Paladin) | **Gesegnetes Streitross** | AH (Wunder: beliebig) |
+| Gnade (Paladin) | **Lindernde Hand** (Heilung/Linderung) | AH (Wunder: beliebig) |
+| Mystische Mächte (Paladin) | **Kampfsegen** (10 gewidmete MP, Kampf-/Heil-Liturgien) | AH (Wunder: beliebig) |
+
+- **Extern:** `Heiliger Champion` (Legendär) Vor → `AH (Wunder: beliebig)` + „Mindestens zwei Geweihter-Talente", „Böses-Niederstrecken" → „Niederstrecken des Unheiligen". `Schlachtherold` Vor `Kavalier oder Paladin` → `Kavalier oder AH (Wunder: beliebig)`.
+
+### 13.4 Verifikation
+- Talente 503 → **502** (Basis Paladin gelöscht, sonst Umbenennung/Recat). Kategorie `Paladin`: **0**. Kategorie `Geweihter`: **17** (11 Götter-SF + 6 Pool). Keine Waisen (Prereq/auto_talente). Tests grün (115).
+- **Vorbestehende Engine-Lücke (nicht behoben, breiter Scope):** `"Mindestens zwei X-Talente"` wird vom Validator nicht ausgewertet (fällt auf Talent-Namens-Lookup → „nicht gefunden"). Betrifft viele Settings (Wahres Urteil, Mächtige Hexerei, Heiliger Champion …). Konvention beibehalten.
+
+### 13.5 Seher-Auflösung → prophetische Talente im Pool (✅ ERLEDIGT 2026-06-06)
+> Backup `pre_seher_aufloesen_20260606.json`. User-Entscheidung: „AH Seher auflösen und prophetische Talente allen Geweihten zugänglich machen."
+- **`AH (Seher)` gelöscht** (502 → **501** Talente). Prophetie ist jetzt Gabe **jedes** Geweihten (der via `AH (Wunder: Gott)` ohnehin Glaube + MP + Mächte hat), kein eigener AH mehr.
+- **3 Folge-Talente → Geweihten-Pool** (Kategorie `Geweihter`, Vor `AH (Wunder: beliebig)`), „Seher/Mysterium" → generisch „Geweihter / göttliche Mächte": `Offenbarung`, `Göttliche Meisterschaft`, `Große Offenbarung`.
+- **`Göttliche Einmischung`**: verwaiste Listen-Voraussetzung `AH (Kleriker, Seher, Wunder)` → `{oder: [AH (Kleriker), AH (Wunder: beliebig)]}`.
+- **Nebeneffekt:** `Mirakel` (Vor `AH (Wunder)`) war zuvor durch Literal-Lookup unerfüllbar → durch den neuen Wildcard `AH (Wunder)` jetzt korrekt für alle Geweihten erfüllbar.
+- **Bugfix nebenher:** 9 Talente hatten nach den §12-Renames ein veraltetes inneres `name`-Feld (≠ Dict-Key: Paktierer/Seher/Schwertmagier/Meuchler-Familien) → global `name = key` gesetzt.
+- **Bereits offen abgedeckt:** `Prophezeien` (explizit „auch ohne Arkanen Hintergrund") und `Sechster Sinn` (kein Prereq) → unverändert. Geweihten-Pool jetzt **20** (11 Götter-SF + 6 Paladin-Pool + 3 prophetische). Tests grün (114).
+
+### 13.6 Offen (optional)
+- **Tsa/Peraine-Heilzweig:** im Pool-Modell decken `Lindernde Hand` + `Kampfsegen` (Heilung) das bereits ab; ggf. weitere Heil-Liturgie-Talente ergänzen.
+
+---
+
+## 14. Zweite Traditions-Sonderfertigkeit je Alveranischem Gott (✅ ERLEDIGT 2026-06-06)
+
+> Quelle: `Kodex_des_Götterwirkens.pdf` – Abschnitte „Die Tradition (Xkirche) als Sonderfertigkeit". Jede der 12 Alveranischen Kirchen listet **zwei** echte Traditions-SFs; bisher war nur eine umgesetzt (§11). User-Wunsch: zweite ergänzen, wo möglich mit **bestehendem SW-Talent**. Backup `pre_zweite_tradition_sf_20260606.json`. Beide SFs werden vom `AH (Wunder: Gott)` via `auto_talente` mitaktiviert (Tradition = Paket beider Fähigkeiten).
+
+| Gott | 1. SF | 2. SF (neu) | Quelle 2. SF |
+|---|---|---|---|
+| Praios | Arkane Resistenz (=Magieschutz) | **Wille des Götterfürsten (Praios)** | custom (+2 Macht gegen Widerstand) |
+| Rondra | Mutig (=Fürchtet nichts) | **Heldenhafter Widerstand** | **bestehend** (Zustand aufheben) |
+| Efferd | Meister des Meeres (Efferd) | **Kraft der Leidenschaft (Efferd)** | custom (+2 Glaube bei Leidenschaft) |
+| Travia | Heimstatt (Travia) | **Speisesegen (Travia)** | custom (Mahlzeit → +1 nat. Heilung) |
+| Boron | Untotenschreck (Boron) | **Nachtsicht** | **bestehend** (Dunkelheits-Abzüge) |
+| Hesinde | Scharfe Sinne (Hesinde) | **Klarer Verstand (Hesinde)** | custom (+2 WIL vs Verwirrung) |
+| Firun | Wildniskunde (Firun) | **Starker Wille** | **bestehend** (+2 Willenskraft-Widerstand) |
+| Tsa | Schnelle Heilung (=Regeneration) | **Flexible Wunder (Tsa)** | custom (Macht-Modifikator −1) |
+| Phex | Glück (=Glückskind) | **Feilschen mit Phex** | custom (Silber opfern → +1) |
+| Peraine | Widerstand g. Krankheiten (Peraine) | **Heiler** | **bestehend** (+2 Heilungsproben) |
+| Ingerimm | Feuerschutz (Ingerimm) | **Meister des Handwerks (Ingerimm)** | custom (+2 Handwerk) |
+| Rahja | Durchhaltevermögen (Rahja) | **Geschenk der Freude (Rahja)** | custom (Zustand bei anderem nehmen) |
+
+- **4 bestehende SW-Talente** (Heldenhafter Widerstand, Nachtsicht, Starker Wille, Heiler) + **8 neue Custom-SFs** (Kategorie `Geweihter`, rang A, Vor jeweiliges AH). Alle in reiner SW-Mechanik (keine DSA-Regelbegriffe; Erschüttert/Abgelenkt, natürliche Heilungsprobe, +2/−2, Silbertaler).
+- **Halbgötter (Aves, Ifirn, Kor, Nandus, Swafnir, Angrosch):** Kodex gibt ihnen nur **eine** echte SF; die zweite Trad.-Position ist **„Eingeschränkte Segnungen"** (eine *Einschränkung*, kein Bonus). Daher **kein** zweites Talent ergänzt — bewusst (kein Erfinden). Mechanische Unterscheidung: volle Götter = 2 Trad.-Talente, Halbgötter = 1. **„Eingeschränkte Segnungen" als reiner Fluff** in die 6 Halbgott-AH-Beschreibungen aufgenommen (User-Entscheidung 2026-06-06: keine Mechanik).
+
+### 14.1 AH-(Wunder)-Beschreibungen ergänzt (✅ 2026-06-06, Backup `pre_ah_beschreibung_autotalente_`)
+Alle 18 `AH (Wunder: Gott)`-Beschreibungen nennen jetzt explizit die **automatisch aktivierten** Sonderfertigkeiten („Diese Tradition aktiviert automatisch die Sonderfertigkeiten X und Y."); Halbgötter zusätzlich der „Eingeschränkte Segnungen"-Fluffsatz. Parser (`extrahiere_arkane_fertigkeit_aus_ah`) unverändert korrekt (Skill `Glaube` vor erster Klammer).
+
+**Verifikation:** 501 → **509** Talente (+8 Custom). Alle 12 Alveranischen-AHs haben 2 auto_talente (0 Waisen), 6 Halbgötter je 1. Kategorie `Geweihter`: 28. Tests grün (87).
+
+### 14.2 Korrektur: Angrosch = Ingerimm (zusammengeführt, ✅ 2026-06-06)
+> Backup `pre_angrosch_merge_20260606.json`. User-Klarstellung: **Angrosch ist nur der zwergische Name des Ingerimm**, kein eigener (Halb-)Gott.
+- `AH (Wunder: Angrosch)` + Custom-SF `Feuerschutz (Angrosch)` **gelöscht** (Duplikat; Ingerimm hat bereits `Feuerschutz (Ingerimm)`). Nur wechselseitige Referenzen, keine Waisen.
+- Zwergischer Name in die Ingerimm-Beschreibung integriert: „…des Ingerimm (Himmlischer Schmied; **von den Zwergen Angrosch genannt**)…".
+- **Neuer Stand der Götter-AHs: 17** = 12 Alveranische + **5** Halbgötter (Aves, Ifirn, Kor, Nandus, Swafnir). Talente 509 → **507**. Tests grün (42). (Frühere „18 / 6 Halbgötter"-Angaben in §0ter/§11 sind entsprechend überholt.)
+
+---
+
+## 15. Kategorie-B-Reste: PF2-Höllen/Konstrukt-Talente → DSA (✅ ERLEDIGT 2026-06-06)
+
+> Quelle: `Kodex_der_Magie.pdf` (pdftotext). Backup `pre_golembauer_daemonologe_20260606.json`. **Alle 5 behalten** (Grundsatz 5), DSA-Vorlagen statt Löschen; Eltern-AHs mit umbenannt (User: „5 Talente + Eltern-AHs"). Keine Talentzahl-Änderung (507).
+
+**DSA-Belege:** Golems sind eigene Konstrukt-Kategorie („Golems (Homunculus, laufende Truhen)"), **Golembau** echte magische Kunst; **Schwarze Gilde** = Dämonenbeschwörung + Nekromantie; Dämonen aus den **Niederhöllen**.
+
+| alt (PF) | neu (DSA) | Kat./AH |
+|---|---|---|
+| `AH (Tüftler)` (Reparieren) | **`AH (Golembauer)`** (Zaubern/VER, magischer Golembau) | AH; Skill Reparieren→**Zaubern** |
+| `Konstrukt-Vertrauter` | **`Homunkulus`** | Kat. Tüftler→**Golembauer** |
+| `Tüftlerrüstung` | **`Golem-Panzerung`** | Kat. Golembauer |
+| `AH (Diabolist)` (Zaubern) | **`AH (Dämonologe)`** (verbotene Schwarzmagie, Heptagramm) | AH |
+| `Beschwörung` | **`Dämonenbeschwörung`** | Kat. Diabolist→**Dämonologe**, auto_talente des AH |
+| `Infernale Rüstung` | **`Dämonische Rüstung`** | Kat. Dämonologe |
+| `Zorn der Hölle` | **`Zorn der Niederhöllen`** | Kat. Dämonologe |
+| `AH (Nekromant)` | bleibt benannt, DSA-Fluff (Schwarze Gilde, Boron/Inquisition gejagt) | — |
+| `Seelengefäß` | bleibt benannt; Nekromantie/Phylakterium (Pfad zur Lichwerdung) | Kat. Nekromant |
+
+**Verifikation:** Kategorie Golembauer (2) / Dämonologe (3). Parser: alle drei AHs → `Zaubern`. Keine Alt-Reste/Waisen/Namensdrift. Tests grün (87). Damit ist Kategorie-B-Rest (Plan §7 Schritt 4) **abgeschlossen** – nächste Phase: Kategorie D (44 Prestige-Talente).
+
+---
+
+## 16. Kategorie D — Prestige-Talente entkoppelt (✅ ERLEDIGT 2026-06-06)
+
+> Backup `pre_meisterschaft_renames_20260606.json`. Keine Talentzahl-Änderung (507).
+
+**Kernbefund:** Die 44 „Prestige"-Talente waren **bereits konzept-offen** — alle Einstiegs-Talente sind über Fertigkeiten/Attribute/AH gegated (z.B. Duellant = GES W8 + Kämpfen W8), **nicht** über Klassen; die I/II/III-Ketten sind normale Steigerungsstufen. „Prestige" ist nur ein Anzeige-Label ohne Engine-Logik (nicht in `pathfinder_kostenlose_kategorien`).
+
+- **Kategorie `Prestige` → `Meisterschaft`** (alle 44; entfernt den letzten Klassensystem-Begriff).
+- **DSA-Umbenennungen (nur wo nötig, User-Wahl):** `Arkaner Betrüger`→**Phexens List**, `Kundschafter-Chronist`→**Chronist** (entfernt Pathfinder-Bezug), `Mystischer Ritter`→**Kampfmagier**, `Naturwächter`→**Hüter der Wildnis** (je I/II/III, Ketten-Prereqs mitgezogen). **Assassine bleibt** (systemneutral).
+- **Zurückgestellt** (DSA-Bezug noch offen): `Mystischer Theurg` (Kandidat: **Doppelbegabter** — kanonischer DSA-Begriff für Doppel-AH), `Schattentänzer` (kein klares DSA-Pendant; Name evtl. belassen).
+- **Waisen gefixt:** `Meisteralchemist` Vor `Mutagene`→`AH (Alchemist)` + `Alchemie W8`; `Unbeugsamer Verteidiger` Vor `Nerven aus Stahl`→`KON W8`.
+
+**Verifikation:** 44 `Meisterschaft`, alle 4 umbenannten Ketten intakt (Tier-Prereqs korrekt), keine Alt-Reste/Waisen/Namensdrift. Tests grün (87). Damit ist Kategorie D (Plan §7 Schritt 5) abgeschlossen.

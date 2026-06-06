@@ -817,6 +817,17 @@ class TalentManager:
                 fehlermeldungen.append("Ein beliebiger Arkaner Hintergrund (AH) wird vorausgesetzt.")
             return fehlermeldungen
 
+        # Spezialfall: "AH (Wunder: beliebig)" / "AH (Wunder)" - beliebiges Götter-Wunder-AH (= Geweihter)
+        if voraussetzung in ("AH (Wunder: beliebig)", "AH (Wunder)"):
+            hat_wunder_ah = False
+            for talent_name, talent_obj in self.charakter.talente.items():
+                if talent_name.startswith("AH (Wunder:") and getattr(talent_obj, 'ausgewaehlt', False):
+                    hat_wunder_ah = True
+                    break
+            if not hat_wunder_ah:
+                fehlermeldungen.append("Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).")
+            return fehlermeldungen
+
         # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
         ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
         if ah_kurz_match:
