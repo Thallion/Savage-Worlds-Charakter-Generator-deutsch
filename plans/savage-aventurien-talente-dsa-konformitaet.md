@@ -717,3 +717,63 @@ Alle 18 `AH (Wunder: Gott)`-Beschreibungen nennen jetzt explizit die **automatis
 - **Waisen gefixt:** `Meisteralchemist` Vor `Mutagene`→`AH (Alchemist)` + `Alchemie W8`; `Unbeugsamer Verteidiger` Vor `Nerven aus Stahl`→`KON W8`.
 
 **Verifikation:** 44 `Meisterschaft`, alle 4 umbenannten Ketten intakt (Tier-Prereqs korrekt), keine Alt-Reste/Waisen/Namensdrift. Tests grün (87). Damit ist Kategorie D (Plan §7 Schritt 5) abgeschlossen.
+
+---
+
+## 17. Verwaiste Klassennamen-Voraussetzungen (✅ ERLEDIGT 2026-06-06)
+
+> Status: **umgesetzt** (User-Go 2026-06-06, gebündelt mit dem Beschwörer/Eidolon-Reflavor §18). Backup `pre_klassenprereq_eidolon_20260606.json`.
+> **Ergebnis:** Alle **23** bloßen Klassennamen-Voraussetzungen auf das jeweilige `AH (Klasse)` umgeschrieben (`Barde→AH (Barde)`, `Druide→AH (Druide)`, `Kleriker→AH (Kleriker)`, `Magier→AH (Magier)`, `Hexe→AH (Hexe)`, `Paktierer→AH (Paktierer)`, `Beschwörer→AH (Beschwörer)`). `'Mindestens zwei X'` und rang-Codes (`L`) unangetastet. Funktional verifiziert (TalentManager: `AH (Barde)` mit AH erfüllt → `[]`, ohne → korrekte Fehlermeldung; vorher schlug bloßes `'Barde'` immer fehl). Talentzahl 507 unverändert. Tests grün (73).
+
+### Ursprünglicher Befund (zur Nachvollziehbarkeit)
+
+**Befund (Prereq-Integritätscheck über alle 507 Talente):** **23 Folge-Talente** fordern als Voraussetzung einen **bloßen Klassennamen**, der in „Savage Aventurien" gar **kein Talent (mehr) ist** — geerbt aus Savage Pathfinder, wo z.B. `Bannlied.vor = ['Barde']` auf das Klassen-Basistalent zeigte. Da der Validator (`_pruefe_einzelne_voraussetzung`) bloße Klassennamen **nicht** speziell behandelt, fällt er auf den Literal-Talent-Lookup zurück → „nicht gefunden" → die Voraussetzung schlägt **immer** fehl.
+
+| Klassen-Prereq (existiert nicht als Talent) | betroffene Folge-Talente | Anz. |
+|---|---|--:|
+| `Barde` | Bannlied, Klagelied | 2 |
+| `Druide` | Tiergestalt, Bevorzugte Mächte (Druide), Göttliche Meisterschaft (Druide) | 3 |
+| `Kleriker` | Bevorzugte Mächte (Kleriker), Göttliche Meisterschaft (Kleriker) | 2 |
+| `Magier` | Bevorzugte Mächte (Magier), Arkane Meisterschaft (Magier) | 2 |
+| `Hexe` | Zusätzlicher Hex, Großer Hex, Grandioser Hex, Arkane Meisterschaft (Hexe) | 4 |
+| `Paktierer` | Weitere Hexerei, Starke Hexerei, Mächtige Hexerei, Arkane Meisterschaft (Paktierer) | 4 |
+| `Beschwörer` | Zusätzliche Evolution, Ruf des Schöpfers, Ruf des Beschwörers, Lebensband, Aspekt, Zwillingseidolon | 6 |
+| **Summe** | | **23** |
+
+**Vorgeschlagener Fix (noch offen):** jede bloße Klassennamen-Voraussetzung auf das entsprechende **`AH (Klasse)`** umschreiben (z.B. `'Barde'`→`'AH (Barde)'`). **Alle 7 Ziel-AHs existieren bereits** (`AH (Barde/Druide/Kleriker/Magier/Hexe/Paktierer/Beschwörer)` — verifiziert 2026-06-06). Rationale: passt zu „kein Klassensystem / für alle Konzepte freigeben" (Grundsatz 7) und repariert die kaputten Voraussetzungen, ohne neue Mechanik. Hintergrund-basierte „Klassen" (Mönch, Barbar, Schurke, Waldläufer, Kavalier, Inquisitor, Alchemist, Kämpfer, Paladin→Pool, Gjalsker) sind **nicht** betroffen — deren Basistalent trägt den geforderten Namen bzw. wurde bereits umgestellt.
+
+**Weitere verwaiste Talent-/Fähigkeits-Referenzen (separater, kleinerer Befund, ebenfalls noch offen):** einige Folge-Talente fordern PF-Mächte/-Ancestry-Namen, die hier kein Talent sind: `Monster beschwören`/`Tier beschwören` (→ Ungezügelte/Höhere Beschwörung, Arkane Stärkung), `Odemwaffe`/`Versengen`-Ketten, `Lykanthropie` (→ Schnelle Verwandlung), sowie ggf. entfernte PF-Ancestries (`Ifrits`, `Sylphen`, `eine böse Gesinnung`). Beim Klassen-Prereq-Fix gleich mit-sichten und im selben Durchgang sauber zuordnen oder Status-3-prüfen.
+
+**Engine-Lücke „Mindestens zwei X-Talente" (§13.4): ✅ GESCHLOSSEN 2026-06-06.** Neuer Handler in `functions/talent_funktionen.py::_pruefe_einzelne_voraussetzung` (vor dem Talent-Fallthrough): Regex `^Mindestens (\w+) (.+?)-(?:Talente|Vorteile)$` → Zahlwort→Zahl + Kategorie über **längsten Präfix** (Plural-/Genitiv-tolerant: „Hexen"→„Hexe", „Druiden"→„Druide", „Schurken"→„Schurke") → zählt **ausgewählte** Talente dieser Kategorie ≥ benötigt. Damit funktionieren die **17 Kategorie-Capstones** (Mächtige Hexerei, Überlegener Ansturm, Wahres Urteil, Grandioser Hex, Tödliche Darbietung, Heiliger Champion, Heimvorteil, Meisterangriff, Perfekter Körper, Schon gesehen, Unaufhaltsame Wut, Veteran des ewigen Krieges, Gut vorbereitet, Wahrer Schwertmagier, Unsichtbare Klinge, Verbesserte Defensive Instinkte, Zwillingswesenheit), die vorher **immer fehlschlugen** (Capstones unwählbar). Alle 17 Token mappen auf existierende Kategorien. **6 Unit-Tests** (`test_talent_manager.py::TestMindestensKategorieVoraussetzung`). Geteilte Engine → kommt auch Savage Pathfinder zugute. Volle Suite 951/952 grün (1 vorbestehender KivyMD-UI-Fehler, unrelated).
+
+**Noch offen (separate Cleanup-Phase): PF-Altlasten-Prereqs** — ~Dutzend Folge-Talente fordern Fremdsetting-Referenzen, die hier kein Talent/Skill sind: `Odemwaffe`, `Tier/Monster beschwören`, `Lykanthropie`, `Ifrits`, `Sylphen`, `eine böse Gesinnung`, `Flügel`, `MM`, `AH (Psionik)`, `AH (Verrückte Wissenschaft)`, `AH (Elementarmagier)` (→ Elementarist), `AH (Diabolist)`/`AH (Zauberer)` (Vertrauter, veraltet nach §15), plus Tippfehler `Ver W8` (Wissenshüter → `VER W8`) und `Fortgeschritten` (Mystische Kräfte → Rang `F`).
+
+---
+
+## 18. Querschnitt — DSA-Essenz/Fluff in Beschreibungen (LÄUFT, §7 Schritt 6)
+
+> Ziel (Grundsatz 6 + §8.3 Prio 1): jedem behaltenen SP/FK-Talent ein DSA-Trapping/Flair in der **Beschreibung** geben (Profession/Kultur/Tradition/ikonischer Begriff), **ohne** SW-Mechanik zu ändern und **ohne** DSA-Regelbegriffe (kein LeP/AsP/QS/FP). Methode: führender DSA-Kontextsatz vor die bestehende (rein mechanische) Beschreibung; Mechanik-Liste unverändert. Roadmap = §8.1-Tabelle. Blockweise mit Verifikation.
+
+### Block 1 — Weltliche Hintergrund-Professionen ✅ ERLEDIGT 2026-06-06
+> Backup `pre_querschnitt_professionen_20260606.json`. Die in §12 auf `Hintergrund` umgehängten Klassentalente hatten nur mechanische Ability-Listen ohne DSA-Rahmen. Je ein führender DSA-Kontextsatz vorangestellt (keine Mechanik berührt):
+- `Barbar` → **Trollzacker / Fjarninger / Thorwaler-Berserker** (User-Korrektur: nicht „Norbarde"), kämpferische Raserei statt Fechtschule.
+- `Kämpfer` → Berufskrieger/Söldner/Gardist eines aventurischen Heeres.
+- `Mönch` → **Hruruzat** (kanonische aventurische Kunst des waffenlosen Kampfes, Kodex der Helden:7582; DSA kennt KEINE klassischen Kampfmönche – User-Hinweis bestätigt, ehrlich so formuliert), als körperlich-geistige Disziplin.
+- `Schurke` → Dieb/Strolch/Beutelschneider, Phex-nah.
+- `Waldläufer` → Wildnisläufer/Förster/Kopfgeldjäger.
+- `Kavalier` → Reiterkrieger eines aventurischen Ritterordens (Turnier/Lanze/Ehre).
+- `Alchemist` → Zauberalchimist hesindegefälliger Laboratorien.
+
+**Verifikation:** 507 Talente unverändert (nur Beschreibungstext), JSON lädt, keine DSA-Regelbegriffe eingefügt. Tests grün (`test_setting_funktionen` + `test_talent_manager` = 72).
+
+### Block 2 — Stab-/Gildenmagie: KEIN Eingriff nötig ✅ (geprüft 2026-06-06)
+Bindung/Fokus des Stabes, Zauberspeicher, Zauberstab-Meisterschaft, Kraftfokus, Kraftlinienmagie, Kugelzauber, Flammenschwert, Eisenaffine Aura, Magischer Alltag sind **bereits durchgehend DSA-nativ** (Magierstab, Kraftlinien, Bann des Eisens, Kristallkugel-Untotenwarnung, Sapefacta/Accuratum) — die Custom-Aventurien-Positiv-Liste (§4 Kat. E „nicht anfassen"). Übersprungen.
+
+### Block 3 — Druide/Schamane/Tier: größtenteils nativ ✅ (geprüft 2026-06-06)
+Die `Druide`-/`Schamane`-kategorisierten Talente (Tiergestalt, Naturgespür, Wahre Form, Dolch des Druiden, Knochenkeule, Bindung mit der Natur) tragen bereits DSA-Flair (Geister-Zwiesprache, Vulkanglasdolch, Kraftlinien). Der Rest (Tiermeister, Tierempathie, Bestienflüsterer, Vertrauter-Familie, Naturverbundenheit, Schnelle Verwandlung) sind **universelle, systemneutrale SW-Edges** → bewusst **clean** gelassen (Grundsatz 8: forciertes DSA-Flair = Rauschen, schadet SW-Kompatibilität). Kein Eingriff.
+
+### Block 4 — Beschwörer/Eidolon-Familie ✅ ERLEDIGT 2026-06-06 (Backup `pre_klassenprereq_eidolon_`)
+Vollständiger Befund: **„Eidolon" (PF-Summoner-Begleitwesen) war die einzige verbliebene Nicht-DSA-Terminologie** im gesamten Talent-Bestand (7 Beschreibungen: Aspekt, Lebensband, Ruf des Schöpfers/Beschwörers, Zusätzliche Evolution, Zwillings…, Entwickelter Vertrauter). User-Entscheidung: Eidolon → **„(gebundene) Wesenheit"** (an DSA-Vertrautentier angelehnt), „Evolutionspunkte"→„Entwicklungspunkte". Talent **`Zwillingseidolon` → `Zwillingswesenheit`** umbenannt (literaler PF-Begriff im Namen; referenzfrei). `AH (Beschwörer)` bekam DSA-Rahmen (Gildenmagier-Beschwörung, ruft/bindet Geister & Elementardiener; parser-sicher: Skill-Zeile zuerst → liefert weiter `Zaubern`). Mechanik unverändert. Talentzahl 507.
+
+### Fazit Querschnitt
+Die DSA-Essenz-Harmonisierung ist damit **inhaltlich abgeschlossen**: 0 PF/D&D-Begriffe in Beschreibungen, 0 verwaiste Klassen-Prereqs, Professionen geflairt, alles übrige bereits DSA-nativ oder bewusst systemneutral. Optionaler Rest = reine Geschmacks-Politur einzelner generischer Edges (nicht erforderlich).

@@ -317,6 +317,55 @@ class TestTalentManager(unittest.TestCase):
         self.assertTrue(self.charakter.talente["Kämpfer_2"].ausgewaehlt)
 
 
+class TestMindestensKategorieVoraussetzung(unittest.TestCase):
+    """Tests für Kategorie-Capstone-Voraussetzungen 'Mindestens zwei X-Talente/-Vorteile'"""
+
+    def setUp(self):
+        self.charakter = MockCharakter()
+        self.manager = TalentManager(self.charakter)
+
+    def _add(self, name, kategorie, ausgewaehlt):
+        t = Talent(name=name, kategorie=kategorie, rang="A", voraussetzungen=[], beschreibung="")
+        t.ausgewaehlt = ausgewaehlt
+        self.charakter.talente[name] = t
+
+    def test_mindestens_nicht_erfuellt_ohne_talente(self):
+        fehler = self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Hexen-Talente")
+        self.assertEqual(len(fehler), 1)
+        self.assertIn("Mindestens 2", fehler[0])
+
+    def test_mindestens_erfuellt_mit_zwei_gewaehlten(self):
+        # Plural 'Hexen' muss auf Kategorie 'Hexe' matchen
+        self._add("Hex A", "Hexe", True)
+        self._add("Hex B", "Hexe", True)
+        fehler = self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Hexen-Talente")
+        self.assertEqual(fehler, [])
+
+    def test_mindestens_nicht_erfuellt_mit_einem_gewaehlten(self):
+        self._add("Hex A", "Hexe", True)
+        self._add("Hex B", "Hexe", False)  # nicht ausgewählt zählt nicht
+        fehler = self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Hexen-Talente")
+        self.assertEqual(len(fehler), 1)
+        self.assertIn("aktuell 1", fehler[0])
+
+    def test_mindestens_genitiv_druiden(self):
+        self._add("D1", "Druide", True)
+        self._add("D2", "Druide", True)
+        self.assertEqual(self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Druiden-Talente"), [])
+
+    def test_mindestens_vorteile_variante(self):
+        self._add("P1", "Paktierer", True)
+        self._add("P2", "Paktierer", True)
+        self.assertEqual(self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Paktierer-Vorteile"), [])
+
+    def test_mindestens_kategorie_mit_leerzeichen(self):
+        self._add("G1", "Gjalsker Tierkrieger", True)
+        self._add("G2", "Gjalsker Tierkrieger", True)
+        self.assertEqual(
+            self.manager._pruefe_einzelne_voraussetzung("Mindestens zwei Gjalsker Tierkrieger-Talente"), []
+        )
+
+
 class TestOderVoraussetzungen(unittest.TestCase):
     """Tests für Entweder-Oder-Voraussetzungen"""
 

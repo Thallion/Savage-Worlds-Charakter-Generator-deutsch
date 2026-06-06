@@ -6,17 +6,18 @@
       "name": "Elf",
       "handicaps": [
         "Schlank (-1 Robustheit)",
-        "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)"
+        "Zwei linke Hände (Abneigung gegen mechanische Gegenstände)",
+        "Anspruchsvoll (Elfische Nahrungsgewohnheiten: verschmäht alles Vergorene – Alkohol, Käse, Brot)",
+        "Phobie (leicht: empfindlicher Geruchssinn – -1 bei üblem Gestank)",
+        "Idealistisch (leicht: weltfremd – vereinfachte, schwarz-weiße Sicht auf die Welt der Sterblichen)"
       ],
       "talente": [],
       "besonderheiten": [
         "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
-        "Intuition (Willenskraft W6 statt W4, Maximum W12+1)",
         "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
         "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)",
-        "Harmonische Magie (Die Wirkungsdauer der vom Elf gewirkten Mächte wird verdoppelt)",
-        "Zweistimmiger Gesang (+1 auf Darbietung beim Singen)",
-        "Nichtschläfer (Benötigt keinen Schlaf, nur eine ruhige Trance/Meditation)"
+        "Nichtschläfer (Benötigt keinen Schlaf, nur eine ruhige Trance/Meditation)",
+        "Zweistimmiger Gesang (+1 auf Darbietung beim Singen)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -29,8 +30,7 @@
       "custom": false,
       "effects": {
         "attribute_bonuses": {
-          "Geschicklichkeit": 2,
-          "Willenskraft": 2
+          "Geschicklichkeit": 2
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
@@ -42,15 +42,17 @@
         ],
         "auto_handicaps": [
           "Schlank",
-          "Zwei linke Hände"
+          "Zwei linke Hände",
+          "Anspruchsvoll",
+          "Phobie_leicht",
+          "Idealistisch"
         ],
         "spezielle_effekte": {
           "nachtsicht": true,
           "geschaerfte_sinne": true,
           "zwei_linke_haende": true,
-          "harmonische_magie": true,
-          "zweistimmiger_gesang": true,
-          "nichtschlaefer": true
+          "nichtschlaefer": true,
+          "zweistimmiger_gesang": true
         },
         "wahlmoeglichkeiten": {}
       }
@@ -58,13 +60,13 @@
     "Halbelf": {
       "name": "Halbelf",
       "handicaps": [
-        "Außenseiter (leicht: -2 Überreden außer bei eigener Art)"
+        "Außenseiter (leicht: -2 Überreden außer bei eigener Art)",
+        "Zweifel (leicht: zerrissen zwischen Menschen- und Elfenwelt)"
       ],
       "talente": [],
       "besonderheiten": [
-        "Flexibilität (Beginnt mit W6 in einem Attribut statt W4, erhöht Maximum nicht)",
-        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
         "Erbe (Freies Anfängertalent ODER Geschicklichkeit W6 statt W4, Maximum W12+1)",
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
         "Zweistimmiger Gesang (+1 auf Darbietung beim Singen)"
       ],
       "sprachen": [
@@ -90,18 +92,23 @@
           "zweistimmiger_gesang": true
         },
         "wahlmoeglichkeiten": {
-          "freies_attribut": true,
           "freies_talent_oder_attribut": true
-        }
+        },
+        "auto_handicaps": [
+          "Außenseiter_leicht",
+          "Zweifel_leicht"
+        ]
       }
     },
     "Halbork": {
       "name": "Halbork",
-      "handicaps": [],
+      "handicaps": [
+        "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
+      ],
       "talente": [],
       "besonderheiten": [
         "Zäher Hund (zäher und leidensfähiger als Menschen – Konstitution W6 statt W4, Maximum W12+1)",
-        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)"
+        "Anpassungsfähig (Freies Anfängertalent nach Wahl – menschliches Erbe)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -123,10 +130,10 @@
         "auto_handicaps": [
           "Außenseiter_leicht"
         ],
-        "spezielle_effekte": {
-          "dunkelsicht": true
-        },
-        "wahlmoeglichkeiten": {}
+        "spezielle_effekte": {},
+        "wahlmoeglichkeiten": {
+          "freies_talent": true
+        }
       }
     },
     "Mensch": {
@@ -134,7 +141,6 @@
       "handicaps": [],
       "talente": [],
       "besonderheiten": [
-        "Anpassungsfähigkeit (Freies Talent und W6 in einem Attribut statt W4, erhöht Maximum nicht)",
         "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
       ],
       "sprachen": [
@@ -154,24 +160,24 @@
         "auto_handicaps": [],
         "spezielle_effekte": {},
         "wahlmoeglichkeiten": {
-          "freies_talent": true,
-          "freies_attribut": true
+          "freies_talent": true
         }
       }
     },
     "Zwerg": {
       "name": "Zwerg",
-      "handicaps": [],
+      "handicaps": [
+        "Langsam (-1 Bewegungsweite, Sprintwürfel um einen Typ kleiner)",
+        "Meeresphobie (schwer: panische Angst vor offenem und tiefem Wasser)",
+        "Stur (leicht: dickköpfig und schwer umzustimmen)"
+      ],
       "talente": [],
       "besonderheiten": [
         "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\" / 20 Meter)",
-        "Eiserne Konstitution (+1 beim Widerstand gegen Gift, +1 zum Widerstand oder zur Erholung von Mächten)",
         "Steingespür (+2 auf Wahrnehmungsproben bei ungewöhnlich bearbeitetem Stein innerhalb von 3m)",
         "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1, Stärke um einen Würfel höher für Belastung und Mindeststärke)",
-        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
-        "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)",
-        "Nichtschwimmer (Schlechter Auftrieb – kann nicht schwimmen)",
-        "Hitzeresistenz (+4 auf Proben gegen große Hitze, z.B. in Schmiede/Lava)"
+        "Hitzeresistenz (+4 auf Proben gegen große Hitze, z.B. in Schmiede/Lava)",
+        "Magische Abwehr (wirkt wie das Talent Arkane Resistenz: -2 auf gegnerische Mächte)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -190,20 +196,19 @@
         "bewegungsweite_bonus": 0,
         "fertigkeits_startboni": {},
         "auto_talente": [
-          "Nachtsicht"
+          "Arkane Resistenz"
         ],
         "auto_handicaps": [
-          "Nichtschwimmer",
-          "Langsam_leicht"
+          "Langsam_leicht",
+          "Phobie_schwer",
+          "Stur"
         ],
         "spezielle_effekte": {
           "dunkelsicht": true,
-          "eiserne_konstitution": true,
           "steingespür": true,
           "staerke_bonus_traglast": true,
-          "nachtsicht": true,
           "hitzeresistenz": true,
-          "nichtschwimmer": true
+          "magische_abwehr": true
         },
         "wahlmoeglichkeiten": {}
       }
@@ -212,14 +217,13 @@
       "name": "Goblin",
       "handicaps": [
         "Größe -1 (Reduzierte Größe und Robustheit)",
-        "Selbstzweifel (-1 auf Willenskraft-Proben – niedrige Seelenkraft)",
+        "Außenseiter (leicht: bei den Kulturvölkern Aventuriens verachtet)",
         "Abergläubisch (Aberglaube und Neugier prägen das Verhalten)"
       ],
       "talente": [],
       "besonderheiten": [
         "Geschickt (Geschicklichkeit W6 statt W4, Maximum W12+1)",
         "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
-        "Geschärfte Sinne (Wahrnehmung W6 statt W4, Maximum W12+1)",
         "Biss (Stä+W4 Schaden, kleine Hauer/spitze Zähne)"
       ],
       "sprachen": [
@@ -237,20 +241,17 @@
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
-        "fertigkeits_startboni": {
-          "Wahrnehmung": 2
-        },
+        "fertigkeits_startboni": {},
         "fertigkeits_modifier_boni": {
           "Überreden": -2
         },
         "auto_talente": [],
         "auto_handicaps": [
           "Abergläubisch",
-          "Selbstzweifel"
+          "Außenseiter_leicht"
         ],
         "spezielle_effekte": {
           "dunkelsicht": true,
-          "geschaerfte_sinne": true,
           "biss": true,
           "groesse_minus1": true
         },
@@ -261,16 +262,15 @@
     "Ork": {
       "name": "Ork",
       "handicaps": [
-        "Brutal (-1 Verstandsproben)"
+        "Brutal (-1 Verstandsproben)",
+        "Impulsiv (schwer: jähzornig, handelt vorschnell)"
       ],
       "talente": [],
       "besonderheiten": [
-        "Größe +1 (+1 Robustheit)",
         "Stark (Stärke W6, Maximum W12+1)",
         "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
         "Widerstandsfähig (Konstitution W6, Maximum W12+1)",
-        "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)",
-        "Natürlicher Rüstungsschutz I (Panzerung +1 durch ledrige Haut)"
+        "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)"
       ],
       "sprachen": [
         "Orkisch"
@@ -292,13 +292,13 @@
         "spezielle_effekte": {
           "brutal": true,
           "biss": true,
-          "panzerung_1": true,
           "dunkelsicht": true
         },
         "wahlmoeglichkeiten": {},
-        "groesse_modifikator": 1,
+        "groesse_modifikator": 0,
         "auto_handicaps": [
-          "Außenseiter_schwer"
+          "Außenseiter_schwer",
+          "Impulsiv"
         ]
       }
     },
@@ -344,12 +344,13 @@
     "Holberker": {
       "name": "Holberker",
       "handicaps": [
-        "Ungebildet (Verstandbasierte Fertigkeiten sind schwerer zu steigern – tumb und grobschlächtig)"
+        "Ungebildet (Verstandbasierte Fertigkeiten sind schwerer zu steigern – tumb und grobschlächtig)",
+        "Misstrauisch (leicht: argwöhnisch gegenüber Fremden)"
       ],
       "talente": [],
       "besonderheiten": [
         "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)",
-        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)",
+        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
         "Richtungssinn (Überleben W6 statt W4 zur Orientierung in der Wildnis)"
       ],
       "sprachen": [
@@ -370,14 +371,13 @@
         "fertigkeits_startboni": {
           "Überleben": 2
         },
-        "auto_talente": [
-          "Nachtsicht"
-        ],
+        "auto_talente": [],
         "auto_handicaps": [
-          "Ungebildet"
+          "Ungebildet",
+          "Misstrauisch_leicht"
         ],
         "spezielle_effekte": {
-          "nachtsicht": true,
+          "dunkelsicht": true,
           "richtungssinn": true,
           "wildnisverbunden": true
         },
@@ -547,7 +547,7 @@
         "STÄ W6",
         "KON W6"
       ],
-      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Behände (Bewegungsweite +2), Kampfrausch (siehe Text)",
+      "beschreibung": "Als ungestümer Krieger aus den wilden Stämmen Aventuriens – ein Trollzacker, Fjarninger oder Thorwaler-Berserker – verlässt du dich auf rohe Kraft und kämpferische Raserei statt auf höfische Fechtschulen. Rüstungsbeschränkung (mittelschwer), Behände (Bewegungsweite +2), Kampfrausch (siehe Text)",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -625,7 +625,7 @@
       "kategorie": "Barde",
       "rang": "V",
       "voraussetzungen": [
-        "Barde"
+        "AH (Barde)"
       ],
       "beschreibung": "Verbündete innerhalb von 5'' erhalten eine Wurfwiederholung, wenn sie feindlichen Zaubereffekten widerstehen oder sich von ihnen erholen.",
       "neue_maechte": 0,
@@ -638,7 +638,7 @@
       "kategorie": "Barde",
       "rang": "H",
       "voraussetzungen": [
-        "Barde"
+        "AH (Barde)"
       ],
       "beschreibung": "Feindliche Wildcards innerhalb von 10'' ziehen –2 vom Gesamtwert ab, wenn sie einen Benny ausgeben.",
       "neue_maechte": 0,
@@ -674,7 +674,7 @@
       "kategorie": "Druide",
       "rang": "F",
       "voraussetzungen": [
-        "Druide"
+        "AH (Druide)"
       ],
       "beschreibung": "Der Druide erhält Gestaltwandeln. Wirkungsdauer ist eine Stunde, und er wirkt den Zauber mit einem Rang höher als normal.",
       "neue_maechte": 0,
@@ -687,7 +687,7 @@
       "kategorie": "Druide",
       "rang": "V",
       "voraussetzungen": [
-        "Druide"
+        "AH (Druide)"
       ],
       "beschreibung": "Als begrenzte freie Aktion kann der Druide bis zu zwei Punkte Abzüge ignorieren, wenn er Schutz, Verstricken oder Waffe verbessern wirkt.",
       "neue_maechte": 0,
@@ -700,7 +700,7 @@
       "kategorie": "Druide",
       "rang": "H",
       "voraussetzungen": [
-        "Druide"
+        "AH (Druide)"
       ],
       "beschreibung": "Der Druide kann Epische Machtmodifikatoren verwenden.",
       "neue_maechte": 0,
@@ -716,7 +716,7 @@
         "STÄ W6",
         "Kämpfen W6"
       ],
-      "beschreibung": "Kriegerische Anpassungsfähigkeit (kann einmal pro Begegnung ein Kampftalent erhalten)",
+      "beschreibung": "Du bist ein abgehärteter Berufskrieger – Söldner, Gardist oder Veteran eines aventurischen Heeres – und passt deinen Kampfstil flexibel jeder Lage an. Kriegerische Anpassungsfähigkeit (kann einmal pro Begegnung ein Kampftalent erhalten)",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -765,33 +765,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Kleriker)": {
-      "name": "AH (Kleriker)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6",
-        "Okkultismus W6"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
-      "neue_maechte": 5,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "Gnade",
-        "Energie fokussieren"
-      ],
-      "auto_handicaps": [
-        "Schwur_schwer"
-      ]
-    },
-    "Bevorzugte Mächte (Kleriker)": {
-      "name": "Bevorzugte Mächte (Kleriker)",
-      "kategorie": "Kleriker",
+    "Bevorzugte Mächte (Geweihter)": {
+      "name": "Bevorzugte Mächte (Geweihter)",
+      "kategorie": "Geweihter",
       "rang": "V",
       "voraussetzungen": [
-        "Kleriker"
+        "AH (Wunder: beliebig)"
       ],
       "beschreibung": "Als begrenzte freie Aktion kann der Kleriker bis zu zwei Punkte Abzüge ignorieren, wenn er Heiligtum, Heilung oder Waffe verbessern wirkt.",
       "neue_maechte": 0,
@@ -799,12 +778,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Göttliche Meisterschaft (Kleriker)": {
-      "name": "Göttliche Meisterschaft (Kleriker)",
-      "kategorie": "Kleriker",
+    "Göttliche Meisterschaft (Geweihter)": {
+      "name": "Göttliche Meisterschaft (Geweihter)",
+      "kategorie": "Geweihter",
       "rang": "H",
       "voraussetzungen": [
-        "Kleriker"
+        "AH (Wunder: beliebig)"
       ],
       "beschreibung": "Der Kleriker kann Epische Machtmodifikatoren verwenden.",
       "neue_maechte": 0,
@@ -840,7 +819,7 @@
       "kategorie": "Magier",
       "rang": "F",
       "voraussetzungen": [
-        "Magier"
+        "AH (Magier)"
       ],
       "beschreibung": "Als begrenzte freie Aktion kann der Magier bis zu zwei Punkte Abzüge ignorieren, wenn er Abwehren, Arkanen Schutz oder Aufheben wirkt.",
       "neue_maechte": 0,
@@ -853,7 +832,7 @@
       "kategorie": "Magier",
       "rang": "V",
       "voraussetzungen": [
-        "Magier"
+        "AH (Magier)"
       ],
       "beschreibung": "Der Magier kann Epische Machtmodifikatoren verwenden.",
       "neue_maechte": 0,
@@ -861,8 +840,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mönch": {
-      "name": "Mönch",
+    "Hruruzat-Kämpfer": {
+      "name": "Hruruzat-Kämpfer",
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
@@ -870,7 +849,7 @@
         "WIL W6",
         "Kämpfen W6"
       ],
-      "beschreibung": "Rüstungsbeschränkung (jede), Betäubende Fäuste, Beweglichkeit, Kämpferische Disziplin, Waffenloser Schlag",
+      "beschreibung": "Du bist ein Schüler des Hruruzat, der hohen Kunst des waffenlosen Kampfes, die du in abgeschiedener Gemeinschaft als körperlich-geistige Disziplin erlernt hast und mit der du deinen Körper selbst zur Waffe machst. Rüstungsbeschränkung (jede), Betäubende Fäuste, Beweglichkeit, Kämpferische Disziplin, Waffenloser Schlag",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -885,12 +864,12 @@
         "Rüstungsbeschränkung_jede"
       ]
     },
-    "Mystische Mächte (Mönch)": {
-      "name": "Mystische Mächte (Mönch)",
-      "kategorie": "Mönch",
+    "Mystische Mächte (Hruruzat)": {
+      "name": "Mystische Mächte (Hruruzat)",
+      "kategorie": "Hruruzat",
       "rang": "F",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Der Mönch hat 10 gewidmete Machtpunkte, die er verwenden kann, um Abwehren, Beschleunigung, Eigenschaft erhöhen (Geschicklichkeit, Athletik, Kämpfen oder Heimlichkeit) oder Waffe verbessern zu wirken. Alle wirken nur auf den Mönch selbst.",
       "neue_maechte": 0,
@@ -898,13 +877,13 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mächtiges Ki": {
-      "name": "Mächtiges Ki",
-      "kategorie": "Mönch",
+    "Mächtige Innere Kraft": {
+      "name": "Mächtige Innere Kraft",
+      "kategorie": "Hruruzat",
       "rang": "V",
       "voraussetzungen": [
-        "Mönch",
-        "Mystische Mächte (Mönch)"
+        "Hruruzat-Kämpfer",
+        "Mystische Mächte (Hruruzat)"
       ],
       "beschreibung": "Zu den mystischen Mächten des Mönchs gehören jetzt Eigenschaft erhöhen (Stärke), Kriegersegen, Schutz, Wandkrabbler.",
       "neue_maechte": 0,
@@ -914,11 +893,11 @@
     },
     "Unversehrtheit des Körpers": {
       "name": "Unversehrtheit des Körpers",
-      "kategorie": "Mönch",
+      "kategorie": "Hruruzat",
       "rang": "H",
       "voraussetzungen": [
-        "Mönch",
-        "Mystische Mächte (Mönch)"
+        "Hruruzat-Kämpfer",
+        "Mystische Mächte (Hruruzat)"
       ],
       "beschreibung": "Der Mönch kann 2 Machtpunkte ausgeben, um auf Schaden wegstecken zu würfeln. Dies wird nicht behandelt, als hätte er einen Benny ausgegeben",
       "neue_maechte": 0,
@@ -974,7 +953,7 @@
         "Wahrnehmung W6",
         "Heimlichkeit W6"
       ],
-      "beschreibung": "Rüstungsbeschränkung (leicht), Hinterhältiger Angriff",
+      "beschreibung": "Du lebst von Geschick, Tücke und schnellen Fingern – als Dieb, Strolch oder Beutelschneider, oft den Schatten und der Kirche des Phex zugetan. Rüstungsbeschränkung (leicht), Hinterhältiger Angriff",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1020,7 +999,7 @@
         "Athletik W6, Kämpfen oder Schießen W6",
         "Überleben W6"
       ],
-      "beschreibung": "Rüstungsbeschränkung (mittelschwer), Erzfeind, Bevorzugtes Gelände, Wildnis durchqueren",
+      "beschreibung": "Du bist ein Kind der Wildnis Aventuriens – Wildnisläufer, Förster oder Kopfgeldjäger –, das in Wäldern, Sümpfen und Gebirgen ebenso zu Hause ist wie der Wolf. Rüstungsbeschränkung (mittelschwer), Erzfeind, Bevorzugtes Gelände, Wildnis durchqueren",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1093,27 +1072,27 @@
         "Behindernde_Rüstung_schwer"
       ]
     },
-    "Weitere Hexerei": {
-      "name": "Weitere Hexerei",
+    "Weitere Paktgabe": {
+      "name": "Weitere Paktgabe",
       "kategorie": "Paktierer",
       "rang": "F",
       "voraussetzungen": [
-        "Paktierer"
+        "AH (Paktierer)"
       ],
-      "beschreibung": "Der:ie Paktierer:in kann eine neue Verfluchung auswählen. Kann einmal pro Rang genommen werden. Verfluchungen (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
+      "beschreibung": "Der:ie Paktierer:in kann eine neue Paktgabe auswählen. Kann einmal pro Rang genommen werden. Paktgaben (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Starke Hexerei": {
-      "name": "Starke Hexerei",
+    "Starke Paktgabe": {
+      "name": "Starke Paktgabe",
       "kategorie": "Paktierer",
       "rang": "V",
       "voraussetzungen": [
-        "Paktierer"
+        "AH (Paktierer)"
       ],
-      "beschreibung": "Der:ie Paktierer:in kann eine Starke Verfluchung auswählen. Kann einmal pro Rang genommen werden. Starke Verfluchungen (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
+      "beschreibung": "Der:ie Paktierer:in kann eine Starke Paktgabe auswählen. Kann einmal pro Rang genommen werden. Starke Paktgaben (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1124,7 +1103,7 @@
       "kategorie": "Paktierer",
       "rang": "H",
       "voraussetzungen": [
-        "Paktierer"
+        "AH (Paktierer)"
       ],
       "beschreibung": "Durch den finsteren Patron erschließt der Paktierer die Geheimnisse seiner Zauberkraft. Erhält Zugriff auf alle Epischen Machtmodifikatoren seiner Mächte.",
       "neue_maechte": 0,
@@ -1132,15 +1111,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Mächtige Hexerei": {
-      "name": "Mächtige Hexerei",
+    "Mächtige Paktgabe": {
+      "name": "Mächtige Paktgabe",
       "kategorie": "Paktierer",
       "rang": "L",
       "voraussetzungen": [
-        "Paktierer",
+        "AH (Paktierer)",
         "Mindestens zwei Paktierer-Vorteile"
       ],
-      "beschreibung": "Wild Card. Der:ie Paktierer:in kann eine Mächtige Verfluchung auswählen. Kann einmal pro Rang genommen werden. Mächtige Verfluchungen (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
+      "beschreibung": "Wild Card. Der:ie Paktierer:in kann eine Mächtige Paktgabe auswählen. Kann einmal pro Rang genommen werden. Mächtige Paktgaben (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1153,7 +1132,7 @@
       "voraussetzungen": [
         "VER W6"
       ],
-      "beschreibung": "Alchemische Identifikation (+2 auf Proben zur Identifikation alchemischer Gegenstände), AH (Alchemist) [Arkane Fertigkeit: Alchemie], Behindernde Rüstung (leicht), Bomben (Aktion: wirf eine Bombe, 1W6 Schaden in Bereich), Extrakte (Tränke für Kraftvolle Heilung oder Eigenschaftsverbesserung), Mutagene (Konstitution für Stärke, Intelligenz für Ausdauer oder Geschicklichkeit für Abwehr tauschen).",
+      "beschreibung": "Du bist ein Zauberalchimist in der Tradition der hesindegefälligen Laboratorien Aventuriens und destillierst Tränke, Elixiere und alchemistische Wunderwerke. Alchemische Identifikation (+2 auf Proben zur Identifikation alchemischer Gegenstände), AH (Alchemist) [Arkane Fertigkeit: Alchemie], Behindernde Rüstung (leicht), Bomben (Aktion: wirf eine Bombe, 1W6 Schaden in Bereich), Extrakte (Tränke für Kraftvolle Heilung oder Eigenschaftsverbesserung), Mutagene (Konstitution für Stärke, Intelligenz für Ausdauer oder Geschicklichkeit für Abwehr tauschen).",
       "neue_maechte": 3,
       "machtpunkte": 15,
       "ausgewaehlt": false,
@@ -1213,7 +1192,7 @@
         "Kämpfen W6",
         "Reiten W6"
       ],
-      "beschreibung": "Herausforderung (einmal pro Begegnung: wähle einen Gegner – beide erhalten Wundabzüge des anderen nicht; der Kavalier erhält +2 Schaden gegen das Ziel), Mächtiger Ansturm (bei Ansturm mit Lanze +4 Schaden statt +2), Orden (tritt einem Ritterorden bei und erhält dessen Kenntnisse), Kavalier-Reittier (verbesserte Variante des Tiermeister-Begleiters).",
+      "beschreibung": "Du bist ein ritterlicher Reiterkrieger und Mitglied eines aventurischen Ritterordens, geschult in Turnier, Lanzenkampf und höfischer Ehre. Herausforderung (einmal pro Begegnung: wähle einen Gegner – beide erhalten Wundabzüge des anderen nicht; der Kavalier erhält +2 Schaden gegen das Ziel), Mächtiger Ansturm (bei Ansturm mit Lanze +4 Schaden statt +2), Orden (tritt einem Ritterorden bei und erhält dessen Kenntnisse), Kavalier-Reittier (verbesserte Variante des Tiermeister-Begleiters).",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1396,100 +1375,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Beschwörer)": {
-      "name": "AH (Beschwörer)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand)",
-      "neue_maechte": 5,
-      "machtpunkte": 15,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Behindernde_Rüstung_leicht"
-      ]
-    },
-    "Zusätzliche Evolution": {
-      "name": "Zusätzliche Evolution",
-      "kategorie": "Beschwörer",
-      "rang": "A",
-      "voraussetzungen": [
-        "Beschwörer"
-      ],
-      "beschreibung": "Das Eidolon des Beschwörers erhält 3 zusätzliche Evolutionspunkte für Verbesserungen (z.B. zusätzliche Gliedmaßen, natürlicher Rüstungsschutz, Flug). Kann einmal genommen werden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Ruf des Schöpfers": {
-      "name": "Ruf des Schöpfers",
-      "kategorie": "Beschwörer",
-      "rang": "F",
-      "voraussetzungen": [
-        "Beschwörer"
-      ],
-      "beschreibung": "Der Beschwörer kann sein Eidolon per Aktion sofort zu sich teleportieren oder mit ihm den Platz tauschen (einmal pro Begegnung, keine Sichtlinie erforderlich).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Ruf des Beschwörers": {
-      "name": "Ruf des Beschwörers",
-      "kategorie": "Beschwörer",
-      "rang": "F",
-      "voraussetzungen": [
-        "Beschwörer"
-      ],
-      "beschreibung": "Das Eidolon erhält +1 Würfeltyp auf Geschicklichkeit, Stärke und Konstitution (permanent).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Lebensband": {
-      "name": "Lebensband",
-      "kategorie": "Beschwörer",
-      "rang": "V",
-      "voraussetzungen": [
-        "Beschwörer"
-      ],
-      "beschreibung": "Solange das Eidolon in der Nähe ist (12''), kann der Beschwörer empfangenen Schaden (Wunden) auf das Eidolon übertragen. Das Eidolon kann nicht unter diesen Schaden fallen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Aspekt": {
-      "name": "Aspekt",
-      "kategorie": "Beschwörer",
-      "rang": "H",
-      "voraussetzungen": [
-        "Beschwörer"
-      ],
-      "beschreibung": "Der Beschwörer kann Evolutionspunkte des Eidolons nutzen, um sich selbst zu transformieren und körperliche Eigenschaften des Eidolons zu übernehmen (z.B. Klauen, Panzerung, Flug).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zwillingseidolon": {
-      "name": "Zwillingseidolon",
-      "kategorie": "Beschwörer",
-      "rang": "WC",
-      "voraussetzungen": [
-        "L",
-        "Beschwörer",
-        "Mindestens zwei Beschwörer-Talente"
-      ],
-      "beschreibung": "Wild Card. Der Beschwörer kann sich vollständig in sein Eidolon verwandeln – alle Eigenschaftspunkte und Fähigkeiten des Eidolons werden für den Beschwörer übernommen. Erfordert Legendär-Rang und mindestens zwei weitere Beschwörer-Talente.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "AH (Hexe)": {
       "name": "AH (Hexe)",
       "kategorie": "Hintergrund",
@@ -1512,7 +1397,7 @@
       "kategorie": "Hexe",
       "rang": "F",
       "voraussetzungen": [
-        "Hexe"
+        "AH (Hexe)"
       ],
       "beschreibung": "Die Hexe schaltet einen zusätzlichen Hex frei. Kann einmal pro Rang genommen werden. Hexen (Auswahl): Agonie, Verhexung, Schlaf, Kichern, Heilung, Böser Blick, Verfluchung.",
       "neue_maechte": 0,
@@ -1525,7 +1410,7 @@
       "kategorie": "Hexe",
       "rang": "V",
       "voraussetzungen": [
-        "Hexe"
+        "AH (Hexe)"
       ],
       "beschreibung": "Die Hexe erhält Zugang zu einem Großen Hex (mächtigere Variante der normalen Hexen-Fähigkeiten). Auswahl: Vettelnauge, Albträume, Langlebigkeit, Wachsabbild, Wetterkontrolle.",
       "neue_maechte": 0,
@@ -1538,7 +1423,7 @@
       "kategorie": "Hexe",
       "rang": "H",
       "voraussetzungen": [
-        "Hexe"
+        "AH (Hexe)"
       ],
       "beschreibung": "Die Hexe darf jetzt Epische Macht-Modifikatoren auf ihre Zaubern-Mächte anwenden.",
       "neue_maechte": 0,
@@ -1552,7 +1437,7 @@
       "rang": "WC",
       "voraussetzungen": [
         "L",
-        "Hexe",
+        "AH (Hexe)",
         "Mindestens zwei Hexen-Talente"
       ],
       "beschreibung": "Wild Card. Die Hexe schaltet einen Grandiosen Hex frei – die mächtigste Form ihrer Hexerei (z.B. ewiger Schlaf, Todesfluch, Seelenstehlen). Erfordert Legendär-Rang und mindestens zwei weitere Hexen-Talente.",
@@ -1575,13 +1460,13 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Versteinerungsschlag": {
-      "name": "Versteinerungsschlag",
-      "kategorie": "Mönch",
+    "Lähmender Nervenschlag": {
+      "name": "Lähmender Nervenschlag",
+      "kategorie": "Hruruzat",
       "rang": "F",
       "voraussetzungen": [
         "WIL W8",
-        "Mönch",
+        "Hruruzat-Kämpfer",
         "Kämpfen W8"
       ],
       "beschreibung": "Ki-Aktion (1 Machtpunkt): Bei einem Treffer mit einer Erhöhung muss das Ziel eine Konstitutionsprobe ablegen oder gilt als Erschöpft und beginnt zu versteinen. Misslingt die Probe mit einer Erhöhung, ist das Ziel sofort Kampfunfähig (Versteinerung).",
@@ -1605,29 +1490,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Zusätzliche Domäne": {
-      "name": "Zusätzliche Domäne",
-      "kategorie": "Kleriker",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Kleriker)"
-      ],
-      "beschreibung": "Der Kleriker wählt eine zusätzliche Götterdomäne und erhält die damit verbundene Domänenmacht als neue arkane Macht (+1 neue Macht, +5 Machtpunkte).",
-      "neue_maechte": 1,
-      "machtpunkte": 5,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Bevorzugte Mächte": {
       "name": "Bevorzugte Mächte",
       "kategorie": "Hintergrund",
       "rang": "F",
       "voraussetzungen": [
-        {
-          "oder": [
-            "AH (Magier)"
-          ]
-        }
+        "AH (Magier)"
       ],
       "beschreibung": "Einmal pro Zug kann der Charakter bei einer Probe für eine Macht seiner Schule oder Blutlinie bis zu 2 Punkte Abzüge ignorieren.",
       "neue_maechte": 0,
@@ -1674,29 +1542,15 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Bebende Handfläche": {
-      "name": "Bebende Handfläche",
-      "kategorie": "Mönch",
+    "Erschütternder Schlag": {
+      "name": "Erschütternder Schlag",
+      "kategorie": "Hruruzat",
       "rang": "H",
       "voraussetzungen": [
-        "Mönch",
+        "Hruruzat-Kämpfer",
         "Kämpfen W10"
       ],
       "beschreibung": "Ki-Aktion (2 Machtpunkte): Bei einem Treffer pflanzt der Mönch vibrierende Energie ins Ziel. Zu einem beliebigen späteren Zeitpunkt (innerhalb derselben Szene) kann der Mönch die Energie auslösen: Das Ziel legt sofort eine Konstitutionsprobe mit –2 ab oder gilt als Kampfunfähig.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zeitloser Körper": {
-      "name": "Zeitloser Körper",
-      "kategorie": "Druide",
-      "rang": "F",
-      "voraussetzungen": [
-        "KON W8",
-        "AH (Druide)"
-      ],
-      "beschreibung": "Der Druide altert nicht mehr (Alterungseffekte gelten nicht). Zudem wird er immun gegen Gift und Krankheiten jeder Art.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1925,19 +1779,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Assassine III": {
-      "name": "Assassine III",
-      "kategorie": "Meisterschaft",
-      "rang": "H",
-      "voraussetzungen": [
-        "Assassine II"
-      ],
-      "beschreibung": "Todesengel: Der Assassine lässt ein getötetes Opfer zu Staub zerfallen und verhindert eine Wiederauferstehung. Schneller Tod: Einmal pro Tag erhält der Assassine einen Überraschungsangriff gegen ein Opfer seiner Wahl.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Duellant": {
       "name": "Duellant",
       "kategorie": "Meisterschaft",
@@ -2143,7 +1984,7 @@
       "kategorie": "Meisterschaft",
       "rang": "F",
       "voraussetzungen": [
-        "Ver W8"
+        "VER W8"
       ],
       "beschreibung": "Legendenkunde: freie Wiederholung bei Allgemeinwissen, Geisteswissenschaften, Okkultismus oder Naturwissenschaften",
       "neue_maechte": 0,
@@ -2177,8 +2018,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Chi": {
-      "name": "Chi",
+    "Innere Kraft": {
+      "name": "Innere Kraft",
       "kategorie": "Übersinnlich",
       "rang": "V",
       "voraussetzungen": [
@@ -2466,49 +2307,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Arkane Stärkung": {
-      "name": "Arkane Stärkung",
-      "kategorie": "Beschwörer",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Beschwörer)",
-        "Tier beschwören"
-      ],
-      "beschreibung": "Beschworene Tiere erhalten einen magischen Harnisch, der ihre Robustheit um +2 erhöht.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Ungezügelte Beschwörung": {
-      "name": "Ungezügelte Beschwörung",
-      "kategorie": "Beschwörer",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Beschwörer)",
-        "Monster beschwören"
-      ],
-      "beschreibung": "Erlaubt dem Beschwörer, beschworenen Monstern ein Kampftalent seines Rangs oder niedriger zu gewähren.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Höhere Beschwörung": {
-      "name": "Höhere Beschwörung",
-      "kategorie": "Beschwörer",
-      "rang": "H",
-      "voraussetzungen": [
-        "AH (Beschwörer)",
-        "Tier beschwören",
-        "Monster beschwören"
-      ],
-      "beschreibung": "Erlaubt das Beschwören mächtiger Kreaturen wie Barghest, Mammut, Frostmammut, Tyrannosaurus Rex oder jungen Drachen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Zorn der Niederhöllen": {
       "name": "Zorn der Niederhöllen",
       "kategorie": "Dämonologe",
@@ -2566,7 +2364,7 @@
       "kategorie": "Elementarmagier",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Elementarmagier)"
+        "AH (Elementarist)"
       ],
       "beschreibung": "Erhöht Robustheit um +2 während der Nutzung von Elementarsynergie.",
       "neue_maechte": 0,
@@ -2589,10 +2387,10 @@
     },
     "Hexenzeit": {
       "name": "Hexenzeit",
-      "kategorie": "Hexer/Hexe",
+      "kategorie": "Hexe",
       "rang": "F",
       "voraussetzungen": [
-        "AH (Hexer/Hexe)"
+        "AH (Hexe)"
       ],
       "beschreibung": "Verleiht Boni während einer besonderen Stunde, z. B. keine Kritischen Fehlschläge und kostenloses Wegstecken von Schaden.",
       "neue_maechte": 0,
@@ -2630,10 +2428,10 @@
     },
     "Untote zerstören": {
       "name": "Untote zerstören",
-      "kategorie": "Kleriker",
+      "kategorie": "Geweihter",
       "rang": "F",
       "voraussetzungen": [
-        "AH (Kleriker)"
+        "AH (Wunder: beliebig)"
       ],
       "beschreibung": "Kanalisierung positiver Energie, um Untote mit 2W6 (oder 3W6 für 2 Machtpunkte) Schaden zu treffen.",
       "neue_maechte": 0,
@@ -2643,10 +2441,10 @@
     },
     "Gnade": {
       "name": "Gnade",
-      "kategorie": "Kleriker",
+      "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Kleriker)",
+        "AH (Wunder: beliebig)",
         "Glaube W8"
       ],
       "beschreibung": "Hebt Abgelenkt, Angeschlagen oder Verwundbar durch Einsatz von 1 Machtpunkt auf.",
@@ -2681,20 +2479,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Seelengefäß": {
-      "name": "Seelengefäß",
-      "kategorie": "Nekromant",
-      "rang": "L",
-      "voraussetzungen": [
-        "AH (Nekromant)",
-        "Okkultismus W10"
-      ],
-      "beschreibung": "Verbotene Nekromantie: Der Nekromant verbirgt seine Seele in einem Gefäß (Phylakterium), um nach dem Tod in einen vorbereiteten Leichnam zurückzukehren – der erste Schritt zur Lichwerdung.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Urtümliche Magie": {
       "name": "Urtümliche Magie",
       "kategorie": "Schamane",
@@ -2722,8 +2506,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Homunkulus": {
-      "name": "Homunkulus",
+    "Konstrukt": {
+      "name": "Konstrukt",
       "kategorie": "Golembauer",
       "rang": "A",
       "voraussetzungen": [
@@ -2849,19 +2633,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Böe": {
-      "name": "Böe",
-      "kategorie": "Kampf",
-      "rang": "F",
-      "voraussetzungen": [
-        "Flügel"
-      ],
-      "beschreibung": "Mächtige Flügelschläge können Gegner in einem Kegel Angeschlagen machen oder Betäuben, wenn ein Joker gezogen wird.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Doppelschuss": {
       "name": "Doppelschuss",
       "kategorie": "Kampf",
@@ -2899,20 +2670,6 @@
         "GES W8"
       ],
       "beschreibung": "Der Charakter ignoriert den üblichen -2 Geschicklichkeits-Abzug beim Wegspringen und kann bei Flächeneffekten oder Angriffen wie Strahl oder Verwirrung Wegspringen anwenden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Versengen": {
-      "name": "Versengen",
-      "kategorie": "Kampf",
-      "rang": "F",
-      "voraussetzungen": [
-        "KON W8",
-        "Odemwaffe"
-      ],
-      "beschreibung": "Erhöht den Schaden einer Odemwaffe um einen Würfeltyp und erlaubt die Wahl zwischen Kegel- und Strahlschablone.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -3031,7 +2788,7 @@
       "kategorie": "Macht",
       "rang": "F",
       "voraussetzungen": [
-        "Fortgeschritten"
+        "F"
       ],
       "beschreibung": "Erlaubt das Erlernen von 10 dedizierten Machtpunkten mit ausgewählten Mächten, die automatisch aktiviert werden können. Die Mächte und Einschränkungen sind abhängig vom gewählten Paket (z. B. Barbar, Kämpfer, Mönch, etc.).",
       "neue_maechte": 0,
@@ -3085,8 +2842,7 @@
       "kategorie": "Macht",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer, Paktierer)",
-        "AH (Diabolist, Druide, Elementarmagier, Schamane, Hexer, Nekromant, Hexer, Zauberer)"
+        "AH (Hexe, Druide, Schamane, Nekromant, Paktierer, Dämonologe, Elementarist, Magier)"
       ],
       "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
       "neue_maechte": 0,
@@ -3157,19 +2913,6 @@
         "Überleben W6"
       ],
       "beschreibung": "Ermöglicht Wahrnehmungsproben zum frühzeitigen Erkennen von Gefahren, verbessert Wachsamkeit und gibt Boni auf Allgemeinwissen über bereiste Orte.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Reittier": {
-      "name": "Reittier",
-      "kategorie": "Experte",
-      "rang": "A",
-      "voraussetzungen": [
-        "Reiten W6"
-      ],
-      "beschreibung": "Gewährt ein treues, aufsteigbares Reittier mit besonderen Fähigkeiten. Ermöglicht die Wahl eines mächtigen Reittiers auf höheren Rängen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -3276,7 +3019,7 @@
       "kategorie": "Übersinnlich",
       "rang": "A",
       "voraussetzungen": [
-        "Lykanthropie"
+        "Tiergestalt"
       ],
       "beschreibung": "Erlaubt eine Formveränderung als begrenzte Aktion statt der üblichen 10 Minuten.",
       "neue_maechte": 0,
@@ -3549,32 +3292,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Engelsschwingen": {
-      "name": "Engelsschwingen",
-      "kategorie": "Hintergrund",
-      "rang": "F",
-      "voraussetzungen": [
-        "Volk: Aasimars"
-      ],
-      "beschreibung": "Der Charakter wächst Flügel aus göttlichem Licht. Er erhält eine Flug-Bewegungsweite von 6\" und muss sich pro Runde mindestens 1\" fortbewegen oder landen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Rüstung des Abgrunds": {
-      "name": "Rüstung des Abgrunds",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Tieflinge"
-      ],
-      "beschreibung": "+2 natürlicher Rüstungsschutz sowie Umgebungsresistenz gegen Kälte, Elektrizität oder Feuer (Wahl bei Erwerb des Talents).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Naturverbundenheit": {
       "name": "Naturverbundenheit",
       "kategorie": "Hintergrund",
@@ -3588,56 +3305,14 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Bluttrinker": {
-      "name": "Bluttrinker",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Dhampire"
-      ],
-      "beschreibung": "Der Charakter kann einen natürlichen Heilungswurf durchführen, wenn er Blut trinkt (erfordert eine Aktion und einen willigen oder wehrlosen Spender).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Brenn! Brenn! Brenn!": {
-      "name": "Brenn! Brenn! Brenn!",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Goblin",
-        "Diebeskunst W6"
-      ],
-      "beschreibung": "Der Charakter verursacht mit natürlichem Feuer erhöhten Schaden: Brennende Gegenstände, Fackeln und ähnliche Lichtquellen fügen in seiner Hand +1 Würfeltyp Schaden zu.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Lässiger Illusionist": {
       "name": "Lässiger Illusionist",
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
-        "Volk: Gnom"
+        "AH (Illusionist)"
       ],
       "beschreibung": "Durch Ausgabe von Machtpunkten erhält der Charakter einen Bonus auf Täuschen- oder Heimlichkeitsproben: 1 MP für +1, 2 MP für +2, bis zu +4.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Krallensturz": {
-      "name": "Krallensturz",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Volk: Katzenfolk",
-        "GES W6",
-        "STÄ W6"
-      ],
-      "beschreibung": "Erfordert die Alternativfähigkeit Katzenkrallen. Bei einem Rücksichtslosen Angriff mit Klauen erhält der Charakter +2 Schaden zusätzlich zum normalen Bonus des Rücksichtslosen Angriffs.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -4566,8 +4241,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Heiliger/Unheiliger Krieger": {
-      "name": "Heiliger/Unheiliger Krieger",
+    "Glaubenskrieger": {
+      "name": "Glaubenskrieger",
       "kategorie": "Macht",
       "rang": "F",
       "voraussetzungen": [
@@ -4755,8 +4430,8 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "McGyver": {
-      "name": "McGyver",
+    "Tüftler": {
+      "name": "Tüftler",
       "kategorie": "Experte",
       "rang": "A",
       "voraussetzungen": [
@@ -5237,10 +4912,10 @@
     },
     "Energie fokussieren": {
       "name": "Energie fokussieren",
-      "kategorie": "Kleriker",
+      "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Kleriker)"
+        "AH (Wunder: beliebig)"
       ],
       "beschreibung": "Der Kleriker kann die Macht Heilung auf eine Entfernung gleich seiner Willenskraft wirken. Er erhält außerdem den Machtmodifikator Zusätzlicher Empfänger, sodass er für jeweils 1 Machtpunkt nahe Verbündete heilen kann.",
       "neue_maechte": 0,
@@ -5276,10 +4951,10 @@
     },
     "Betäubende Fäuste": {
       "name": "Betäubende Fäuste",
-      "kategorie": "Mönch",
+      "kategorie": "Hruruzat",
       "rang": "A",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Bei einer Steigerung beim Kämpfen-Wurf kann der Mönch einen Feind betäuben oder einen Verursacher machen.",
       "neue_maechte": 0,
@@ -5289,10 +4964,10 @@
     },
     "Beweglichkeit": {
       "name": "Beweglichkeit",
-      "kategorie": "Mönch",
+      "kategorie": "Hruruzat",
       "rang": "A",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Der Mönch ist schnell und wendig und erhält +1 auf Sprint und Ausweichen.",
       "neue_maechte": 0,
@@ -5302,10 +4977,10 @@
     },
     "Kämpferische Disziplin": {
       "name": "Kämpferische Disziplin",
-      "kategorie": "Mönch",
+      "kategorie": "Hruruzat",
       "rang": "A",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Der Mönch erhält +1 Robustheit, wenn er keine Rüstung trägt.",
       "neue_maechte": 0,
@@ -5315,10 +4990,10 @@
     },
     "Waffenloser Schlag": {
       "name": "Waffenloser Schlag",
-      "kategorie": "Mönch",
+      "kategorie": "Hruruzat",
       "rang": "A",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Der Mönch erhält +1 auf Kampfwürfe und verursacht STÄ+W4 Schaden bei waffenlosen Angriffen. Dieser Schadenswürfel steigt mit dem Rang.",
       "neue_maechte": 0,
@@ -5772,7 +5447,7 @@
       "kategorie": "Legendär",
       "rang": "L",
       "voraussetzungen": [
-        "Mindestens zwei Mönch-Talente"
+        "Mindestens zwei Hruruzat-Talente"
       ],
       "beschreibung": "Erhalte +4 Robustheit und werde zu einem Externar.",
       "neue_maechte": 0,
@@ -5827,74 +5502,6 @@
         "Mindestens zwei Magier-Talente"
       ],
       "beschreibung": "Wirke einen Zauber als begrenzte freie Aktion für +1 Machtpunkt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kletterranke": {
-      "name": "Kletterranke",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Weinranken-Leshy",
-        "STÄ W6"
-      ],
-      "beschreibung": "Gewährt die Kletterer-Fähigkeit (Wandkletterer).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Innerer Atem": {
-      "name": "Innerer Atem",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Sylphen"
-      ],
-      "beschreibung": "Dein Held muss nicht mehr atmen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kudzu-Ringer": {
-      "name": "Kudzu-Ringer",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "Weinranken-Leshy",
-        "GES W6",
-        "Kämpfen W6"
-      ],
-      "beschreibung": "Behindert die Sicht eines Gegners beim Ringen und erschwert diesem das Ausführen von Aktionen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Versengende Waffe": {
-      "name": "Versengende Waffe",
-      "kategorie": "Hintergrund",
-      "rang": "F",
-      "voraussetzungen": [
-        "Ifrits"
-      ],
-      "beschreibung": "Waffenlose Angriffe verursachen Feuerschaden. Kann auf Metallwaffen übertragen werden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Flügel der Luft": {
-      "name": "Flügel der Luft",
-      "kategorie": "Hintergrund",
-      "rang": "F",
-      "voraussetzungen": [
-        "Sylphen"
-      ],
-      "beschreibung": "Gewährt die Fähigkeit zu fliegen.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6065,12 +5672,12 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Kranich-Stil": {
-      "name": "Kranich-Stil",
-      "kategorie": "Mönch",
+    "Hruruzat-Form": {
+      "name": "Hruruzat-Form",
+      "kategorie": "Hruruzat",
       "rang": "V",
       "voraussetzungen": [
-        "Mönch"
+        "Hruruzat-Kämpfer"
       ],
       "beschreibung": "Greife einen Gegner an, der den Charakter beim Verteidigen treffen würde.",
       "neue_maechte": 0,
@@ -6097,7 +5704,7 @@
       "rang": "F",
       "voraussetzungen": [
         "WIL W6",
-        "Tiermeister oder ähnliche Fähigkeit"
+        "Tiermeister"
       ],
       "beschreibung": "Der Bestienmeister kann mit seinem tierischen Begleiter zusammenarbeiten, um zu verhindern, dass dieser Schaden erleidet.",
       "neue_maechte": 0,
@@ -6190,12 +5797,7 @@
       "kategorie": "Macht",
       "rang": "H",
       "voraussetzungen": [
-        {
-          "oder": [
-            "AH (Kleriker)",
-            "AH (Wunder: beliebig)"
-          ]
-        }
+        "AH (Wunder: beliebig)"
       ],
       "beschreibung": "Gib Machtpunkte aus, um einen Gegner zu zwingen, einen Angriffswurf mit einem Malus zu wiederholen.",
       "neue_maechte": 0,
@@ -6213,7 +5815,7 @@
         "AH (beliebig)",
         "Vertrauter"
       ],
-      "beschreibung": "Der Vertraute deines Charakters erhält eine Entwicklung aus der Eidolon-Entwicklungsliste.",
+      "beschreibung": "Der Vertraute deines Charakters erhält eine Entwicklung aus der Entwicklungsliste der gebundenen Wesenheit.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6296,27 +5898,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "AH (Hexer/Hexe)": {
-      "name": "AH (Hexer/Hexe)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft)",
-      "neue_maechte": 3,
-      "machtpunkte": 10,
-      "auto_handicaps": [
-        "Behindernde_Rüstung_schwer",
-        "Materialkomponenten",
-        "Verderbnis"
-      ],
-      "auto_talente": [
-        "Vertrauter"
-      ],
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Dämonenbeschwörung": {
       "name": "Dämonenbeschwörung",
       "kategorie": "Dämonologe",
@@ -6347,34 +5928,6 @@
       "rang": "A",
       "voraussetzungen": [],
       "beschreibung": "+2 auf Wahrnehmungsproben.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Bastler": {
-      "name": "Bastler",
-      "kategorie": "Macht",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Verrückte Wissenschaft)",
-        "Verrückte Wissenschaft W6"
-      ],
-      "beschreibung": "Gib 3 Machtpunkte aus, um ein Gerät zu erschaffen, das eine andere Macht nachahmt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Mentalist": {
-      "name": "Mentalist",
-      "kategorie": "Macht",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Psionik)",
-        "Psionik W6"
-      ],
-      "beschreibung": "+2 auf vergleichende Psionikproben.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6608,10 +6161,10 @@
     },
     "Mirakel": {
       "name": "Mirakel",
-      "kategorie": "Kleriker",
+      "kategorie": "Geweihter",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Wunder)",
+        "AH (Wunder: beliebig)",
         "Glaube W6"
       ],
       "beschreibung": "Durch ein kurzes Stoßgebet kann der Geweihte nach einem Wurf einen Bennie ausgeben und erhält den bei seiner Gottheit unter „Mirakel“ angegebenen Bonus, um die Probe nachträglich zu seinen Gunsten zu drehen.",
@@ -6671,7 +6224,7 @@
         "AH (Hexe)",
         "Zaubern W8"
       ],
-      "beschreibung": "Die Hexe spricht lang anhaltende Flüche aus. Ein Hexenfluch kostet keine Machtpunkte, der Zauberwurf ist aber um −2 erschwert. Für einen Bennie kann sie die Wirkungsdauer von Eigenschaft schwächen oder Fesseln beliebig lange aufrechterhalten; dafür muss sie zu Beginn jeder Sitzung je aufrechterhaltenem Fluch einen Bennie ausgeben.",
+      "beschreibung": "Die Hexe spricht lang anhaltende Flüche aus. Ein Hexenfluch kostet keine Machtpunkte, der Zauberwurf ist aber um −2 erschwert. Für einen Bennie kann sie die Wirkungsdauer von Eigenschaft schwächen oder Fesseln beliebig lange aufrechterhalten; dafür muss sie zu Beginn jeder Sitzung je aufrechterhaltenem Fluch einen Bennie ausgeben. (Auch die Darna – Waldmenschen-Fluchmagier – nutzen dieselben Flüche.)",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -6775,14 +6328,16 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Schelm": {
-      "name": "Schelm",
+    "AH (Schelm)": {
+      "name": "AH (Schelm)",
       "kategorie": "Hintergrund",
       "rang": "A",
-      "voraussetzungen": [],
-      "beschreibung": "Als Säugling von Kobolden entführt und aufgezogen, beherrscht der Schelm allerlei magische Späße: Er kann per Zauberei Menschen nackt dastehen lassen, Kobolde rufen, Illusionen hervorrufen u.ä. – ganz ohne Arkanen Hintergrund oder Machtpunkte. Die Fähigkeit dient nur der Erheiterung, niemals der Schädigung, lässt sich aber für Tricks und geistige Duelle einsetzen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Als Säugling von Kobolden entführt und aufgezogen, wirkt der Schelm allerlei magische Späße – Illusionen, Koboldrufe, harmlose Streiche. Seine intuitive Koboldmagie dient der Erheiterung, nie der ernsten Schädigung, taugt aber für Tricks und geistige Duelle.",
+      "neue_maechte": 2,
+      "machtpunkte": 10,
       "ausgewaehlt": false,
       "aktiv": true
     },
@@ -7509,27 +7064,234 @@
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
+    },
+    "AH (Goblinzauberin)": {
+      "name": "AH (Goblinzauberin)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6",
+        "Volk: Goblin"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Goblinzauberin, deren Goblinrituale an Schamanenriten erinnern; bindet ihre Kraft an Goblinkeule, Schweinetrommel und Hauerkette (Traditionsartefakte).",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Behindernde_Rüstung_leicht",
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Runenschöpfer)": {
+      "name": "AH (Runenschöpfer)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Seltene Tradition der Runenmagie; der Runenschöpfer bringt Zauberrunen an, die eine gespeicherte Macht entfalten, sobald ihre Auslösebedingung eintritt.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Scharlatan)": {
+      "name": "AH (Scharlatan)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "WIL W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Magie (Willenskraft). Fahrender Scharlatan-Magier (Gaukelei, Verblüffung, Illusionen); bindet seine Streiche an Zauberstecken und scharlatanische Zauberkugel (Traditionsartefakte). Anders als der koboldgeborene Schelm ist seine Trickmagie erlernt und durchaus auch zum Schaden einsetzbar.",
+      "neue_maechte": 2,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Bannzeichner)": {
+      "name": "AH (Bannzeichner)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Ysilischer Bannzeichner; bringt Bannzeichen an, die Dämonen und fremde Magie abwehren. Besitzt kein Traditionsartefakt.",
+      "neue_maechte": 2,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Materialkomponenten"
+      ]
+    },
+    "AH (Borbaradianer)": {
+      "name": "AH (Borbaradianer)",
+      "kategorie": "Hintergrund",
+      "rang": "A",
+      "voraussetzungen": [
+        "VER W6"
+      ],
+      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Verbotene Tradition: Anhänger des Dämonenmeisters Borbarad. Durch einen heimlichen Pakt mit dem Erzdämon Amazeroth erlangt der Borbaradianer gefährliche, geächtete Macht.",
+      "neue_maechte": 3,
+      "machtpunkte": 10,
+      "ausgewaehlt": false,
+      "aktiv": true,
+      "auto_handicaps": [
+        "Verderbnis"
+      ]
+    },
+    "Ysilisches Bannzeichen": {
+      "name": "Ysilisches Bannzeichen",
+      "kategorie": "Bannzeichner",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Bannzeichner)"
+      ],
+      "beschreibung": "Mit einer Aktion und einer Zaubernprobe bringt der Bannzeichner ein Bannzeichen an einer Fläche oder einem Durchgang an. In der Zone (Kleine Flächenschablone) erleiden Dämonen, Untote und gegnerische Wirker −2 auf ihre Proben; das Zeichen hält bis zum Ende der Szene.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Pakt mit Amazeroth": {
+      "name": "Pakt mit Amazeroth",
+      "kategorie": "Borbaradianer",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Borbaradianer)"
+      ],
+      "beschreibung": "Der heimliche Dämonenpakt verleiht dem Borbaradianer einmal pro Sitzung einen zusätzlichen Benny, den er ausschließlich für seine eigenen Mächte einsetzen darf — die Gunst des Erzdämonen fordert jedoch ihren Preis.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Totenbeschwörung": {
+      "name": "Totenbeschwörung",
+      "kategorie": "Nekromant",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Nekromant)"
+      ],
+      "beschreibung": "Der Nekromant beherrscht das Rufen und Binden der Toten: Mit „Verbündete beschwören\" gerufene untote Diener erhalten +2 Robustheit und zerfallen erst am Ende der Szene; gegen Untote wirkt er Mächte um +2 erleichtert.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Steinkundige": {
+      "name": "Steinkundige",
+      "kategorie": "Geode",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Geode)"
+      ],
+      "beschreibung": "Unter der Erde und im Stein ist die Geode in ihrem Element: +2 auf Wirken-, Wahrnehmungs- und Überlebensproben in Höhlen, Minen und Gestein. Ihr Lebensring (Traditionsartefakt) speichert bis zu 5 Machtpunkte.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Kristallsicht": {
+      "name": "Kristallsicht",
+      "kategorie": "Kristallomant",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Kristallomant)"
+      ],
+      "beschreibung": "Durch die Kristallkugel erlangt der Kristallomant Hellsicht: +2 auf Nachforschen und Wahrnehmung, um Fernes, Verborgenes oder Vergangenes zu erspüren.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Ritualmacht": {
+      "name": "Ritualmacht",
+      "kategorie": "Zibilja",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Zibilja)"
+      ],
+      "beschreibung": "Als Ritualmagierin kann die Zibilja eine Macht in einem mehrminütigen Ritual statt als Aktion wirken; das Ritual kostet 2 Machtpunkte weniger (mindestens 1).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Bann des Tanzes": {
+      "name": "Bann des Tanzes",
+      "kategorie": "Zaubertänzer",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Zaubertänzer)"
+      ],
+      "beschreibung": "Wirkt der Zaubertänzer eine Macht über einen Tanz (Darbietung), erhält er +1 auf die Probe; Zuschauer im Umkreis können von der Darbietung gefesselt und so Abgelenkt werden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Schelmenstreich": {
+      "name": "Schelmenstreich",
+      "kategorie": "Schelm",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Schelm)"
+      ],
+      "beschreibung": "Einmal pro Begegnung vollführt der Schelm einen magischen Streich: ein Ziel in Sichtweite ist bis zu seiner nächsten Aktion Abgelenkt (−2), nimmt aber keinen Schaden.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Steckenverzauberung": {
+      "name": "Steckenverzauberung",
+      "kategorie": "Scharlatan",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Scharlatan)"
+      ],
+      "beschreibung": "Der Scharlatan verzaubert seinen Zauberstecken zeitweise: Solange er ihn führt, kann er einmal pro Szene eine seiner Mächte ohne Machtpunkte wirken (Gaukelei und Verblüffung).",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Goblinritual": {
+      "name": "Goblinritual",
+      "kategorie": "Goblinzauberin",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Goblinzauberin)"
+      ],
+      "beschreibung": "Mit der Schweinetrommel vollführt die Goblinzauberin ein Stammesritual: Verbündete in Hörweite erhalten +1 auf ihre nächste Probe, oder Feinde müssen eine Furchtprobe ablegen.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
+    },
+    "Zauberrune": {
+      "name": "Zauberrune",
+      "kategorie": "Runenschöpfer",
+      "rang": "A",
+      "voraussetzungen": [
+        "AH (Runenschöpfer)"
+      ],
+      "beschreibung": "Der Runenschöpfer speichert eine vorbereitete Macht in einer Zauberrune (Aktion + Machtpunkte beim Anbringen). Die Rune entfaltet die Macht automatisch, sobald ihre festgelegte Auslösebedingung eintritt.",
+      "neue_maechte": 0,
+      "machtpunkte": 0,
+      "ausgewaehlt": false,
+      "aktiv": true
     }
   },
   "handicaps": {
-    "Ahnen-Schwäche_leicht": {
-      "name": "Ahnen-Schwäche",
-      "stufe": "leicht",
-      "punkte": 1,
-      "beschreibung": "Einige Familien können ihre Abstammungslinie weit genug zurückverfolgen, um einen Vorfahren von einer anderen Ebene zu entdecken. Wähle eines: Feuer, Kälte oder Elektrizität. Der Charakter erleidet +2 Schaden durch Angriffe dieses Typs.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Ahnen-Schwäche_schwer": {
-      "name": "Ahnen-Schwäche",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Einige Familien können ihre Abstammungslinie weit genug zurückverfolgen, um einen Vorfahren von einer anderen Ebene zu entdecken. Wähle eines: Feuer, Kälte oder Elektrizität. Der Charakter erleidet +4 Schaden durch Angriffe dieses Typs.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
     "Akribisch": {
       "name": "Akribisch",
       "stufe": "leicht",
@@ -7625,15 +7387,6 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Der Charakter passt nicht in die örtliche Umgebung und zieht –2 von Überredenproben ab.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Befleckter Geist": {
-      "name": "Befleckter Geist",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Als Kind schloss ein Elternteil oder eine Autoritätsperson einen Pakt mit einem Teufelswesen und stahl dabei einen Teil der Lebenskraft des Charakters als Pfand. Unmittelbar nachdem ein Kampf endet, muss dieser Charakter einen Konstitutionswurf ablegen oder erleidet eine Erschöpfungsstufe. Diese Erschöpfung dauert an, bis der Charakter 24 Stunden ohne Kampf verbracht hat.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -7786,7 +7539,7 @@
       "name": "Feige",
       "stufe": "schwer",
       "punkte": 2,
-      "beschreibung": "–2 auf Furchtproben und beim Widerstand gegen Einschüchtern.",
+      "beschreibung": "–2 auf Furchtproben und beim Widerstand gegen Einschüchtern; in großer Furcht flieht der Charakter.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -7895,15 +7648,6 @@
       "stufe": "leicht",
       "punkte": 1,
       "beschreibung": "Kann kein Geheimnis bewahren und verrät ständig private Informationen.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Heroisch": {
-      "name": "Heroisch",
-      "stufe": "schwer",
-      "punkte": 2,
-      "beschreibung": "Der Charakter hilft immer anderen, die in Not sind.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -8529,15 +8273,6 @@
       "aktiv": true,
       "custom": false
     },
-    "Feigling": {
-      "name": "Feigling",
-      "stufe": "leicht",
-      "punkte": 1,
-      "beschreibung": "Egal, woher die Furcht stammt, der Charakter läuft davor davon.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
     "Grausam": {
       "name": "Grausam",
       "stufe": "leicht",
@@ -8678,15 +8413,6 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Es ist schwerer, verstandbasierte Fertigkeiten zu steigern.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Zweifler": {
-      "name": "Zweifler",
-      "stufe": "leicht",
-      "punkte": 1,
-      "beschreibung": "Der Charakter glaubt nicht an übernatürliche Dinge und versucht, sie rational zu erklären.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false
@@ -8858,15 +8584,6 @@
       "stufe": "schwer",
       "punkte": 2,
       "beschreibung": "Zauberwirken erleiden -2, wenn sie versuchen, den Helden mit nützlicher Magie zu beeinflussen.",
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "custom": false
-    },
-    "Außenseiter": {
-      "name": "Außenseiter",
-      "stufe": "leicht",
-      "punkte": 1,
-      "beschreibung": "Der Charakter passt nicht in die örtliche Umgebung und zieht –2 von Überredenproben ab.",
       "ausgewaehlt": false,
       "aktiv": true,
       "custom": false

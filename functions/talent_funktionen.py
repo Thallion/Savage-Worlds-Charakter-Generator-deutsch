@@ -951,6 +951,41 @@ class TalentManager:
                 fehlermeldungen.append(f"Volk-Eigenschaft '{eigenschaft_key}' wird vorausgesetzt.")
             return fehlermeldungen
 
+        # Spezialfall: "Mindestens zwei X-Talente" / "Mindestens zwei X-Vorteile"
+        # Kategorie-Capstone: setzt eine Mindestzahl bereits gewählter Talente der
+        # Kategorie X voraus (X kann eine deutsche Plural-/Genitivform sein,
+        # z.B. "Hexen" → Kategorie "Hexe", "Druiden" → "Druide").
+        mindestens_match = re.match(r'^Mindestens (\w+) (.+?)-(?:Talente|Vorteile)$', voraussetzung)
+        if mindestens_match:
+            wort_zu_zahl = {'ein': 1, 'eine': 1, 'einem': 1, 'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5}
+            benoetigt = wort_zu_zahl.get(mindestens_match.group(1).lower(), 2)
+            kategorie_token = mindestens_match.group(2).strip()
+
+            # Passende Kategorie über längsten Präfix bestimmen (Plural-/Genitiv-tolerant)
+            vorhandene_kategorien = {
+                getattr(t_obj, 'kategorie', None) for t_obj in self.charakter.talente.values()
+            }
+            vorhandene_kategorien.discard(None)
+            vorhandene_kategorien.discard('')
+            match_kategorie = None
+            for kat in sorted(vorhandene_kategorien, key=len, reverse=True):
+                if kategorie_token == kat or kategorie_token.startswith(kat):
+                    match_kategorie = kat
+                    break
+
+            anzahl = 0
+            if match_kategorie:
+                for t_obj in self.charakter.talente.values():
+                    if getattr(t_obj, 'kategorie', None) == match_kategorie and getattr(t_obj, 'ausgewaehlt', False):
+                        anzahl += 1
+
+            if anzahl < benoetigt:
+                ziel = match_kategorie or kategorie_token
+                fehlermeldungen.append(
+                    f"Mindestens {benoetigt} Talente der Kategorie '{ziel}' werden vorausgesetzt (aktuell {anzahl})."
+                )
+            return fehlermeldungen
+
         # Talentvoraussetzung (z.B. "Glück")
         talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
 
