@@ -4,7 +4,7 @@
 
 **Setting:** Savage Aventurien  
 **Währung:** S (Silbertaler) · **Startgeld:** 1000  
-**Umfang:** 9 Völker · 492 Talente · 166 Handicaps · 66 Mächte
+**Umfang:** 9 Völker · 458 Talente · 166 Handicaps · 66 Mächte
 
 **Rang-Legende:** A=Anfänger · F=Fortgeschritten · V=Veteran · H=Held · L=Legendär
 
@@ -225,12 +225,6 @@
   - **Effekt:** Ziehe und verteile zwei zusätzliche Aktionskarten anstelle von einer.
   - **Voraussetzungen:** Taktiker
 
-### Kategorie: Bannzeichner (1)
-
-**Ysilisches Bannzeichen** _(Rang A – Anfänger)_
-  - **Effekt:** Mit einer Aktion und einer Zaubernprobe bringt der Bannzeichner ein Bannzeichen an einer Fläche oder einem Durchgang an. In der Zone (Kleine Flächenschablone) erleiden Dämonen, Untote und gegnerische Wirker −2 auf ihre Proben; das Zeichen hält bis zum Ende der Szene.
-  - **Voraussetzungen:** AH (Bannzeichner)
-
 ### Kategorie: Barbar (6)
 
 **Behände** _(Rang A – Anfänger)_
@@ -286,12 +280,6 @@
 **Klagelied** _(Rang H – Held)_
   - **Effekt:** Feindliche Wildcards innerhalb von 10'' ziehen –2 vom Gesamtwert ab, wenn sie einen Benny ausgeben.
   - **Voraussetzungen:** AH (Barde)
-
-### Kategorie: Borbaradianer (1)
-
-**Pakt mit Amazeroth** _(Rang A – Anfänger)_
-  - **Effekt:** Der heimliche Dämonenpakt verleiht dem Borbaradianer einmal pro Sitzung einen zusätzlichen Benny, den er ausschließlich für seine eigenen Mächte einsetzen darf — die Gunst des Erzdämonen fordert jedoch ihren Preis.
-  - **Voraussetzungen:** AH (Borbaradianer)
 
 ### Kategorie: Druide (8)
 
@@ -453,12 +441,6 @@
   - **Effekt:** Gewährt einen freien Bonus beim Bau von Fallen.
   - **Voraussetzungen:** Fallensteller
 
-### Kategorie: Geode (1)
-
-**Steinkundige** _(Rang A – Anfänger)_
-  - **Effekt:** Unter der Erde und im Stein ist die Geode in ihrem Element: +2 auf Wirken-, Wahrnehmungs- und Überlebensproben in Höhlen, Minen und Gestein. Ihr Lebensring (Traditionsartefakt) speichert bis zu 5 Machtpunkte.
-  - **Voraussetzungen:** AH (Geode)
-
 ### Kategorie: Geweihter (33)
 
 **Das Unheilige erspüren** _(Rang A – Anfänger)_
@@ -611,12 +593,6 @@
   - **Effekt:** Nutze Willenskraft und Konstitution zur Berechnung der Robustheit.
   - **Voraussetzungen:** Mindestens zwei Gjalsker Tierkrieger-Talente
 
-### Kategorie: Goblinzauberin (1)
-
-**Goblinritual** _(Rang A – Anfänger)_
-  - **Effekt:** Mit der Schweinetrommel vollführt die Goblinzauberin ein Stammesritual: Verbündete in Hörweite erhalten +1 auf ihre nächste Probe, oder Feinde müssen eine Furchtprobe ablegen.
-  - **Voraussetzungen:** AH (Goblinzauberin)
-
 ### Kategorie: Golembauer (2)
 
 **Konstrukt** _(Rang A – Anfänger)_
@@ -653,14 +629,10 @@
   - **Effekt:** Wild Card. Die Hexe schaltet einen Grandiosen Hex frei – die mächtigste Form ihrer Hexerei (z.B. ewiger Schlaf, Todesfluch, Seelenstehlen). Erfordert Legendär-Rang und mindestens zwei weitere Hexen-Talente.
   - **Voraussetzungen:** L, AH (Hexe), Mindestens zwei Hexen-Talente
 
-### Kategorie: Hintergrund (87)
+### Kategorie: Hintergrund (83)
 
 **AH (Alchemist)** _(Rang A – Anfänger)_ — 15 MP, +3 Mächte
   - **Effekt:** Arkane Fertigkeit: Alchemie (Verstand)
-
-**AH (Bannzeichner)** _(Rang A – Anfänger)_ — 10 MP, +2 Mächte
-  - **Effekt:** Arkane Fertigkeit: Zaubern (Verstand). Ysilischer Bannzeichner; bringt Bannzeichen an, die Dämonen und fremde Magie abwehren. Besitzt kein Traditionsartefakt.
-  - **Voraussetzungen:** VER W6
 
 **AH (Barde)** _(Rang A – Anfänger)_ — 10 MP, +3 Mächte
   - **Effekt:** Arkane Fertigkeit: Darbietung (Willenskraft)
@@ -668,10 +640,6 @@
 
 **AH (Begabt)** _(Rang A – Anfänger)_ — 15 MP, +1 Mächte
   - **Effekt:** Arkaner Hintergrund, Arkane Fertigkeit: Fokus (Willenskraft)
-
-**AH (Borbaradianer)** _(Rang A – Anfänger)_ — 10 MP, +3 Mächte
-  - **Effekt:** Arkane Fertigkeit: Zaubern (Verstand). Verbotene Tradition: Anhänger des Dämonenmeisters Borbarad. Durch einen heimlichen Pakt mit dem Erzdämon Amazeroth erlangt der Borbaradianer gefährliche, geächtete Macht.
-  - **Voraussetzungen:** VER W6
 
 **AH (Druide)** _(Rang A – Anfänger)_ — 10 MP, +5 Mächte
   - **Effekt:** Arkane Fertigkeit: Glaube (Willenskraft)
@@ -720,10 +688,6 @@
 **AH (Nekromant)** _(Rang A – Anfänger)_ — 10 MP, +5 Mächte
   - **Effekt:** Arkane Fertigkeit: Zaubern (Verstand). Nekromant der Schwarzen Gilde – verbotene Magie über Tod und Untote. Von der Boronkirche und der Inquisition unerbittlich gejagt.
   - **Voraussetzungen:** VER W6
-
-**AH (Paktierer)** _(Rang A – Anfänger)_ — 10 MP, +2 Mächte
-  - **Effekt:** AH (Paktierer) [Arkane Fertigkeit: Magie (Willenskraft)]. Verbotene schwarze Tradition: Der Paktierer hat einen Pakt mit dämonischen Mächten geschlossen und empfängt dafür Zauberkraft. Behindernde Rüstung (schwer), Vertrauter (ein an den Patron gebundenes Wesen, das die Mächte speichert; tägliche Zwiesprache mit dem Patron erforderlich). Startet mit 2 Mächten aus der Paktierer-Liste.
-  - **Voraussetzungen:** WIL W6, Okkultismus W4
 
 **AH (Runenschöpfer)** _(Rang A – Anfänger)_ — 10 MP, +3 Mächte
   - **Effekt:** Arkane Fertigkeit: Zaubern (Verstand). Seltene Tradition der Runenmagie; der Runenschöpfer bringt Zauberrunen an, die eine gespeicherte Macht entfalten, sobald ihre Auslösebedingung eintritt.
@@ -897,10 +861,6 @@
   - **Effekt:** +2 Bennys zu Beginn jeder Sitzung.
   - **Voraussetzungen:** Glück
 
-**Hruruzat-Kämpfer** _(Rang A – Anfänger)_
-  - **Effekt:** Du bist ein Schüler des Hruruzat, der hohen Kunst des waffenlosen Kampfes, die du in abgeschiedener Gemeinschaft als körperlich-geistige Disziplin erlernt hast und mit der du deinen Körper selbst zur Waffe machst. Rüstungsbeschränkung (jede), Betäubende Fäuste, Beweglichkeit, Kämpferische Disziplin, Waffenloser Schlag
-  - **Voraussetzungen:** GES W6, WIL W6, Kämpfen W6
-
 **Inquisitor** _(Rang A – Anfänger)_
   - **Effekt:** Diener der Heiligen Inquisition der Praioskirche (Bannstrahler-Laienorden): jagt mit Feuer und Schwert Ketzer, Schwarzmagier, Dämonen und Untote. Rüstungsbeschränkung (mittelschwer), Urteil (einmal pro Begegnung: +1 auf Angriffs- oder Schadenswürfe, oder +2 auf Eigenschaftswürfe – Wahl bei Einsatz), Monsterkunde (+2 auf Allgemeinwissen-Proben über Dämonen, Untote und unheilige Kreaturen).
   - **Voraussetzungen:** Athletik W6 oder Kämpfen W6 oder Schießen W6, Okkultismus W4
@@ -992,48 +952,6 @@
   - **Effekt:** Einmal pro Zug kann der Charakter bei einer Probe für eine Macht seiner Schule oder Blutlinie bis zu 2 Punkte Abzüge ignorieren.
   - **Voraussetzungen:** AH (Magier)
 
-### Kategorie: Hruruzat (10)
-
-**Betäubende Fäuste** _(Rang A – Anfänger)_
-  - **Effekt:** Bei einer Steigerung beim Kämpfen-Wurf kann der Mönch einen Feind betäuben oder einen Verursacher machen.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Beweglichkeit** _(Rang A – Anfänger)_
-  - **Effekt:** Der Mönch ist schnell und wendig und erhält +1 auf Sprint und Ausweichen.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Kämpferische Disziplin** _(Rang A – Anfänger)_
-  - **Effekt:** Der Mönch erhält +1 Robustheit, wenn er keine Rüstung trägt.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Waffenloser Schlag** _(Rang A – Anfänger)_
-  - **Effekt:** Der Mönch erhält +1 auf Kampfwürfe und verursacht STÄ+W4 Schaden bei waffenlosen Angriffen. Dieser Schadenswürfel steigt mit dem Rang.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Lähmender Nervenschlag** _(Rang F – Fortgeschritten)_
-  - **Effekt:** Ki-Aktion (1 Machtpunkt): Bei einem Treffer mit einer Erhöhung muss das Ziel eine Konstitutionsprobe ablegen oder gilt als Erschöpft und beginnt zu versteinen. Misslingt die Probe mit einer Erhöhung, ist das Ziel sofort Kampfunfähig (Versteinerung).
-  - **Voraussetzungen:** WIL W8, Hruruzat-Kämpfer, Kämpfen W8
-
-**Mystische Mächte (Hruruzat)** _(Rang F – Fortgeschritten)_ — 10 MP
-  - **Effekt:** Der Mönch hat 10 gewidmete Machtpunkte, die er verwenden kann, um Abwehren, Beschleunigung, Eigenschaft erhöhen (Geschicklichkeit, Athletik, Kämpfen oder Heimlichkeit) oder Waffe verbessern zu wirken. Alle wirken nur auf den Mönch selbst.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Hruruzat-Form** _(Rang V – Veteran)_
-  - **Effekt:** Greife einen Gegner an, der den Charakter beim Verteidigen treffen würde.
-  - **Voraussetzungen:** Hruruzat-Kämpfer
-
-**Mächtige Innere Kraft** _(Rang V – Veteran)_
-  - **Effekt:** Zu den mystischen Mächten des Mönchs gehören jetzt Eigenschaft erhöhen (Stärke), Kriegersegen, Schutz, Wandkrabbler.
-  - **Voraussetzungen:** Hruruzat-Kämpfer, Mystische Mächte (Hruruzat)
-
-**Erschütternder Schlag** _(Rang H – Held)_
-  - **Effekt:** Ki-Aktion (2 Machtpunkte): Bei einem Treffer pflanzt der Mönch vibrierende Energie ins Ziel. Zu einem beliebigen späteren Zeitpunkt (innerhalb derselben Szene) kann der Mönch die Energie auslösen: Das Ziel legt sofort eine Konstitutionsprobe mit –2 ab oder gilt als Kampfunfähig.
-  - **Voraussetzungen:** Hruruzat-Kämpfer, Kämpfen W10
-
-**Unversehrtheit des Körpers** _(Rang H – Held)_
-  - **Effekt:** Der Mönch kann 2 Machtpunkte ausgeben, um auf Schaden wegstecken zu würfeln. Dies wird nicht behandelt, als hätte er einen Benny ausgegeben
-  - **Voraussetzungen:** Hruruzat-Kämpfer, Mystische Mächte (Hruruzat)
-
 ### Kategorie: Illusionist (2)
 
 **Meisterlicher Illusionist** _(Rang A – Anfänger)_
@@ -1070,7 +988,7 @@
   - **Effekt:** Wild Card. Im vollstreckten Urteil Praios' trifft der Inquisitor sein Urteilsziel mit vernichtendem Schaden (automatischer Erfolg und eine Erhöhung auf den Angriff) und kann sofort einen neuen Feind als Urteilsziel wählen. Erfordert Legendär-Rang und mindestens zwei weitere Inquisitor-Talente.
   - **Voraussetzungen:** L, Inquisitor, Mindestens zwei Inquisitor-Talente
 
-### Kategorie: Kampf (88)
+### Kategorie: Kampf (85)
 
 **Beidhändiger Fernkampf** _(Rang A – Anfänger)_
   - **Effekt:** Führe einen zusätzlichen Angriff mit Athletik (Werfen) oder Schießen mit der falschen Hand ohne Mehrfachaktionsabzug aus.
@@ -1105,10 +1023,6 @@
 **Formationskämpfer** _(Rang A – Anfänger)_
   - **Effekt:** Erhöht Überzahlbonus um zusätzlich +1 (Maximum +4).
   - **Voraussetzungen:** Kämpfen W8
-
-**Kampfkünstler** _(Rang A – Anfänger)_
-  - **Effekt:** Unbewaffnetes Kämpfen +1, Fäuste und Füße zählen als Natürliche Waffen, addiere W4 auf den Schaden unbewaffneter Angriffe (oder erhöhe den Schaden um einen Würfeltyp, wenn du bereits einen Würfel hast).
-  - **Voraussetzungen:** Kämpfen W6
 
 **Körperschild** _(Rang A – Anfänger)_
   - **Effekt:** Benutze einen gepackten Gegner als Deckung.
@@ -1194,10 +1108,6 @@
   - **Effekt:** –2 bei Angriffen durch Fernkampfwaffen.
   - **Voraussetzungen:** GES W8
 
-**Berührung der Stille** _(Rang F – Fortgeschritten)_
-  - **Effekt:** Ki-Aktion (1 Machtpunkt): Bei einem erfolgreichen unbewaffneten Treffer muss das Ziel eine Willenskraftprobe ablegen oder kann bis zum Ende seines nächsten Zuges keine Aktionen ausführen (gilt als Erschöpft).
-  - **Voraussetzungen:** WIL W8, Waffenloser Schlag, Kämpfen W8
-
 **Bestienmeister-Stil** _(Rang F – Fortgeschritten)_
   - **Effekt:** Der Bestienmeister kann mit seinem tierischen Begleiter zusammenarbeiten, um zu verhindern, dass dieser Schaden erleidet.
   - **Voraussetzungen:** WIL W6, Tiermeister
@@ -1244,10 +1154,6 @@
 **Kampf mit zwei Waffen** _(Rang F – Fortgeschritten)_
   - **Effekt:** Mach einen zusätzlichen Kämpfen- oder Athletik-Angriff mit der falschen Hand ohne Mehrfachaktionsabzug.
   - **Voraussetzungen:** GES W8
-
-**Kampfkunstmeister** _(Rang F – Fortgeschritten)_
-  - **Effekt:** Unbewaffnetes Kämpfen +2, erhöhe Schadenswürfel um einen Würfeltyp.
-  - **Voraussetzungen:** Kampfkünstler
 
 **Kampfreflexe** _(Rang F – Fortgeschritten)_
   - **Effekt:** +2 Erholungsproben gegen Angeschlagen oder Betäubt.
@@ -1436,12 +1342,6 @@
   - **Effekt:** Wild Card. Der Kavalier verdoppelt den Schaden bei einem Ansturm mit einer Lanze (anstatt des normalen +4-Bonus). Erfordert Legendär-Rang und mindestens zwei weitere Kavalier-Talente.
   - **Voraussetzungen:** L, Kavalier, Mindestens zwei Kavalier-Talente
 
-### Kategorie: Kristallomant (1)
-
-**Kristallsicht** _(Rang A – Anfänger)_
-  - **Effekt:** Durch die Kristallkugel erlangt der Kristallomant Hellsicht: +2 auf Nachforschen und Wahrnehmung, um Fernes, Verborgenes oder Vergangenes zu erspüren.
-  - **Voraussetzungen:** AH (Kristallomant)
-
 ### Kategorie: Kämpfer (4)
 
 **Tödlicher Hieb** _(Rang F – Fortgeschritten)_
@@ -1460,7 +1360,7 @@
   - **Effekt:** Der Kämpfer erhält eine freie Wiederholung bei jeder misslungenen Kämpfenprobe.
   - **Voraussetzungen:** Kämpfer
 
-### Kategorie: Legendär (22)
+### Kategorie: Legendär (21)
 
 **Experte** _(Rang L – Legendär)_
   - **Effekt:** Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen weiteren Schritt.
@@ -1504,10 +1404,6 @@
 
 **Mystischer Jäger** _(Rang L – Legendär)_
   - **Effekt:** Ignoriere Unaufhaltsam bei einer Bildkarte und hindere Gegner daran, die Angriffe dieses Charakters zu absorbieren, wenn du einen Joker hast.
-
-**Perfekter Körper** _(Rang L – Legendär)_
-  - **Effekt:** Erhalte +4 Robustheit und werde zu einem Externar.
-  - **Voraussetzungen:** Mindestens zwei Hruruzat-Talente
 
 **Profi** _(Rang L – Legendär)_
   - **Effekt:** Die Eigenschaft des Charakters und die Obergrenze erhöhen sich um einen Schritt.
@@ -1582,7 +1478,7 @@
 
 **Vertrauter** _(Rang A – Anfänger)_ — 5 MP
   - **Effekt:** Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.
-  - **Voraussetzungen:** AH (Hexe, Druide, Schamane, Nekromant, Paktierer, Dämonologe, Elementarist, Magier)
+  - **Voraussetzungen:** AH (Hexe, Druide, Schamane, Nekromant, Dämonologe, Elementarist, Magier)
 
 **Übertragung** _(Rang A – Anfänger)_
   - **Effekt:** Erlaubt das Übertragen von bis zu fünf Machtpunkten auf eine andere Person in Sichtweite als begrenzte freie Aktion.
@@ -1676,7 +1572,7 @@
   - **Effekt:** Erhöht die Belohnung für Okkultismusproben bei der Herstellung magischer Gegenstände auf 1000 G pro Erfolg oder Steigerung.
   - **Voraussetzungen:** Artefakterschaffer, Okkultismus W10
 
-### Kategorie: Magier (13)
+### Kategorie: Magier (17)
 
 **Arkane Verbindung** _(Rang A – Anfänger)_
   - **Effekt:** Der Magier wählt eine Arkane Verbindung: einen Gegenstand (+1 auf Zaubern) oder einen Vertrauten (siehe Regeln).
@@ -1702,6 +1598,10 @@
   - **Effekt:** Als begrenzte freie Aktion kann der Magier bis zu zwei Punkte Abzüge ignorieren, wenn er Abwehren, Arkanen Schutz oder Aufheben wirkt.
   - **Voraussetzungen:** AH (Magier)
 
+**Bevorzugte Mächte (Zauberer)** _(Rang F – Fortgeschritten)_
+  - **Effekt:** Als begrenzte freie Aktion kann der Zauberer bis zu zwei Punkte von Abzügen ignorieren, wenn er Geschoss, Elementarmanipulation oder Schutz wirkt.
+  - **Voraussetzungen:** Zauberer
+
 **Fokus des Stabes** _(Rang F – Fortgeschritten)_
   - **Effekt:** Mit einer Aktion und einer Zaubernprobe halbiert oder verdoppelt der Magier die Länge seines Stabes. Der Stab zählt in jeder Form als Erweiterung der Reichweite Berührung. Zudem kann er ihn aus bis zu 100 m zu sich rufen – außer er wird mit mindestens der Kraft einer erwachsenen Hand festgehalten.
   - **Voraussetzungen:** Bindung des Stabes, Okkultismus W8
@@ -1710,9 +1610,17 @@
   - **Effekt:** Der Magier kann Epische Machtmodifikatoren verwenden.
   - **Voraussetzungen:** AH (Magier)
 
+**Arkane Meisterschaft (Zauberer)** _(Rang V – Veteran)_
+  - **Effekt:** Der Zauberer kann Epische Machtmodifikatoren verwenden.
+  - **Voraussetzungen:** Zauberer
+
 **Flammenschwert** _(Rang V – Veteran)_
   - **Effekt:** Der Magier verwandelt seinen Stab in ein Flammenschwert (VE+W8, Angriff über den Kämpfen-Wert des Magiers). Verwandlung über Zaubern: 1 Aktion, 2 Machtpunkte, hält 5 Runden, danach 1 MP pro weiterer Runde. Das Schwert kann geführt oder schwebend genutzt werden (eigene Bewegungsaktion mit Standardgeschwindigkeit des Magiers).
   - **Voraussetzungen:** Fokus des Stabes, Okkultismus W10
+
+**Große Macht** _(Rang V – Veteran)_
+  - **Effekt:** Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.
+  - **Voraussetzungen:** AH (Magier)
 
 **Kraftfokus** _(Rang V – Veteran)_
   - **Effekt:** Solange der Magier seinen Zauberstab in der Hand hält, würfelt er einen W8 statt einen W6 als Wild Die auf seine Zaubernproben.
@@ -1725,6 +1633,10 @@
 **Kraftlinienmagie** _(Rang H – Held)_
   - **Effekt:** Auf einer Kraftlinie sind Zaubernproben um +2 erleichtert, auf einer Kreuzung zweier Linien um +4 (je weitere Linie +1). Dafür tritt der Rückschlag auf einer Kraftlinie schon bei 1–2 auf dem Zaubern-Würfel ein (egal, was der Wild Die zeigt). Erst dieses Talent erlaubt es, Kraftlinien mit Arkanes entdecken aufzuspüren.
   - **Voraussetzungen:** AH (Magier), WIL W8, Okkultismus W8
+
+**Phänomenale Macht** _(Rang H – Held)_
+  - **Effekt:** Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.
+  - **Voraussetzungen:** AH (Magier), Große Macht
 
 **Unheimliche Inspiration** _(Rang H – Held)_
   - **Effekt:** Ermöglicht das Wirken einer beliebigen Macht mit einem Benny, solange Zugang zu Zauberbüchern besteht.
@@ -1922,36 +1834,6 @@
   - **Effekt:** Gewährt leichter das Überraschungsmoment gegen einen Gegner.
   - **Voraussetzungen:** Mindestens zwei Meuchler-Talente
 
-### Kategorie: Nekromant (1)
-
-**Totenbeschwörung** _(Rang A – Anfänger)_
-  - **Effekt:** Der Nekromant beherrscht das Rufen und Binden der Toten: Mit „Verbündete beschwören" gerufene untote Diener erhalten +2 Robustheit und zerfallen erst am Ende der Szene; gegen Untote wirkt er Mächte um +2 erleichtert.
-  - **Voraussetzungen:** AH (Nekromant)
-
-### Kategorie: Paktierer (4)
-
-**Weitere Paktgabe** _(Rang F – Fortgeschritten)_
-  - **Effekt:** Der:ie Paktierer:in kann eine neue Paktgabe auswählen. Kann einmal pro Rang genommen werden. Paktgaben (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.
-  - **Voraussetzungen:** AH (Paktierer)
-
-**Starke Paktgabe** _(Rang V – Veteran)_
-  - **Effekt:** Der:ie Paktierer:in kann eine Starke Paktgabe auswählen. Kann einmal pro Rang genommen werden. Starke Paktgaben (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.
-  - **Voraussetzungen:** AH (Paktierer)
-
-**Arkane Meisterschaft (Paktierer)** _(Rang H – Held)_
-  - **Effekt:** Durch den finsteren Patron erschließt der Paktierer die Geheimnisse seiner Zauberkraft. Erhält Zugriff auf alle Epischen Machtmodifikatoren seiner Mächte.
-  - **Voraussetzungen:** AH (Paktierer)
-
-**Mächtige Paktgabe** _(Rang L – Legendär)_
-  - **Effekt:** Wild Card. Der:ie Paktierer:in kann eine Mächtige Paktgabe auswählen. Kann einmal pro Rang genommen werden. Mächtige Paktgaben (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.
-  - **Voraussetzungen:** AH (Paktierer), Mindestens zwei Paktierer-Vorteile
-
-### Kategorie: Runenschöpfer (1)
-
-**Zauberrune** _(Rang A – Anfänger)_
-  - **Effekt:** Der Runenschöpfer speichert eine vorbereitete Macht in einer Zauberrune (Aktion + Machtpunkte beim Anbringen). Die Rune entfaltet die Macht automatisch, sobald ihre festgelegte Auslösebedingung eintritt.
-  - **Voraussetzungen:** AH (Runenschöpfer)
-
 ### Kategorie: Schamane (3)
 
 **Geweihter Fetisch** _(Rang A – Anfänger)_
@@ -1965,18 +1847,6 @@
 **Urtümliche Magie** _(Rang F – Fortgeschritten)_
   - **Effekt:** Erhöht Schaden von Mächten um +2, verursacht jedoch bei Kritischen Fehlschlägen Betäubung im Umkreis.
   - **Voraussetzungen:** AH (Schamane)
-
-### Kategorie: Scharlatan (1)
-
-**Steckenverzauberung** _(Rang A – Anfänger)_
-  - **Effekt:** Der Scharlatan verzaubert seinen Zauberstecken zeitweise: Solange er ihn führt, kann er einmal pro Szene eine seiner Mächte ohne Machtpunkte wirken (Gaukelei und Verblüffung).
-  - **Voraussetzungen:** AH (Scharlatan)
-
-### Kategorie: Schelm (1)
-
-**Schelmenstreich** _(Rang A – Anfänger)_
-  - **Effekt:** Einmal pro Begegnung vollführt der Schelm einen magischen Streich: ein Ziel in Sichtweite ist bis zu seiner nächsten Aktion Abgelenkt (−2), nimmt aber keinen Schaden.
-  - **Voraussetzungen:** AH (Schelm)
 
 ### Kategorie: Schurke (3)
 
@@ -2107,37 +1977,7 @@
   - **Effekt:** Der Jäger addiert zusätzliche W6 Schaden, wenn er einen erfolgreichen Angriff mit Athletik (Werfen), Kämpfen oder Schießen gegen einen Erzfeind ausführt.
   - **Voraussetzungen:** Waldläufer
 
-### Kategorie: Zauberer (4)
-
-**Bevorzugte Mächte (Zauberer)** _(Rang F – Fortgeschritten)_
-  - **Effekt:** Als begrenzte freie Aktion kann der Zauberer bis zu zwei Punkte von Abzügen ignorieren, wenn er Geschoss, Elementarmanipulation oder Schutz wirkt.
-  - **Voraussetzungen:** Zauberer
-
-**Arkane Meisterschaft (Zauberer)** _(Rang V – Veteran)_
-  - **Effekt:** Der Zauberer kann Epische Machtmodifikatoren verwenden.
-  - **Voraussetzungen:** Zauberer
-
-**Große Macht** _(Rang V – Veteran)_
-  - **Effekt:** Ermöglicht das Wirken einer beliebigen Macht bis 20 Machtpunkte mit einem Abzug von -2 auf die Zaubernprobe.
-  - **Voraussetzungen:** AH (Magier)
-
-**Phänomenale Macht** _(Rang H – Held)_
-  - **Effekt:** Erlaubt das Wirken jeder Macht mit Entschlossenheit und fügt den Entschlossenheitsbonus dem Zauberwurf hinzu.
-  - **Voraussetzungen:** AH (Magier), Große Macht
-
-### Kategorie: Zaubertänzer (1)
-
-**Bann des Tanzes** _(Rang A – Anfänger)_
-  - **Effekt:** Wirkt der Zaubertänzer eine Macht über einen Tanz (Darbietung), erhält er +1 auf die Probe; Zuschauer im Umkreis können von der Darbietung gefesselt und so Abgelenkt werden.
-  - **Voraussetzungen:** AH (Zaubertänzer)
-
-### Kategorie: Zibilja (1)
-
-**Ritualmacht** _(Rang A – Anfänger)_
-  - **Effekt:** Als Ritualmagierin kann die Zibilja eine Macht in einem mehrminütigen Ritual statt als Aktion wirken; das Ritual kostet 2 Machtpunkte weniger (mindestens 1).
-  - **Voraussetzungen:** AH (Zibilja)
-
-### Kategorie: Übersinnlich (13)
+### Kategorie: Übersinnlich (12)
 
 **Aura der Tapferkeit** _(Rang A – Anfänger)_
   - **Effekt:** Verbündete im Umkreis von 20 Metern erhalten +1 auf Furchtproben und -1 auf der Furchttabelle.
@@ -2182,10 +2022,6 @@
 **Zertrümmern** _(Rang A – Anfänger)_
   - **Effekt:** Der Charakter kann Schadenswürfe explodieren lassen, wenn er versucht, Objekte zu zerstören.
   - **Voraussetzungen:** Halb-Ork, STÄ W10
-
-**Innere Kraft** _(Rang V – Veteran)_
-  - **Effekt:** Einmal pro Kampf kannst du eine misslungene Kämpfenprobe wiederholen, einen Gegner einen erfolgreichen Angriff wiederholen lassen oder +W6 Schaden auf einen waffenlosen Angriff addieren.
-  - **Voraussetzungen:** Kampfkunstmeister
 
 ---
 ## 3. Handicaps

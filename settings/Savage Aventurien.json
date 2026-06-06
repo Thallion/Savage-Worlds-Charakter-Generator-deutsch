@@ -840,71 +840,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Hruruzat-Kämpfer": {
-      "name": "Hruruzat-Kämpfer",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "GES W6",
-        "WIL W6",
-        "Kämpfen W6"
-      ],
-      "beschreibung": "Du bist ein Schüler des Hruruzat, der hohen Kunst des waffenlosen Kampfes, die du in abgeschiedener Gemeinschaft als körperlich-geistige Disziplin erlernt hast und mit der du deinen Körper selbst zur Waffe machst. Rüstungsbeschränkung (jede), Betäubende Fäuste, Beweglichkeit, Kämpferische Disziplin, Waffenloser Schlag",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "Betäubende Fäuste",
-        "Beweglichkeit",
-        "Kämpferische Disziplin",
-        "Waffenloser Schlag"
-      ],
-      "auto_handicaps": [
-        "Rüstungsbeschränkung_jede"
-      ]
-    },
-    "Mystische Mächte (Hruruzat)": {
-      "name": "Mystische Mächte (Hruruzat)",
-      "kategorie": "Hruruzat",
-      "rang": "F",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Der Mönch hat 10 gewidmete Machtpunkte, die er verwenden kann, um Abwehren, Beschleunigung, Eigenschaft erhöhen (Geschicklichkeit, Athletik, Kämpfen oder Heimlichkeit) oder Waffe verbessern zu wirken. Alle wirken nur auf den Mönch selbst.",
-      "neue_maechte": 0,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Mächtige Innere Kraft": {
-      "name": "Mächtige Innere Kraft",
-      "kategorie": "Hruruzat",
-      "rang": "V",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer",
-        "Mystische Mächte (Hruruzat)"
-      ],
-      "beschreibung": "Zu den mystischen Mächten des Mönchs gehören jetzt Eigenschaft erhöhen (Stärke), Kriegersegen, Schutz, Wandkrabbler.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Unversehrtheit des Körpers": {
-      "name": "Unversehrtheit des Körpers",
-      "kategorie": "Hruruzat",
-      "rang": "H",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer",
-        "Mystische Mächte (Hruruzat)"
-      ],
-      "beschreibung": "Der Mönch kann 2 Machtpunkte ausgeben, um auf Schaden wegstecken zu würfeln. Dies wird nicht behandelt, als hätte er einen Benny ausgegeben",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Kampfsegen": {
       "name": "Kampfsegen",
       "kategorie": "Geweihter",
@@ -1047,79 +982,6 @@
         "Waldläufer"
       ],
       "beschreibung": "Der Jäger addiert zusätzliche W6 Schaden, wenn er einen erfolgreichen Angriff mit Athletik (Werfen), Kämpfen oder Schießen gegen einen Erzfeind ausführt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "AH (Paktierer)": {
-      "name": "AH (Paktierer)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "WIL W6",
-        "Okkultismus W4"
-      ],
-      "beschreibung": "AH (Paktierer) [Arkane Fertigkeit: Magie (Willenskraft)]. Verbotene schwarze Tradition: Der Paktierer hat einen Pakt mit dämonischen Mächten geschlossen und empfängt dafür Zauberkraft. Behindernde Rüstung (schwer), Vertrauter (ein an den Patron gebundenes Wesen, das die Mächte speichert; tägliche Zwiesprache mit dem Patron erforderlich). Startet mit 2 Mächten aus der Paktierer-Liste.",
-      "neue_maechte": 2,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_talente": [
-        "Vertrauter"
-      ],
-      "auto_handicaps": [
-        "Behindernde_Rüstung_schwer"
-      ]
-    },
-    "Weitere Paktgabe": {
-      "name": "Weitere Paktgabe",
-      "kategorie": "Paktierer",
-      "rang": "F",
-      "voraussetzungen": [
-        "AH (Paktierer)"
-      ],
-      "beschreibung": "Der:ie Paktierer:in kann eine neue Paktgabe auswählen. Kann einmal pro Rang genommen werden. Paktgaben (Auswahl): Agonie, Verstärkung, Verfluchen, Kichern, Verzaubern, Böser Blick, Heilung.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Starke Paktgabe": {
-      "name": "Starke Paktgabe",
-      "kategorie": "Paktierer",
-      "rang": "V",
-      "voraussetzungen": [
-        "AH (Paktierer)"
-      ],
-      "beschreibung": "Der:ie Paktierer:in kann eine Starke Paktgabe auswählen. Kann einmal pro Rang genommen werden. Starke Paktgaben (Auswahl): Vettelnauge, Albträume, Vision, Wachsabbild, Wetterkontrolle.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Arkane Meisterschaft (Paktierer)": {
-      "name": "Arkane Meisterschaft (Paktierer)",
-      "kategorie": "Paktierer",
-      "rang": "H",
-      "voraussetzungen": [
-        "AH (Paktierer)"
-      ],
-      "beschreibung": "Durch den finsteren Patron erschließt der Paktierer die Geheimnisse seiner Zauberkraft. Erhält Zugriff auf alle Epischen Machtmodifikatoren seiner Mächte.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Mächtige Paktgabe": {
-      "name": "Mächtige Paktgabe",
-      "kategorie": "Paktierer",
-      "rang": "L",
-      "voraussetzungen": [
-        "AH (Paktierer)",
-        "Mindestens zwei Paktierer-Vorteile"
-      ],
-      "beschreibung": "Wild Card. Der:ie Paktierer:in kann eine Mächtige Paktgabe auswählen. Kann einmal pro Rang genommen werden. Mächtige Paktgaben (Auswahl): Todesfluch, Ewiger Schlaf, Erzwungene Wiedergeburt.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -1460,21 +1322,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Lähmender Nervenschlag": {
-      "name": "Lähmender Nervenschlag",
-      "kategorie": "Hruruzat",
-      "rang": "F",
-      "voraussetzungen": [
-        "WIL W8",
-        "Hruruzat-Kämpfer",
-        "Kämpfen W8"
-      ],
-      "beschreibung": "Ki-Aktion (1 Machtpunkt): Bei einem Treffer mit einer Erhöhung muss das Ziel eine Konstitutionsprobe ablegen oder gilt als Erschöpft und beginnt zu versteinen. Misslingt die Probe mit einer Erhöhung, ist das Ziel sofort Kampfunfähig (Versteinerung).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Störende Wut": {
       "name": "Störende Wut",
       "kategorie": "Barbar",
@@ -1542,20 +1389,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Erschütternder Schlag": {
-      "name": "Erschütternder Schlag",
-      "kategorie": "Hruruzat",
-      "rang": "H",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer",
-        "Kämpfen W10"
-      ],
-      "beschreibung": "Ki-Aktion (2 Machtpunkte): Bei einem Treffer pflanzt der Mönch vibrierende Energie ins Ziel. Zu einem beliebigen späteren Zeitpunkt (innerhalb derselben Szene) kann der Mönch die Energie auslösen: Das Ziel legt sofort eine Konstitutionsprobe mit –2 ab oder gilt als Kampfunfähig.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Waffenspezialisierung": {
       "name": "Waffenspezialisierung",
       "kategorie": "Kämpfer",
@@ -1571,7 +1404,7 @@
     },
     "Bevorzugte Mächte (Zauberer)": {
       "name": "Bevorzugte Mächte (Zauberer)",
-      "kategorie": "Zauberer",
+      "kategorie": "Magier",
       "rang": "F",
       "voraussetzungen": [
         "Zauberer"
@@ -1584,7 +1417,7 @@
     },
     "Arkane Meisterschaft (Zauberer)": {
       "name": "Arkane Meisterschaft (Zauberer)",
-      "kategorie": "Zauberer",
+      "kategorie": "Magier",
       "rang": "V",
       "voraussetzungen": [
         "Zauberer"
@@ -2014,19 +1847,6 @@
       ],
       "beschreibung": "Höhere Legendenkunde: Erhalte 2 neue Mächte, die in der Kampagne verfügbar sind.",
       "neue_maechte": 2,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Innere Kraft": {
-      "name": "Innere Kraft",
-      "kategorie": "Übersinnlich",
-      "rang": "V",
-      "voraussetzungen": [
-        "Kampfkunstmeister"
-      ],
-      "beschreibung": "Einmal pro Kampf kannst du eine misslungene Kämpfenprobe wiederholen, einen Gegner einen erfolgreichen Angriff wiederholen lassen oder +W6 Schaden auf einen waffenlosen Angriff addieren.",
-      "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
       "aktiv": true
@@ -2534,7 +2354,7 @@
     },
     "Große Macht": {
       "name": "Große Macht",
-      "kategorie": "Zauberer",
+      "kategorie": "Magier",
       "rang": "V",
       "voraussetzungen": [
         "AH (Magier)"
@@ -2547,7 +2367,7 @@
     },
     "Phänomenale Macht": {
       "name": "Phänomenale Macht",
-      "kategorie": "Zauberer",
+      "kategorie": "Magier",
       "rang": "H",
       "voraussetzungen": [
         "AH (Magier)",
@@ -2842,7 +2662,7 @@
       "kategorie": "Macht",
       "rang": "A",
       "voraussetzungen": [
-        "AH (Hexe, Druide, Schamane, Nekromant, Paktierer, Dämonologe, Elementarist, Magier)"
+        "AH (Hexe, Druide, Schamane, Nekromant, Dämonologe, Elementarist, Magier)"
       ],
       "beschreibung": "Gewährt einen loyalen magischen Begleiter, der 5 eigene Machtpunkte hat und als Wildcard fungiert. Der Vertraute kann keine Zauber wirken, aber der Meister kann auf seine Machtpunkte zugreifen.",
       "neue_maechte": 0,
@@ -3518,21 +3338,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Berührung der Stille": {
-      "name": "Berührung der Stille",
-      "kategorie": "Kampf",
-      "rang": "F",
-      "voraussetzungen": [
-        "WIL W8",
-        "Waffenloser Schlag",
-        "Kämpfen W8"
-      ],
-      "beschreibung": "Ki-Aktion (1 Machtpunkt): Bei einem erfolgreichen unbewaffneten Treffer muss das Ziel eine Willenskraftprobe ablegen oder kann bis zum Ende seines nächsten Zuges keine Aktionen ausführen (gilt als Erschöpft).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Stolperschlag": {
       "name": "Stolperschlag",
       "kategorie": "Kampf",
@@ -3711,32 +3516,6 @@
         "VER W6"
       ],
       "beschreibung": "Ignoriere den Abzug von –2, wenn du mit improvisierten Waffen angreifst.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kampfkünstler": {
-      "name": "Kampfkünstler",
-      "kategorie": "Kampf",
-      "rang": "A",
-      "voraussetzungen": [
-        "Kämpfen W6"
-      ],
-      "beschreibung": "Unbewaffnetes Kämpfen +1, Fäuste und Füße zählen als Natürliche Waffen, addiere W4 auf den Schaden unbewaffneter Angriffe (oder erhöhe den Schaden um einen Würfeltyp, wenn du bereits einen Würfel hast).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kampfkunstmeister": {
-      "name": "Kampfkunstmeister",
-      "kategorie": "Kampf",
-      "rang": "F",
-      "voraussetzungen": [
-        "Kampfkünstler"
-      ],
-      "beschreibung": "Unbewaffnetes Kämpfen +2, erhöhe Schadenswürfel um einen Würfeltyp.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -4949,58 +4728,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Betäubende Fäuste": {
-      "name": "Betäubende Fäuste",
-      "kategorie": "Hruruzat",
-      "rang": "A",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Bei einer Steigerung beim Kämpfen-Wurf kann der Mönch einen Feind betäuben oder einen Verursacher machen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Beweglichkeit": {
-      "name": "Beweglichkeit",
-      "kategorie": "Hruruzat",
-      "rang": "A",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Der Mönch ist schnell und wendig und erhält +1 auf Sprint und Ausweichen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kämpferische Disziplin": {
-      "name": "Kämpferische Disziplin",
-      "kategorie": "Hruruzat",
-      "rang": "A",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Der Mönch erhält +1 Robustheit, wenn er keine Rüstung trägt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Waffenloser Schlag": {
-      "name": "Waffenloser Schlag",
-      "kategorie": "Hruruzat",
-      "rang": "A",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Der Mönch erhält +1 auf Kampfwürfe und verursacht STÄ+W4 Schaden bei waffenlosen Angriffen. Dieser Schadenswürfel steigt mit dem Rang.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Das Unheilige erspüren": {
       "name": "Das Unheilige erspüren",
       "kategorie": "Geweihter",
@@ -5442,19 +5169,6 @@
       "ausgewaehlt": false,
       "aktiv": true
     },
-    "Perfekter Körper": {
-      "name": "Perfekter Körper",
-      "kategorie": "Legendär",
-      "rang": "L",
-      "voraussetzungen": [
-        "Mindestens zwei Hruruzat-Talente"
-      ],
-      "beschreibung": "Erhalte +4 Robustheit und werde zu einem Externar.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
     "Schon gesehen": {
       "name": "Schon gesehen",
       "kategorie": "Legendär",
@@ -5667,19 +5381,6 @@
         "Bann"
       ],
       "beschreibung": "Der Inquisitor weiht auch die Waffen seiner Mitstreiter: Teile die Vorteile von Bann mit Verbündeten.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Hruruzat-Form": {
-      "name": "Hruruzat-Form",
-      "kategorie": "Hruruzat",
-      "rang": "V",
-      "voraussetzungen": [
-        "Hruruzat-Kämpfer"
-      ],
-      "beschreibung": "Greife einen Gegner an, der den Charakter beim Verteidigen treffen würde.",
       "neue_maechte": 0,
       "machtpunkte": 0,
       "ausgewaehlt": false,
@@ -7114,181 +6815,6 @@
       "auto_handicaps": [
         "Materialkomponenten"
       ]
-    },
-    "AH (Bannzeichner)": {
-      "name": "AH (Bannzeichner)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Ysilischer Bannzeichner; bringt Bannzeichen an, die Dämonen und fremde Magie abwehren. Besitzt kein Traditionsartefakt.",
-      "neue_maechte": 2,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Materialkomponenten"
-      ]
-    },
-    "AH (Borbaradianer)": {
-      "name": "AH (Borbaradianer)",
-      "kategorie": "Hintergrund",
-      "rang": "A",
-      "voraussetzungen": [
-        "VER W6"
-      ],
-      "beschreibung": "Arkane Fertigkeit: Zaubern (Verstand). Verbotene Tradition: Anhänger des Dämonenmeisters Borbarad. Durch einen heimlichen Pakt mit dem Erzdämon Amazeroth erlangt der Borbaradianer gefährliche, geächtete Macht.",
-      "neue_maechte": 3,
-      "machtpunkte": 10,
-      "ausgewaehlt": false,
-      "aktiv": true,
-      "auto_handicaps": [
-        "Verderbnis"
-      ]
-    },
-    "Ysilisches Bannzeichen": {
-      "name": "Ysilisches Bannzeichen",
-      "kategorie": "Bannzeichner",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Bannzeichner)"
-      ],
-      "beschreibung": "Mit einer Aktion und einer Zaubernprobe bringt der Bannzeichner ein Bannzeichen an einer Fläche oder einem Durchgang an. In der Zone (Kleine Flächenschablone) erleiden Dämonen, Untote und gegnerische Wirker −2 auf ihre Proben; das Zeichen hält bis zum Ende der Szene.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Pakt mit Amazeroth": {
-      "name": "Pakt mit Amazeroth",
-      "kategorie": "Borbaradianer",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Borbaradianer)"
-      ],
-      "beschreibung": "Der heimliche Dämonenpakt verleiht dem Borbaradianer einmal pro Sitzung einen zusätzlichen Benny, den er ausschließlich für seine eigenen Mächte einsetzen darf — die Gunst des Erzdämonen fordert jedoch ihren Preis.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Totenbeschwörung": {
-      "name": "Totenbeschwörung",
-      "kategorie": "Nekromant",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Nekromant)"
-      ],
-      "beschreibung": "Der Nekromant beherrscht das Rufen und Binden der Toten: Mit „Verbündete beschwören\" gerufene untote Diener erhalten +2 Robustheit und zerfallen erst am Ende der Szene; gegen Untote wirkt er Mächte um +2 erleichtert.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Steinkundige": {
-      "name": "Steinkundige",
-      "kategorie": "Geode",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Geode)"
-      ],
-      "beschreibung": "Unter der Erde und im Stein ist die Geode in ihrem Element: +2 auf Wirken-, Wahrnehmungs- und Überlebensproben in Höhlen, Minen und Gestein. Ihr Lebensring (Traditionsartefakt) speichert bis zu 5 Machtpunkte.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Kristallsicht": {
-      "name": "Kristallsicht",
-      "kategorie": "Kristallomant",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Kristallomant)"
-      ],
-      "beschreibung": "Durch die Kristallkugel erlangt der Kristallomant Hellsicht: +2 auf Nachforschen und Wahrnehmung, um Fernes, Verborgenes oder Vergangenes zu erspüren.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Ritualmacht": {
-      "name": "Ritualmacht",
-      "kategorie": "Zibilja",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Zibilja)"
-      ],
-      "beschreibung": "Als Ritualmagierin kann die Zibilja eine Macht in einem mehrminütigen Ritual statt als Aktion wirken; das Ritual kostet 2 Machtpunkte weniger (mindestens 1).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Bann des Tanzes": {
-      "name": "Bann des Tanzes",
-      "kategorie": "Zaubertänzer",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Zaubertänzer)"
-      ],
-      "beschreibung": "Wirkt der Zaubertänzer eine Macht über einen Tanz (Darbietung), erhält er +1 auf die Probe; Zuschauer im Umkreis können von der Darbietung gefesselt und so Abgelenkt werden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Schelmenstreich": {
-      "name": "Schelmenstreich",
-      "kategorie": "Schelm",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Schelm)"
-      ],
-      "beschreibung": "Einmal pro Begegnung vollführt der Schelm einen magischen Streich: ein Ziel in Sichtweite ist bis zu seiner nächsten Aktion Abgelenkt (−2), nimmt aber keinen Schaden.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Steckenverzauberung": {
-      "name": "Steckenverzauberung",
-      "kategorie": "Scharlatan",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Scharlatan)"
-      ],
-      "beschreibung": "Der Scharlatan verzaubert seinen Zauberstecken zeitweise: Solange er ihn führt, kann er einmal pro Szene eine seiner Mächte ohne Machtpunkte wirken (Gaukelei und Verblüffung).",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Goblinritual": {
-      "name": "Goblinritual",
-      "kategorie": "Goblinzauberin",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Goblinzauberin)"
-      ],
-      "beschreibung": "Mit der Schweinetrommel vollführt die Goblinzauberin ein Stammesritual: Verbündete in Hörweite erhalten +1 auf ihre nächste Probe, oder Feinde müssen eine Furchtprobe ablegen.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
-    },
-    "Zauberrune": {
-      "name": "Zauberrune",
-      "kategorie": "Runenschöpfer",
-      "rang": "A",
-      "voraussetzungen": [
-        "AH (Runenschöpfer)"
-      ],
-      "beschreibung": "Der Runenschöpfer speichert eine vorbereitete Macht in einer Zauberrune (Aktion + Machtpunkte beim Anbringen). Die Rune entfaltet die Macht automatisch, sobald ihre festgelegte Auslösebedingung eintritt.",
-      "neue_maechte": 0,
-      "machtpunkte": 0,
-      "ausgewaehlt": false,
-      "aktiv": true
     }
   },
   "handicaps": {
