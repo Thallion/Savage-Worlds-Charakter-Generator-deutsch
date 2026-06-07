@@ -105,15 +105,15 @@
 **Positive Eigenarten:**
 
 - Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)
-- Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10"/20 Meter)
-- Richtungssinn (Überleben W6 statt W4 zur Orientierung in der Wildnis)
+- Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)
 
 **Handicaps / Nachteile:**
 
 - Ungebildet (Verstandbasierte Fertigkeiten sind schwerer zu steigern – tumb und grobschlächtig)
 - Misstrauisch (leicht: argwöhnisch gegenüber Fremden)
+- Außenseiter (leicht: -2 Überredenproben außerhalb der eigenen Sippe)
 
-**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Fertigkeits-Start: Überleben W6; Auto-Handicaps: Ungebildet, Misstrauisch_leicht; Spezial-Flags: dunkelsicht, richtungssinn, wildnisverbunden
+**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Auto-Handicaps: Ungebildet, Misstrauisch_leicht, Außenseiter_leicht; Spezial-Flags: nachtsicht
 
 ### Mensch
 

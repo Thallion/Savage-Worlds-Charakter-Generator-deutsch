@@ -349,13 +349,13 @@
       "name": "Holberker",
       "handicaps": [
         "Ungebildet (Verstandbasierte Fertigkeiten sind schwerer zu steigern – tumb und grobschlächtig)",
-        "Misstrauisch (leicht: argwöhnisch gegenüber Fremden)"
+        "Misstrauisch (leicht: argwöhnisch gegenüber Fremden)",
+        "Außenseiter (leicht: -2 Überredenproben außerhalb der eigenen Sippe)"
       ],
       "talente": [],
       "besonderheiten": [
         "Widerstandsfähig (Konstitution W6 statt W4, Maximum W12+1)",
-        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
-        "Richtungssinn (Überleben W6 statt W4 zur Orientierung in der Wildnis)"
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -372,18 +372,15 @@
         },
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
-        "fertigkeits_startboni": {
-          "Überleben": 2
-        },
+        "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
           "Ungebildet",
-          "Misstrauisch_leicht"
+          "Misstrauisch_leicht",
+          "Außenseiter_leicht"
         ],
         "spezielle_effekte": {
-          "dunkelsicht": true,
-          "richtungssinn": true,
-          "wildnisverbunden": true
+          "nachtsicht": true
         },
         "wahlmoeglichkeiten": {}
       }
