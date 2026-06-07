@@ -393,10 +393,10 @@
 | Gestaltwandeln | Tiergestalt |
 | Heiligtum | Konsekration |
 | Marionette | Heiliger Befehl |
-| Mirakel (Zwölfgötter) | Indoktrination, Ordination, Prophezeiung |
 | Mystisches Eingreifen | Göttliches Zeichen, Schutzsegen |
-| Segen | Geburtssegen, Objektsegen, Objektweihe, Speisesegen, Weisheitssegen |
+| Segen | Geburtssegen, Indoktrination, Objektsegen, Objektweihe, Ordination, Speisesegen, Weisheitssegen |
 | Strahl | Göttliche Strafe |
+| Vision | Prophezeiung |
 
 ### Praios (Sonne, Ordnung, Magieabwehr)
 
@@ -405,16 +405,15 @@
 | Arkaner Schutz | Argelions Mantel |
 | Arkanes entdecken/verbergen | Sicht auf Madas Welt, Unverstellter Blick |
 | Aufheben | Argelions bannende Hand, Praios’ Magiebann |
-| Aufspüren | Ucuris Geleit, Weisung des Himmels |
-| Blenden | Blendstrahl aus Alveran |
+| Aufspüren | Ucuris Geleit, Urischars ordnender Blick, Weisung des Himmels |
+| Blenden | Blendstrahl aus Alveran, Praios’ Mahnung |
+| Einfluss | Wille zur Wahrheit |
 | Fliegen | Garafans gleissende Schwingen |
 | Gedankenleere | Innere Ruhe |
 | Heiligtum | Arcanum Interdictum |
 | Licht/Dunkelheit | Daradors Bann der Schatten, Licht des Herrn |
 | Linderung | Vertreibung des Dunkelsinns |
 | Machtpunkte entziehen | Purgation |
-| Marionette | Wille zur Wahrheit |
-| Mirakel (Praios) | Praios’ Mahnung, Urischars ordnender Blick |
 | Schutz | Goldene Rüstung |
 | Verbannen | Zerschmetternder Bannstrahl |
 
@@ -423,10 +422,11 @@
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
 | Eigenschaft erhöhen/senken | Segnung der stählernen Stirn |
+| Einfluss | Ehrenhafter Zweikampf |
+| Elementarmanipulation | Belemans Hochzeit |
 | Heilung | Wundersames Teilen des Martyriums |
 | Kriegersegen | Ritus der Schlachthilfe, Ruf zum Bund wider die Mächte der Finsternis, Schlachtgesang, Segen des heiligen Hlûthar, Segnung der Schlacht |
 | Machtpunkte entziehen | Purgation |
-| Mirakel (Rondra) | Belemans Hochzeit, Ehrenhafter Zweikampf |
 | Schutz | Rondras wundersame Rüstung |
 | Verbündeten beschwören | Segen der heiligen Ardare |
 | Waffe verbessern | Grosser Weihesegen der Waffe |
@@ -437,11 +437,11 @@
 |---|---|
 | Aufspüren | Hashnabiths Flehen, Weisung des Himmels |
 | Eigenschaft erhöhen/senken | Mannschaftssegen |
-| Elementarmanipulation | Anrufung der Winde, Azilas Quellgesang, Segen des Plättlings, Swafnirs Fluke, Teilung der Wasser |
+| Elementarmanipulation | Anrufung der Winde, Anrufung Nuiannas, Azilas Quellgesang, Segen des Plättlings, Swafnirs Fluke, Teilung der Wasser |
+| Fernsicht | Gebet des kristallklaren Blicks |
 | Gedankenverbindung | Gleichklang des Geistes |
 | Heiligtum | Conagas Ruf |
-| Mirakel (Efferd) | Anrufung Nuiannas, Gebet des kristallklaren Blicks, Gruss des Versunkenen |
-| Schutz vor Naturgewalten | Begehen der Heiligen Wasser |
+| Schutz vor Naturgewalten | Begehen der Heiligen Wasser, Gruss des Versunkenen |
 | Segen | Bootssegen, Efferdsegen, Gesegneter Fang, Quellsegen |
 | Tier Beschwören | Ruf der Gefährten |
 | Tierfreund | Gesang der Delphine |
@@ -452,10 +452,10 @@
 |---|---|
 | Eigenschaft erhöhen/senken | Lohn der Unverzagten |
 | Empathie | Freundliche Aufnahme |
+| Fluch | Erzieherische Massnahme der Heiligen Yalsicena |
 | Gegenstand beschwören | Speisung der hungernden Seelen |
 | Heiligtum | Grosse Weihe des Heimsteins, Hausfrieden, Kleine Segnung des Heimsteins, Travinians Segen der Schwelle |
 | Heilung | Geteiltes Leid |
-| Mirakel (Travia) | Erzieherische Massnahme der Heiligen Yalsicena |
 | Mystisches Eingreifen | Segnung des Heims, Travias Gebet der sicheren Zuflucht, Wachsamkeit der Gänse, Zuflucht finden |
 | Segen | Grosser Speisesegen, Reisesegen, Speisung der Bedürftigen |
 | Tierfreund | Gemeinschaft der treuen Gefährten |
@@ -466,14 +466,18 @@
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
 | Arkanes entdecken/verbergen | Nemekaths Geisterblick |
+| Dunkelsicht | Golgaris Zwielicht |
+| Ebenenwechsel | Marbos Geleit |
 | Eigenschaft erhöhen/senken | Segen der heiligen Velvenya |
+| Einfluss | Siegel Borons |
 | Empathie | Ruf zur Ruhe |
-| Fluch | Bannfluch des Heiligen Khalid |
+| Fluch | Bannfluch des Heiligen Khalid, Etilias Gnade |
+| Furcht | Bishdariels Warnung |
 | Gedankenlesen | Bishdariels Auge |
 | Heiligtum | Weihe der letzten Ruhestatt |
 | Linderung | Borons süsse Gnade, Rahjas Rauschsegen, Segen der heiligen Noiona |
-| Mirakel (Boron) | Bishdariels Warnung, Etilias Gnade, Golgaris Zwielicht, Kleine Liturgie des heiligen Nemekath, Marbos Geleit, Siegel Borons |
 | Schlummer | Hauch Borons, Ruf in Borons Arme, Schlaf des Gesegneten |
+| Vision | Kleine Liturgie des heiligen Nemekath |
 | Zwiesprache | Nemekaths Zwiesprache |
 
 ### Hesinde (Wissen, Magie)
@@ -481,7 +485,7 @@
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
 | Arkaner Schutz | Argelions Mantel, Argelions Spiegel |
-| Arkanes entdecken/verbergen | Blick der Weberin, Sicht auf Madas Welt, Unverstellter Blick |
+| Arkanes entdecken/verbergen | Blick der Weberin, Graues Siegel, Sicht auf Madas Welt, Sprechende Symbole, Unverstellter Blick |
 | Aufheben | Argelions bannende Hand |
 | Aufspüren | Aura der Form, Buchprüfung |
 | Eigenschaft erhöhen/senken | Canyzeths Weisheit |
@@ -491,20 +495,21 @@
 | Licht/Dunkelheit | Auge Xeledons, Xeledons helles Licht |
 | Linderung | Vertreibung des Dunkelsinns |
 | Machtpunkte entziehen | Purgation |
-| Mirakel (Hesinde) | Graues Siegel, Sprechende Symbole, Sterne funkeln immerfort, Wandeln in Hesindes Hain |
+| Segen | Sterne funkeln immerfort |
 | Sprachen sprechen | Phexens wunderbare Verständigung, Schrifttum ferner Lande |
 | Tier Beschwören | Schlangenstab |
+| Vision | Wandeln in Hesindes Hain |
 
 ### Firun (Winter, Jagd)
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Aufspüren | Weisung des Himmels |
+| Aufspüren | Jagdglück, Weisung des Himmels |
 | Betäuben | Winterschlaf |
 | Flächenschlag | Firuns Zorn, Schneesturm |
 | Gegenstand beschwören | Firuns Einsicht |
+| Gegenstand verbessern/schaden | Trophäe erhalten |
 | Geschoss | Mikailspfeil |
-| Mirakel (Firun) | Jagdglück, Trophäe erhalten |
 | Mystisches Eingreifen | Zuflucht finden |
 | Schutz vor Naturgewalten | Sichere Wanderung im Schnee |
 | Tierfreund | Seelengefährte |
@@ -513,13 +518,13 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
+| Einfluss | Revolution der Gedanken |
 | Gedankenverbindung | Gleichklang des Geistes |
 | Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
 | Heilung | Tsas Lebensschutz, Tsas wunderbare Erneuerung, Wundsegen |
+| Illusion | Kirschblütenregen |
 | Linderung | Rahjas Freiheit |
-| Marionette | Revolution der Gedanken |
-| Mirakel (Tsa) | Kirschblütenregen, Wundersame Blütenpracht |
-| Mystisches Eingreifen | Aura des Regenbogens, Flagge des Regenbogens |
+| Mystisches Eingreifen | Aura des Regenbogens, Flagge des Regenbogens, Wundersame Blütenpracht |
 | Schutz | Eidechsenhaut |
 | Segen | Kälbchensegen, Tsas segensreicher Neuanfang, Tsas wundersame Fruchtbarkeit |
 | Tierfreund | Tierempathie |
@@ -532,17 +537,19 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Arkanes entdecken/verbergen | Auge des Händlers |
+| Arkanes entdecken/verbergen | Auge des Händlers, Graues Siegel, Phexens Elsterflug, Sternenspur |
 | Aufspüren | Buchprüfung |
+| Blenden | Sternenstaub |
 | Dunkelsicht | Auge des Mondes |
 | Empathie | Mondsilberzunge |
 | Gedankenleere | Entzug von Nandus’ Gaben, Phexens Augenzwinkern |
 | Geschoss | Phexens Sternenwurf |
 | Gestaltwandeln | Phexens Nebelleib, Weg des Fuchses |
 | Illusion | Schattenlarve, Sternenglanz |
-| Mirakel (Phex) | Graues Siegel, Phexens Elsterflug, Sechs Leben des Mungos, Sterne funkeln immerfort, Sternenspur, Sternenstaub |
 | Schutz | Phexens Verteidigung |
+| Segen | Sterne funkeln immerfort |
 | Sprachen sprechen | Phexens wunderbare Verständigung, Schrifttum ferner Lande |
+| Trägheit/Beschleunigung | Sechs Leben des Mungos |
 | Unsichtbarkeit | Phexens Schatten, Verborgen wie der Neumond |
 | Verriegeln/Entriegeln | Phexens Meisterschlüssel |
 
@@ -551,12 +558,11 @@
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
 | Aufspüren | Peraines Pflanzengespür |
-| Eigenschaft erhöhen/senken | Kräftigung der Schwachen und Versehrten, Lohn der Unverzagten |
+| Eigenschaft erhöhen/senken | Kräftigung der Schwachen und Versehrten, Lohn der Unverzagten, Therbûns Erkenntnis |
 | Elementarmanipulation | Anrufung der Erdkraft |
 | Gedankenverbindung | Gleichklang des Geistes |
 | Gegenstand beschwören | Segenreiches Wasser |
 | Heilung | Fürbitten des heiligen Therbûn, Kleiner Giftbann, Segen der heiligen Theria, Wundsegen |
-| Mirakel (Peraine) | Therbûns Erkenntnis |
 | Segen | Dreifacher Saatsegen, Grosser Speisesegen, Kälbchensegen, Parinors Vermächtnis, Reiches Land, Speisung der Bedürftigen, Wegzehrung der Heiligen Selma |
 | Wiederauferstehung | Tsas heiliges Lebensgeschenk |
 | Zeitstopp | Fünfte Lobpreisung des Frühlings |
@@ -565,31 +571,31 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Aufspüren | Goldener Blick |
+| Aufspüren | Goldener Blick, Ruf der Ferne |
 | Ausspähung | Blick in die Flammen |
+| Eigenschaft erhöhen/senken | Blick für das Handwerk |
 | Elementarmanipulation | Gebieter der Lava, Heilige Schmiedeglut, Herr über Feuer und Glut |
 | Flächenschlag | Allmacht der Lohe |
 | Gegenstand beschwören | Sicherer Weg durch Fels |
 | Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
 | Kriegersegen | Eherne Kraft, Lodernder Zorn |
-| Licht/Dunkelheit | Licht des verborgenen Pfades |
-| Mirakel (Ingerimm) | Blick für das Handwerk, Ruf der Ferne, Wandeln in Hesindes Hain, Weihe der ewigen Flamme |
+| Licht/Dunkelheit | Licht des verborgenen Pfades, Weihe der ewigen Flamme |
 | Schutz | Waliburias Wehr |
 | Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
 | Segen | Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs |
 | Verbündeten beschwören | Vertrauter der Flamme, Vertrauter des Felsens |
+| Vision | Wandeln in Hesindes Hain |
 
 ### Rahja (Liebe, Rausch, Freude)
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
 | Betäuben | Ascandears Hingabe |
-| Empathie | Heiliges Liebesspiel, Rahjas Begehren, Rahjas Sinnlichkeit |
+| Empathie | Dorlens Verbrüderung, Heiliges Liebesspiel, Rahjas Begehren, Rahjas Sinnlichkeit |
 | Gedankenverbindung | Gleichklang des Geistes |
 | Gegenstand beschwören | Rahjalinas Kuss, Rahjas geheiligter Wein, Rahjas Schoss |
 | Illusion | Rahjalinas Farbenspiel |
 | Linderung | Rahjas Freiheit, Rahjas Rauschsegen, Reichung des Amethyst |
-| Mirakel (Rahja) | Dorlens Verbrüderung |
 | Schlummer | Schlaf des Gesegneten |
 | Segen | Rahjas Fest der Freude |
 | Tierfreund | Sulvas Gnade |
@@ -601,16 +607,16 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
+| Arkanes entdecken/verbergen | Sternenspur |
 | Aufspüren | Hashnabiths Flehen, Hilfe in der Not, Weisung des Himmels |
 | Eigenschaft erhöhen/senken | Nimmermüde Wanderschaft |
 | Empathie | Aller Welt Freund, Freundliche Aufnahme, Frieden der Melodie, Mondsilberzunge |
 | Fliegen | Über die Wolken |
 | Gestaltwandeln | Weg des Fuchses |
 | Linderung | Rahjas Freiheit |
-| Mirakel (Aves) | Ein Freund in Zeiten der Not, Sterne funkeln immerfort, Sternenspur |
 | Mystisches Eingreifen | Zuflucht finden |
 | Schlummer | Schlaf des Gesegneten |
-| Segen | Reisesegen |
+| Segen | Ein Freund in Zeiten der Not, Reisesegen, Sterne funkeln immerfort |
 | Sprachen sprechen | Phexens wunderbare Verständigung |
 | Tierfreund | Gemeinschaft der treuen Gefährten, Sulvas Gnade |
 
@@ -618,10 +624,10 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Aufspüren | Hilfe in der Not, Runjensweisung, Weisung des Himmels |
+| Aufspüren | Hilfe in der Not, Jagdglück, Runjensweisung, Weisung des Himmels |
 | Betäuben | Winterschlaf |
+| Gegenstand verbessern/schaden | Trophäe erhalten |
 | Heilung | Birkenzweig, Geteiltes Leid |
-| Mirakel (Ifirn) | Jagdglück, Trophäe erhalten |
 | Mystisches Eingreifen | Zuflucht finden |
 | Schutz | Lidaris Herz |
 | Schutz vor Naturgewalten | Sichere Wanderung im Schnee |
@@ -639,11 +645,11 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Arkanes entdecken/verbergen | Auge des Händlers, Sicht auf Madas Welt |
-| Aufspüren | Buchprüfung |
+| Arkanes entdecken/verbergen | Auge des Händlers, Sicht auf Madas Welt, Sprechende Symbole, Sternenspur |
+| Aufspüren | Buchprüfung, Urischars ordnender Blick |
 | Eigenschaft erhöhen/senken | Ein Bild für die Ewigkeit |
 | Gedankenleere | Entzug von Nandus’ Gaben |
-| Mirakel (Nandus) | Sprechende Symbole, Sterne funkeln immerfort, Sternenspur, Urischars ordnender Blick |
+| Segen | Sterne funkeln immerfort |
 | Sprachen sprechen | Hoftag der Sprachen, Phexens wunderbare Verständigung, Schrifttum ferner Lande |
 
 ### Swafnir (Wale, Thorwal, Meer)
@@ -652,10 +658,9 @@
 |---|---|
 | Aufspüren | Weisung des Himmels |
 | Eigenschaft erhöhen/senken | Mannschaftssegen |
-| Elementarmanipulation | Anrufung der Winde, Segen des Plättlings, Swafnirs Fluke |
+| Elementarmanipulation | Anrufung der Winde, Anrufung Nuiannas, Segen des Plättlings, Swafnirs Fluke |
 | Empathie | Swafnirs Ruhelied |
-| Mirakel (Swafnir) | Anrufung Nuiannas, Sterne funkeln immerfort |
-| Segen | Bootssegen, Gesegneter Fang |
+| Segen | Bootssegen, Gesegneter Fang, Sterne funkeln immerfort |
 | Tier Beschwören | Ruf der Gefährten |
 | Tierfreund | Gesang der Delphine |
 
@@ -665,16 +670,16 @@
 |---|---|
 | Aufspüren | Goldener Blick, Seelenprüfung |
 | Ausspähung | Blick in die Flammen |
+| Eigenschaft erhöhen/senken | Blick für das Handwerk |
 | Elementarmanipulation | Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut |
 | Fluch | Anathema |
 | Flächenschlag | Allmacht der Lohe |
 | Gedankenverbindung | Göttliche Verständigung |
 | Gegenstand beschwören | Sicherer Weg durch Fels |
-| Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
+| Gegenstand verbessern/schaden | Angroschs Opfergabe, Erneuerung des Geborstenen |
 | Heilung | Heilungssegen |
 | Kriegersegen | Eherne Kraft, Lodernder Zorn |
 | Licht/Dunkelheit | Feuersegen, Licht des verborgenen Pfades |
-| Mirakel (Angrosch) | Angroschs Opfergabe, Blick für das Handwerk, Visionssuche |
 | Mystisches Eingreifen | Exkommunikation |
 | Schutz | Waliburias Wehr |
 | Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
@@ -682,6 +687,7 @@
 | Telekinese | Hammer rufen |
 | Verbannen | Exorzismus |
 | Verbündeten beschwören | Vertrauter der Flamme, Vertrauter des Felsens |
+| Vision | Visionssuche |
 | Wiederauferstehung | Initiation |
 
 ### Gravesh (Orkische Schmiedeglut)
@@ -693,12 +699,12 @@
 | Flächenschlag | Allmacht der Lohe |
 | Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
 | Licht/Dunkelheit | Feuersegen, Licht des verborgenen Pfades |
-| Mirakel (Gravesh) | Visionssuche |
 | Mystisches Eingreifen | Exkommunikation |
 | Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
 | Segen | Tsas segensreicher Neuanfang |
 | Verbannen | Exorzismus |
 | Verbündeten beschwören | Vertrauter der Flamme |
+| Vision | Visionssuche |
 
 ### Himmelswölfe (Nivesen-Kult)
 
@@ -707,10 +713,11 @@
 | Aufspüren | Weisung des Himmels |
 | Betäuben | Winterschlaf |
 | Fluch | Sippenfluch |
-| Mirakel (Himmelswölfe) | Vaês Tränen, Visionssuche |
+| Heilung | Vaês Tränen |
 | Schutz vor Naturgewalten | Sichere Wanderung im Schnee |
 | Segen | Dreifacher Saatsegen, Kälbchensegen, Parinors Vermächtnis, Tsas wundersame Fruchtbarkeit |
 | Tierfreund | Tierempathie |
+| Vision | Visionssuche |
 | Zeitstopp | Fünfte Lobpreisung des Frühlings |
 
 ### H’Szint (Echsen-Kult)
@@ -732,12 +739,13 @@
 |---|---|
 | Arkanes entdecken/verbergen | Nemekaths Geisterblick |
 | Aufheben | Praios’ Magiebann |
+| Einfluss | Siegel Borons |
 | Fluch | Bannfluch des Heiligen Khalid, Sippenfluch |
 | Heiligtum | Weihe der letzten Ruhestatt |
 | Linderung | Borons süsse Gnade |
-| Mirakel (Kamaluq) | Siegel Borons, Visionssuche |
 | Untoten Beschwören | Ewiger Wächter |
 | Verbannen | Zerschmetternder Bannstrahl |
+| Vision | Visionssuche |
 
 ### Tairach (Echsen-Blutkult)
 
@@ -747,7 +755,8 @@
 | Eigenschaft erhöhen/senken | Ein Bild für die Ewigkeit |
 | Fluch | Sippenfluch |
 | Gedankenleere | Entzug von Nandus’ Gaben |
-| Mirakel (Tairach) | Ewiges Wissen, Kleine Liturgie des heiligen Nemekath, Sterne funkeln immerfort |
+| Segen | Ewiges Wissen, Sterne funkeln immerfort |
+| Vision | Kleine Liturgie des heiligen Nemekath |
 
 ### Zsahh (Echsen-Kult)
 
@@ -775,9 +784,9 @@
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
+| Aufspüren | Jagdglück |
 | Gegenstand beschwören | Firuns Einsicht |
 | Heilung | Geteiltes Leid |
-| Mirakel (Riva) | Jagdglück |
 | Tierfreund | Gemeinschaft der treuen Gefährten |
 
 ### Namenloser (Verbotener Kult)

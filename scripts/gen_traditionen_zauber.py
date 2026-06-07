@@ -300,7 +300,7 @@ LITURGIE_SW = {
     "Nimmermüde Wanderschaft": "Eigenschaft erhöhen/senken",
     "Phexens Augenzwinkern": "Gedankenleere",
     "Reichung des Amethyst": "Linderung",
-    "Revolution der Gedanken": "Marionette",
+    "Revolution der Gedanken": "Einfluss",
     "Ruf der Gefährten": "Tier Beschwören",
     "Ruf in Borons Arme": "Schlummer",
     "Schlachtfeld schreitet": "Furcht",
@@ -316,7 +316,7 @@ LITURGIE_SW = {
     "Ucuris Geleit": "Aufspüren",
     "Weihe der letzten Ruhestatt": "Heiligtum",
     "Weisung des Himmels": "Aufspüren",
-    "Wille zur Wahrheit": "Marionette",
+    "Wille zur Wahrheit": "Einfluss",
     # --- Nachtrag 2: Segen-Sammelmacht + Talisman-Anrufungen (Gegenstand beschwören) ---
     "Bootssegen": "Segen",
     "Dreifacher Saatsegen": "Segen",
@@ -346,6 +346,47 @@ LITURGIE_SW = {
     "Ingalfs Alchimie": "Gegenstand beschwören",
     "Seelenschatten": "Arkanes entdecken/verbergen",
     "Runjensweisung": "Aufspüren",
+    # --- Nachtrag 3: vermeintlich narrativ, per Volltext doch SW-Macht ---
+    "Jagdglück": "Aufspüren",
+    "Urischars ordnender Blick": "Aufspüren",
+    "Ruf der Ferne": "Aufspüren",
+    "Golgaris Zwielicht": "Dunkelsicht",
+    "Marbos Geleit": "Ebenenwechsel",
+    "Sechs Leben des Mungos": "Trägheit/Beschleunigung",
+    "Sternenstaub": "Blenden",
+    "Praios’ Mahnung": "Blenden",
+    "Bishdariels Warnung": "Furcht",
+    "Erzieherische Massnahme der Heiligen Yalsicena": "Fluch",
+    "Etilias Gnade": "Fluch",
+    "Dorlens Verbrüderung": "Empathie",
+    "Vaês Tränen": "Heilung",
+    "Therbûns Erkenntnis": "Eigenschaft erhöhen/senken",
+    "Blick für das Handwerk": "Eigenschaft erhöhen/senken",
+    "Gruss des Versunkenen": "Schutz vor Naturgewalten",
+    "Anrufung Nuiannas": "Elementarmanipulation",
+    "Belemans Hochzeit": "Elementarmanipulation",
+    "Trophäe erhalten": "Gegenstand verbessern/schaden",
+    "Wundersame Blütenpracht": "Mystisches Eingreifen",
+    "Siegel Borons": "Einfluss",
+    "Weihe der ewigen Flamme": "Licht/Dunkelheit",
+    # --- Nachtrag 4: restliche „narrative" Liturgien zugeordnet, Mirakel-Kategorie aufgelöst ---
+    "Angroschs Opfergabe": "Gegenstand verbessern/schaden",
+    "Ehrenhafter Zweikampf": "Einfluss",
+    "Ein Freund in Zeiten der Not": "Segen",
+    "Ewiges Wissen": "Segen",
+    "Gebet des kristallklaren Blicks": "Fernsicht",
+    "Graues Siegel": "Arkanes entdecken/verbergen",
+    "Indoktrination": "Segen",
+    "Kirschblütenregen": "Illusion",
+    "Kleine Liturgie des heiligen Nemekath": "Vision",
+    "Ordination": "Segen",
+    "Phexens Elsterflug": "Arkanes entdecken/verbergen",
+    "Prophezeiung": "Vision",
+    "Sprechende Symbole": "Arkanes entdecken/verbergen",
+    "Sterne funkeln immerfort": "Segen",
+    "Sternenspur": "Arkanes entdecken/verbergen",
+    "Visionssuche": "Vision",
+    "Wandeln in Hesindes Hain": "Vision",
 }
 
 
@@ -485,8 +526,8 @@ def main():
 
     W("---\n## 4. Geweihte (Götter-Kulte)\n")
     W("> Datengetrieben aus dem Liber Liturgium (Feld *Herkunft*): vollständiges Liturgie-Roster je "
-      "Gottheit. SW-Macht nach **Wirkung** zugeordnet; rein narrative/zeremonielle Liturgien sind in "
-      "der jeweiligen Macht **Mirakel (Gott)** gesammelt (göttlicher Eingriff nach Spielleiter-Entscheid).\n")
+      "Gottheit. Jede Liturgie ist einer SW-Macht nach **Wirkung** zugeordnet (inkl. der Mächte "
+      "*Einfluss* und *Vision* für Suggestion bzw. Weissagung).\n")
 
     # Allgemeine Liturgien (universell / Zwölfgötterkult)
     W("### Allgemeine Liturgien (Zwölfgötterkult / universell)\n")

@@ -13,6 +13,7 @@ Aufruf:  python scripts/gen_uebersicht.py
 """
 import json
 import os
+import re
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,9 +62,13 @@ def sw_regelabschnitt(beschreibung, trappings):
         return clean(besch)
     lines = besch.split("\n")
     cut = len(lines)
+    # Trapping-Zeile = "<Name>:" ODER "<Name> (<Zusatz>):" (längste Namen zuerst matchen)
+    pat = re.compile(
+        r"^(?:" + "|".join(re.escape(t) for t in sorted(tset, key=len, reverse=True))
+        + r")(?: \([^)]*\))?:"
+    )
     for i, line in enumerate(lines):
-        stripped = line.strip()
-        if any(stripped.startswith(tr + ":") for tr in tset):
+        if pat.match(line.strip()):
             cut = i
             break
     return clean("\n".join(lines[:cut]))

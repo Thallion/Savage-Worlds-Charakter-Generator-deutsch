@@ -8,7 +8,7 @@
   "window_maximized": true,
   "window_width": 1200,
   "window_height": 800,
-  "mobile_modus": true,
+  "mobile_modus": false,
   "show_logger": false,
   "auto_save_enabled": true,
   "auto_save_interval": 300,
@@ -22,7 +22,7 @@
   "auto_backup_enabled": true,
   "max_backups": 5,
   "last_setting": "Savage Aventurien",
-  "force_mobile_layout": true,
+  "force_mobile_layout": false,
   "tablet_layout": false,
   "desktop_scale_factor": "auto",
   "screen_orientation": "auto",
@@ -44,5 +44,5 @@
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-06-05T13:30:47.764808"
+  "last_updated": "2026-06-07T18:11:01.530625"
 }

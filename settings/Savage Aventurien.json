@@ -8362,7 +8362,7 @@
       "machtpunkte": 2,
       "reichweite": "VER S",
       "dauer": "—",
-      "beschreibung": "Entdeckt Magie für Wirkungsdauer 5 oder verbirgt sie für eine Stunde.\n\nModifikatoren:\n  Stark (+1): Nur Verbergen: Entdecken-Würfe mit –2.\n  Flächeneffekt (+1/+2): Nur Verbergen: MFS (+1) oder GFS (+2).\n  Zusätzliche Empfänger (+1): Mehrere Betrachter oder Gegenstände pro Punkt.\n  Gesinnungssinn (FK) (+1): Aufspüren von übernatürlich Gutem oder Bösem ohne Sichtlinie.\n  Identifizieren (FK) (+1): Magische Gegenstände identifizieren; Steigerung deckt Flüche auf.\n\nAnalys Arkanstruktur: Der Zauberer erhält detaillierte Hinweise, ob das Objekt magisch ist und falls ja, wie seine magische Struktur beschaffen ist.\nBlick aufs Wesen: Dem Zauberer werden die Werte des Ziels offenbart.\nBlick des Heilers: Vor den Augen der Perainegeweihten leuchten alle Ziele innerhalb eines Umkreis auf, die verwundet, vergiftet oder krank sind.\nCryptographo: Mit diesem Zauberspruch kann eine Zauberin eine Pergament-, Papier- oder Papyrusseite verschlüsseln, eine Kristallomantin wahlweise auch eine Passage in einem Thesiskristall.\nEntzifferung: Der Geweihte kann eine Inschrift oder ein Schriftstück in einer unbekannten oder unleserlichen Sprache oder Schrift entziffern.\nMagieanalyse: Der Geweihte erhält detaillierte Hinweise, ob das Objekt magisch ist und, falls ja, wie seine magische Struktur beschaffen ist.\nMagiesicht: Mit dieser Liturgie lässt sich aktives magisches Wirken auf Gegenständen und Personen erkennen.\nOdem Arcanum: Mit diesem Zauberspruch lässt sich aktives magisches Wirken auf Gegenständen und Personen erkennen.\nAuge des Händlers: Mittels dieser Liturgie kann der Geweihte in Erfahrung bringen, welche Gegenstände sich in einem Raum befinden und in welchen Mengen sie lagern.\nBlick der Weberin: Der Geweihten werden die feinen Verästelungen der gewirkten Magie offenbar, also die Art und Zugehörigkeit der wirkenden Zauber.\nNemekaths Geisterblick: Bis er die Augen wieder öffnet, vermag der Geweihte anwesende Geister zu sehen, die für das menschliche Auge normalerweise unsichtbar bleiben.\nSicht auf Madas Welt: Der Geweihten erscheint ein magischer Gegenstand oder eine magische Person von silbernem Funkeln eingehüllt, gleich dem Mondlicht auf einer Wasseroberfläche.\nUnverstellter Blick: Der Geweihte erkennt eine Ordnung in einer vor ihm liegenden Unordnung, z.B.\nSeelenschatten: Durch diese Liturgie kann der Geweihte verbergen, dass er ein Diener des namenlosen Gottes ist.",
+      "beschreibung": "Entdeckt Magie für Wirkungsdauer 5 oder verbirgt sie für eine Stunde.\n\nModifikatoren:\n  Stark (+1): Nur Verbergen: Entdecken-Würfe mit –2.\n  Flächeneffekt (+1/+2): Nur Verbergen: MFS (+1) oder GFS (+2).\n  Zusätzliche Empfänger (+1): Mehrere Betrachter oder Gegenstände pro Punkt.\n  Gesinnungssinn (FK) (+1): Aufspüren von übernatürlich Gutem oder Bösem ohne Sichtlinie.\n  Identifizieren (FK) (+1): Magische Gegenstände identifizieren; Steigerung deckt Flüche auf.\n\nAnalys Arkanstruktur: Der Zauberer erhält detaillierte Hinweise, ob das Objekt magisch ist und falls ja, wie seine magische Struktur beschaffen ist.\nBlick aufs Wesen: Dem Zauberer werden die Werte des Ziels offenbart.\nBlick des Heilers: Vor den Augen der Perainegeweihten leuchten alle Ziele innerhalb eines Umkreis auf, die verwundet, vergiftet oder krank sind.\nCryptographo: Mit diesem Zauberspruch kann eine Zauberin eine Pergament-, Papier- oder Papyrusseite verschlüsseln, eine Kristallomantin wahlweise auch eine Passage in einem Thesiskristall.\nEntzifferung: Der Geweihte kann eine Inschrift oder ein Schriftstück in einer unbekannten oder unleserlichen Sprache oder Schrift entziffern.\nMagieanalyse: Der Geweihte erhält detaillierte Hinweise, ob das Objekt magisch ist und, falls ja, wie seine magische Struktur beschaffen ist.\nMagiesicht: Mit dieser Liturgie lässt sich aktives magisches Wirken auf Gegenständen und Personen erkennen.\nOdem Arcanum: Mit diesem Zauberspruch lässt sich aktives magisches Wirken auf Gegenständen und Personen erkennen.\nAuge des Händlers: Mittels dieser Liturgie kann der Geweihte in Erfahrung bringen, welche Gegenstände sich in einem Raum befinden und in welchen Mengen sie lagern.\nBlick der Weberin: Der Geweihten werden die feinen Verästelungen der gewirkten Magie offenbar, also die Art und Zugehörigkeit der wirkenden Zauber.\nNemekaths Geisterblick: Bis er die Augen wieder öffnet, vermag der Geweihte anwesende Geister zu sehen, die für das menschliche Auge normalerweise unsichtbar bleiben.\nSicht auf Madas Welt: Der Geweihten erscheint ein magischer Gegenstand oder eine magische Person von silbernem Funkeln eingehüllt, gleich dem Mondlicht auf einer Wasseroberfläche.\nUnverstellter Blick: Der Geweihte erkennt eine Ordnung in einer vor ihm liegenden Unordnung, z.B.\nSeelenschatten: Durch diese Liturgie kann der Geweihte verbergen, dass er ein Diener des namenlosen Gottes ist.\nGraues Siegel: Auf dem Siegelwachs erscheint nach der Segnung ein Fuchskopf als Symbol der Geheimhaltung.\nPhexens Elsterflug: Das gewählte Objekt wird entrückt und befindet sich fortan am Sternenhimmel in Phexens Schatzhort.\nSprechende Symbole: Die Geweihte erhält einen groben Fingerzeig, was die Bedeutung eines Symbols angeht.\nSternenspur: Mittels dieser Liturgie hinterlässt der Phexgeweihte auf der Fläche, die er berührt hat, eine Markierung, die in Form eines leuchtenden Sterns erscheint.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8382,7 +8382,11 @@
         "Nemekaths Geisterblick",
         "Sicht auf Madas Welt",
         "Unverstellter Blick",
-        "Seelenschatten"
+        "Seelenschatten",
+        "Graues Siegel",
+        "Phexens Elsterflug",
+        "Sprechende Symbole",
+        "Sternenspur"
       ]
     },
     "Aufheben": {
@@ -8416,7 +8420,7 @@
       "machtpunkte": 3,
       "reichweite": "Selbst",
       "dauer": "10 Minuten",
-      "beschreibung": "Findet verborgene Dinge.\n\nAuge des Jägers: Der Firungeweihte spürt die Anwesenheit und das Verhalten von Lebewesen innerhalb einer Zone im Umkreis um sich.\nBlick in die Vergangenheit: Die Sicht des Zauberers wird in die Vergangenheit seines derzeitigen Aufenthaltsorts versetzt.\nBüchersuche: Die Geweihte kann den Titel eines Buches nennen und wird innerhalb eines Raumes, z.\nErfolgreiche Pflanzensuche: Der Geweihte findet immer 1 Anwendung einer Pflanze mehr bei der Pflanzensuche, als die Probe auf Pflanzenkunde ergeben hat.\nGefunden: Der Zauberer kann die Richtung bestimmen, in der sich ein Objekt befindet.\nGespür für das Göttliche: Der Geweihte kann durch diese Liturgie erahnen, von welcher Tradition ein karmales Objekt gesegnet oder geweiht wurde, und damit Rückschlüsse auf die Gottheit ziehen.\nGöttlicher Fingerzeig: Voraussetzung ist, dass ein solcher Gegenstand überhaupt in Reichweite liegt.\nHilfe in der Not: Die Geweihte vermag zu spüren, in welcher Richtung sich die nächste Person befindet, die Not leidet (d.\nPenetrizzel: Der Zaubernde kann durch feste Materie blicken.\nPestilenz erspüren: Mit diesem Zauberspruch kann der Druide erspüren, welche Art von Krankheit das Opfer befallen hat.\nSchiffsgespür: Der Geweihte spürt, in welcher Richtung sich das nächste hochseetaugliche Schiff auf dem Meer befindet und ob es sich von ihm entfernt oder auf ihn zubewegt, solange es sich in der Reichweite der Liturgie befindet.\nSeelenprüfung: Der Geweihte kann erkennen, ob irgendwann im Leben des Ziels eine initiation des eigenen Pantheons oder sogar eine ordination eines Gottes seines Pantheons auf dieses gewirkt wurde.\nSeelentier erkennen: Die Hexe kann das Seelentier des Ziels erkennen und daraus gewisse Rückschlüsse auf dessen Persönlichkeit erlangen.\nWegweiser: Der Geweihte vermag zu spüren, in welcher Richtung im Umkreis sich die nächste bewohnte Unterkunft befindet.\nAura der Form: Der Geweihten werden visionäre Einblicke über den Vorbesitzer und die Nutzung des Gegenstandes zuteil.\nBuchprüfung: Mit Hilfe dieser Liturgie kann ein Phexgeweihter auf der Stelle die für ihn wichtigsten Passagen eines Buches finden.\nGoldener Blick: Der Geweihte spürt Schätze der Erde (Edelsteine, Edelmetalle, Erze), so vorhanden, und in welcher Richtung diese ungefähr liegen.\nHashnabiths Flehen: Durch diese Liturgie findet der Geweihte die nächste Wasserquelle.\nPeraines Pflanzengespür: Die Liturgie ruft das Digitabulum herbei, einen Talisman der Perainekirche.\nUcuris Geleit: Die Augen des Geweihten werden von Licht umspielt, ein Funkeln darin zeigt ihm die Richtung zum nächsten zwölfgöttlichen Tempel oder Geweihten, je nachdem, worum der …\nWeisung des Himmels: Durch diese Liturgie ist die Geweihte in der Lage, eine bestimmte Himmelsrichtung genau zu bestimmen, auch wenn sie über keine weiteren Hilfsmittel (Südweiser …\nRunjensweisung: Die Gefährten der Geweihten sind in der Lage, ihren Weg zielsicher zu verfolgen.",
+      "beschreibung": "Findet verborgene Dinge.\n\nAuge des Jägers: Der Firungeweihte spürt die Anwesenheit und das Verhalten von Lebewesen innerhalb einer Zone im Umkreis um sich.\nBlick in die Vergangenheit: Die Sicht des Zauberers wird in die Vergangenheit seines derzeitigen Aufenthaltsorts versetzt.\nBüchersuche: Die Geweihte kann den Titel eines Buches nennen und wird innerhalb eines Raumes, z.\nErfolgreiche Pflanzensuche: Der Geweihte findet immer 1 Anwendung einer Pflanze mehr bei der Pflanzensuche, als die Probe auf Pflanzenkunde ergeben hat.\nGefunden: Der Zauberer kann die Richtung bestimmen, in der sich ein Objekt befindet.\nGespür für das Göttliche: Der Geweihte kann durch diese Liturgie erahnen, von welcher Tradition ein karmales Objekt gesegnet oder geweiht wurde, und damit Rückschlüsse auf die Gottheit ziehen.\nGöttlicher Fingerzeig: Voraussetzung ist, dass ein solcher Gegenstand überhaupt in Reichweite liegt.\nHilfe in der Not: Durch einen leichten Zug des Stabs erspürt die Geweihte die Richtung, in der sich die vermisste Person aufhält.\nPenetrizzel: Der Zaubernde kann durch feste Materie blicken.\nPestilenz erspüren: Mit diesem Zauberspruch kann der Druide erspüren, welche Art von Krankheit das Opfer befallen hat.\nSchiffsgespür: Der Geweihte spürt, in welcher Richtung sich das nächste hochseetaugliche Schiff auf dem Meer befindet und ob es sich von ihm entfernt oder auf ihn zubewegt, solange es sich in der Reichweite der Liturgie befindet.\nSeelenprüfung: Dank dieser Liturgie erfährt der Geweihte, wie es um die geprüfte Seele steht.\nSeelentier erkennen: Die Hexe kann das Seelentier des Ziels erkennen und daraus gewisse Rückschlüsse auf dessen Persönlichkeit erlangen.\nWegweiser: Der Geweihte vermag zu spüren, in welcher Richtung im Umkreis sich die nächste bewohnte Unterkunft befindet.\nAura der Form: Der Geweihten werden visionäre Einblicke über den Vorbesitzer und die Nutzung des Gegenstandes zuteil.\nBuchprüfung: Mit Hilfe dieser Liturgie kann ein Phexgeweihter auf der Stelle die für ihn wichtigsten Passagen eines Buches finden.\nGoldener Blick: Der Geweihte spürt Schätze der Erde (Edelsteine, Edelmetalle, Erze), so vorhanden, und in welcher Richtung diese ungefähr liegen.\nHashnabiths Flehen: Durch diese Liturgie findet der Geweihte die nächste Wasserquelle.\nPeraines Pflanzengespür: Die Liturgie ruft das Digitabulum herbei, einen Talisman der Perainekirche.\nUcuris Geleit: Die Augen des Geweihten werden von Licht umspielt, ein Funkeln darin zeigt ihm die Richtung zum nächsten zwölfgöttlichen Tempel oder Geweihten, je nachdem, worum der …\nWeisung des Himmels: Durch diese Liturgie ist die Geweihte in der Lage, eine bestimmte Himmelsrichtung genau zu bestimmen, auch wenn sie über keine weiteren Hilfsmittel (Südweiser …\nRunjensweisung: Die Gefährten der Geweihten sind in der Lage, ihren Weg zielsicher zu verfolgen.\nJagdglück: Der Segen bewirkt, dass das nächste potenzielle Beutetier sich in Richtung des Geweihten in Bewegung setzt, und auch der Priester nähert sich intuitiv seiner Beute.\nRuf der Ferne: Die wandernde Gesellin wird in die Richtung geführt, in der sie etwas Neues über ihr Handwerk erfahren kann.\nUrischars ordnender Blick: Der Geweihte erkennt eine Ordnung in einer vor ihm liegenden Unordnung, z.B.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8443,7 +8447,10 @@
         "Peraines Pflanzengespür",
         "Ucuris Geleit",
         "Weisung des Himmels",
-        "Runjensweisung"
+        "Runjensweisung",
+        "Jagdglück",
+        "Ruf der Ferne",
+        "Urischars ordnender Blick"
       ]
     },
     "Ausspähung": {
@@ -8452,7 +8459,7 @@
       "machtpunkte": 3,
       "reichweite": "Selbst",
       "dauer": "5",
-      "beschreibung": "Spioniert ein entferntes Ziel aus.\n\nModifikatoren:\n  Gruppensicht (FK) (+1): Wahrnehmung mit Verbündeten in Verstand-Reichweite teilen.\n\nBlick durch fremde Augen: Der Zauberer ersetzt seine eigene Sicht durch jene des Ziels und sieht dadurch alles, was sich in dessen Blickfeld befindet.\nBlick in die Flammen: Der Geweihte vermag in schemenhaften Visionen zu erkennen, wodurch ein noch loderndes oder schon lange erloschenes Feuer ausgelöst wurde.",
+      "beschreibung": "Spioniert ein entferntes Ziel aus.\n\nModifikatoren:\n  Gruppensicht (FK) (+1): Wahrnehmung mit Verbündeten in Verstand-Reichweite teilen.\n\nBlick durch fremde Augen: Der Zauberer ersetzt seine eigene Sicht durch jene des Ziels und sieht dadurch alles, was sich in dessen Blickfeld befindet.\nBlick in die Flammen: Der Geweihte sieht Szenen, die sich während des Brandes abgespielt haben, scheinbar ohne Zusammenhang (+) bis hin zu zusammenhängend mit erkennbarem Verlauf und Ursache …",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8493,7 +8500,7 @@
       "machtpunkte": 2,
       "reichweite": "VER",
       "dauer": "Sofort",
-      "beschreibung": "Ziel wird Betäubt.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): MFS (+2) oder GFS (+3).\n\nAerofugo: In einer Zone im Umkreis, deren Mittelpunkt in der Reichweite des Zaubers liegen muss, verschwindet sämtliche Luft und solange der Zauber wirkt, strömt auch keine neue Luft in die Zone.\nAtemnot: Der Verzauberte leidet augenblicklich unter Atemnot.\nBerauschen: Der Levthanpriester kann andere Personen berauschen, sodass sie so wirken, als stünden sie unter dem Einfluss von Alkohol oder Rauschmitteln.\nFriedvoller Rausch: Das Ziel wird Betäubt und fühlt sich dabei in einem befriedigenden Rausch gefangen.\nInvinculo: Der Invinculo erschafft Dornenranken, die sich um das Ziel winden, ihm Schaden zufügen und es Festhalten.\nParalysis: Der Körper des Verzauberten versteift und verhärtet sich.\nStillstand: Der Zauberer muss einen Mittelpunkt innerhalb der Reichweite des Zauberspruchs benennen, um den herum sich die Zone kugelförmig mit einem Umkreis ausbreitet.\nVersteinerung: Das Ziel versteift zusehends und wird schließlich bewegungsunfähig (Betäubt).\nVipernblick: Mit diesem Zauberspruch kann die Hexe ein Opfer, solange sie ihren Blick nicht von ihm abwendet, hypnotisieren und somit lähmen.\nWarmes gefriere: Gegenstände bis maximal zur Größe einer Tasse/Truhe/Tür/Burgtor werden mit einer Eisschicht überzogen.\nWinterschlaf: Die Zeremonie versetzt einen freiwilligen Kulturschaffenden in einen tiefen Schlaf, aus dem er erst am Ende der Wirkungsdauer erwacht oder durch grobes Wecken gerissen werden kann.\nWoge der Versteinerung: Der Zauber erschafft eine Lähmungswelle.\nAscandears Hingabe: Die Zielperson dieser Liturgie wird in einen friedlichen, glücksseligen Rauschzustand versetzt, so als würde sie unter dem Einfluss von Alkohol oder einem Rauschmittel …",
+      "beschreibung": "Ziel wird Betäubt.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): MFS (+2) oder GFS (+3).\n\nAerofugo: In einer Zone im Umkreis, deren Mittelpunkt in der Reichweite des Zaubers liegen muss, verschwindet sämtliche Luft und solange der Zauber wirkt, strömt auch keine neue Luft in die Zone.\nAtemnot: Der Verzauberte leidet augenblicklich unter Atemnot.\nBerauschen: Der Levthanpriester kann andere Personen berauschen, sodass sie so wirken, als stünden sie unter dem Einfluss von Alkohol oder Rauschmitteln.\nFriedvoller Rausch: Das Ziel wird Betäubt und fühlt sich dabei in einem befriedigenden Rausch gefangen.\nInvinculo: Der Invinculo erschafft Dornenranken, die sich um das Ziel winden, ihm Schaden zufügen und es Festhalten.\nParalysis: Der Körper des Verzauberten versteift und verhärtet sich.\nStillstand: Der Zauberer muss einen Mittelpunkt innerhalb der Reichweite des Zauberspruchs benennen, um den herum sich die Zone kugelförmig mit einem Umkreis ausbreitet.\nVersteinerung: Das Ziel versteift zusehends und wird schließlich bewegungsunfähig (Betäubt).\nVipernblick: Mit diesem Zauberspruch kann die Hexe ein Opfer, solange sie ihren Blick nicht von ihm abwendet, hypnotisieren und somit lähmen.\nWarmes gefriere: Gegenstände bis maximal zur Größe einer Tasse/Truhe/Tür/Burgtor werden mit einer Eisschicht überzogen.\nWinterschlaf: Die Zielperson fällt in einen tiefen Winterschlaf, dessen Dauer vor Beginn der Liturgie durch den Geweihten festgelegt werden muss.\nWoge der Versteinerung: Der Zauber erschafft eine Lähmungswelle.\nAscandears Hingabe: Die Zielperson dieser Liturgie wird in einen friedlichen, glücksseligen Rauschzustand versetzt, so als würde sie unter dem Einfluss von Alkohol oder einem Rauschmittel …",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8521,7 +8528,7 @@
       "machtpunkte": 2,
       "reichweite": "VER",
       "dauer": "Sofort",
-      "beschreibung": "Verursacht bei Opfern Abzüge von –2/–4.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): MFS (+2) oder GFS (+3).\n  Stark (+1): Konstitutionsprobe zum Abschütteln mit –2.\n\nBlendstrahl: Der Betroffene wird geblendet.\nBlendung: Das Ziel wird geblendet (Zustand Geblendet).\nBlindheit: Das Ziel verliert schlagartig die Fähigkeit, seine Umgebung optisch wahrzunehmen (Zustand Geblendet).\nBlitz dich find: Der Verzauberte wird geblendet.\nObarans Blendung: Das Ziel wird geblendet (Zustand Geblendet).\nTaubheit: Das Ziel kann nichts mehr hören (Zustand Taub).\nBlendstrahl aus Alveran: Aus der Hand des Geweihten fährt ein gleißender Lichtstrahl, der eine Person blendet.",
+      "beschreibung": "Verursacht bei Opfern Abzüge von –2/–4.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): MFS (+2) oder GFS (+3).\n  Stark (+1): Konstitutionsprobe zum Abschütteln mit –2.\n\nBlendstrahl: Der Betroffene wird geblendet.\nBlendung: Das Ziel wird geblendet (Zustand Geblendet).\nBlindheit: Das Ziel verliert schlagartig die Fähigkeit, seine Umgebung optisch wahrzunehmen (Zustand Geblendet).\nBlitz dich find: Der Verzauberte wird geblendet.\nObarans Blendung: Das Ziel wird geblendet (Zustand Geblendet).\nTaubheit: Das Ziel kann nichts mehr hören (Zustand Taub).\nBlendstrahl aus Alveran: Aus der Hand des Geweihten fährt ein gleißender Lichtstrahl, der eine Person blendet.\nPraios’ Mahnung: Diese Liturgie wird oft als Bestrafung und Buße eingesetzt.\nSternenstaub: Der Staub dient dazu, Angriffe durch Feinde zu erschweren.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8534,7 +8541,9 @@
         "Blitz dich find",
         "Obarans Blendung",
         "Taubheit",
-        "Blendstrahl aus Alveran"
+        "Blendstrahl aus Alveran",
+        "Praios’ Mahnung",
+        "Sternenstaub"
       ]
     },
     "Böswillige Verwandlung": {
@@ -8573,7 +8582,7 @@
       "machtpunkte": 1,
       "reichweite": "VER",
       "dauer": "1 Stunde",
-      "beschreibung": "Ignoriere bis zu 4 Punkte Beleuchtungsabzüge, 6 mit Steigerung.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Ignoriert alle Beleuchtungsabzüge und 4 Punkte Abzüge durch Unsichtbarkeit.\n\nKatzenaugen: Die Lichtempfindlichkeit der Augen des Zieles erhöht sich ungemein.\nMondsicht: Beleuchtungsabzüge durch Dunkelheit werden deutlich verringert.\nSicht in der Dunkelheit: Die Lichtempfindlichkeit der Augen des Zieles erhöht sich ungemein.\nAuge des Mondes: Durch diese Liturgie vermag der Phexgeweihte auch während der Nacht oder bei Dunkelheit ohne Einschränkung zu sehen.",
+      "beschreibung": "Ignoriere bis zu 4 Punkte Beleuchtungsabzüge, 6 mit Steigerung.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Ignoriert alle Beleuchtungsabzüge und 4 Punkte Abzüge durch Unsichtbarkeit.\n\nKatzenaugen: Die Lichtempfindlichkeit der Augen des Zieles erhöht sich ungemein.\nMondsicht: Beleuchtungsabzüge durch Dunkelheit werden deutlich verringert.\nSicht in der Dunkelheit: Die Lichtempfindlichkeit der Augen des Zieles erhöht sich ungemein.\nAuge des Mondes: Durch diese Liturgie vermag der Phexgeweihte auch während der Nacht oder bei Dunkelheit ohne Einschränkung zu sehen.\nGolgaris Zwielicht: Wenn der Geweihte die Augen wieder öffnet, ist die Welt für ihn in graues Zwielicht getaucht.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8583,7 +8592,8 @@
         "Katzenaugen",
         "Mondsicht",
         "Sicht in der Dunkelheit",
-        "Auge des Mondes"
+        "Auge des Mondes",
+        "Golgaris Zwielicht"
       ]
     },
     "Ebenenwechsel": {
@@ -8592,7 +8602,7 @@
       "machtpunkte": 4,
       "reichweite": "Verstand",
       "dauer": "Sofort",
-      "beschreibung": "Wechselt in eine andere Existenzebene.\n\nModifikatoren:\n  Extradimensionaler Raum (FK) (+1): Taschendimension mit Unterkunft für bis zu 5 Personen.\n  Feind transportieren (FK) (+2): Unwilliges Ziel in andere Ebene versetzen (3-5 Runden).\n  Zusätzliche Empfänger (FK) (+1): Ein zusätzliches Ziel pro Punkt.\n\nAuge des Limbus: Der Spruch erschafft einen Strudel in den angrenzenden Limbus.\nChrononautos: Der Zauberer legt einen Punkt innerhalb der Reichweite fest, der den Mittelpunkt einer Zone mit einem Umkreis bildet.\nFreie Seelenfahrt: Mit dieser Zeremonie kann ein Schamane seinen Geist von seinem Körper trennen und sich in die Geisterwelt seiner Kultur begeben.\nKörperlose Reise: Der Zauberer trennt seinen Geist von seinem Körper und kann sich auf diesem Wege mit einer Geschwindigkeit von fortbewegen, feste Objekte halten den Geisterkörper jedoch auf.\nNekropathia: Der Zauberer trennt seinen Geist von seinem Körper und kann sich mit ihm in eines der Totenreiche begeben.\nPlanastrale: Das Ritual öffnet ein bis zu durchmessendes Tor in den angrenzenden Limbus, das von beiden Seiten aus durchquert werden kann.\nSeelenwanderung: Der Zauberer tauscht seine Seele mit der des Ziels.\nTraumgestalt: Der Zauberer dringt in die Träume des Ziels ein und kann diese manipulieren.",
+      "beschreibung": "Wechselt in eine andere Existenzebene.\n\nModifikatoren:\n  Extradimensionaler Raum (FK) (+1): Taschendimension mit Unterkunft für bis zu 5 Personen.\n  Feind transportieren (FK) (+2): Unwilliges Ziel in andere Ebene versetzen (3-5 Runden).\n  Zusätzliche Empfänger (FK) (+1): Ein zusätzliches Ziel pro Punkt.\n\nAuge des Limbus: Der Spruch erschafft einen Strudel in den angrenzenden Limbus.\nChrononautos: Der Zauberer legt einen Punkt innerhalb der Reichweite fest, der den Mittelpunkt einer Zone mit einem Umkreis bildet.\nFreie Seelenfahrt: Mit dieser Zeremonie kann ein Schamane seinen Geist von seinem Körper trennen und sich in die Geisterwelt seiner Kultur begeben.\nKörperlose Reise: Der Zauberer trennt seinen Geist von seinem Körper und kann sich auf diesem Wege mit einer Geschwindigkeit von fortbewegen, feste Objekte halten den Geisterkörper jedoch auf.\nNekropathia: Der Zauberer trennt seinen Geist von seinem Körper und kann sich mit ihm in eines der Totenreiche begeben.\nPlanastrale: Das Ritual öffnet ein bis zu durchmessendes Tor in den angrenzenden Limbus, das von beiden Seiten aus durchquert werden kann.\nSeelenwanderung: Der Zauberer tauscht seine Seele mit der des Ziels.\nTraumgestalt: Der Zauberer dringt in die Träume des Ziels ein und kann diese manipulieren.\nMarbos Geleit: Der Geweihte verlässt seinen Körper und begleitet die Seele des Sterbenden über das Nirgendmeer, um sie sicher bis an Uthars Pforte zu geleiten.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8605,7 +8615,8 @@
         "Nekropathia",
         "Planastrale",
         "Seelenwanderung",
-        "Traumgestalt"
+        "Traumgestalt",
+        "Marbos Geleit"
       ]
     },
     "Eigenschaft erhöhen/senken": {
@@ -8614,7 +8625,7 @@
       "machtpunkte": 2,
       "reichweite": "VER 5",
       "dauer": "Sofort/5",
-      "beschreibung": "Erhöht oder senkt Attribut oder Fertigkeit.\n\nModifikatoren:\n  Stark (+1): Nur senken: Willenskraftprobe zum Abschütteln mit –2.\n  Verbessert (FK) (+2): Erhöhen: freie Wiederholung pro Runde; Senken: –2 Malus.\n\nAttributo (Eigenschaft steigern): Steigert eine körperliche oder geistige Eigenschaft des Ziels.\nMal (Schwächung): Schwächt eine bestimmte Eigenschaft des Ziels.\nSchwächungszauber: Schwächt eine Eigenschaft des Ziels.\nAffenarme: Die Hexe erhält Erleichterung für Proben auf Klettern (Baumklettern, Bergsteigen oder Fassadenklettern) und Körperbeherrschung (Balance).\nBild für die Ewigkeit: Während der Wirkungsdauer aufgenommene visuelle Sinneseindrücke brennen sich permanent in das Gedächtnis des Betroffenen ein.\nDämonisches Vergessen: Für das Opfer des Zaubers sind alle geistigen Handlungen um erschwert (beispielsweise Gesellschafts- und Wissenstalente).\nEingeschworene Mannschaft: Durch diese Zeremonie kann der Geweihte mehrere ausgewählte Besatzungsmitgliedern eines Schiffes eine Begabung für Boote & Schiffe verleihen.\nEins mit der Natur: Der Zauberer erhält während der Wirkungsdauer die SF Geländekunde für ein beliebiges Gelände.\nErmutigung: Das Ziel wird zuversichtlicher und mutiger.\nFalkenauge: Der Verzauberte baut eine geistige Verbindung zu seinem Ziel auf.\nFurchtresistenz: Der Priester ignoriert die Auswirkungen von Furcht und wird durch Furcht nicht Angeschlagen.\nKleine Moralstärkung: Durch diese Zeremonie kann der Geweihte die Mannschaft eines Bootes oder Schiffes segnen und ihr so Mut machen.\nKraft des Tieres: Durch diesen Zauberspruch erlangt die Hexe für einen kurzen Zeitraum große Kräfte.\nMemorans: Durch den Zauberspruch kann sich der Zauberer alles einprägen, was er in den nächsten Minuten wahrnimmt, ganz so, als ob er ein fotografisches Gedächtnis besitzen würde.\nMoralstärkung: Durch diese Zeremonie kann der Efferdgeweihte die Mannschaft eines Bootes oder Schiffes segnen und ihr so Mut machen.\nMotivation: Bis zu Wiederholungsproben innerhalb der Wirkungsdauer sind nicht erschwert.\nNuminorus Fluch: Durch diese Zeremonie lässt sich ein Wasserfahrzeug verfluchen.\nOpfergang: Während der Wirkungsdauer ignoriert der Rondrageweihte Wundabzüge und bleibt handlungsfähig, selbst wenn er eigentlich außer Gefecht wäre.\nPhysiostabilis: Mittels dieses Zauberspruchs wird kurzfristig die Widerstandskraft gegen körperliche Beeinflussungen gestärkt.\nPlumbumbarum: Das Ziel erleidet einen Abzug in Höhe der des Zaubers auf seine Angriff.\nPsychostabilis: Mittels dieses Zauberspruchs wird kurzfristig die Resistenz gegen geistige Beeinflussung gestärkt.\nSchaffenskraft: Der Geweihte kann bis zu 6 freiwillige Ziele in Reichweite benennen (inklusive sich selbst).\nSchmerzresistenz: Der Geweihte ignoriert Wundabzüge.\nSicherer Weg: Der Avesgeweihte erhält während der Wirkungsdauer in natürlichem Gelände, etwa in Wäldern, Sümpfen und Bergen, eine Erleichterung von auf alle Proben, um Gefahren des Wegs zu entgehen.\nStandfest: Dem Ziel des Zaubers unterlaufen bei Attacken und Verteidigungen keine Patzer mehr.\nCanyzeths Weisheit: Die Liturgie ruft die Tafel der Erzheiligen Canyzeth herbei, die Anwesenden folgende Boni gewährt so lange sie vor Ort ist.\nEin Bild für die Ewigkeit: Der Geweihte kann sich einen Sinneseindruck mit allen Feinheiten für alle Ewigkeit einprägen.\nHandwerkssegen: Der Geweihte segnet die Fähigkeit einer anderen Person, dadurch steigt bei dieser für eine Probe das gesegnete Talent um +5, so als hätte der Geweihte für sich selbst …\nKräftigung der Schwachen und Versehrten: Die Liturgie sorgt für den Rückgewinn entstandener permanenter Verluste einer guten Eigenschaft.\nLohn der Unverzagten: Der Gesegnete erhält bei Robustheitsprobe gegen Krankheiten eine Erleichterung von +5 Punkten.\nMannschaftssegen: Diese Liturgie schenkt der Besatzung eines Schiffes besondere Zuversicht.\nMärtyrersegen: Durch diese Liturgie kann der Geweihte jeglichen Schmerz ignorieren.\nNimmermüde Wanderschaft: Der Gesegnete ist vor den Folgen eines strapaziösen Marsches geschützt.\nSegen der heiligen Velvenya: Die negativen Auswirkungen von Nachteilen, die Borons Wirken entgegengesetzt sind, lassen sich so für die Wirkungsdauer aufheben.\nSegnung der stählernen Stirn: Die gesegnete Person fühlt sich ermutigt und in ihrem Glauben gestärkt.",
+      "beschreibung": "Erhöht oder senkt Attribut oder Fertigkeit.\n\nModifikatoren:\n  Stark (+1): Nur senken: Willenskraftprobe zum Abschütteln mit –2.\n  Verbessert (FK) (+2): Erhöhen: freie Wiederholung pro Runde; Senken: –2 Malus.\n\nAttributo (Eigenschaft steigern): Steigert eine körperliche oder geistige Eigenschaft des Ziels.\nMal (Schwächung): Schwächt eine bestimmte Eigenschaft des Ziels.\nSchwächungszauber: Schwächt eine Eigenschaft des Ziels.\nAffenarme: Die Hexe erhält Erleichterung für Proben auf Klettern (Baumklettern, Bergsteigen oder Fassadenklettern) und Körperbeherrschung (Balance).\nBild für die Ewigkeit: Während der Wirkungsdauer aufgenommene visuelle Sinneseindrücke brennen sich permanent in das Gedächtnis des Betroffenen ein.\nDämonisches Vergessen: Für das Opfer des Zaubers sind alle geistigen Handlungen um erschwert (beispielsweise Gesellschafts- und Wissenstalente).\nEingeschworene Mannschaft: Durch diese Zeremonie kann der Geweihte mehrere ausgewählte Besatzungsmitgliedern eines Schiffes eine Begabung für Boote & Schiffe verleihen.\nEins mit der Natur: Der Zauberer erhält während der Wirkungsdauer die SF Geländekunde für ein beliebiges Gelände.\nErmutigung: Das Ziel wird zuversichtlicher und mutiger.\nFalkenauge: Der Verzauberte baut eine geistige Verbindung zu seinem Ziel auf.\nFurchtresistenz: Der Priester ignoriert die Auswirkungen von Furcht und wird durch Furcht nicht Angeschlagen.\nKleine Moralstärkung: Durch diese Zeremonie kann der Geweihte die Mannschaft eines Bootes oder Schiffes segnen und ihr so Mut machen.\nKraft des Tieres: Durch diesen Zauberspruch erlangt die Hexe für einen kurzen Zeitraum große Kräfte.\nMemorans: Durch den Zauberspruch kann sich der Zauberer alles einprägen, was er in den nächsten Minuten wahrnimmt, ganz so, als ob er ein fotografisches Gedächtnis besitzen würde.\nMoralstärkung: Durch diese Zeremonie kann der Efferdgeweihte die Mannschaft eines Bootes oder Schiffes segnen und ihr so Mut machen.\nMotivation: Bis zu Wiederholungsproben innerhalb der Wirkungsdauer sind nicht erschwert.\nNuminorus Fluch: Durch diese Zeremonie lässt sich ein Wasserfahrzeug verfluchen.\nOpfergang: Während der Wirkungsdauer ignoriert der Rondrageweihte Wundabzüge und bleibt handlungsfähig, selbst wenn er eigentlich außer Gefecht wäre.\nPhysiostabilis: Mittels dieses Zauberspruchs wird kurzfristig die Widerstandskraft gegen körperliche Beeinflussungen gestärkt.\nPlumbumbarum: Das Ziel erleidet einen Abzug in Höhe der des Zaubers auf seine Angriff.\nPsychostabilis: Mittels dieses Zauberspruchs wird kurzfristig die Resistenz gegen geistige Beeinflussung gestärkt.\nSchaffenskraft: Der Geweihte kann bis zu 6 freiwillige Ziele in Reichweite benennen (inklusive sich selbst).\nSchmerzresistenz: Der Geweihte ignoriert Wundabzüge.\nSicherer Weg: Der Avesgeweihte erhält während der Wirkungsdauer in natürlichem Gelände, etwa in Wäldern, Sümpfen und Bergen, eine Erleichterung von auf alle Proben, um Gefahren des Wegs zu entgehen.\nStandfest: Dem Ziel des Zaubers unterlaufen bei Attacken und Verteidigungen keine Patzer mehr.\nCanyzeths Weisheit: Die Liturgie ruft die Tafel der Erzheiligen Canyzeth herbei, die Anwesenden folgende Boni gewährt so lange sie vor Ort ist.\nEin Bild für die Ewigkeit: Der Geweihte kann sich einen Sinneseindruck mit allen Feinheiten für alle Ewigkeit einprägen.\nHandwerkssegen: Der Geweihte segnet die Fähigkeit einer anderen Person, dadurch steigt bei dieser für eine Probe das gesegnete Talent um +5, so als hätte der Geweihte für sich selbst …\nKräftigung der Schwachen und Versehrten: Die Liturgie sorgt für den Rückgewinn entstandener permanenter Verluste einer guten Eigenschaft.\nLohn der Unverzagten: Der Gesegnete erhält bei Robustheitsprobe gegen Krankheiten eine Erleichterung von +5 Punkten.\nMannschaftssegen: Diese Liturgie schenkt der Besatzung eines Schiffes besondere Zuversicht.\nMärtyrersegen: Durch diese Liturgie kann der Geweihte jeglichen Schmerz ignorieren.\nNimmermüde Wanderschaft: Der Gesegnete ist vor den Folgen eines strapaziösen Marsches geschützt.\nSegen der heiligen Velvenya: Die negativen Auswirkungen von Nachteilen, die Borons Wirken entgegengesetzt sind, lassen sich so für die Wirkungsdauer aufheben.\nSegnung der stählernen Stirn: Die gesegnete Person fühlt sich ermutigt und in ihrem Glauben gestärkt.\nBlick für das Handwerk: Der Ingerimmgeweihte wird in die Lage versetzt, den Wert und die Qualität von Handwerksstücken außerordentlich gut einzuschätzen und zu bestimmen.\nTherbûns Erkenntnis: Die Priesterin erlangt durch diese Liturgie große Kenntnis über die Behandlung von Krankheiten.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8668,7 +8679,9 @@
         "Märtyrersegen",
         "Nimmermüde Wanderschaft",
         "Segen der heiligen Velvenya",
-        "Segnung der stählernen Stirn"
+        "Segnung der stählernen Stirn",
+        "Blick für das Handwerk",
+        "Therbûns Erkenntnis"
       ]
     },
     "Elementarmanipulation": {
@@ -8677,7 +8690,7 @@
       "machtpunkte": 1,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Erlaubt kleinere Manipulationen der Grundelemente.\n\nModifikatoren:\n  Mächtig (FK) (+3): Volumen verdreifacht; Stoßen –2; Angriff 2W6 (3W6 mit Steigerung).\n  Wetter (FK, episch) (+5): Stürme beschwören/aufheben; Regen, Schnee, Sonne, Wind im 8-km-Umkreis.\n\nBerauschender Wein: Bis zu Liter Wasser werden in schmackhaften Wein der gleichen Menge verwandelt.\nBrandform: Innerhalb eines Umkreis vermag der Zauberer, das Element Feuer zu verformen, solange es nicht Teil eines Wesens ist (etwa bei einem Feuerdschinn).\nCaldofrigo: Mittels Caldofrigo kann die Temperatur eines maximal truhengroßen Objekts verändert werden.\nErzene Opfergabe: Metalle oder Steine, herkömmlicher wie edler Natur, können vom Ingerimmgeweihten wieder mit dem Fels verschmolzen werden.\nFelsenform: Innerhalb eines Umkreis vermag der Zauberer, alle Materie des Elements Erz zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Erzdschinns).\nGletscherform: Innerhalb eines Umkreis vermag der Zauberer alle Materie des Elements Eis zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Eisdschinns).\nLäuterung des Erzes: Innerhalb eines Umkreis um den Geweihten löst sich alles befindliche und benannte erzene Material aus dem umgebenden Felsen.\nMetallerhitzung: Ein maximal wiegendes Stück Metall wird so sehr erhitzt, dass es geschmiedet werden kann.\nPeraines Gnade: Der Geweihte steckt ein Samenkorn in die Erde, das binnen zu einer Blume heranwächst (in Liturgiedauer inbegriffen).\nPflanzenform: Innerhalb eines Umkreis vermag der Zauberer alle Materie des Elements Humus zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Humusdschinns).\nTransformatio: Durch den TRANSFORMATIO können Objekte in andere verwandelt werden.\nWirbelform: Innerhalb eines Umkreis vermag der Elf, alle Materie des Elements Luft zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Luftdschinns).\nWogenform: Innerhalb eines Umkreis vermag der Zauberer, alle Materie des Elements Wasser zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Wasserdschinns).\nAnrufung der Erdkraft: Der Erkrankte fällt in heilsamen Schlaf und erwacht Stunden später ausgeruht und erholt.\nAnrufung der Winde: Mit dieser Liturgie kann der Geweihte die Strömung des Windes leiten.\nAzilas Quellgesang: Aus dem Boden sprudelt für die Wirkungsdauer reines Trinkwasser und zwar an der Stelle, wo der Aquamarin vergraben wurde.\nElementwandlung: Der Priester kann mit dieser Liturgie Gegenstände in andere Objekte verwandeln.\nGebieter der Lava: Die Liturgie ruft den Finger Ingerimms herbei, einen Talisman der Kirche, mit dessen Hilfe der Ingerimmgeweihte Lavaströme lenken kann.\nGeläutert sei Erz und Goldgestein: Die nutzbaren Metalle werden in reinster Form aus dem Erz gepresst.\nHeilige Schmiedeglut: Die Liturgie bewirkt, dass ein einfaches Feuer die Temperatur erreicht, welche zum Schmieden notwendig ist.\nHerr über Feuer und Glut: Der Geweihte ist in der Lage, Feuer in seiner näheren Umgebung zu beeinflussen und sogar gezielt zu lenken.\nSegen des Plättlings: Durch diese Liturgie wird das Salzwasser in dem Gefäß in Trinkwasser verwandelt.\nSwafnirs Fluke: Mit dieser Liturgie kann der Geweihte eine Wasserfläche in Sichtweite entweder zu glatter See beruhigen oder aber zu wilden Wellen aufpeitschen.\nTeilung der Wasser: Durch diese Liturgie wird einem Gegenstand Wasser entzogen, lediglich das für die Stabilität notwendige bleibt erhalten.",
+      "beschreibung": "Erlaubt kleinere Manipulationen der Grundelemente.\n\nModifikatoren:\n  Mächtig (FK) (+3): Volumen verdreifacht; Stoßen –2; Angriff 2W6 (3W6 mit Steigerung).\n  Wetter (FK, episch) (+5): Stürme beschwören/aufheben; Regen, Schnee, Sonne, Wind im 8-km-Umkreis.\n\nBerauschender Wein: Bis zu Liter Wasser werden in schmackhaften Wein der gleichen Menge verwandelt.\nBrandform: Innerhalb eines Umkreis vermag der Zauberer, das Element Feuer zu verformen, solange es nicht Teil eines Wesens ist (etwa bei einem Feuerdschinn).\nCaldofrigo: Mittels Caldofrigo kann die Temperatur eines maximal truhengroßen Objekts verändert werden.\nErzene Opfergabe: Metalle oder Steine, herkömmlicher wie edler Natur, können vom Ingerimmgeweihten wieder mit dem Fels verschmolzen werden.\nFelsenform: Innerhalb eines Umkreis vermag der Zauberer, alle Materie des Elements Erz zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Erzdschinns).\nGletscherform: Innerhalb eines Umkreis vermag der Zauberer alle Materie des Elements Eis zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Eisdschinns).\nLäuterung des Erzes: Innerhalb eines Umkreis um den Geweihten löst sich alles befindliche und benannte erzene Material aus dem umgebenden Felsen.\nMetallerhitzung: Ein maximal wiegendes Stück Metall wird so sehr erhitzt, dass es geschmiedet werden kann.\nPeraines Gnade: Der Geweihte steckt ein Samenkorn in die Erde, das binnen zu einer Blume heranwächst (in Liturgiedauer inbegriffen).\nPflanzenform: Innerhalb eines Umkreis vermag der Zauberer alle Materie des Elements Humus zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Humusdschinns).\nTransformatio: Durch den TRANSFORMATIO können Objekte in andere verwandelt werden.\nWirbelform: Innerhalb eines Umkreis vermag der Elf, alle Materie des Elements Luft zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Luftdschinns).\nWogenform: Innerhalb eines Umkreis vermag der Zauberer, alle Materie des Elements Wasser zu verformen, solange sie nicht Teil eines Wesens ist (etwa eines Wasserdschinns).\nAnrufung der Erdkraft: Der Erkrankte fällt in heilsamen Schlaf und erwacht Stunden später ausgeruht und erholt.\nAnrufung der Winde: Mit dieser Liturgie kann der Geweihte die Strömung des Windes leiten.\nAzilas Quellgesang: Aus dem Boden sprudelt für die Wirkungsdauer reines Trinkwasser und zwar an der Stelle, wo der Aquamarin vergraben wurde.\nElementwandlung: Der Priester kann mit dieser Liturgie Gegenstände in andere Objekte verwandeln.\nGebieter der Lava: Die Liturgie ruft den Finger Ingerimms herbei, einen Talisman der Kirche, mit dessen Hilfe der Ingerimmgeweihte Lavaströme lenken kann.\nGeläutert sei Erz und Goldgestein: Die nutzbaren Metalle werden in reinster Form aus dem Erz gepresst.\nHeilige Schmiedeglut: Die Liturgie bewirkt, dass ein einfaches Feuer die Temperatur erreicht, welche zum Schmieden notwendig ist.\nHerr über Feuer und Glut: Der Geweihte ist in der Lage, Feuer in seiner näheren Umgebung zu beeinflussen und sogar gezielt zu lenken.\nSegen des Plättlings: Durch diese Liturgie wird das Salzwasser in dem Gefäß in Trinkwasser verwandelt.\nSwafnirs Fluke: Mit dieser Liturgie kann der Geweihte eine Wasserfläche in Sichtweite entweder zu glatter See beruhigen oder aber zu wilden Wellen aufpeitschen.\nTeilung der Wasser: Durch diese Liturgie wird einem Gegenstand Wasser entzogen, lediglich das für die Stabilität notwendige bleibt erhalten.\nAnrufung Nuiannas: Durch diese Liturgie erschafft der Geweihte eine dichte Nebelfront, die sich in eine von ihm gewünschte Richtung ausbreitet.\nBelemans Hochzeit: Mittels dieser Liturgie kann die Geweihte ein Gewitter entstehen oder dunkle Wolken abregnen lassen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8707,7 +8720,9 @@
         "Herr über Feuer und Glut",
         "Segen des Plättlings",
         "Swafnirs Fluke",
-        "Teilung der Wasser"
+        "Teilung der Wasser",
+        "Anrufung Nuiannas",
+        "Belemans Hochzeit"
       ]
     },
     "Empathie": {
@@ -8716,7 +8731,7 @@
       "machtpunkte": 1,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Vergleichender Wurf gegen Willenskraft für +1/+2 auf Darbietung, Einschüchtern, Provozieren und Überreden gegen das Ziel.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Bezaubern (FK) (+2): Unkooperativ→Kooperativ, mit Steigerung Freundlich.\n  Dauer (FK) (+1): Wirkungsdauer Minuten statt Runden.\n  Wahrheit (FK) (+2): Wirker erkennt, ob das Ziel wissentlich lügt.\n\nBand der Freundschaft: Dieses ursprünglich elfische Freundschaftsritual (eine lange Version des BANNBALADIN für Gäste des Elfendorfes) weckt in seinem Ziel Sympathien und Freundschaft für den Zaubernden.\nBann der Furcht: Mit dieser Liturgie wird Furcht (auch Angeschlagen durch Furcht) sofort genommen, unabhängig von der Ursache.\nBannbaladin: Dieser ursprünglich elfische Freundschaftszauber weckt in seinem Ziel Sympathien und Freundschaft für den Zaubernden.\nBesänftigung: Eine kampfwütige Raserei des Ziels endet kurz darauf.\nEinflüsterung: Proben auf Überreden sind für das Ziel um erleichtert, wenn das Talent dafür genutzt wird, anderen Personen einzuflüstern, eigennützigen Gelüsten nachzugehen und lästige Verpflichtungen zu ign.\nFreundschaftliches Auftreten: Die Geweihte kann gegenüber einem Kulturschaffenden ein Grundvertrauen aufbauen.\nGöttliche Erkenntnis: Der Nandusgeweihte bekommt eine Begabung für die nächste Probe auf ein Wissenstalent, das er innerhalb der Wirkungsdauer benutzt.\nHeiliges Liebesspiel: Alle Proben auf Betören sind für das Ziel erleichtert.\nHelfende Hand: Die Liturgie erleichtert Sammelproben für mindestens 2 und maximal 3 beteiligte Personen.\nLevthanischer Liebhaber: Alle Proben auf Betören (Anbändeln oder Liebeskünste) sind für den Geweihten erleichtert.\nLevthans Feuer: Das Ziel entbrennt in leidenschaftlicher Zuneigung zum Zauberer und wird sich diesem auf Wunsch hingeben.\nMondsilberzunge: Der Held wirkt vertrauenerweckend.\nSeidenzunge: Das Ziel wird dem Zauberer gegenüber äußerst leichtgläubig, was bedeutet, dass Proben auf Willenskraft (Überreden widerstehen) um erschwert sind.\nSensibar: Der Zaubernde kann die Gefühle des Verzauberten ergründen.\nVerstecktes Begehren: Der Geweihte vermag zu erkennen, welche Wünsche und Gelüste das Leben eines Wesens bestimmen.\nÄngste Lindern: Mit diesem Zauberspruch wird Furcht (auch Angeschlagen durch Furcht) sofort genommen, unabhängig von der Ursache.\nAller Welt Freund: Solange der Geweihte spielt, wird ihn niemand angreifen.\nFreundliche Aufnahme: Die Steinchen fallen so, dass sie den Weg zu einem bewohnten Heim zeigen.\nFrieden der Melodie: Die Melodie beruhigt niedere Wesen, angriffslustige Tiere ziehen sich üblicherweise zurück.\nRahjas Begehren: Die Liturgie lässt die Rahjageweihte als das in jeder Hinsicht begehrenswerteste und zugleich ehrfurchtgebietendste Wesen erscheinen.\nRahjas Sinnlichkeit: Die Gesegnete wird für die Wirkungsdauer unverwundbar.\nRuf zur Ruhe: Gelingt der Zielperson keine Willenskraftprobe, die um die Hälfte der übrigbehaltenen * erschwert ist, so verliert sie jegliches Bedürfnis zu sprechen.\nSwafnirs Ruhelied: Durch diese Liturgie kann der Geweihte einem Walwütigen seine Willenskraftproben um Punkte erleichtern.",
+      "beschreibung": "Vergleichender Wurf gegen Willenskraft für +1/+2 auf Darbietung, Einschüchtern, Provozieren und Überreden gegen das Ziel.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Bezaubern (FK) (+2): Unkooperativ→Kooperativ, mit Steigerung Freundlich.\n  Dauer (FK) (+1): Wirkungsdauer Minuten statt Runden.\n  Wahrheit (FK) (+2): Wirker erkennt, ob das Ziel wissentlich lügt.\n\nBand der Freundschaft: Dieses ursprünglich elfische Freundschaftsritual (eine lange Version des BANNBALADIN für Gäste des Elfendorfes) weckt in seinem Ziel Sympathien und Freundschaft für den Zaubernden.\nBann der Furcht: Mit dieser Liturgie wird Furcht (auch Angeschlagen durch Furcht) sofort genommen, unabhängig von der Ursache.\nBannbaladin: Dieser ursprünglich elfische Freundschaftszauber weckt in seinem Ziel Sympathien und Freundschaft für den Zaubernden.\nBesänftigung: Eine kampfwütige Raserei des Ziels endet kurz darauf.\nEinflüsterung: Proben auf Überreden sind für das Ziel um erleichtert, wenn das Talent dafür genutzt wird, anderen Personen einzuflüstern, eigennützigen Gelüsten nachzugehen und lästige Verpflichtungen zu ign.\nFreundschaftliches Auftreten: Die Geweihte kann gegenüber einem Kulturschaffenden ein Grundvertrauen aufbauen.\nGöttliche Erkenntnis: Der Nandusgeweihte bekommt eine Begabung für die nächste Probe auf ein Wissenstalent, das er innerhalb der Wirkungsdauer benutzt.\nHeiliges Liebesspiel: Das Paar wird im Liebesspiel rahjagefällige Wonnen empfinden und dank Rahjas Segen höchste Erfüllung finden.\nHelfende Hand: Die Liturgie erleichtert Sammelproben für mindestens 2 und maximal 3 beteiligte Personen.\nLevthanischer Liebhaber: Alle Proben auf Betören (Anbändeln oder Liebeskünste) sind für den Geweihten erleichtert.\nLevthans Feuer: Das Ziel entbrennt in leidenschaftlicher Zuneigung zum Zauberer und wird sich diesem auf Wunsch hingeben.\nMondsilberzunge: Die Liturgie bewirkt, dass eine andere Person (z.B.\nSeidenzunge: Das Ziel wird dem Zauberer gegenüber äußerst leichtgläubig, was bedeutet, dass Proben auf Willenskraft (Überreden widerstehen) um erschwert sind.\nSensibar: Der Zaubernde kann die Gefühle des Verzauberten ergründen.\nVerstecktes Begehren: Der Geweihte vermag zu erkennen, welche Wünsche und Gelüste das Leben eines Wesens bestimmen.\nÄngste Lindern: Mit diesem Zauberspruch wird Furcht (auch Angeschlagen durch Furcht) sofort genommen, unabhängig von der Ursache.\nAller Welt Freund: Solange der Geweihte spielt, wird ihn niemand angreifen.\nFreundliche Aufnahme: Die Steinchen fallen so, dass sie den Weg zu einem bewohnten Heim zeigen.\nFrieden der Melodie: Die Melodie beruhigt niedere Wesen, angriffslustige Tiere ziehen sich üblicherweise zurück.\nRahjas Begehren: Die Liturgie lässt die Rahjageweihte als das in jeder Hinsicht begehrenswerteste und zugleich ehrfurchtgebietendste Wesen erscheinen.\nRahjas Sinnlichkeit: Die Gesegnete wird für die Wirkungsdauer unverwundbar.\nRuf zur Ruhe: Der Geweihte beruhigt eine Zielperson; widersteht sie nicht, verliert sie ihre Aggression.\nSwafnirs Ruhelied: Durch diese Liturgie kann der Geweihte einem Walwütigen seine Willenskraftproben um Punkte erleichtern.\nDorlens Verbrüderung: Die Liturgie lässt das Joborner Liebeslicht erscheinen, eine unauffällige Duftlampe, die einen angenehmen Rosenduft verströmt.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8745,7 +8760,8 @@
         "Rahjas Begehren",
         "Rahjas Sinnlichkeit",
         "Ruf zur Ruhe",
-        "Swafnirs Ruhelied"
+        "Swafnirs Ruhelied",
+        "Dorlens Verbrüderung"
       ]
     },
     "Fernsicht": {
@@ -8754,7 +8770,7 @@
       "machtpunkte": 2,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Sieht Details auf größere Entfernung; halbiert Entfernungsabzüge bei Steigerung.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Ignoriert alle Entfernungsabzüge; Steigerung verdoppelt Sichtweite.\n\nAdlerauge: Das Talent Sinnesschärfe wird während der Wirkungsdauer um des Zaubers erhöht.\nBlick auf den Meeresgrund: Der Priester kann Wasser als Sichtmodifikator ignorieren, so als wäre es nicht vorhanden.\nGeisterblick: Der Borongeweihte ist in der Lage, alle Geister zu sehen, die sich im Umkreis befinden, selbst wenn sie mit bloßem Auge nicht sichtbar wären.\nMadas Spiegel: Blickt die Hexe auf eine Wasserfläche, vermag sie darin eine mit ihr befreundete Person ihrer Wahl zu erkennen.\nOculus Astralis: Die normale Sicht des Zauberers wird um eine astrale Wahrnehmung ergänzt.\nRuf der Heimat: Der Geweihte vermag zu spüren, in welcher Richtung sich sein Heimattempel befindet.",
+      "beschreibung": "Sieht Details auf größere Entfernung; halbiert Entfernungsabzüge bei Steigerung.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Ignoriert alle Entfernungsabzüge; Steigerung verdoppelt Sichtweite.\n\nAdlerauge: Das Talent Sinnesschärfe wird während der Wirkungsdauer um des Zaubers erhöht.\nBlick auf den Meeresgrund: Der Priester kann Wasser als Sichtmodifikator ignorieren, so als wäre es nicht vorhanden.\nGeisterblick: Der Borongeweihte ist in der Lage, alle Geister zu sehen, die sich im Umkreis befinden, selbst wenn sie mit bloßem Auge nicht sichtbar wären.\nMadas Spiegel: Blickt die Hexe auf eine Wasserfläche, vermag sie darin eine mit ihr befreundete Person ihrer Wahl zu erkennen.\nOculus Astralis: Die normale Sicht des Zauberers wird um eine astrale Wahrnehmung ergänzt.\nRuf der Heimat: Der Geweihte vermag zu spüren, in welcher Richtung sich sein Heimattempel befindet.\nGebet des kristallklaren Blicks: Nach dem Sprung kann der Geweihte bis zu Schritt weit selbst durch trübstes Wasser klar sehen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8766,7 +8782,8 @@
         "Geisterblick",
         "Madas Spiegel",
         "Oculus Astralis",
-        "Ruf der Heimat"
+        "Ruf der Heimat",
+        "Gebet des kristallklaren Blicks"
       ]
     },
     "Flächenschlag": {
@@ -8829,7 +8846,7 @@
       "machtpunkte": 5,
       "reichweite": "Berührung",
       "dauer": "Speziell",
-      "beschreibung": "Fügt Feinden Krankheiten zu.\n\nModifikatoren:\n  Versteinern (FK, episch) (+5): Ziel jede Runde Willenskraft oder Erschöpfung; Ausgeschaltet = zu Stein.\n\nBannfluch: Belegt eine Person mit einem göttlichen Fluch.\nSchleichende Fäulnis: Das Opfer dieser Liturgie kann während Regenerationsphasen keine Lebenspunkte mehr regenerieren, sondern erleidet stattdessen pro Tag Schaden (üblicherweise bei Sonnenuntergang).\nEntstelltes Antlitz: Das Aussehen der betroffenen Person verfällt sichtbar; sie wirkt entstellt und abstoßend (–2 auf Überredenproben, die auf das Äußere bauen).\nHerzschlag ruhe: Der Herzschlag des Ziels wird ausgesetzt, wodurch es jede Kampfrunde Schaden erleidet.\nPestodem: Die Zauberin stößt eine Übelkeit erregende Wolke stinkenden Gases aus.\nSchwarz und Rot: Das Ziel verliert jede Stunde Lebensenergie.\nTrankfluch: Durch diese Liturgie kann eine Flüssigkeit vergiftet werden.\nWaffenfluch: Der Geweihte kann eine beliebige Waffe mit einem Waffenfluch belegen.\nAnathema: Durch diese Liturgie wird eine Person von den Göttern selbst verdammt.\nBannfluch des Heiligen Khalid: Der Geweihte kann bis zu *+5 Untote oder verirrte Seelen zur ewigen Ruhe betten.\nFluch wider die Ungläubigen: Durch den Hass des Geweihten wird das Ziel seines Hasses zerstört: Brunnen trocknen aus, Bauwerke zerfallen, Straßen brechen auf.\nSippenfluch: Der Verbrecher wird mit einem Fluch belegt, dessen Ausprägung je nach Götterwelt des Schamanen unterschiedlich ist.",
+      "beschreibung": "Fügt Feinden Krankheiten zu.\n\nModifikatoren:\n  Versteinern (FK, episch) (+5): Ziel jede Runde Willenskraft oder Erschöpfung; Ausgeschaltet = zu Stein.\n\nBannfluch: Belegt eine Person mit einem göttlichen Fluch.\nSchleichende Fäulnis: Das Opfer der Liturgie fängt an, sich langsam zu zersetzen und erleidet pro Tag 2W6 Schadenspunkte.\nEntstelltes Antlitz: Das Aussehen der betroffenen Person verfällt sichtbar; sie wirkt entstellt und abstoßend (–2 auf Überredenproben, die auf das Äußere bauen).\nHerzschlag ruhe: Der Herzschlag des Ziels wird ausgesetzt, wodurch es jede Kampfrunde Schaden erleidet.\nPestodem: Die Zauberin stößt eine Übelkeit erregende Wolke stinkenden Gases aus.\nSchwarz und Rot: Das Ziel verliert jede Stunde Lebensenergie.\nTrankfluch: Durch diese Liturgie kann eine Flüssigkeit vergiftet werden.\nWaffenfluch: Der Waffenfluch bewirkt, dass die gesegnete Waffe schreckliche Wunden verursacht.\nAnathema: Durch diese Liturgie wird eine Person von den Göttern selbst verdammt.\nBannfluch des Heiligen Khalid: Der Geweihte bettet mehrere Untote oder verirrte Seelen zur ewigen Ruhe.\nFluch wider die Ungläubigen: Durch den Hass des Geweihten wird das Ziel seines Hasses zerstört: Brunnen trocknen aus, Bauwerke zerfallen, Straßen brechen auf.\nSippenfluch: Der Verbrecher wird mit einem Fluch belegt, dessen Ausprägung je nach Götterwelt des Schamanen unterschiedlich ist.\nErzieherische Massnahme der Heiligen Yalsicena: Jedes Mal während der Wirkungsdauer, wenn der Gestrafte das benannte Verhalten an den Tag legt (z.B.\nEtilias Gnade: Die Zielperson versinkt in borongefälligen, visionären Träumen und verstirbt noch vor Anbruch des nächsten Tages.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8848,7 +8865,9 @@
         "Anathema",
         "Bannfluch des Heiligen Khalid",
         "Fluch wider die Ungläubigen",
-        "Sippenfluch"
+        "Sippenfluch",
+        "Erzieherische Massnahme der Heiligen Yalsicena",
+        "Etilias Gnade"
       ]
     },
     "Furcht": {
@@ -8857,7 +8876,7 @@
       "machtpunkte": 2,
       "reichweite": "VER",
       "dauer": "Sofort",
-      "beschreibung": "Verursacht Furchtproben.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): KFS oder MFS (+2) oder GFS (+3).\n  Verbessert (FK) (+2): Furchtproben mit –2, oder –4 mit Steigerung.\n\nAlpgestalt: Den Verzauberten befällt Angst; er muss eine Furchtprobe ablegen.\nAngst auslösen: Alle mit dem Zauberer verfeindeten Kulturschaffenden im Umkreis um den Zauberer werden von panischer Angst vor ihm erfüllt.\nBöser Blick: Das Ziel wird von einem Gefühl des Widerwillens vor dem Zauberer übermannt und kann sich nicht überwinden, etwas gegen ihn zu unternehmen.\nFurchteinflößende Tiergeister: Um den Schamanen herum erscheinen Tiergeister, die den Gegnern des Schamanen im Umkreis bis zu Angst einflößen.\nHorriphobus: Dem Verzauberten gegenüber wirkt der Zaubernde wie eine Angst einflößende Gestalt aus seinen Alpträumen.\nKrabbelnder Schrecken: Haut und Kleidung des Ziels werden von unzähligen Kleintieren bedeckt.\nKusch: Das verzauberte Tier wird von Angst vor dem Zauberer erfüllt.\nPanik überkomme euch: Der Zauber erschafft eine Welle der Angst.\nSchwarzer Schrecken: Das Ziel erhält den Nachteil Angst vor Schwarz III.\nSchlachtfeld schreitet: Bei jedem Schritt des Geweihten dröhnt und bebt die Erde, wodurch er deutlich beeindruckender und furchteinflößender wirkt.",
+      "beschreibung": "Verursacht Furchtproben.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): KFS oder MFS (+2) oder GFS (+3).\n  Verbessert (FK) (+2): Furchtproben mit –2, oder –4 mit Steigerung.\n\nAlpgestalt: Den Verzauberten befällt Angst; er muss eine Furchtprobe ablegen.\nAngst auslösen: Alle mit dem Zauberer verfeindeten Kulturschaffenden im Umkreis um den Zauberer werden von panischer Angst vor ihm erfüllt.\nBöser Blick: Das Ziel wird von einem Gefühl des Widerwillens vor dem Zauberer übermannt und kann sich nicht überwinden, etwas gegen ihn zu unternehmen.\nFurchteinflößende Tiergeister: Um den Schamanen herum erscheinen Tiergeister, die den Gegnern des Schamanen im Umkreis bis zu Angst einflößen.\nHorriphobus: Dem Verzauberten gegenüber wirkt der Zaubernde wie eine Angst einflößende Gestalt aus seinen Alpträumen.\nKrabbelnder Schrecken: Haut und Kleidung des Ziels werden von unzähligen Kleintieren bedeckt.\nKusch: Das verzauberte Tier wird von Angst vor dem Zauberer erfüllt.\nPanik überkomme euch: Der Zauber erschafft eine Welle der Angst.\nSchwarzer Schrecken: Das Ziel erhält den Nachteil Angst vor Schwarz III.\nSchlachtfeld schreitet: Bei jedem Schritt des Geweihten dröhnt und bebt die Erde, wodurch er deutlich beeindruckender und furchteinflößender wirkt.\nBishdariels Warnung: Um jemanden für sein frevlerisches Verhalten zu strafen oder zur Umkehr zu bewegen, kann der Borongeweihte ihm mittels dieser Liturgie eine deutliche Warnung zukommen …",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8873,7 +8892,8 @@
         "Kusch",
         "Panik überkomme euch",
         "Schwarzer Schrecken",
-        "Schlachtfeld schreitet"
+        "Schlachtfeld schreitet",
+        "Bishdariels Warnung"
       ]
     },
     "Gedankenleere": {
@@ -8882,7 +8902,7 @@
       "machtpunkte": 3,
       "reichweite": "VER",
       "dauer": "Sofort",
-      "beschreibung": "Entfernt oder verändert Erinnerungen.\n\nModifikatoren:\n  Schnelles Wirken (+2): Erinnerung mit einer Aktion auslöschen.\n  Verändern (+1): Erinnerungen verändern statt auslöschen.\n  Verbessert (FK) (+2): Einzelereignis, Person, Ort oder Ding vollständig löschen.\n\nErinnerung verlasse dich: Der Zauber unterdrückt alle persönlichen Erinnerungen des Opfers an die letzten Minuten.\nGefühlskälte: Der Geweihte kann seine Seelenkraft gegen Zauber und Liturgien stärken und der Beeinflussung durch Gesellschaftstalente leichter entgehen.\nGnade des Vergessens: Die Zeremonie lässt die Erinnerung an ein bestimmtes Ereignis, das der Schamane gut kennen muss, verblassen.\nInnere Ruhe: Während der Wirkungsdauer sind alle Proben gegen Furcht und geistige Beeinflussung um +2 erleichtert.\nMemorabia Falsifir: Der Zauberer entfernt Erinnerungen aus dem Gedächtnis des Ziels.\nNamenloses Vergessen: Die Liturgie verdrängt jegliche Erinnerung des Opfers an sein früheres Leben.\nVerblassende Erinnerung: Die Zeremonie lässt die Erinnerung an ein traumatisches Erlebnis (etwa Krieg, Seuchen, Begegnungen mit furchteinflößenden Wesenheiten) verblassen, sodass sich das Ziel nicht mehr ständig damit beschäftigt.\nVergessen: Die Zeremonie unterdrückt alle persönlichen Erinnerungen des Ziels an ein zurückliegendes Ereignis.\nEntzug von Nandus’ Gaben: Durch diese Liturgie bestraft der Geweihte eine Person mit Dummheit und getrübten Sinnen, was sich in –7, –3 und TaW Sinnenschärfe –7 äußert.\nPhexens Augenzwinkern: Die Zielperson der Liturgie kann sich so gut wie gar nicht mehr an das konkrete Aussehen des Geweihten erinnern.",
+      "beschreibung": "Entfernt oder verändert Erinnerungen.\n\nModifikatoren:\n  Schnelles Wirken (+2): Erinnerung mit einer Aktion auslöschen.\n  Verändern (+1): Erinnerungen verändern statt auslöschen.\n  Verbessert (FK) (+2): Einzelereignis, Person, Ort oder Ding vollständig löschen.\n\nErinnerung verlasse dich: Der Zauber unterdrückt alle persönlichen Erinnerungen des Opfers an die letzten Minuten.\nGefühlskälte: Der Geweihte kann seine Seelenkraft gegen Zauber und Liturgien stärken und der Beeinflussung durch Gesellschaftstalente leichter entgehen.\nGnade des Vergessens: Die Zeremonie lässt die Erinnerung an ein bestimmtes Ereignis, das der Schamane gut kennen muss, verblassen.\nInnere Ruhe: Diese Liturgie ermöglicht es dem Geweihten, Einflüsse auf sein Urteilsvermögen zurückzudrängen.\nMemorabia Falsifir: Der Zauberer entfernt Erinnerungen aus dem Gedächtnis des Ziels.\nNamenloses Vergessen: Die Liturgie verdrängt jegliche Erinnerung des Opfers an sein früheres Leben.\nVerblassende Erinnerung: Die Zeremonie lässt die Erinnerung an ein traumatisches Erlebnis (etwa Krieg, Seuchen, Begegnungen mit furchteinflößenden Wesenheiten) verblassen, sodass sich das Ziel nicht mehr ständig damit beschäftigt.\nVergessen: Die Zeremonie unterdrückt alle persönlichen Erinnerungen des Ziels an ein zurückliegendes Ereignis.\nEntzug von Nandus’ Gaben: Der Geweihte bestraft eine Person mit Dummheit und getrübten Sinnen.\nPhexens Augenzwinkern: Die Zielperson der Liturgie kann sich so gut wie gar nicht mehr an das konkrete Aussehen des Geweihten erinnern.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -8930,7 +8950,7 @@
       "machtpunkte": 1,
       "reichweite": "VER 30m",
       "dauer": "—",
-      "beschreibung": "Geistige Verbindung auf 1,5 Kilometer (8 mit Steigerung).\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Fernverbindung (FK) (+3): Unabhängig von Entfernung mit bekanntem Bewusstsein.\n  Senden (FK) (+2): Kurze telepathische Nachricht an Verstand in Verstand×4.\n\nBotschaft aus der Tiefe: Der Priester projiziert ein Bild seines Gesichts auf eine Wasseroberfläche, die sich innerhalb eines Umkreis um den nächsten ihm persönlich bekannten Priester seiner Tradition befindet.\nGedankenbilder: Das Ziel vernimmt in seinem Geist vom Zauberer gewählte Bilder, beispielsweise dessen Sinneseindrücke, eine Warnung vor drohender Gefahr oder den Plan für ein gemeinsames Vorgehen.\nGöttliche Verständigung: Der Geweihte sendet eine Gedankenbotschaft an den nächsten Geweihten seiner Tradition, der sich im Umkreis befindet.\nSprache des Tapams: Der Schamane und bis zu zusätzliche freiwillige Ziele, die sich währenddessen an den Händen halten müssen, können während der Wirkungsdauer über Bilder kommunizieren, die im Geist aller Teilnehmer erscheinen.\nGleichklang des Geistes: Durch diese Liturgie ist es möglich, die Gefühle eines anderen Menschen zu lesen und zu ergründen.",
+      "beschreibung": "Geistige Verbindung auf 1,5 Kilometer (8 mit Steigerung).\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Fernverbindung (FK) (+3): Unabhängig von Entfernung mit bekanntem Bewusstsein.\n  Senden (FK) (+2): Kurze telepathische Nachricht an Verstand in Verstand×4.\n\nBotschaft aus der Tiefe: Der Priester projiziert ein Bild seines Gesichts auf eine Wasseroberfläche, die sich innerhalb eines Umkreis um den nächsten ihm persönlich bekannten Priester seiner Tradition befindet.\nGedankenbilder: Das Ziel vernimmt in seinem Geist vom Zauberer gewählte Bilder, beispielsweise dessen Sinneseindrücke, eine Warnung vor drohender Gefahr oder den Plan für ein gemeinsames Vorgehen.\nGöttliche Verständigung: Mit dieser Liturgie kann die Geweihte eine Botschaft mit einer Länge von bis zu +5 Worten an den Geweihten, der sie geweiht hat, oder den Tempelvorsteher ihres …\nSprache des Tapams: Der Schamane und bis zu zusätzliche freiwillige Ziele, die sich währenddessen an den Händen halten müssen, können während der Wirkungsdauer über Bilder kommunizieren, die im Geist aller Teilnehmer erscheinen.\nGleichklang des Geistes: Durch diese Liturgie ist es möglich, die Gefühle eines anderen Menschen zu lesen und zu ergründen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9112,7 +9132,7 @@
       "machtpunkte": 3,
       "reichweite": "B",
       "dauer": "Sofort",
-      "beschreibung": "Stellt Wunden wieder her, die weniger als eine Stunde alt sind.\n\nModifikatoren:\n  Gift oder Krankheit neutralisieren (+1): Negiert alle Gifte oder Krankheiten.\n  Mächtige Heilung (+10): Heilt jede Wunde, unabhängig vom Alter.\n  Permanente Verletzungen (+20): Heilt eine permanente Verletzung; eine Stunde Vorbereitung.\n  Massenheilung (FK) (+2/+3): Alle Verbündeten in MFS (+2) oder GFS (+3).\n\nBalsam Salabunde: Der Verzauberte erhält nach dem Wirken des Zaubers verlorene Lebenspunkte zurück.\nBlutzoll: Für jeweils viel Schaden, die der Korgeweihte mit einer einzigen Angriff gegen ein Ziel anrichtet, wird beim Geweihten seine Zustandsstufen geheilt (außer Belastung und Entrückung).\nEidechsenregeneration: Die Geweihte regeneriert Lebensenergie.\nGeistheilung: In der nächsten Regenerationsphase, regeneriert das Ziel Lebenspunkte zusätzlich.\nGiftbann: Der Giftbann neutralisiert ein Gift.\nHeilsame Quelle: Der Efferdgeweihte bohrt mit seinem Efferdbart oder einem vergleichbaren Gegenstand ein kleines Loch in den Boden.\nHeilschlaf: Das ausgewählte Ziel erhält in der nächsten Regenerationsphase zusätzliche Lebensenergie.\nHeilsegen: Der Betroffene erhält innerhalb von wenigen Minuten nach dem Wirken der Liturgie verlorene Lebenspunkte zurück.\nHexenspeichel: Der Verzauberte erhält Lebensenergie zurück.\nKleiner Heilsegen: Der Gesegnete erhält 1 Lebenspunkt zurück.\nKraft des Humus: Ein Baum wird mit astraler Kraft versorgt.\nKrankheiten vorbeugen: Die Geweihte kann sich nicht mit einer Krankheit anstecken.\nKrankheitsbann: Diese Liturgie heilt Krankheiten (die bisher erlittenen Auswirkungen werden nicht geheilt).\nLebensschutz: Liegt die betroffene Person im Sterben, werden Lebensenergie wiederhergestellt.\nRegeneratio: Der Zauberer regeneriert Lebensenergie.\nTiere besprechen: Ein Tier erhält nach dem Wirken des Zaubers verlorene Lebenspunkte zurück.\nTierleid lindern: Durch diese Liturgie werden einem Tier Furcht und Schmerz (Angeschlagen) genommen.\nBirkenzweig: Die Geweihte erhält +2 Punkte als Bonus auf ihre GS, um einer ihr nahestehenden bedrohten Person zu Hilfe zu eilen.\nFürbitten des heiligen Therbûn: Die Segnung kann Krankheiten heilen und den Patienten genesen lassen.\nGeteiltes Leid: Der Mantel der Heiligen Mascha erscheint.\nHeilungssegen: Durch diese Liturgie bekommt der Patient +3 Lebenspunkte zurück, regeltechnische Wunden schließen sich nicht.\nKleiner Giftbann: Die Liturgie kann das Fortschreiten einer Giftwirkung verhindern und die Schadenswirkung beenden.\nSegen der heiligen Theria: Das Leiden des Patienten verschwindet.\nTsas Lebensschutz: Diese Liturgie ruft das Eidechsenauge von Khunchom herbei, einen Talisman der Tsakirche, das einen Sterbenden wieder ins Leben zurückholen kann.\nTsas wunderbare Erneuerung: Die Liturgie bewirkt das Nachwachsen eines amputierten Körperteils.\nWundersames Teilen des Martyriums: Durch diese Liturgie kann die Geweihte einmalig die Hälfte des Schadens (maximal *+5 SP) auf sich nehmen, den eine andere, ihr nahestehende Person erleidet.\nWundsegen: Der Segen verschließt Wunden und verhindert Wundbrand.",
+      "beschreibung": "Stellt Wunden wieder her, die weniger als eine Stunde alt sind.\n\nModifikatoren:\n  Gift oder Krankheit neutralisieren (+1): Negiert alle Gifte oder Krankheiten.\n  Mächtige Heilung (+10): Heilt jede Wunde, unabhängig vom Alter.\n  Permanente Verletzungen (+20): Heilt eine permanente Verletzung; eine Stunde Vorbereitung.\n  Massenheilung (FK) (+2/+3): Alle Verbündeten in MFS (+2) oder GFS (+3).\n\nBalsam Salabunde: Der Verzauberte erhält nach dem Wirken des Zaubers verlorene Lebenspunkte zurück.\nBlutzoll: Für jeweils viel Schaden, die der Korgeweihte mit einer einzigen Angriff gegen ein Ziel anrichtet, wird beim Geweihten seine Zustandsstufen geheilt (außer Belastung und Entrückung).\nEidechsenregeneration: Die Geweihte regeneriert Lebensenergie.\nGeistheilung: In der nächsten Regenerationsphase, regeneriert das Ziel Lebenspunkte zusätzlich.\nGiftbann: Der Giftbann neutralisiert ein Gift.\nHeilsame Quelle: Der Efferdgeweihte bohrt mit seinem Efferdbart oder einem vergleichbaren Gegenstand ein kleines Loch in den Boden.\nHeilschlaf: Das ausgewählte Ziel erhält in der nächsten Regenerationsphase zusätzliche Lebensenergie.\nHeilsegen: Der Betroffene erhält innerhalb von wenigen Minuten nach dem Wirken der Liturgie verlorene Lebenspunkte zurück.\nHexenspeichel: Der Verzauberte erhält Lebensenergie zurück.\nKleiner Heilsegen: Der Gesegnete erhält 1 Lebenspunkt zurück.\nKraft des Humus: Ein Baum wird mit astraler Kraft versorgt.\nKrankheiten vorbeugen: Die Geweihte kann sich nicht mit einer Krankheit anstecken.\nKrankheitsbann: Diese Liturgie heilt Krankheiten (die bisher erlittenen Auswirkungen werden nicht geheilt).\nLebensschutz: Liegt die betroffene Person im Sterben, werden Lebensenergie wiederhergestellt.\nRegeneratio: Der Zauberer regeneriert Lebensenergie.\nTiere besprechen: Ein Tier erhält nach dem Wirken des Zaubers verlorene Lebenspunkte zurück.\nTierleid lindern: Durch diese Liturgie werden einem Tier Furcht und Schmerz (Angeschlagen) genommen.\nBirkenzweig: Die Geweihte erhält +2 Punkte als Bonus auf ihre GS, um einer ihr nahestehenden bedrohten Person zu Hilfe zu eilen.\nFürbitten des heiligen Therbûn: Die Segnung kann Krankheiten heilen und den Patienten genesen lassen.\nGeteiltes Leid: Der Mantel der Heiligen Mascha erscheint.\nHeilungssegen: Durch diese Liturgie bekommt der Patient +3 Lebenspunkte zurück, regeltechnische Wunden schließen sich nicht.\nKleiner Giftbann: Die Liturgie kann das Fortschreiten einer Giftwirkung verhindern und die Schadenswirkung beenden.\nSegen der heiligen Theria: Das Leiden des Patienten verschwindet.\nTsas Lebensschutz: Diese Liturgie ruft das Eidechsenauge von Khunchom herbei, einen Talisman der Tsakirche, das einen Sterbenden wieder ins Leben zurückholen kann.\nTsas wunderbare Erneuerung: Die Liturgie bewirkt das Nachwachsen eines amputierten Körperteils.\nWundersames Teilen des Martyriums: Die Geweihte nimmt einmalig die Hälfte des Schadens auf sich, den eine ihr nahestehende Person erleidet.\nWundsegen: Der Segen verschließt Wunden und verhindert Wundbrand.\nVaês Tränen: Die Schamanin gibt ihr Leben freiwillig für ein anderes, das sie zu retten wünscht.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9145,7 +9165,8 @@
         "Tsas Lebensschutz",
         "Tsas wunderbare Erneuerung",
         "Wundersames Teilen des Martyriums",
-        "Wundsegen"
+        "Wundsegen",
+        "Vaês Tränen"
       ]
     },
     "Illusion": {
@@ -9154,7 +9175,7 @@
       "machtpunkte": 3,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Erzeugt illusionäre Bilder.\n\nModifikatoren:\n  Geräusche (+1): Erzeugt passende Geräusche; kann vorhandene Geräusche nicht maskieren.\n  Stark (+2): Verstandsproben zum Anzweifeln mit –2.\n  Beweglich (+1): Gebiet jede Runde um Würfel in Zoll bewegen.\n  Beweglich + (FK) (+1/+2): Illusion bewegt sich BW 12 (+1) oder BW 24 (+2) und fliegt.\n  Dauer (FK) (+2): Wirkungsdauer von Runden zu Minuten.\n  Flächeneffekt (FK) (+1): Wirkungsbereich auf GFS vergrößert.\n  Tödliche Illusion (FK, episch) (+3): Illusion greift an und verursacht Schaden (vergleichender Wurf).\n\nAromatis Illusionis: Mit diesem Illusionszauber lassen sich beliebige Gerüche und Geschmäcker erzeugen, die jedoch niemals so intensiv sein können, dass sie bei betroffenen Personen Übelkeit hervorrufen könnten.\nAuris Illusionis: Mit diesem Illusionszauber ist die Täuschung des Gehörsinnes möglich.\nChamaelioni: Steht der Zauberer still, verschmelzen Körper und Kleidung optisch mit der Umgebung (jedoch nicht Waffen, andere Ausrüstung oder Kleidung und Rüstungen ab Rüstungsschutz 1).\nDoppelgänger: Die Geweihte erschafft eine Doppelgängerin, die aus ihrem Schatten tritt und intelligent handelt.\nGoldene Hand: Durch eine Berührung kann ein Objekt bis zur Größe eines Apfels in Gold, Silber oder Edelsteine verwandelt werden.\nHalluzination: Der Zauber erschafft im Geist des Ziels ein alle Sinne betreffendes Trugbild.\nManus Illusionis: Mit diesem Illusionszauber ist die Täuschung des Tastsinnes möglich.\nMenetekel: Der Zauber ermöglicht es, illusionäre Schriftzüge erscheinen zu lassen.\nOculus Illusionis: Mit diesem Illusionszauber ist die Täuschung des Sichtsinnes möglich.\nProjectimago: Der Zauberer projiziert ein optisches Ebenbild seiner selbst an einen gewünschten Ort (inklusive Kleidung und Gegenständen, die er am Körper trägt).\nReflectimago: Der Zauberer überzieht die glatte Fläche eines Objekts mit einer maximal 2 Rechtschritt messenden spiegelnden Oberfläche.\nSatuarias Herrlichkeit: Die Hexe erzeugt subtile Veränderungen ihres Körpers, die sie begehrlicher wirken lassen.\nSternenglanz: Das Zielobjekt wirkt auf göttlichem Wege ansprechender als es ist und kann so einen um % höheren Preis erzielen.\nWiderwille: Kulturschaffende mit Seelenkraft 2 oder niedriger ignorieren ein vom Zauberer bestimmtes Objekt, selbst wenn es sich direkt vor ihnen befindet.\nDie goldene Hand: Mittels dieser Liturgie ist der Geweihte in der Lage, einen Gegenstand kurzfristig in pures Gold zu verwandeln.\nRahjalinas Farbenspiel: Die Tätowierungen, die mit dieser Farbe gestochen werden, erhalten einen besonders schönen Glanz.\nSchattenlarve: Die hergestellte Maske kann ihrem Träger wie eine andere Person erscheinen lassen, mitsamt typischer Gewandung.",
+      "beschreibung": "Erzeugt illusionäre Bilder.\n\nModifikatoren:\n  Geräusche (+1): Erzeugt passende Geräusche; kann vorhandene Geräusche nicht maskieren.\n  Stark (+2): Verstandsproben zum Anzweifeln mit –2.\n  Beweglich (+1): Gebiet jede Runde um Würfel in Zoll bewegen.\n  Beweglich + (FK) (+1/+2): Illusion bewegt sich BW 12 (+1) oder BW 24 (+2) und fliegt.\n  Dauer (FK) (+2): Wirkungsdauer von Runden zu Minuten.\n  Flächeneffekt (FK) (+1): Wirkungsbereich auf GFS vergrößert.\n  Tödliche Illusion (FK, episch) (+3): Illusion greift an und verursacht Schaden (vergleichender Wurf).\n\nAromatis Illusionis: Mit diesem Illusionszauber lassen sich beliebige Gerüche und Geschmäcker erzeugen, die jedoch niemals so intensiv sein können, dass sie bei betroffenen Personen Übelkeit hervorrufen könnten.\nAuris Illusionis: Mit diesem Illusionszauber ist die Täuschung des Gehörsinnes möglich.\nChamaelioni: Steht der Zauberer still, verschmelzen Körper und Kleidung optisch mit der Umgebung (jedoch nicht Waffen, andere Ausrüstung oder Kleidung und Rüstungen ab Rüstungsschutz 1).\nDoppelgänger: Die Geweihte erschafft eine Doppelgängerin, die aus ihrem Schatten tritt und intelligent handelt.\nGoldene Hand: Durch eine Berührung kann ein Objekt bis zur Größe eines Apfels in Gold, Silber oder Edelsteine verwandelt werden.\nHalluzination: Der Zauber erschafft im Geist des Ziels ein alle Sinne betreffendes Trugbild.\nManus Illusionis: Mit diesem Illusionszauber ist die Täuschung des Tastsinnes möglich.\nMenetekel: Der Zauber ermöglicht es, illusionäre Schriftzüge erscheinen zu lassen.\nOculus Illusionis: Mit diesem Illusionszauber ist die Täuschung des Sichtsinnes möglich.\nProjectimago: Der Zauberer projiziert ein optisches Ebenbild seiner selbst an einen gewünschten Ort (inklusive Kleidung und Gegenständen, die er am Körper trägt).\nReflectimago: Der Zauberer überzieht die glatte Fläche eines Objekts mit einer maximal 2 Rechtschritt messenden spiegelnden Oberfläche.\nSatuarias Herrlichkeit: Die Hexe erzeugt subtile Veränderungen ihres Körpers, die sie begehrlicher wirken lassen.\nSternenglanz: Der Gegenstand erscheint in neuem Glanz, wirkt wertvoll und schön.\nWiderwille: Kulturschaffende mit Seelenkraft 2 oder niedriger ignorieren ein vom Zauberer bestimmtes Objekt, selbst wenn es sich direkt vor ihnen befindet.\nDie goldene Hand: Mittels dieser Liturgie ist der Geweihte in der Lage, einen Gegenstand kurzfristig in pures Gold zu verwandeln.\nRahjalinas Farbenspiel: Die Tätowierungen, die mit dieser Farbe gestochen werden, erhalten einen besonders schönen Glanz.\nSchattenlarve: Die hergestellte Maske kann ihrem Träger wie eine andere Person erscheinen lassen, mitsamt typischer Gewandung.\nKirschblütenregen: Mit Beginn des Liedes fallen unglaubliche Mengen an Kirschblüten vom Himmel.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9177,7 +9198,8 @@
         "Widerwille",
         "Die goldene Hand",
         "Rahjalinas Farbenspiel",
-        "Schattenlarve"
+        "Schattenlarve",
+        "Kirschblütenregen"
       ]
     },
     "Kriegersegen": {
@@ -9186,7 +9208,7 @@
       "machtpunkte": 4,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Gewährt Ziel ein Kampftalent.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Mächtig (FK, episch) (+4): Empfänger erhält zwei Kampftalente auf einmal.\n  Verwandeln (FK) (+2/+3): Williges Ziel per Berührung (+2) oder Verstand (+3) treffen.\n\nAngriffslust (Kampfrausch): Der Geweihte kann bis zu Ziele vor dem Wirken der Liturgie auswählen (inklusive sich selbst), die bis zum Ende der Wirkungsdauer2 Angriff und1 Schaden erhalten.\nBlutiger Zorn (Berserker): Die Ziele verfallen einer kampfwütigen Raserei.\nBlutrausch (göttlich) (Berserker): Versetzt in göttlichen Blutrausch.\nBrazoraghs Krieger (Kriegerische Anpassungsfähigkeit): Der Geweihte wählt vor dem Wirken der Liturgie ein Ziel aus (inklusive sich selbst), das bis zum Ende der Wirkungsdauer1 Angriff,2 Schaden und die Sonderfertigkeit Mächtiger Schlag erhält.\nBrennender Hass (Erzfeind): Das Ziel wird von Hass auf eine vom Zauberer bestimmte Sache erfüllt, beispielswiese ein Wesen, eine Gruppierung oder ein Konzept.\nGnadenstoß (Tödlicher Hieb): Die Marbopriesterin kann diese Liturgie auf ihren Marbodolch legen, um bei der nächsten gelungenen und unparierten Angriff ihre Schaden zu verdoppeln.\nGöttlicher Rausch (Kampfrausch): Solange der heilige Rausch anhält, kämpft der Geweihte in göttlicher Entrückung mit gesteigerter Kraft.\nHeldenkraft (Kraftvoller Schlag): Angriff und Wurfwaffen-Fernkampf richten bei Gelingen zusätzliche Schaden an.\nKampfgeschick (Kampfreflexe): Die Erschwernis des nächsten eingesetzten Spezialmanövers wird um 2 gesenkt (bis zu einem Minimum von 0).\nKraftvoller Körper (Schmerzresistenz): Der Levthangeweihte kann seinen Körper durch karmale Kraft stärken.\nKriegsfarben (Kampfrausch): Durch diese Liturgie erlangt der Schamane für einen kurzen Zeitraum große Kräfte.\nKriegszustand (Inspirieren): Durch diese Zeremonie wird die gesamte Rondrakirche in einen Kriegszustand versetzt.\nMächtiger Angriff (Mächtiger Hieb): Gelingt dem Geweihten eine Attacke, gleichgültig ob verteidigt oder nicht, kann er sich deren durchschnittliche Schaden notieren (durchschnittliche Schaden gilt als 4 + Faktor der Waffe; ein Schwert mit.\nSensattacco (Hinterhältiger Angriff): Das Ziel erreicht im Kampf mit höherer Wahrscheinlichkeit einen Kritischen Erfolg.\nStandhafter Wächter (Block): Alle Verteidigungen des Ziels sind erleichtert, unabhängig davon, ob es Angriffe pariert oder ihnen ausweicht.\nZwergenmacht (Kraftvoller Schlag): Der Angroschgeweihte kann einen Zwerg mit zusätzlicher Kraft ausstatten.\nZwergische Verbrüderung (Inspirieren): Der Angroschpriester kann bis zu 6 Zwerge segnen.\nDas schwarze Fell durch das rote Blut: Die Haut des Geweihten wird fester und widerstandsfähiger, ihr RS beträgt für die Wirkungsdauer zugefügte SP x 2.\nEherne Kraft, Lodernder Zorn: Die Kräfte von Feuer und Erz der Umgebung entladen Angroschs Zorn, z.B.\nNamenlose Raserei: Ein Tier wird durch diese Liturgie in einen Kampfrausch versetzt und greift die Feinde des Geweihten an.\nNeun Streiche in einem: Bei acht seiner Attacken kann der Geweihte die Kraft genau dosieren und nur so viel der erzeugten Trefferpunkte anrichten wie er möchte (jedoch mindestens 1 TP).\nRitus der Schlachthilfe: Der Geist der Geweihten, im Rondrakult Schwertseele genannt, löst sich von ihrem Körper und eilt dem Ziel entgegen, um es – gleich einer Walkürja mit Flügeln …\nRuf zum Bund wider die Mächte der Finsternis: Durch diese Liturgie wird die Rondrakirche in den Kriegszustand versetzt.\nSchlachtgesang: Die Geweihte verspürt keinerlei Schmerzen.\nSegen des heiligen Hlûthar: Alle Zuhörer fühlen sich ermutigt und bekommen für anfallende Furchtproben einen Bonus von Punkten.\nSegnung der Schlacht: Alle Beteiligten einer Schlacht verhalten sich rondragefällig.",
+      "beschreibung": "Gewährt Ziel ein Kampftalent.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Mächtig (FK, episch) (+4): Empfänger erhält zwei Kampftalente auf einmal.\n  Verwandeln (FK) (+2/+3): Williges Ziel per Berührung (+2) oder Verstand (+3) treffen.\n\nAngriffslust (Kampfrausch): Der Geweihte kann bis zu Ziele vor dem Wirken der Liturgie auswählen (inklusive sich selbst), die bis zum Ende der Wirkungsdauer2 Angriff und1 Schaden erhalten.\nBlutiger Zorn (Berserker): Die Ziele verfallen einer kampfwütigen Raserei.\nBlutrausch (göttlich) (Berserker): Versetzt in göttlichen Blutrausch.\nBrazoraghs Krieger (Kriegerische Anpassungsfähigkeit): Der Geweihte wählt vor dem Wirken der Liturgie ein Ziel aus (inklusive sich selbst), das bis zum Ende der Wirkungsdauer1 Angriff,2 Schaden und die Sonderfertigkeit Mächtiger Schlag erhält.\nBrennender Hass (Erzfeind): Das Ziel wird von Hass auf eine vom Zauberer bestimmte Sache erfüllt, beispielswiese ein Wesen, eine Gruppierung oder ein Konzept.\nGnadenstoß (Tödlicher Hieb): Die Marbopriesterin kann diese Liturgie auf ihren Marbodolch legen, um bei der nächsten gelungenen und unparierten Angriff ihre Schaden zu verdoppeln.\nGöttlicher Rausch (Kampfrausch): Solange der heilige Rausch anhält, kämpft der Geweihte in göttlicher Entrückung mit gesteigerter Kraft.\nHeldenkraft (Kraftvoller Schlag): Angriff und Wurfwaffen-Fernkampf richten bei Gelingen zusätzliche Schaden an.\nKampfgeschick (Kampfreflexe): Die Erschwernis des nächsten eingesetzten Spezialmanövers wird um 2 gesenkt (bis zu einem Minimum von 0).\nKraftvoller Körper (Schmerzresistenz): Der Levthangeweihte kann seinen Körper durch karmale Kraft stärken.\nKriegsfarben (Kampfrausch): Durch diese Liturgie erlangt der Schamane für einen kurzen Zeitraum große Kräfte.\nKriegszustand (Inspirieren): Durch diese Zeremonie wird die gesamte Rondrakirche in einen Kriegszustand versetzt.\nMächtiger Angriff (Mächtiger Hieb): Gelingt dem Geweihten eine Attacke, gleichgültig ob verteidigt oder nicht, kann er sich deren durchschnittliche Schaden notieren (durchschnittliche Schaden gilt als 4 + Faktor der Waffe; ein Schwert mit.\nSensattacco (Hinterhältiger Angriff): Das Ziel erreicht im Kampf mit höherer Wahrscheinlichkeit einen Kritischen Erfolg.\nStandhafter Wächter (Block): Alle Verteidigungen des Ziels sind erleichtert, unabhängig davon, ob es Angriffe pariert oder ihnen ausweicht.\nZwergenmacht (Kraftvoller Schlag): Der Angroschgeweihte kann einen Zwerg mit zusätzlicher Kraft ausstatten.\nZwergische Verbrüderung (Inspirieren): Der Angroschpriester kann bis zu 6 Zwerge segnen.\nDas schwarze Fell durch das rote Blut: Die Haut des Geweihten wird fester und widerstandsfähiger und gewährt zusätzliche Panzerung.\nEherne Kraft, Lodernder Zorn: Die Kräfte von Feuer und Erz der Umgebung entladen Angroschs Zorn, z.B.\nNamenlose Raserei: Ein Tier wird durch diese Liturgie in einen Kampfrausch versetzt und greift die Feinde des Geweihten an.\nNeun Streiche in einem: Bei acht seiner Attacken kann der Geweihte die Kraft genau dosieren und nur so viel der erzeugten Trefferpunkte anrichten wie er möchte (jedoch mindestens 1 TP).\nRitus der Schlachthilfe: Der Geist der Geweihten, im Rondrakult Schwertseele genannt, löst sich von ihrem Körper und eilt dem Ziel entgegen, um es – gleich einer Walkürja mit Flügeln …\nRuf zum Bund wider die Mächte der Finsternis: Durch diese Liturgie wird die Rondrakirche in den Kriegszustand versetzt.\nSchlachtgesang: Die Geweihte verspürt keinerlei Schmerzen.\nSegen des heiligen Hlûthar: Alle Zuhörer fühlen sich ermutigt und bekommen für anfallende Furchtproben einen Bonus von Punkten.\nSegnung der Schlacht: Alle Beteiligten einer Schlacht verhalten sich rondragefällig.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9227,7 +9249,7 @@
       "machtpunkte": 2,
       "reichweite": "VER 10m",
       "dauer": "—",
-      "beschreibung": "Erschafft oder verbannt Beleuchtung.\n\nModifikatoren:\n  Beleuchten (FK) (+1): Nur Licht: Ziel Größe ≤1 in Leuchten getaucht; ignoriert 2 Punkte Abzüge.\n  Flächeneffekt (FK) (+2): Nur Licht: wirkt wie natürliches Sonnenlicht um den Wirker.\n  Wahre Dunkelheit (FK) (+2): Nur Dunkelheit: blockiert Wärmesicht, Nachtsicht und Dunkelsicht.\n\nBann der Dunkelheit: Aus der Hand des Geweihten strahlt ein helles Licht.\nBann des Lichts: Um den Geweihten herum bildet sich eine Kugel aus Dunkelheit mit einem Durchmesser von Schritt.\nDas Löschen des Lichts: Am Ende des Rituals ersterben alle Lichter der Gwen Petryl-Steine.\nDunkelheit: Um den Zaubernden herum bildet sich eine Kugel aus Dunkelheit mit einem Umkreis.\nFeuersegen: Auf der Handfläche oder dem Zeigefinger des Geweihten entsteht eine kleine Flamme, die einen Raum erhellt oder ausreicht, um eine Kerze zu entzünden.\nAuge Xeledons, Xeledons helles Licht: Der Geweihte führt seine Mitbeter auf eine höhere Geistebene und leitet sie durch eine xeledonische Prüfung, die den Geist reinigt und die eigenen Fehler offenbart.\nDaradors Bann der Schatten: In der Zone werden alle Schatten aufgehoben, magische Licht- und Schattenmanipulationen und optische Illusionen werden geschwächt (von den ZfP* werden *+10 abgezogen).\nLicht des Herrn: Von der Hand des Geweihten aus erfüllt Licht die Umgebung, egal ob es Nacht ist oder der Geweihte in einem finsteren Keller steht.\nLicht des verborgenen Pfades: Die Liturgie hilft dem Ingerimmgeweihten, bei einer Abzweigung in einem Höhlensystem, einer Mine oder Stollen, den richtigen Weg zu wählen.",
+      "beschreibung": "Erschafft oder verbannt Beleuchtung.\n\nModifikatoren:\n  Beleuchten (FK) (+1): Nur Licht: Ziel Größe ≤1 in Leuchten getaucht; ignoriert 2 Punkte Abzüge.\n  Flächeneffekt (FK) (+2): Nur Licht: wirkt wie natürliches Sonnenlicht um den Wirker.\n  Wahre Dunkelheit (FK) (+2): Nur Dunkelheit: blockiert Wärmesicht, Nachtsicht und Dunkelsicht.\n\nBann der Dunkelheit: Aus der Hand des Geweihten strahlt ein helles Licht.\nBann des Lichts: Um den Geweihten herum bildet sich eine Kugel aus Dunkelheit mit einem Durchmesser von Schritt.\nDas Löschen des Lichts: Am Ende des Rituals ersterben alle Lichter der Gwen Petryl-Steine.\nDunkelheit: Um den Zaubernden herum bildet sich eine Kugel aus Dunkelheit mit einem Umkreis.\nFeuersegen: Auf der Hand oder dem Finger des Geweihten erscheint ein kerzenflammengroßes Feuerchen, das gegen Regen, Sturm und andere Witterungseinflüsse gefeit ist.\nAuge Xeledons, Xeledons helles Licht: Der Geweihte führt seine Mitbeter auf eine höhere Geistebene und leitet sie durch eine xeledonische Prüfung, die den Geist reinigt und die eigenen Fehler offenbart.\nDaradors Bann der Schatten: In der Zone werden alle Schatten aufgehoben sowie magische Licht-/Schattenmanipulationen und optische Illusionen unterdrückt.\nLicht des Herrn: Von der Hand des Geweihten aus erfüllt Licht die Umgebung, egal ob es Nacht ist oder der Geweihte in einem finsteren Keller steht.\nLicht des verborgenen Pfades: Die Liturgie hilft dem Ingerimmgeweihten, bei einer Abzweigung in einem Höhlensystem, einer Mine oder Stollen, den richtigen Weg zu wählen.\nWeihe der ewigen Flamme: Die Liturgie entfacht das Feuer in der Laterne der Ingerimmgeweihten.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9242,7 +9264,8 @@
         "Auge Xeledons, Xeledons helles Licht",
         "Daradors Bann der Schatten",
         "Licht des Herrn",
-        "Licht des verborgenen Pfades"
+        "Licht des verborgenen Pfades",
+        "Weihe der ewigen Flamme"
       ]
     },
     "Linderung": {
@@ -9284,7 +9307,7 @@
       "machtpunkte": 2,
       "reichweite": "Ver",
       "dauer": "Sofort",
-      "beschreibung": "Entzieht Gegner W6 Machtpunkte bei erfolgreichem vergleichendem Wurf\n\nModifikatoren:\n  Mächtig (FK) (+2): Entzieht 2W6 Machtpunkte bei Erfolg.\n\nAusbrennen (Purgation): Die betroffene Person verliert den Vorteil Zauberer und die daran gekoppelte Sonderfertigkeit der Tradition, magische Sonderfertigkeiten, magische Vor- und Nachteile sowie Zauber.\nMagischer Raub: Während der Wirkungsdauer kann der Zauberer auf die Astralpunkte des Ziels zugreifen.\nSchwindende Zauberkraft: Dieser Magiebann wirkt auf eine stationäre Zone im Umkreis.\nPurgation: Die Liturgie dient zum Ausbrennen von magischen Kräften.",
+      "beschreibung": "Entzieht Gegner W6 Machtpunkte bei erfolgreichem vergleichendem Wurf\n\nModifikatoren:\n  Mächtig (FK) (+2): Entzieht 2W6 Machtpunkte bei Erfolg.\n\nAusbrennen (Purgation): Die betroffene Person verliert den Vorteil Zauberer und die daran gekoppelte Sonderfertigkeit der Tradition, magische Sonderfertigkeiten, magische Vor- und Nachteile sowie Zauber.\nMagischer Raub: Während der Wirkungsdauer kann der Zauberer auf die Astralpunkte des Ziels zugreifen.\nSchwindende Zauberkraft: An einer von dem Geweihten ausgewählten Stelle entsteht eine antimagische Zone.\nPurgation: Die Liturgie dient zum Ausbrennen von magischen Kräften.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9302,7 +9325,7 @@
       "machtpunkte": 3,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Vergleichender Wurf gegen Willenskraft, um Ziel zu kontrollieren.\n\nModifikatoren:\n  Zusätzliche Empfänger (+2): Ein zusätzliches Ziel pro 2 Punkte.\n  Stark (FK) (+2): Willenskraftproben widerstehen mit –2; Gedankenverbindung für beliebige Distanz.\n\nBefehl des Schamanen: Das Ziel befolgt einen einzigen Befehl des Schamanen, solange dieser nicht gegen die Prinzipien der Gottheit verstößt oder dem Selbsterhaltungstrieb des Ziels im groben Maße widerspricht.\nBescheidenheit: Die Traviageweihte sucht sich innerhalb der Reichweite ein Ziel aus.\nBrennender Hass: Das Ziel wird von Hass auf eine vom Zauberer bestimmte Sache erfüllt, beispielswiese ein Wesen, eine Gruppierung oder ein Konzept.\nDes Einen bezaubernder Sphärenklang: Diese Liturgie des Namenlosen erzeugt Bilder im Geist des Opfers und lässt es verführerische Melodien hören.\nEhrenhaftigkeit: Ein Ziel wird gezwungen, sich im Kampf ehrenhaft zu verhalten.\nGroße Gier: Der Verzauberte verspürt eine unbändige Gier nach einem Objekt oder einer Handlung, die der Zaubernde ihm nennt.\nHeiliger Befehl: Das Ziel befolgt einen einzigen Befehl des Geweihten, solange dieser nicht gegen die Prinzipien der Gottheit verstößt oder dem Selbsterhaltungstrieb des Ziels im groben Maße widerspricht.\nHilfreiche Seele: Die Geweihte sucht sich innerhalb der Liturgiereichweite ein Ziel aus.\nImperavi: Das Ziel befolgt einen einzigen Befehl des Zauberers, der seinem Selbsterhaltungstrieb nicht offensichtlich zuwiderläuft.\nObsession: Ein von der Liturgie betroffenes Ziel widmet seine gesamte Aufmerksamkeit einer vom Geweihten bestimmten, rahjagefälligen Sache.\nRespondami: Der Verzauberte muss auf Fragen wahrheitsgemäß antworten.\nTsas Gedankenspiel: Der Geweihte pflanzt revolutionäre Ideen in den Kopf seines Gesprächspartners.\nWahrheit: Der Betroffene muss dem Geweihten (und nur ihm) wahrheitsgemäß auf jede seiner Frage antworten, so lange die Wirkungsdauer der Liturgie anhält.\nZauberzwang: Dem Ziel kann ein einzelner Auftrag gegeben werden.\nZwingtanz: Durch den Zauberspruch ist das Opfer dazu gezwungen, unkontrolliert zu tanzen.\nRevolution der Gedanken: Diese Liturgie pflanzt in die Gedanken der Zielperson eine bestimmte revolutionäre Idee.\nWille zur Wahrheit: Diese Liturgie weckt in allen Zuhörern die Überzeugung, nur noch die Wahrheit zu sprechen und sich an geltende Gesetze halten zu wollen.",
+      "beschreibung": "Vergleichender Wurf gegen Willenskraft, um Ziel zu kontrollieren.\n\nModifikatoren:\n  Zusätzliche Empfänger (+2): Ein zusätzliches Ziel pro 2 Punkte.\n  Stark (FK) (+2): Willenskraftproben widerstehen mit –2; Gedankenverbindung für beliebige Distanz.\n\nBefehl des Schamanen: Das Ziel befolgt einen einzigen Befehl des Schamanen, solange dieser nicht gegen die Prinzipien der Gottheit verstößt oder dem Selbsterhaltungstrieb des Ziels im groben Maße widerspricht.\nBescheidenheit: Die Traviageweihte sucht sich innerhalb der Reichweite ein Ziel aus.\nBrennender Hass: Das Ziel wird von Hass auf eine vom Zauberer bestimmte Sache erfüllt, beispielswiese ein Wesen, eine Gruppierung oder ein Konzept.\nDes Einen bezaubernder Sphärenklang: Diese namenlose Liturgie erzeugt Bilder im Geist des Opfers und lässt es verführerische Melodien hören.\nEhrenhaftigkeit: Ein Ziel wird gezwungen, sich im Kampf ehrenhaft zu verhalten.\nGroße Gier: Der Verzauberte verspürt eine unbändige Gier nach einem Objekt oder einer Handlung, die der Zaubernde ihm nennt.\nHeiliger Befehl: Die Stimme des Geweihten klingt eindringlicher und selbst jemand, der die Sprache des Geweihten nicht versteht, wird sich dem göttlichen Wirken beugen.\nHilfreiche Seele: Die Geweihte sucht sich innerhalb der Liturgiereichweite ein Ziel aus.\nImperavi: Das Ziel befolgt einen einzigen Befehl des Zauberers, der seinem Selbsterhaltungstrieb nicht offensichtlich zuwiderläuft.\nObsession: Ein von der Liturgie betroffenes Ziel widmet seine gesamte Aufmerksamkeit einer vom Geweihten bestimmten, rahjagefälligen Sache.\nRespondami: Der Verzauberte muss auf Fragen wahrheitsgemäß antworten.\nTsas Gedankenspiel: Der Geweihte pflanzt revolutionäre Ideen in den Kopf seines Gesprächspartners.\nWahrheit: Der Betroffene muss dem Geweihten (und nur ihm) wahrheitsgemäß auf jede seiner Frage antworten, so lange die Wirkungsdauer der Liturgie anhält.\nZauberzwang: Dem Ziel kann ein einzelner Auftrag gegeben werden.\nZwingtanz: Durch den Zauberspruch ist das Opfer dazu gezwungen, unkontrolliert zu tanzen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9323,9 +9346,7 @@
         "Tsas Gedankenspiel",
         "Wahrheit",
         "Zauberzwang",
-        "Zwingtanz",
-        "Revolution der Gedanken",
-        "Wille zur Wahrheit"
+        "Zwingtanz"
       ]
     },
     "Schadensfeld": {
@@ -9370,7 +9391,7 @@
       "machtpunkte": 1,
       "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Gewährt Panzerung +2/+4.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n\nLeib-Zauber (Elementarpanzer): Härtet die Haut mit elementarer Magie und verleiht Rüstungsschutz.\nArmatrutz: Die Haut des Zaubernden verhärtet sich, ohne ihre Flexibilität zu verlieren.\nQuallenhaut: Die Haut des Priesters überzieht sich mit Schleim, der an die Nesseln einer Feuerqualle erinnert.\nSchuppenhaut: Die Haut des Zauberers wird komplett mit einer echsischen Schuppenhaut überzogen, die ihm Rüstungsschutz verleiht.\nZähe Haut: Der Geweihte erhält einen natürlichen Rüstungsschutz von 1, der mit dem Rüstungsschutz von Rüstungen kombiniert werden kann.\nEidechsenhaut: Die Haut der Zielperson verdickt sich und ähnelt immer mehr der Schuppenhaut einer Eidechse.\nGoldene Rüstung: Der Geweihte wird in eine Aureole gleißenden Lichts gehüllt, die ihn schützt.\nLidaris Herz: Um den Körper des Gesegneten bildet sich eine fein aufstäubende und rauglitzernde Reifschicht, die sich auf allen Kleidungsteilen niederlässt und den effektiven …\nPhexens Verteidigung: Der Phexgeweihte hat gegen */4 Zauber eine aktive Magieresistenz.\nRondras wundersame Rüstung: Durch diese Liturgie ruft die Geweihte die Wundersame Rüstung herbei, die sie mit RS 12 bei einer Behinderung von 0 Punkten schützt.\nWaliburias Wehr: Mittels dieser Liturgie kann der Geweihte eine elementare Manifestation zwischen sich und seine Gegner rufen.",
+      "beschreibung": "Gewährt Panzerung +2/+4.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n\nLeib-Zauber (Elementarpanzer): Härtet die Haut mit elementarer Magie und verleiht Rüstungsschutz.\nArmatrutz: Die Haut des Zaubernden verhärtet sich, ohne ihre Flexibilität zu verlieren.\nQuallenhaut: Die Haut des Priesters überzieht sich mit Schleim, der an die Nesseln einer Feuerqualle erinnert.\nSchuppenhaut: Die Haut des Zauberers wird komplett mit einer echsischen Schuppenhaut überzogen, die ihm Rüstungsschutz verleiht.\nZähe Haut: Der Geweihte erhält einen natürlichen Rüstungsschutz von 1, der mit dem Rüstungsschutz von Rüstungen kombiniert werden kann.\nEidechsenhaut: Die Haut der Zielperson verdickt sich und ähnelt immer mehr der Schuppenhaut einer Eidechse.\nGoldene Rüstung: Der Geweihte wird in eine Aureole gleißenden Lichts gehüllt, die ihn schützt.\nLidaris Herz: Um den Körper des Gesegneten bildet sich eine fein aufstäubende und rauglitzernde Reifschicht, die sich auf allen Kleidungsteilen niederlässt und den effektiven …\nPhexens Verteidigung: Der Phexgeweihte hat gegen /4 Zauber eine aktive Magieresistenz.\nRondras wundersame Rüstung: Die Geweihte ruft eine wundersame Rüstung herbei, die sie schwer schützt.\nWaliburias Wehr: Mittels dieser Liturgie kann der Geweihte eine elementare Manifestation zwischen sich und seine Gegner rufen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9401,7 +9422,7 @@
       "machtpunkte": 2,
       "reichweite": "VER",
       "dauer": "1 Stunde",
-      "beschreibung": "Beschützt Ziel vor schädlichen Umwelteinflüssen.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Umweltresistenz (FK) (+1): Reduziert Schaden durch Energiequellen um –4 (–6 mit Steigerung).\n\nFirnlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Eis möglich, seien es Schneefelder oder hauchdünn gefrorene Wasserflächen.\nFrostschutz: Der Geweihte erleidet kaum noch negative Auswirkungen durch eine kalte Umgebung.\nGlutlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Feuer möglich, seien es Lavafelder oder glühende Kohlen.\nUnentflammbarkeit: Wirkt die Hexe den Zauber auf sich, erhält sie Rüstungsschutz gegen Feuer.\nWasseratem: Der Verzauberte kann während der Wirkungsdauer sowohl normale Luft als auch Wasser atmen.\nWasserlauf: Mit Hilfe dieser Liturgie kann der Geweihte über Wasser laufen, ganz so, als ob er über Erde gehen würde.\nWellenlauf: Dem Zauberer ist eine problemlose Überquerung von Wasserflächen möglich.\nWipfellauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Humus möglich, seien es Sümpfe oder dicht bewachsene Flächen (etwa das Blätterdach eines Waldes).\nWüstenlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Erz möglich, seien es Steinwüsten, Geröll- bzw.\nBegehen der Heiligen Wasser: Diese Liturgie ermöglicht es dem Geweihten, gemessenen Schrittes auf dem Wasser zu gehen.\nIngerimms Zorn verschone uns: Die Liturgie ruft den Stein des Ingerimm, einen Talisman der Kirche, herbei, der vor Erdbeben, Vulkanausbrüchen und Feuer schützt.\nSichere Wanderung im Schnee: Mittels dieser Segnung kann die Zielperson auf Schnee und Eis ebenso sicheren Tritt finden wie auf Erde.",
+      "beschreibung": "Beschützt Ziel vor schädlichen Umwelteinflüssen.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Umweltresistenz (FK) (+1): Reduziert Schaden durch Energiequellen um –4 (–6 mit Steigerung).\n\nFirnlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Eis möglich, seien es Schneefelder oder hauchdünn gefrorene Wasserflächen.\nFrostschutz: Der Geweihte erleidet kaum noch negative Auswirkungen durch eine kalte Umgebung.\nGlutlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Feuer möglich, seien es Lavafelder oder glühende Kohlen.\nUnentflammbarkeit: Wirkt die Hexe den Zauber auf sich, erhält sie Rüstungsschutz gegen Feuer.\nWasseratem: Der Verzauberte kann während der Wirkungsdauer sowohl normale Luft als auch Wasser atmen.\nWasserlauf: Mit Hilfe dieser Liturgie kann der Geweihte über Wasser laufen, ganz so, als ob er über Erde gehen würde.\nWellenlauf: Dem Zauberer ist eine problemlose Überquerung von Wasserflächen möglich.\nWipfellauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Humus möglich, seien es Sümpfe oder dicht bewachsene Flächen (etwa das Blätterdach eines Waldes).\nWüstenlauf: Dem Zauberer ist eine problemlose Überquerung von Oberflächen des Elements Erz möglich, seien es Steinwüsten, Geröll- bzw.\nBegehen der Heiligen Wasser: Diese Liturgie ermöglicht es dem Geweihten, gemessenen Schrittes auf dem Wasser zu gehen.\nIngerimms Zorn verschone uns: Die Liturgie ruft den Stein des Ingerimm, einen Talisman der Kirche, herbei, der vor Erdbeben, Vulkanausbrüchen und Feuer schützt.\nSichere Wanderung im Schnee: Mittels dieser Segnung kann die Zielperson auf Schnee und Eis ebenso sicheren Tritt finden wie auf Erde.\nGruss des Versunkenen: Durch diese Liturgie füllt sich der bezeichnete Raum mit Atemluft.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9419,7 +9440,8 @@
         "Wüstenlauf",
         "Begehen der Heiligen Wasser",
         "Ingerimms Zorn verschone uns",
-        "Sichere Wanderung im Schnee"
+        "Sichere Wanderung im Schnee",
+        "Gruss des Versunkenen"
       ]
     },
     "Sprachen sprechen": {
@@ -9428,7 +9450,7 @@
       "machtpunkte": 1,
       "reichweite": "VER 10m",
       "dauer": "—",
-      "beschreibung": "Wirker kann Sprachen sprechen und verstehen.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Alle Sprachen intelligenter Wesen auf einmal sprechen, lesen, schreiben.\n  Massenverständnis (FK, episch) (+5): Alle im Umkreis Verstand×2 verstehen sich unabhängig von Sprache.\n\nWundersame Verständigung: Der Geweihte beherrscht vorübergehend die Sprache, die er gerade für seine Kommunikation benötigt.\nHoftag der Sprachen: Durch diese Liturgie können alle Nutznießer des Segens ohne Sprachbarrieren miteinander reden.\nPhexens wunderbare Verständigung: Mit Hilfe dieser Liturgie ist der Geweihte in der Lage, jede Fremdsprache zu verstehen.\nSchrifttum ferner Lande: Die Geweihte erhält einen vorübergehenden Bonus in einer fremden oder alten Schrift in Höhe von *+5 Punkten.",
+      "beschreibung": "Wirker kann Sprachen sprechen und verstehen.\n\nModifikatoren:\n  Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.\n  Verbessert (FK) (+2): Alle Sprachen intelligenter Wesen auf einmal sprechen, lesen, schreiben.\n  Massenverständnis (FK, episch) (+5): Alle im Umkreis Verstand×2 verstehen sich unabhängig von Sprache.\n\nWundersame Verständigung: Der Geweihte beherrscht vorübergehend die Sprache, die er gerade für seine Kommunikation benötigt.\nHoftag der Sprachen: Durch diese Liturgie können alle Nutznießer des Segens ohne Sprachbarrieren miteinander reden.\nPhexens wunderbare Verständigung: Mit Hilfe dieser Liturgie ist der Geweihte in der Lage, jede Fremdsprache zu verstehen.\nSchrifttum ferner Lande: Die Geweihte kann vorübergehend eine fremde oder alte Schrift lesen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9541,7 +9563,7 @@
       "machtpunkte": 2,
       "reichweite": "VER",
       "dauer": "Sofort/5",
-      "beschreibung": "Erhöht oder verlangsamt Bewegung.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): Nur Trägheit: MFS (+2) oder GFS (+3).\n  Schnelligkeit (+2): Nur Beschleunigung: Abzug für Mehrfachaktionen um –2.\n  Stark (+1): Nur Trägheit: Willenskraftprobe mit –2.\n  Zusätzliche Empfänger (+1): Nur Beschleunigung: ein zusätzliches Ziel pro Punkt.\n  Spurten (FK) (+2): Nur Beschleunigung: maximales Sprintergebnis statt Würfelwurf.\n\nAxxeleratus: Die Bewegungen des Verzauberten werden übernatürlich beschleunigt.\nDebilitatio (senken): Der Spruch erschafft eine unbewegliche kugelförmige Zone.\nGeschwinder Schritt: Während der Wirkungsdauer kann der Geweihte ohne Erschöpfung zu Fuß unterwegs sein.\nKrötensprung: Der Verzauberte kann einmalig unnatürlich weit und hoch springen.\nLeichtfüssig: Die Traglast des Helden wird für ihn zur Berechnung der Traglastregeln um % reduziert.\nLunge des Leviatan: Während der Wirkungsdauer kann der Zauberer sprinten, ohne dass ihn dies erschöpft.\nMovimento: Während der Wirkungsdauer kann sich der Elf beliebig lange im Dauerlauf fortbewegen, ohne dass ihn dies erschöpft.\nSanfter Fall: Fällt der Zauberer während der Wirkungsdauer und erleidet Sturzschaden, gilt die Fallhöhe als um Schritt gesenkt.\nSicherer Tritt: Innerhalb eines Umkreis um den Geweihten können sich alle Wesen problemlos über Eis und Schnee bewegen.\nUnbeschwerte Wanderung: Durch die Zeremonie kann das Ziel Stein zusätzlich tragen .\nWieselflink: Der Geweihte wird flinker und schneller.\nSchnell wie eine Eidechse: Für kurze Zeit erlangt die Tsageweihte die schnellen Reflexe einer Eidechse.",
+      "beschreibung": "Erhöht oder verlangsamt Bewegung.\n\nModifikatoren:\n  Flächeneffekt (+2/+3): Nur Trägheit: MFS (+2) oder GFS (+3).\n  Schnelligkeit (+2): Nur Beschleunigung: Abzug für Mehrfachaktionen um –2.\n  Stark (+1): Nur Trägheit: Willenskraftprobe mit –2.\n  Zusätzliche Empfänger (+1): Nur Beschleunigung: ein zusätzliches Ziel pro Punkt.\n  Spurten (FK) (+2): Nur Beschleunigung: maximales Sprintergebnis statt Würfelwurf.\n\nAxxeleratus: Die Bewegungen des Verzauberten werden übernatürlich beschleunigt.\nDebilitatio (senken): Der Spruch erschafft eine unbewegliche kugelförmige Zone.\nGeschwinder Schritt: Während der Wirkungsdauer kann der Geweihte ohne Erschöpfung zu Fuß unterwegs sein.\nKrötensprung: Der Verzauberte kann einmalig unnatürlich weit und hoch springen.\nLeichtfüssig: Die Traglast des Helden wird für ihn zur Berechnung der Traglastregeln um % reduziert.\nLunge des Leviatan: Während der Wirkungsdauer kann der Zauberer sprinten, ohne dass ihn dies erschöpft.\nMovimento: Während der Wirkungsdauer kann sich der Elf beliebig lange im Dauerlauf fortbewegen, ohne dass ihn dies erschöpft.\nSanfter Fall: Fällt der Zauberer während der Wirkungsdauer und erleidet Sturzschaden, gilt die Fallhöhe als um Schritt gesenkt.\nSicherer Tritt: Innerhalb eines Umkreis um den Geweihten können sich alle Wesen problemlos über Eis und Schnee bewegen.\nUnbeschwerte Wanderung: Durch die Zeremonie kann das Ziel Stein zusätzlich tragen .\nWieselflink: Der Geweihte wird flinker und schneller.\nSchnell wie eine Eidechse: Für kurze Zeit erlangt die Tsageweihte die schnellen Reflexe einer Eidechse.\nSechs Leben des Mungos: Der Geweihte kann durch göttlichen Beistand selbst einen Fall oder Sprung aus großer Höhe überleben.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9559,7 +9581,8 @@
         "Sicherer Tritt",
         "Unbeschwerte Wanderung",
         "Wieselflink",
-        "Schnell wie eine Eidechse"
+        "Schnell wie eine Eidechse",
+        "Sechs Leben des Mungos"
       ]
     },
     "Unsichtbarkeit": {
@@ -9587,7 +9610,7 @@
       "machtpunkte": 3,
       "reichweite": "VER",
       "dauer": "Sofort",
-      "beschreibung": "Vergleichender Wurf gegen Willenskraft, um Wesenheiten zu verbannen.\n\nModifikatoren:\n  Wirkungsbereich (FK) (+1/+2/+3): KFS (+1), MFS (+2), GFS (+3).\n\nBannstrahl: Der Bannstrahl richtet gegen Dämonen, Geister, Untote oder Paktierer Schaden an. (Einschränkung: nur gegen solche Wesen wirksam.)\nExorzismus: Mit einem Exorzismus werden Dämonen und Geister ausgetrieben, die Besitz von einem Lebewesen ergriffen haben.\nGramma (Bannkreis): Erschafft einen Bannkreis gegen eine bestimmte Wesenheit.\nMerkmalsbann: Hebt einen Zauber eines bestimmten Merkmals auf.\nBann wider Untote: Wird ein untotes Wesen mit der Liturgie belegt, erleidet es Schaden. (Einschränkung: nur gegen Untote.)\nMeeresungeheuer vertreiben: Der Geweihte kann durch diese Liturgie versuchen, ein Meeresungeheuer zu vertreiben.\nSeelenbannung: Die schrecklichste aller Liturgien des Namenlosen verbannt die Seele eines Menschen und schickt sie direkt zum finsteren Herrn des Priesters – selbst dann, wenn das …\nZerschmetternder Bannstrahl: Aus dem Himmel fährt ein gleißender Strahl auf das Ziel herab.",
+      "beschreibung": "Vergleichender Wurf gegen Willenskraft, um Wesenheiten zu verbannen.\n\nModifikatoren:\n  Wirkungsbereich (FK) (+1/+2/+3): KFS (+1), MFS (+2), GFS (+3).\n\nBannstrahl: Der Bannstrahl richtet gegen Dämonen, Geister, Untote oder Paktierer Schaden an. (Einschränkung: nur gegen solche Wesen wirksam.)\nExorzismus: Mit dieser Liturgie zwingt der Geweihte einen niederen Dämon aus dem Gefolge des Widersachers seiner Gottheit in die Niederhöllen zurück.\nGramma (Bannkreis): Erschafft einen Bannkreis gegen eine bestimmte Wesenheit.\nMerkmalsbann: Hebt einen Zauber eines bestimmten Merkmals auf.\nBann wider Untote: Wird ein untotes Wesen mit der Liturgie belegt, erleidet es Schaden. (Einschränkung: nur gegen Untote.)\nMeeresungeheuer vertreiben: Der Geweihte kann durch diese Liturgie versuchen, ein Meeresungeheuer zu vertreiben.\nSeelenbannung: Die schrecklichste aller Liturgien des Namenlosen verbannt die Seele eines Menschen und schickt sie direkt zum finsteren Herrn des Priesters – selbst dann, wenn das …\nZerschmetternder Bannstrahl: Aus dem Himmel fährt ein gleißender Strahl auf das Ziel herab.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9774,7 +9797,7 @@
       "machtpunkte": 30,
       "reichweite": "B",
       "dauer": "Sofort",
-      "beschreibung": "Erweckt Tote zum Leben.\n\nModifikatoren:\n  Mächtig (+5): Bis zu ein Jahrzehnt alte Leiche wiedererwecken.\n  Verbesserte Wiederauferstehung (FK, episch) (+10): Tote wiedererwecken unabhängig von Todeszeitpunkt; ohne Leiche; 12h-Ritual.\n\nAufnahme (Initiation): Der Seele des Betroffenen eröffnet sich die Möglichkeit, in ein Paradies der Götter einzukehren.\nSelbstopferung: Die Schamanin kann Lebenspunkte auf jemanden übertragen, der im Sterben liegt und an seiner Stelle den Tod finden.\nInitiation: Der Initiat wird in die Gemeinschaft der Zwölfgöttergläubigen aufgenommen, gilt nun als eigenständiges Mitglied der Gemeinschaft, und damit in einigen Regionen auch als …\nTsas heiliges Lebensgeschenk: Der Empfänger der Liturgie erhält nach dem Zyklus *+15 Punkte Sikaryan zurück, höchstens jedoch so viel, wie sein ursprüngliches Maximum beträgt.",
+      "beschreibung": "Erweckt Tote zum Leben.\n\nModifikatoren:\n  Mächtig (+5): Bis zu ein Jahrzehnt alte Leiche wiedererwecken.\n  Verbesserte Wiederauferstehung (FK, episch) (+10): Tote wiedererwecken unabhängig von Todeszeitpunkt; ohne Leiche; 12h-Ritual.\n\nAufnahme (Initiation): Der Seele des Betroffenen eröffnet sich die Möglichkeit, in ein Paradies der Götter einzukehren.\nSelbstopferung: Die Schamanin kann Lebenspunkte auf jemanden übertragen, der im Sterben liegt und an seiner Stelle den Tod finden.\nInitiation: Der Initiat wird in die Gemeinschaft der Zwölfgöttergläubigen aufgenommen, gilt nun als eigenständiges Mitglied der Gemeinschaft, und damit in einigen Regionen auch als …\nTsas heiliges Lebensgeschenk: Der Empfänger erhält einen Teil seiner Lebenskraft zurück und kann dem sicheren Tod entrissen werden.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9858,7 +9881,7 @@
       "machtpunkte": 20,
       "reichweite": "Speziell",
       "dauer": "Speziell",
-      "beschreibung": "Bittet um Hilfe von größeren Mächten.\n\nFriedfertigkeit: Innerhalb eines Umkreis um einen von der Tsageweihten bestimmten Punkt ist es kaum noch möglich, Handlungen durchzuführen, die anderen Lebewesen zum Schaden gereichen.\nFriedvolle Aura: Um den Geweihten anzugreifen, ist eine Probe auf Willenskraft (Bedrohungen standhalten) des Gegners notwendig, bei der er mehr erzielen muss als die der Friedvollen Aura.\nGöttliches Zeichen: Das Zeichen äußert sich z.\nKleiner Schutzsegen: Der Schutzsegen kann einige als unheilig geltende Wesen fernhalten.\nSchutz der Hornissenkönigin: Die Priesterin kann bis zu Verbündete bestimmen, auf die der von ihr erlittene Schaden zu Beginn jeder Kampfrunde bis zu einem Maximum von Schaden zu gleichen Teilen übertragen wird.\nSchutz der Wehrlosen: Der Geweihte kann einen Kämpfer, der eine wehr- oder schutzlose Person angreift oder angreifen will, herausfordern.\nSchutzsegen: Der Schutzsegen kann einige als unheilig geltende Wesen von einem Gebiet fernhalten.\nSeelenbannung: Durch diese finstere Zeremonie ist es einem Geweihten möglich, die Seele eines Kulturschaffenden dem Namenlosen zu opfern.\nSegnung des Heims: Innerhalb eines Umkreis um die Feuerstelle eines gesegneten Heims ist es nur noch unter erschwerten Bedingungen möglich, das Gastrecht zu brechen.\nTabu-Zone: Der Schamane kann ein Gebiet zur Tabuzone erklären.\nTravias Wachgänse: Der Geweihte segnet das Herdfeuer eines Gebäudes oder Lagers.\nWaffenfluch (umgekehrt): Der Geweihte kann eine beliebige Waffe mit einem Waffenfluch belegen.\nZuflucht: Nach Wirken der Zeremonie tut sich eine sichere Zuflucht auf, sei es in Form einer schützenden Kuhle im Boden oder einer Höhle im Fels.\nÄchtung (Exkommunikation): Die betroffene Person wird aus dem Kreis der Initiaten des Pantheons ausgestoßen und erhält den Makel des Frevlers (siehe Aventurisches Götterwirken bzw.\nAura des Regenbogens: Die Liturgie erschafft um die Tsageweihte eine Zone der Friedfertigkeit.\nExkommunikation: Durch diese Liturgie wird eine Person aus der Zwölfgöttlichen Gemeinschaft ausgeschlossen.\nFlagge des Regenbogens: Um weiterhin aggressive Handlungen vorzunehmen oder zu kämpfen, muss eine Willenskraftprobe+*+5 gelingen.\nTravias Gebet der sicheren Zuflucht: Im Wirkungsbereich entsteht eine orange leuchtende Schutzkuppel, die vor Umweltbedingungen und dämonischen Einflüssen schützt.\nWachsamkeit der Gänse: Sollte sich ein Wesen, von dem eine Gefahr für die Geweihte ausgeht, auf +5 Schritt der Zone nähern, wird sie von einem lauten Gänseschnattern geweckt.\nZuflucht finden: Durch diese Liturgie kann der Geweihte ohne weitere Proben eine sichere Zuflucht finden, in der er und seine Gefährten vor Wind und Wetter geschützt sind.",
+      "beschreibung": "Bittet um Hilfe von größeren Mächten.\n\nFriedfertigkeit: Innerhalb eines Umkreis um einen von der Tsageweihten bestimmten Punkt ist es kaum noch möglich, Handlungen durchzuführen, die anderen Lebewesen zum Schaden gereichen.\nFriedvolle Aura: Um den Geweihten anzugreifen, ist eine Probe auf Willenskraft (Bedrohungen standhalten) des Gegners notwendig, bei der er mehr erzielen muss als die der Friedvollen Aura.\nGöttliches Zeichen: Es erscheint ein kleines, göttliches Zeichen, das dem Wesen der Gottheit der Geweihten und der aktuellen Situation entspricht.\nKleiner Schutzsegen: Der Schutzsegen kann einige als unheilig geltende Wesen fernhalten.\nSchutz der Hornissenkönigin: Die Priesterin kann bis zu Verbündete bestimmen, auf die der von ihr erlittene Schaden zu Beginn jeder Kampfrunde bis zu einem Maximum von Schaden zu gleichen Teilen übertragen wird.\nSchutz der Wehrlosen: Der Geweihte kann einen Kämpfer, der eine wehr- oder schutzlose Person angreift oder angreifen will, herausfordern.\nSchutzsegen: Der markierte Bereich wirkt für eine bestimmte Art unheiliger Wesen, z.B.\nSeelenbannung: Durch diese finstere Zeremonie ist es einem Geweihten möglich, die Seele eines Kulturschaffenden dem Namenlosen zu opfern.\nSegnung des Heims: Jedes denkende Wesen, das den Wirkungsbereich betritt, wird sich unbewusst an die Gesetze der Gastfreundschaft und des Anstandes halten.\nTabu-Zone: Der Schamane kann ein Gebiet zur Tabuzone erklären.\nTravias Wachgänse: Der Geweihte segnet das Herdfeuer eines Gebäudes oder Lagers.\nWaffenfluch (umgekehrt): Der Geweihte kann eine beliebige Waffe mit einem Waffenfluch belegen.\nZuflucht: Nach Wirken der Zeremonie tut sich eine sichere Zuflucht auf, sei es in Form einer schützenden Kuhle im Boden oder einer Höhle im Fels.\nÄchtung (Exkommunikation): Die betroffene Person wird aus dem Kreis der Initiaten des Pantheons ausgestoßen und erhält den Makel des Frevlers (siehe Aventurisches Götterwirken bzw.\nAura des Regenbogens: Die Liturgie erschafft um die Tsageweihte eine Zone der Friedfertigkeit.\nExkommunikation: Durch diese Liturgie wird eine Person aus der Zwölfgöttlichen Gemeinschaft ausgeschlossen.\nFlagge des Regenbogens: Wer im Wirkungsbereich weiter angreifen oder kämpfen will, muss eine Willenskraftprobe bestehen.\nTravias Gebet der sicheren Zuflucht: Im Wirkungsbereich entsteht eine orange leuchtende Schutzkuppel, die vor Umweltbedingungen und dämonischen Einflüssen schützt.\nWachsamkeit der Gänse: Sollte sich ein Wesen, von dem eine Gefahr für die Geweihte ausgeht, auf +5 Schritt der Zone nähern, wird sie von einem lauten Gänseschnattern geweckt.\nZuflucht finden: Durch diese Liturgie kann der Geweihte ohne weitere Proben eine sichere Zuflucht finden, in der er und seine Gefährten vor Wind und Wetter geschützt sind.\nWundersame Blütenpracht: Mit Beginn des Liedes wachsen bunte Frühlingsblumen innerhalb eines Radius von Schritt, genau dort, wohin das regenbogenfarbene Licht des Prismas fällt.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9883,7 +9906,8 @@
         "Flagge des Regenbogens",
         "Travias Gebet der sicheren Zuflucht",
         "Wachsamkeit der Gänse",
-        "Zuflucht finden"
+        "Zuflucht finden",
+        "Wundersame Blütenpracht"
       ]
     },
     "Segen": {
@@ -9892,7 +9916,7 @@
       "machtpunkte": 10,
       "reichweite": "Eine Stadt/Gemeinde",
       "dauer": "Ein Jahr",
-      "beschreibung": "Segnet Gemeinschaften und Ressourcen.\n\nAckersegen: Der Geweihte wandert über das frisch gesäte Feld und segnet die Ackerfrüchte.\nEmpfängnis des Korsmals: Durch die Liturgie können bis zu Personen im Namen Kors getauft werden.\nFest der Freude: Alle innerhalb eines Umkreis abgehaltenen Feierlichkeiten werden als besonders festlich und berauschend empfunden.\nFruchtbarkeit: Die Zeremonie wird gleichzeitig auf zwei Kulturschaffende gewirkt, die gemeinsam ein Kind zeugen wollen.\nGeburtssegen: Ein Neugeborenes wird gesegnet und in die Gemeinschaft der Gläubigen aufgenommen.\nGlückssegen: Der Gesegnete hat einmal während der Wirkungsdauer der Segnung ein Fünkchen Glück.\nGrabsegen: Das Grab eines Verstorbenen wird gesegnet.\nHeiliger Schwur: Der Schwur kann auf eine oder zwei Personen wirken.\nLiebestätowierung: Eine Rahjageweihte kann mit dieser Zeremonie Tätowierfarbe für eine Rosentätowierung weihen.\nObjektsegen: Mit dieser Liturgie werden für Götterdienste benötigte Materialien (z.\nObjektweihe: Das Objekt, üblicherweise ein liturgischer Gegenstand oder eine rituelle Waffe wie ein Sonnenzepter oder ein Rondrakamm, wird geweiht.\nReinigung des Bösen: Der Geweihte kann dämonisch verseuchtes Gebiet reinigen und von den Auswirkungen der niederhöllischen Macht befreien.\nSegen (Eidsegen, Harmoniesegen, Weisheitssegen): Verschiedene göttliche Segen (Eid, Harmonie, Weisheit).\nSpeisung: Bis zu Personen benötigen während der Wirkungsdauer weder Nahrung noch Wasser und fühlen sich weder hungrig noch durstig.\nTranksegen: Wer von dem gesegneten Getränk trinkt, fühlt sich erfrischt.\nWeihe des Heims: Die Zeremonie erhöht die Strukturpunkte eines Gebäudes um Punkte gegen jegliche Art von Schaden.\nHarmoniesegen: Der Gesegnete ist von Freude, Zuversicht und innerer Harmonie erfüllt.\nRahjas Fest der Freude: Ein durch diese Liturgie gesegnetes Fest bewirkt, dass es in den Augen der Teilnehmer als besonders gelungen gilt: Speisen und Trunk schmecken hervorragend, Musik und …\nTsas wundersame Fruchtbarkeit: Die Liturgie ruft die Kreide der Tsa herbei, einen göttlichen Talisman.\nWeisheitssegen: Durch diese Liturgie werden gleichmäßig auf Klugheit und Intuition verteilt, zusätzlich steigt die MR um */4.\nBootssegen: Durch diese Liturgie sind Boot und Mannschaft fortan gegen Efferdfrevler gewappnet.\nDreifacher Saatsegen: Der Saatsegen soll für gutes Wachstum und eine reichhaltige Ernte sorgen.\nEfferdsegen: Binnen * Tagen wird es über den Feldern sanft, aber ausgiebig regnen.\nEidsegen: DSA-Liturgie, abgebildet über die Macht Segen.\nGesegneter Fang: Durch diese Liturgie erhöht sich die Fangausbeute.\nGrosser Eidsegen: Durch diese Liturgie werden zwei Personen für ihr Leben miteinander verbunden und der Einhaltung der beschworenen Prinzipien verpflichtet.\nGrosser Speisesegen: Durch diese Liturgie werden Nahrung und Getränke auf dem Tisch von allen Krankheiten, Giften, Schmutz etc.\nKälbchensegen: Das Tier ist während des Aufwachsens vor jeglicher Tierkrankheit geschützt.\nParinors Vermächtnis: Eine Pflanze wächst unter der Kraft der Liturgie zu einem schönen und starken Exemplar ihrer Gattung heran – und das auch noch doppelt so schnell.\nQuellsegen: Diese Liturgie verhindert, dass ein Brunnen oder eine Quelle versiegt.\nReiches Land: Mittels dieser Liturgie verwandelt sich trockener, nicht zur Aussaat geeigneter Boden binnen eines Tages in fruchtbares Land.\nReisesegen: Der Gesegnete wird überall freundlich aufgenommen, findet gute Lagerplätze, kann seine Ausrüstung besser in Stand halten und besser orientieren, solange er sich an …\nSchutz des Geleges: Die Liturgie soll den frischgeschlüpften Echsen Schutz gewähren.\nSpeisesegen: Mit dieser Liturgie reinigt die Geweihte eine Mahlzeit für maximal Personen von Dreck, Fäulnis und Krankheiten.\nSpeisung der Bedürftigen: Die gesegnete Speise ist nahrhaft und sättigend.\nTsas segensreicher Neuanfang: Mittels dieser Liturgie wird Tsas Regenbogen herbeigerufen und ein göttingefälliges Projekt unter ihren Schutz gestellt.\nUnterpfand des Heiligen Rhÿs: Ein mit dieser Liturgie bedachter Gegenstand steht unter dem besonderen Schutz Ingerimms.\nWegzehrung der Heiligen Selma: Die Liturgie sorgt für eine größere Haltbarkeit von Lebensmitteln.",
+      "beschreibung": "Segnet Gemeinschaften und Ressourcen.\n\nAckersegen: Der Geweihte wandert über das frisch gesäte Feld und segnet die Ackerfrüchte.\nEmpfängnis des Korsmals: Durch die Liturgie können bis zu Personen im Namen Kors getauft werden.\nFest der Freude: Alle innerhalb eines Umkreis abgehaltenen Feierlichkeiten werden als besonders festlich und berauschend empfunden.\nFruchtbarkeit: Die Zeremonie wird gleichzeitig auf zwei Kulturschaffende gewirkt, die gemeinsam ein Kind zeugen wollen.\nGeburtssegen: Die Seele eines mit dieser Liturgie gesegneten Kindes ist vor dämonischen Einflüsterungen geschützt.\nGlückssegen: Der Gesegnete darf eine Probe wiederholen und das günstigere Ergebnis wählen, ganz so, als hätte er den Vorteil Glück (Wege der ­Helden, S.\nGrabsegen: Das gesegnete Grab wirkt abschreckend auf unheilige Wesen und gilt als einfach geweiht.\nHeiliger Schwur: Der Schwur kann auf eine oder zwei Personen wirken.\nLiebestätowierung: Eine Rahjageweihte kann mit dieser Zeremonie Tätowierfarbe für eine Rosentätowierung weihen.\nObjektsegen: Mit dieser Liturgie segnet die Geweihte einen Gegenstand oder eine Substanz (maximal Liter), üblicherweise für ein nachfolgendes Ritual.\nObjektweihe: Durch diese Liturgie wird ein Gegenstand oder eine Substanz (jeweils maximal 10 Stein) für die Wirkungsdauer einfach geweiht.\nReinigung des Bösen: Der Geweihte kann dämonisch verseuchtes Gebiet reinigen und von den Auswirkungen der niederhöllischen Macht befreien.\nSegen (Eidsegen, Harmoniesegen, Weisheitssegen): Verschiedene göttliche Segen (Eid, Harmonie, Weisheit).\nSpeisung: Bis zu Personen benötigen während der Wirkungsdauer weder Nahrung noch Wasser und fühlen sich weder hungrig noch durstig.\nTranksegen: Mit dieser Liturgie reinigt der Geweihte ausreichend Trinkwasser von Dreck, Fäulnis und Krankheiten, sodass Personen für einem Tag versorgt werden können.\nWeihe des Heims: Die Zeremonie erhöht die Strukturpunkte eines Gebäudes um Punkte gegen jegliche Art von Schaden.\nHarmoniesegen: Der Gesegnete ist von Freude, Zuversicht und innerer Harmonie erfüllt.\nRahjas Fest der Freude: Ein durch diese Liturgie gesegnetes Fest bewirkt, dass es in den Augen der Teilnehmer als besonders gelungen gilt: Speisen und Trunk schmecken hervorragend, Musik und …\nTsas wundersame Fruchtbarkeit: Die Liturgie ruft die Kreide der Tsa herbei, einen göttlichen Talisman.\nWeisheitssegen: Durch diese Liturgie werden gleichmäßig auf Klugheit und Intuition verteilt, zusätzlich steigt die MR um /4.\nBootssegen: Durch diese Liturgie sind Boot und Mannschaft fortan gegen Efferdfrevler gewappnet.\nDreifacher Saatsegen: Der Saatsegen soll für gutes Wachstum und eine reichhaltige Ernte sorgen.\nEfferdsegen: Binnen weniger Tage wird es über den Feldern sanft, aber ausgiebig regnen.\nEidsegen: DSA-Liturgie, abgebildet über die Macht Segen.\nGesegneter Fang: Durch diese Liturgie erhöht sich die Fangausbeute.\nGrosser Eidsegen: Durch diese Liturgie werden zwei Personen für ihr Leben miteinander verbunden und der Einhaltung der beschworenen Prinzipien verpflichtet.\nGrosser Speisesegen: Durch diese Liturgie werden Nahrung und Getränke auf dem Tisch von allen Krankheiten, Giften, Schmutz etc.\nKälbchensegen: Das Tier ist während des Aufwachsens vor jeglicher Tierkrankheit geschützt.\nParinors Vermächtnis: Eine Pflanze wächst unter der Kraft der Liturgie zu einem schönen und starken Exemplar ihrer Gattung heran – und das auch noch doppelt so schnell.\nQuellsegen: Diese Liturgie verhindert, dass ein Brunnen oder eine Quelle versiegt.\nReiches Land: Mittels dieser Liturgie verwandelt sich trockener, nicht zur Aussaat geeigneter Boden binnen eines Tages in fruchtbares Land.\nReisesegen: Der Gesegnete wird überall freundlich aufgenommen, findet gute Lagerplätze, kann seine Ausrüstung besser in Stand halten und besser orientieren, solange er sich an …\nSchutz des Geleges: Die Liturgie soll den frischgeschlüpften Echsen Schutz gewähren.\nSpeisesegen: Mit dieser Liturgie reinigt die Geweihte eine Mahlzeit für maximal Personen von Dreck, Fäulnis und Krankheiten.\nSpeisung der Bedürftigen: Die gesegnete Speise ist nahrhaft und sättigend.\nTsas segensreicher Neuanfang: Mittels dieser Liturgie wird Tsas Regenbogen herbeigerufen und ein göttingefälliges Projekt unter ihren Schutz gestellt.\nUnterpfand des Heiligen Rhÿs: Ein mit dieser Liturgie bedachter Gegenstand steht unter dem besonderen Schutz Ingerimms.\nWegzehrung der Heiligen Selma: Die Liturgie sorgt für eine größere Haltbarkeit von Lebensmitteln.\nEin Freund in Zeiten der Not: Ein neuer Gefährte wird in naher Zukunft dem Geweihten begegnen oder ihn aus einer Notlage retten.\nEwiges Wissen: Das Ritual findet in den meisten Fällen zwischen einem Orkpriester und seinem Schüler statt und dient der Übertragung von altem Wissen.\nIndoktrination: Diese Liturgie ermöglicht es einer Geweihten, die zuvor theoretisch vermittelte Liturgie mit göttlicher Kraft und Hilfe als regeltechnische Liturgie zu erlernen und …\nOrdination: Durch diese Liturgie wird die Seele des Novizen geprüft, und er wird, so er in den Augen seiner Gottheit Gnade findet, als Geweihter angenommen und kann fortan mittels …\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9935,7 +9959,12 @@
         "Speisung der Bedürftigen",
         "Tsas segensreicher Neuanfang",
         "Unterpfand des Heiligen Rhÿs",
-        "Wegzehrung der Heiligen Selma"
+        "Wegzehrung der Heiligen Selma",
+        "Ein Freund in Zeiten der Not",
+        "Ewiges Wissen",
+        "Indoktrination",
+        "Ordination",
+        "Sterne funkeln immerfort"
       ]
     },
     "Tier Beschwören": {
@@ -9944,7 +9973,7 @@
       "machtpunkte": 1,
       "reichweite": "Verstand",
       "dauer": "5",
-      "beschreibung": "Beschwört Tiere zur Unterstützung.\n\nModifikatoren:\n  Erhöhte Eigenschaft (FK) (+1): Eine Eigenschaft um einen Würfeltyp verbessern.\n  Geistesband (FK) (+1): Kommunikation und Wahrnehmung durch beschworene Tiere.\n  Zusätzliche Tiere (FK) (halbe Basiskosten): Weitere Tiere gleicher Art zur Hälfte der Kosten.\n\nHeerscharen herbeirufen: Ruft eine Schar von Dienern des Namenlosen herbei.\nTierruf: Ruft ein bestimmtes Tier herbei, das dem Wirker dient.\nHairuf: Mit dieser Liturgie kann der Schamane Streifenhaie herbeirufen.\nNebelkrähenschwarm: Der Schamane verwandelt sich auf der Stelle in einen Schwarm Nebelkrähen.\nRattenschwarm: Der Geweihte des Namenlosen verwandelt sich auf der Stelle in einen Schwarm Ratten.\nReptilea: Alle innerhalb im Umkreisbefindlichen Reptilien und Amphibien der Größenkategorie winzig werden vom Zauberer angezogen und bewegen sich in seine Richtung.\nSchlangenstab: Die Schlange beschützt den Geweihten mit den ihr zur Verfügung stehenden Mitteln und folgt ihm.\nZauberpferd herbeirufen: Neben dem Elfen manifestiert sich ein Zauberpferd von den Inseln im Nebel.\nHerbeirufung der Heerscharen des Rattenkindes: Diese Liturgie ruft Tiere herbei, die als Diener des Namenlosen assoziiert werden: Ratten, Spinnen oder Schakale.\nRuf der Gefährten: Durch diese Liturgie ruft der Geweihte ein ihm freundlich gesinntes Meerestier zu sich.",
+      "beschreibung": "Beschwört Tiere zur Unterstützung.\n\nModifikatoren:\n  Erhöhte Eigenschaft (FK) (+1): Eine Eigenschaft um einen Würfeltyp verbessern.\n  Geistesband (FK) (+1): Kommunikation und Wahrnehmung durch beschworene Tiere.\n  Zusätzliche Tiere (FK) (halbe Basiskosten): Weitere Tiere gleicher Art zur Hälfte der Kosten.\n\nHeerscharen herbeirufen: Ruft eine Schar von Dienern des Namenlosen herbei.\nTierruf: Ruft ein bestimmtes Tier herbei, das dem Wirker dient.\nHairuf: Mit dieser Liturgie kann der Schamane Streifenhaie herbeirufen.\nNebelkrähenschwarm: Der Schamane verwandelt sich auf der Stelle in einen Schwarm Nebelkrähen.\nRattenschwarm: Der Geweihte des Namenlosen verwandelt sich auf der Stelle in einen Schwarm Ratten.\nReptilea: Alle innerhalb im Umkreisbefindlichen Reptilien und Amphibien der Größenkategorie winzig werden vom Zauberer angezogen und bewegen sich in seine Richtung.\nSchlangenstab: Der Holzstecken verwandelt sich in eine Smaragdnatter, die alle Personen angreift, welche die Geweihte bedrohen.\nZauberpferd herbeirufen: Neben dem Elfen manifestiert sich ein Zauberpferd von den Inseln im Nebel.\nHerbeirufung der Heerscharen des Rattenkindes: Diese Liturgie ruft Tiere herbei, die als Diener des Namenlosen assoziiert werden: Ratten, Spinnen oder Schakale.\nRuf der Gefährten: Durch diese Liturgie ruft der Geweihte ein ihm freundlich gesinntes Meerestier zu sich.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -9992,7 +10021,7 @@
       "machtpunkte": 1,
       "reichweite": "Verstand",
       "dauer": "5",
-      "beschreibung": "Beschwört einfache Untote.\n\nModifikatoren:\n  Erhöhte Eigenschaft (FK) (+1): Eine Eigenschaft um einen Würfeltyp verbessern.\n  Geistesband (FK) (+1): Kommunikation und Wahrnehmung durch beschworene Untote.\n  Zusätzliche Untote (FK) (halbe Basiskosten): Weitere Untote gleicher Art zur Hälfte der Kosten.\n\nSkelettarius: Der Zauberer erhebt die körperlichen Überreste eines verstorbenen Wesens kurzfristig zum Untoten.\nTairachs Erhebung: Erhebt Tote zu Untoten im Namen Tairachs.\nTairachs machtvolle Erhebung von Untoten: Mit dieser Zeremonie erhebt der Schamane Tote und macht sie sich gefügig.\nTotes handle: Der Zauberer erhebt die körperlichen Überreste eines verstorbenen Lebewesens langfristig zum Untoten.\nUntote erschaffen: Die Zeremonie erhebt die körperlichen Überreste eines verstorbenen Lebewesens permanent zu einem karmalen Untoten.\nUntotenerhebung: Der Schamane erhebt die körperlichen Überreste eines verstorbenen Wesens kurzfristig zum Untoten.\nEwiger Wächter: Der Schamane verwandelt sich dauerhaft in einen Jaguar, der sich nicht weiter als * Meilen von dem zu beschützenden Ort entfernen kann.",
+      "beschreibung": "Beschwört einfache Untote.\n\nModifikatoren:\n  Erhöhte Eigenschaft (FK) (+1): Eine Eigenschaft um einen Würfeltyp verbessern.\n  Geistesband (FK) (+1): Kommunikation und Wahrnehmung durch beschworene Untote.\n  Zusätzliche Untote (FK) (halbe Basiskosten): Weitere Untote gleicher Art zur Hälfte der Kosten.\n\nSkelettarius: Der Zauberer erhebt die körperlichen Überreste eines verstorbenen Wesens kurzfristig zum Untoten.\nTairachs Erhebung: Erhebt Tote zu Untoten im Namen Tairachs.\nTairachs machtvolle Erhebung von Untoten: Mit dieser Zeremonie erhebt der Schamane Tote und macht sie sich gefügig.\nTotes handle: Der Zauberer erhebt die körperlichen Überreste eines verstorbenen Lebewesens langfristig zum Untoten.\nUntote erschaffen: Die Zeremonie erhebt die körperlichen Überreste eines verstorbenen Lebewesens permanent zu einem karmalen Untoten.\nUntotenerhebung: Der Schamane erhebt die körperlichen Überreste eines verstorbenen Wesens kurzfristig zum Untoten.\nEwiger Wächter: Der Schamane verwandelt sich dauerhaft in einen Jaguar, der den zu beschützenden Ort kaum verlässt.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -10030,7 +10059,7 @@
       "machtpunkte": 2,
       "reichweite": "BER",
       "dauer": "—",
-      "beschreibung": "Neue Macht.\n\nAdamantium: Der Ritual ADAMANTIUM verschafft einem Objekt bis zur Größe einer Truhe % zusätzliche Strukturpunkte.\nCustodosigil: Ein maximal truhengroßes Behältnis, das über ein Schloss verfügt, wird mit einem magischen Schutz ausgestattet.\nDesintegratus (umgekehrt): Das verzauberte Objekt verliert Strukturpunkte.\nEisenrost (Schutz gegen Waffen): Metallene Gegenstände verlieren 20 Strukturpunkte.\nMauereinsturz: Die Tsageweihte kann eine Mauer in der Nähe Länge und maximal Höhe beschädigen.\nSumus Elixiere: Durch diesen Zauberspruch kann der Druide Astralkraft in Zutaten für Alchimica einfließen lassen.\nUnberührt von Satinav: Ein maximal wiegendes Objekt ist während der Wirkungsdauer vor Verfall geschützt.\nWiederherstellung: Die Zeremonie repariert ein beschädigtes oder zerstörtes Objekt, indem sie ihm Strukturpunkte zurückgibt.\nErneuerung des Geborstenen: Ein mit dieser Liturgie gesegneter Gegenstand wird wieder instandgesetzt.",
+      "beschreibung": "Verbessert oder beschädigt einen Gegenstand: repariert und verstärkt ihn (mehr Härte/Struktur) oder lässt ihn rosten, bersten und zerfallen.\n\nAdamantium: Der Ritual ADAMANTIUM verschafft einem Objekt bis zur Größe einer Truhe % zusätzliche Strukturpunkte.\nCustodosigil: Ein maximal truhengroßes Behältnis, das über ein Schloss verfügt, wird mit einem magischen Schutz ausgestattet.\nDesintegratus (umgekehrt): Das verzauberte Objekt verliert Strukturpunkte.\nEisenrost (Schutz gegen Waffen): Metallene Gegenstände verlieren 20 Strukturpunkte.\nMauereinsturz: Die Tsageweihte kann eine Mauer in der Nähe Länge und maximal Höhe beschädigen.\nSumus Elixiere: Durch diesen Zauberspruch kann der Druide Astralkraft in Zutaten für Alchimica einfließen lassen.\nUnberührt von Satinav: Ein maximal wiegendes Objekt ist während der Wirkungsdauer vor Verfall geschützt.\nWiederherstellung: Die Zeremonie repariert ein beschädigtes oder zerstörtes Objekt, indem sie ihm Strukturpunkte zurückgibt.\nErneuerung des Geborstenen: Ein mit dieser Liturgie gesegneter Gegenstand wird wieder instandgesetzt.\nTrophäe erhalten: Die Trophäe wird durch die Wirkung der Liturgie konserviert und erhalten.\nAngroschs Opfergabe: Durch diese Liturgie verschmilzt der Gegenstand mit dem Felsen.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -10045,7 +10074,9 @@
         "Sumus Elixiere",
         "Unberührt von Satinav",
         "Wiederherstellung",
-        "Erneuerung des Geborstenen"
+        "Erneuerung des Geborstenen",
+        "Trophäe erhalten",
+        "Angroschs Opfergabe"
       ]
     },
     "Zaubertricks": {
@@ -10054,7 +10085,7 @@
       "machtpunkte": 1,
       "reichweite": "VER G",
       "dauer": "—",
-      "beschreibung": "Neue Macht.\nAccuratum, Sapefacta, Bartwuchs, Beruhigung, Blütenduft, Abkühlung, Astralmanifestation, Bauchreden, Elementarling, Dämonling, Buchschließer, Elfenhaar, Feenfüße, Feenzauber, Feuerspiel, Gelöscht, Flammenhaar, Feuerfinger, Geistergeräusche, Geräuschhexerei, Glücksgriff, Geräuschschutz, Handwärmer, Grußworte, Haarpracht, Hautbild, Hexenblick, Hintergrundmusik, Duft, Hundekeks, Insektenbann, Kleingeld, Jagdtrommel, Kehrbesen, Keimling, Kneifen, Kreide, Körperpflege, Kriegsbemalung, Leselampe, Leuchtblume, Nagellack, Luftstoß, Lockruf, Patron-Illusion, Ordentlich, Platscher, Pflanzenempathie, Regenschirm, Regenbogenaugen, Rohrstock, Schattenspiel, Rührlöffel, Sandfigur, Schnipsen, Schlangenhände, Schmutzabweisend, Schönschrift, Schulgong, Schminken, Selbstarchivierung, Signatur, Tiertrick, Tafelschwamm, Stabhalter, Steinempathie, Tentakelgriff, Tätowierung, Tierpflege, Totenmaske, Trocken, Türklinkenbetätiger, Verbundenheitsgefühl, Türklopfer, Verneigung, Wechselschein, Waffensäuberung, Übergangen, Wasserhöhe, Wohlgeruch, Würze, Zauberfeder, Blick in den Limbus, Aranische Rasur, Beeren & Nüsse, Eiskalter Blick, Auffälliger Stil, Einfache Telekinese, Astrales Leuchten, Aura der Eitelkeit, Ehrfürchtiges Verhalten, Heller Stern, Guten Morgen, Hand der Antimagie, Konstante Temperatur, Essenz der Niederhöllen, Gut behütet, Kleiner fliegender Teppich, Heilsame Berührung, Laufendes Händchen, Ruhige Ausstrahlung, Putziges Tierchen, Rutschiger Boden, Siegel der Elemente, Sauberes Werkzeug, Sprechendes Kästchen, Schutz vor dem Tierpatron, Strahlendes Lächeln, Unauffälliger Stab, Bereit zum Aufbruch, Unheimliches Lachen, Warmes Blut, Weisheit des Leytfadens, Wind im Haar, Verrücktes Kichern",
+      "beschreibung": "Kleine, alltägliche Zaubereien ohne nennenswerte Spielwert-Wirkung – reinigen, würzen, kleine Lichter und Geräusche, Gesten und ähnliche Effekte für die Stimmung.",
       "voraussetzungen": [],
       "ausgewaehlt": false,
       "aktiv": true,
@@ -10178,196 +10209,18 @@
         "Verrücktes Kichern"
       ]
     },
-    "Mirakel (Angrosch)": {
-      "name": "Mirakel (Angrosch)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
+    "Einfluss": {
+      "name": "Einfluss",
+      "rang": "A",
+      "machtpunkte": 2,
+      "reichweite": "VER 5",
       "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Angroschs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nAngroschs Opfergabe: Durch diese Liturgie verschmilzt der Gegenstand mit dem Felsen.\nBlick für das Handwerk: Der Ingerimmgeweihte wird in die Lage versetzt, den Wert und die Qualität von Handwerksstücken außerordentlich gut einzuschätzen und zu bestimmen.\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.",
+      "beschreibung": "Beeinflusst Gesinnung und Verhalten einer Person durch Suggestion – erzeugt Sympathie, Gehorsam in Grenzen oder bindet an eine Verhaltensregel. Vergleichende Willenskraftprobe; kein völliger Kontrollverlust wie bei Marionette.\nEhrenhafter Zweikampf: Durch diese Liturgie sind die beiden Duellanten zum rondragefälligen Kampf verpflichtet.\nRevolution der Gedanken: Diese Liturgie pflanzt in die Gedanken der Zielperson eine bestimmte revolutionäre Idee.\nSiegel Borons: Der Geweihte bestimmt, über welches Wissen die Zielperson zukünftig schweigen muss.\nWille zur Wahrheit: Diese Liturgie weckt in allen Zuhörern die Überzeugung, nur noch die Wahrheit zu sprechen und sich an geltende Gesetze halten zu wollen.",
       "dsa_trappings": [
-        "Angroschs Opfergabe",
-        "Blick für das Handwerk",
-        "Visionssuche"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Aves)": {
-      "name": "Mirakel (Aves)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Aves'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nEin Freund in Zeiten der Not: Ein neuer Gefährte wird in naher Zukunft dem Geweihten begegnen oder ihn aus einer Notlage retten.\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.\nSternenspur: Mittels dieser Liturgie hinterlässt der Phexgeweihte auf der Fläche, die er berührt hat, eine Markierung, die in Form eines leuchtenden Sterns erscheint.",
-      "dsa_trappings": [
-        "Ein Freund in Zeiten der Not",
-        "Sterne funkeln immerfort",
-        "Sternenspur"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Boron)": {
-      "name": "Mirakel (Boron)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Borons. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nBishdariels Warnung: Um jemanden für sein frevlerisches Verhalten zu strafen oder zur Umkehr zu bewegen, kann der Borongeweihte ihm mittels dieser Liturgie eine deutliche Warnung zukommen …\nEtilias Gnade: Die Zielperson versinkt in borongefälligen, visionären Träumen und verstirbt noch vor Anbruch des nächsten Tages.\nGolgaris Zwielicht: Wenn der Geweihte die Augen wieder öffnet, ist die Welt für ihn in graues Zwielicht getaucht.\nKleine Liturgie des heiligen Nemekath: Der zur Ruhe gebettete Gläubige kann in seinen Träumen seine Vergangenheit nacherleben und sich so selbst lange verschüttet geglaubte Erinnerungen wieder ins Gedächtnis …\nMarbos Geleit: Der Geweihte verlässt seinen Körper und begleitet die Seele des Sterbenden über das Nirgendmeer, um sie sicher bis an Uthars Pforte zu geleiten.\nSiegel Borons: Der Geweihte bestimmt, über welches Wissen die Zielperson zukünftig schweigen muss.",
-      "dsa_trappings": [
-        "Bishdariels Warnung",
-        "Etilias Gnade",
-        "Golgaris Zwielicht",
-        "Kleine Liturgie des heiligen Nemekath",
-        "Marbos Geleit",
-        "Siegel Borons"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Efferd)": {
-      "name": "Mirakel (Efferd)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Efferds. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nAnrufung Nuiannas: Durch diese Liturgie erschafft der Geweihte eine dichte Nebelfront, die sich in eine von ihm gewünschte Richtung ausbreitet.\nGebet des kristallklaren Blicks: Nach dem Sprung kann der Geweihte bis zu Schritt weit selbst durch trübstes Wasser klar sehen.\nGruss des Versunkenen: Durch diese Liturgie füllt sich der bezeichnete Raum mit Atemluft.",
-      "dsa_trappings": [
-        "Anrufung Nuiannas",
-        "Gebet des kristallklaren Blicks",
-        "Gruss des Versunkenen"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Firun)": {
-      "name": "Mirakel (Firun)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Firuns. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nJagdglück: Der Segen bewirkt, dass das nächste potenzielle Beutetier sich in Richtung des Geweihten in Bewegung setzt, und auch der Priester nähert sich intuitiv seiner Beute.\nTrophäe erhalten: Die Trophäe wird durch die Wirkung der Liturgie konserviert und erhalten.",
-      "dsa_trappings": [
-        "Jagdglück",
-        "Trophäe erhalten"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Gravesh)": {
-      "name": "Mirakel (Gravesh)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Gravesh'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.",
-      "dsa_trappings": [
-        "Visionssuche"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Hesinde)": {
-      "name": "Mirakel (Hesinde)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Hesindes. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nGraues Siegel: Auf dem Siegelwachs erscheint nach der Segnung ein Fuchskopf als Symbol der Geheimhaltung.\nSprechende Symbole: Die Geweihte erhält einen groben Fingerzeig, was die Bedeutung eines Symbols angeht.\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.\nWandeln in Hesindes Hain: Der Geweihten ist es, als erhalte sie Zugang zu Hesindes Hain.",
-      "dsa_trappings": [
-        "Graues Siegel",
-        "Sprechende Symbole",
-        "Sterne funkeln immerfort",
-        "Wandeln in Hesindes Hain"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Himmelswölfe)": {
-      "name": "Mirakel (Himmelswölfe)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen der Himmelswölfe. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nVaês Tränen: Die Schamanin gibt ihr Leben freiwillig für ein anderes, das sie zu retten wünscht.\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.",
-      "dsa_trappings": [
-        "Vaês Tränen",
-        "Visionssuche"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Ifirn)": {
-      "name": "Mirakel (Ifirn)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Ifirns. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nJagdglück: Der Segen bewirkt, dass das nächste potenzielle Beutetier sich in Richtung des Geweihten in Bewegung setzt, und auch der Priester nähert sich intuitiv seiner Beute.\nTrophäe erhalten: Die Trophäe wird durch die Wirkung der Liturgie konserviert und erhalten.",
-      "dsa_trappings": [
-        "Jagdglück",
-        "Trophäe erhalten"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Ingerimm)": {
-      "name": "Mirakel (Ingerimm)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Ingerimms. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nBlick für das Handwerk: Der Ingerimmgeweihte wird in die Lage versetzt, den Wert und die Qualität von Handwerksstücken außerordentlich gut einzuschätzen und zu bestimmen.\nRuf der Ferne: Die wandernde Gesellin wird in die Richtung geführt, in der sie etwas Neues über ihr Handwerk erfahren kann.\nWandeln in Hesindes Hain: Der Geweihten ist es, als erhalte sie Zugang zu Hesindes Hain.\nWeihe der ewigen Flamme: Die Liturgie entfacht das Feuer in der Laterne der Ingerimmgeweihten.",
-      "dsa_trappings": [
-        "Blick für das Handwerk",
-        "Ruf der Ferne",
-        "Wandeln in Hesindes Hain",
-        "Weihe der ewigen Flamme"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Kamaluq)": {
-      "name": "Mirakel (Kamaluq)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Kamaluqs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nSiegel Borons: Der Geweihte bestimmt, über welches Wissen die Zielperson zukünftig schweigen muss.\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.",
-      "dsa_trappings": [
+        "Ehrenhafter Zweikampf",
+        "Revolution der Gedanken",
         "Siegel Borons",
-        "Visionssuche"
+        "Wille zur Wahrheit"
       ],
       "effekt": "",
       "aktiv": true,
@@ -10375,208 +10228,18 @@
       "custom": false,
       "voraussetzungen": []
     },
-    "Mirakel (Nandus)": {
-      "name": "Mirakel (Nandus)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
+    "Vision": {
+      "name": "Vision",
+      "rang": "A",
+      "machtpunkte": 3,
+      "reichweite": "Selbst",
       "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Nandus'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nSprechende Symbole: Die Geweihte erhält einen groben Fingerzeig, was die Bedeutung eines Symbols angeht.\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.\nSternenspur: Mittels dieser Liturgie hinterlässt der Phexgeweihte auf der Fläche, die er berührt hat, eine Markierung, die in Form eines leuchtenden Sterns erscheint.\nUrischars ordnender Blick: Der Geweihte erkennt eine Ordnung in einer vor ihm liegenden Unordnung, z.B.",
+      "beschreibung": "Gewährt prophetische Visionen, Traumbilder oder plötzliche Einsichten über Vergangenheit, Gegenwart oder Zukunft. Die Spielleitung gibt einen Eindruck oder Hinweis – keine garantierte Antwort.\nKleine Liturgie des heiligen Nemekath: Der zur Ruhe gebettete Gläubige kann in seinen Träumen seine Vergangenheit nacherleben und sich so selbst lange verschüttet geglaubte Erinnerungen wieder ins Gedächtnis …\nProphezeiung: Durch diese Liturgie kann der Geweihte einen Eindruck von der Zukunft erhalten, so als hätte er die Gabe Prophezeien, bei der das Würfelergebnis beträgt.\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.\nWandeln in Hesindes Hain: Der Geweihten ist es, als erhalte sie Zugang zu Hesindes Hain.",
       "dsa_trappings": [
-        "Sprechende Symbole",
-        "Sterne funkeln immerfort",
-        "Sternenspur",
-        "Urischars ordnender Blick"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Peraine)": {
-      "name": "Mirakel (Peraine)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Peraines. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nTherbûns Erkenntnis: Die Priesterin erlangt durch diese Liturgie große Kenntnis über die Behandlung von Krankheiten.",
-      "dsa_trappings": [
-        "Therbûns Erkenntnis"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Phex)": {
-      "name": "Mirakel (Phex)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Phex'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nGraues Siegel: Auf dem Siegelwachs erscheint nach der Segnung ein Fuchskopf als Symbol der Geheimhaltung.\nPhexens Elsterflug: Das gewählte Objekt wird entrückt und befindet sich fortan am Sternenhimmel in Phexens Schatzhort.\nSechs Leben des Mungos: Der Geweihte kann durch göttlichen Beistand selbst einen Fall oder Sprung aus großer Höhe überleben.\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.\nSternenspur: Mittels dieser Liturgie hinterlässt der Phexgeweihte auf der Fläche, die er berührt hat, eine Markierung, die in Form eines leuchtenden Sterns erscheint.\nSternenstaub: Der Staub dient dazu, Angriffe durch Feinde zu erschweren.",
-      "dsa_trappings": [
-        "Graues Siegel",
-        "Phexens Elsterflug",
-        "Sechs Leben des Mungos",
-        "Sterne funkeln immerfort",
-        "Sternenspur",
-        "Sternenstaub"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Praios)": {
-      "name": "Mirakel (Praios)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Praios'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nPraios’ Mahnung: Diese Liturgie wird oft als Bestrafung und Buße eingesetzt.\nUrischars ordnender Blick: Der Geweihte erkennt eine Ordnung in einer vor ihm liegenden Unordnung, z.B.",
-      "dsa_trappings": [
-        "Praios’ Mahnung",
-        "Urischars ordnender Blick"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Rahja)": {
-      "name": "Mirakel (Rahja)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Rahjas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nDorlens Verbrüderung: Die Liturgie lässt das Joborner Liebeslicht erscheinen, eine unauffällige Duftlampe, die einen angenehmen Rosenduft verströmt.",
-      "dsa_trappings": [
-        "Dorlens Verbrüderung"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Riva)": {
-      "name": "Mirakel (Riva)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Rivas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nJagdglück: Der Segen bewirkt, dass das nächste potenzielle Beutetier sich in Richtung des Geweihten in Bewegung setzt, und auch der Priester nähert sich intuitiv seiner Beute.",
-      "dsa_trappings": [
-        "Jagdglück"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Rondra)": {
-      "name": "Mirakel (Rondra)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Rondras. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nBelemans Hochzeit: Mittels dieser Liturgie kann die Geweihte ein Gewitter entstehen oder dunkle Wolken abregnen lassen.\nEhrenhafter Zweikampf: Durch diese Liturgie sind die beiden Duellanten zum rondragefälligen Kampf verpflichtet.",
-      "dsa_trappings": [
-        "Belemans Hochzeit",
-        "Ehrenhafter Zweikampf"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Swafnir)": {
-      "name": "Mirakel (Swafnir)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Swafnirs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nAnrufung Nuiannas: Durch diese Liturgie erschafft der Geweihte eine dichte Nebelfront, die sich in eine von ihm gewünschte Richtung ausbreitet.\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.",
-      "dsa_trappings": [
-        "Anrufung Nuiannas",
-        "Sterne funkeln immerfort"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Tairach)": {
-      "name": "Mirakel (Tairach)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Tairachs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nEwiges Wissen: Das Ritual findet in den meisten Fällen zwischen einem Orkpriester und seinem Schüler statt und dient der Übertragung von altem Wissen.\nKleine Liturgie des heiligen Nemekath: Der zur Ruhe gebettete Gläubige kann in seinen Träumen seine Vergangenheit nacherleben und sich so selbst lange verschüttet geglaubte Erinnerungen wieder ins Gedächtnis …\nSterne funkeln immerfort: Die Liturgie verhilft dem Phexgeweihten zu einer ungetrübten Sicht auf den Sternenhimmel.",
-      "dsa_trappings": [
-        "Ewiges Wissen",
         "Kleine Liturgie des heiligen Nemekath",
-        "Sterne funkeln immerfort"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Travia)": {
-      "name": "Mirakel (Travia)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Travias. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nErzieherische Massnahme der Heiligen Yalsicena: Jedes Mal während der Wirkungsdauer, wenn der Gestrafte das benannte Verhalten an den Tag legt (z.B.",
-      "dsa_trappings": [
-        "Erzieherische Massnahme der Heiligen Yalsicena"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Tsa)": {
-      "name": "Mirakel (Tsa)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen Tsas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nKirschblütenregen: Mit Beginn des Liedes fallen unglaubliche Mengen an Kirschblüten vom Himmel.\nWundersame Blütenpracht: Mit Beginn des Liedes wachsen bunte Frühlingsblumen innerhalb eines Radius von Schritt, genau dort, wohin das regenbogenfarbene Licht des Prismas fällt.",
-      "dsa_trappings": [
-        "Kirschblütenregen",
-        "Wundersame Blütenpracht"
-      ],
-      "effekt": "",
-      "aktiv": true,
-      "ausgewaehlt": false,
-      "custom": false,
-      "voraussetzungen": []
-    },
-    "Mirakel (Zwölfgötter)": {
-      "name": "Mirakel (Zwölfgötter)",
-      "rang": "F",
-      "machtpunkte": 0,
-      "reichweite": "—",
-      "dauer": "—",
-      "beschreibung": "Seltene, erzählerische Wundertaten im Namen der Zwölfgötter. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).\nIndoktrination: Diese Liturgie ermöglicht es einer Geweihten, die zuvor theoretisch vermittelte Liturgie mit göttlicher Kraft und Hilfe als regeltechnische Liturgie zu erlernen und …\nOrdination: Durch diese Liturgie wird die Seele des Novizen geprüft, und er wird, so er in den Augen seiner Gottheit Gnade findet, als Geweihter angenommen und kann fortan mittels …\nProphezeiung: Durch diese Liturgie kann der Geweihte einen Eindruck von der Zukunft erhalten, so als hätte er die Gabe Prophezeien, bei der das Würfelergebnis beträgt.\nVisionssuche: Der Geweihte erfährt Visionen, die ihm dem Wesen seiner Gottheit näher bringen.",
-      "dsa_trappings": [
-        "Indoktrination",
-        "Ordination",
         "Prophezeiung",
-        "Visionssuche"
+        "Visionssuche",
+        "Wandeln in Hesindes Hain"
       ],
       "effekt": "",
       "aktiv": true,

@@ -37,14 +37,22 @@ def main():
     if unknown:
         raise SystemExit(f"Unbekannte Ziel-Mächte: {sorted(unknown)}")
 
+    import re
     added = []
+    resynced = 0
     for lit, macht in sorted(LIT.items()):
         m = mae[macht]
         traps = m.setdefault("dsa_trappings", [])
         vorhanden = {base(t).lower() for t in traps}
-        if base(lit).lower() in vorhanden:
-            continue
         desc = besch.get(lit, "").strip() or f"DSA-Liturgie, abgebildet über die Macht {macht}."
+        if base(lit).lower() in vorhanden:
+            # bestehende Trapping-Zeile auf aktuelle (saubere) Kurzbeschreibung re-syncen
+            pat = re.compile(r"^" + re.escape(lit) + r": .*$", re.M)
+            neu, n = pat.subn(f"{lit}: {desc}", m["beschreibung"])
+            if n and neu != m["beschreibung"]:
+                m["beschreibung"] = neu
+                resynced += 1
+            continue
         traps.append(lit)
         m["beschreibung"] = m["beschreibung"].rstrip("\n") + f"\n{lit}: {desc}"
         added.append((macht, lit))
@@ -55,7 +63,7 @@ def main():
 
     from collections import Counter
     c = Counter(macht for macht, _ in added)
-    print(f"Hinzugefügt: {len(added)} Liturgie-Trappings")
+    print(f"Hinzugefügt: {len(added)} Liturgie-Trappings · re-synct: {resynced}")
     for macht, n in c.most_common():
         print(f"  +{n:2}  {macht}")
 

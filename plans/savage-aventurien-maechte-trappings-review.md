@@ -122,10 +122,23 @@ Aufbauend auf dem Trapping-Mapping wurden zwei Übersichts-Docs + eine Daten-Erw
   `LITURGIE_SW` in `gen_traditionen_zauber.py`) wurden via `scripts/add_liturgien_trappings.py` als
   Trappings + Kurzbeschreibung (aus Liber, DSA-Begriffe gescrubbt) in die jeweilige SW-Macht
   eingefügt. Trappings gesamt 690 → 889. „Narrativ" zunächst von 179 auf 60 gesenkt.
-- **Mirakel-Mächte je Gott (2026-06-07):** Für die verbleibenden 39 rein narrativen Liturgien wurde
-  via `scripts/add_mirakel_maechte.py` pro Gottheit eine Macht **`Mirakel (<Gott>)`** angelegt (23
-  Stück, z.B. `Mirakel (Travia)`, `Mirakel (Zwölfgötter)`) und die jeweiligen Liturgien als Trappings
-  + Kurzbeschreibung einsortiert (shared Liturgien in jede zugehörige Mirakel-Macht). Mächte 66 →
-  **89**, Trappings → **950**, **narrativ = 0**. Der Doc-Generator zeigt je Gott die passende
-  `Mirakel (Gott)` (gott-bewusste `lit_sw`). DSA-Begriff-Scan: **0**. Volle Suite 951/952
-  (1 vorbestehender KivyMD-UI-Fehler).
+- **Mirakel-Mächte je Gott (2026-06-07):** Für die rein narrativen Liturgien wurde via
+  `scripts/add_mirakel_maechte.py` pro Gottheit eine Macht **`Mirakel (<Gott>)`** angelegt (z.B.
+  `Mirakel (Travia)`, `Mirakel (Zwölfgötter)`) und die jeweiligen Liturgien als Trappings +
+  Kurzbeschreibung einsortiert (shared Liturgien in jede zugehörige Mirakel-Macht). Der Doc-Generator
+  zeigt je Gott die passende `Mirakel (Gott)` (gott-bewusste `lit_sw`).
+- **Narrativ-Reduktion 2 (2026-06-07):** Nach Volltext-Prüfung im Liber 22 vermeintlich narrative
+  Liturgien doch konkreten Mächten zugeordnet (Jagdglück→Aufspüren, Golgaris Zwielicht→Dunkelsicht,
+  Marbos Geleit→Ebenenwechsel, Praios' Mahnung→Blenden, …) → 16 Mirakel-Mächte / 17 narrative.
+  `add_liturgien_trappings.py` **re-synct** bestehende Liturgie-Beschreibungen aus dem Cache;
+  Scrubber + Override (12 handgeschriebene Kurzbeschreibungen) → DSA-Begriff-Scan inkl.
+  SP/RS/LkP*/`*`-Reste: **0**.
+- **Mirakel AUFGELÖST (2026-06-07, final):** Alle restlichen 17 narrativen Liturgien echten Mächten
+  zugeordnet; `Mirakel (<Gott>)`-Mächte entfernt. Zwei **neue Mächte**: **`Einfluss`** (Suggestion;
+  bekam Ehrenhafter Zweikampf + aus Marionette verschoben Wille zur Wahrheit / Revolution der
+  Gedanken / Siegel Borons) und **`Vision`** (Weissagung: Prophezeiung, Visionssuche, Kleine Liturgie
+  des heiligen Nemekath, Wandeln in Hesindes Hain). Rest: Angroschs Opfergabe→Gegenstand verbessern/
+  schaden, Gebet des kristallklaren Blicks→Fernsicht, Graues Siegel/Sternenspur/Sprechende Symbole/
+  Phexens Elsterflug→Arkanes entdecken/verbergen, Kirschblütenregen→Illusion, mehrere→Segen.
+  **narrativ = 0**, Mächte **68**, DSA-Scan **0**, Suite 951/952 (1 vorbestehender KivyMD-UI-Fehler).
+  `add_mirakel_maechte.py` ist dormant (nicht mehr Teil der Pipeline).

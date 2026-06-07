@@ -23,6 +23,24 @@ TERM = ("Varianten:", "Anmerkungen:", "Liturgiestil:", "Grad:", "Herkunft:",
         "Reichweite:", "Symbole", "Ritualdauer:", "Wirkungsdauer:", "Art:", "Ziel:")
 
 
+# Handgeschriebene Kurzbeschreibungen für Liturgien, deren Auswirkung sich nicht sauber
+# automatisch von DSA-Wertformeln (SP, RS, LkP*, …) befreien lässt.
+BESCHREIBUNG_OVERRIDE = {
+    "Ruf zur Ruhe": "Der Geweihte beruhigt eine Zielperson; widersteht sie nicht, verliert sie ihre Aggression.",
+    "Bannfluch des Heiligen Khalid": "Der Geweihte bettet mehrere Untote oder verirrte Seelen zur ewigen Ruhe.",
+    "Entzug von Nandus’ Gaben": "Der Geweihte bestraft eine Person mit Dummheit und getrübten Sinnen.",
+    "Wundersames Teilen des Martyriums": "Die Geweihte nimmt einmalig die Hälfte des Schadens auf sich, den eine ihr nahestehende Person erleidet.",
+    "Das schwarze Fell durch das rote Blut": "Die Haut des Geweihten wird fester und widerstandsfähiger und gewährt zusätzliche Panzerung.",
+    "Daradors Bann der Schatten": "In der Zone werden alle Schatten aufgehoben sowie magische Licht-/Schattenmanipulationen und optische Illusionen unterdrückt.",
+    "Rondras wundersame Rüstung": "Die Geweihte ruft eine wundersame Rüstung herbei, die sie schwer schützt.",
+    "Schrifttum ferner Lande": "Die Geweihte kann vorübergehend eine fremde oder alte Schrift lesen.",
+    "Tsas heiliges Lebensgeschenk": "Der Empfänger erhält einen Teil seiner Lebenskraft zurück und kann dem sicheren Tod entrissen werden.",
+    "Flagge des Regenbogens": "Wer im Wirkungsbereich weiter angreifen oder kämpfen will, muss eine Willenskraftprobe bestehen.",
+    "Efferdsegen": "Binnen weniger Tage wird es über den Feldern sanft, aber ausgiebig regnen.",
+    "Ewiger Wächter": "Der Schamane verwandelt sich dauerhaft in einen Jaguar, der den zu beschützenden Ort kaum verlässt.",
+}
+
+
 def scrub(s):
     """Entfernt DSA-Regelbegriffe aus einer Kurzbeschreibung (SW-konform halten)."""
     # Regel-Klauseln nach Doppelpunkt mit Stat-Boni abschneiden (": KL +1, +3 auf …")
@@ -38,6 +56,9 @@ def scrub(s):
     s = s.replace("Mutproben", "Furchtproben").replace("Mutprobe", "Furchtprobe")
     s = re.sub(r"\bKO-Probe(n)?\b", "Robustheitsprobe", s)
     s = re.sub(r"\b(?:der |des )?Stufe[n]? \w+", "", s)  # DSA-Zustandsstufen
+    s = re.sub(r"\*\s*\+?\s*\d+", "", s)                 # *+5 / * 3 Reste von LkP*
+    s = re.sub(r"(?<![\w*])\*(?![\w])", "", s)            # einzelne Sternchen
+    s = re.sub(r"\b(SP|RS|AU|TaW|ZfW|Sikaryan)\b", "", s)  # weitere DSA-Werte
     s = re.sub(r"\b(MU|KL|IN|CH|FF|GE|KO|KK)\b", "", s)  # DSA-Attribut-Kürzel
     s = re.sub(r"\s+", " ", s)
     s = re.sub(r"\s+([.,;:])", r"\1", s)
@@ -122,7 +143,7 @@ def main():
             gods = clean_herk(lines[i])
             if nm and gods:
                 herk.setdefault(nm, sorted(set(gods)))
-                besch.setdefault(nm, kurzbeschreibung(i))
+                besch.setdefault(nm, BESCHREIBUNG_OVERRIDE.get(nm) or kurzbeschreibung(i))
 
     json.dump(herk, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2, sort_keys=True)
     json.dump(besch, open(OUT_BESCH, "w", encoding="utf-8"), ensure_ascii=False, indent=2, sort_keys=True)

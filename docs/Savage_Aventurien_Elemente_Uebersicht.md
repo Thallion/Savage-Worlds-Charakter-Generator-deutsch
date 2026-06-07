@@ -4,7 +4,7 @@
 
 **Setting:** Savage Aventurien  
 **Währung:** S (Silbertaler) · **Startgeld:** 1000  
-**Umfang:** 9 Völker · 458 Talente · 166 Handicaps · 89 Mächte
+**Umfang:** 9 Völker · 458 Talente · 166 Handicaps · 68 Mächte
 
 **Rang-Legende:** A=Anfänger · F=Fortgeschritten · V=Veteran · H=Held · L=Legendär
 
@@ -2224,7 +2224,7 @@
       Zusätzliche Empfänger (+1): Mehrere Betrachter oder Gegenstände pro Punkt.
       Gesinnungssinn (FK) (+1): Aufspüren von übernatürlich Gutem oder Bösem ohne Sichtlinie.
       Identifizieren (FK) (+1): Magische Gegenstände identifizieren; Steigerung deckt Flüche auf.
-  - **DSA-Zauber (Trappings):** Analys Arkanstruktur, Blick aufs Wesen, Blick des Heilers, Cryptographo, Entzifferung, Magieanalyse, Magiesicht, Odem Arcanum, Auge des Händlers, Blick der Weberin, Nemekaths Geisterblick, Sicht auf Madas Welt, Unverstellter Blick, Seelenschatten
+  - **DSA-Zauber (Trappings):** Analys Arkanstruktur, Blick aufs Wesen, Blick des Heilers, Cryptographo, Entzifferung, Magieanalyse, Magiesicht, Odem Arcanum, Auge des Händlers, Blick der Weberin, Nemekaths Geisterblick, Sicht auf Madas Welt, Unverstellter Blick, Seelenschatten, Graues Siegel, Phexens Elsterflug, Sprechende Symbole, Sternenspur
 
 **Aufheben** _(Rang F · 1 MP · Reichweite VER · Dauer Sofort)_
   - **Effekt (SW):** Negiert magische Effekte.
@@ -2240,7 +2240,7 @@
 
 **Aufspüren** _(Rang A · 3 MP · Reichweite Selbst · Dauer 10 Minuten)_
   - **Effekt (SW):** Findet verborgene Dinge.
-  - **DSA-Zauber (Trappings):** Auge des Jägers, Blick in die Vergangenheit, Büchersuche, Erfolgreiche Pflanzensuche, Gefunden, Gespür für das Göttliche, Göttlicher Fingerzeig, Hilfe in der Not, Penetrizzel, Pestilenz erspüren, Schiffsgespür, Seelenprüfung, Seelentier erkennen, Wegweiser, Aura der Form, Buchprüfung, Goldener Blick, Hashnabiths Flehen, Peraines Pflanzengespür, Ucuris Geleit, Weisung des Himmels, Runjensweisung
+  - **DSA-Zauber (Trappings):** Auge des Jägers, Blick in die Vergangenheit, Büchersuche, Erfolgreiche Pflanzensuche, Gefunden, Gespür für das Göttliche, Göttlicher Fingerzeig, Hilfe in der Not, Penetrizzel, Pestilenz erspüren, Schiffsgespür, Seelenprüfung, Seelentier erkennen, Wegweiser, Aura der Form, Buchprüfung, Goldener Blick, Hashnabiths Flehen, Peraines Pflanzengespür, Ucuris Geleit, Weisung des Himmels, Runjensweisung, Jagdglück, Ruf der Ferne, Urischars ordnender Blick
 
 **Ausspähung** _(Rang F · 3 MP · Reichweite Selbst · Dauer 5)_
   - **Effekt (SW):** Spioniert ein entferntes Ziel aus.
@@ -2276,7 +2276,7 @@
     Modifikatoren:
       Flächeneffekt (+2/+3): MFS (+2) oder GFS (+3).
       Stark (+1): Konstitutionsprobe zum Abschütteln mit –2.
-  - **DSA-Zauber (Trappings):** Blendstrahl, Blendung, Blindheit, Blitz dich find, Obarans Blendung, Taubheit, Blendstrahl aus Alveran
+  - **DSA-Zauber (Trappings):** Blendstrahl, Blendung, Blindheit, Blitz dich find, Obarans Blendung, Taubheit, Blendstrahl aus Alveran, Praios’ Mahnung, Sternenstaub
 
 **Böswillige Verwandlung** _(Rang V · 3 MP · Reichweite Ver · Dauer 5)_
   - **Effekt (SW):** Tier von Größe –2 bis 3 wird in eine relativ harmlose Kreatur verwandelt
@@ -2298,7 +2298,7 @@
     Modifikatoren:
       Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.
       Verbessert (FK) (+2): Ignoriert alle Beleuchtungsabzüge und 4 Punkte Abzüge durch Unsichtbarkeit.
-  - **DSA-Zauber (Trappings):** Katzenaugen, Mondsicht, Sicht in der Dunkelheit, Auge des Mondes
+  - **DSA-Zauber (Trappings):** Katzenaugen, Mondsicht, Sicht in der Dunkelheit, Auge des Mondes, Golgaris Zwielicht
 
 **Ebenenwechsel** _(Rang V · 4 MP · Reichweite Verstand · Dauer Sofort)_
   - **Effekt (SW):** Wechselt in eine andere Existenzebene.
@@ -2307,7 +2307,7 @@
       Extradimensionaler Raum (FK) (+1): Taschendimension mit Unterkunft für bis zu 5 Personen.
       Feind transportieren (FK) (+2): Unwilliges Ziel in andere Ebene versetzen (3-5 Runden).
       Zusätzliche Empfänger (FK) (+1): Ein zusätzliches Ziel pro Punkt.
-  - **DSA-Zauber (Trappings):** Auge des Limbus, Chrononautos, Freie Seelenfahrt, Körperlose Reise, Nekropathia, Planastrale, Seelenwanderung, Traumgestalt
+  - **DSA-Zauber (Trappings):** Auge des Limbus, Chrononautos, Freie Seelenfahrt, Körperlose Reise, Nekropathia, Planastrale, Seelenwanderung, Traumgestalt, Marbos Geleit
 
 **Eigenschaft erhöhen/senken** _(Rang A · 2 MP · Reichweite VER 5 · Dauer Sofort/5)_
   - **Effekt (SW):** Erhöht oder senkt Attribut oder Fertigkeit.
@@ -2319,7 +2319,11 @@
     Attributo (Eigenschaft steigern): Steigert eine körperliche oder geistige Eigenschaft des Ziels.
     Mal (Schwächung): Schwächt eine bestimmte Eigenschaft des Ziels.
     Schwächungszauber: Schwächt eine Eigenschaft des Ziels.
-  - **DSA-Zauber (Trappings):** Affenarme, Attributo (Charisma), Attributo (Fingerfertigkeit), Attributo (Gewandtheit), Attributo (Intuition), Attributo (Klugheit), Attributo (Konstitution), Attributo (Körperkraft), Attributo (Mut), Bild für die Ewigkeit, Dämonisches Vergessen, Eigene Dummheit, Eigene Ängste, Eingeschworene Mannschaft, Eins mit der Natur, Ermutigung, Falkenauge, Furchtresistenz, Kleine Moralstärkung, Kraft des Tieres, Mal der Erschöpfung, Mal der Schwäche, Memorans, Moralstärkung, Motivation, Numinorus Fluch, Opfergang, Physiostabilis, Plumbumbarum, Psychostabilis, Schaffenskraft, Schlechte Ausstrahlung, Schmerzresistenz, Sicherer Weg, Standfest, Ungeschickt (senken), Verunsicherung, Zitterfinger (senken), Canyzeths Weisheit, Ein Bild für die Ewigkeit, Handwerkssegen, Kräftigung der Schwachen und Versehrten, Lohn der Unverzagten, Mannschaftssegen, Märtyrersegen, Nimmermüde Wanderschaft, Segen der heiligen Velvenya, Segnung der stählernen Stirn
+  - **DSA-Zauber (Trappings):** Affenarme, Attributo (Charisma), Attributo (Fingerfertigkeit), Attributo (Gewandtheit), Attributo (Intuition), Attributo (Klugheit), Attributo (Konstitution), Attributo (Körperkraft), Attributo (Mut), Bild für die Ewigkeit, Dämonisches Vergessen, Eigene Dummheit, Eigene Ängste, Eingeschworene Mannschaft, Eins mit der Natur, Ermutigung, Falkenauge, Furchtresistenz, Kleine Moralstärkung, Kraft des Tieres, Mal der Erschöpfung, Mal der Schwäche, Memorans, Moralstärkung, Motivation, Numinorus Fluch, Opfergang, Physiostabilis, Plumbumbarum, Psychostabilis, Schaffenskraft, Schlechte Ausstrahlung, Schmerzresistenz, Sicherer Weg, Standfest, Ungeschickt (senken), Verunsicherung, Zitterfinger (senken), Canyzeths Weisheit, Ein Bild für die Ewigkeit, Handwerkssegen, Kräftigung der Schwachen und Versehrten, Lohn der Unverzagten, Mannschaftssegen, Märtyrersegen, Nimmermüde Wanderschaft, Segen der heiligen Velvenya, Segnung der stählernen Stirn, Blick für das Handwerk, Therbûns Erkenntnis
+
+**Einfluss** _(Rang A · 2 MP · Reichweite VER 5 · Dauer —)_
+  - **Effekt (SW):** Beeinflusst Gesinnung und Verhalten einer Person durch Suggestion – erzeugt Sympathie, Gehorsam in Grenzen oder bindet an eine Verhaltensregel. Vergleichende Willenskraftprobe; kein völliger Kontrollverlust wie bei Marionette.
+  - **DSA-Zauber (Trappings):** Ehrenhafter Zweikampf, Revolution der Gedanken, Siegel Borons, Wille zur Wahrheit
 
 **Elementarmanipulation** _(Rang A · 1 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Erlaubt kleinere Manipulationen der Grundelemente.
@@ -2327,7 +2331,7 @@
     Modifikatoren:
       Mächtig (FK) (+3): Volumen verdreifacht; Stoßen –2; Angriff 2W6 (3W6 mit Steigerung).
       Wetter (FK, episch) (+5): Stürme beschwören/aufheben; Regen, Schnee, Sonne, Wind im 8-km-Umkreis.
-  - **DSA-Zauber (Trappings):** Berauschender Wein, Brandform, Caldofrigo, Erzene Opfergabe, Felsenform, Gletscherform, Läuterung des Erzes, Metallerhitzung, Peraines Gnade, Pflanzenform, Transformatio, Wirbelform, Wogenform, Anrufung der Erdkraft, Anrufung der Winde, Azilas Quellgesang, Elementwandlung, Gebieter der Lava, Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut, Segen des Plättlings, Swafnirs Fluke, Teilung der Wasser
+  - **DSA-Zauber (Trappings):** Berauschender Wein, Brandform, Caldofrigo, Erzene Opfergabe, Felsenform, Gletscherform, Läuterung des Erzes, Metallerhitzung, Peraines Gnade, Pflanzenform, Transformatio, Wirbelform, Wogenform, Anrufung der Erdkraft, Anrufung der Winde, Azilas Quellgesang, Elementwandlung, Gebieter der Lava, Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut, Segen des Plättlings, Swafnirs Fluke, Teilung der Wasser, Anrufung Nuiannas, Belemans Hochzeit
 
 **Empathie** _(Rang A · 1 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Vergleichender Wurf gegen Willenskraft für +1/+2 auf Darbietung, Einschüchtern, Provozieren und Überreden gegen das Ziel.
@@ -2337,7 +2341,7 @@
       Bezaubern (FK) (+2): Unkooperativ→Kooperativ, mit Steigerung Freundlich.
       Dauer (FK) (+1): Wirkungsdauer Minuten statt Runden.
       Wahrheit (FK) (+2): Wirker erkennt, ob das Ziel wissentlich lügt.
-  - **DSA-Zauber (Trappings):** Band der Freundschaft, Bann der Furcht, Bannbaladin, Besänftigung, Einflüsterung, Freundschaftliches Auftreten, Göttliche Erkenntnis, Heiliges Liebesspiel, Helfende Hand, Levthanischer Liebhaber, Levthans Feuer, Mondsilberzunge, Seidenzunge, Sensibar, Verstecktes Begehren, Ängste Lindern, Aller Welt Freund, Freundliche Aufnahme, Frieden der Melodie, Rahjas Begehren, Rahjas Sinnlichkeit, Ruf zur Ruhe, Swafnirs Ruhelied
+  - **DSA-Zauber (Trappings):** Band der Freundschaft, Bann der Furcht, Bannbaladin, Besänftigung, Einflüsterung, Freundschaftliches Auftreten, Göttliche Erkenntnis, Heiliges Liebesspiel, Helfende Hand, Levthanischer Liebhaber, Levthans Feuer, Mondsilberzunge, Seidenzunge, Sensibar, Verstecktes Begehren, Ängste Lindern, Aller Welt Freund, Freundliche Aufnahme, Frieden der Melodie, Rahjas Begehren, Rahjas Sinnlichkeit, Ruf zur Ruhe, Swafnirs Ruhelied, Dorlens Verbrüderung
 
 **Fernsicht** _(Rang F · 2 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Sieht Details auf größere Entfernung; halbiert Entfernungsabzüge bei Steigerung.
@@ -2345,7 +2349,7 @@
     Modifikatoren:
       Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.
       Verbessert (FK) (+2): Ignoriert alle Entfernungsabzüge; Steigerung verdoppelt Sichtweite.
-  - **DSA-Zauber (Trappings):** Adlerauge, Blick auf den Meeresgrund, Geisterblick, Madas Spiegel, Oculus Astralis, Ruf der Heimat
+  - **DSA-Zauber (Trappings):** Adlerauge, Blick auf den Meeresgrund, Geisterblick, Madas Spiegel, Oculus Astralis, Ruf der Heimat, Gebet des kristallklaren Blicks
 
 **Fliegen** _(Rang V · 3 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Ziel fliegt mit Bewegungsweite 12“.
@@ -2362,7 +2366,7 @@
       Versteinern (FK, episch) (+5): Ziel jede Runde Willenskraft oder Erschöpfung; Ausgeschaltet = zu Stein.
     
     Bannfluch: Belegt eine Person mit einem göttlichen Fluch.
-  - **DSA-Zauber (Trappings):** Bannfluch (Anathema), Entstelltes Antlitz, Herzschlag ruhe, Pestodem, Schleichende Fäulnis, Schleichende Fäulnis (Pflanzen), Schwarz und Rot, Sippenbann, Trankfluch, Waffenfluch, Anathema, Bannfluch des Heiligen Khalid, Fluch wider die Ungläubigen, Sippenfluch
+  - **DSA-Zauber (Trappings):** Bannfluch (Anathema), Entstelltes Antlitz, Herzschlag ruhe, Pestodem, Schleichende Fäulnis, Schleichende Fäulnis (Pflanzen), Schwarz und Rot, Sippenbann, Trankfluch, Waffenfluch, Anathema, Bannfluch des Heiligen Khalid, Fluch wider die Ungläubigen, Sippenfluch, Erzieherische Massnahme der Heiligen Yalsicena, Etilias Gnade
 
 **Flächenschlag** _(Rang F · 3 MP · Reichweite VER×2 · Dauer Sofort)_
   - **Effekt (SW):** 2W6 Schaden in mittlerer Flächenschablone.
@@ -2387,7 +2391,7 @@
     Modifikatoren:
       Flächeneffekt (+2/+3): KFS oder MFS (+2) oder GFS (+3).
       Verbessert (FK) (+2): Furchtproben mit –2, oder –4 mit Steigerung.
-  - **DSA-Zauber (Trappings):** Alpgestalt, Angst auslösen, Böser Blick, Furchteinflößende Tiergeister, Horriphobus, Krabbelnder Schrecken, Kusch, Panik überkomme euch, Schwarzer Schrecken, Schlachtfeld schreitet
+  - **DSA-Zauber (Trappings):** Alpgestalt, Angst auslösen, Böser Blick, Furchteinflößende Tiergeister, Horriphobus, Krabbelnder Schrecken, Kusch, Panik überkomme euch, Schwarzer Schrecken, Schlachtfeld schreitet, Bishdariels Warnung
 
 **Gedankenleere** _(Rang V · 3 MP · Reichweite VER · Dauer Sofort)_
   - **Effekt (SW):** Entfernt oder verändert Erinnerungen.
@@ -2426,8 +2430,8 @@
   - **DSA-Zauber (Trappings):** Arcanovi, Aurum Argentor (Gold), Feenstaub, Geisteressenz, Himmlische Schatzkammer, Invocatio Minima, Manifesto, Objectovoco, Talismanruf, Speisung der hungernden Seelen, Firuns Einsicht, Ingalfs Alchimie, Rahjalinas Kuss, Rahjas Schoss, Rahjas geheiligter Wein, Segenreiches Wasser, Sicherer Weg durch Fels
 
 **Gegenstand verbessern/schaden** _(Rang A · 2 MP · Reichweite BER · Dauer —)_
-  - **Effekt (SW):** Neue Macht.
-  - **DSA-Zauber (Trappings):** Adamantium, Custodosigil, Desintegratus (umgekehrt), Eisenrost (Schutz gegen Waffen), Mauereinsturz, Sumus Elixiere, Unberührt von Satinav, Wiederherstellung, Erneuerung des Geborstenen
+  - **Effekt (SW):** Verbessert oder beschädigt einen Gegenstand: repariert und verstärkt ihn (mehr Härte/Struktur) oder lässt ihn rosten, bersten und zerfallen.
+  - **DSA-Zauber (Trappings):** Adamantium, Custodosigil, Desintegratus (umgekehrt), Eisenrost (Schutz gegen Waffen), Mauereinsturz, Sumus Elixiere, Unberührt von Satinav, Wiederherstellung, Erneuerung des Geborstenen, Trophäe erhalten, Angroschs Opfergabe
 
 **Geräusch/Stille** _(Rang A · 1 MP · Reichweite VERx5/VER · Dauer 5/Sofort)_
   - **Effekt (SW):** Erzeugt oder dämpft Geräusche.
@@ -2478,7 +2482,7 @@
       Mächtige Heilung (+10): Heilt jede Wunde, unabhängig vom Alter.
       Permanente Verletzungen (+20): Heilt eine permanente Verletzung; eine Stunde Vorbereitung.
       Massenheilung (FK) (+2/+3): Alle Verbündeten in MFS (+2) oder GFS (+3).
-  - **DSA-Zauber (Trappings):** Balsam Salabunde, Blutzoll, Eidechsenregeneration, Geistheilung, Giftbann, Heilsame Quelle, Heilschlaf, Heilsegen, Hexenspeichel, Kleiner Heilsegen, Kraft des Humus, Krankheiten vorbeugen, Krankheitsbann, Lebensschutz, Regeneratio, Tiere besprechen, Tierleid lindern, Birkenzweig, Fürbitten des heiligen Therbûn, Geteiltes Leid, Heilungssegen, Kleiner Giftbann, Segen der heiligen Theria, Tsas Lebensschutz, Tsas wunderbare Erneuerung, Wundersames Teilen des Martyriums, Wundsegen
+  - **DSA-Zauber (Trappings):** Balsam Salabunde, Blutzoll, Eidechsenregeneration, Geistheilung, Giftbann, Heilsame Quelle, Heilschlaf, Heilsegen, Hexenspeichel, Kleiner Heilsegen, Kraft des Humus, Krankheiten vorbeugen, Krankheitsbann, Lebensschutz, Regeneratio, Tiere besprechen, Tierleid lindern, Birkenzweig, Fürbitten des heiligen Therbûn, Geteiltes Leid, Heilungssegen, Kleiner Giftbann, Segen der heiligen Theria, Tsas Lebensschutz, Tsas wunderbare Erneuerung, Wundersames Teilen des Martyriums, Wundsegen, Vaês Tränen
 
 **Illusion** _(Rang A · 3 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Erzeugt illusionäre Bilder.
@@ -2491,7 +2495,7 @@
       Dauer (FK) (+2): Wirkungsdauer von Runden zu Minuten.
       Flächeneffekt (FK) (+1): Wirkungsbereich auf GFS vergrößert.
       Tödliche Illusion (FK, episch) (+3): Illusion greift an und verursacht Schaden (vergleichender Wurf).
-  - **DSA-Zauber (Trappings):** Aromatis Illusionis, Auris Illusionis, Chamaelioni, Doppelgänger, Goldene Hand, Halluzination, Manus Illusionis, Menetekel, Oculus Illusionis, Projectimago, Reflectimago, Satuarias Herrlichkeit, Sternenglanz, Widerwille, Die goldene Hand, Rahjalinas Farbenspiel, Schattenlarve
+  - **DSA-Zauber (Trappings):** Aromatis Illusionis, Auris Illusionis, Chamaelioni, Doppelgänger, Goldene Hand, Halluzination, Manus Illusionis, Menetekel, Oculus Illusionis, Projectimago, Reflectimago, Satuarias Herrlichkeit, Sternenglanz, Widerwille, Die goldene Hand, Rahjalinas Farbenspiel, Schattenlarve, Kirschblütenregen
 
 **Kriegersegen** _(Rang F · 4 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Gewährt Ziel ein Kampftalent.
@@ -2500,24 +2504,6 @@
       Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.
       Mächtig (FK, episch) (+4): Empfänger erhält zwei Kampftalente auf einmal.
       Verwandeln (FK) (+2/+3): Williges Ziel per Berührung (+2) oder Verstand (+3) treffen.
-    
-    Angriffslust (Kampfrausch): Der Geweihte kann bis zu Ziele vor dem Wirken der Liturgie auswählen (inklusive sich selbst), die bis zum Ende der Wirkungsdauer2 Angriff und1 Schaden erhalten.
-    Blutiger Zorn (Berserker): Die Ziele verfallen einer kampfwütigen Raserei.
-    Blutrausch (göttlich) (Berserker): Versetzt in göttlichen Blutrausch.
-    Brazoraghs Krieger (Kriegerische Anpassungsfähigkeit): Der Geweihte wählt vor dem Wirken der Liturgie ein Ziel aus (inklusive sich selbst), das bis zum Ende der Wirkungsdauer1 Angriff,2 Schaden und die Sonderfertigkeit Mächtiger Schlag erhält.
-    Brennender Hass (Erzfeind): Das Ziel wird von Hass auf eine vom Zauberer bestimmte Sache erfüllt, beispielswiese ein Wesen, eine Gruppierung oder ein Konzept.
-    Gnadenstoß (Tödlicher Hieb): Die Marbopriesterin kann diese Liturgie auf ihren Marbodolch legen, um bei der nächsten gelungenen und unparierten Angriff ihre Schaden zu verdoppeln.
-    Göttlicher Rausch (Kampfrausch): Solange der heilige Rausch anhält, kämpft der Geweihte in göttlicher Entrückung mit gesteigerter Kraft.
-    Heldenkraft (Kraftvoller Schlag): Angriff und Wurfwaffen-Fernkampf richten bei Gelingen zusätzliche Schaden an.
-    Kampfgeschick (Kampfreflexe): Die Erschwernis des nächsten eingesetzten Spezialmanövers wird um 2 gesenkt (bis zu einem Minimum von 0).
-    Kraftvoller Körper (Schmerzresistenz): Der Levthangeweihte kann seinen Körper durch karmale Kraft stärken.
-    Kriegsfarben (Kampfrausch): Durch diese Liturgie erlangt der Schamane für einen kurzen Zeitraum große Kräfte.
-    Kriegszustand (Inspirieren): Durch diese Zeremonie wird die gesamte Rondrakirche in einen Kriegszustand versetzt.
-    Mächtiger Angriff (Mächtiger Hieb): Gelingt dem Geweihten eine Attacke, gleichgültig ob verteidigt oder nicht, kann er sich deren durchschnittliche Schaden notieren (durchschnittliche Schaden gilt als 4 + Faktor der Waffe; ein Schwert mit.
-    Sensattacco (Hinterhältiger Angriff): Das Ziel erreicht im Kampf mit höherer Wahrscheinlichkeit einen Kritischen Erfolg.
-    Standhafter Wächter (Block): Alle Verteidigungen des Ziels sind erleichtert, unabhängig davon, ob es Angriffe pariert oder ihnen ausweicht.
-    Zwergenmacht (Kraftvoller Schlag): Der Angroschgeweihte kann einen Zwerg mit zusätzlicher Kraft ausstatten.
-    Zwergische Verbrüderung (Inspirieren): Der Angroschpriester kann bis zu 6 Zwerge segnen.
   - **DSA-Zauber (Trappings):** Angriffslust, Blutiger Zorn, Blutrausch (göttlich), Brazoraghs Krieger, Brennender Hass, Gnadenstoß, Göttlicher Rausch, Heldenkraft, Kampfgeschick, Kraftvoller Körper, Kriegsfarben, Kriegszustand, Mächtiger Angriff, Sensattacco, Standhafter Wächter, Zwergenmacht, Zwergische Verbrüderung, Das schwarze Fell durch das rote Blut, Eherne Kraft, Lodernder Zorn, Namenlose Raserei, Neun Streiche in einem, Ritus der Schlachthilfe, Ruf zum Bund wider die Mächte der Finsternis, Schlachtgesang, Segen des heiligen Hlûthar, Segnung der Schlacht
 
 **Licht/Dunkelheit** _(Rang A · 2 MP · Reichweite VER 10m · Dauer —)_
@@ -2527,7 +2513,7 @@
       Beleuchten (FK) (+1): Nur Licht: Ziel Größe ≤1 in Leuchten getaucht; ignoriert 2 Punkte Abzüge.
       Flächeneffekt (FK) (+2): Nur Licht: wirkt wie natürliches Sonnenlicht um den Wirker.
       Wahre Dunkelheit (FK) (+2): Nur Dunkelheit: blockiert Wärmesicht, Nachtsicht und Dunkelsicht.
-  - **DSA-Zauber (Trappings):** Bann der Dunkelheit, Bann des Lichts, Das Löschen des Lichts, Dunkelheit, Feuersegen, Auge Xeledons, Xeledons helles Licht, Daradors Bann der Schatten, Licht des Herrn, Licht des verborgenen Pfades
+  - **DSA-Zauber (Trappings):** Bann der Dunkelheit, Bann des Lichts, Das Löschen des Lichts, Dunkelheit, Feuersegen, Auge Xeledons, Xeledons helles Licht, Daradors Bann der Schatten, Licht des Herrn, Licht des verborgenen Pfades, Weihe der ewigen Flamme
 
 **Linderung** _(Rang A · 1 MP · Reichweite VER · Dauer Sofort)_
   - **Effekt (SW):** Entfernt Erschöpfung und Angeschlagen; Betäubt mit Steigerung.
@@ -2551,99 +2537,7 @@
     Modifikatoren:
       Zusätzliche Empfänger (+2): Ein zusätzliches Ziel pro 2 Punkte.
       Stark (FK) (+2): Willenskraftproben widerstehen mit –2; Gedankenverbindung für beliebige Distanz.
-  - **DSA-Zauber (Trappings):** Befehl des Schamanen, Bescheidenheit, Brennender Hass, Des Einen bezaubernder Sphärenklang, Ehrenhaftigkeit, Große Gier, Heiliger Befehl, Hilfreiche Seele, Imperavi, Obsession, Respondami, Tsas Gedankenspiel, Wahrheit, Zauberzwang, Zwingtanz, Revolution der Gedanken, Wille zur Wahrheit
-
-**Mirakel (Angrosch)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Angroschs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Angroschs Opfergabe, Blick für das Handwerk, Visionssuche
-
-**Mirakel (Aves)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Aves'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Ein Freund in Zeiten der Not, Sterne funkeln immerfort, Sternenspur
-
-**Mirakel (Boron)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Borons. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Bishdariels Warnung, Etilias Gnade, Golgaris Zwielicht, Kleine Liturgie des heiligen Nemekath, Marbos Geleit, Siegel Borons
-
-**Mirakel (Efferd)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Efferds. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Anrufung Nuiannas, Gebet des kristallklaren Blicks, Gruss des Versunkenen
-
-**Mirakel (Firun)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Firuns. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Jagdglück, Trophäe erhalten
-
-**Mirakel (Gravesh)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Gravesh'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Visionssuche
-
-**Mirakel (Hesinde)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Hesindes. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Graues Siegel, Sprechende Symbole, Sterne funkeln immerfort, Wandeln in Hesindes Hain
-
-**Mirakel (Himmelswölfe)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen der Himmelswölfe. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Vaês Tränen, Visionssuche
-
-**Mirakel (Ifirn)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Ifirns. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Jagdglück, Trophäe erhalten
-
-**Mirakel (Ingerimm)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Ingerimms. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Blick für das Handwerk, Ruf der Ferne, Wandeln in Hesindes Hain, Weihe der ewigen Flamme
-
-**Mirakel (Kamaluq)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Kamaluqs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Siegel Borons, Visionssuche
-
-**Mirakel (Nandus)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Nandus'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Sprechende Symbole, Sterne funkeln immerfort, Sternenspur, Urischars ordnender Blick
-
-**Mirakel (Peraine)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Peraines. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Therbûns Erkenntnis
-
-**Mirakel (Phex)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Phex'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Graues Siegel, Phexens Elsterflug, Sechs Leben des Mungos, Sterne funkeln immerfort, Sternenspur, Sternenstaub
-
-**Mirakel (Praios)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Praios'. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Praios’ Mahnung, Urischars ordnender Blick
-
-**Mirakel (Rahja)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Rahjas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Dorlens Verbrüderung
-
-**Mirakel (Riva)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Rivas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Jagdglück
-
-**Mirakel (Rondra)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Rondras. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Belemans Hochzeit, Ehrenhafter Zweikampf
-
-**Mirakel (Swafnir)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Swafnirs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Anrufung Nuiannas, Sterne funkeln immerfort
-
-**Mirakel (Tairach)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Tairachs. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Ewiges Wissen, Kleine Liturgie des heiligen Nemekath, Sterne funkeln immerfort
-
-**Mirakel (Travia)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Travias. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Erzieherische Massnahme der Heiligen Yalsicena
-
-**Mirakel (Tsa)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen Tsas. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Kirschblütenregen, Wundersame Blütenpracht
-
-**Mirakel (Zwölfgötter)** _(Rang F · 0 MP · Reichweite — · Dauer —)_
-  - **Effekt (SW):** Seltene, erzählerische Wundertaten im Namen der Zwölfgötter. Diese Liturgien haben keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig).
-  - **DSA-Zauber (Trappings):** Indoktrination, Ordination, Prophezeiung, Visionssuche
+  - **DSA-Zauber (Trappings):** Befehl des Schamanen, Bescheidenheit, Brennender Hass, Des Einen bezaubernder Sphärenklang, Ehrenhaftigkeit, Große Gier, Heiliger Befehl, Hilfreiche Seele, Imperavi, Obsession, Respondami, Tsas Gedankenspiel, Wahrheit, Zauberzwang, Zwingtanz
 
 **Monster Beschwören** _(Rang A · 1 MP · Reichweite Verstand · Dauer 5)_
   - **Effekt (SW):** Beschwört ein mächtiges Monster.
@@ -2659,7 +2553,7 @@
 
 **Mystisches Eingreifen** _(Rang L · 20 MP · Reichweite Speziell · Dauer Speziell)_
   - **Effekt (SW):** Bittet um Hilfe von größeren Mächten.
-  - **DSA-Zauber (Trappings):** Friedfertigkeit, Friedvolle Aura, Göttliches Zeichen, Kleiner Schutzsegen, Schutz der Hornissenkönigin, Schutz der Wehrlosen, Schutzsegen, Seelenbannung, Segnung des Heims, Tabu-Zone, Travias Wachgänse, Waffenfluch (umgekehrt), Zuflucht, Ächtung (Exkommunikation), Aura des Regenbogens, Exkommunikation, Flagge des Regenbogens, Travias Gebet der sicheren Zuflucht, Wachsamkeit der Gänse, Zuflucht finden
+  - **DSA-Zauber (Trappings):** Friedfertigkeit, Friedvolle Aura, Göttliches Zeichen, Kleiner Schutzsegen, Schutz der Hornissenkönigin, Schutz der Wehrlosen, Schutzsegen, Seelenbannung, Segnung des Heims, Tabu-Zone, Travias Wachgänse, Waffenfluch (umgekehrt), Zuflucht, Ächtung (Exkommunikation), Aura des Regenbogens, Exkommunikation, Flagge des Regenbogens, Travias Gebet der sicheren Zuflucht, Wachsamkeit der Gänse, Zuflucht finden, Wundersame Blütenpracht
 
 **Schadensfeld** _(Rang F · 4 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Erschafft Aura, die 2W4 Schaden verursacht.
@@ -2693,11 +2587,11 @@
     Modifikatoren:
       Zusätzliche Empfänger (+1): Ein zusätzliches Ziel pro Punkt.
       Umweltresistenz (FK) (+1): Reduziert Schaden durch Energiequellen um –4 (–6 mit Steigerung).
-  - **DSA-Zauber (Trappings):** Firnlauf, Frostschutz, Glutlauf, Unentflammbarkeit, Wasseratem, Wasserlauf, Wellenlauf, Wipfellauf, Wüstenlauf, Begehen der Heiligen Wasser, Ingerimms Zorn verschone uns, Sichere Wanderung im Schnee
+  - **DSA-Zauber (Trappings):** Firnlauf, Frostschutz, Glutlauf, Unentflammbarkeit, Wasseratem, Wasserlauf, Wellenlauf, Wipfellauf, Wüstenlauf, Begehen der Heiligen Wasser, Ingerimms Zorn verschone uns, Sichere Wanderung im Schnee, Gruss des Versunkenen
 
 **Segen** _(Rang F · 10 MP · Reichweite Eine Stadt/Gemeinde · Dauer Ein Jahr)_
   - **Effekt (SW):** Segnet Gemeinschaften und Ressourcen.
-  - **DSA-Zauber (Trappings):** Ackersegen, Empfängnis des Korsmals, Fest der Freude, Fruchtbarkeit, Geburtssegen, Glückssegen, Grabsegen, Heiliger Schwur, Liebestätowierung, Objektsegen, Objektweihe, Reinigung des Bösen, Segen (Eidsegen, Harmoniesegen, Weisheitssegen), Speisung, Tranksegen, Weihe des Heims, Harmoniesegen, Rahjas Fest der Freude, Tsas wundersame Fruchtbarkeit, Weisheitssegen, Bootssegen, Dreifacher Saatsegen, Efferdsegen, Eidsegen, Gesegneter Fang, Grosser Eidsegen, Grosser Speisesegen, Kälbchensegen, Parinors Vermächtnis, Quellsegen, Reiches Land, Reisesegen, Schutz des Geleges, Speisesegen, Speisung der Bedürftigen, Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs, Wegzehrung der Heiligen Selma
+  - **DSA-Zauber (Trappings):** Ackersegen, Empfängnis des Korsmals, Fest der Freude, Fruchtbarkeit, Geburtssegen, Glückssegen, Grabsegen, Heiliger Schwur, Liebestätowierung, Objektsegen, Objektweihe, Reinigung des Bösen, Segen (Eidsegen, Harmoniesegen, Weisheitssegen), Speisung, Tranksegen, Weihe des Heims, Harmoniesegen, Rahjas Fest der Freude, Tsas wundersame Fruchtbarkeit, Weisheitssegen, Bootssegen, Dreifacher Saatsegen, Efferdsegen, Eidsegen, Gesegneter Fang, Grosser Eidsegen, Grosser Speisesegen, Kälbchensegen, Parinors Vermächtnis, Quellsegen, Reiches Land, Reisesegen, Schutz des Geleges, Speisesegen, Speisung der Bedürftigen, Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs, Wegzehrung der Heiligen Selma, Ein Freund in Zeiten der Not, Ewiges Wissen, Indoktrination, Ordination, Sterne funkeln immerfort
 
 **Sprachen sprechen** _(Rang A · 1 MP · Reichweite VER 10m · Dauer —)_
   - **Effekt (SW):** Wirker kann Sprachen sprechen und verstehen.
@@ -2768,7 +2662,7 @@
       Stark (+1): Nur Trägheit: Willenskraftprobe mit –2.
       Zusätzliche Empfänger (+1): Nur Beschleunigung: ein zusätzliches Ziel pro Punkt.
       Spurten (FK) (+2): Nur Beschleunigung: maximales Sprintergebnis statt Würfelwurf.
-  - **DSA-Zauber (Trappings):** Axxeleratus, Debilitatio (senken), Geschwinder Schritt, Krötensprung, Leichtfüssig, Lunge des Leviatan, Movimento, Sanfter Fall, Sicherer Tritt, Unbeschwerte Wanderung, Wieselflink, Schnell wie eine Eidechse
+  - **DSA-Zauber (Trappings):** Axxeleratus, Debilitatio (senken), Geschwinder Schritt, Krötensprung, Leichtfüssig, Lunge des Leviatan, Movimento, Sanfter Fall, Sicherer Tritt, Unbeschwerte Wanderung, Wieselflink, Schnell wie eine Eidechse, Sechs Leben des Mungos
 
 **Unsichtbarkeit** _(Rang F · 5 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Ziel wird unsichtbar (–4/–6 um es zu beeinflussen).
@@ -2841,6 +2735,10 @@
       Verbessert (FK) (+2): Ziele neben Abgelenkt/Verwundbar auch Angeschlagen.
   - **DSA-Zauber (Trappings):** Große Verwirrung, Ignorantia, Lust erzeugen, Mit Dummheit schlagen, Namenlose Zweifel, Sturm der Verunsicherung, Zweifel schüren, Namenloser Zweifel, Namenlose Erleuchtung
 
+**Vision** _(Rang A · 3 MP · Reichweite Selbst · Dauer —)_
+  - **Effekt (SW):** Gewährt prophetische Visionen, Traumbilder oder plötzliche Einsichten über Vergangenheit, Gegenwart oder Zukunft. Die Spielleitung gibt einen Eindruck oder Hinweis – keine garantierte Antwort.
+  - **DSA-Zauber (Trappings):** Kleine Liturgie des heiligen Nemekath, Prophezeiung, Visionssuche, Wandeln in Hesindes Hain
+
 **Wachsen/Schrumpfen** _(Rang F · 2 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Erhöht oder verringert Größe.
     
@@ -2873,8 +2771,7 @@
   - **DSA-Zauber (Trappings):** Aufnahme (Initiation), Selbstopferung, Initiation, Tsas heiliges Lebensgeschenk
 
 **Zaubertricks** _(Rang A · 1 MP · Reichweite VER G · Dauer —)_
-  - **Effekt (SW):** Neue Macht.
-    Accuratum, Sapefacta, Bartwuchs, Beruhigung, Blütenduft, Abkühlung, Astralmanifestation, Bauchreden, Elementarling, Dämonling, Buchschließer, Elfenhaar, Feenfüße, Feenzauber, Feuerspiel, Gelöscht, Flammenhaar, Feuerfinger, Geistergeräusche, Geräuschhexerei, Glücksgriff, Geräuschschutz, Handwärmer, Grußworte, Haarpracht, Hautbild, Hexenblick, Hintergrundmusik, Duft, Hundekeks, Insektenbann, Kleingeld, Jagdtrommel, Kehrbesen, Keimling, Kneifen, Kreide, Körperpflege, Kriegsbemalung, Leselampe, Leuchtblume, Nagellack, Luftstoß, Lockruf, Patron-Illusion, Ordentlich, Platscher, Pflanzenempathie, Regenschirm, Regenbogenaugen, Rohrstock, Schattenspiel, Rührlöffel, Sandfigur, Schnipsen, Schlangenhände, Schmutzabweisend, Schönschrift, Schulgong, Schminken, Selbstarchivierung, Signatur, Tiertrick, Tafelschwamm, Stabhalter, Steinempathie, Tentakelgriff, Tätowierung, Tierpflege, Totenmaske, Trocken, Türklinkenbetätiger, Verbundenheitsgefühl, Türklopfer, Verneigung, Wechselschein, Waffensäuberung, Übergangen, Wasserhöhe, Wohlgeruch, Würze, Zauberfeder, Blick in den Limbus, Aranische Rasur, Beeren & Nüsse, Eiskalter Blick, Auffälliger Stil, Einfache Telekinese, Astrales Leuchten, Aura der Eitelkeit, Ehrfürchtiges Verhalten, Heller Stern, Guten Morgen, Hand der Antimagie, Konstante Temperatur, Essenz der Niederhöllen, Gut behütet, Kleiner fliegender Teppich, Heilsame Berührung, Laufendes Händchen, Ruhige Ausstrahlung, Putziges Tierchen, Rutschiger Boden, Siegel der Elemente, Sauberes Werkzeug, Sprechendes Kästchen, Schutz vor dem Tierpatron, Strahlendes Lächeln, Unauffälliger Stab, Bereit zum Aufbruch, Unheimliches Lachen, Warmes Blut, Weisheit des Leytfadens, Wind im Haar, Verrücktes Kichern
+  - **Effekt (SW):** Kleine, alltägliche Zaubereien ohne nennenswerte Spielwert-Wirkung – reinigen, würzen, kleine Lichter und Geräusche, Gesten und ähnliche Effekte für die Stimmung.
   - **DSA-Zauber (Trappings):** Accuratum, Sapefacta, Bartwuchs, Beruhigung, Blütenduft, Abkühlung, Astralmanifestation, Bauchreden, Elementarling, Dämonling, Buchschließer, Elfenhaar, Feenfüße, Feenzauber, Feuerspiel, Gelöscht, Flammenhaar, Feuerfinger, Geistergeräusche, Geräuschhexerei, Glücksgriff, Geräuschschutz, Handwärmer, Grußworte, Haarpracht, Hautbild, Hexenblick, Hintergrundmusik, Duft, Hundekeks, Insektenbann, Kleingeld, Jagdtrommel, Kehrbesen, Keimling, Kneifen, Kreide, Körperpflege, Kriegsbemalung, Leselampe, Leuchtblume, Nagellack, Luftstoß, Lockruf, Patron-Illusion, Ordentlich, Platscher, Pflanzenempathie, Regenschirm, Regenbogenaugen, Rohrstock, Schattenspiel, Rührlöffel, Sandfigur, Schnipsen, Schlangenhände, Schmutzabweisend, Schönschrift, Schulgong, Schminken, Selbstarchivierung, Signatur, Tiertrick, Tafelschwamm, Stabhalter, Steinempathie, Tentakelgriff, Tätowierung, Tierpflege, Totenmaske, Trocken, Türklinkenbetätiger, Verbundenheitsgefühl, Türklopfer, Verneigung, Wechselschein, Waffensäuberung, Übergangen, Wasserhöhe, Wohlgeruch, Würze, Zauberfeder, Blick in den Limbus, Aranische Rasur, Beeren & Nüsse, Eiskalter Blick, Auffälliger Stil, Einfache Telekinese, Astrales Leuchten, Aura der Eitelkeit, Ehrfürchtiges Verhalten, Heller Stern, Guten Morgen, Hand der Antimagie, Konstante Temperatur, Essenz der Niederhöllen, Gut behütet, Kleiner fliegender Teppich, Heilsame Berührung, Laufendes Händchen, Ruhige Ausstrahlung, Putziges Tierchen, Rutschiger Boden, Siegel der Elemente, Sauberes Werkzeug, Sprechendes Kästchen, Schutz vor dem Tierpatron, Strahlendes Lächeln, Unauffälliger Stab, Bereit zum Aufbruch, Unheimliches Lachen, Warmes Blut, Weisheit des Leytfadens, Wind im Haar, Verrücktes Kichern
 
 **Zeitstopp** _(Rang H · 10 MP · Reichweite Selbst · Dauer Sofort)_

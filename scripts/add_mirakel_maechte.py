@@ -47,58 +47,46 @@ def main():
     d = json.load(open(SRC, encoding="utf-8"))
     mae = d["maechte"]
 
-    vorhandene_traps = {base(t).lower() for m in mae.values() for t in (m.get("dsa_trappings") or [])}
+    # Vollständiger Rebuild: bestehende Mirakel-Mächte entfernen ...
+    for nm in [n for n in mae if n.startswith("Mirakel (")]:
+        del mae[nm]
 
-    # narrative Liturgien je Gott bündeln
+    # ... narrativ = Liturgie weder in LITURGIE_SW gemappt NOCH Trapping einer (Nicht-Mirakel-)Macht
+    vorhandene_traps = {base(t).lower() for m in mae.values() for t in (m.get("dsa_trappings") or [])}
     by_god = defaultdict(list)
     for lit, goetter in herk.items():
         if lit in LIT or base(lit).lower() in vorhandene_traps:
             continue
-        ziele = set()
-        for g in goetter:
-            ziele.add("Zwölfgötter" if g in ("universell", "Zwölfgötterkult") else g)
+        ziele = {("Zwölfgötter" if g in ("universell", "Zwölfgötterkult") else g) for g in goetter}
         for g in ziele:
             by_god[g].append(lit)
 
-    added_maechte = 0
-    added_traps = 0
+    traps = 0
     for gott in sorted(by_god):
         mname = f"Mirakel ({gott})"
         gname = GOTT_NAME.get(gott, gott)
-        if mname not in mae:
-            mae[mname] = {
-                "name": mname,
-                "rang": "F",
-                "machtpunkte": 0,
-                "reichweite": "—",
-                "dauer": "—",
-                "beschreibung": (
-                    f"Seltene, erzählerische Wundertaten im Namen {gname}. Diese Liturgien haben "
-                    f"keine feste Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als "
-                    f"göttlichen Eingriff fest (oft Bennie- oder Wild-Card-würdig)."
-                ),
-                "dsa_trappings": [],
-                "effekt": "",
-                "aktiv": True,
-                "ausgewaehlt": False,
-                "custom": False,
-                "voraussetzungen": [],
-            }
-            added_maechte += 1
-        m = mae[mname]
-        vorhanden = {base(t).lower() for t in m["dsa_trappings"]}
+        besch_lines = [
+            f"Seltene, erzählerische Wundertaten im Namen {gname}. Diese Liturgien haben keine feste "
+            f"Spielwert-Wirkung – die genaue Auswirkung legt die Spielleitung als göttlichen Eingriff "
+            f"fest (oft Bennie- oder Wild-Card-würdig)."
+        ]
+        trapping_names = []
         for lit in sorted(by_god[gott], key=str.lower):
-            if base(lit).lower() in vorhanden:
-                continue
             desc = besch.get(lit, "").strip() or "Erzählerische Wundertat (Wirkung nach Spielleiter-Entscheid)."
-            m["dsa_trappings"].append(lit)
-            m["beschreibung"] = m["beschreibung"].rstrip("\n") + f"\n{lit}: {desc}"
-            added_traps += 1
+            besch_lines.append(f"{lit}: {desc}")
+            trapping_names.append(lit)
+            traps += 1
+        mae[mname] = {
+            "name": mname, "rang": "F", "machtpunkte": 0, "reichweite": "—", "dauer": "—",
+            "beschreibung": "\n".join(besch_lines),
+            "dsa_trappings": trapping_names, "effekt": "",
+            "aktiv": True, "ausgewaehlt": False, "custom": False, "voraussetzungen": [],
+        }
 
     out = json.dumps(d, ensure_ascii=False, indent=2)
     assert not out.endswith("\n")
     open(SRC, "w", encoding="utf-8").write(out)
-    print(f"Neue Mirakel-Mächte: {added_maechte} · hinzugefügte Trappings: {added_traps}")
+    print(f"Mirakel-Mächte (rebuild): {len(by_god)} · Trappings: {traps}")
     print("Mirakel-Mächte:", ", ".join(f"Mirakel ({g})" for g in sorted(by_god)))
 
 
