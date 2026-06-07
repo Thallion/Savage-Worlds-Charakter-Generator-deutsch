@@ -38,7 +38,7 @@ version = 0.8.1.0
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
 # version.filename = %(source.dir)s/main.py
-
+zzahh
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3==3.11.13,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,exceptiongroup,asyncgui,asynckivy,pillow

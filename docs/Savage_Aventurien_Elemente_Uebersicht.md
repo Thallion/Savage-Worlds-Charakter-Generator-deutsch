@@ -2366,7 +2366,7 @@
       Versteinern (FK, episch) (+5): Ziel jede Runde Willenskraft oder Erschöpfung; Ausgeschaltet = zu Stein.
     
     Bannfluch: Belegt eine Person mit einem göttlichen Fluch.
-  - **DSA-Zauber (Trappings):** Bannfluch (Anathema), Entstelltes Antlitz, Herzschlag ruhe, Pestodem, Schleichende Fäulnis, Schleichende Fäulnis (Pflanzen), Schwarz und Rot, Sippenbann, Trankfluch, Waffenfluch, Anathema, Bannfluch des Heiligen Khalid, Fluch wider die Ungläubigen, Sippenfluch, Erzieherische Massnahme der Heiligen Yalsicena, Etilias Gnade
+  - **DSA-Zauber (Trappings):** Bannfluch (Anathema), Entstelltes Antlitz, Herzschlag ruhe, Pestodem, Schleichende Fäulnis, Schleichende Fäulnis (Pflanzen), Schwarz und Rot, Sippenbann, Trankfluch, Waffenfluch, Anathema, Bannfluch des Heiligen Khalid, Fluch wider die Ungläubigen, Erzieherische Massnahme der Heiligen Yalsicena, Etilias Gnade
 
 **Flächenschlag** _(Rang F · 3 MP · Reichweite VER×2 · Dauer Sofort)_
   - **Effekt (SW):** 2W6 Schaden in mittlerer Flächenschablone.
@@ -2482,7 +2482,7 @@
       Mächtige Heilung (+10): Heilt jede Wunde, unabhängig vom Alter.
       Permanente Verletzungen (+20): Heilt eine permanente Verletzung; eine Stunde Vorbereitung.
       Massenheilung (FK) (+2/+3): Alle Verbündeten in MFS (+2) oder GFS (+3).
-  - **DSA-Zauber (Trappings):** Balsam Salabunde, Blutzoll, Eidechsenregeneration, Geistheilung, Giftbann, Heilsame Quelle, Heilschlaf, Heilsegen, Hexenspeichel, Kleiner Heilsegen, Kraft des Humus, Krankheiten vorbeugen, Krankheitsbann, Lebensschutz, Regeneratio, Tiere besprechen, Tierleid lindern, Birkenzweig, Fürbitten des heiligen Therbûn, Geteiltes Leid, Heilungssegen, Kleiner Giftbann, Segen der heiligen Theria, Tsas Lebensschutz, Tsas wunderbare Erneuerung, Wundersames Teilen des Martyriums, Wundsegen, Vaês Tränen
+  - **DSA-Zauber (Trappings):** Balsam Salabunde, Blutzoll, Eidechsenregeneration, Geistheilung, Giftbann, Heilsame Quelle, Heilschlaf, Heilsegen, Hexenspeichel, Kleiner Heilsegen, Kraft des Humus, Krankheiten vorbeugen, Krankheitsbann, Lebensschutz, Regeneratio, Tiere besprechen, Tierleid lindern, Birkenzweig, Fürbitten des heiligen Therbûn, Geteiltes Leid, Heilungssegen, Kleiner Giftbann, Segen der heiligen Theria, Tsas Lebensschutz, Tsas wunderbare Erneuerung, Wundersames Teilen des Martyriums, Wundsegen
 
 **Illusion** _(Rang A · 3 MP · Reichweite VER 5 · Dauer —)_
   - **Effekt (SW):** Erzeugt illusionäre Bilder.
@@ -2591,7 +2591,7 @@
 
 **Segen** _(Rang F · 10 MP · Reichweite Eine Stadt/Gemeinde · Dauer Ein Jahr)_
   - **Effekt (SW):** Segnet Gemeinschaften und Ressourcen.
-  - **DSA-Zauber (Trappings):** Ackersegen, Empfängnis des Korsmals, Fest der Freude, Fruchtbarkeit, Geburtssegen, Glückssegen, Grabsegen, Heiliger Schwur, Liebestätowierung, Objektsegen, Objektweihe, Reinigung des Bösen, Segen (Eidsegen, Harmoniesegen, Weisheitssegen), Speisung, Tranksegen, Weihe des Heims, Harmoniesegen, Rahjas Fest der Freude, Tsas wundersame Fruchtbarkeit, Weisheitssegen, Bootssegen, Dreifacher Saatsegen, Efferdsegen, Eidsegen, Gesegneter Fang, Grosser Eidsegen, Grosser Speisesegen, Kälbchensegen, Parinors Vermächtnis, Quellsegen, Reiches Land, Reisesegen, Schutz des Geleges, Speisesegen, Speisung der Bedürftigen, Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs, Wegzehrung der Heiligen Selma, Ein Freund in Zeiten der Not, Ewiges Wissen, Indoktrination, Ordination, Sterne funkeln immerfort
+  - **DSA-Zauber (Trappings):** Ackersegen, Empfängnis des Korsmals, Fest der Freude, Fruchtbarkeit, Geburtssegen, Glückssegen, Grabsegen, Heiliger Schwur, Liebestätowierung, Objektsegen, Objektweihe, Reinigung des Bösen, Segen (Eidsegen, Harmoniesegen, Weisheitssegen), Speisung, Tranksegen, Weihe des Heims, Harmoniesegen, Rahjas Fest der Freude, Tsas wundersame Fruchtbarkeit, Weisheitssegen, Bootssegen, Dreifacher Saatsegen, Efferdsegen, Eidsegen, Gesegneter Fang, Grosser Eidsegen, Grosser Speisesegen, Kälbchensegen, Parinors Vermächtnis, Quellsegen, Reiches Land, Reisesegen, Schutz des Geleges, Speisesegen, Speisung der Bedürftigen, Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs, Wegzehrung der Heiligen Selma, Ein Freund in Zeiten der Not, Indoktrination, Ordination, Sterne funkeln immerfort
 
 **Sprachen sprechen** _(Rang A · 1 MP · Reichweite VER 10m · Dauer —)_
   - **Effekt (SW):** Wirker kann Sprachen sprechen und verstehen.
@@ -2678,7 +2678,7 @@
       Erhöhte Eigenschaft (FK) (+1): Eine Eigenschaft um einen Würfeltyp verbessern.
       Geistesband (FK) (+1): Kommunikation und Wahrnehmung durch beschworene Untote.
       Zusätzliche Untote (FK) (halbe Basiskosten): Weitere Untote gleicher Art zur Hälfte der Kosten.
-  - **DSA-Zauber (Trappings):** Skelettarius, Tairachs Erhebung, Tairachs machtvolle Erhebung von Untoten, Totes handle, Untote erschaffen, Untotenerhebung, Ewiger Wächter
+  - **DSA-Zauber (Trappings):** Skelettarius, Tairachs Erhebung, Tairachs machtvolle Erhebung von Untoten, Totes handle, Untote erschaffen, Untotenerhebung
 
 **Verbannen** _(Rang V · 3 MP · Reichweite VER · Dauer Sofort)_
   - **Effekt (SW):** Vergleichender Wurf gegen Willenskraft, um Wesenheiten zu verbannen.

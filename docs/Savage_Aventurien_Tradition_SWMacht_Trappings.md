@@ -489,15 +489,18 @@
 | Aufheben | Argelions bannende Hand |
 | Aufspüren | Aura der Form, Buchprüfung |
 | Eigenschaft erhöhen/senken | Canyzeths Weisheit |
+| Elementarmanipulation | Elementwandlung |
 | Gedankenleere | Entzug von Nandus’ Gaben |
 | Gedankenlesen | Gift der Erkenntnis |
 | Gegenstand beschwören | Ingalfs Alchimie |
+| Gestaltwandeln | Geschlechterwandel |
 | Licht/Dunkelheit | Auge Xeledons, Xeledons helles Licht |
 | Linderung | Vertreibung des Dunkelsinns |
 | Machtpunkte entziehen | Purgation |
 | Segen | Sterne funkeln immerfort |
 | Sprachen sprechen | Phexens wunderbare Verständigung, Schrifttum ferner Lande |
 | Tier Beschwören | Schlangenstab |
+| Tierfreund | Bindung der Schlange |
 | Vision | Wandeln in Hesindes Hain |
 
 ### Firun (Winter, Jagd)
@@ -567,24 +570,31 @@
 | Wiederauferstehung | Tsas heiliges Lebensgeschenk |
 | Zeitstopp | Fünfte Lobpreisung des Frühlings |
 
-### Ingerimm (Feuer, Schmiedekunst)
+### Ingerimm / Angrosch (Feuer, Schmiedekunst, Zwerge)
 
 | SW-Macht | DSA-Zauber/Liturgien |
 |---|---|
-| Aufspüren | Goldener Blick, Ruf der Ferne |
+| Aufspüren | Goldener Blick, Ruf der Ferne, Seelenprüfung |
 | Ausspähung | Blick in die Flammen |
 | Eigenschaft erhöhen/senken | Blick für das Handwerk |
-| Elementarmanipulation | Gebieter der Lava, Heilige Schmiedeglut, Herr über Feuer und Glut |
+| Elementarmanipulation | Gebieter der Lava, Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut |
+| Fluch | Anathema |
 | Flächenschlag | Allmacht der Lohe |
+| Gedankenverbindung | Göttliche Verständigung |
 | Gegenstand beschwören | Sicherer Weg durch Fels |
-| Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
+| Gegenstand verbessern/schaden | Angroschs Opfergabe, Erneuerung des Geborstenen |
+| Heilung | Heilungssegen |
 | Kriegersegen | Eherne Kraft, Lodernder Zorn |
-| Licht/Dunkelheit | Licht des verborgenen Pfades, Weihe der ewigen Flamme |
+| Licht/Dunkelheit | Feuersegen, Licht des verborgenen Pfades, Weihe der ewigen Flamme |
+| Mystisches Eingreifen | Exkommunikation |
 | Schutz | Waliburias Wehr |
 | Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
-| Segen | Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs |
+| Segen | Eidsegen, Glückssegen, Grosser Eidsegen, Harmoniesegen, Tsas segensreicher Neuanfang, Unterpfand des Heiligen Rhÿs |
+| Telekinese | Hammer rufen |
+| Verbannen | Exorzismus |
 | Verbündeten beschwören | Vertrauter der Flamme, Vertrauter des Felsens |
-| Vision | Wandeln in Hesindes Hain |
+| Vision | Visionssuche, Wandeln in Hesindes Hain |
+| Wiederauferstehung | Initiation |
 
 ### Rahja (Liebe, Rausch, Freude)
 
@@ -664,100 +674,6 @@
 | Tier Beschwören | Ruf der Gefährten |
 | Tierfreund | Gesang der Delphine |
 
-### Angrosch (Zwergengott)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Aufspüren | Goldener Blick, Seelenprüfung |
-| Ausspähung | Blick in die Flammen |
-| Eigenschaft erhöhen/senken | Blick für das Handwerk |
-| Elementarmanipulation | Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut |
-| Fluch | Anathema |
-| Flächenschlag | Allmacht der Lohe |
-| Gedankenverbindung | Göttliche Verständigung |
-| Gegenstand beschwören | Sicherer Weg durch Fels |
-| Gegenstand verbessern/schaden | Angroschs Opfergabe, Erneuerung des Geborstenen |
-| Heilung | Heilungssegen |
-| Kriegersegen | Eherne Kraft, Lodernder Zorn |
-| Licht/Dunkelheit | Feuersegen, Licht des verborgenen Pfades |
-| Mystisches Eingreifen | Exkommunikation |
-| Schutz | Waliburias Wehr |
-| Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
-| Segen | Eidsegen, Glückssegen, Grosser Eidsegen, Harmoniesegen |
-| Telekinese | Hammer rufen |
-| Verbannen | Exorzismus |
-| Verbündeten beschwören | Vertrauter der Flamme, Vertrauter des Felsens |
-| Vision | Visionssuche |
-| Wiederauferstehung | Initiation |
-
-### Gravesh (Orkische Schmiedeglut)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Aufspüren | Goldener Blick |
-| Elementarmanipulation | Geläutert sei Erz und Goldgestein, Heilige Schmiedeglut, Herr über Feuer und Glut |
-| Flächenschlag | Allmacht der Lohe |
-| Gegenstand verbessern/schaden | Erneuerung des Geborstenen |
-| Licht/Dunkelheit | Feuersegen, Licht des verborgenen Pfades |
-| Mystisches Eingreifen | Exkommunikation |
-| Schutz vor Naturgewalten | Ingerimms Zorn verschone uns |
-| Segen | Tsas segensreicher Neuanfang |
-| Verbannen | Exorzismus |
-| Verbündeten beschwören | Vertrauter der Flamme |
-| Vision | Visionssuche |
-
-### Himmelswölfe (Nivesen-Kult)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Aufspüren | Weisung des Himmels |
-| Betäuben | Winterschlaf |
-| Fluch | Sippenfluch |
-| Heilung | Vaês Tränen |
-| Schutz vor Naturgewalten | Sichere Wanderung im Schnee |
-| Segen | Dreifacher Saatsegen, Kälbchensegen, Parinors Vermächtnis, Tsas wundersame Fruchtbarkeit |
-| Tierfreund | Tierempathie |
-| Vision | Visionssuche |
-| Zeitstopp | Fünfte Lobpreisung des Frühlings |
-
-### H’Szint (Echsen-Kult)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Arkaner Schutz | Argelions Mantel, Argelions Spiegel |
-| Arkanes entdecken/verbergen | Blick der Weberin, Sicht auf Madas Welt, Unverstellter Blick |
-| Elementarmanipulation | Elementwandlung |
-| Gedankenlesen | Gift der Erkenntnis |
-| Gestaltwandeln | Geschlechterwandel |
-| Sprachen sprechen | Schrifttum ferner Lande |
-| Tier Beschwören | Schlangenstab |
-| Tierfreund | Bindung der Schlange |
-
-### Kamaluq (Tulamidischer Totenkult)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Arkanes entdecken/verbergen | Nemekaths Geisterblick |
-| Aufheben | Praios’ Magiebann |
-| Einfluss | Siegel Borons |
-| Fluch | Bannfluch des Heiligen Khalid, Sippenfluch |
-| Heiligtum | Weihe der letzten Ruhestatt |
-| Linderung | Borons süsse Gnade |
-| Untoten Beschwören | Ewiger Wächter |
-| Verbannen | Zerschmetternder Bannstrahl |
-| Vision | Visionssuche |
-
-### Tairach (Echsen-Blutkult)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Arkanes entdecken/verbergen | Blick der Weberin, Nemekaths Geisterblick, Sicht auf Madas Welt |
-| Eigenschaft erhöhen/senken | Ein Bild für die Ewigkeit |
-| Fluch | Sippenfluch |
-| Gedankenleere | Entzug von Nandus’ Gaben |
-| Segen | Ewiges Wissen, Sterne funkeln immerfort |
-| Vision | Kleine Liturgie des heiligen Nemekath |
-
 ### Zsahh (Echsen-Kult)
 
 | SW-Macht | DSA-Zauber/Liturgien |
@@ -768,26 +684,6 @@
 | Schutz | Eidechsenhaut |
 | Segen | Schutz des Geleges, Tsas wundersame Fruchtbarkeit |
 | Zeitstopp | Tsas ewige Jugend |
-
-### H’Ranga (Achaz-Kult)
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Fluch | Anathema |
-| Heilung | Heilungssegen |
-| Mystisches Eingreifen | Exkommunikation |
-| Segen | Eidsegen, Grabsegen, Tranksegen |
-| Verbannen | Exorzismus |
-| Wiederauferstehung | Initiation |
-
-### Riva
-
-| SW-Macht | DSA-Zauber/Liturgien |
-|---|---|
-| Aufspüren | Jagdglück |
-| Gegenstand beschwören | Firuns Einsicht |
-| Heilung | Geteiltes Leid |
-| Tierfreund | Gemeinschaft der treuen Gefährten |
 
 ### Namenloser (Verbotener Kult)
 

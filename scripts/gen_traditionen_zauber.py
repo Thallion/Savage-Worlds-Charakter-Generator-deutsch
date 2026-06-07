@@ -95,24 +95,22 @@ GOTT_LABELS = [
     ("Tsa", "Tsa (Leben, Wandel, Wiedergeburt)"),
     ("Phex", "Phex (Diebe, Händler, List)"),
     ("Peraine", "Peraine (Heilung, Ackerbau)"),
-    ("Ingerimm", "Ingerimm (Feuer, Schmiedekunst)"),
+    ("Ingerimm", "Ingerimm / Angrosch (Feuer, Schmiedekunst, Zwerge)"),
     ("Rahja", "Rahja (Liebe, Rausch, Freude)"),
     ("Aves", "Aves (Reise, Wege)"),
     ("Ifirn", "Ifirn (Barmherzigkeit, Eis)"),
     ("Kor", "Kor (Kampf, Söldner)"),
     ("Nandus", "Nandus (Wissen, Lehre)"),
     ("Swafnir", "Swafnir (Wale, Thorwal, Meer)"),
-    ("Angrosch", "Angrosch (Zwergengott)"),
-    ("Gravesh", "Gravesh (Orkische Schmiedeglut)"),
-    ("Himmelswölfe", "Himmelswölfe (Nivesen-Kult)"),
-    ("H’Szint", "H’Szint (Echsen-Kult)"),
-    ("Kamaluq", "Kamaluq (Tulamidischer Totenkult)"),
-    ("Tairach", "Tairach (Echsen-Blutkult)"),
     ("Zsahh", "Zsahh (Echsen-Kult)"),
-    ("H’Ranga", "H’Ranga (Achaz-Kult)"),
-    ("Riva", "Riva"),
     ("Namenlos", "Namenloser (Verbotener Kult)"),
 ]
+
+# Götter-Kulte, die NICHT als eigene Sektion geführt werden:
+# - zusammengeführt (Token -> Ziel-Gott): H’Szint→Hesinde, Angrosch→Ingerimm
+# - entfernt (deren exklusive Liturgien fallen aus der Geweihten-Übersicht)
+GOTT_MERGE = {"H’Szint": "Hesinde", "Angrosch": "Ingerimm"}
+GOTT_REMOVE = {"Kamaluq", "Tairach", "H’Ranga", "Riva", "Himmelswölfe", "Gravesh"}
 
 # Wirkungs-Mapping Liturgie -> SW-Macht (nur die mechanisch abbildbaren; Rest = narrativ).
 # SW-Macht-Namen müssen exakt einem Eintrag in d['maechte'] entsprechen (wird geprüft).
@@ -146,7 +144,6 @@ LITURGIE_SW = {
     "Entzug von Nandus’ Gaben": "Gedankenleere",
     "Erneuerung des Geborstenen": "Gegenstand verbessern/schaden",
     "Ewige Jugend": "Zeitstopp",
-    "Ewiger Wächter": "Untoten Beschwören",
     "Exkommunikation": "Mystisches Eingreifen",
     "Exorzismus": "Verbannen",
     "Feuersegen": "Licht/Dunkelheit",
@@ -242,7 +239,6 @@ LITURGIE_SW = {
     "Segnung des Heims": "Mystisches Eingreifen",
     "Sichere Wanderung im Schnee": "Schutz vor Naturgewalten",
     "Sicht auf Madas Welt": "Arkanes entdecken/verbergen",
-    "Sippenfluch": "Fluch",
     "Sternenglanz": "Illusion",
     "Teilung der Wasser": "Elementarmanipulation",
     "Tierempathie": "Tierfreund",
@@ -359,7 +355,6 @@ LITURGIE_SW = {
     "Erzieherische Massnahme der Heiligen Yalsicena": "Fluch",
     "Etilias Gnade": "Fluch",
     "Dorlens Verbrüderung": "Empathie",
-    "Vaês Tränen": "Heilung",
     "Therbûns Erkenntnis": "Eigenschaft erhöhen/senken",
     "Blick für das Handwerk": "Eigenschaft erhöhen/senken",
     "Gruss des Versunkenen": "Schutz vor Naturgewalten",
@@ -373,7 +368,6 @@ LITURGIE_SW = {
     "Angroschs Opfergabe": "Gegenstand verbessern/schaden",
     "Ehrenhafter Zweikampf": "Einfluss",
     "Ein Freund in Zeiten der Not": "Segen",
-    "Ewiges Wissen": "Segen",
     "Gebet des kristallklaren Blicks": "Fernsicht",
     "Graues Siegel": "Arkanes entdecken/verbergen",
     "Indoktrination": "Segen",
@@ -501,15 +495,23 @@ def main():
             return LITURGIE_SW[name]
         return "— *(narrativ)*"
 
-    # Gott-Token -> [Liturgien]
+    # Gott-Token -> [Liturgien] (mit Merge H’Szint→Hesinde / Angrosch→Ingerimm, Remove-Kulte raus)
     gott_lit = defaultdict(list)
     allg_lit = []  # universell / Zwölfgötterkult
     for lit, goetter in liber.items():
-        ziele = [g for g in goetter if g not in ("universell", "Zwölfgötterkult")]
-        if not ziele:  # nur universell/Zwölfgötterkult
+        echte = [g for g in goetter if g not in ("universell", "Zwölfgötterkult")]
+        if not echte:  # nur universell/Zwölfgötterkult
             allg_lit.append(lit)
+            continue
+        ziele = set()
+        for g in echte:
+            g = GOTT_MERGE.get(g, g)
+            if g in GOTT_REMOVE:
+                continue
+            ziele.add(g)
         for g in ziele:
-            gott_lit[g].append(lit)
+            if lit not in gott_lit[g]:
+                gott_lit[g].append(lit)
 
     narrativ_count = 0
 
