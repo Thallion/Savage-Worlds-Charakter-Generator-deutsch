@@ -92,12 +92,13 @@
 
 - Zäher Hund (zäher und leidensfähiger als Menschen – Konstitution W6 statt W4, Maximum W12+1)
 - Anpassungsfähig (Freies Anfängertalent nach Wahl – menschliches Erbe)
+- Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)
 
 **Handicaps / Nachteile:**
 
 - Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)
 
-**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Freies Anfängertalent; Auto-Handicaps: Außenseiter_schwer
+**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Freies Anfängertalent; Auto-Handicaps: Außenseiter_schwer; Spezial-Flags: nachtsicht
 
 ### Holberker
 
@@ -131,6 +132,7 @@
 - Stark (Stärke W6, Maximum W12+1)
 - Widerstandsfähig (Konstitution W6, Maximum W12+1)
 - Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)
+- Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)
 
 **Handicaps / Nachteile:**
 
@@ -138,7 +140,7 @@
 - Impulsiv (schwer: jähzornig, handelt vorschnell)
 - Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)
 
-**Mechanik:** Attribut-Boni: Stärke +1 Würfelstufe(n), Konstitution +1 Würfelstufe(n); Auto-Handicaps: Außenseiter_schwer, Impulsiv; Spezial-Flags: brutal, biss
+**Mechanik:** Attribut-Boni: Stärke +1 Würfelstufe(n), Konstitution +1 Würfelstufe(n); Auto-Handicaps: Außenseiter_schwer, Impulsiv; Spezial-Flags: brutal, biss, nachtsicht
 
 ### Zwerg
 

@@ -108,7 +108,8 @@
       "talente": [],
       "besonderheiten": [
         "Zäher Hund (zäher und leidensfähiger als Menschen – Konstitution W6 statt W4, Maximum W12+1)",
-        "Anpassungsfähig (Freies Anfängertalent nach Wahl – menschliches Erbe)"
+        "Anpassungsfähig (Freies Anfängertalent nach Wahl – menschliches Erbe)",
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
       ],
       "sprachen": [
         "Gemeinsprache",
@@ -130,7 +131,9 @@
         "auto_handicaps": [
           "Außenseiter_schwer"
         ],
-        "spezielle_effekte": {},
+        "spezielle_effekte": {
+          "nachtsicht": true
+        },
         "wahlmoeglichkeiten": {
           "freies_talent": true
         }
@@ -270,7 +273,8 @@
       "besonderheiten": [
         "Stark (Stärke W6, Maximum W12+1)",
         "Widerstandsfähig (Konstitution W6, Maximum W12+1)",
-        "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)"
+        "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)",
+        "Nachtsicht (Ignoriert Abzüge für Düstere und Dunkle Beleuchtung)"
       ],
       "sprachen": [
         "Orkisch"
@@ -291,7 +295,8 @@
         "auto_talente": [],
         "spezielle_effekte": {
           "brutal": true,
-          "biss": true
+          "biss": true,
+          "nachtsicht": true
         },
         "wahlmoeglichkeiten": {},
         "groesse_modifikator": 0,
