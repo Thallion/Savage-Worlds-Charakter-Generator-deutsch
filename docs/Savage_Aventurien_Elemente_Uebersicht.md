@@ -95,9 +95,9 @@
 
 **Handicaps / Nachteile:**
 
-- Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)
+- Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)
 
-**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Freies Anfängertalent; Auto-Handicaps: Außenseiter_leicht
+**Mechanik:** Attribut-Boni: Konstitution +1 Würfelstufe(n); Freies Anfängertalent; Auto-Handicaps: Außenseiter_schwer
 
 ### Holberker
 
@@ -129,7 +129,6 @@
 **Positive Eigenarten:**
 
 - Stark (Stärke W6, Maximum W12+1)
-- Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10"/20 Meter)
 - Widerstandsfähig (Konstitution W6, Maximum W12+1)
 - Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)
 
@@ -137,8 +136,9 @@
 
 - Brutal (-1 Verstandsproben)
 - Impulsiv (schwer: jähzornig, handelt vorschnell)
+- Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)
 
-**Mechanik:** Attribut-Boni: Stärke +1 Würfelstufe(n), Konstitution +1 Würfelstufe(n); Auto-Handicaps: Außenseiter_schwer, Impulsiv; Spezial-Flags: brutal, biss, dunkelsicht
+**Mechanik:** Attribut-Boni: Stärke +1 Würfelstufe(n), Konstitution +1 Würfelstufe(n); Auto-Handicaps: Außenseiter_schwer, Impulsiv; Spezial-Flags: brutal, biss
 
 ### Zwerg
 

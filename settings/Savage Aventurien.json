@@ -103,7 +103,7 @@
     "Halbork": {
       "name": "Halbork",
       "handicaps": [
-        "Außenseiter (leicht: -2 Überreden außer bei anderen Halborks)"
+        "Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)"
       ],
       "talente": [],
       "besonderheiten": [
@@ -128,7 +128,7 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Außenseiter_leicht"
+          "Außenseiter_schwer"
         ],
         "spezielle_effekte": {},
         "wahlmoeglichkeiten": {
@@ -263,12 +263,12 @@
       "name": "Ork",
       "handicaps": [
         "Brutal (-1 Verstandsproben)",
-        "Impulsiv (schwer: jähzornig, handelt vorschnell)"
+        "Impulsiv (schwer: jähzornig, handelt vorschnell)",
+        "Außenseiter (schwer: -2 Überredenproben, von Menschen gefürchtet und abgelehnt)"
       ],
       "talente": [],
       "besonderheiten": [
         "Stark (Stärke W6, Maximum W12+1)",
-        "Dunkelsicht (Ignoriert Beleuchtungsabzüge auf bis zu 10\"/20 Meter)",
         "Widerstandsfähig (Konstitution W6, Maximum W12+1)",
         "Biss (Stä+W4 Schaden, natürliche Waffe – die Hauer der Orks)"
       ],
@@ -291,8 +291,7 @@
         "auto_talente": [],
         "spezielle_effekte": {
           "brutal": true,
-          "biss": true,
-          "dunkelsicht": true
+          "biss": true
         },
         "wahlmoeglichkeiten": {},
         "groesse_modifikator": 0,
