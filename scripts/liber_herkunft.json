@@ -1,0 +1,978 @@
+{
+  "Aller Welt Freund": [
+    "Aves"
+  ],
+  "Allmacht der Lohe": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Alte Schuppen": [
+    "Zsahh"
+  ],
+  "Anathema": [
+    "Angrosch",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Angroschs Opfergabe": [
+    "Angrosch"
+  ],
+  "Anrufung Nuiannas": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Anrufung der Erdkraft": [
+    "Peraine"
+  ],
+  "Anrufung der Winde": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Arcanum Interdictum": [
+    "Praios"
+  ],
+  "Argelions Mantel": [
+    "Hesinde",
+    "H’Szint",
+    "Praios"
+  ],
+  "Argelions Spiegel": [
+    "Hesinde",
+    "H’Szint"
+  ],
+  "Argelions bannende Hand": [
+    "Hesinde",
+    "Praios"
+  ],
+  "Ascandears Hingabe": [
+    "Rahja"
+  ],
+  "Auge Xeledons, Xeledons helles Licht": [
+    "Hesinde"
+  ],
+  "Auge des Händlers": [
+    "Nandus",
+    "Phex"
+  ],
+  "Auge des Mondes": [
+    "Phex"
+  ],
+  "Aura der Form": [
+    "Hesinde"
+  ],
+  "Aura des Regenbogens": [
+    "Tsa"
+  ],
+  "Azilas Quellgesang": [
+    "Efferd"
+  ],
+  "Bannfluch des Heiligen Khalid": [
+    "Boron",
+    "Kamaluq"
+  ],
+  "Begehen der Heiligen Wasser": [
+    "Efferd"
+  ],
+  "Belemans Hochzeit": [
+    "Rondra"
+  ],
+  "Bindung der Schlange": [
+    "H’Szint"
+  ],
+  "Birkenzweig": [
+    "Ifirn"
+  ],
+  "Bishdariels Auge": [
+    "Boron"
+  ],
+  "Bishdariels Warnung": [
+    "Boron"
+  ],
+  "Blendstrahl aus Alveran": [
+    "Praios"
+  ],
+  "Blick der Weberin": [
+    "Hesinde",
+    "H’Szint",
+    "Tairach"
+  ],
+  "Blick für das Handwerk": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Blick in die Flammen": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Bootssegen": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Borons süsse Gnade": [
+    "Boron",
+    "Kamaluq"
+  ],
+  "Buchprüfung": [
+    "Hesinde",
+    "Nandus",
+    "Phex"
+  ],
+  "Canyzeths Weisheit": [
+    "Hesinde"
+  ],
+  "Conagas Ruf": [
+    "Efferd"
+  ],
+  "Daradors Bann der Schatten": [
+    "Praios"
+  ],
+  "Das schwarze Fell durch das rote Blut": [
+    "Kor"
+  ],
+  "Des Einen bezaubernder Sphärenklang": [
+    "Namenlos"
+  ],
+  "Die goldene Hand": [
+    "Namenlos"
+  ],
+  "Dorlens Verbrüderung": [
+    "Rahja"
+  ],
+  "Dreifacher Saatsegen": [
+    "Himmelswölfe",
+    "Peraine"
+  ],
+  "Efferdsegen": [
+    "Efferd"
+  ],
+  "Eherne Kraft, Lodernder Zorn": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Ehrenhafter Zweikampf": [
+    "Rondra"
+  ],
+  "Eidechsenhaut": [
+    "Tsa",
+    "Zsahh"
+  ],
+  "Eidsegen": [
+    "Angrosch",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Ein Bild für die Ewigkeit": [
+    "Nandus",
+    "Tairach"
+  ],
+  "Ein Freund in Zeiten der Not": [
+    "Aves"
+  ],
+  "Elementwandlung": [
+    "H’Szint"
+  ],
+  "Entzug von Nandus’ Gaben": [
+    "Hesinde",
+    "Nandus",
+    "Phex",
+    "Tairach"
+  ],
+  "Erneuerung des Geborstenen": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm",
+    "Tsa"
+  ],
+  "Erzieherische Massnahme der Heiligen Yalsicena": [
+    "Travia"
+  ],
+  "Etilias Gnade": [
+    "Boron"
+  ],
+  "Ewige Jugend": [
+    "Namenlos"
+  ],
+  "Ewiger Wächter": [
+    "Kamaluq"
+  ],
+  "Ewiges Wissen": [
+    "Tairach"
+  ],
+  "Exkommunikation": [
+    "Angrosch",
+    "Gravesh",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Exorzismus": [
+    "Angrosch",
+    "Gravesh",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Feuersegen": [
+    "Angrosch",
+    "Gravesh",
+    "Zwölfgötterkult"
+  ],
+  "Firuns Einsicht": [
+    "Firun",
+    "Riva"
+  ],
+  "Firuns Zorn": [
+    "Firun"
+  ],
+  "Flagge des Regenbogens": [
+    "Tsa",
+    "Zsahh"
+  ],
+  "Fluch wider die Ungläubigen": [
+    "Namenlos"
+  ],
+  "Freundliche Aufnahme": [
+    "Aves",
+    "Travia"
+  ],
+  "Frieden der Melodie": [
+    "Aves"
+  ],
+  "Fünfte Lobpreisung des Frühlings": [
+    "Himmelswölfe",
+    "Peraine"
+  ],
+  "Fürbitten des heiligen Therbûn": [
+    "Peraine"
+  ],
+  "Garafans gleissende Schwingen": [
+    "Praios"
+  ],
+  "Gebet des kristallklaren Blicks": [
+    "Efferd"
+  ],
+  "Gebieter der Lava": [
+    "Ingerimm"
+  ],
+  "Geburtssegen": [
+    "Zwölfgötterkult"
+  ],
+  "Geläutert sei Erz und Goldgestein": [
+    "Angrosch",
+    "Gravesh"
+  ],
+  "Gemeinschaft der treuen Gefährten": [
+    "Aves",
+    "Ifirn",
+    "Riva",
+    "Travia"
+  ],
+  "Gesang der Delphine": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Geschlechterwandel": [
+    "H’Szint",
+    "Zsahh"
+  ],
+  "Gesegneter Fang": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Geteiltes Leid": [
+    "Ifirn",
+    "Riva",
+    "Travia"
+  ],
+  "Gift der Erkenntnis": [
+    "Hesinde",
+    "H’Szint"
+  ],
+  "Gleichklang des Geistes": [
+    "Efferd",
+    "Peraine",
+    "Rahja",
+    "Tsa"
+  ],
+  "Glückssegen": [
+    "Angrosch",
+    "Zwölfgötterkult"
+  ],
+  "Goldene Rüstung": [
+    "Praios"
+  ],
+  "Goldener Blick": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Golgaris Zwielicht": [
+    "Boron"
+  ],
+  "Gott der Götter": [
+    "Namenlos"
+  ],
+  "Grabsegen": [
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Graues Siegel": [
+    "Hesinde",
+    "Phex"
+  ],
+  "Grosse Weihe des Heimsteins": [
+    "Travia"
+  ],
+  "Grosser Eidsegen": [
+    "Angrosch",
+    "Zwölfgötterkult"
+  ],
+  "Grosser Speisesegen": [
+    "Peraine",
+    "Travia"
+  ],
+  "Grosser Weihesegen der Waffe": [
+    "Kor",
+    "Rondra"
+  ],
+  "Gruss des Versunkenen": [
+    "Efferd"
+  ],
+  "Göttliche Strafe": [
+    "universell"
+  ],
+  "Göttliche Verständigung": [
+    "Angrosch",
+    "Zwölfgötterkult"
+  ],
+  "Göttliches Zeichen": [
+    "universell"
+  ],
+  "Hammer rufen": [
+    "Angrosch"
+  ],
+  "Handwerkssegen": [
+    "universell"
+  ],
+  "Harmoniesegen": [
+    "Angrosch",
+    "Zwölfgötterkult"
+  ],
+  "Hashnabiths Flehen": [
+    "Aves",
+    "Efferd"
+  ],
+  "Hauch Borons": [
+    "Boron"
+  ],
+  "Hausfrieden": [
+    "Travia"
+  ],
+  "Heilige Schmiedeglut": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Heiliger Befehl": [
+    "universell"
+  ],
+  "Heiliges Liebesspiel": [
+    "Rahja"
+  ],
+  "Heilungssegen": [
+    "Angrosch",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Herbeirufung der Diener des Herrn": [
+    "Namenlos"
+  ],
+  "Herbeirufung der Heerscharen des Rattenkindes": [
+    "Namenlos"
+  ],
+  "Herr über Feuer und Glut": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Hilfe in der Not": [
+    "Aves",
+    "Ifirn"
+  ],
+  "Hoftag der Sprachen": [
+    "Nandus"
+  ],
+  "Indoktrination": [
+    "universell"
+  ],
+  "Ingalfs Alchimie": [
+    "Hesinde"
+  ],
+  "Ingerimms Zorn verschone uns": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Initiation": [
+    "Angrosch",
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Innere Ruhe": [
+    "Praios"
+  ],
+  "Jagdglück": [
+    "Firun",
+    "Ifirn",
+    "Riva"
+  ],
+  "Khablas Jugend": [
+    "Rahja"
+  ],
+  "Khablas makelloser Leib": [
+    "Rahja"
+  ],
+  "Kirschblütenregen": [
+    "Tsa"
+  ],
+  "Kleine Liturgie des heiligen Nemekath": [
+    "Boron",
+    "Tairach"
+  ],
+  "Kleine Segnung des Heimsteins": [
+    "Travia"
+  ],
+  "Kleiner Giftbann": [
+    "Peraine"
+  ],
+  "Konsekration": [
+    "universell"
+  ],
+  "Kräftigung der Schwachen und Versehrten": [
+    "Peraine"
+  ],
+  "Kälbchensegen": [
+    "Himmelswölfe",
+    "Peraine",
+    "Tsa"
+  ],
+  "Levthans Fesseln": [
+    "Rahja"
+  ],
+  "Licht des Herrn": [
+    "Praios"
+  ],
+  "Licht des verborgenen Pfades": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm"
+  ],
+  "Lidaris Herz": [
+    "Ifirn"
+  ],
+  "Lohn der Unverzagten": [
+    "Peraine",
+    "Travia"
+  ],
+  "Mannschaftssegen": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Marbos Geleit": [
+    "Boron"
+  ],
+  "Mikailspfeil": [
+    "Firun"
+  ],
+  "Mondsilberzunge": [
+    "Aves",
+    "Phex"
+  ],
+  "Märtyrersegen": [
+    "universell"
+  ],
+  "Namenlose Kälte": [
+    "Namenlos"
+  ],
+  "Namenlose Raserei": [
+    "Namenlos"
+  ],
+  "Namenloser Zweifel, Namenlose Erleuchtung": [
+    "Namenlos"
+  ],
+  "Namenloses Vergessen": [
+    "Namenlos"
+  ],
+  "Nemekaths Geisterblick": [
+    "Boron",
+    "Kamaluq",
+    "Tairach"
+  ],
+  "Nemekaths Zwiesprache": [
+    "Boron"
+  ],
+  "Neun Streiche in einem": [
+    "Kor"
+  ],
+  "Nimmermüde Wanderschaft": [
+    "Aves"
+  ],
+  "Objektsegen": [
+    "universell"
+  ],
+  "Objektweihe": [
+    "universell"
+  ],
+  "Ordination": [
+    "universell"
+  ],
+  "Parinors Vermächtnis": [
+    "Himmelswölfe",
+    "Peraine"
+  ],
+  "Pech und Schwefel": [
+    "Namenlos"
+  ],
+  "Peraines Pflanzengespür": [
+    "Peraine"
+  ],
+  "Phexens Augenzwinkern": [
+    "Phex"
+  ],
+  "Phexens Elsterflug": [
+    "Phex"
+  ],
+  "Phexens Meisterschlüssel": [
+    "Phex"
+  ],
+  "Phexens Nebelleib": [
+    "Phex"
+  ],
+  "Phexens Schatten": [
+    "Phex"
+  ],
+  "Phexens Sternenwurf": [
+    "Phex"
+  ],
+  "Phexens Verteidigung": [
+    "Phex"
+  ],
+  "Phexens wunderbare Verständigung": [
+    "Aves",
+    "Hesinde",
+    "Nandus",
+    "Phex"
+  ],
+  "Praios’ Magiebann": [
+    "Kamaluq",
+    "Praios"
+  ],
+  "Praios’ Mahnung": [
+    "Praios"
+  ],
+  "Prophezeiung": [
+    "universell"
+  ],
+  "Purgation": [
+    "Hesinde",
+    "Praios",
+    "Rondra"
+  ],
+  "Quellsegen": [
+    "Efferd"
+  ],
+  "Rahjalinas Farbenspiel": [
+    "Rahja"
+  ],
+  "Rahjalinas Kuss": [
+    "Rahja"
+  ],
+  "Rahjas Begehren": [
+    "Rahja"
+  ],
+  "Rahjas Fest der Freude": [
+    "Rahja"
+  ],
+  "Rahjas Freiheit": [
+    "Aves",
+    "Rahja",
+    "Tsa"
+  ],
+  "Rahjas Rauschsegen": [
+    "Boron",
+    "Rahja"
+  ],
+  "Rahjas Schoss": [
+    "Rahja"
+  ],
+  "Rahjas Sinnlichkeit": [
+    "Rahja"
+  ],
+  "Rahjas geheiligter Wein": [
+    "Rahja"
+  ],
+  "Reiches Land": [
+    "Peraine"
+  ],
+  "Reichung des Amethyst": [
+    "Rahja"
+  ],
+  "Reisesegen": [
+    "Aves",
+    "Travia"
+  ],
+  "Revolution der Gedanken": [
+    "Tsa"
+  ],
+  "Ritus der Schlachthilfe": [
+    "Rondra"
+  ],
+  "Rondras wundersame Rüstung": [
+    "Rondra"
+  ],
+  "Ruf der Ferne": [
+    "Ingerimm"
+  ],
+  "Ruf der Gefährten": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Ruf in Borons Arme": [
+    "Boron"
+  ],
+  "Ruf zum Bund wider die Mächte der Finsternis": [
+    "Rondra"
+  ],
+  "Ruf zur Ruhe": [
+    "Boron"
+  ],
+  "Runjensweisung": [
+    "Ifirn"
+  ],
+  "Schattenlarve": [
+    "Phex"
+  ],
+  "Schlachtfeld schreitet": [
+    "Kor"
+  ],
+  "Schlachtgesang": [
+    "Rondra"
+  ],
+  "Schlaf des Gesegneten": [
+    "Aves",
+    "Boron",
+    "Rahja"
+  ],
+  "Schlangenstab": [
+    "Hesinde",
+    "H’Szint"
+  ],
+  "Schleichende Fäulnis": [
+    "Namenlos"
+  ],
+  "Schneesturm": [
+    "Firun"
+  ],
+  "Schnell wie eine Eidechse": [
+    "Tsa"
+  ],
+  "Schrifttum ferner Lande": [
+    "Hesinde",
+    "H’Szint",
+    "Nandus",
+    "Phex"
+  ],
+  "Schutz des Geleges": [
+    "Zsahh"
+  ],
+  "Schutzsegen": [
+    "universell"
+  ],
+  "Schwindende Zauberkraft": [
+    "Namenlos"
+  ],
+  "Sechs Leben des Mungos": [
+    "Phex"
+  ],
+  "Seelenbannung": [
+    "Namenlos"
+  ],
+  "Seelengefährte": [
+    "Firun"
+  ],
+  "Seelenprüfung": [
+    "Angrosch",
+    "Zwölfgötterkult"
+  ],
+  "Seelenschatten": [
+    "Namenlos"
+  ],
+  "Segen der heiligen Ardare": [
+    "Rondra"
+  ],
+  "Segen der heiligen Noiona": [
+    "Boron"
+  ],
+  "Segen der heiligen Theria": [
+    "Peraine"
+  ],
+  "Segen der heiligen Velvenya": [
+    "Boron"
+  ],
+  "Segen des Plättlings": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Segen des heiligen Hlûthar": [
+    "Rondra"
+  ],
+  "Segenreiches Wasser": [
+    "Peraine"
+  ],
+  "Segnung der Schlacht": [
+    "Rondra"
+  ],
+  "Segnung der stählernen Stirn": [
+    "Rondra"
+  ],
+  "Segnung des Heims": [
+    "Travia"
+  ],
+  "Sichere Wanderung im Schnee": [
+    "Firun",
+    "Himmelswölfe",
+    "Ifirn"
+  ],
+  "Sicherer Weg durch Fels": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Sicht auf Madas Welt": [
+    "Hesinde",
+    "H’Szint",
+    "Nandus",
+    "Praios",
+    "Tairach"
+  ],
+  "Siegel Borons": [
+    "Boron",
+    "Kamaluq"
+  ],
+  "Sippenfluch": [
+    "Himmelswölfe",
+    "Kamaluq",
+    "Tairach"
+  ],
+  "Speisesegen": [
+    "universell"
+  ],
+  "Speisung der Bedürftigen": [
+    "Peraine",
+    "Travia"
+  ],
+  "Speisung der hungernden Seelen": [
+    "Travia"
+  ],
+  "Sprechende Symbole": [
+    "Hesinde",
+    "Nandus"
+  ],
+  "Sterne funkeln immerfort": [
+    "Aves",
+    "Hesinde",
+    "Nandus",
+    "Phex",
+    "Swafnir",
+    "Tairach"
+  ],
+  "Sternenglanz": [
+    "Phex"
+  ],
+  "Sternenspur": [
+    "Aves",
+    "Nandus",
+    "Phex"
+  ],
+  "Sternenstaub": [
+    "Phex"
+  ],
+  "Sulvas Gnade": [
+    "Aves",
+    "Rahja"
+  ],
+  "Swafnirs Fluke": [
+    "Efferd",
+    "Swafnir"
+  ],
+  "Swafnirs Ruhelied": [
+    "Swafnir"
+  ],
+  "Teilung der Wasser": [
+    "Efferd"
+  ],
+  "Therbûns Erkenntnis": [
+    "Peraine"
+  ],
+  "Tierempathie": [
+    "Himmelswölfe",
+    "Ifirn",
+    "Tsa"
+  ],
+  "Tiergestalt": [
+    "Zwölfgötterkult"
+  ],
+  "Tranksegen": [
+    "H’Ranga",
+    "Zwölfgötterkult"
+  ],
+  "Travias Gebet der sicheren Zuflucht": [
+    "Travia"
+  ],
+  "Travinians Segen der Schwelle": [
+    "Travia"
+  ],
+  "Trophäe erhalten": [
+    "Firun",
+    "Ifirn"
+  ],
+  "Tsas Lebensschutz": [
+    "Tsa",
+    "Zsahh"
+  ],
+  "Tsas ewige Jugend": [
+    "Tsa",
+    "Zsahh"
+  ],
+  "Tsas heiliges Lebensgeschenk": [
+    "Peraine",
+    "Tsa"
+  ],
+  "Tsas segensreicher Neuanfang": [
+    "Gravesh",
+    "Ingerimm",
+    "Tsa"
+  ],
+  "Tsas wunderbare Erneuerung": [
+    "Tsa",
+    "Zsahh"
+  ],
+  "Tsas wundersame Fruchtbarkeit": [
+    "Himmelswölfe",
+    "Tsa",
+    "Zsahh"
+  ],
+  "Ucuris Geleit": [
+    "Praios"
+  ],
+  "Unterpfand des Heiligen Rhÿs": [
+    "Ingerimm"
+  ],
+  "Unverstellter Blick": [
+    "Hesinde",
+    "H’Szint",
+    "Praios"
+  ],
+  "Urischars ordnender Blick": [
+    "Nandus",
+    "Praios"
+  ],
+  "Vaês Tränen": [
+    "Himmelswölfe"
+  ],
+  "Verborgen wie der Neumond": [
+    "Phex",
+    "Tsa"
+  ],
+  "Vertrauter der Flamme": [
+    "Angrosch",
+    "Gravesh",
+    "Ingerimm",
+    "Travia"
+  ],
+  "Vertrauter des Felsens": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Vertreibung des Dunkelsinns": [
+    "Hesinde",
+    "Praios"
+  ],
+  "Visionssuche": [
+    "Angrosch",
+    "Gravesh",
+    "Himmelswölfe",
+    "Kamaluq",
+    "Zwölfgötterkult"
+  ],
+  "Wachsamkeit der Gänse": [
+    "Travia"
+  ],
+  "Waffenfluch": [
+    "Namenlos"
+  ],
+  "Waliburias Wehr": [
+    "Angrosch",
+    "Ingerimm"
+  ],
+  "Wandeln in Hesindes Hain": [
+    "Hesinde",
+    "Ingerimm"
+  ],
+  "Weg des Fuchses": [
+    "Aves",
+    "Phex"
+  ],
+  "Wegzehrung der Heiligen Selma": [
+    "Peraine"
+  ],
+  "Weihe der ewigen Flamme": [
+    "Ingerimm"
+  ],
+  "Weihe der letzten Ruhestatt": [
+    "Boron",
+    "Kamaluq"
+  ],
+  "Weisheitssegen": [
+    "universell"
+  ],
+  "Weisung des Himmels": [
+    "Aves",
+    "Efferd",
+    "Firun",
+    "Himmelswölfe",
+    "Ifirn",
+    "Praios",
+    "Swafnir"
+  ],
+  "Wille zur Wahrheit": [
+    "Praios"
+  ],
+  "Winterschlaf": [
+    "Firun",
+    "Himmelswölfe",
+    "Ifirn"
+  ],
+  "Wundersame Blütenpracht": [
+    "Tsa"
+  ],
+  "Wundersames Teilen des Martyriums": [
+    "Rondra"
+  ],
+  "Wundsegen": [
+    "Peraine",
+    "Tsa",
+    "Zsahh"
+  ],
+  "Zerschmetternder Bannstrahl": [
+    "Kamaluq",
+    "Praios"
+  ],
+  "Zuflucht finden": [
+    "Aves",
+    "Firun",
+    "Ifirn",
+    "Travia"
+  ],
+  "Über die Wolken": [
+    "Aves"
+  ]
+}
