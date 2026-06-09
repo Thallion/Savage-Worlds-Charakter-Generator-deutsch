@@ -26,14 +26,14 @@ source.include_patterns = assets/*,views/*.kv,templates/*,config/*,settings/*,ch
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git
+source.exclude_dirs = tests, bin, venv, .buildozer, __pycache__, .git, Texte, logs, dist, screenshots
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.8.1.7
+version = 0.8.1.8
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]

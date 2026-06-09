@@ -73,7 +73,9 @@ from pathlib import Path
 project_dir = Path(r"Z:\\home\\jean\\Dokumente\\GitHub\\Savage-Worlds-Charakter-Generator-deutsch")
 
 # Daten sammeln - Wine-Pfade verwenden
-datas = [
+# Nur existierende Pfade hinzufügen (templates/chars werden ggf. erst zur
+# Laufzeit erzeugt und fehlen evtl. im Repo -> PyInstaller bricht sonst ab)
+_data_candidates = [
     (str(project_dir / 'assets'), 'assets'),
     (str(project_dir / 'config'), 'config'),
     (str(project_dir / 'settings'), 'settings'),
@@ -82,6 +84,7 @@ datas = [
     (str(project_dir / 'chars'), 'chars'),
     (str(project_dir / 'main.kv'), '.'),
 ]
+datas = [(src, dst) for src, dst in _data_candidates if os.path.exists(src)]
 
 # Hidden imports
 hiddenimports = [

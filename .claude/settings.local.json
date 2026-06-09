@@ -186,7 +186,8 @@
       "Bash(pdftotext -layout \"Wildes_Aventurien.pdf\" /tmp/wa_v1.txt)",
       "WebFetch(domain:dsa.ulisses-regelwiki.de)",
       "Bash(pdfinfo \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\")",
-      "Bash(pdftoppm -png -r 150 \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\" /tmp/horror_pdf_png/p)"
+      "Bash(pdftoppm -png -r 150 \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\" /tmp/horror_pdf_png/p)",
+      "Bash(SKIP_DIST_CLEANUP=1 timeout 280 python build_linux.py)"
     ],
     "deny": []
   }
