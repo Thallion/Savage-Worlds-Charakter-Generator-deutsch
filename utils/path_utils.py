@@ -5,61 +5,70 @@ import sys
 import os
 from pathlib import Path
 
+def _get_app_root_from_file() -> Path:
+    """Ermittelt den App-Root über den Speicherort dieser Datei.
+    Funktioniert auf allen Plattformen zuverlässig, inkl. Android/p4a."""
+    return Path(__file__).parent.parent.resolve()
+
+
 def get_resource_path(relative_path: str) -> str:
     """
     Gibt den korrekten Pfad zu einer Ressource zurück, sowohl im Development als auch in der gepackten EXE.
-    
+
     Args:
         relative_path (str): Relativer Pfad zur Ressource (z.B. 'assets/logo.png' oder 'chars/character.json')
-        
+
     Returns:
         str: Absoluter Pfad zur Ressource
     """
-    if getattr(sys, 'frozen', False):
-        # PyInstaller: Prüfe ob one-directory oder one-file Modus
-        if hasattr(sys, '_MEIPASS'):
-            # one-file Modus - verwende temporären Pfad
-            base_path = Path(sys._MEIPASS)
-        else:
-            # one-directory Modus - verwende _internal Verzeichnis
-            exe_dir = Path(sys.executable).parent
-            internal_dir = exe_dir / '_internal'
-            if internal_dir.exists():
-                base_path = internal_dir
-            else:
-                base_path = exe_dir
-    else:
-        # Development-Modus: Verwende das Projektverzeichnis
-        base_path = Path(__file__).parent.parent.resolve()
-    
+    base_path = _resolve_base_path()
     resource_path = base_path / relative_path
     return str(resource_path)
 
 def get_application_root() -> Path:
     """
-    Ermittelt das Hauptverzeichnis der Anwendung (kompatibel mit PyInstaller).
-    
+    Ermittelt das Hauptverzeichnis der Anwendung (kompatibel mit PyInstaller und Android/p4a).
+
     Returns:
         Path: Das Hauptverzeichnis der Anwendung
     """
+    return _resolve_base_path()
+
+
+def _resolve_base_path() -> Path:
+    """Zentrale Pfad-Erkennung für alle Laufzeitumgebungen.
+
+    Reihenfolge:
+    1. PyInstaller one-file (_MEIPASS) – eindeutig
+    2. PyInstaller one-dir (_internal/ neben der EXE) – eindeutig
+    3. PyInstaller one-dir (EXE-Verzeichnis enthält main.py) – eindeutig
+    4. __file__-basiert – funktioniert immer, auch auf Android/p4a wo
+       sys.frozen=True gesetzt ist, sys.executable aber auf den Python-Interpreter
+       in _python_bundle/bin/ zeigt und NICHT auf das App-Verzeichnis.
+    """
     if getattr(sys, 'frozen', False):
-        # PyInstaller: Prüfe ob one-directory oder one-file Modus
+        # PyInstaller one-file
         if hasattr(sys, '_MEIPASS'):
-            # one-file Modus - verwende temporären Pfad
-            app_root = Path(sys._MEIPASS)
-        else:
-            # one-directory Modus - verwende _internal Verzeichnis
-            exe_dir = Path(sys.executable).parent
+            return Path(sys._MEIPASS)
+
+        # PyInstaller one-dir: sys.executable liegt neben den App-Dateien
+        try:
+            exe_dir = Path(sys.executable).parent.resolve()
             internal_dir = exe_dir / '_internal'
             if internal_dir.exists():
-                app_root = internal_dir
-            else:
-                app_root = exe_dir
-    else:
-        # Development-Modus
-        app_root = Path(__file__).parent.parent.resolve()
-    
-    return app_root
+                return internal_dir
+            # EXE-Verzeichnis ist direkt der App-Root (älteres PyInstaller)
+            if (exe_dir / 'main.py').exists():
+                return exe_dir
+        except Exception:
+            pass
+
+        # Android/p4a-Fallback: sys.executable zeigt auf _python_bundle/bin/,
+        # nicht auf das App-Verzeichnis – deshalb __file__ verwenden.
+        return _get_app_root_from_file()
+
+    # Development oder normale Python-Ausführung
+    return _get_app_root_from_file()
 
 def get_assets_path(filename: str = "") -> str:
     """
