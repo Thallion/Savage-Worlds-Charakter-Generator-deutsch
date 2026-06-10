@@ -591,8 +591,8 @@ class MachtDialogHandler:
             if dialog_service:
                 dialog_service.show_warning_dialog(message)
                 return
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Macht-Fehler: Dialog-Service nicht verfügbar: {e}")
         Logger.error(f"Macht-Fehler: {message}")
 
     def get_all_maechte(self):
@@ -626,5 +626,5 @@ class MachtDialogHandler:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_success_dialog(message)
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Macht-Snackbar konnte nicht angezeigt werden: {e}")
