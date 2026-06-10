@@ -49,6 +49,7 @@ ERWARTETE_KLASSEN = {
     'views.template_wizard': ['TemplateWizardDialog'],
     'views.voelker_view': ['VoelkerWidget'],
     'views.volk_popup': ['VolkGeneratorWizard', 'VolkDialogHandler'],
+    'views.volk_dialog_handler': ['VolkDialogHandler'],
     'views.waffe_popup': ['WaffeDialogContent', 'DeleteWaffeDialogContent', 'WaffeDialogHandler'],
 }
 
