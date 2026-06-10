@@ -398,16 +398,21 @@ class SW_Charakter_GeneratorApp(MDApp):
             # Neues Verzeichnis erstellen falls nötig
             new_chars_dir.mkdir(parents=True, exist_ok=True)
 
-            # Alte Charaktere migrieren (nur wenn alte Dateien existieren)
-            if old_chars_dir.exists() and old_chars_dir != new_chars_dir:
-                migrated = 0
-                for json_file in old_chars_dir.glob('*.json'):
-                    target = new_chars_dir / json_file.name
-                    if not target.exists():
-                        shutil.copy2(str(json_file), str(target))
-                        migrated += 1
-                if migrated > 0:
-                    Logger.info(f"Migration: {migrated} Charakter(e) ins persistente Verzeichnis kopiert")
+            # Alte Charaktere migrieren (nur wenn alte Dateien existieren).
+            # Eigener try-Block, damit ein Fehler hier die Archetypen-Kopie
+            # nicht verhindert.
+            try:
+                if old_chars_dir.exists() and old_chars_dir != new_chars_dir:
+                    migrated = 0
+                    for json_file in old_chars_dir.glob('*.json'):
+                        target = new_chars_dir / json_file.name
+                        if not target.exists():
+                            shutil.copy2(str(json_file), str(target))
+                            migrated += 1
+                    if migrated > 0:
+                        Logger.info(f"Migration: {migrated} Charakter(e) ins persistente Verzeichnis kopiert")
+            except Exception as e:
+                Logger.warning(f"Charakter-Migration fehlgeschlagen: {e}")
 
             # Archetypen aus gebündeltem App-Verzeichnis ins persistente Verzeichnis kopieren
             self._copy_archetypen_on_android(old_chars_dir, new_chars_dir)
@@ -418,17 +423,28 @@ class SW_Charakter_GeneratorApp(MDApp):
     def _copy_archetypen_on_android(self, bundled_chars_dir: Path, user_chars_dir: Path):
         """Kopiert mitgelieferte Archetypen ins persistente Benutzer-Verzeichnis auf Android.
 
-        Vergleicht Dateigröße statt mtime, da APK-Extraktion oft ältere Timestamps
-        setzt als bereits vorhandene User-Dateien.
+        Als Quelle wird unter allen Kandidaten das Verzeichnis mit den
+        meisten Archetypen-JSONs gewählt — nicht das erste existierende.
+        Das verhindert, dass ein veraltetes oder leeres Verzeichnis das
+        echte Bundle verdeckt. Der kanonische p4a-App-Pfad kommt zusätzlich
+        aus der Umgebungsvariable ANDROID_ARGUMENT (von p4a/start.c gesetzt).
         """
         try:
-            import shutil
+            from utils.archetypen_sync import (
+                finde_beste_quelle, sync_archetypen, zaehle_archetypen,
+            )
 
             # Hol den Root der App (wo die Ressourcen entpackt werden)
             app_root = get_application_root()
-            
-            # Prüfe mehrere mögliche Quellpfade für Archetypen
-            possible_sources = [
+
+            # Mögliche Quellpfade für Archetypen sammeln
+            kandidaten = []
+            for env_var in ('ANDROID_ARGUMENT', 'ANDROID_APP_PATH'):
+                env_dir = os.environ.get(env_var)
+                if env_dir:
+                    kandidaten.append(Path(env_dir) / 'chars' / 'Archetypen')
+                    kandidaten.append(Path(env_dir) / 'Archetypen')
+            kandidaten += [
                 bundled_chars_dir / 'Archetypen',  # chars/Archetypen (normal)
                 bundled_chars_dir.parent / 'Archetypen',  # /Archetypen (neben chars)
                 app_root / 'Archetypen',  # Direkt im App-Root (buildozer)
@@ -436,49 +452,65 @@ class SW_Charakter_GeneratorApp(MDApp):
                 Path(get_resource_path('chars/Archetypen')),  # via get_resource_path
                 Path(get_resource_path('Archetypen')),  # direkt im resources
             ]
+            # Duplikate entfernen, Reihenfolge erhalten
+            kandidaten = list(dict.fromkeys(kandidaten))
 
-            bundled_archetypen = None
-            for src in possible_sources:
-                Logger.debug(f"Archetypen: Prüfe {src}")
-                if src.exists():
-                    bundled_archetypen = src
-                    Logger.info(f"Archetypen: Gefunden in {src}")
-                    break
+            user_archetypen = Path(user_chars_dir) / 'Archetypen'
 
-            if not bundled_archetypen:
-                Logger.warning(f"Archetypen: Kein gebündeltes Verzeichnis gefunden in {len(possible_sources)} möglichen Pfaden:")
-                for src in possible_sources:
-                    Logger.warning(f"Archetypen:   - {src}: {src.exists()}")
+            for kandidat in kandidaten:
+                Logger.info(f"Archetypen: Kandidat {kandidat}: {zaehle_archetypen(kandidat)} JSON(s)")
+
+            quelle, quell_anzahl = finde_beste_quelle(kandidaten, user_archetypen)
+
+            if not quelle:
+                vorhanden = zaehle_archetypen(user_archetypen)
+                Logger.warning(
+                    f"Archetypen: Kein gebündeltes Verzeichnis mit Archetypen gefunden "
+                    f"({len(kandidaten)} Kandidaten geprüft, {vorhanden} bereits im Ziel)"
+                )
+                # Nutzer sichtbar warnen, wenn offensichtlich Archetypen fehlen
+                if vorhanden < 50:
+                    self._zeige_archetypen_feedback(
+                        f"Gebündelte Archetypen nicht gefunden — nur {vorhanden} verfügbar. "
+                        f"Bitte als Fehler melden.",
+                        erfolg=False,
+                    )
                 return
 
-            user_archetypen = user_chars_dir / 'Archetypen'
-            user_archetypen.mkdir(parents=True, exist_ok=True)
+            statistik = sync_archetypen(quelle, user_archetypen)
+            gesamt = zaehle_archetypen(user_archetypen)
+            Logger.info(
+                f"Archetypen: Quelle {quelle} ({quell_anzahl} JSONs) → "
+                f"{statistik['kopiert']} kopiert, {statistik['repariert']} Namen repariert, "
+                f"{statistik['vorhanden']} unverändert, {statistik['fehler']} Fehler, "
+                f"{gesamt} insgesamt im Ziel"
+            )
 
-            # Zähle Quelldateien
-            source_files = list(bundled_archetypen.rglob('*'))
-            source_count = sum(1 for f in source_files if f.is_file())
-            Logger.info(f"Archetypen: Quelle hat {source_count} Datei(en)")
-
-            copied = 0
-            for item in bundled_archetypen.rglob('*'):
-                if item.is_file():
-                    rel_path = item.relative_to(bundled_archetypen)
-                    target = user_archetypen / rel_path
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    # Kopieren wenn Zieldatei fehlt oder abweichende Größe hat (Update)
-                    if not target.exists() or item.stat().st_size != target.stat().st_size:
-                        shutil.copy2(str(item), str(target))
-                        copied += 1
-                        Logger.debug(f"Archetypen: Kopiert {item.name}")
-
-            if copied > 0:
-                Logger.info(f"Archetypen: {copied} Datei(en) ins persistente Verzeichnis kopiert")
-            else:
-                # Auch loggen wenn nichts kopiert wurde, weil bereits vorhanden
-                existing_count = sum(1 for f in user_archetypen.rglob('*') if f.is_file())
-                Logger.info(f"Archetypen: Bereits {existing_count} Datei(en) im Zielverzeichnis vorhanden")
+            if statistik['kopiert'] > 0:
+                self._zeige_archetypen_feedback(
+                    f"{statistik['kopiert']} neue Archetypen installiert ({gesamt} insgesamt)"
+                )
         except Exception as e:
             Logger.error(f"Archetypen-Kopie fehlgeschlagen: {e}", exc_info=True)
+
+    def _zeige_archetypen_feedback(self, nachricht: str, erfolg: bool = True):
+        """Zeigt das Ergebnis der Archetypen-Synchronisation als Snackbar.
+
+        Verzögert, damit die UI beim App-Start bereits aufgebaut ist.
+        """
+        def _show(dt):
+            try:
+                from services.service_container import service_container
+                dialog_service = service_container.get_dialog_service()
+                if dialog_service:
+                    if erfolg:
+                        dialog_service.show_success_dialog(nachricht)
+                    else:
+                        dialog_service.show_warning_dialog(nachricht)
+            except Exception as e:
+                Logger.warning(f"Archetypen-Feedback konnte nicht angezeigt werden: {e}")
+
+        Clock.schedule_once(_show, 3.0)
 
     def _migrate_settings_on_android(self):
         """Migriert benutzerdefinierte Settings vom alten App-Verzeichnis ins persistente Verzeichnis auf Android."""

@@ -83,6 +83,19 @@ class CustomFileManager(MDFileManager):
         """
         paths = []
 
+        # Persistentes Charakter-Verzeichnis und Archetypen zuoberst —
+        # die häufigsten Ziele beim Laden/Speichern von Charakteren
+        try:
+            from utils.path_utils import get_chars_path
+            chars_dir = get_chars_path()
+            if os.path.isdir(chars_dir):
+                paths.append((chars_dir, "Meine Charaktere", "account-group"))
+            archetypen_dir = os.path.join(chars_dir, "Archetypen")
+            if os.path.isdir(archetypen_dir):
+                paths.append((archetypen_dir, "Archetypen", "sword-cross"))
+        except Exception as e:
+            Logger.warning(f"CustomFileManager: Charakter-Schnellzugriffe nicht verfügbar: {e}")
+
         # Interner Speicher (primärer Zugriffspunkt für Nutzer)
         internal = "/storage/emulated/0"
         if os.path.exists(internal) and os.access(internal, os.R_OK):
