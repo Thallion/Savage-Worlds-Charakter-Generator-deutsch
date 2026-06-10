@@ -9,6 +9,7 @@ from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.menu import MDDropdownMenu
 
 from models.talent import Talent
+from views.popup_basis import BasisDialogHandler, SofortDismissMixin
 
 import os
 import sys
@@ -105,19 +106,20 @@ class DeleteTalentDialogContent(MDBoxLayout):
         if hasattr(self.ids, 'talent_dropdown'):
             self.ids.talent_dropdown.text = text_item
 
-class TalentDialogHandler:
-    def __init__(self, controller):
-        self.controller = controller
-        self.overlay = None
-        self.selected_talent = None
-        self.dialog_content = None
+class TalentDialogHandler(SofortDismissMixin, BasisDialogHandler):
+    element_name = "Talent"
+    element_name_plural = "Talente"
+    artikel_unbestimmt = "ein"
 
-    def _get_overlay(self):
-        """Gibt eine gecachte ElementOverlay-Instanz zurück"""
-        from views.element_overlay import ElementOverlay
-        if not self.overlay:
-            self.overlay = ElementOverlay()
-        return self.overlay
+    def __init__(self, controller):
+        super().__init__(controller)
+        self.selected_talent = None
+
+    def _get_loeschbare_elemente(self):
+        return self.get_all_talente()
+
+    def _reset_selection(self):
+        self.selected_talent = None
 
     def show_add_dialog(self):
         """Zeigt das Overlay zum Hinzufügen eines neuen Talents"""
@@ -242,134 +244,7 @@ class TalentDialogHandler:
             Logger.error(f"Fehler beim Aktualisieren des Talents: {e}")
             self.show_error("Fehler beim Aktualisieren des Talents")
 
-    def show_delete_dialog(self):
-        """Zeigt das Two-Phase Popup zum Löschen von Talenten."""
-        import time
-        from kivy.metrics import dp
-        from kivy.core.window import Window
-
-        talente = self.get_all_talente()
-        if not talente:
-            self.show_error("Keine Talente zum Löschen verfügbar.")
-            return
-
-        from kivymd.app import MDApp
-        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-        from kivymd.uix.button import MDButton, MDButtonText
-        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
-        from kivymd.uix.scrollview import MDScrollView
-        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
-
-        self._talent_checkboxes = {}
-        self._talent_last_cb_times = {}
-
-        content = MDList(size_hint_y=None)
-        content.bind(minimum_height=content.setter('height'))
-
-        def create_checkbox(item_name):
-            item = MDListItem(size_hint_y=None, height=dp(48))
-            item.add_widget(MDListItemSupportingText(text=item_name))
-
-            checkbox = MDListItemTrailingCheckbox()
-            cb = checkbox
-
-            def on_release_checkbox(inst, cb=cb, name=item_name):
-                now = time.monotonic()
-                key = f"cb_{name}"
-                if key in self._talent_last_cb_times and (now - self._talent_last_cb_times[key]) < 0.5:
-                    return
-                self._talent_last_cb_times[key] = now
-
-            checkbox.bind(on_release=on_release_checkbox)
-            item.add_widget(checkbox)
-            content.add_widget(item)
-            self._talent_checkboxes[item_name] = checkbox
-
-        for talent_name in sorted(talente):
-            create_checkbox(talent_name)
-
-        scroll_height = min(len(talente) * dp(48), dp(250))
-        scroll = MDScrollView(
-            size_hint=(1, None),
-            height=scroll_height,
-            do_scroll_x=False,
-            do_scroll_y=True,
-            bar_width=dp(15),
-            bar_margin=dp(4),
-        )
-        scroll.add_widget(content)
-
-        main_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(8),
-            size_hint_y=None,
-            padding=dp(16),
-            height=scroll_height + dp(80),
-        )
-
-        search_field = MDTextField(
-            mode="outlined",
-            size_hint_y=None,
-            height=dp(56),
-            hint_text="Suchen...",
-        )
-        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
-        main_content.add_widget(search_field)
-        main_content.add_widget(scroll)
-
-        def populate_list(search_text):
-            content.clear_widgets()
-            for talent_name in sorted(talente):
-                if search_text and search_text.lower() not in talent_name.lower():
-                    continue
-                if talent_name in self._talent_checkboxes:
-                    item = MDListItem(size_hint_y=None, height=dp(48))
-                    item.add_widget(MDListItemSupportingText(text=talent_name))
-                    cb_existing = self._talent_checkboxes[talent_name]
-                    if cb_existing.parent:
-                        cb_existing.parent.remove_widget(cb_existing)
-                    item.add_widget(cb_existing)
-                    content.add_widget(item)
-                else:
-                    create_checkbox(talent_name)
-
-        search_field.bind(text=lambda instance, value: populate_list(value))
-        populate_list("")
-
-        self._delete_popup = MDDialog(
-            MDDialogHeadlineText(text="Talent löschen"),
-            MDDialogContentContainer(main_content),
-            MDDialogButtonContainer(
-                MDButton(MDButtonText(text="Abbrechen"), style="text",
-                         on_release=lambda x: self._delete_popup.dismiss()),
-                MDButton(MDButtonText(text="Weiter"), style="filled",
-                         on_release=self._on_delete_action_clicked),
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        self._delete_popup.open()
-
-    def _on_delete_action_clicked(self, *args):
-        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
-        selected = []
-        for name, cb in self._talent_checkboxes.items():
-            if cb.active:
-                selected.append(name)
-
-        if not selected:
-            self.show_error("Bitte wähle mindestens ein Talent zum Löschen aus.")
-            return
-
-        self._pending_delete_items = selected
-        self._delete_popup.dismiss()
-        self._show_delete_confirmation_popup(
-            selected_items=selected,
-            item_type="Talent",
-            on_confirm=self._confirm_delete_talent
-        )
-
-    def _confirm_delete_talent(self):
+    def _confirm_delete_elemente(self):
         """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
         if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
             return
@@ -395,80 +270,6 @@ class TalentDialogHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Löschen der Talente: {e}")
             self.show_error("Fehler beim Löschen der Talente")
-
-    def _show_delete_confirmation_popup(self, selected_items, item_type, on_confirm):
-        """Zeigt separates Bestätigungs-Popup OHNE Checkboxen (Two-Phase Pattern)."""
-        from kivymd.uix.scrollview import MDScrollView
-        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
-        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-        from kivymd.uix.button import MDButton, MDButtonText
-        from kivy.metrics import dp
-
-        content = MDList(size_hint_y=None)
-        content.bind(minimum_height=content.setter('height'))
-
-        for item_name in selected_items:
-            list_item = MDListItem(size_hint_y=None, height=dp(48))
-            list_item.add_widget(MDListItemSupportingText(text=item_name))
-            content.add_widget(list_item)
-
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
-        scroll.add_widget(content)
-
-        list_height = min(dp(48) * len(selected_items), dp(200))
-        content.size_hint_y = None
-        content.height = list_height
-
-        main_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(8),
-            size_hint_y=None,
-            height=dp(80) + list_height,
-            padding=dp(16)
-        )
-        main_content.add_widget(scroll)
-
-        def _dismiss_confirm_popup(*_):
-            """Schließt das Bestätigungs-Popup robust (doppelter Versuch)."""
-            popup = getattr(self, '_delete_confirm_popup', None)
-            if popup is None:
-                return
-            try:
-                popup.dismiss()
-            except Exception as e:
-                Logger.warning(f"Fehler beim Schließen des Lösch-Dialogs: {e}")
-
-        def _on_cancel(x):
-            _dismiss_confirm_popup()
-            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
-
-        def _on_confirm_release(x):
-            # Dialog zuerst schließen, dann die eigentliche Aktion verzögert
-            # ausführen. Auf Android kann das synchrone Aufrufen von
-            # on_confirm() (mit UI-Refresh) die Dismiss-Animation unterbrechen
-            # und den Dialog in einem inkonsistenten Zustand hinterlassen.
-            _dismiss_confirm_popup()
-            Clock.schedule_once(_dismiss_confirm_popup, 0.15)
-            Clock.schedule_once(lambda dt: on_confirm(), 0.2)
-
-        self._delete_confirm_popup = MDDialog(
-            MDDialogHeadlineText(text=f"{item_type} löschen?"),
-            MDDialogContentContainer(main_content),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(text="Abbrechen"),
-                    style="text",
-                    on_release=_on_cancel,
-                ),
-                MDButton(
-                    MDButtonText(text="Löschen"),
-                    style="filled",
-                    on_release=_on_confirm_release,
-                ),
-            ),
-            size_hint=(0.85, None),
-        )
-        self._delete_confirm_popup.open()
 
     def save_talent(self, *args):
         """Speichert ein neues Talent"""
@@ -570,25 +371,6 @@ class TalentDialogHandler:
         else:
             Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
-    def dismiss_dialog(self, *args):
-        """Schließt das aktive Overlay"""
-        if self.overlay and self.overlay._is_open:
-            self.overlay.close()
-        self.dialog_content = None
-        self.selected_talent = None
-
-    def show_error(self, message):
-        """Zeigt eine Fehlermeldung als Snackbar (nicht-blockierend)"""
-        try:
-            from services.service_container import service_container
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_warning_dialog(message)
-                return
-        except Exception:
-            pass
-        Logger.error(f"Talent-Fehler: {message}")
-
     def get_all_talente(self):
         """Gibt eine Liste aller verfügbaren Talente zurück"""
         try:
@@ -612,13 +394,3 @@ class TalentDialogHandler:
                     widget.refresh()
         except Exception as e:
             Logger.warning(f"Talente-Widget nicht gefunden: {e}")
-
-    def _show_success_snackbar(self, message):
-        """Zeigt eine Erfolgs-Snackbar an"""
-        try:
-            from services.service_container import service_container
-            dialog_service = service_container.get_dialog_service()
-            if dialog_service:
-                dialog_service.show_success_dialog(message)
-        except Exception:
-            pass
