@@ -39,13 +39,21 @@ def _resolve_base_path() -> Path:
     """Zentrale Pfad-Erkennung für alle Laufzeitumgebungen.
 
     Reihenfolge:
-    1. PyInstaller one-file (_MEIPASS) – eindeutig
-    2. PyInstaller one-dir (_internal/ neben der EXE) – eindeutig
-    3. PyInstaller one-dir (EXE-Verzeichnis enthält main.py) – eindeutig
-    4. __file__-basiert – funktioniert immer, auch auf Android/p4a wo
-       sys.frozen=True gesetzt ist, sys.executable aber auf den Python-Interpreter
-       in _python_bundle/bin/ zeigt und NICHT auf das App-Verzeichnis.
+    1. Android/p4a: ANDROID_ARGUMENT/ANDROID_APP_PATH – wird von p4a (start.c)
+       direkt auf das entpackte App-Verzeichnis gesetzt und ist damit die
+       verlässlichste Quelle auf Android
+    2. PyInstaller one-file (_MEIPASS) – eindeutig
+    3. PyInstaller one-dir (_internal/ neben der EXE) – eindeutig
+    4. PyInstaller one-dir (EXE-Verzeichnis enthält main.py) – eindeutig
+    5. __file__-basiert – funktioniert auf allen übrigen Plattformen
     """
+    # Android/p4a: kanonischer App-Pfad aus der Umgebung (nur dort gesetzt)
+    android_app_path = os.environ.get('ANDROID_ARGUMENT') or os.environ.get('ANDROID_APP_PATH')
+    if android_app_path:
+        p = Path(android_app_path)
+        if p.is_dir():
+            return p
+
     if getattr(sys, 'frozen', False):
         # PyInstaller one-file
         if hasattr(sys, '_MEIPASS'):

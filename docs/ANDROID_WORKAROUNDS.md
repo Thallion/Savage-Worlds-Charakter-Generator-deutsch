@@ -297,3 +297,14 @@ main_layout = MDBoxLayout(orientation="vertical", size_hint_y=None, height=main_
 - Slide-up/down animation
 - Integrated search field with filtered list
 - Used for race/species selection and other searchable lists
+
+## Archetypen-Synchronisation & jtar-Mojibake (`utils/archetypen_sync.py`)
+**Problem 1:** Die mitgelieferten Archetypen (`chars/Archetypen/`) liegen nach der APK-Installation im App-Verzeichnis (`files/app/`), das bei jedem Update gelöscht und neu entpackt wird. Sie müssen ins persistente Verzeichnis (`files/chars/Archetypen/`) kopiert werden. Wählt man dabei den **ersten existierenden** Quellpfad, kann ein veraltetes oder falsches Verzeichnis das echte Bundle verdecken — die Kopie läuft dann scheinbar erfolgreich, aber ohne neue Dateien.
+
+**Problem 2:** Der Java-Tar-Extractor von python-for-android (jtar) parst Header-Namen, indem er **signierte Bytes direkt zu chars castet**. UTF-8-Bytes ≥ 0x80 werden sign-extended (0xC3 → U+FFC3). Dateinamen mit Umlauten landen dadurch als Mojibake auf dem Gerät: `Kopfgeldjäger` → `Kopfgeldjￃﾤger` (verifiziert mit jtar 2.3 + OpenJDK).
+
+**Solution:** `utils/archetypen_sync.py` (aufgerufen aus `main.py` in `on_start`):
+- `finde_beste_quelle()` wählt unter allen Kandidaten-Pfaden (inkl. `ANDROID_ARGUMENT`-Umgebungsvariable, dem kanonischen p4a-App-Pfad) das Verzeichnis mit den **meisten** Archetypen-JSONs und überspringt das Zielverzeichnis selbst.
+- `sync_archetypen()` kopiert fehlende/geänderte Dateien (Größenvergleich statt mtime, da die APK-Extraktion keine brauchbaren Timestamps setzt) und repariert dabei Mojibake-Namen (`repariere_mojibake_name()`); alte Mojibake-Varianten im Ziel werden entfernt.
+- Das Ergebnis wird per Snackbar gemeldet (`X neue Archetypen installiert`), ein Fehlschlag (kein Bundle gefunden) als Warnung — so ist der Zustand auf dem Gerät ohne Logzugriff diagnostizierbar.
+- Der FileManager bietet auf Android Schnellzugriffe „Meine Charaktere" und „Archetypen" direkt auf das persistente Verzeichnis.
