@@ -591,8 +591,8 @@ class SchildDialogHandler:
             if dialog_service:
                 dialog_service.show_warning_dialog(message)
                 return
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Schild-Fehler: Dialog-Service nicht verfügbar: {e}")
         Logger.error(f"Schild-Fehler: {message}")
 
     def get_all_schilde(self):
@@ -626,5 +626,5 @@ class SchildDialogHandler:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_success_dialog(message)
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Schild-Snackbar konnte nicht angezeigt werden: {e}")
