@@ -1653,12 +1653,8 @@ class VoelkerWidget(MDBoxLayout):
         else:
             Logger.error(f"Fehler beim Setzen des Magieaffin-AH für '{volk_name}'")
 
-    def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
-        """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.
-        Ersetzt den bisherigen Dialog-basierten Ansatz für bessere Android-Kompatibilität."""
-        from kivymd.uix.chip import MDChip, MDChipText
-        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
-
+    def _baue_zusatzelement_karte(self, titel):
+        """Erstellt Karte + Inhalts-Container mit Titelzeile für eine Zusatzelement-Sektion."""
         # Kompaktere Werte für Mobile
         _pad = dp(10) if _mobile else dp(14)
         _spacing = dp(6) if _mobile else dp(10)
@@ -1696,38 +1692,57 @@ class VoelkerWidget(MDBoxLayout):
         )
         section_content.add_widget(titel_label)
 
+        return section_card, section_content
+
+    def _baue_zusatzelement_auswahl_zeile(self, current_selection):
+        """Zeile mit Chip des bereits gewählten Elements + Ändern-Button (Stift)."""
+        from kivymd.uix.chip import MDChip, MDChipText
+
+        auswahl_row = MDBoxLayout(
+            orientation='horizontal',
+            size_hint_y=None,
+            height=dp(44),
+            spacing=dp(10)
+        )
+        # Hintergrundfarbe sicherstellen (nie None)
+        if hasattr(self, 'theme_cls') and self.theme_cls:
+            bg_color = self.theme_cls.primaryContainerColor
+        else:
+            bg_color = [0.7, 0.8, 1.0, 1.0]  # hellblau als Fallback
+
+        selected_chip = MDChip(
+            MDChipText(text=current_selection),
+            type="filter",
+            active=True,
+            md_bg_color=bg_color,
+        )
+        auswahl_row.add_widget(selected_chip)
+
+        # Ändern-Button
+        aendern_button = MDIconButton(
+            icon="pencil",
+            size_hint=(None, None),
+            size=(dp(44), dp(44)),
+        )
+        auswahl_row.add_widget(aendern_button)
+
+        return auswahl_row, aendern_button
+
+    def _create_zusatzelement_section(self, titel, volk_name, auswahl_typ, get_options_func, select_func, placeholder_text, get_alle_items_func=None):
+        """Erstellt eine Sektion für Zusatzelemente mit Inline-Chip-Auswahl.
+        Ersetzt den bisherigen Dialog-basierten Ansatz für bessere Android-Kompatibilität."""
+        from kivymd.uix.chip import MDChip, MDChipText
+        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+
+        section_card, section_content = self._baue_zusatzelement_karte(titel)
+
         # Aktuell ausgewählten Text ermitteln
         current_selection = self.voelker_auswahlen.get(volk_name, {}).get(auswahl_typ, None)
 
         # Ausgewähltes Element anzeigen (wenn vorhanden)
+        aendern_button = None
         if current_selection and current_selection != placeholder_text:
-            auswahl_row = MDBoxLayout(
-                orientation='horizontal',
-                size_hint_y=None,
-                height=dp(44),
-                spacing=dp(10)
-            )
-            # Hintergrundfarbe sicherstellen (nie None)
-            if hasattr(self, 'theme_cls') and self.theme_cls:
-                bg_color = self.theme_cls.primaryContainerColor
-            else:
-                bg_color = [0.7, 0.8, 1.0, 1.0]  # hellblau als Fallback
-            
-            selected_chip = MDChip(
-                MDChipText(text=current_selection),
-                type="filter",
-                active=True,
-                md_bg_color=bg_color,
-            )
-            auswahl_row.add_widget(selected_chip)
-
-            # Ändern-Button
-            aendern_button = MDIconButton(
-                icon="pencil",
-                size_hint=(None, None),
-                size=(dp(44), dp(44)),
-            )
-            auswahl_row.add_widget(aendern_button)
+            auswahl_row, aendern_button = self._baue_zusatzelement_auswahl_zeile(current_selection)
             section_content.add_widget(auswahl_row)
 
         # Suchfeld
