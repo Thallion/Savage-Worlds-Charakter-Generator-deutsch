@@ -61,6 +61,7 @@ TEST_MODULE = [
     'test_android_scoped_storage',
     'test_volkseigenarten_schritt_2_rest',
     'test_volkseigenarten_sonderfaelle',
+    'test_views_import_smoke',
 ]
 
 # Doppelte entfernen
