@@ -59,10 +59,27 @@ class TestTemplateHandler(unittest.TestCase):
         """Test Template-Dialog mit verfügbaren Templates - ruft _show_template_search_dialog"""
         templates = [{'name': 'Template1', 'description': 'Desc1', 'file': Mock()}]
         self.template_handler.available_templates = templates
+        # Lazy-Loading überspringen, sonst überschreibt _load_available_templates die Vorgabe
+        self.template_handler._templates_loaded = True
 
         with patch.object(self.template_handler, '_show_template_search_dialog') as mock_search:
             self.template_handler.show_template_selection_dialog()
             mock_search.assert_called_once()
+
+    def test_show_template_selection_dialog_laedt_lazy(self):
+        """Test Lazy-Loading: erster Dialog-Aufruf lädt die Templates genau einmal"""
+        templates = [{'name': 'Template1', 'description': 'Desc1', 'file': Mock()}]
+
+        def fake_load():
+            self.template_handler.available_templates = templates
+
+        with patch.object(self.template_handler, '_load_available_templates', side_effect=fake_load) as mock_load, \
+                patch.object(self.template_handler, '_show_template_search_dialog') as mock_search:
+            self.template_handler._templates_loaded = False
+            self.template_handler.show_template_selection_dialog()
+            self.template_handler.show_template_selection_dialog()
+            mock_load.assert_called_once()
+            self.assertEqual(mock_search.call_count, 2)
 
     @patch('controllers.template_handler.Logger')
     def test_on_template_selected_from_dialog(self, mock_logger):
