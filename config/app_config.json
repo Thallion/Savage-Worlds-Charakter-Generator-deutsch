@@ -30,19 +30,19 @@
   "tutorial_state": {
     "welcome_completed": true,
     "tab_hints_shown": {
-      "ausruestung": false,
-      "superkraefte": false,
+      "speichern_laden": false,
+      "voelker": false,
+      "profil": false,
+      "eigenschaften": false,
+      "handicaps": false,
       "talente": false,
       "maechte": false,
-      "eigenschaften": false,
-      "historie": false,
-      "profil": false,
-      "voelker": false,
-      "speichern_laden": false,
+      "superkraefte": false,
+      "ausruestung": false,
       "charakterbogen": false,
-      "handicaps": false
+      "historie": false
     }
   },
   "config_version": "1.0",
-  "last_updated": "2026-06-07T18:11:01.530625"
+  "last_updated": "2026-06-11T17:25:59.812695"
 }
