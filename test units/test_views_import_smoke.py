@@ -35,6 +35,8 @@ for _mod in ['kivymd.uix.chip', 'kivymd.uix.chip.chip']:
 # Bei Datei-Splits müssen diese Namen per Re-Export erhalten bleiben.
 ERWARTETE_KLASSEN = {
     'views.ausruestung_popup': ['AusruestungDialogContent', 'DeleteAusruestungDialogContent', 'AusruestungDialogHandler'],
+    'views.app_navigation_mixin': ['AppNavigationMixin'],
+    'views.app_tab_mixin': ['AppTabAufbauMixin'],
     'views.ausruestung_view': ['AusruestungWidget'],
     'views.charakter_verwaltung_widget': ['CharakterVerwaltungWidget'],
     'views.charakter_verwaltung_versand': ['CharakterVersandMixin'],
