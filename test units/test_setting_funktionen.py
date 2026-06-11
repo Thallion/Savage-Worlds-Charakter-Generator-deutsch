@@ -69,12 +69,25 @@ class TestGetApplicationRoot(unittest.TestCase):
             self.assertIsInstance(root, Path)
             self.assertTrue(root.exists())
     
-    @patch('sys.executable', '/test/path/app.exe')
-    def test_frozen_mode(self):
-        """Test im gepackten Modus"""
-        with patch('sys.frozen', True, create=True):
+    def test_frozen_mode_onefile(self):
+        """Test im gepackten One-File-Modus (PyInstaller, _MEIPASS)"""
+        with patch('sys.frozen', True, create=True), \
+                patch('sys._MEIPASS', '/test/path', create=True):
             root = get_application_root()
             self.assertEqual(root, Path('/test/path'))
+
+    def test_frozen_mode_onedir(self):
+        """Test im gepackten One-Dir-Modus (PyInstaller, _internal neben der EXE)"""
+        exe_dir = Path(tempfile.mkdtemp())
+        try:
+            internal_dir = exe_dir / '_internal'
+            internal_dir.mkdir()
+            with patch('sys.frozen', True, create=True), \
+                    patch('sys.executable', str(exe_dir / 'app.exe')):
+                root = get_application_root()
+                self.assertEqual(root, internal_dir.resolve())
+        finally:
+            shutil.rmtree(exe_dir, ignore_errors=True)
 
 
 class TestCustomElementManager(unittest.TestCase):
