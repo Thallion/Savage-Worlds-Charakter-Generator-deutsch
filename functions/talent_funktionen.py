@@ -856,20 +856,8 @@ class TalentManager:
                 fehlermeldungen.append("Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).")
             return fehlermeldungen
 
-        # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
-        # ACHTUNG: Dieser Regex fängt auch "AH (jeder außer X)" und "AH (X, Y, Z)"
-        # ab, die beiden folgenden Blöcke sind dadurch faktisch unerreichbar.
-        # Verhalten beim Refactoring bewusst unverändert übernommen.
-        ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
-        if ah_kurz_match:
-            ah_name = ah_kurz_match.group(1)
-            full_name = f"AH ({ah_name})"
-            talent_obj = self.charakter.talente.get(full_name)
-            if not talent_obj or not talent_obj.ausgewaehlt:
-                fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
-            return fehlermeldungen
-
         # Spezialfall: "AH (jeder außer X)" - beliebiger AH außer einem bestimmten
+        # (muss VOR der generischen Kurzform geprüft werden, sonst unerreichbar)
         ausser_match = re.match(r'^AH \(jeder außer (.+)\)$', voraussetzung)
         if ausser_match:
             ausgeschlossener_ah = ausser_match.group(1).strip()
@@ -887,6 +875,7 @@ class TalentManager:
             return fehlermeldungen
 
         # Spezialfall: "AH (X, Y, Z)" - einer aus einer Liste von AHs
+        # (muss VOR der generischen Kurzform geprüft werden, sonst unerreichbar)
         if voraussetzung.startswith("AH (") and "," in voraussetzung:
             inner = voraussetzung[len("AH ("):-1]
             ah_namen = [name.strip() for name in inner.split(",")]
@@ -901,6 +890,16 @@ class TalentManager:
                 fehlermeldungen.append(
                     f"Einer der folgenden AH wird vorausgesetzt: {', '.join(ah_namen)}"
                 )
+            return fehlermeldungen
+
+        # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
+        ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
+        if ah_kurz_match:
+            ah_name = ah_kurz_match.group(1)
+            full_name = f"AH ({ah_name})"
+            talent_obj = self.charakter.talente.get(full_name)
+            if not talent_obj or not talent_obj.ausgewaehlt:
+                fehlermeldungen.append(f"'{full_name}' muss ausgewählt sein.")
             return fehlermeldungen
 
         return None
