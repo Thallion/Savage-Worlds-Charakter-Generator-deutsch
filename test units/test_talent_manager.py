@@ -366,6 +366,65 @@ class TestMindestensKategorieVoraussetzung(unittest.TestCase):
         )
 
 
+class TestAHVoraussetzungen(unittest.TestCase):
+    """Tests für die AH-Syntaxformen, insbesondere Liste und 'jeder außer'.
+
+    Regression: Der generische Kurzform-Regex 'AH (XYZ)' hatte die spezielleren
+    Formen 'AH (X, Y, Z)' und 'AH (jeder außer X)' verschattet — Voraussetzungen
+    wie "AH (Alchemist, Horror)" (Rippers/Horror Kompendium) waren dadurch
+    nie erfüllbar.
+    """
+
+    def setUp(self):
+        self.charakter = MockCharakter()
+        self.manager = TalentManager(self.charakter)
+
+    def _add_ah(self, name, ausgewaehlt=True):
+        t = Talent(name=name, kategorie="Legendentalente", rang="A", voraussetzungen=[], beschreibung="")
+        t.ausgewaehlt = ausgewaehlt
+        self.charakter.talente[name] = t
+
+    def test_ah_liste_erfuellt(self):
+        self._add_ah("AH (Alchemist)")
+        self.assertEqual(
+            self.manager._pruefe_einzelne_voraussetzung("AH (Alchemist, Horror)"), []
+        )
+
+    def test_ah_liste_nicht_erfuellt(self):
+        self._add_ah("AH (Magie)")
+        fehler = self.manager._pruefe_einzelne_voraussetzung("AH (Alchemist, Horror)")
+        self.assertEqual(len(fehler), 1)
+        self.assertIn("Einer der folgenden AH", fehler[0])
+
+    def test_ah_liste_nicht_ausgewaehlt_zaehlt_nicht(self):
+        self._add_ah("AH (Horror)", ausgewaehlt=False)
+        fehler = self.manager._pruefe_einzelne_voraussetzung("AH (Alchemist, Horror)")
+        self.assertEqual(len(fehler), 1)
+
+    def test_ah_jeder_ausser_erfuellt(self):
+        self._add_ah("AH (Wunder)")
+        self.assertEqual(
+            self.manager._pruefe_einzelne_voraussetzung("AH (jeder außer Magie)"), []
+        )
+
+    def test_ah_jeder_ausser_nicht_erfuellt(self):
+        self._add_ah("AH (Magie)")
+        fehler = self.manager._pruefe_einzelne_voraussetzung("AH (jeder außer Magie)")
+        self.assertEqual(len(fehler), 1)
+        self.assertIn("außer Magie", fehler[0])
+
+    def test_ah_kurzform_weiterhin_intakt(self):
+        self._add_ah("AH (Magie)")
+        self.assertEqual(self.manager._pruefe_einzelne_voraussetzung("AH (Magie)"), [])
+        fehler = self.manager._pruefe_einzelne_voraussetzung("AH (Wunder)")
+        self.assertEqual(len(fehler), 1)
+
+    def test_ah_beliebig_weiterhin_intakt(self):
+        self._add_ah("AH (Magie)")
+        self.assertEqual(self.manager._pruefe_einzelne_voraussetzung("AH"), [])
+        self.assertEqual(self.manager._pruefe_einzelne_voraussetzung("AH (beliebig)"), [])
+
+
 class TestOderVoraussetzungen(unittest.TestCase):
     """Tests für Entweder-Oder-Voraussetzungen"""
 
