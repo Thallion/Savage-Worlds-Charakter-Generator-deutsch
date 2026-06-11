@@ -17,7 +17,7 @@ from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText, MDSnackbarSupporting
 from kivy.metrics import dp
 
 # Dialog-Handler Imports
-from views.volk_popup import VolkDialogHandler
+from views.volk_dialog_handler import VolkDialogHandler
 from views.macht_popup import MachtDialogHandler
 from views.schild_popup import SchildDialogHandler
 from views.waffe_popup import WaffeDialogHandler

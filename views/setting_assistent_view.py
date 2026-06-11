@@ -56,7 +56,8 @@ def _is_mobile_layout():
         from services.service_container import service_container
         config = service_container.get_config_service()
         return config.get('force_mobile_layout', False)
-    except Exception:
+    except Exception as e:
+        Logger.warning(f"Setting-Assistent: Config-Service nicht verfügbar, nutze Desktop-Layout: {e}")
         return False
 
 _mobile = _is_mobile_layout()
@@ -428,7 +429,8 @@ class SettingAssistentWizard:
             manager = CustomElementManager(charakter)
             available_settings = list(manager.settings.keys())
             available_settings.sort()
-        except Exception:
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Settings konnten nicht geladen werden, nutze Fallback: {e}")
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
         
         num_items = len(available_settings)
@@ -479,7 +481,8 @@ class SettingAssistentWizard:
             manager = CustomElementManager(charakter)
             available_settings = list(manager.settings.keys())
             available_settings.sort()
-        except Exception:
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Settings konnten nicht geladen werden, nutze Fallback: {e}")
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
         
         num_items = len(available_settings)
@@ -957,7 +960,8 @@ class SettingAssistentWizard:
             manager = CustomElementManager(charakter)
             available_settings = list(manager.settings.keys())
             available_settings.sort()
-        except Exception:
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Settings konnten nicht geladen werden, nutze Fallback: {e}")
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
         
         content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(300))
@@ -1011,7 +1015,8 @@ class SettingAssistentWizard:
             manager = CustomElementManager(charakter)
             available_settings = list(manager.settings.keys())
             available_settings.sort()
-        except Exception:
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Settings konnten nicht geladen werden, nutze Fallback: {e}")
             available_settings = ["SWAE", "Deadlands", "Fantasy Kompendium"]
         
         content = MDBoxLayout(orientation="vertical", spacing=dp(8), size_hint_y=None, height=dp(300))
@@ -1379,17 +1384,17 @@ class SettingAssistentWizard:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_warning_dialog(message)
-        except Exception:
-            pass
-    
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Fehlermeldung konnte nicht angezeigt werden: {e}")
+
     def _show_success(self, message: str):
         try:
             from services.service_container import service_container
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_success_dialog(message)
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Erfolgsmeldung konnte nicht angezeigt werden: {e}")
 
 
 def show_setting_assistent(controller, callback: Optional[Callable] = None, edit_draft: Optional[SettingDraft] = None):
@@ -1479,8 +1484,8 @@ class SettingAssistentDialogHandler:
             dialog_service = service_container.get_dialog_service()
             if dialog_service:
                 dialog_service.show_success_dialog("Keine gespeicherten Entwürfe vorhanden.")
-        except Exception:
-            pass
+        except Exception as e:
+            Logger.warning(f"Setting-Assistent: Hinweis konnte nicht angezeigt werden: {e}")
     
     def _open_draft(self, draft: SettingDraft):
         """Öffnet einen Draft im Wizard."""

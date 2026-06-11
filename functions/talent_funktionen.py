@@ -786,24 +786,52 @@ class TalentManager:
         Wird sowohl direkt von pruefe_voraussetzungen als auch von
         _pruefe_oder_voraussetzung für einzelne Alternativen verwendet.
 
+        Delegiert an Sub-Checker je Syntaxform. Jeder Sub-Checker gibt None
+        zurück, wenn seine Syntaxform nicht zutrifft, sonst die Liste der
+        Fehlermeldungen (leer = erfüllt). Die Reihenfolge der Checker ist
+        verhaltensrelevant und darf nicht geändert werden.
+
         Args:
             voraussetzung: Der Voraussetzungstext (z.B. "Kämpfen W8", "Glück", "AH")
 
         Returns:
             Liste von Fehlermeldungen (leer wenn erfüllt)
         """
-        fehlermeldungen = []
+        sub_checker = (
+            self._pruefe_rang_voraussetzung,
+            self._pruefe_ah_voraussetzung,
+            self._pruefe_attribut_voraussetzung,
+            self._pruefe_fertigkeit_voraussetzung,
+            self._pruefe_handicap_voraussetzung,
+            self._pruefe_volk_voraussetzung,
+            self._pruefe_volk_eigenschaft_voraussetzung,
+            self._pruefe_kategorie_capstone_voraussetzung,
+        )
+        for pruefe in sub_checker:
+            ergebnis = pruefe(voraussetzung)
+            if ergebnis is not None:
+                return ergebnis
 
-        # Rang-Voraussetzung (z.B. "A", "F", "V", "H", "L")
+        return self._pruefe_talent_voraussetzung(voraussetzung)
+
+    def _pruefe_rang_voraussetzung(self, voraussetzung):
+        """Rang-Voraussetzung (z.B. "A", "F", "V", "H", "L"). None wenn keine Rang-Syntax."""
         rang_hierarchie = {'A': 1, 'F': 2, 'V': 3, 'H': 4, 'L': 5}
-        if voraussetzung in rang_hierarchie:
-            charakter_rang = getattr(self.charakter, 'rang', 'A') or 'A'
-            charakter_rang_wert = rang_hierarchie.get(charakter_rang.upper()[0], 1)
-            erforderlicher_wert = rang_hierarchie[voraussetzung]
-            rang_namen = {'A': 'Anfänger', 'F': 'Fortgeschritten', 'V': 'Veteran', 'H': 'Held', 'L': 'Legendär'}
-            if charakter_rang_wert < erforderlicher_wert:
-                fehlermeldungen.append(f"Rang '{rang_namen[voraussetzung]}' wird vorausgesetzt.")
-            return fehlermeldungen
+        if voraussetzung not in rang_hierarchie:
+            return None
+
+        fehlermeldungen = []
+        charakter_rang = getattr(self.charakter, 'rang', 'A') or 'A'
+        charakter_rang_wert = rang_hierarchie.get(charakter_rang.upper()[0], 1)
+        erforderlicher_wert = rang_hierarchie[voraussetzung]
+        rang_namen = {'A': 'Anfänger', 'F': 'Fortgeschritten', 'V': 'Veteran', 'H': 'Held', 'L': 'Legendär'}
+        if charakter_rang_wert < erforderlicher_wert:
+            fehlermeldungen.append(f"Rang '{rang_namen[voraussetzung]}' wird vorausgesetzt.")
+        return fehlermeldungen
+
+    def _pruefe_ah_voraussetzung(self, voraussetzung):
+        """Alle AH-Syntaxformen (Arkaner Hintergrund). None wenn keine AH-Syntax."""
+        fehlermeldungen = []
 
         # Spezialfall: "AH" oder "AH (beliebig)" - beliebiger Arkaner Hintergrund
         if voraussetzung == "AH" or voraussetzung == "AH (beliebig)":
@@ -829,6 +857,9 @@ class TalentManager:
             return fehlermeldungen
 
         # Spezialfall: "AH (XYZ)" - spezifischer Arkaner Hintergrund in Kurzform
+        # ACHTUNG: Dieser Regex fängt auch "AH (jeder außer X)" und "AH (X, Y, Z)"
+        # ab, die beiden folgenden Blöcke sind dadurch faktisch unerreichbar.
+        # Verhalten beim Refactoring bewusst unverändert übernommen.
         ah_kurz_match = re.match(r'^AH \((.+)\)$', voraussetzung)
         if ah_kurz_match:
             ah_name = ah_kurz_match.group(1)
@@ -872,121 +903,152 @@ class TalentManager:
                 )
             return fehlermeldungen
 
-        # Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8" oder "STÄ W8+")
+        return None
+
+    def _pruefe_attribut_voraussetzung(self, voraussetzung):
+        """Attributvoraussetzung (z.B. "STÄ W8" oder "Geschicklichkeit W8+"). None wenn keine Attribut-Syntax."""
         attribut_match = re.match(r'^(Geschicklichkeit|Stärke|Konstitution|Verstand|Willenskraft|STÄ|GES|KON|VER|WIL)\s+W(\d+)\+?$', voraussetzung)
-        if attribut_match:
-            attribut_name_or_kuerzel = attribut_match.group(1)
-            wuerfel_wert = int(attribut_match.group(2))
+        if not attribut_match:
+            return None
 
-            # Attributkürzel zu vollständigem Namen umwandeln
-            attribut_mapping = {
-                'STÄ': 'Stärke',
-                'GES': 'Geschicklichkeit',
-                'KON': 'Konstitution',
-                'VER': 'Verstand',
-                'WIL': 'Willenskraft'
-            }
-            attribut_name = attribut_mapping.get(attribut_name_or_kuerzel, attribut_name_or_kuerzel)
+        fehlermeldungen = []
+        attribut_name_or_kuerzel = attribut_match.group(1)
+        wuerfel_wert = int(attribut_match.group(2))
 
-            attribut = self.charakter.attribute.get(attribut_name)
-            if not attribut:
-                fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
-                return fehlermeldungen
+        # Attributkürzel zu vollständigem Namen umwandeln
+        attribut_mapping = {
+            'STÄ': 'Stärke',
+            'GES': 'Geschicklichkeit',
+            'KON': 'Konstitution',
+            'VER': 'Verstand',
+            'WIL': 'Willenskraft'
+        }
+        attribut_name = attribut_mapping.get(attribut_name_or_kuerzel, attribut_name_or_kuerzel)
 
-            if attribut.wert < wuerfel_wert:
-                fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
-
+        attribut = self.charakter.attribute.get(attribut_name)
+        if not attribut:
+            fehlermeldungen.append(f"Attribut '{attribut_name}' nicht gefunden.")
             return fehlermeldungen
 
-        # Fertigkeitsvoraussetzung (z.B. "Kämpfen W8", "Kämpfen W8+", "Verrückte Wissenschaft W6+")
+        if attribut.wert < wuerfel_wert:
+            fehlermeldungen.append(f"Attribut '{attribut_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{attribut.wert}).")
+
+        return fehlermeldungen
+
+    def _pruefe_fertigkeit_voraussetzung(self, voraussetzung):
+        """Fertigkeitsvoraussetzung (z.B. "Kämpfen W8", "Verrückte Wissenschaft W6+"). None wenn keine Würfel-Syntax."""
         fertigkeit_match = re.match(r'^(.+?)\s+W(\d+)\+?$', voraussetzung)
-        if fertigkeit_match:
-            fertigkeit_name = fertigkeit_match.group(1)
-            wuerfel_wert = int(fertigkeit_match.group(2))
+        if not fertigkeit_match:
+            return None
 
-            fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
-            if not fertigkeit:
-                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
-                return fehlermeldungen
+        fehlermeldungen = []
+        fertigkeit_name = fertigkeit_match.group(1)
+        wuerfel_wert = int(fertigkeit_match.group(2))
 
-            if fertigkeit.wert < wuerfel_wert:
-                fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
-
+        fertigkeit = self.charakter.fertigkeiten.get(fertigkeit_name)
+        if not fertigkeit:
+            fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' nicht gefunden.")
             return fehlermeldungen
 
-        # Handicap-Voraussetzung (z.B. "Handicap: Klein" oder "Handicap: Rüstungsbeschränkung")
-        if voraussetzung.startswith("Handicap: "):
-            handicap_prefix = voraussetzung[len("Handicap: "):]
-            hat_handicap = False
-            if hasattr(self.charakter, 'handicaps'):
-                for h_key, h_obj in self.charakter.handicaps.items():
-                    is_selected = getattr(h_obj, 'ausgewaehlt', False)
-                    if is_selected and h_key.startswith(handicap_prefix):
-                        hat_handicap = True
-                        break
-            if not hat_handicap:
-                fehlermeldungen.append(f"Handicap '{handicap_prefix}' wird vorausgesetzt.")
-            return fehlermeldungen
+        if fertigkeit.wert < wuerfel_wert:
+            fehlermeldungen.append(f"Fertigkeit '{fertigkeit_name}' muss mindestens W{wuerfel_wert} sein (aktuell W{fertigkeit.wert}).")
 
-        # Volk-Voraussetzung (z.B. "Volk: Aasimars")
-        if voraussetzung.startswith("Volk: "):
-            volk_name = voraussetzung[len("Volk: "):]
-            if not hasattr(self.charakter, 'voelker_selected') or not self.charakter.voelker_selected.get(volk_name, False):
-                fehlermeldungen.append(f"Volk '{volk_name}' wird vorausgesetzt.")
-            return fehlermeldungen
+        return fehlermeldungen
 
-        # Volk-Eigenschaft-Voraussetzung (z.B. "Volk-Eigenschaft: dunkelsicht")
-        if voraussetzung.startswith("Volk-Eigenschaft: "):
-            eigenschaft_key = voraussetzung[len("Volk-Eigenschaft: "):]
-            hat_eigenschaft = False
-            if hasattr(self.charakter, 'voelker') and hasattr(self.charakter, 'voelker_selected'):
-                for v_name, ist_ausgewaehlt in self.charakter.voelker_selected.items():
-                    if ist_ausgewaehlt and v_name in self.charakter.voelker:
-                        volk_obj = self.charakter.voelker[v_name]
-                        spez = volk_obj.effects.get('spezielle_effekte', {})
-                        if spez.get(eigenschaft_key, False):
-                            hat_eigenschaft = True
-                            break
-            if not hat_eigenschaft:
-                fehlermeldungen.append(f"Volk-Eigenschaft '{eigenschaft_key}' wird vorausgesetzt.")
-            return fehlermeldungen
+    def _pruefe_handicap_voraussetzung(self, voraussetzung):
+        """Handicap-Voraussetzung (z.B. "Handicap: Klein"). None wenn keine Handicap-Syntax."""
+        if not voraussetzung.startswith("Handicap: "):
+            return None
 
-        # Spezialfall: "Mindestens zwei X-Talente" / "Mindestens zwei X-Vorteile"
-        # Kategorie-Capstone: setzt eine Mindestzahl bereits gewählter Talente der
-        # Kategorie X voraus (X kann eine deutsche Plural-/Genitivform sein,
-        # z.B. "Hexen" → Kategorie "Hexe", "Druiden" → "Druide").
-        mindestens_match = re.match(r'^Mindestens (\w+) (.+?)-(?:Talente|Vorteile)$', voraussetzung)
-        if mindestens_match:
-            wort_zu_zahl = {'ein': 1, 'eine': 1, 'einem': 1, 'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5}
-            benoetigt = wort_zu_zahl.get(mindestens_match.group(1).lower(), 2)
-            kategorie_token = mindestens_match.group(2).strip()
-
-            # Passende Kategorie über längsten Präfix bestimmen (Plural-/Genitiv-tolerant)
-            vorhandene_kategorien = {
-                getattr(t_obj, 'kategorie', None) for t_obj in self.charakter.talente.values()
-            }
-            vorhandene_kategorien.discard(None)
-            vorhandene_kategorien.discard('')
-            match_kategorie = None
-            for kat in sorted(vorhandene_kategorien, key=len, reverse=True):
-                if kategorie_token == kat or kategorie_token.startswith(kat):
-                    match_kategorie = kat
+        fehlermeldungen = []
+        handicap_prefix = voraussetzung[len("Handicap: "):]
+        hat_handicap = False
+        if hasattr(self.charakter, 'handicaps'):
+            for h_key, h_obj in self.charakter.handicaps.items():
+                is_selected = getattr(h_obj, 'ausgewaehlt', False)
+                if is_selected and h_key.startswith(handicap_prefix):
+                    hat_handicap = True
                     break
+        if not hat_handicap:
+            fehlermeldungen.append(f"Handicap '{handicap_prefix}' wird vorausgesetzt.")
+        return fehlermeldungen
 
-            anzahl = 0
-            if match_kategorie:
-                for t_obj in self.charakter.talente.values():
-                    if getattr(t_obj, 'kategorie', None) == match_kategorie and getattr(t_obj, 'ausgewaehlt', False):
-                        anzahl += 1
+    def _pruefe_volk_voraussetzung(self, voraussetzung):
+        """Volk-Voraussetzung (z.B. "Volk: Aasimars"). None wenn keine Volk-Syntax."""
+        if not voraussetzung.startswith("Volk: "):
+            return None
 
-            if anzahl < benoetigt:
-                ziel = match_kategorie or kategorie_token
-                fehlermeldungen.append(
-                    f"Mindestens {benoetigt} Talente der Kategorie '{ziel}' werden vorausgesetzt (aktuell {anzahl})."
-                )
-            return fehlermeldungen
+        fehlermeldungen = []
+        volk_name = voraussetzung[len("Volk: "):]
+        if not hasattr(self.charakter, 'voelker_selected') or not self.charakter.voelker_selected.get(volk_name, False):
+            fehlermeldungen.append(f"Volk '{volk_name}' wird vorausgesetzt.")
+        return fehlermeldungen
 
-        # Talentvoraussetzung (z.B. "Glück")
+    def _pruefe_volk_eigenschaft_voraussetzung(self, voraussetzung):
+        """Volk-Eigenschaft-Voraussetzung (z.B. "Volk-Eigenschaft: dunkelsicht"). None wenn keine solche Syntax."""
+        if not voraussetzung.startswith("Volk-Eigenschaft: "):
+            return None
+
+        fehlermeldungen = []
+        eigenschaft_key = voraussetzung[len("Volk-Eigenschaft: "):]
+        hat_eigenschaft = False
+        if hasattr(self.charakter, 'voelker') and hasattr(self.charakter, 'voelker_selected'):
+            for v_name, ist_ausgewaehlt in self.charakter.voelker_selected.items():
+                if ist_ausgewaehlt and v_name in self.charakter.voelker:
+                    volk_obj = self.charakter.voelker[v_name]
+                    spez = volk_obj.effects.get('spezielle_effekte', {})
+                    if spez.get(eigenschaft_key, False):
+                        hat_eigenschaft = True
+                        break
+        if not hat_eigenschaft:
+            fehlermeldungen.append(f"Volk-Eigenschaft '{eigenschaft_key}' wird vorausgesetzt.")
+        return fehlermeldungen
+
+    def _pruefe_kategorie_capstone_voraussetzung(self, voraussetzung):
+        """
+        Kategorie-Capstone: "Mindestens zwei X-Talente" / "Mindestens zwei X-Vorteile".
+
+        Setzt eine Mindestzahl bereits gewählter Talente der Kategorie X voraus
+        (X kann eine deutsche Plural-/Genitivform sein, z.B. "Hexen" → Kategorie
+        "Hexe", "Druiden" → "Druide"). None wenn keine solche Syntax.
+        """
+        mindestens_match = re.match(r'^Mindestens (\w+) (.+?)-(?:Talente|Vorteile)$', voraussetzung)
+        if not mindestens_match:
+            return None
+
+        fehlermeldungen = []
+        wort_zu_zahl = {'ein': 1, 'eine': 1, 'einem': 1, 'zwei': 2, 'drei': 3, 'vier': 4, 'fünf': 5}
+        benoetigt = wort_zu_zahl.get(mindestens_match.group(1).lower(), 2)
+        kategorie_token = mindestens_match.group(2).strip()
+
+        # Passende Kategorie über längsten Präfix bestimmen (Plural-/Genitiv-tolerant)
+        vorhandene_kategorien = {
+            getattr(t_obj, 'kategorie', None) for t_obj in self.charakter.talente.values()
+        }
+        vorhandene_kategorien.discard(None)
+        vorhandene_kategorien.discard('')
+        match_kategorie = None
+        for kat in sorted(vorhandene_kategorien, key=len, reverse=True):
+            if kategorie_token == kat or kategorie_token.startswith(kat):
+                match_kategorie = kat
+                break
+
+        anzahl = 0
+        if match_kategorie:
+            for t_obj in self.charakter.talente.values():
+                if getattr(t_obj, 'kategorie', None) == match_kategorie and getattr(t_obj, 'ausgewaehlt', False):
+                    anzahl += 1
+
+        if anzahl < benoetigt:
+            ziel = match_kategorie or kategorie_token
+            fehlermeldungen.append(
+                f"Mindestens {benoetigt} Talente der Kategorie '{ziel}' werden vorausgesetzt (aktuell {anzahl})."
+            )
+        return fehlermeldungen
+
+    def _pruefe_talent_voraussetzung(self, voraussetzung):
+        """Talentvoraussetzung (z.B. "Glück") - Fallback, wenn keine spezielle Syntaxform zutrifft."""
+        fehlermeldungen = []
         talent_name = voraussetzung  # Annahme: Wenn keine spezielle Formatierung, handelt es sich um ein Talent
 
         talent_obj = self.charakter.talente.get(talent_name)

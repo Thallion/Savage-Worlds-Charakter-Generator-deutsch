@@ -135,8 +135,8 @@ class CharakterbogenWidget(MDBoxLayout):
         if self.charakter:
             try:
                 self.charakter.unbind(on_charakter_change=self._on_charakter_change)
-            except:
-                pass  # Ignoriere Fehler beim Unbind
+            except Exception as e:
+                Logger.warning(f"CharakterbogenWidget: Fehler beim Unbind ignoriert: {e}")
         
         # Neuen Charakter setzen
         self.charakter = new_charakter

@@ -1300,7 +1300,8 @@ class TemplateWizardDialog:
             if hasattr(self.app, 'controller') and self.app.controller:
                 return list(self.app.controller.charakter.fertigkeiten.keys())
             return ["Athletik", "Kämpfen", "Wahrnehmung", "Heimlichkeit", "Überreden"]  # Fallback
-        except:
+        except Exception as e:
+            Logger.warning(f"Template-Wizard: Fehler beim Laden der Fertigkeiten, nutze Fallback: {e}")
             return ["Athletik", "Kämpfen", "Wahrnehmung", "Heimlichkeit", "Überreden"]
     
     def _get_available_handicaps(self):
@@ -1342,7 +1343,8 @@ class TemplateWizardDialog:
                 edges = self.app.controller.charakter.talente
                 return [e.name for e in edges.values()]
             return ["AH", "Kämpfer", "Gelehrter"]  # Fallback
-        except:
+        except Exception as e:
+            Logger.warning(f"Template-Wizard: Fehler beim Laden der Talente, nutze Fallback: {e}")
             return ["AH", "Kämpfer", "Gelehrter"]
     
     def _get_available_powers(self):
@@ -1352,7 +1354,8 @@ class TemplateWizardDialog:
                 powers = self.app.controller.charakter.maechte
                 return [p.name for p in powers.values()]
             return ["Feuerball", "Heilung", "Rüstung"]  # Fallback
-        except:
+        except Exception as e:
+            Logger.warning(f"Template-Wizard: Fehler beim Laden der Mächte, nutze Fallback: {e}")
             return ["Feuerball", "Heilung", "Rüstung"]
     
     def _create_setting_dropdown(self):
@@ -1377,7 +1380,8 @@ class TemplateWizardDialog:
                 races = list(self.app.controller.charakter.setting.voelker.keys())
             else:
                 races = ["Mensch"]  # Fallback
-        except:
+        except Exception as e:
+            Logger.warning(f"Template-Wizard: Fehler beim Laden der Völker, nutze Fallback: {e}")
             races = ["Mensch"]
         
         menu_items = []
