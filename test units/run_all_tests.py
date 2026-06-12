@@ -21,6 +21,7 @@ TEST_MODULE = [
     'test_abgeleitete_werte',
     'test_character_advancement',
     'test_kompatibilitaets_pruefung',
+    'test_setting_integritaet',
     'test_theme_handler',
     'test_character_handler',
     'test_template_handler',
