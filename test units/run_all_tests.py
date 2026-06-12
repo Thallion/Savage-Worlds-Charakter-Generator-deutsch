@@ -67,6 +67,7 @@ TEST_MODULE = [
     'test_volkseigenarten_sonderfaelle',
     'test_views_import_smoke',
     'test_popup_basis',
+    'test_popup_form',
     'test_archetypen_sync',
     'test_backup_service',
     'test_clock_consolidation',
