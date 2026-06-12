@@ -66,6 +66,13 @@ TEST_MODULE = [
     'test_volkseigenarten_sonderfaelle',
     'test_views_import_smoke',
     'test_popup_basis',
+    'test_archetypen_sync',
+    'test_backup_service',
+    'test_clock_consolidation',
+    'test_groesse',
+    'test_volk_funktionen',
+    'test_volkseigenarten_multi_slot',
+    'test_volkseigenarten_stufen_migration',
 ]
 
 # Doppelte entfernen
