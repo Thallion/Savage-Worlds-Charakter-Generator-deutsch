@@ -89,13 +89,6 @@ DSA_TRAPPINGS = {
         "Wasseratem",
         "Lunge des Leviatan",
     ],
-    "Heiligtum": [
-        "Bodenweihe",
-        "Weihung des Bodens",
-        "Ortsweihe (Sanctum)",
-        "Bannzone",
-        "Heiliger Boden",
-    ],
     "Unberührbarkeit": [
         "Unberührt von Satinav",
         "Frostleib",
@@ -228,11 +221,6 @@ DSA_TRAPPINGS = {
         "Regenbogenbrücke",
         "Freie Seelenfahrt",
         "Seelenwanderung",
-    ],
-    "Wandkrabbler": [
-        "Affenarme",
-        "Klettern (Elfen, Katzen)",
-        "Spinnenlauf",
     ],
     "Wachsen/Schrumpfen": [
         "Riesengestalt",

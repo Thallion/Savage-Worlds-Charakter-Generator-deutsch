@@ -1,0 +1,26 @@
+# Minimale Linter-Konfiguration: nur echte Fehlerklassen, keine Style-Regeln
+# (deutsche Bezeichner und gewachsene Formatierung bleiben unangetastet).
+# Aufruf: ruff check .
+
+exclude = [
+    ".buildozer",
+    ".venv",
+    "venv",
+    "bin",
+    "build",
+    "dist",
+    "__pycache__",
+    "logs",
+]
+
+[lint]
+# E9 = Syntax-/IO-Fehler, F = Pyflakes (undefinierte Namen, kaputte Importe, ...)
+select = ["E9", "F"]
+# Bewusst ausgenommen (Bestands-Lärm, Abbau als Folgeaufgabe):
+# - F401 ungenutzte Importe (teils gewollt: Re-Exports, Kivy-Registrierung)
+# - F541 f-Strings ohne Platzhalter (141x, kosmetisch)
+# - F811 Redefinitionen (56x, meist doppelte Importe)
+# - F841 ungenutzte Variablen (35x)
+# Durchgesetzt bleiben insbesondere F821 (undefinierte Namen) und
+# F601 (doppelte Dict-Keys) — beides echte Fehler.
+ignore = ["F401", "F541", "F811", "F841"]

@@ -79,7 +79,7 @@ class MachtManager:
             "standard_werte": {
                 "fallback_rang": "a",
                 "fallback_rang_wert": 1,
-                "debug_logging": true
+                "debug_logging": True
             }
         }
     

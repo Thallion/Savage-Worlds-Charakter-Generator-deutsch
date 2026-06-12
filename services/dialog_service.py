@@ -16,18 +16,6 @@ from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText, MDSnackbarSupportingText
 from kivy.metrics import dp
 
-# Dialog-Handler Imports
-from views.volk_dialog_handler import VolkDialogHandler
-from views.macht_popup import MachtDialogHandler
-from views.schild_popup import SchildDialogHandler
-from views.waffe_popup import WaffeDialogHandler
-from views.fertigkeit_popup import FertigkeitDialogHandler
-from views.ruestung_popup import RuestungDialogHandler
-from views.ausruestung_popup import AusruestungDialogHandler
-from views.handicap_popup import HandicapDialogHandler
-from views.talent_popup import TalentDialogHandler
-from views.setting_popup import SettingDialogHandler
-
 # Statblock Generator Import
 from functions.statblock_generator import generate_character_statblock, copy_statblock_to_clipboard
 
@@ -62,7 +50,24 @@ class DialogService:
         self.active_dialogs = {}
     
     def _initialize_dialog_handlers(self):
-        """Initialisiert alle Dialog-Handler"""
+        """Initialisiert alle Dialog-Handler.
+
+        Die View-Imports erfolgen bewusst LAZY (erst hier statt auf Modulebene):
+        Der Service-Layer bleibt dadurch ohne geladene View-Schicht importierbar
+        (z.B. in Tests); die Kopplung an die konkreten Handler ist eine bewusste
+        Ausnahme, da DialogService deren einziger Konsument ist.
+        """
+        from views.volk_dialog_handler import VolkDialogHandler
+        from views.macht_popup import MachtDialogHandler
+        from views.schild_popup import SchildDialogHandler
+        from views.waffe_popup import WaffeDialogHandler
+        from views.fertigkeit_popup import FertigkeitDialogHandler
+        from views.ruestung_popup import RuestungDialogHandler
+        from views.ausruestung_popup import AusruestungDialogHandler
+        from views.handicap_popup import HandicapDialogHandler
+        from views.talent_popup import TalentDialogHandler
+        from views.setting_popup import SettingDialogHandler
+
         self.volk_dialog_handler = VolkDialogHandler(self.controller)
         self.macht_dialog_handler = MachtDialogHandler(self.controller)
         self.schild_dialog_handler = SchildDialogHandler(self.controller)

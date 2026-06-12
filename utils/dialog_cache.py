@@ -390,8 +390,9 @@ class DialogCache:
             if dialog:
                 try:
                     dialog.dismiss()
-                except:
-                    pass  # Dialog kann bereits geschlossen sein
+                except Exception as e:
+                    # Dialog kann bereits geschlossen sein
+                    Logger.warning(f"DialogCache: Dialog konnte nicht geschlossen werden: {e}")
 
         self._cached_dialogs.clear()
         Logger.info("DialogCache geleert")

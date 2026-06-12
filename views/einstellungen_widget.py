@@ -718,6 +718,10 @@ class EinstellungenWidget(MDBoxLayout):
     
     def _show_log_content_dialog(self, log_filepath):
         """Zeigt den Log-Inhalt in einem scrollbaren Dialog"""
+        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
+        from kivymd.uix.scrollview import MDScrollView
         try:
             # Log-Datei lesen (letzten 200 Zeilen für bessere Performance)
             with open(log_filepath, 'r', encoding='utf-8') as f:
@@ -779,6 +783,9 @@ class EinstellungenWidget(MDBoxLayout):
     def _show_log_path_info(self, log_filepath):
         """Zeigt detaillierte Pfad-Informationen für die Log-Datei"""
         from kivy.utils import platform
+        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.label import MDLabel
+        from kivymd.uix.button import MDButton, MDButtonText
         
         log_dir = os.path.dirname(log_filepath)
         content_text = f"Log-Datei:\n{log_filepath}\n\nLog-Ordner:\n{log_dir}"

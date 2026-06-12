@@ -91,7 +91,6 @@ MANUELLE_HINTS = {
     "Gedankenverbindung": ["Hellsicht", "Einfluss"],
     "Verstricken": ["Einfluss", "Elementar"],
     "Unberührbarkeit": ["Elementar", "Antimagie"],
-    "Wiederauferstehung": ["Temporal", "Heilung"],
     "Segen": ["Heilung"],
     "Chaos": ["Dämonisch", "Antimagie"],
     "Abwehren": [],

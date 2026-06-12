@@ -23,6 +23,7 @@ from kivymd.uix.dialog import (
     MDDialogButtonContainer,
     MDDialogContentContainer,
 )
+from kivymd.uix.menu import MDDropdownMenu
 
 # Wichtig: Importe für die Typprüfung
 from models.waffe import Waffe

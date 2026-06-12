@@ -950,11 +950,8 @@ class CharacterHandler:
             
             # PDF erstellen
             pdf_service = service_container.get_pdf_service()
-            if pdf_manager:
-                success = pdf_manager.create_character_sheet_pdf(
-                    self.app.controller.charakter,
-                    full_path
-                )
+            if pdf_service:
+                success = pdf_service.create_character_pdf(full_path)
             else:
                 # Fallback: Direkte PDF-Erstellung
                 success = self._create_pdf_directly(full_path)
