@@ -34,7 +34,10 @@ for _mod in ['kivymd.uix.chip', 'kivymd.uix.chip.chip']:
 # Erwartete zentrale Klassen je View-Modul (Modulname -> Klassennamen).
 # Bei Datei-Splits müssen diese Namen per Re-Export erhalten bleiben.
 ERWARTETE_KLASSEN = {
-    'views.ausruestung_popup': ['AusruestungDialogContent', 'DeleteAusruestungDialogContent', 'AusruestungDialogHandler'],
+    # ausruestung/fertigkeit/schild_popup: Add/Edit deklarativ über popup_form
+    # (FormDialogContent), eigene *DialogContent-Klassen entfallen
+    'views.ausruestung_popup': ['AusruestungDialogHandler'],
+    'views.popup_form': ['FormDialogContent', 'FormDialogHandlerMixin'],
     'views.app_navigation_mixin': ['AppNavigationMixin'],
     'views.app_tab_mixin': ['AppTabAufbauMixin'],
     'views.ausruestung_view': ['AusruestungWidget'],
@@ -43,11 +46,11 @@ ERWARTETE_KLASSEN = {
     'views.charakter_verwaltung_export': ['CharakterbogenExportMixin'],
     'views.charakter_verwaltung_config': ['CharakterConfigMixin'],
     'views.charakterbogen_view': ['CharakterbogenWidget'],
-    'views.fertigkeit_popup': ['FertigkeitDialogContent', 'DeleteFertigkeitDialogContent', 'FertigkeitDialogHandler'],
+    'views.fertigkeit_popup': ['FertigkeitDialogHandler'],
     'views.handicap_popup': ['HandicapDialogContent', 'DeleteHandicapDialogContent', 'HandicapDialogHandler'],
     'views.macht_popup': ['MachtDialogContent', 'DeleteMachtDialogContent', 'MachtDialogHandler'],
     'views.ruestung_popup': ['RuestungDialogContent', 'DeleteRuestungDialogContent', 'RuestungDialogHandler'],
-    'views.schild_popup': ['SchildDialogContent', 'DeleteSchildDialogContent', 'SchildDialogHandler'],
+    'views.schild_popup': ['SchildDialogHandler'],
     'views.setting_assistent_view': ['SettingAssistentWizard', 'SettingAssistentDialogHandler'],
     'views.superkraft_popup': ['SuperkraftAuswahlContent', 'SuperkraftKonfigContent', 'SuperkraftDialogHandler'],
     'views.talent_popup': ['TalentDialogContent', 'DeleteTalentDialogContent', 'TalentDialogHandler'],
