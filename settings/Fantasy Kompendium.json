@@ -970,9 +970,7 @@
         "robustheit_bonus": 0,
         "bewegungsweite_bonus": 0,
         "fertigkeits_startboni": {},
-        "auto_talente": [
-          "Zäh"
-        ],
+        "auto_talente": [],
         "spezielle_effekte": {
           "arrogant": true,
           "aussenseiter_leicht": true,

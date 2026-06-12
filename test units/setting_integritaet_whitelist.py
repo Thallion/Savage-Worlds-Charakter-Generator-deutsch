@@ -61,7 +61,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Zusätzliche Anstrengung': 'AH (Begabt)' muss ausgewählt sein.",
     },
     'Deadlands': {
-        "Talent 'AH (Verrückte Wissenschaft)': Fertigkeit 'Anfänger, VER W8+, Naturwissenschaften W6+, Verrückte Wissenschaft' nicht gefunden.",
         "Talent 'Gefolgsleute': Vorausgesetztes Talent 'WC' wurde nicht gefunden.",
         "Talent 'Handlanger': Vorausgesetztes Talent 'WC' wurde nicht gefunden.",
         "Talent 'Heiliger/Unheiliger Krieger': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
@@ -84,7 +83,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Versengen': Vorausgesetztes Talent 'Odemwaffe' wurde nicht gefunden.",
         "Talent 'Zauberbücher': 'AH (Magie)' muss ausgewählt sein.",
         "Talent 'Zauberer': 'AH (Magie)' muss ausgewählt sein.",
-        "Volk 'Oger': auto_talent 'Zäh' existiert nicht",
     },
     'HeXXen 1773': {
         "Talent 'Bastler': 'AH (Verrückte Wissenschaft)' muss ausgewählt sein.",
@@ -181,8 +179,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Übernatürliches Spüren': Voraussetzung nicht erfüllt: {'oder': ['Dämon', 'Engel']}",
     },
     'Rippers': {
-        "Talent 'Anpassungsfähig': Feld 'kategorie' fehlt",
-        "Talent 'Anpassungsfähig': Feld 'voraussetzungen' fehlt",
         "Talent 'Heiliger/Unheiliger Krieger': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
         "Talent 'Zusätzliche Anstrengung': 'AH (Begabt)' muss ausgewählt sein.",
     },
@@ -252,7 +248,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Versengende Waffe': Vorausgesetztes Talent 'Ifrits' wurde nicht gefunden.",
         "Talent 'Wasserabstammung': Vorausgesetztes Talent 'Undinen' wurde nicht gefunden.",
         "Talent 'Weitere Hexerei': Vorausgesetztes Talent 'Hexenmeister' wurde nicht gefunden.",
-        "Talent 'Wissenshüter': Fertigkeit 'Ver' nicht gefunden.",
         "Talent 'Zauberbücher': 'AH (Magie)' muss ausgewählt sein.",
         "Talent 'Zertrümmern': Vorausgesetztes Talent 'Halb-Ork' wurde nicht gefunden.",
         "Talent 'Zornprophet': 'AH (Wunder oder Orakel)' muss ausgewählt sein.",
@@ -265,11 +260,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Mentalist': 'AH (Psionik)' muss ausgewählt sein.",
         "Talent 'Zauberer': 'AH (Magie)' muss ausgewählt sein.",
         "Talent 'Zusätzliche Anstrengung': 'AH (Begabt)' muss ausgewählt sein.",
-        "Volk 'Insektoide': auto_handicap 'Außenseiter (leicht)' existiert nicht",
-        "Volk 'Racker': auto_handicap 'Volksfeind (Insektoide)' existiert nicht",
-        "Volk 'Synthetische Wesen': auto_handicap 'Programmiert (schwer)' existiert nicht",
-        "Volk 'Vierarmige': auto_handicap 'Volksfeind (SL-Wahl)' existiert nicht",
-        "Volk 'Wechselbälger': auto_handicap 'Außenseiter (leicht)' existiert nicht",
     },
     'Sundered Skies': {
         "Talent 'Bastler': 'AH (Verrückte Wissenschaft)' muss ausgewählt sein.",
@@ -291,8 +281,6 @@ BEKANNTE_VERSTOESSE = {
         "Talent 'Sangespriester': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
         "Talent 'Seelenopfer': Eine der folgenden Voraussetzungen muss erfüllt sein: Wissen (Übernatürliches) oder Glaube",
         "Talent 'Ungezähmter': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
-        "Talent 'Vierfachschuss': Fertigkeit 'Athletik W10+ foder Schießen' nicht gefunden.",
-        "Talent 'Vierfachschuss': Vorausgesetztes Talent 'Heroisch' wurde nicht gefunden.",
         "Talent 'Vom Wind gesegnet': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
         "Talent 'Waffenbann': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",
         "Talent 'Windsucher': Ein Arkaner Hintergrund 'AH (Wunder: Gott)' wird vorausgesetzt (Geweihter).",

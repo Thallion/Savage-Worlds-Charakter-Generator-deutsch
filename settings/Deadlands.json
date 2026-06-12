@@ -1290,7 +1290,9 @@
       "kategorie": "Hintergrund",
       "rang": "A",
       "voraussetzungen": [
-        "Anfänger, VER W8+, Naturwissenschaften W6+, Verrückte Wissenschaft W4+"
+        "VER W8+",
+        "Naturwissenschaften W6+",
+        "Verrückte Wissenschaft W4+"
       ],
       "beschreibung": "Verleiht Zugang zu fortschrittlichen Erfindungen, die übernatürliche Kräfte simulieren.",
       "neue_maechte": 2,

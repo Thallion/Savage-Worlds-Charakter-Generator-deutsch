@@ -1876,9 +1876,8 @@
             "kategorie": "Kampf",
             "rang": "H",
             "voraussetzungen": [
-                "Heroisch",
                 "Doppelschuss",
-                "Athletik W10+ foder Schießen W10+"
+                "Athletik W10+ oder Schießen W10+"
             ],
             "beschreibung": "Erlaubt das zweimalige Nutzen des Talents Doppelschuss pro Zug.",
             "neue_maechte": 0,

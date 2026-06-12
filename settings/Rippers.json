@@ -424,7 +424,9 @@
         },
         "Anpassungsfähig": {
             "name": "Anpassungsfähig",
+            "kategorie": "Hintergrund",
             "rang": "A",
+            "voraussetzungen": [],
             "beschreibung": "Wähle ein freies Anfängertalent nach Wahl.",
             "ausgewaehlt": false,
             "aktiv": true,

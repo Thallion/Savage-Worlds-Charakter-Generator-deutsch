@@ -313,7 +313,7 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Außenseiter (leicht)",
+          "Außenseiter",
           "Trennungsangst"
         ],
         "spezielle_effekte": {
@@ -463,8 +463,7 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "High Tech (schwer)",
-          "Volksfeind (Insektoide)"
+          "High Tech (schwer)"
         ],
         "spezielle_effekte": {
           "winzling_sehr_klein": true,
@@ -538,7 +537,7 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Programmiert (schwer)"
+          "Programmiert"
         ],
         "spezielle_effekte": {
           "immun_krankheiten_gifte": true,
@@ -573,7 +572,6 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Volksfeind (SL-Wahl)",
           "Dünnhäutig"
         ],
         "spezielle_effekte": {
@@ -608,7 +606,7 @@
         "fertigkeits_startboni": {},
         "auto_talente": [],
         "auto_handicaps": [
-          "Außenseiter (leicht)",
+          "Außenseiter",
           "Kybernetische Abstoßung"
         ],
         "spezielle_effekte": {
