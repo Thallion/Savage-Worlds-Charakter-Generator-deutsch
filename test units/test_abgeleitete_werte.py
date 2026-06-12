@@ -355,5 +355,73 @@ class TestAbgeleiteteWerte(unittest.TestCase):
         self.assertEqual(werte, {})
 
 
+class TestEffektRegistry(unittest.TestCase):
+    """Smoke-Test: config/abgeleitete_effekte.json lädt und ist vollständig.
+
+    Schlägt dieser Test fehl, fällt die Registry zur Laufzeit auf ein leeres
+    Dict zurück und ALLE Talent-/Handicap-Effekte auf abgeleitete Werte
+    verschwinden stillschweigend.
+    """
+
+    ERWARTETE_TALENTE = {
+        "Block": {"parade": 1},
+        "Harter Block": {"parade": 1},
+        "Meister aller Waffen": {"parade": 1},
+        "Waffenmeister": {"parade": 1},
+        "Herdritter": {"parade": 1},
+        "Lieblingswaffe": {"parade": 1},
+        "Absolute Lieblingswaffe": {"parade": 2},
+        "Behände": {"bewegungsweite": 2},
+        "Flink": {"bewegungsweite": 2},
+        "Kräftig": {"groesse": 1, "traglast_kg": 20},
+        "Raufbold": {"robustheit": 1},
+        "Schläger": {"robustheit": 1},
+        "Jünger Erthas": {"robustheit": 1},
+        "AH (Zauberer) Abnorme Blutlinie": {"robustheit": 1},
+        "AH (Zauberer) Dämonische Blutlinie": {"robustheit": 1},
+        "AH (Zauberer) Drachenblutlinie": {"robustheit": 2},
+        "Kämpferische Disziplin": {"robustheit": 1},
+        "Glück": {"bennys": 1},
+        "Großes Glück": {"bennys": 1},
+    }
+    ERWARTETE_HANDICAPS = {"Langsam", "Fettleibig", "Alt", "Klein", "Schlank", "Jung"}
+
+    def test_registry_laedt_und_ist_vollstaendig(self):
+        """Alle 19 Talente und 6 Handicaps mit erwarteten Werten vorhanden"""
+        from functions.effekt_registry import lade_abgeleitete_effekte
+        registry = lade_abgeleitete_effekte()
+
+        talente = registry.get('talente', {})
+        for name, erwartete_werte in self.ERWARTETE_TALENTE.items():
+            self.assertIn(name, talente, f"Talent '{name}' fehlt in der Registry")
+            for wert, bonus in erwartete_werte.items():
+                self.assertEqual(
+                    talente[name].get(wert), bonus,
+                    f"Talent '{name}': {wert} erwartet {bonus}"
+                )
+
+        self.assertEqual(set(registry.get('handicaps', {})), self.ERWARTETE_HANDICAPS)
+
+    def test_nicht_kumulativ_gruppen(self):
+        """Lieblingswaffe-Paar und Behände/Flink sind als Gruppen markiert"""
+        from functions.effekt_registry import lade_abgeleitete_effekte
+        talente = lade_abgeleitete_effekte()['talente']
+        self.assertEqual(talente['Lieblingswaffe'].get('nicht_kumulativ_gruppe'),
+                         talente['Absolute Lieblingswaffe'].get('nicht_kumulativ_gruppe'))
+        self.assertEqual(talente['Behände'].get('nicht_kumulativ_gruppe'),
+                         talente['Flink'].get('nicht_kumulativ_gruppe'))
+        self.assertIsNotNone(talente['Behände'].get('nicht_kumulativ_gruppe'))
+        # Block-Paar ist BEWUSST additiv (keine Gruppe)
+        self.assertIsNone(talente['Block'].get('nicht_kumulativ_gruppe'))
+        self.assertIsNone(talente['Harter Block'].get('nicht_kumulativ_gruppe'))
+
+    def test_bedingung_kaempferische_disziplin(self):
+        """Kämpferische Disziplin trägt die Rüstungs-Bedingung"""
+        from functions.effekt_registry import lade_abgeleitete_effekte
+        talente = lade_abgeleitete_effekte()['talente']
+        self.assertEqual(talente['Kämpferische Disziplin'].get('bedingung'),
+                         'keine_getragene_ruestung')
+
+
 if __name__ == '__main__':
     unittest.main()

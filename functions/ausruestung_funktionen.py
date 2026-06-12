@@ -585,11 +585,11 @@ def berechne_traglast(charakter):
             staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
 
         maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
-        
-        # Bonus für das Talent "Kräftig" hinzufügen
-        if "Kräftig" in charakter.selected_talente:
-            maximale_traglast += 20  # +20 kg Traglast bei Kräftig
-        
+
+        # Talent-Boni (z.B. Kräftig +20 kg, Effekt-Registry)
+        from functions.effekt_registry import summiere_talent_bonus
+        maximale_traglast += summiere_talent_bonus(charakter.selected_talente, 'traglast_kg')
+
         return maximale_traglast
 
     except Exception as e:

@@ -4,6 +4,7 @@ from kivy.logger import Logger
 from models.waffe import Waffe
 from models.ruestung import Ruestung
 from models.schild import Schild
+from functions.effekt_registry import summiere_talent_bonus, summiere_handicap_bonus
 
 def berechne_abgeleitete_werte(charakter):
     """
@@ -36,65 +37,15 @@ def berechne_abgeleitete_werte(charakter):
             kaempfen_wert = 4  # Standardwert, wenn Kämpfen nicht vorhanden
             
         parade_basis = 2 + kaempfen_wert // 2
-        parade_bonus = 0
-        
-        # Talent-Boni für Parade
-        if "Block" in charakter.selected_talente:
-            parade_bonus += 1  # Block: +1 Parade
-        
-        if "Harter Block" in charakter.selected_talente:
-            # Harter Block ersetzt Block (nicht kumulativ)
-            parade_bonus += 1  # Harter Block: +1 Parade
-        
-        if "Meister aller Waffen" in charakter.selected_talente:
-            parade_bonus += 1  # Meister aller Waffen: +1 Parade
-        
-        if "Waffenmeister" in charakter.selected_talente:
-            parade_bonus += 1  # Waffenmeister: +1 Parade
 
-        if "Herdritter" in charakter.selected_talente:
-            parade_bonus += 1  # Herdritter (Hellfrost): +1 Parade
-
-        # Lieblingswaffe: +1 Parade (Absolute Lieblingswaffe: +2, ersetzt – nicht kumulativ)
-        if "Absolute Lieblingswaffe" in charakter.selected_talente:
-            parade_bonus += 2
-        elif "Lieblingswaffe" in charakter.selected_talente:
-            parade_bonus += 1
+        # Talent-Boni für Parade (Effekt-Registry)
+        parade_bonus = summiere_talent_bonus(charakter.selected_talente, 'parade')
 
         charakter.parade = parade_basis + parade_bonus
-      
-        # Debug-Ausgaben zur Fehleridentifikation
-        #Logger.debug("=== Berechne abgeleitete Werte ===")
-        #Logger.debug(f"Ausgewählte Handicaps: {charakter.selected_handicaps}")
-        for hcap_key in charakter.selected_handicaps:
-            if hcap_key in charakter.handicaps:
-                hcap = charakter.handicaps[hcap_key]
-                #Logger.debug(f"- {hcap_key}: Name={hcap.name}, Stufe={hcap.stufe}")
-        
+
         # === BEWEGUNGSWEITE BERECHNUNG ===
-        bewegungsweite_malus = 0
-        
-        # 1. Handicap-Effekte für Bewegungsweite
-        for handicap_key in charakter.selected_handicaps:
-            if handicap_key in charakter.handicaps:
-                handicap = charakter.handicaps[handicap_key]
-                
-                # Explizite Abfragen für jeden Handicap-Typ
-                if handicap.name == "Langsam":
-                    if handicap.stufe == "leicht":
-                        bewegungsweite_malus += 1
-                        #Logger.debug(f"Bewegungsweite -1 durch Langsam (leicht)")
-                    elif handicap.stufe == "schwer":
-                        bewegungsweite_malus += 2
-                        #Logger.debug(f"Bewegungsweite -2 durch Langsam (schwer)")
-                
-                elif handicap.name == "Fettleibig" and handicap.stufe == "leicht":
-                    bewegungsweite_malus += 1
-                    #Logger.debug(f"Bewegungsweite -1 durch Fettleibig (leicht)")
-                
-                elif handicap.name == "Alt" and handicap.stufe == "schwer":
-                    bewegungsweite_malus += 1
-                    #Logger.debug(f"Bewegungsweite -1 durch Alt (schwer)")
+        # 1. Handicap-Effekte für Bewegungsweite (Effekt-Registry, Boni negativ)
+        bewegungsweite_malus = -summiere_handicap_bonus(charakter, 'bewegungsweite')
 
         # 2. Völker-Effekte für Bewegungsweite
         voelker_bewegungsweite_bonus = _berechne_voelker_bewegungsweite_bonus(charakter)
@@ -104,11 +55,8 @@ def berechne_abgeleitete_werte(charakter):
         cyberware_bw_bonus = _berechne_cyberware_bewegungsweite_bonus(charakter)
         bewegungsweite_malus -= cyberware_bw_bonus
 
-        # 3. Talent-Effekte für Bewegungsweite
-        # "Behände" (Barbar) und "Flink" (Hintergrund, Savage Pathfinder) geben beide +2
-        if ("Behände" in charakter.selected_talente
-                or "Flink" in charakter.selected_talente):
-            bewegungsweite_malus -= 2  # +2 Bewegungsweite
+        # 3. Talent-Effekte für Bewegungsweite (Effekt-Registry)
+        bewegungsweite_malus -= summiere_talent_bonus(charakter.selected_talente, 'bewegungsweite')
 
         # Bewegungsweite anpassen (nicht unter 1)
         #Logger.debug(f"Bewegungsweite-Malus gesamt: {bewegungsweite_malus}")
@@ -127,48 +75,22 @@ def berechne_abgeleitete_werte(charakter):
 
         # Größe und Robustheit getrennt führen:
         # - groesse: Mensch = 0; Volks-Größe + Größe-relevante Talente/Handicaps
-        # - robustheit_bonus: echte Robustheit-Boni (Talente Raufbold/Schläger/Jünger Erthas, Fettleibig, Cyberware, Volk-Rest)
+        # - robustheit_bonus: echte Robustheit-Boni (Talente, Handicaps, Cyberware, Volk-Rest)
         # Endformel: robustheit_basis = (KON//2) + 2 + groesse + robustheit_bonus
-        groesse = 0
-        robustheit_bonus = 0
 
-        # Talent-Effekte
-        if "Kräftig" in charakter.selected_talente:
-            groesse += 1  # Kräftig erhöht die Größe (und damit Robustheit) um 1
+        # Gesamtrüstungsschutz vorab berechnen (Bedingung für Kämpferische Disziplin:
+        # natürliche/Cyberware-Panzerung zählt nicht als getragene Rüstung)
+        from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
+        gesamt_ruestungsschutz = berechne_gesamt_ruestungsschutz(charakter)
+        gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
+        effekt_bedingungen = {'keine_getragene_ruestung': gesamt_torso == 0}
 
-        if "Raufbold" in charakter.selected_talente:
-            robustheit_bonus += 1  # Raufbold: +1 Robustheit (kein Größe-Effekt)
-
-        if "Schläger" in charakter.selected_talente:
-            robustheit_bonus += 1  # Schläger: +1 Robustheit (kein Größe-Effekt)
-
-        if "Jünger Erthas" in charakter.selected_talente:
-            robustheit_bonus += 1  # Jünger Erthas (Hellfrost): +1 Robustheit
-
-        # Zauberer-Blutlinien (Savage Pathfinder) – als AH-(Zauberer)-Varianten modelliert
-        if "AH (Zauberer) Abnorme Blutlinie" in charakter.selected_talente:
-            robustheit_bonus += 1  # Abnorme Blutlinie: +1 Robustheit (seltsame Gestalt)
-        if "AH (Zauberer) Dämonische Blutlinie" in charakter.selected_talente:
-            robustheit_bonus += 1  # Dämonische Blutlinie: +1 Robustheit
-        if "AH (Zauberer) Drachenblutlinie" in charakter.selected_talente:
-            robustheit_bonus += 2  # Drachenblutlinie: Schuppenhaut (Panzerung +2)
-
-        # Handicap-Effekte
-        for handicap_name in charakter.selected_handicaps:
-            if handicap_name in charakter.handicaps:
-                handicap = charakter.handicaps[handicap_name]
-
-                # Fettleibig (leicht): +1 Robustheit (Körperfett, kein Größenwachstum)
-                if "Fettleibig" in handicap.name and handicap.stufe == "leicht":
-                    robustheit_bonus += 1
-
-                # Klein (leicht): -1 Größe (und damit -1 Robustheit)
-                elif "Klein" in handicap.name and handicap.stufe == "leicht":
-                    groesse -= 1
-
-                # Schlank: -1 Robustheit (schmaler Körperbau, z.B. Elfen)
-                elif "Schlank" in handicap.name:
-                    robustheit_bonus -= 1
+        # Talent- und Handicap-Effekte (Effekt-Registry)
+        groesse = (summiere_talent_bonus(charakter.selected_talente, 'groesse')
+                   + summiere_handicap_bonus(charakter, 'groesse'))
+        robustheit_bonus = (summiere_talent_bonus(charakter.selected_talente, 'robustheit',
+                                                  bedingungen=effekt_bedingungen)
+                            + summiere_handicap_bonus(charakter, 'robustheit'))
 
         # Völker-Effekte: Größe und Robustheit-Bonus getrennt
         voelker_groesse = _berechne_voelker_groesse(charakter)
@@ -185,17 +107,8 @@ def berechne_abgeleitete_werte(charakter):
         charakter.groesse = groesse
 
         # Basis-Robustheit ohne Rüstung: (Konstitution/2) + 2 + Größe + Robustheit-Bonus
+        # (Kämpferische Disziplin steckt bereits bedingt im robustheit_bonus)
         charakter.robustheit_basis = (konstitution_wert // 2) + 2 + groesse + robustheit_bonus
-
-        # Gesamtrüstungsschutz berechnen (inklusive natürlicher Panzerung)
-        from functions.ausruestung_funktionen import berechne_gesamt_ruestungsschutz
-        gesamt_ruestungsschutz = berechne_gesamt_ruestungsschutz(charakter)
-        gesamt_torso = gesamt_ruestungsschutz.get('Torso', 0)
-
-        # Kämpferische Disziplin (Mönch): +1 Robustheit, wenn KEINE Rüstung getragen wird
-        # (natürliche/Cyberware-Panzerung zählt nicht als getragene Rüstung)
-        if "Kämpferische Disziplin" in charakter.selected_talente and gesamt_torso == 0:
-            charakter.robustheit_basis += 1
 
         # 4. Natürliche Panzerung aus Völker-Effekten hinzufügen
         natuerliche_panzerung = _berechne_voelker_natuerliche_panzerung(charakter)
@@ -214,24 +127,9 @@ def berechne_abgeleitete_werte(charakter):
         charakter.robustheit_mit_ruestung = f"{charakter.robustheit} ({gesamt_torso})"
         
         # === BENNYS BERECHNUNG ===
-        # Talente für Bennys
-        if "Glück" in charakter.selected_talente:
-            bennys += 1  # Glück: +1 Benny
-        
-        if "Großes Glück" in charakter.selected_talente:
-            bennys += 1  # Großes Glück: +1 Bennys
-            
-        # Handicap-Effekte für Bennys
-        for handicap_name in charakter.selected_handicaps:
-            if handicap_name in charakter.handicaps:
-                handicap = charakter.handicaps[handicap_name]
-                
-                # Jung (leicht oder schwer)
-                if "Jung" in handicap.name:
-                    if handicap.stufe == "leicht":
-                        bennys += 1  # Jung (leicht): +1 Benny
-                    elif handicap.stufe == "schwer":
-                        bennys += 2  # Jung (schwer): +2 Bennys
+        # Talent- und Handicap-Effekte (Effekt-Registry)
+        bennys += summiere_talent_bonus(charakter.selected_talente, 'bennys')
+        bennys += summiere_handicap_bonus(charakter, 'bennys')
 
         # Völker-Effekte für Bennys (z.B. Halbling Glück)
         voelker_benny_bonus = _berechne_voelker_benny_bonus(charakter)

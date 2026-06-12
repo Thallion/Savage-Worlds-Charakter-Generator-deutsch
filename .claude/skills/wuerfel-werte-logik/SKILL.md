@@ -134,16 +134,16 @@ wählen – die Boni greifen nur auf **unveränderten Basiswerten** (s.u.).
 ### Weitere `effects`-Felder
 | Feld | Wirkung | Berechnet in |
 |------|---------|--------------|
-| `robustheit_bonus` | flacher +/- auf Robustheit | `abgeleitete_werte.py:173` |
-| `groesse_modifikator` | Größe (⇒ Robustheit) | `abgeleitete_werte.py:170` |
-| `bewegungsweite_bonus` | +/- Bewegungsweite | `abgeleitete_werte.py:100` |
+| `robustheit_bonus` | flacher +/- auf Robustheit | `abgeleitete_werte.py:99` |
+| `groesse_modifikator` | Größe (⇒ Robustheit) | `abgeleitete_werte.py:96` |
+| `bewegungsweite_bonus` | +/- Bewegungsweite | `abgeleitete_werte.py:51` |
 | `auto_talente` | Talente auto auf `ausgewaehlt`, inkl. Machtpunkte/neue Mächte | `volk.py:272` |
 | `auto_handicaps` | Handicaps auto in `selected_handicaps` | `volk.py:290` |
 | `auto_mächte` / `spezielle_effekte:[{typ:'macht_volk'}]` | Mächte + ggf. `AH (Begabt)` | `volk.py:298/305` |
-| `spezielle_effekte: panzerung_1/2/bonus` | natürliche Panzerung (zum Rüstungsschutz, **nicht** Basis-Robustheit) | `abgeleitete_werte.py:379` |
+| `spezielle_effekte: panzerung_1/2/bonus` | natürliche Panzerung (zum Rüstungsschutz, **nicht** Basis-Robustheit) | `abgeleitete_werte.py:281` |
 
 > ⚠️ Sanity-Check im Code: `robustheit_bonus != 0` **und** `groesse_modifikator != 0`
-> gleichzeitig erzeugt eine Warnung (mögliche Doppelcodierung). `abgeleitete_werte.py:334`.
+> gleichzeitig erzeugt eine Warnung (mögliche Doppelcodierung). `abgeleitete_werte.py:235`.
 
 ### Freies Menschen-Talent / -Attribut (`functions/volk_funktionen.py`)
 Menschen haben **Einzel-Slots**: Es kann nur **ein** freies Talent **und ein** freies Attribut
@@ -161,33 +161,41 @@ gleichzeitig aktiv sein. Bei Neuwahl wird die vorherige Wahl **zurückgesetzt**:
 
 ## 5. Talente & Handicaps, die abgeleitete Werte beeinflussen
 
-Vollständig in **`functions/abgeleitete_werte.py`** (Hardcodierte Namenslisten). Auszug:
+Vollständig **datengetrieben** in **`config/abgeleitete_effekte.json`**
+(geladen von `functions/effekt_registry.py`, angewendet in
+`functions/abgeleitete_werte.py`). Inhalt:
 
-### Parade (`= 2 + Kämpfen//2 + Bonus`, Z.38)
+### Parade (`= 2 + Kämpfen//2 + Bonus`, Z.39)
 `+1`: Block · Harter Block (ersetzt Block) · Meister aller Waffen · Waffenmeister ·
 Herdritter (Hellfrost) · **Lieblingswaffe**. `+2`: **Absolute Lieblingswaffe** (ersetzt Lieblingswaffe).
 
-### Robustheit (`= Konstitution//2 + 2 + Größe + Robustheit-Bonus`, Z.184)
+### Robustheit (`= Konstitution//2 + 2 + Größe + Robustheit-Bonus`, Z.111)
 - **Größe +1:** Kräftig (Talent), Volk-Größe. **Größe −1:** Klein (Handicap, leicht).
 - **Robustheit-Bonus +1:** Raufbold · Schläger · Jünger Erthas (Hellfrost) · Fettleibig (leicht) ·
   AH(Zauberer) Abnorme/Dämonische Blutlinie · Volk-`robustheit_bonus` · Cyberware.
 - **+2:** AH(Zauberer) Drachenblutlinie (Schuppenhaut).
-- **Kämpferische Disziplin** (Mönch): +1 Robustheit **nur ohne getragene Rüstung** (Z.193).
+- **Kämpferische Disziplin** (Mönch): +1 Robustheit **nur ohne getragene Rüstung** (Z.81–91).
 - Natürliche Panzerung (Volk/Cyberware) zählt zum **Rüstungsschutz**, nicht zur Basis.
 - Merksatz: **Konstitution +2 (W4→W6) ⇒ +1 Robustheit** (6//2+2=5 vs 4//2+2=4).
 
-### Bewegungsweite (`Basis 6`, Z.74)
+### Bewegungsweite (`Basis 6`, Z.46)
 - **−1:** Langsam (leicht), Fettleibig (leicht), Alt (schwer). **−2:** Langsam (schwer).
 - **+2:** Behände (Barbar), Flink (Hintergrund). Volk-`bewegungsweite_bonus`, Cyberware.
 - Minimum 1.
 
-### Bennys (`Basis 3`, Z.212)
+### Bennys (`Basis 3`, Z.129)
 - **+1:** Glück · Großes Glück · Jung (leicht) · Volk mit `auto_talente`-`Glück` (z.B. Halbling).
 - **+2:** Jung (schwer).
 
-> Diese Effekte sind **namensbasiert hartcodiert**. Ein neues Talent/Handicap mit Robustheits-/
-> Parade-/Bewegungs-Wirkung muss hier **zusätzlich** eingetragen werden – es reicht nicht, es nur
-> ins Setting-JSON zu schreiben. (Relevanter Stolperstein bei DSA-/Setting-Erweiterungen.)
+> Diese Effekte sind **namensbasiert** in `config/abgeleitete_effekte.json` hinterlegt.
+> Ein neues Talent/Handicap mit Robustheits-/Parade-/Bewegungs-Wirkung muss dort
+> **zusätzlich** eingetragen werden – es reicht nicht, es nur ins Setting-JSON zu
+> schreiben. (Relevanter Stolperstein bei DSA-/Setting-Erweiterungen.)
+> Semantik: additiv; `nicht_kumulativ_gruppe` ⇒ nur Gruppen-Maximum zählt
+> (Lieblingswaffe-Paar, Behände/Flink); Block-Paar bewusst additiv;
+> `bedingung: keine_getragene_ruestung` für Kämpferische Disziplin.
+> Traglast (`Kräftig` +20 kg, `traglast_kg`) läuft über dieselbe Registry.
+> Absicherung: `test units/test_abgeleitete_werte.py` (Charakterisierung + Registry-Smoke).
 
 ---
 
@@ -199,7 +207,7 @@ Herdritter (Hellfrost) · **Lieblingswaffe**. `+2`: **Absolute Lieblingswaffe** 
 4. Fertigkeit ≥ Attribut ⇒ Doppelkosten eingeplant?
 5. `char_gen_completed` korrekt? (vorher: Steigerungs-/HP-Pools; nachher: nur Aufstiege, Skill 0,5)
 6. Major-Handicaps zuerst (HP-Limit 4)?
-7. Abgeleiteter Wert fehlt trotz Talent? → Name in `abgeleitete_werte.py` hinterlegt (§5)?
+7. Abgeleiteter Wert fehlt trotz Talent? → Name in `config/abgeleitete_effekte.json` hinterlegt (§5)?
 
 ---
 

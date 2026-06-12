@@ -4,6 +4,7 @@ Ausrüstungsverwaltung für die Charakter-Klasse.
 """
 from kivy.logger import Logger
 import functions.ausruestung_funktionen as ausruestung_funktionen
+from functions.effekt_registry import summiere_talent_bonus
 
 class CharakterEquipment:
     """Mixin-Klasse für Ausrüstungsverwaltung"""
@@ -64,17 +65,16 @@ class CharakterEquipment:
                 staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
 
             maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
-            
-            # Bonus für das Talent "Kräftig" hinzufügen
-            if "Kräftig" in self.selected_talente:
-                maximale_traglast += 20  # +20 kg Traglast bei Kräftig
-            
+
+            # Talent-Boni (z.B. Kräftig +20 kg, Effekt-Registry)
+            maximale_traglast += summiere_talent_bonus(self.selected_talente, 'traglast_kg')
+
             return maximale_traglast
 
         except Exception as e:
             Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
             return 40  # Fallback-Wert (Stärke W4 * 10)
-    
+
     def berechne_gesamtgewicht(self):
         """
         Berechnet das Gesamtgewicht aller Ausrüstungsgegenstände mit Menge > 0.
@@ -116,17 +116,16 @@ class CharakterEquipment:
                 staerke_wert = 4  # Standardwert, wenn Stärke nicht vorhanden
 
             maximale_traglast = staerke_wert * 10  # 10 kg pro Punkt Stärke
-            
-            # Bonus für das Talent "Kräftig" hinzufügen
-            if "Kräftig" in self.selected_talente:
-                maximale_traglast += 20  # +20 kg Traglast bei Kräftig
-            
+
+            # Talent-Boni (z.B. Kräftig +20 kg, Effekt-Registry)
+            maximale_traglast += summiere_talent_bonus(self.selected_talente, 'traglast_kg')
+
             return maximale_traglast
 
         except Exception as e:
             Logger.error(f"Fehler bei der Berechnung der maximalen Traglast: {e}")
             return 40  # Fallback-Wert (Stärke W4 * 10)
-    
+
     def berechne_gesamt_ruestungsschutz(self):
         return ausruestung_funktionen.berechne_gesamt_ruestungsschutz(self)
     
