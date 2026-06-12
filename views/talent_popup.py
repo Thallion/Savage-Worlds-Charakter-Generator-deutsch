@@ -1,115 +1,37 @@
 # talent-popup.py
-from kivy.lang import Builder
-from kivy.logger import Logger
+"""
+Dialog-Handler für Talente (Add/Edit/Delete).
+
+Add/Edit laufen deklarativ über FormDialogHandlerMixin (views/popup_form.py),
+der Two-Phase-Lösch-Flow über BasisDialogHandler (views/popup_basis.py).
+"""
 from kivy.app import App
-from kivy.clock import Clock
-from kivy.metrics import dp
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
-from kivymd.uix.menu import MDDropdownMenu
+from kivy.logger import Logger
 
 from models.talent import Talent
 from views.popup_basis import BasisDialogHandler, SofortDismissMixin
+from views.popup_form import FormDialogHandlerMixin
 
-import os
-import sys
 
-# PyInstaller-kompatibles Laden der KV-Datei
-def load_kv_file():
-    if getattr(sys, 'frozen', False):
-        # PyInstaller Bundle
-        base_path = sys._MEIPASS
-        kv_path = os.path.join(base_path, 'views', 'talent_popup.kv')
-    else:
-        # Normale Ausführung
-        base_path = os.path.dirname(os.path.dirname(__file__))
-        kv_path = os.path.join(base_path, 'views', 'talent_popup.kv')
-    
-    if os.path.exists(kv_path):
-        Builder.load_file(kv_path)
-    else:
-        Logger.error(f"talent_popup: KV-Datei nicht gefunden: {kv_path}")
-
-load_kv_file()
-
-class TalentDialogContent(MDBoxLayout):
-    def __init__(self, talent_data=None, **kwargs):
-        super().__init__(**kwargs)
-        self.dialog = None
-        self.edit_mode = False
-        self.original_name = None
-        
-        # Wenn Talent-Daten übergeben wurden, befülle die Felder
-        if talent_data:
-            self.edit_mode = True
-            self.original_name = talent_data.get('name', '')
-            Clock.schedule_once(lambda dt: self._fill_fields(talent_data), 0.1)
-    
-    def _fill_fields(self, talent_data):
-        """Befüllt die Felder mit den Talent-Daten beim Bearbeiten"""
-        if hasattr(self.ids, 'name_input'):
-            self.ids.name_input.text = talent_data.get('name', '')
-        
-        if hasattr(self.ids, 'kategorie_input'):
-            self.ids.kategorie_input.text = talent_data.get('kategorie', '')
-        
-        if hasattr(self.ids, 'rang_input'):
-            self.ids.rang_input.text = talent_data.get('rang', '')
-        
-        if hasattr(self.ids, 'beschreibung_input'):
-            self.ids.beschreibung_input.text = talent_data.get('beschreibung', '')
-        
-        if hasattr(self.ids, 'voraussetzungen_input'):
-            voraussetzungen = talent_data.get('voraussetzungen', [])
-            if isinstance(voraussetzungen, list):
-                self.ids.voraussetzungen_input.text = ', '.join(voraussetzungen)
-            else:
-                self.ids.voraussetzungen_input.text = str(voraussetzungen)
-        
-        if hasattr(self.ids, 'neue_maechte_input'):
-            self.ids.neue_maechte_input.text = str(talent_data.get('neue_maechte', 0))
-        
-        if hasattr(self.ids, 'machtpunkte_input'):
-            self.ids.machtpunkte_input.text = str(talent_data.get('machtpunkte', 0))
-        
-class DeleteTalentDialogContent(MDBoxLayout):
-    def __init__(self, talente_callback=None, menu_callback=None, **kwargs):
-        super().__init__(**kwargs)
-        self.talente_callback = talente_callback
-        self.menu_callback = menu_callback
-        self.dialog = None
-        
-    def open_menu(self, instance_item):
-        if not self.talente_callback:
-            return
-            
-        talente = self.talente_callback()
-        if not talente:
-            return
-            
-        menu_items = [
-            {
-                "text": name,
-                "on_release": lambda x=name: self.select_item(x),
-            }
-            for name in talente
-        ]
-        
-        MDDropdownMenu(
-            caller=instance_item,
-            items=menu_items,
-        ).open()
-        
-    def select_item(self, text_item):
-        if self.menu_callback:
-            self.menu_callback(text_item)
-        if hasattr(self.ids, 'talent_dropdown'):
-            self.ids.talent_dropdown.text = text_item
-
-class TalentDialogHandler(SofortDismissMixin, BasisDialogHandler):
+class TalentDialogHandler(FormDialogHandlerMixin, SofortDismissMixin, BasisDialogHandler):
     element_name = "Talent"
     element_name_plural = "Talente"
     artikel_unbestimmt = "ein"
+    titel_neu = "Neues Talent hinzufügen"
+    titel_bearbeiten = "Talent bearbeiten"
+
+    FELDER = [
+        {"key": "name", "label": "Name des Talents", "typ": "text", "pflicht": True,
+         "pflicht_meldung": "Der Name des Talents darf nicht leer sein."},
+        {"key": "kategorie", "label": "Kategorie", "typ": "text"},
+        {"key": "rang", "label": "Rang (A, F, V, H, L)", "typ": "text"},
+        {"key": "beschreibung", "label": "Beschreibung", "typ": "text"},
+        {"key": "voraussetzungen", "label": "Voraussetzungen (durch Komma getrennt)", "typ": "text"},
+        {"key": "neue_maechte", "label": "Neue Mächte", "typ": "int", "default": 0,
+         "zahl_meldung": "Neue Mächte muss eine gültige Zahl sein."},
+        {"key": "machtpunkte", "label": "Machtpunkte", "typ": "int", "default": 0,
+         "zahl_meldung": "Machtpunkte müssen eine gültige Zahl sein."},
+    ]
 
     def __init__(self, controller):
         super().__init__(controller)
@@ -121,129 +43,96 @@ class TalentDialogHandler(SofortDismissMixin, BasisDialogHandler):
     def _reset_selection(self):
         self.selected_talent = None
 
-    def show_add_dialog(self):
-        """Zeigt das Overlay zum Hinzufügen eines neuen Talents"""
-        dialog_content = TalentDialogContent()
-        self.dialog_content = dialog_content
+    # ------------------------------------------------------------------
+    # Add/Edit-Hooks (FormDialogHandlerMixin)
+    # ------------------------------------------------------------------
+    def _get_element_daten(self, talent_name_key):
+        app = App.get_running_app()
+        charakter = app.controller.charakter
+        talent = charakter.talente.get(talent_name_key)
+        if not talent:
+            return None
+        self.selected_talent = talent_name_key
+        voraussetzungen = talent.voraussetzungen
+        if isinstance(voraussetzungen, list):
+            voraussetzungen = ', '.join(str(v) for v in voraussetzungen)
+        return {
+            'name': talent.name,
+            'kategorie': talent.kategorie,
+            'rang': talent.rang,
+            'beschreibung': talent.beschreibung,
+            'voraussetzungen': voraussetzungen,
+            'neue_maechte': talent.neue_maechte,
+            'machtpunkte': talent.machtpunkte,
+        }
 
-        overlay = self._get_overlay()
-        overlay.open(
-            title="Neues Talent hinzufügen",
-            content_widget=dialog_content,
-            action_text="Speichern",
-            on_action=self.save_talent,
+    @staticmethod
+    def _parse_voraussetzungen(text):
+        return [v.strip() for v in text.split(',') if v.strip()]
+
+    def _erstelle_element(self, werte):
+        app = App.get_running_app()
+        charakter = app.controller.charakter
+
+        name = werte['name']
+        if name in charakter.talente:
+            self.show_error(f"Talent '{name}' existiert bereits.")
+            return False
+
+        new_talent = Talent(
+            name=name,
+            kategorie=werte['kategorie'],
+            rang=werte['rang'],
+            beschreibung=werte['beschreibung'],
+            voraussetzungen=self._parse_voraussetzungen(werte['voraussetzungen']),
+            neue_maechte=werte['neue_maechte'],
+            machtpunkte=werte['machtpunkte'],
+            custom=True
         )
 
-    def show_edit_dialog(self, talent_name_key):
-        """Zeigt das Overlay zum Bearbeiten eines bestehenden Talents"""
-        try:
-            app = App.get_running_app()
-            charakter = app.controller.charakter
+        charakter.add_talent(new_talent)
+        return True
 
-            talent = charakter.talente.get(talent_name_key)
-            if not talent:
-                self.show_error(f"Talent '{talent_name_key}' nicht gefunden.")
-                return
+    def _aktualisiere_element(self, talent_key, werte):
+        app = App.get_running_app()
+        charakter = app.controller.charakter
 
-            talent_data = {
-                'name': talent.name,
-                'kategorie': talent.kategorie,
-                'rang': talent.rang,
-                'beschreibung': talent.beschreibung,
-                'voraussetzungen': talent.voraussetzungen,
-                'neue_maechte': talent.neue_maechte,
-                'machtpunkte': talent.machtpunkte
-            }
+        talent = charakter.talente.get(talent_key)
+        if not talent:
+            self.show_error(f"Talent '{talent_key}' nicht mehr gefunden.")
+            return False
 
-            dialog_content = TalentDialogContent(talent_data=talent_data)
-            self.dialog_content = dialog_content
-            self.selected_talent = talent_name_key
+        name = werte['name']
+        if name != talent.name and name in charakter.talente:
+            self.show_error(f"Ein Talent mit dem Namen '{name}' existiert bereits.")
+            return False
 
-            overlay = self._get_overlay()
-            overlay.open(
-                title="Talent bearbeiten",
-                content_widget=dialog_content,
-                action_text="Speichern",
-                on_action=self.update_talent,
-            )
+        old_name = talent.name
+        talent.name = name
+        talent.kategorie = werte['kategorie']
+        talent.rang = werte['rang']
+        talent.beschreibung = werte['beschreibung']
+        talent.voraussetzungen = self._parse_voraussetzungen(werte['voraussetzungen'])
+        talent.neue_maechte = werte['neue_maechte']
+        talent.machtpunkte = werte['machtpunkte']
 
-        except Exception as e:
-            Logger.error(f"Fehler beim Öffnen des Bearbeitungsdialogs: {e}")
-            self.show_error("Fehler beim Öffnen des Bearbeitungsdialogs")
+        # Bei Namensänderung: Key im Dictionary und in selected_talente ändern
+        if name != old_name:
+            new_key = name
+            old_key = talent_key
+            charakter.talente[new_key] = talent
+            if old_key != new_key and old_key in charakter.talente:
+                del charakter.talente[old_key]
+                if old_key in charakter.selected_talente:
+                    idx = charakter.selected_talente.index(old_key)
+                    charakter.selected_talente[idx] = new_key
 
-    def update_talent(self, *args):
-        """Aktualisiert ein bestehendes Talent"""
-        if not self.dialog_content or not self.selected_talent:
-            Logger.error("Dialog-Content oder ausgewähltes Talent nicht gefunden")
-            return
+        charakter.save_custom_talents()
+        return True
 
-        name = self.dialog_content.ids.name_input.text.strip()
-
-        if not name:
-            self.show_error("Der Name des Talents darf nicht leer sein.")
-            return
-
-        kategorie = self.dialog_content.ids.kategorie_input.text.strip()
-        rang = self.dialog_content.ids.rang_input.text.strip()
-        beschreibung = self.dialog_content.ids.beschreibung_input.text.strip()
-        voraussetzungen = [v.strip() for v in self.dialog_content.ids.voraussetzungen_input.text.split(',') if v.strip()]
-        neue_maechte_text = self.dialog_content.ids.neue_maechte_input.text.strip()
-        machtpunkte_text = self.dialog_content.ids.machtpunkte_input.text.strip()
-
-        if neue_maechte_text and not neue_maechte_text.isdigit():
-            self.show_error("Neue Mächte muss eine gültige Zahl sein.")
-            return
-
-        if machtpunkte_text and not machtpunkte_text.isdigit():
-            self.show_error("Machtpunkte müssen eine gültige Zahl sein.")
-            return
-
-        try:
-            app = App.get_running_app()
-            charakter = app.controller.charakter
-
-            talent = charakter.talente.get(self.selected_talent)
-            if not talent:
-                self.show_error(f"Talent '{self.selected_talent}' nicht mehr gefunden.")
-                return
-
-            if name != talent.name and name in charakter.talente:
-                self.show_error(f"Ein Talent mit dem Namen '{name}' existiert bereits.")
-                return
-
-            old_name = talent.name
-            talent.name = name
-            talent.kategorie = kategorie
-            talent.rang = rang
-            talent.beschreibung = beschreibung
-            talent.voraussetzungen = voraussetzungen
-            talent.neue_maechte = int(neue_maechte_text) if neue_maechte_text else 0
-            talent.machtpunkte = int(machtpunkte_text) if machtpunkte_text else 0
-
-            if name != old_name:
-                new_key = name
-                old_key = self.selected_talent
-
-                charakter.talente[new_key] = talent
-                if old_key != new_key and old_key in charakter.talente:
-                    del charakter.talente[old_key]
-
-                    if old_key in charakter.selected_talente:
-                        idx = charakter.selected_talente.index(old_key)
-                        charakter.selected_talente[idx] = new_key
-
-            charakter.save_custom_talents()
-
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
-
-            self.dismiss_dialog()
-            Logger.info(f"Talent '{name}' wurde aktualisiert.")
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Aktualisieren des Talents: {e}")
-            self.show_error("Fehler beim Aktualisieren des Talents")
-
+    # ------------------------------------------------------------------
+    # Lösch-Flow (BasisDialogHandler)
+    # ------------------------------------------------------------------
     def _confirm_delete_elemente(self):
         """Phase 2: Führt das tatsächliche Löschen nach Bestätigung durch"""
         if not hasattr(self, '_pending_delete_items') or not self._pending_delete_items:
@@ -271,105 +160,9 @@ class TalentDialogHandler(SofortDismissMixin, BasisDialogHandler):
             Logger.error(f"Fehler beim Löschen der Talente: {e}")
             self.show_error("Fehler beim Löschen der Talente")
 
-    def save_talent(self, *args):
-        """Speichert ein neues Talent"""
-        if not self.dialog_content:
-            Logger.error("Dialog-Content nicht gefunden")
-            return
-
-        name = self.dialog_content.ids.name_input.text.strip()
-
-        if not name:
-            self.show_error("Der Name des Talents darf nicht leer sein.")
-            return
-
-        kategorie = self.dialog_content.ids.kategorie_input.text.strip()
-        rang = self.dialog_content.ids.rang_input.text.strip()
-        beschreibung = self.dialog_content.ids.beschreibung_input.text.strip()
-        voraussetzungen = [v.strip() for v in self.dialog_content.ids.voraussetzungen_input.text.split(',') if v.strip()]
-        neue_maechte_text = self.dialog_content.ids.neue_maechte_input.text.strip()
-        machtpunkte_text = self.dialog_content.ids.machtpunkte_input.text.strip()
-
-        if neue_maechte_text and not neue_maechte_text.isdigit():
-            self.show_error("Neue Mächte muss eine gültige Zahl sein.")
-            return
-
-        if machtpunkte_text and not machtpunkte_text.isdigit():
-            self.show_error("Machtpunkte müssen eine gültige Zahl sein.")
-            return
-
-        try:
-            app = App.get_running_app()
-            charakter = app.controller.charakter
-
-            if name in charakter.talente:
-                self.show_error(f"Talent '{name}' existiert bereits.")
-                return
-
-            new_talent = Talent(
-                name=name,
-                kategorie=kategorie,
-                rang=rang,
-                beschreibung=beschreibung,
-                voraussetzungen=voraussetzungen,
-                neue_maechte=int(neue_maechte_text) if neue_maechte_text else 0,
-                machtpunkte=int(machtpunkte_text) if machtpunkte_text else 0,
-                custom=True
-            )
-
-            charakter.add_talent(new_talent)
-
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
-
-            self.dismiss_dialog()
-            Logger.info(f"Talent '{name}' wurde hinzugefügt.")
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Speichern des Talents: {e}")
-            self.show_error("Fehler beim Speichern des Talents")
-
-    def delete_talent(self, *args):
-        """Löscht die ausgewählten Talente"""
-        try:
-            if not self.dialog_content:
-                self.show_error("Dialog-Content nicht gefunden.")
-                return
-
-            selected = self.dialog_content.get_selected_items()
-            if not selected:
-                self.show_error("Bitte wähle mindestens ein Talent zum Löschen aus.")
-                return
-
-            app = App.get_running_app()
-            charakter = app.controller.charakter
-
-            for talent_name in selected:
-                charakter.remove_talent(talent_name)
-                Logger.info(f"Talent '{talent_name}' wurde gelöscht.")
-
-            if hasattr(app, 'einstellungen_widget'):
-                app.einstellungen_widget.aktualisiere_ui()
-            self._refresh_eigenschaften_widget()
-            self._show_success_snackbar(f"{len(selected)} Talent(e) gelöscht")
-
-            Logger.info(f"{len(selected)} Talent(e) wurde(n) gelöscht.")
-            self.dismiss_dialog()
-
-        except Exception as e:
-            Logger.error(f"Fehler beim Löschen der Talente: {e}")
-            self.show_error("Fehler beim Löschen der Talente")
-
-
     def on_talent_select(self, talent_name):
         """Callback wenn ein Talent im Dropdown ausgewählt wurde"""
         self.selected_talent = talent_name
-        if (self.dialog_content and
-            hasattr(self.dialog_content.ids, 'selected_talent_text')):
-            self.dialog_content.ids.selected_talent_text.text = talent_name
-            Logger.info(f"Talent '{talent_name}' wurde ausgewählt.")
-        else:
-            Logger.debug("Dialog-Content nicht verfügbar für Textaktualisierung")
 
     def get_all_talente(self):
         """Gibt eine Liste aller verfügbaren Talente zurück"""

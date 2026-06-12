@@ -34,8 +34,8 @@ for _mod in ['kivymd.uix.chip', 'kivymd.uix.chip.chip']:
 # Erwartete zentrale Klassen je View-Modul (Modulname -> Klassennamen).
 # Bei Datei-Splits müssen diese Namen per Re-Export erhalten bleiben.
 ERWARTETE_KLASSEN = {
-    # ausruestung/fertigkeit/schild_popup: Add/Edit deklarativ über popup_form
-    # (FormDialogContent), eigene *DialogContent-Klassen entfallen
+    # Element-Popups: Add/Edit deklarativ über popup_form (FormDialogContent),
+    # eigene *DialogContent-Klassen entfallen
     'views.ausruestung_popup': ['AusruestungDialogHandler'],
     'views.popup_form': ['FormDialogContent', 'FormDialogHandlerMixin'],
     'views.app_navigation_mixin': ['AppNavigationMixin'],
@@ -47,13 +47,13 @@ ERWARTETE_KLASSEN = {
     'views.charakter_verwaltung_config': ['CharakterConfigMixin'],
     'views.charakterbogen_view': ['CharakterbogenWidget'],
     'views.fertigkeit_popup': ['FertigkeitDialogHandler'],
-    'views.handicap_popup': ['HandicapDialogContent', 'DeleteHandicapDialogContent', 'HandicapDialogHandler'],
-    'views.macht_popup': ['MachtDialogContent', 'DeleteMachtDialogContent', 'MachtDialogHandler'],
-    'views.ruestung_popup': ['RuestungDialogContent', 'DeleteRuestungDialogContent', 'RuestungDialogHandler'],
+    'views.handicap_popup': ['HandicapDialogHandler'],
+    'views.macht_popup': ['MachtDialogHandler'],
+    'views.ruestung_popup': ['RuestungDialogHandler'],
     'views.schild_popup': ['SchildDialogHandler'],
     'views.setting_assistent_view': ['SettingAssistentWizard', 'SettingAssistentDialogHandler'],
     'views.superkraft_popup': ['SuperkraftAuswahlContent', 'SuperkraftKonfigContent', 'SuperkraftDialogHandler'],
-    'views.talent_popup': ['TalentDialogContent', 'DeleteTalentDialogContent', 'TalentDialogHandler'],
+    'views.talent_popup': ['TalentDialogHandler'],
     'views.template_wizard': ['TemplateWizardDialog'],
     'views.voelker_view': ['VoelkerWidget'],
     'views.voelker_view_zusatzelemente': ['ZusatzelementeMixin'],
@@ -61,7 +61,7 @@ ERWARTETE_KLASSEN = {
     'views.voelker_view_mensch': ['MenschenVielseitigMixin'],
     'views.volk_popup': ['VolkGeneratorWizard', 'VolkDialogHandler'],
     'views.volk_dialog_handler': ['VolkDialogHandler'],
-    'views.waffe_popup': ['WaffeDialogContent', 'DeleteWaffeDialogContent', 'WaffeDialogHandler'],
+    'views.waffe_popup': ['WaffeDialogHandler'],
 }
 
 

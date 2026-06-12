@@ -30,26 +30,20 @@ datas = [
     (str(project_dir / 'main.kv'), '.'),
     
     # Alle KV-Dateien einzeln hinzufügen für bessere Erkennung
-    (str(project_dir / 'views' / 'ausruestung_popup.kv'), 'views'),
+    # (Element-Popups bauen ihre Formulare seit der Dialog-Konsolidierung
+    # deklarativ in Python auf — keine eigenen KV-Dateien mehr)
     (str(project_dir / 'views' / 'ausruestung_view.kv'), 'views'),
     (str(project_dir / 'views' / 'charakterbogen_view.kv'), 'views'),
     (str(project_dir / 'views' / 'eigenschaften_view.kv'), 'views'),
     (str(project_dir / 'views' / 'einstellungen_widget.kv'), 'views'),
-    (str(project_dir / 'views' / 'fertigkeit_popup.kv'), 'views'),
-    (str(project_dir / 'views' / 'handicap_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'handicaps_view.kv'), 'views'),
-    (str(project_dir / 'views' / 'macht_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'maechte_view.kv'), 'views'),
     (str(project_dir / 'views' / 'pointbar_view.kv'), 'views'),
     (str(project_dir / 'views' / 'profil_view.kv'), 'views'),
-    (str(project_dir / 'views' / 'ruestung_popup.kv'), 'views'),
-    (str(project_dir / 'views' / 'schild_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'setting_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'talente_view.kv'), 'views'),
-    (str(project_dir / 'views' / 'talent_popup.kv'), 'views'),
     (str(project_dir / 'views' / 'voelker_view.kv'), 'views'),
     (str(project_dir / 'views' / 'volk_popup.kv'), 'views'),
-    (str(project_dir / 'views' / 'waffe_popup.kv'), 'views'),
 ]
 
 # KivyMD Daten dynamisch hinzufügen

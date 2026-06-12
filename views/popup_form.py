@@ -19,7 +19,8 @@ durch eine Feld-Spezifikation pro Handler:
 
 Feld-Typen: text, int, float, multiline, auswahl (Freitext mit erlaubter
 Wertemenge), dropdown (MDDropDownItem + MDDropdownMenu), checkbox (einzelne
-Standalone-Checkbox mit Label).
+Standalone-Checkbox mit Label), segment (MDSegmentedButton, z.B.
+Nahkampf/Fernkampf — "optionen" + "default" erforderlich).
 
 WICHTIG (Android, docs/ANDROID_WORKAROUNDS.md):
 - Der Content enthält KEINEN eigenen ScrollView — das ElementOverlay scrollt
@@ -121,8 +122,36 @@ class FormDialogContent(MDBoxLayout):
             self.feld_widgets[feld['key']] = checkbox
             self.add_widget(box)
 
+        elif typ == 'segment':
+            from kivymd.uix.segmentedbutton import (
+                MDSegmentedButton, MDSegmentedButtonItem, MDSegmentButtonLabel,
+            )
+            segment = MDSegmentedButton(pos_hint={"center_x": .5})
+            default = feld.get('default')
+            self._segment_items = getattr(self, '_segment_items', {})
+            self._segment_items[feld['key']] = {}
+            for option in feld.get('optionen', []):
+                item = MDSegmentedButtonItem(
+                    size_hint=(None, None),
+                    size=(dp(120), dp(40)),
+                )
+                item.add_widget(MDSegmentButtonLabel(text=option))
+                item.bind(on_release=lambda inst, k=feld['key'], o=option: self._select_segment(k, o))
+                if option == default:
+                    item.selected = True
+                segment.add_widget(item)
+                self._segment_items[feld['key']][option] = item
+            self.dropdown_werte[feld['key']] = default
+            self.feld_widgets[feld['key']] = segment
+            self.add_widget(segment)
+
         else:
             Logger.error(f"FormDialogContent: Unbekannter Feld-Typ '{typ}' ({feld.get('key')})")
+
+    def _select_segment(self, key, option):
+        self.dropdown_werte[key] = option
+        for opt, item in self._segment_items.get(key, {}).items():
+            item.selected = (opt == option)
 
     def _open_dropdown(self, caller, feld):
         optionen = feld.get('optionen', [])
@@ -163,6 +192,9 @@ class FormDialogContent(MDBoxLayout):
             elif typ == 'dropdown':
                 if wert:
                     self._select_dropdown(key, str(wert))
+            elif typ == 'segment':
+                if wert:
+                    self._select_segment(key, str(wert))
             elif typ == 'checkbox':
                 widget.active = bool(wert)
 
@@ -207,7 +239,7 @@ class FormDialogContent(MDBoxLayout):
                         f"Bitte geben Sie eine gültige Zahl für '{label}' ein."
                     ))
 
-            elif typ == 'dropdown':
+            elif typ in ('dropdown', 'segment'):
                 wert = self.dropdown_werte.get(key)
                 if feld.get('pflicht') and not wert:
                     fehler.append(feld.get('pflicht_meldung', f"Bitte wähle '{label}' aus."))
