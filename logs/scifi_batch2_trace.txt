@@ -1,6 +1,6 @@
-  Talente: HC=4
-  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
-  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Talente: HC=2
+  Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
+  Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Advance Beziehungen: ok=True
   Advance Berühmt: ok=True
   Advance Rampensau: ok=True
@@ -39,7 +39,7 @@ Roughneck FERTIG anomalien=12
   Macht Linderung: ok=False
   Macht Kriegersegen: ok=False
 Mystic FERTIG anomalien=9
-  Wechselbälger HC: ['Große Klappe', 'Loyal', 'Beschämt', 'Pechvogel (leicht)', 'Kybernetische Abstoßung']
+  Wechselbälger HC: ['Große Klappe', 'Loyal', 'Beschämt', 'Pechvogel (leicht)', 'Außenseiter', 'Kybernetische Abstoßung']
   Talent: HC=2
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 15}

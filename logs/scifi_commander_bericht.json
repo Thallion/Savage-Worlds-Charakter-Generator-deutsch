@@ -340,7 +340,7 @@
       "warnung": null
     },
     {
-      "aktion": "talent(Selbstlos)",
+      "aktion": "talent(Gemeinsames Band)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -645,7 +645,7 @@
       "Anführer",
       "Glück",
       "Charismatisch",
-      "Selbstlos",
+      "Gemeinsames Band",
       "Elan",
       "Geborener Anführer"
     ],

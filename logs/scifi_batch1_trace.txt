@@ -2,7 +2,7 @@
   Attrs: {'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Skills: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 500, 'machtpunkte': 0}
   Advance Charismatisch: ok=True
-  Advance Selbstlos: ok=True
+  Advance Gemeinsames Band: ok=True
   Advance Elan: ok=True
   Advance Geborener Anführer: ok=True
 Commander FERTIG anomalien=6

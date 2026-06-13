@@ -532,3 +532,118 @@ Setting-JSON `settings/Horror Kompendium.json` + 5 Archetypen korrigiert, headle
 - **Mumie/Wiedergänger/Vampir auto_talente** (Zäh/Nachtsicht): repräsentieren das UNTOT/Dunkelsicht-
   Paket, sind aber im PDF keine separaten Edges. Belassen, da Entfernen Archetyp-Punktebilanz berührt.
 - **Werwolf** „Stumm/Kann nicht sprechen" (nur Wolfsform) nicht modelliert.
+
+## Savage Aventurien: Egnus (druidischer Alchemist, Mensch, PDF-Nachbau 2026-06-12)
+
+Quelle: `screenshots/Egnus_20260515_180556.pdf` (Original aus anderem Setting), Nachbau in
+Savage Aventurien → `chars/Archetypen/Archetyp_Savage_Aventurien_Egnus.json`.
+Build: `logs/build_egnus_aventurien.py`, Bericht: `logs/egnus_aventurien_bericht.json`.
+
+#### Ergebnis
+- Chargen geht exakt auf (Attribut 0/0, Fertigkeit 0/17, HP 4/4); abgeleitete Werte identisch
+  zum Bogen: BW 5, Parade 5, Robustheit 6 (1), MP 15, Bennys 3, Traglast 31.0/60.
+- AH (Druide) passt strukturell perfekt: 5 freie Mächte + 10 MP + auto Schwur_schwer/
+  Behindernde_Rüstung_leicht/Materialkomponenten decken Bogen-Mächte (7 = 5+2) und -Handicaps ab.
+  Zusätzlich (nicht auf dem Bogen): Auto-Talente Bindung mit der Natur, Naturgespür.
+
+#### Daten-/Bogen-Befunde (keine Code-Bugs)
+- **Chemiker-Voraussetzung settingfremd**: verlangt in Savage Aventurien `AH (Alchemist)` +
+  Alchemie W8; Egnus hat AH (Druide) → nur per ignore_voraussetzungen nachbaubar. Prüfen, ob
+  Chemiker auch für andere AHs mit Alchemie gedacht ist.
+- **HP-Ökonomie des Original-Bogens regelwidrig**: Original kassierte 6 HP (Alt 2 + Feind 2 +
+  2× Talisman_leicht!). Aktuelle App setzt Limit 4 korrekt durch (Talisman über Limit: angenommen,
+  0 HP — SWADE-konform). Folge im Nachbau: 17 statt 19 Fertigkeitspunkte → Einschüchtern-
+  Aktivierung rutscht in die Aufstiege → 8. Aufstieg reicht nicht mehr für Machtpunkte_2
+  (korrekt abgelehnt). Endstand: Rang Fortgeschritten (7,5/8 Aufstiege), Machtpunkte_2 fehlt.
+- **Original-Bogen in sich inkonsistent**: zeigt MP 15 trotz genommenem Machtpunkte_2 (müsste 20
+  sein) und Heimlichkeit W4 trotz protokollierter Steigerung W4→W6.
+
+#### Kosmetik
+- Treiber-Bericht: `endzustand.ausruestung` bleibt leer, obwohl Käufe ok (Anzeige-Lücke im
+  Skill-Treiber, Charakter-JSON enthält alles inkl. Waffen-/Rüstungszuordnung).
+- Beim Laden eines Charakters mit 0,5 Rest-Aufstieg loggt die App transient
+  „Rang aktualisiert: Unbekannter Rang (Ausgegebene Aufstiege: -0.5)…" — Endzustand korrekt.
+
+---
+
+## SciFi Kompendium — Refaktorierungs-Verifikation + PDF-Abgleich (2026-06-13)
+
+**Anlass:** Prüfung, ob `logs/build_scifi_batch1.py` nach der Refaktorierung noch sauber baut,
+plus erneuter Abgleich gegen `Texte/Science_Fiction_Companion_Archetypes_(SWADE).pdf`.
+
+### Refaktorierung: kein Regressionseffekt
+- Build läuft fehlerfrei durch ("BATCH1 DONE"), alle 6 Berichte ohne `ok:false` (nur FORCE-Käufe
+  bei Geldmangel + Notizen — dokumentiertes Verhalten).
+- Neu erzeugte JSONs **byte-identisch** zum Backup (Jun 4) bei 5/6. Einzige Abweichung: Infiltrator
+  unterscheidet sich nur in zufälligen Cyberware-UUIDs + `installations_datum` (06-04→06-13),
+  semantisch gleich. → **Build-Output durch Refaktorierung unverändert.**
+
+### PDF-Abgleich (Treue zum offiziellen Bogen)
+- **Hacker: 100 % Übereinstimmung** (Attribute, alle 11 Skills, alle 5 Edges, Handicaps).
+- **Infiltrator:** Skills/Edges/Handicaps vollständig; nur Stärke d4 statt d6 (dokumentierter
+  HP-Tradeoff, Bogen-Stärke zugunsten fehlender Skills aufgegeben).
+- **Psyker:** Attribute/Edges/alle 5 Mächte/MP15 korrekt; 4 d4-Skills (Kämpfen, Glücksspiel,
+  Naturwiss., Schießen) fielen wegen 12-Punkte-Skill-Budget weg (Finding F7).
+- **Ambassador:** Attribute/4 Edges/alle 5 Mächte/MP10 korrekt; Einschüchtern d4 statt d6,
+  Elektronik d4 + Kämpfen d4 fehlen (12-Punkte-Budget).
+- **Surveyor:** Attribute (inkl. Stärke d6) + 4 Edges korrekt; Allgemeinwissen d6 + Heimlichkeit d6
+  je um einen Schritt zu niedrig (12-Punkte-Budget).
+- **Commander — FINDING behoben:** Advance "Common Bond" war fälschlich als **`Selbstlos`**
+  (Selfless) gebaut — ein Ersatz-Edge (verstößt gegen "keine Ersatz-Elemente"). Korrekter Key
+  **`Gemeinsames Band`** existiert im SciFi-Setting und ist beim Commander (Willenskraft d8)
+  voraussetzungskonform. Build-Skript korrigiert + neu gebaut → jetzt bogentreu.
+
+**Fazit:** Refaktorierung ohne Auswirkung auf die Builds. Die verbliebenen Skill-Lücken sind das
+bekannte 12-vs-15-Punkte-Budget (F7) bei Seasoned-Bögen, kein Code-Bug.
+
+### SciFi Batch 2 (build_scifi_batch2.py) — Refaktorierungs-Verifikation + PDF-Abgleich (2026-06-13)
+
+**Refaktorierung — ein positiver Effekt, sonst unverändert:**
+- Build läuft fehlerfrei durch ("BATCH2 DONE").
+- JSON-Vergleich gegen Backup (Jun 4): Influencer/Mystic/Spacer byte-identisch; Mercenary/Roughneck
+  nur Cyberware-UUID + Datum (semantisch gleich).
+- **Morpher (Wechselbälger) — REFAKTORIERUNGS-FIX:** Volk gewährt jetzt zusätzlich das
+  Handicap **`Außenseiter` (leicht / Outsider Minor)**. Das deckt sich exakt mit der PDF-Changeling-
+  Ancestry (Zeile 989: "Outsider (Minor): Subtract 2 from Persuasion when recognized"). Vorher
+  fehlte es → Morpher ist jetzt **bogentreuer**. Kein HP-Einfluss (Volks-Handicap).
+
+**PDF-Abgleich:**
+- **Morpher:** Attribute/4 Edges/alle 4 Mächte/MP15 korrekt; beide Volks-Handicaps (Außenseiter +
+  Kybernetische Abstoßung=Cyber Resistant) bogentreu. Skill-Lücken Athletik d4(→d6), Elektronik,
+  Kämpfen (12-Pt-Budget).
+- **Mercenary:** Attribute/3 Edges/Handicaps korrekt. Wahrnehmung d10 statt d6 — kommt von Cyberware
+  "Verbesserte Sicht" (modelliert als +2 Würfelstufen statt situativem +2; vorbestehend).
+- **Roughneck (Draken):** Attribute/4 Edges/Handicaps korrekt; Athletik d4(→d6), Naturwiss., Schießen
+  fehlen (12-Pt-Budget + Einarmig).
+- **Spacer:** Attribute/3 Edges/Handicaps korrekt; Ancestry (Alien) dokumentiert fehlend; Athletik d4,
+  Schießen d4(→d6) (Budget, dokumentiert).
+- **Mystic (Floraner) — vorbestehende Anomalie (kein Refaktorierungs-Effekt, byte-identisch):**
+  Advance `Neue Mächte` + Mächte `Linderung`/`Kriegersegen` scheitern (`ok=False`), MP 10 statt 15.
+  Ursache: zu viele Advances in 4 Aufstiege gequetscht (2× Konst-Steigerung + Naturwiss + Überreden +
+  Elan + Neue Mächte) → Budget erschöpft. Build-Design-Limit, kein Code-Bug.
+
+**FINDINGS (vorbestehend, kein Refaktorierungs-Effekt):**
+- **Influencer — behoben:** `talent('Charismatisch')` wurde in Zeile 40 VOR dem Setzen der Attribute
+  ohne `ignore_voraussetzungen=True` aufgerufen. Charismatisch hat Voraussetzung Willenskraft d8 (zu
+  dem Zeitpunkt noch d4) → still abgelehnt. Folge: Edge fehlte + 2 HP ungenutzt. Build korrigiert
+  (Flag ergänzt, konsistent mit allen anderen Talent-Aufrufen) → jetzt alle 6 Edges, HP 0/4.
+- **Driver/Code-Reporting-Bug:** `talent()` lieferte beim Influencer-Fall `ok=True, kosten=0`,
+  OBWOHL das Talent wegen nicht erfüllter Voraussetzung gar nicht hinzugefügt wurde. Verifiziert via
+  Reproduktion (Variante A vs. B: nur `ignore_voraussetzungen` macht den Unterschied). Konsequenz:
+  Beim Bug-Finder darf `ok=True` von `talent()` nicht als "wurde gesetzt" interpretiert werden —
+  immer gegen `selected_talente` gegenprüfen. Zu klären: liegt das maskierende `ok=True` im Treiber
+  (`driver.py`) oder in `talent_funktionen`/Controller.
+
+#### Root-Cause + Fix: `talent()`-`ok=True`-Maskierung (2026-06-13)
+- **Ursache lokalisiert:** `TalentManager.waehle_talent` (`functions/talent_funktionen.py:158-160`) gibt
+  bei nicht erfüllter Voraussetzung den Sentinel-String `"needs_voraussetzungen_confirmation"` zurück
+  (analog `needs_rang_confirmation`, `not_duplicatable`, `pathfinder_kostenlos_angeboten`). Das ist
+  **korrektes App-Verhalten** — die GUI zeigt darauf einen Bestätigungsdialog und ruft bei „Ja" erneut
+  mit `ignore_voraussetzungen=True` auf. **Kein App-Bug.**
+- **Eigentlicher Bug im Bug-Finder-Treiber:** `driver.py::_try` wertete `ok = bool(res)` → ein
+  nicht-leerer Sentinel-String ist truthy → `ok=True`, obwohl nichts angewendet wurde.
+- **Fix (driver.py):** Konstante `_PENDING_SENTINELS`; `_try` erkennt diese Strings und meldet
+  `ok=False` mit `warnung="nicht angewendet (Sentinel: …)"`. Verifiziert: Charismatisch-ohne-ignore →
+  jetzt `ok=False`; mit ignore weiter `ok=True` (kosten 2, gesetzt); `volk_freies_talent` unverändert.
+- **Regression-Check:** Beide Batches neu gebaut → alle 12 JSONs unverändert (Fix ist reporting-only),
+  keine neuen Sentinel-Fehlschläge in den aktuellen Builds.

@@ -209,10 +209,25 @@ class Sitzung:
                                'punkte': {}, 'vermoegen': self.ch.vermoegen})
         self._schreibe_log()
 
+    # Sentinel-Rückgaben der Kern-Auswahllogik (waehle_talent/_macht), die TROTZ truthy-String
+    # KEINE erfolgreiche Auswahl bedeuten: In der GUI lösen sie einen Bestätigungs-/Hinweisdialog
+    # aus, headless wurde aber NICHTS angewendet. bool('needs_...') == True würde sie sonst als
+    # Erfolg fehlinterpretieren und einen stillen Fehlschlag maskieren (z.B. Talent nicht gesetzt).
+    _PENDING_SENTINELS = {
+        'needs_rang_confirmation',
+        'needs_voraussetzungen_confirmation',
+        'not_duplicatable',
+        'pathfinder_kostenlos_angeboten',
+    }
+
     def _try(self, aktion, fn, warn_wenn_false=True):
         vorher = _punkte(self.ch)
         try:
             res = fn()
+            if isinstance(res, str) and res in self._PENDING_SENTINELS:
+                # truthy-String, aber Element wurde nicht angewendet → als Fehlschlag werten
+                return self._erfasse(aktion, False, vorher,
+                                     warnung=f'nicht angewendet (Sentinel: {res})')
             ok = bool(res) if res is not None else True
             warnung = None if (ok or not warn_wenn_false) else 'Aktion lieferte False/None'
             return self._erfasse(aktion, ok, vorher, warnung)

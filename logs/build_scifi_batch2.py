@@ -37,7 +37,7 @@ try:
     s.handicap('Angewohnheit_leicht')
     s.volk('Mensch')
     s.volk_freies_talent('Mensch', 'Attraktiv', ignore_voraussetzungen=True)  # free
-    s.talent('Charismatisch')                                                   # 2HP
+    s.talent('Charismatisch', ignore_voraussetzungen=True)                      # 2HP (vor Attributen → Voraussetzung Wil d8 noch nicht erfüllt)
     m(f"  Talente: HC={s.ch.verbleibende_handicap_punkte}")
     s.attribut_auf('Verstand', 8)
     s.attribut_auf('Willenskraft', 8)

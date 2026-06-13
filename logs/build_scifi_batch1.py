@@ -59,7 +59,7 @@ try:
                       ('Einschüchtern',6),('Wahrnehmung',6),('Überreden',8),('Pilot',4)])
     m(f"  Skills: {s.punktestand()}")
     abschliessen(s, 4)
-    for t in ['Charismatisch','Selbstlos','Elan','Geborener Anführer']:
+    for t in ['Charismatisch','Gemeinsames Band','Elan','Geborener Anführer']:  # Common Bond = Gemeinsames Band (nicht Selbstlos!)
         r = s.talent(t, ignore_rang_check=True, ignore_voraussetzungen=True)
         m(f"  Advance {t}: ok={ok_check(r)}")
     for item in [('Körperpanzerung +4',1),('Molekularmesser',1),

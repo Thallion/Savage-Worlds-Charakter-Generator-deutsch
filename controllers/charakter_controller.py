@@ -514,9 +514,12 @@ class CharakterController(EventDispatcher):
             result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check,
                                                   ignore_voraussetzungen=ignore_voraussetzungen)
 
-            if result is True:
+            # Pathfinder-spezifische Behandlung: kostenloses Klassentalent angeboten (kein Erfolg/Fehler)
+            if result == "pathfinder_kostenlos_angeboten":
+                Logger.info(f"Pathfinder-Talent '{talent_name}' kann kostenlos gewählt werden")
+            elif result is True:
                 self.dispatch('on_charakter_updated')
-                
+
                 # Event für Historie-System senden
                 from services.service_container import service_container
                 event_service = service_container.get_event_service()
@@ -1032,42 +1035,3 @@ class CharakterController(EventDispatcher):
                 'kann_kostenloses_talent_waehlen': False,
                 'char_gen_completed': True
             }
-
-    # Zusätzlich sollte in der bestehenden waehle_talent Methode 
-    # ein Log-Eintrag hinzugefügt werden, wenn Pathfinder-spezifische Rückgabewerte auftreten:
-
-    def waehle_talent(self, talent_name, ignore_rang_check=False, ignore_voraussetzungen=False):
-        """
-        Wählt ein Talent für den Charakter aus
-        ERWEITERT: Mit verbessertem Logging für Pathfinder-Features
-        
-        Args:
-            talent_name (str): Name des Talents
-            ignore_rang_check (bool): Flag zum Ignorieren der Rangprüfung
-            ignore_voraussetzungen (bool): Flag zum Ignorieren der Voraussetzungen
-            
-        Returns:
-            bool oder str: Ergebniscode oder Erfolgsstatus
-        """
-        try:
-            # Flag nur setzen, wenn es angefordert wurde
-            if ignore_voraussetzungen:
-                self.charakter.ignore_voraussetzungen = True
-                Logger.debug(f"Controller: Flag ignore_voraussetzungen gesetzt für '{talent_name}'")
-                
-            # Parameter weitergeben
-            result = self.charakter.waehle_talent(talent_name, ignore_rang_check=ignore_rang_check,
-                                                  ignore_voraussetzungen=ignore_voraussetzungen)
-
-            # Pathfinder-spezifische Behandlung
-            if result == "pathfinder_kostenlos_angeboten":
-                Logger.info(f"Pathfinder-Talent '{talent_name}' kann kostenlos gewählt werden")
-            elif result is True:
-                self.dispatch('on_charakter_updated')
-                Logger.debug(f"Talent '{talent_name}' erfolgreich ausgewählt")
-            
-            return result
-        except Exception as e:
-            Logger.error(f"Fehler bei Auswahl von Talent {talent_name}: {str(e)}")
-            self.dispatch('on_charakter_error', f"Talent-Auswahl fehlgeschlagen: {str(e)}")
-            return False        

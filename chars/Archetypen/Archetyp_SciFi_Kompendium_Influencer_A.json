@@ -483,6 +483,12 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
+            "Charismatisch": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Beziehungen": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -551,6 +557,7 @@
     ],
     "selected_talente": [
         "Attraktiv",
+        "Charismatisch",
         "Beziehungen",
         "Berühmt",
         "Rampensau",
@@ -622,10 +629,16 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "Charismatisch",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Verstand",

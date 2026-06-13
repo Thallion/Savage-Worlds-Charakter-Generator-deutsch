@@ -460,6 +460,11 @@
             }
         },
         "handicaps": {
+            "Außenseiter": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
             "Beschämt": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
@@ -573,6 +578,7 @@
         }
     },
     "selected_handicaps": [
+        "Außenseiter",
         "Beschämt",
         "Große Klappe",
         "Loyal",

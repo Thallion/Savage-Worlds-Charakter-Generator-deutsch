@@ -495,7 +495,7 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Selbstlos": {
+            "Gemeinsames Band": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -564,7 +564,7 @@
         "Anführer",
         "Glück",
         "Charismatisch",
-        "Selbstlos",
+        "Gemeinsames Band",
         "Elan",
         "Geborener Anführer"
     ],
@@ -780,7 +780,7 @@
             },
             {
                 "typ": "talent",
-                "name": "Selbstlos",
+                "name": "Gemeinsames Band",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
