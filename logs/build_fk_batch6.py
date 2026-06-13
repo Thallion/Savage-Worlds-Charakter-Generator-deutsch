@@ -346,7 +346,8 @@ except BaseException as e:
 # Halbling auto: Glück talent; Willenskraft d6 free; Größe-1, Verringerte Bewegungsweite
 # Manual: Neugierig(2)+Gierig_leicht(1)+Sanftmütig(1) = 4 HP
 # 4 HP: 2 für Aufmerksamkeit + 2 für Steingespür
-# D Advances: Kämpfen d6+Wahr d8 (2skill+advance), Schatzjäger, Dieb, Fallengespür = 5
+# D Advances: Kämpfen d6+Wahr d8 (1 Advance, 2 Skills), Schatzjäger, Dieb, Fallengespür (3 Edges),
+# Konstitution d4→d6 (1 Attr-Advance, gleicht Bogen-Vigor d6 an) = 5
 # Kämpfen Novice: d4(aktiviert), Wahr Novice: d6 (advance → d8)
 # ===========================================================================
 m("\n=== 36. SCHATZJÄGER ===")
@@ -390,10 +391,13 @@ try:
     s.talent('Schatzjäger', ignore_rang_check=True, ignore_voraussetzungen=True)
     s.talent('Dieb', ignore_rang_check=True, ignore_voraussetzungen=True)
     s.talent('Fallengespür', ignore_rang_check=True, ignore_voraussetzungen=True)
+    # Bogen: Vigor d6. Halbling-Array kostet 6 Attr-Punkte (nur 5 im Chargen) → Konstitution d4→d6
+    # über den freien 5. Aufstieg (Attribut-Advance) angleichen.
+    s.attribut('Konstitution', nur_freie_punkte=False)   # Advance: Vig d4→d6 (Bogen)
     m(f"  D-Advances: {s.punktestand()}")
 
     soll = {
-        'attribute': {'Geschicklichkeit':8,'Verstand':8,'Willenskraft':6,'Stärke':6,'Konstitution':4},
+        'attribute': {'Geschicklichkeit':8,'Verstand':8,'Willenskraft':6,'Stärke':6,'Konstitution':6},
         'fertigkeiten': {'Athletik':6,'Allgemeinwissen':4,'Kämpfen':6,'Wahrnehmung':8,
                          'Überreden':4,'Reparieren':6,'Okkultismus':8,'Schießen':4,
                          'Heimlichkeit':6,'Diebeskunst':6},
