@@ -103,7 +103,7 @@ class AppTabAufbauMixin:
                 # früh registrierte Event-Listener für Änderungs-Logging), Rest on-demand
                 if i == 0 or tab_text == "Historie":
                     screen_instance, screen_name = self._instantiate_screen(i, screen_manager)
-                    if screen_instance and screen_name:
+                    if i == 0 and screen_instance and screen_name:
                         screen_manager.current = screen_name
                     Logger.info(f"✓ Tab '{tab_text}' + Screen (eager) erstellt")
                 else:
@@ -266,13 +266,17 @@ class AppTabAufbauMixin:
             return None, None
 
     def _activate_first_tab(self, screen_manager):
-        """Aktiviert den ersten Tab mit Verzögerung um KivyMD-Initialisierung abzuwarten"""
+        """Aktiviert den ersten Tab (CharakterVerwaltungScreen) mit Verzögerung."""
         try:
             if self.tab_items:
                 first_tab = self.tab_items[0]
                 first_tab.active = True
-                Logger.info(f"Erster Tab verzögert aktiviert.")
-                # ScreenManager braucht kein Index-Setting - wird bereits beim add_widget gesetzt
+                # Explizit sicherstellen, dass der ScreenManager auf Tab 0 steht,
+                # weil on_tab_switch durch active=True nicht immer zuverlässig ausgelöst wird.
+                screen_name = self._screen_name_for_tab(0)
+                if screen_name and screen_name in getattr(screen_manager, 'screen_names', []):
+                    screen_manager.current = screen_name
+                Logger.info("Erster Tab (CharakterVerwaltungScreen) aktiviert.")
         except Exception as e:
             Logger.error(f"Fehler bei verzögerter Tab-Aktivierung: {str(e)}")
 
