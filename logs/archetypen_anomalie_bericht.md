@@ -647,3 +647,50 @@ bekannte 12-vs-15-Punkte-Budget (F7) bei Seasoned-Bögen, kein Code-Bug.
   jetzt `ok=False`; mit ignore weiter `ok=True` (kosten 2, gesetzt); `volk_freies_talent` unverändert.
 - **Regression-Check:** Beide Batches neu gebaut → alle 12 JSONs unverändert (Fix ist reporting-only),
   keine neuen Sentinel-Fehlschläge in den aktuellen Builds.
+
+---
+
+## Fantasy Kompendium — Refaktorierungs-Verifikation + PDF-Abgleich (2026-06-13)
+
+**Anlass:** Prüfung der Fantasy-Builds (batch1–5 + anomalie_fix + batch6) gegen
+`Texte/SW Fantasy Kompendium Archetypen.pdf` (englische Fantasy Companion) nach der
+datengetriebenen Volk/Talent-Refaktorierung. PDF-Text-Export liegt in `Texte/...txt`.
+
+### Refaktorierung: KEINE Regression
+- Alle Builds laufen fehlerfrei durch (batch1–5, anomalie_fix, batch6).
+- Alle 30 getrackten JSONs **semantisch identisch** zum Backup (nur UUID/Datum-Churn) — anders als
+  SciFi (Morpher) gab es hier keinen Volks-Effekt-Unterschied; die Fantasy-Völker waren schon korrekt.
+- **0 Sentinel-Fehlschläge** (neuer Driver-Fix surfacte nichts) → Builds frei von maskierten Talent-Fehlern.
+
+### Build-Health: nur 2 vorbestehende, benigne Handicap-`ok:false`
+- **Magier `Materialkomponenten`**: redundanter manueller Aufruf eines AH-Auto-Handicaps (bereits
+  gesetzt) → harmlos, Handicap ist im Char.
+- **Druidin `Schwerzüngig`**: Der PDF-Druid-Bogen hat 5 HP spielergewählte Handicaps (Schwur_schwer 2 +
+  Sanftmütig 1 + Arm 1 + Schwerzüngig 1), Limit ist 4. App setzt das 4-HP-Limit korrekt durch und lässt
+  Schwerzüngig fallen → **korrektes Verhalten, Bogen ist HP-regelwidrig** (wie Egnus-Fall).
+
+### Automatisierter Attribut-Abgleich (PDF vs IST, alle 30): 26 exakt, 4 geprüft
+- **Champion**: FALSE POSITIVE der Auto-Extraktion (matchte das Kleriker-Edge „Champion" in Zeile 117
+  statt des echten Bogens in Zeile 735). Echter Bogen (Celestial-Volk) stimmt exakt: Ges6/Ver6/Wil8/
+  Stä8/Kon6 + alle 5 Mächte (Dispel/Heilung/Licht/Schutz/Zuflucht). ✓
+- **Barbarin** — Stärke d10 statt d8: **bekannter, im Build dokumentierter Code-Bug** — der
+  Berserker-Edge erhöht Stärke DAUERHAFT statt nur im Berserkermodus. Es ist ein Basis-Attribut (nicht
+  abgeleiteter Wert) → außerhalb der `effekt_registry`-Refaktorierung → zu Recht unberührt, aber
+  **weiterhin offen**.
+- **Drachenkmpf** — Ges d4 statt d6: dokumentierter Budget-Engpass (Build-Kommentar Zeile 8).
+- **Tiermeister** — Kon d4 statt d6: HP/Budget-Engpass, eine Würfelstufe zu niedrig (pre-existing).
+- Keiner der 4 ist eine Refaktorierungs-Regression (alle byte-identisch zum Backup).
+
+### batch6 (Soldat/Piratenkpt/Titanentgr/Schwertmag/Walkuere/Schatzjgr)
+- Läuft sauber durch, 0 Sentinel-Fehlschläge. EN→DE: Soldier=Soldat, Swashbuckler=Piratenkpt,
+  Titan Slayer=Titanentgr, Swordmage=Schwertmag, Valkyrie=Walkuere, Treasure Hunter=Schatzjgr.
+  Waren zunächst **nicht als JSON getrackt**; auf Wunsch angelegt und ins Set aufgenommen
+  (2026-06-13). Attribut-Abgleich: 5/6 exakt.
+  - **Schatzjgr** Willenskraft d6/Konstitution d4 vs Bogen Spirit d4/Vigor d6: Wurzel ist die
+    **Halbling**-Wahl — SWADE-Halblinge haben per Regel Willenskraft d6 (Spirited), der Bogen-Wert
+    Spirit d4 wäre für einen Halbling regelwidrig; Build also eher regelkorrekter. Bleibt nur
+    Konstitution d4 statt d6 (kleiner Budget-Engpass).
+  - **Titanentgr**: Überleben d4 fehlt (Skill-Budget, im Build als SOLL/IST-Diff notiert).
+
+**Fazit:** Refaktorierung ohne Auswirkung auf die Fantasy-Builds. Einziger offener echter Code-Bug
+(Barbarin/Berserker-Stärke) ist pre-existing und liegt außerhalb des Refaktorierungs-Scopes.
