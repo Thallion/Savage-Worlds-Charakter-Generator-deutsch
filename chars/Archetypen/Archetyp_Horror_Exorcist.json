@@ -551,12 +551,6 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Mut_2": {
-                "ausgewaehlt": true,
-                "rang": "F",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -580,6 +574,13 @@
                 "machtpunkte": 1,
                 "reichweite": "VER",
                 "dauer": "Sofort"
+            },
+            "Kriegersegen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 4,
+                "reichweite": "VER 5",
+                "dauer": "—"
             }
         },
         "superkraefte": {},
@@ -612,7 +613,8 @@
     "selected_maechte": [
         "Heilung",
         "Schutz",
-        "Linderung"
+        "Linderung",
+        "Kriegersegen"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -644,7 +646,7 @@
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 2,
+    "verfuegbare_maechte": 1,
     "anzahl_maechte": 5,
     "machtpunkte": 10,
     "machtstufe": "III",

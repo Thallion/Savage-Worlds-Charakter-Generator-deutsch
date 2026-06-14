@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Verstand": {
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -490,6 +490,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Lieblingswaffe": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -553,7 +559,8 @@
     ],
     "selected_talente": [
         "Inquisitor",
-        "Elan"
+        "Elan",
+        "Lieblingswaffe"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -607,7 +614,7 @@
         "Dolch": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 3.5,
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -764,6 +771,33 @@
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Lieblingswaffe",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

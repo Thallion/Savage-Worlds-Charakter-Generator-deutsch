@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -492,6 +492,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -508,21 +514,39 @@
                 "machtpunkte": 1,
                 "reichweite": "Ver 5",
                 "dauer": "5"
+            },
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "Ver×2",
+                "dauer": "Sofort"
+            },
+            "Arkanes entdecken/verbergen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/1h"
+            },
+            "Aufheben": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            },
+            "Sprachen sprechen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 10m",
+                "dauer": "5"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Stab": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Abenteurerausrüstung": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -547,6 +571,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Stab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -560,11 +594,17 @@
         "AH (Hexenmeister)",
         "Vertrauter",
         "Glück",
-        "Aufmerksamkeit"
+        "Aufmerksamkeit",
+        "Neue Mächte",
+        "Neue Mächte_2"
     ],
     "selected_maechte": [
         "Eigenschaft erhöhen/senken",
-        "Schutz"
+        "Schutz",
+        "Flächenschlag",
+        "Arkanes entdecken/verbergen",
+        "Aufheben",
+        "Sprachen sprechen"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -589,8 +629,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Stab",
-        "Dolch",
         "Abenteurerausrüstung",
         "Heilertasche",
         "Verstrickungsbeutel",
@@ -604,21 +642,21 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Stab": 1,
-        "Dolch": 1,
         "Abenteurerausrüstung": 1,
         "Heilertasche": 1,
         "Verstrickungsbeutel": 1,
         "Sonnenzepter": 2,
-        "Schriftrolle: Geschoss": 2
+        "Schriftrolle: Geschoss": 2,
+        "Stab": 1,
+        "Dolch": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 3,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 2,
+    "anzahl_maechte": 6,
     "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -763,6 +801,25 @@
                 "name": "Aufmerksamkeit",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte_2",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

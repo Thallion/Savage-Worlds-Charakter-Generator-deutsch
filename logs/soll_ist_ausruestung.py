@@ -58,8 +58,8 @@ DE_TO_EN = {
     'amiri': 'AMIRI', 'ezren': 'EZREN', 'harsk': 'HARSK', 'kyra': 'KYRA',
     'lem': 'LEM', 'lini': 'LINI', 'merisiel': 'MERISIEL', 'sajan': 'SAJAN',
     'seelah': 'SEELAH', 'seoni': 'SEONI', 'valeros': 'VALEROS',
-    # Deadlands: Bogen-Schreibweise weicht ab (Saloon- vs. Salon-)
-    'salonschönheit': 'SALOONSCHÖNHEIT', 'salonschoenheit': 'SALOONSCHÖNHEIT',
+    # Deadlands: Saloonschönheit (an Bogen-Schreibweise angeglichen, früher "Salon-")
+    'saloonschönheit': 'SALOONSCHÖNHEIT', 'saloonschoenheit': 'SALOONSCHÖNHEIT',
 }
 
 

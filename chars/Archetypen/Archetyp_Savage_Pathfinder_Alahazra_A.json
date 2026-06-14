@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -480,6 +480,24 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Anführer": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Offenbarung": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -503,26 +521,18 @@
                 "machtpunkte": 3,
                 "reichweite": "Berührung",
                 "dauer": "Sofort"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/Sofort"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Stab": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schleuder": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schleudersteine (20)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -533,7 +543,22 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Schleudersteine (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Stab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schleuder": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -548,12 +573,16 @@
     ],
     "selected_talente": [
         "AH (Orakel)",
-        "Glück"
+        "Glück",
+        "Anführer",
+        "Offenbarung",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Arkanes entdecken/verbergen",
         "Schutz vor Naturgewalten",
-        "Heilung"
+        "Heilung",
+        "Eigenschaft erhöhen/senken"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -578,11 +607,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Stab",
-        "Schleuder",
-        "Schleudersteine (20)",
         "Ledertunika",
         "Lederbeinlinge",
+        "Schleudersteine (20)",
         "Abenteurerausrüstung"
     ],
     "selected_waffen": [
@@ -595,20 +622,20 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Stab": 1,
-        "Schleuder": 1,
-        "Schleudersteine (20)": 1,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1
+        "Schleudersteine (20)": 1,
+        "Abenteurerausrüstung": 1,
+        "Stab": 1,
+        "Schleuder": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 3,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 0,
-    "anzahl_maechte": 3,
+    "verfuegbare_maechte": 1,
+    "anzahl_maechte": 5,
     "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -746,6 +773,24 @@
                 "name": "Überreden",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Anführer",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Offenbarung",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

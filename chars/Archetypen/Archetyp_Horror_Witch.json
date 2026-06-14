@@ -581,6 +581,20 @@
                 "machtpunkte": 1,
                 "reichweite": "VER 5",
                 "dauer": "—"
+            },
+            "Fluchwort": {
+                "ausgewaehlt": true,
+                "rang": "Fortgeschritten",
+                "machtpunkte": 3,
+                "reichweite": "Verstand",
+                "dauer": "Bis zur nächsten Steigerung"
+            },
+            "Geisterruf": {
+                "ausgewaehlt": true,
+                "rang": "Fortgeschritten",
+                "machtpunkte": 3,
+                "reichweite": "Verstand",
+                "dauer": "5"
             }
         },
         "superkraefte": {},
@@ -613,7 +627,9 @@
     "selected_maechte": [
         "Tierfreund",
         "Eigenschaft erhöhen/senken",
-        "Schutz"
+        "Schutz",
+        "Fluchwort",
+        "Geisterruf"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -645,7 +661,7 @@
     "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 2,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 15,
     "machtstufe": "III",

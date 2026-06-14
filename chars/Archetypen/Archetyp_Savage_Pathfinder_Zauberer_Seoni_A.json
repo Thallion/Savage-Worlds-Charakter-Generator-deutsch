@@ -7,7 +7,7 @@
         "Sprachen": "Drakonisch, Elfisch, Gemeinsprache, Goblinisch, Sylvanisch"
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -527,16 +527,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kampfstab": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Alchemistenfeuer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -558,6 +548,16 @@
                 "zustand": "neu"
             },
             "Schriftrolle: Eigenschaft senken": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kampfstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -605,8 +605,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kampfstab",
-        "Dolch",
         "Alchemistenfeuer",
         "Gegengift, Phiole",
         "Abenteurerausrüstung",
@@ -620,20 +618,19 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kampfstab": 1,
-        "Dolch": 1,
         "Alchemistenfeuer": 1,
         "Gegengift, Phiole": 1,
         "Abenteurerausrüstung": 1,
         "Schriftrolle: Geschoss": 1,
-        "Schriftrolle: Eigenschaft senken": 1
+        "Schriftrolle: Eigenschaft senken": 1,
+        "Kampfstab": 1,
+        "Dolch": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 1,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 4,
     "machtpunkte": 20,

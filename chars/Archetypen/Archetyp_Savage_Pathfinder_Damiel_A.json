@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Verstand": {
@@ -486,6 +486,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Entdeckung": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -502,21 +514,25 @@
                 "machtpunkte": 3,
                 "reichweite": "Selbst",
                 "dauer": "5"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/Sofort"
+            },
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "Ver×2",
+                "dauer": "Sofort"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Rapier": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -528,6 +544,16 @@
                 "zustand": "neu"
             },
             "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rapier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -543,11 +569,15 @@
     "selected_talente": [
         "Alchemist",
         "AH (Alchemist)",
-        "Berechnend"
+        "Berechnend",
+        "Entdeckung",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Abwehren",
-        "Gestaltwandeln"
+        "Gestaltwandeln",
+        "Eigenschaft erhöhen/senken",
+        "Flächenschlag"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -572,8 +602,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Rapier",
-        "Dolch",
         "Ledertunika",
         "Lederbeinlinge",
         "Abenteurerausrüstung"
@@ -588,19 +616,19 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Rapier": 1,
-        "Dolch": 1,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1
+        "Abenteurerausrüstung": 1,
+        "Rapier": 1,
+        "Dolch": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 3,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 1,
-    "anzahl_maechte": 3,
+    "anzahl_maechte": 5,
     "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -751,6 +779,25 @@
                 "name": "Diebeskunst",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Entdeckung",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

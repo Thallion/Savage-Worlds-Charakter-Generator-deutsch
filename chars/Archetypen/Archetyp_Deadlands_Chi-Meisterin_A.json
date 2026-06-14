@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -303,7 +303,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -570,9 +570,7 @@
         "Mensch": true
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [
-        "Messer"
-    ],
+    "selected_allgemeine_ausruestung": [],
     "selected_waffen": [
         "Messer"
     ],
@@ -581,8 +579,8 @@
     "ausruestung_mengen": {
         "Messer": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 1.0,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -748,6 +746,20 @@
             {
                 "typ": "fertigkeit",
                 "name": "Sprache",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5

@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -548,17 +548,17 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
+            "Erfinderschürze": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Brille": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Messer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Erfinderschürze": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -589,9 +589,8 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Brille",
-        "Messer",
-        "Erfinderschürze"
+        "Erfinderschürze",
+        "Brille"
     ],
     "selected_waffen": [
         "Messer"
@@ -601,12 +600,12 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
+        "Erfinderschürze": 1,
         "Brille": 1,
-        "Messer": 1,
-        "Erfinderschürze": 1
+        "Messer": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 1.0,
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -780,6 +779,13 @@
                 "typ": "fertigkeit",
                 "name": "Verrückte Wissenschaft",
                 "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

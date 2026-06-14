@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Verstand": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -492,6 +492,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Duellant": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -515,6 +527,20 @@
                 "machtpunkte": 2,
                 "reichweite": "Ver",
                 "dauer": "Speziell"
+            },
+            "Aufheben": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            },
+            "Furcht": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
             }
         },
         "superkraefte": {},
@@ -572,12 +598,16 @@
         "AH (Barde)",
         "Scharfzüngig",
         "Charismatisch",
-        "Formationskämpfer"
+        "Formationskämpfer",
+        "Duellant",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Eigenschaft erhöhen/senken",
         "Empathie",
-        "Verwirrung"
+        "Verwirrung",
+        "Aufheben",
+        "Furcht"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -628,13 +658,13 @@
         "Rapier": 1,
         "Leichte Armbrust": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 3.0,
-    "aufstiege_gesamt": 4,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 3,
+    "anzahl_maechte": 5,
     "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -793,6 +823,53 @@
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Duellant",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Verstand": {
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -172,7 +172,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -502,6 +502,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Arkaner Bogenschütze": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -518,22 +530,38 @@
                 "machtpunkte": 2,
                 "reichweite": "Ver",
                 "dauer": "Sofort"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/Sofort"
+            },
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "Ver×2",
+                "dauer": "Sofort"
+            },
+            "Kriegersegen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 4,
+                "reichweite": "Ver 5",
+                "dauer": "5"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kompositbogen": {
+            "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Pfeile (20)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -557,6 +585,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Kompositbogen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -572,11 +605,16 @@
         "AH (Druide)",
         "Bindung mit der Natur",
         "Naturgespür",
-        "Rückzug"
+        "Rückzug",
+        "Arkaner Bogenschütze",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Tierfreund",
-        "Verstricken"
+        "Verstricken",
+        "Eigenschaft erhöhen/senken",
+        "Flächenschlag",
+        "Kriegersegen"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -601,9 +639,8 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kompositbogen",
-        "Pfeile (20)",
         "Ledertunika",
+        "Pfeile (20)",
         "Abenteurerausrüstung",
         "Verstrickungsbeutel",
         "Trank: schwache Heilung",
@@ -617,21 +654,21 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kompositbogen": 1,
-        "Pfeile (20)": 1,
         "Ledertunika": 1,
+        "Pfeile (20)": 1,
         "Abenteurerausrüstung": 1,
         "Verstrickungsbeutel": 1,
         "Trank: schwache Heilung": 1,
-        "Rauchstab": 2
+        "Rauchstab": 2,
+        "Kompositbogen": 1
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 1,
-    "anzahl_maechte": 3,
+    "verfuegbare_maechte": 0,
+    "anzahl_maechte": 5,
     "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -782,6 +819,39 @@
                 "name": "Überleben",
                 "wert": 6,
                 "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Arkaner Bogenschütze",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

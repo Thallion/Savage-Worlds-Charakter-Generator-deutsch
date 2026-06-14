@@ -57,7 +57,7 @@
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -509,6 +509,12 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Bedrohlich": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -560,7 +566,8 @@
         "Bevorzugtes Gelände",
         "Wildnis durchqueren",
         "Schnell",
-        "Rundumschlag"
+        "Rundumschlag",
+        "Bedrohlich"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -608,9 +615,9 @@
         "Streitflegel": 1,
         "Handaxt": 3
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 3,
-    "aufstiege_gesamt": 4,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
@@ -756,6 +763,33 @@
             {
                 "typ": "talent",
                 "name": "Rundumschlag",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "talent",
+                "name": "Bedrohlich",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

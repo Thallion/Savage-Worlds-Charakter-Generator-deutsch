@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Stärke": {
@@ -354,7 +354,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -380,7 +380,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -509,6 +509,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Wissenshüter": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -525,16 +537,32 @@
                 "machtpunkte": 1,
                 "reichweite": "Ver 5",
                 "dauer": "5"
+            },
+            "Aufheben": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            },
+            "Betäuben": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            },
+            "Verbündeten beschwören": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Zauberkomponentenbeutel": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -554,6 +582,11 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -570,11 +603,16 @@
         "Arkane Verbindung",
         "Schule",
         "Glück",
-        "Arkane Resistenz"
+        "Arkane Resistenz",
+        "Wissenshüter",
+        "Neue Mächte"
     ],
     "selected_maechte": [
         "Geschoss",
-        "Schutz"
+        "Schutz",
+        "Aufheben",
+        "Betäuben",
+        "Verbündeten beschwören"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -599,7 +637,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Dolch",
         "Zauberkomponentenbeutel",
         "Zauberbuch, Magier (leer)",
         "Abenteurerausrüstung",
@@ -611,19 +648,19 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Dolch": 3,
         "Zauberkomponentenbeutel": 1,
         "Zauberbuch, Magier (leer)": 1,
         "Abenteurerausrüstung": 1,
-        "Schriftrolle: Schlummer": 1
+        "Schriftrolle: Schlummer": 1,
+        "Dolch": 3
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 1,
-    "anzahl_maechte": 3,
+    "anzahl_maechte": 6,
     "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
@@ -774,6 +811,39 @@
                 "name": "Zaubern",
                 "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Geisteswissenschaften",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Wissenshüter",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

@@ -1,10 +1,10 @@
 {
     "profil_daten": {
-        "Name": "Gnor",
+        "Name": "Kyra",
         "Alter": "",
         "Geschlecht": "",
-        "Konzept": "",
-        "Sprachen": ""
+        "Konzept": "Ikonische Klerikerin",
+        "Sprachen": "Celestisch, Elfisch, Gemeinsprache, Halblingisch, Kelisch"
     },
     "active_setting_name": "Savage Pathfinder",
     "char_gen_completed": true,
@@ -42,17 +42,17 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -107,7 +107,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -147,7 +147,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -186,7 +186,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -263,8 +263,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -276,8 +276,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -380,8 +380,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
-                "modifier": 0,
+                "value": 4,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -442,40 +442,47 @@
     },
     "selected_elements": {
         "voelker": {
-            "Zwerg": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Angetrieben_schwer": {
+            "Ehrenkodex": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Behindernde Rüstung_jede": {
+            "Heroisch": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Fies": {
+            "Schwur_schwer": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
-            },
-            "Tick": {
-                "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "AH (Zauberer)": {
+            "AH (Kleriker)": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "neue_maechte": 2,
-                "machtpunkte": 15
+                "neue_maechte": 3,
+                "machtpunkte": 10
             },
-            "Blutlinie": {
+            "Gnade": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Energie fokussieren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Heiler": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -483,18 +490,62 @@
             }
         },
         "maechte": {
-            "Eigenschaft erhöhen/senken": {
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Berührung",
+                "dauer": "Sofort"
+            },
+            "Schutz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            },
+            "Waffe verbessern": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "machtpunkte": 2,
                 "reichweite": "Ver 5",
-                "dauer": "5/Sofort"
+                "dauer": "5"
             }
         },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Bolzen (10)": {
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederkappe": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schleudersteine (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heilertasche": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heiliges Symbol, Silber": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Heiliges Wasser": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -504,12 +555,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Trank: schwache Heilung": {
+            "Krummschwert": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Leichte Armbrust": {
+            "Schleuder": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -517,17 +568,20 @@
         }
     },
     "selected_handicaps": [
-        "Angetrieben_schwer",
-        "Behindernde Rüstung_jede",
-        "Fies",
-        "Tick"
+        "Ehrenkodex",
+        "Heroisch",
+        "Schwur_schwer"
     ],
     "selected_talente": [
-        "AH (Zauberer)",
-        "Blutlinie"
+        "AH (Kleriker)",
+        "Gnade",
+        "Energie fokussieren",
+        "Heiler"
     ],
     "selected_maechte": [
-        "Eigenschaft erhöhen/senken"
+        "Heilung",
+        "Schutz",
+        "Waffe verbessern"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -537,8 +591,8 @@
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
-        "Mensch": false,
-        "Zwerg": true,
+        "Mensch": true,
+        "Zwerg": false,
         "Ifrits": false,
         "Oreads": false,
         "Sylphen": false,
@@ -552,29 +606,45 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Bolzen (10)",
-        "Abenteurerausrüstung",
-        "Trank: schwache Heilung"
+        "Ledertunika",
+        "Lederbeinlinge",
+        "Lederkappe",
+        "Schleudersteine (20)",
+        "Heilertasche",
+        "Heiliges Symbol, Silber",
+        "Heiliges Wasser",
+        "Abenteurerausrüstung"
     ],
     "selected_waffen": [
-        "Leichte Armbrust"
+        "Krummschwert",
+        "Schleuder"
     ],
-    "selected_ruestungen": [],
+    "selected_ruestungen": [
+        "Ledertunika",
+        "Lederbeinlinge",
+        "Lederkappe"
+    ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Bolzen (10)": 2,
+        "Ledertunika": 1,
+        "Lederbeinlinge": 1,
+        "Lederkappe": 1,
+        "Schleudersteine (20)": 1,
+        "Heilertasche": 1,
+        "Heiliges Symbol, Silber": 1,
+        "Heiliges Wasser": 1,
         "Abenteurerausrüstung": 1,
-        "Trank: schwache Heilung": 1,
-        "Leichte Armbrust": 1
+        "Krummschwert": 1,
+        "Schleuder": 1
     },
     "rang": "Anfänger",
-    "verbleibende_aufstiege": 3.0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0,
+    "aufstiege_gesamt": 0,
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 1,
-    "verfuegbare_maechte": 1,
-    "anzahl_maechte": 2,
-    "machtpunkte": 15,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 0,
+    "anzahl_maechte": 3,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -589,7 +659,14 @@
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -603,6 +680,13 @@
             },
             {
                 "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
@@ -611,34 +695,55 @@
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
-                "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "attribut",
-                "name": "Konstitution",
                 "wert": 8,
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Athletik",
+                "name": "Glaube",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
@@ -659,66 +764,38 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Okkultismus",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
+                "name": "Okkultismus",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Wahrnehmung",
                 "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Okkultismus",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Okkultismus",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Zaubern",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Zaubern",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Zaubern",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
             }
         ]
     }

@@ -568,6 +568,13 @@
                 "machtpunkte": 1,
                 "reichweite": "VER 5",
                 "dauer": "—"
+            },
+            "Bannung": {
+                "ausgewaehlt": true,
+                "rang": "Fortgeschritten",
+                "machtpunkte": 3,
+                "reichweite": "Willenskraft",
+                "dauer": "Sofort"
             }
         },
         "superkraefte": {},
@@ -613,7 +620,8 @@
     ],
     "selected_maechte": [
         "Arkanes entdecken/verbergen",
-        "Empathie"
+        "Empathie",
+        "Bannung"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -647,11 +655,11 @@
         "Salz (5kg Sack)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 1,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 10,
     "machtstufe": "III",

@@ -7,7 +7,7 @@
         "Sprachen": "Druidisch, Elfisch, Gemeinsprache, Gnomisch, Sylvanisch"
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -566,12 +566,12 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Sichel": {
+            "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schleuder": {
+            "Lederbeinlinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -582,16 +582,6 @@
                 "zustand": "neu"
             },
             "Reisekleidung": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Ledertunika": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Lederbeinlinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -612,6 +602,16 @@
                 "zustand": "neu"
             },
             "Rauchstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Sichel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schleuder": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -666,12 +666,10 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Sichel",
-        "Schleuder",
-        "Schleudersteine (20)",
-        "Reisekleidung",
         "Ledertunika",
         "Lederbeinlinge",
+        "Schleudersteine (20)",
+        "Reisekleidung",
         "Abenteurerausrüstung",
         "Donnerstein",
         "Zauberkomponentenbeutel",
@@ -687,23 +685,22 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Sichel": 1,
-        "Schleuder": 1,
-        "Schleudersteine (20)": 1,
-        "Reisekleidung": 1,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
+        "Schleudersteine (20)": 1,
+        "Reisekleidung": 1,
         "Abenteurerausrüstung": 1,
         "Donnerstein": 1,
         "Zauberkomponentenbeutel": 1,
-        "Rauchstab": 5
+        "Rauchstab": 5,
+        "Sichel": 1,
+        "Schleuder": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 11,

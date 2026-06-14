@@ -7,7 +7,7 @@
         "Sprachen": "Abyssisch, Elfisch, Gemeinsprache, Riesisch, Thassilonisch, Zwergisch"
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -521,21 +521,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Kampfstab": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Handarmbrust": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Bolzen (10)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -572,6 +557,21 @@
                 "zustand": "neu"
             },
             "Schriftrolle: Schlummer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kampfstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Handarmbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -618,9 +618,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Dolch",
-        "Kampfstab",
-        "Handarmbrust",
         "Bolzen (10)",
         "Zauberkomponentenbeutel",
         "Zauberbuch, Magier (leer)",
@@ -638,9 +635,6 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Dolch": 1,
-        "Kampfstab": 1,
-        "Handarmbrust": 1,
         "Bolzen (10)": 2,
         "Zauberkomponentenbeutel": 1,
         "Zauberbuch, Magier (leer)": 1,
@@ -648,14 +642,16 @@
         "Pergament": 1,
         "Tintenstift (Schreibfeder)": 1,
         "Tinte (Fläschchen)": 1,
-        "Schriftrolle: Schlummer": 1
+        "Schriftrolle: Schlummer": 1,
+        "Dolch": 1,
+        "Kampfstab": 1,
+        "Handarmbrust": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 17,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 10,

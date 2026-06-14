@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
@@ -380,7 +380,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 10,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -498,6 +498,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Kanalisieren": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Rückzug": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {
@@ -538,7 +550,9 @@
         "AH (Magier)",
         "Zauberbücher",
         "Arkane Verbindung",
-        "Schule"
+        "Schule",
+        "Kanalisieren",
+        "Rückzug"
     ],
     "selected_maechte": [
         "Geschoss",
@@ -572,8 +586,8 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 4,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -723,6 +737,32 @@
                 "name": "Zaubern",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "talent",
+                "name": "Kanalisieren",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Rückzug",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

@@ -82,6 +82,40 @@ def parse_sheet(lines, hi):
             if m: skills[de] = int(m.group(1))
     return attrs, skills
 
+def parse_german_sheets(path):
+    """Deutscher Bogen (Deadlands US85040): {HEADER_UPPER: (attrs, skills)}.
+    Würfel als 'Name W8'. Trennt Blöcke an 40-`=`-Linien (NICHT 27-`=` Titel → {35,}).
+    Normalisiert 'Sprache (Englisch)'→'Sprache' (Setting hat nur generisches Sprache)."""
+    text = open(path, encoding='utf-8').read()
+    parts = re.split(r'={35,}\n', text)
+    blocks = {}
+    i = 1
+    while i < len(parts) - 1:
+        header = parts[i].strip().splitlines()[0].strip().upper()
+        body = parts[i + 1]
+        attrs, skills = {}, {}
+        section = None
+        for ln in body.splitlines():
+            s2 = ln.strip()
+            if s2 in ('ATTRIBUTE', 'FERTIGKEITEN', 'HANDICAPS', 'TALENTE', 'AUSRÜSTUNG'):
+                section = s2; continue
+            if s2.startswith('AUFSTIEGE'):
+                section = None; continue
+            if not s2:
+                continue
+            mm = re.match(r'(.+?)\s+W(\d+)', s2)
+            if not mm:
+                continue
+            nm, val = mm.group(1).strip(), int(mm.group(2))
+            if section == 'ATTRIBUTE':
+                attrs[nm] = val
+            elif section == 'FERTIGKEITEN':
+                if nm.startswith('Sprache'): nm = 'Sprache'
+                skills[nm] = val
+        blocks[header] = (attrs, skills)
+        i += 2
+    return blocks
+
 def fill(setting, name, jsonpath, lines, en):
     hi = find_header(lines, en)
     if hi is None:
@@ -89,6 +123,10 @@ def fill(setting, name, jsonpath, lines, en):
     sheet_a, sheet_s = parse_sheet(lines, hi)
     if not sheet_a:
         w(f"  {name:22} kein Attributblock geparst (Header Z~{hi+1})"); return
+    apply_gaps(setting, name, jsonpath, sheet_a, sheet_s)
+
+def apply_gaps(setting, name, jsonpath, sheet_a, sheet_s):
+    """Hebt Attribute/Fertigkeiten per Zusatz-Aufstieg auf Bogenwerte an (Seasoned-Cap <8)."""
     s = d.Sitzung(setting, name)
     if not s.controller.lade_charakter_von_json(jsonpath):
         w(f"  {name}: LADEN FEHLGESCHLAGEN"); return
@@ -149,5 +187,21 @@ for setting in ['SciFi Kompendium', 'Fantasy Kompendium']:
             fill(setting, name, jp, lines, en)
         except BaseException as e:
             w(f"  {name}: CRASH {e!r}"); w(traceback.format_exc())
+
+# ── Deadlands (deutscher Bogen, Header = Name in Großbuchstaben) ──
+DL_PDF = 'Texte/US85040PDF_Deadlands_Archetypen-Set_meta.txt'
+w("\n===== Deadlands =====")
+dl_blocks = parse_german_sheets(DL_PDF)
+for jp in sorted(glob.glob('chars/Archetypen/Archetyp_Deadlands_*.json')):
+    if '_backup' in jp: continue
+    name = os.path.basename(jp).replace('Archetyp_Deadlands_', '').replace('_A.json', '')
+    block = dl_blocks.get(name.upper())
+    if not block:
+        w(f"  {name}: kein PDF-Block"); continue
+    try:
+        apply_gaps('Deadlands', name, jp, block[0], block[1])
+    except BaseException as e:
+        w(f"  {name}: CRASH {e!r}"); w(traceback.format_exc())
+
 LOG.close()
 print("GAPFILL DONE")

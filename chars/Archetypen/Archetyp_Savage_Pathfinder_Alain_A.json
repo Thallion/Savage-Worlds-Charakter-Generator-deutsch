@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -57,7 +57,7 @@
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -172,7 +172,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -185,7 +185,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -475,33 +475,29 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Banner": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Rapier": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Leichte Armbrust": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Bolzen (10)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Bolzen (10)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -520,6 +516,16 @@
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
+            },
+            "Rapier": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Leichte Armbrust": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
             }
         }
     },
@@ -530,7 +536,8 @@
     ],
     "selected_talente": [
         "Kavalier",
-        "Lieblingswaffe"
+        "Lieblingswaffe",
+        "Banner"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -556,11 +563,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Rapier",
-        "Leichte Armbrust",
-        "Bolzen (10)",
         "Ledertunika",
         "Lederbeinlinge",
+        "Bolzen (10)",
         "Abenteurerausrüstung",
         "Trank: schwache Heilung",
         "Gegengift, Phiole"
@@ -575,18 +580,18 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Rapier": 1,
-        "Leichte Armbrust": 1,
-        "Bolzen (10)": 2,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
+        "Bolzen (10)": 2,
         "Abenteurerausrüstung": 1,
         "Trank: schwache Heilung": 1,
-        "Gegengift, Phiole": 1
+        "Gegengift, Phiole": 1,
+        "Rapier": 1,
+        "Leichte Armbrust": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 3,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -735,6 +740,33 @@
                 "name": "Überleben",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Banner",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

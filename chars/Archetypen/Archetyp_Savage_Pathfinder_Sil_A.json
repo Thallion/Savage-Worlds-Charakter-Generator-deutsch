@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": -1
         },
         "Willenskraft": {
@@ -503,27 +503,30 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Lebensband": {
+                "ausgewaehlt": true,
+                "rang": "V",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Mystische Kräfte": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 10
+            },
+            "Großes Glück": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Langschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Kompositbogen": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Pfeile (20)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Kettenhemd": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -534,7 +537,22 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Pfeile (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Langschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kompositbogen": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -553,7 +571,10 @@
         "Aura der Tapferkeit",
         "Böses Entdecken",
         "Böses Niederstrecken",
-        "Glück"
+        "Glück",
+        "Lebensband",
+        "Mystische Kräfte",
+        "Großes Glück"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -579,11 +600,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Langschwert",
-        "Kompositbogen",
-        "Pfeile (20)",
         "Kettenhemd",
         "Lederbeinlinge",
+        "Pfeile (20)",
         "Abenteurerausrüstung"
     ],
     "selected_waffen": [
@@ -596,21 +615,21 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Langschwert": 1,
-        "Kompositbogen": 1,
-        "Pfeile (20)": 1,
         "Kettenhemd": 1,
         "Lederbeinlinge": 1,
-        "Abenteurerausrüstung": 1
+        "Pfeile (20)": 1,
+        "Abenteurerausrüstung": 1,
+        "Langschwert": 1,
+        "Kompositbogen": 1
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "machtpunkte": 10,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
@@ -754,6 +773,31 @@
                 "name": "Glück",
                 "zahlungsquelle": "Handicap-Punkte",
                 "kosten": 2
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Lebensband",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Mystische Kräfte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Großes Glück",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

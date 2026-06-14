@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -526,16 +526,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Colt Peacemaker (.45)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Messer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Munition Pistole (groß) .40-.50 (50 Stück)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -547,6 +537,16 @@
                 "zustand": "neu"
             },
             "Pistolengürtel": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Colt Peacemaker (.45)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Messer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -573,8 +573,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Colt Peacemaker (.45)",
-        "Messer",
         "Munition Pistole (groß) .40-.50 (50 Stück)",
         "Schnelllade-Zylinder",
         "Pistolengürtel"
@@ -586,14 +584,14 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Colt Peacemaker (.45)": 2,
-        "Messer": 1,
         "Munition Pistole (groß) .40-.50 (50 Stück)": 1,
         "Schnelllade-Zylinder": 2,
-        "Pistolengürtel": 1
+        "Pistolengürtel": 1,
+        "Colt Peacemaker (.45)": 2,
+        "Messer": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 0.5,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -758,6 +756,13 @@
                 "typ": "fertigkeit",
                 "name": "Wahrnehmung",
                 "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

@@ -28,7 +28,7 @@ EXTRA_GEAR = {
     'Medizinfrau': [('Schlafsack', 1)],
     'Metallmagier': [('Werkzeugsatz', 1), ('Wesson Dolch-Pistole (.41)', 1)],
     'Revolverheldin': [('Pistolengürtel', 1)],
-    'Salonschönheit': [('Schuhe', 1)],
+    'Saloonschönheit': [('Schuhe', 1)],
     'Schamane': [('Eingeborenenschild (Klein)', 1), ('Pferd', 1), ('Schlafsack', 1)],
     'Territorialer Ranger': [('Colt Thunderer (.41)', 1), ('Dynamit (Stange)', 2),
              ('Einläufige Flinte', 1), ('Pferd', 1),
@@ -663,7 +663,7 @@ build('Kopfgeldjäger', {
     'fertigkeit:Wahrnehmung:6'])
 
 # ── SALOONSCHÖNHEIT ───────────────────────────────────────────────────────────
-build('Salonschönheit', {
+build('Saloonschönheit', {
     'attribute':    {'Geschicklichkeit': 6, 'Verstand': 8, 'Willenskraft': 8,
                      'Stärke': 4, 'Konstitution': 6},
     'fertigkeiten': {'Allgemeinwissen': 6, 'Athletik': 6, 'Darbietung': 8,

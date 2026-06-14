@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -535,22 +535,22 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Derringer (.41)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Messer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Munition Pistolen (klein) .22-.38 (50 Stück)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Spielkarten": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Derringer (.41)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Messer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -579,8 +579,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Derringer (.41)",
-        "Messer",
         "Munition Pistolen (klein) .22-.38 (50 Stück)",
         "Spielkarten"
     ],
@@ -591,13 +589,13 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Derringer (.41)": 1,
-        "Messer": 1,
         "Munition Pistolen (klein) .22-.38 (50 Stück)": 1,
-        "Spielkarten": 1
+        "Spielkarten": 1,
+        "Derringer (.41)": 1,
+        "Messer": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 1.0,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
@@ -781,6 +779,13 @@
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
             }
         ]
     }

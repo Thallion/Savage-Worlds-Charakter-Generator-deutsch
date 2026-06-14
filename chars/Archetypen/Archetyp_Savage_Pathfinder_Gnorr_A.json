@@ -1,10 +1,10 @@
 {
     "profil_daten": {
-        "Name": "Valeros, der Kämpfer",
+        "Name": "Gnorr",
         "Alter": "",
-        "Geschlecht": "männlich",
-        "Konzept": "Kämpfer",
-        "Sprachen": "Elfisch, Gemein­sprache, Sylvanisch, Zwergisch"
+        "Geschlecht": "",
+        "Konzept": "",
+        "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
     "char_gen_completed": true,
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
@@ -52,12 +52,12 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -146,7 +146,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -173,7 +173,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -186,7 +186,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": 0,
+                "modifier": -2,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -341,8 +341,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -380,8 +380,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -442,68 +442,98 @@
     },
     "selected_elements": {
         "voelker": {
-            "Mensch": {
+            "Zwerg": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Impulsiv": {
+            "Angetrieben_schwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Loyal": {
+            "Behindernde Rüstung_jede": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Fies": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Rachsüchtig_leicht": {
+            "Tick": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             }
         },
         "talente": {
-            "Kämpfer": {
+            "AH (Zauberer)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 15
+            },
+            "Blutlinie": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Kriegerische Anpassungsfähigkeit": {
+            "Schläger": {
                 "ausgewaehlt": true,
-                "rang": "A",
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Kräftig": {
+            "Drachenjünger": {
                 "ausgewaehlt": true,
-                "rang": "A",
+                "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Beidhändig": {
+            "Neue Mächte": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "neue_maechte": 0,
+                "neue_maechte": 2,
                 "machtpunkte": 0
             }
         },
-        "maechte": {},
+        "maechte": {
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver 5",
+                "dauer": "5/Sofort"
+            },
+            "Flächenschlag": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 3,
+                "reichweite": "Ver×2",
+                "dauer": "Sofort"
+            },
+            "Furcht": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Ver",
+                "dauer": "Sofort"
+            },
+            "Kriegersegen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 4,
+                "reichweite": "Ver 5",
+                "dauer": "5"
+            }
+        },
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Lederbeinlinge": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schuppenpanzer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Pfeile (20)": {
+            "Bolzen (10)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -513,17 +543,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Langschwert": {
+            "Trank: schwache Heilung": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Kurzschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Langbogen": {
+            "Leichte Armbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -531,17 +556,24 @@
         }
     },
     "selected_handicaps": [
-        "Impulsiv",
-        "Loyal",
-        "Rachsüchtig_leicht"
+        "Angetrieben_schwer",
+        "Behindernde Rüstung_jede",
+        "Fies",
+        "Tick"
     ],
     "selected_talente": [
-        "Kämpfer",
-        "Kriegerische Anpassungsfähigkeit",
-        "Kräftig",
-        "Beidhändig"
+        "AH (Zauberer)",
+        "Blutlinie",
+        "Schläger",
+        "Drachenjünger",
+        "Neue Mächte"
     ],
-    "selected_maechte": [],
+    "selected_maechte": [
+        "Eigenschaft erhöhen/senken",
+        "Flächenschlag",
+        "Furcht",
+        "Kriegersegen"
+    ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -550,8 +582,8 @@
         "Halbelf": false,
         "Halbling": false,
         "Halbork": false,
-        "Mensch": true,
-        "Zwerg": false,
+        "Mensch": false,
+        "Zwerg": true,
         "Ifrits": false,
         "Oreads": false,
         "Sylphen": false,
@@ -565,300 +597,40 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Lederbeinlinge",
-        "Schuppenpanzer",
-        "Pfeile (20)",
-        "Abenteurerausrüstung"
+        "Bolzen (10)",
+        "Abenteurerausrüstung",
+        "Trank: schwache Heilung"
     ],
     "selected_waffen": [
-        "Langschwert",
-        "Kurzschwert",
-        "Langbogen"
+        "Leichte Armbrust"
     ],
-    "selected_ruestungen": [
-        "Lederbeinlinge",
-        "Schuppenpanzer"
-    ],
+    "selected_ruestungen": [],
     "selected_schilde": [],
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "ausruestung_mengen": {
+        "Bolzen (10)": 2,
+        "Abenteurerausrüstung": 1,
+        "Trank: schwache Heilung": 1,
+        "Leichte Armbrust": 1
+    },
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 0,
+    "aufstiege_gesamt": 5,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
-    "anzahl_maechte": 0,
-    "machtpunkte": 0,
+    "anzahl_maechte": 4,
+    "machtpunkte": 15,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 29.0,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
-        "session_start": "2026-05-17T08:13:36.496751",
-        "entries": [
-            {
-                "timestamp": "2026-05-17 08:14:18",
-                "type": "handicap_hinzugefuegt",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Impulsiv",
-                    "stufe": "schwer",
-                    "punkte": 2
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:14:25",
-                "type": "handicap_hinzugefuegt",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Loyal",
-                    "stufe": "leicht",
-                    "punkte": 1
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:14:33",
-                "type": "handicap_hinzugefuegt",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Rachsüchtig_leicht",
-                    "stufe": "leicht",
-                    "punkte": 1
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:39",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Geschicklichkeit",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Attributspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:40",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Verstand",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Attributspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:42",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Konstitution",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Attributspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:43",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Willenskraft",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Attributspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:46",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Stärke",
-                    "von": 6,
-                    "nach": 8,
-                    "kosten": 1,
-                    "kosten_typ": "Attributspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:16:59",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Athletik",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:02",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Einschüchtern",
-                    "von": 4,
-                    "nach": 4,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:03",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Einschüchtern",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:07",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Heimlichkeit",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:11",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Kämpfen",
-                    "von": 4,
-                    "nach": 4,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:14",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Kämpfen",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:21",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Reiten",
-                    "von": 4,
-                    "nach": 4,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:26",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Schießen",
-                    "von": 4,
-                    "nach": 4,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:17:27",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Schießen",
-                    "von": 4,
-                    "nach": 6,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:18:33",
-                "type": "attribut_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Geschicklichkeit",
-                    "von": 6,
-                    "nach": 8,
-                    "kosten": 1,
-                    "kosten_typ": "Handicap-Punkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:18:37",
-                "type": "talent_hinzugefuegt",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Beidhändig",
-                    "kosten": 2,
-                    "voraussetzungen": ""
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:18:44",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Kämpfen",
-                    "von": 6,
-                    "nach": 8,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:18:50",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Schießen",
-                    "von": 6,
-                    "nach": 8,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            },
-            {
-                "timestamp": "2026-05-17 08:19:15",
-                "type": "fertigkeit_steigerung",
-                "rang": "Anfänger",
-                "details": {
-                    "name": "Überleben",
-                    "von": 4,
-                    "nach": 4,
-                    "kosten": 1,
-                    "kosten_typ": "Fertigkeitspunkte"
-                }
-            }
-        ],
         "cost_entries": [
             {
                 "typ": "attribut",
@@ -876,7 +648,7 @@
             },
             {
                 "typ": "attribut",
-                "name": "Konstitution",
+                "name": "Willenskraft",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -884,6 +656,13 @@
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -892,8 +671,15 @@
                 "typ": "attribut",
                 "name": "Stärke",
                 "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -904,27 +690,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -939,57 +704,90 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Reiten",
+                "name": "Einschüchtern",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
+                "name": "Einschüchtern",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Okkultismus",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Zaubern",
                 "wert": 8,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
             },
             {
                 "typ": "talent",
-                "name": "Beidhändig",
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "name": "Schläger",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "typ": "talent",
+                "name": "Drachenjünger",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             },
             {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }
         ]

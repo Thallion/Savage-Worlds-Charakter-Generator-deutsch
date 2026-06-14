@@ -7,7 +7,7 @@
         "Sprachen": "Elfisch, Gemeinsprache, Goblinisch, Riesisch"
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Konstitution": {
@@ -516,16 +516,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kurzschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Shuriken": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Krähenfüße": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -537,6 +527,16 @@
                 "zustand": "neu"
             },
             "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kurzschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Shuriken": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -582,8 +582,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kurzschwert",
-        "Shuriken",
         "Krähenfüße",
         "Alchemistenfeuer",
         "Abenteurerausrüstung"
@@ -595,18 +593,17 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kurzschwert": 1,
-        "Shuriken": 6,
         "Krähenfüße": 1,
         "Alchemistenfeuer": 3,
-        "Abenteurerausrüstung": 1
+        "Abenteurerausrüstung": 1,
+        "Kurzschwert": 1,
+        "Shuriken": 6
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

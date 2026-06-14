@@ -584,6 +584,27 @@
                 "machtpunkte": 2,
                 "reichweite": "VER",
                 "dauer": "1 Stunde"
+            },
+            "Eigenschaft erhöhen/senken": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "Sofort/5"
+            },
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "B",
+                "dauer": "Sofort"
+            },
+            "Schutz": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 5",
+                "dauer": "—"
             }
         },
         "superkraefte": {},
@@ -612,7 +633,10 @@
     ],
     "selected_maechte": [
         "Flächenschlag",
-        "Schlummer"
+        "Schlummer",
+        "Eigenschaft erhöhen/senken",
+        "Heilung",
+        "Schutz"
     ],
     "selected_superkraefte": [],
     "selected_cyberware": [],
@@ -640,11 +664,11 @@
         "Robe (dünn)": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 3,
+    "verfuegbare_maechte": 0,
     "anzahl_maechte": 5,
     "machtpunkte": 20,
     "machtstufe": "III",

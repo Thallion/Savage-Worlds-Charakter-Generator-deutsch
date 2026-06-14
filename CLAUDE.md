@@ -19,6 +19,7 @@ Detaillierte Dokumentation in `docs/`:
 - **[docs/TESTING.md](docs/TESTING.md)** — Test-Befehle, Test-Module-Übersicht, Mocking-Konventionen
 - **[docs/BUILD.md](docs/BUILD.md)** — Desktop + Android Builds, Build-Specs
 - **[docs/DATA_FORMATS.md](docs/DATA_FORMATS.md)** — Character-/Setting-/Template-/Config-JSON
+- **[docs/ARCHETYPEN_BUILD.md](docs/ARCHETYPEN_BUILD.md)** — Archetypen-Build-Skripte (`logs/`), Pipeline-Reihenfolge pro Setting, `fill_budget_gaps.py`, Verifikations-Tools
 
 ## Quick Reference
 

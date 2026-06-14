@@ -7,7 +7,7 @@
         "Sprachen": "Elfisch, Gemeinsprache, Gnomisch, Halblingisch"
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -525,27 +525,17 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schleuder": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schleudersteine (20)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schleudersteine (20)": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -571,6 +561,16 @@
                 "zustand": "neu"
             },
             "Zündholz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schleuder": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -618,11 +618,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Dolch",
-        "Schleuder",
-        "Schleudersteine (20)",
         "Ledertunika",
         "Lederbeinlinge",
+        "Schleudersteine (20)",
         "Abenteurerausrüstung",
         "Gegengift, Phiole",
         "Musikinstrument",
@@ -639,23 +637,22 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Dolch": 1,
-        "Schleuder": 1,
-        "Schleudersteine (20)": 1,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
+        "Schleudersteine (20)": 1,
         "Abenteurerausrüstung": 1,
         "Gegengift, Phiole": 1,
         "Musikinstrument": 1,
         "Unterhalterpaket": 1,
-        "Zündholz": 5
+        "Zündholz": 5,
+        "Dolch": 1,
+        "Schleuder": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 1,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 10,
