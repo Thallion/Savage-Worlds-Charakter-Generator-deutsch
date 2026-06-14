@@ -184,11 +184,13 @@ Handicaps/Talente laufen weiter über die normalen Treiber-Methoden. Details:
 - **Behoben:** Das Hintergrundtalent **„Der Beste"** hebt die Obergrenze auf 1/2 (Stufe III = 22).
   Es muss VOR der Kräfte-Wahl gesetzt werden — `build_supers.py` tat das zu spät (D-Advances),
   wodurch Feuervogel (Fire Bird) seinen 20-SKP-Fernkampf verlor. Jetzt in Schritt 5 gesetzt → 45/45.
-- **Offen (Regel-Engine-Entscheidung):** Panzer/Schlaeger (`Superattribut` 20) und Sprinter
-  (`Geschwindigkeit` 16) — die PL-III-Karten haben Einzelkräfte >15 OHNE „Der Beste". Die App lehnt
-  zudem eine zweite Instanz derselben Kraft ab (`superkraft_funktionen.py`), obwohl das Kompendium
-  Superattribut explizit als mehrfach wählbar beschreibt. → nicht originalgetreu baubar ohne
-  App-Änderung (wiederholbare Kräfte zulassen bzw. Obergrenze für Archetypen lockern).
+- **Behoben (Mehrfachwahl):** Panzer/Schlaeger haben `Superattribut` 20. Das Kompendium erlaubt
+  „fünfmal Superattribut → 5 Stufen", aber `waehle_superkraft` lehnte jede zweite Instanz ab. Fix:
+  Kräfte mit Setting-Kosten `"X/Stufe"` sind wiederholbar (Kosten stapeln auf, Obergrenze pro Stufe);
+  Build-SPEC `Superattribut 20 → 2×10`. Panzer/Schlaeger jetzt 45/45. Tests in `test_superkraft_model.py`.
+- **Offen (RAW-Spannung):** Sprinter `Geschwindigkeit 16` ist EINE Kraft (`3-17`, kein `/Stufe`) >
+  Obergrenze 15 ohne „Der Beste" → 29/45. Nur durch Obergrenze-Lockerung lösbar (bewusst nicht gemacht).
+  Stand: 10/11 Archetypen 45/45.
 
 ---
 

@@ -538,6 +538,11 @@
                 "ausgewaehlt": true,
                 "gewaehlte_kosten": 11,
                 "gewaehlte_modifikatoren": []
+            },
+            "Superattribut": {
+                "ausgewaehlt": true,
+                "gewaehlte_kosten": 20,
+                "gewaehlte_modifikatoren": []
             }
         },
         "cyberware": {},
@@ -557,7 +562,8 @@
     "selected_superkraefte": [
         "Panzerung",
         "Springen",
-        "Nahkampfangriff"
+        "Nahkampfangriff",
+        "Superattribut"
     ],
     "selected_cyberware": [],
     "voelker_selected": {
@@ -588,7 +594,7 @@
     "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 45,
-    "superkraft_punkte_verbraucht": 25,
+    "superkraft_punkte_verbraucht": 45,
     "kraftobergrenze": 15,
     "vermoegen": 500,
     "erschoepfung": 0,

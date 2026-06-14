@@ -478,6 +478,10 @@ class TestWaehleSuperkraft(unittest.TestCase):
                 "name": "Panzerung", "kosten": "1-5", "beschreibung": "Schutz",
                 "modifikatoren": {}, "ausgewaehlt": False, "aktiv": True
             },
+            "Superattribut": {
+                "name": "Superattribut", "kosten": "2/Stufe", "beschreibung": "Attribut erhöhen",
+                "modifikatoren": {}, "ausgewaehlt": False, "aktiv": True
+            },
         }
         skf.initialisiere_superkraefte(self.char, daten)
 
@@ -522,6 +526,22 @@ class TestWaehleSuperkraft(unittest.TestCase):
         skf.waehle_superkraft(self.char, "Fliegen", kosten=6)  # 6 SKP
         self.assertEqual(self.char.superkraft_punkte_verbraucht, 8)
         self.assertEqual(len(self.char.selected_superkraefte), 2)
+
+    def test_wiederholbare_kraft_stapelt_stufen(self):
+        """Gestufte Kräfte ('X/Stufe', z.B. Superattribut) dürfen mehrfach gewählt werden
+        und addieren ihre Kosten auf (Regel: 'fünfmal Superattribut → 5 Stufen')."""
+        self.assertTrue(skf.waehle_superkraft(self.char, "Superattribut", kosten=10))
+        # zweite Stufe: je Stufe <= Obergrenze (15), wird aufaddiert
+        self.assertTrue(skf.waehle_superkraft(self.char, "Superattribut", kosten=10))
+        self.assertEqual(self.char.superkraefte["Superattribut"].gewaehlte_kosten, 20)
+        self.assertEqual(self.char.superkraft_punkte_verbraucht, 20)
+        # nur EIN Eintrag in der Auswahlliste (eine Kraft mit mehreren Stufen)
+        self.assertEqual(self.char.selected_superkraefte.count("Superattribut"), 1)
+
+    def test_wiederholbare_kraft_einzelstufe_ueber_obergrenze(self):
+        """Auch bei wiederholbaren Kräften gilt die Obergrenze PRO Stufe."""
+        result = skf.waehle_superkraft(self.char, "Superattribut", kosten=16)  # > 15
+        self.assertEqual(result, "ueber_obergrenze")
 
 
 class TestEntferneSuperkraft(unittest.TestCase):

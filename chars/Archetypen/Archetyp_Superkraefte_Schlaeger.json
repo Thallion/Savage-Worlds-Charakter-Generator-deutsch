@@ -541,6 +541,11 @@
                 "gewaehlte_kosten": 3,
                 "gewaehlte_modifikatoren": []
             },
+            "Superattribut": {
+                "ausgewaehlt": true,
+                "gewaehlte_kosten": 20,
+                "gewaehlte_modifikatoren": []
+            },
             "Supertalent": {
                 "ausgewaehlt": true,
                 "gewaehlte_kosten": 8,
@@ -570,6 +575,7 @@
     "selected_superkraefte": [
         "Nahkampfangriff",
         "Parade",
+        "Superattribut",
         "Supertalent",
         "Superfertigkeit"
     ],
@@ -602,7 +608,7 @@
     "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 45,
-    "superkraft_punkte_verbraucht": 25,
+    "superkraft_punkte_verbraucht": 45,
     "kraftobergrenze": 15,
     "vermoegen": 500,
     "erschoepfung": 0,

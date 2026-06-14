@@ -30,7 +30,8 @@ SPEC = [
            'Wahrnehmung':6,'Überreden':4,'Heimlichkeit':4,'Überleben':6},
    hind=[('Heldenhaft','Heroic M'),('Zwei linke Hände','All Thumbs m'),('Transformation (leicht)','Transformation m')],
    edges=[('Kräftig','Brawny'),('Rundumschlag','Sweep'),('Superkräfte','Super Powers')],
-   powers=[('Panzerung',10),('Springen',4),('Nahkampfangriff',11),('Superattribut',20)]),
+   powers=[('Panzerung',10),('Springen',4),('Nahkampfangriff',11),
+           ('Superattribut',10),('Superattribut',10)]),  # Bogen: Super Attribute 20 = 2 Stufen ≤Obergrenze
  dict(name='Schuetze', attr=dict(Agi=10,Sma=8,Spi=8,Str=8,Vig=8),
    skills={'Athletik':8,'Allgemeinwissen':6,'Elektronik':8,'Fahren':8,'Kämpfen':8,'Einschüchtern':10,
            'Wahrnehmung':6,'Überreden':4,'Schießen':12,'Heimlichkeit':6,'Diebeskunst':8},
@@ -66,7 +67,8 @@ SPEC = [
            'Darbietung':6,'Überreden':4,'Heimlichkeit':6,'Provozieren':8},
    hind=[('Arrogant','Arrogant M'),('Heldenhaft','Heroic M')],
    edges=[('Raufbold','Brawler/Bruiser'),('Rohling','Brute'),('Finte','Feint'),('Erstschlag','First Strike'),('Erniedrigen','Humiliate'),(None,'Mighty Blow'),('Superkräfte','Super Powers')],
-   powers=[('Nahkampfangriff',11),('Parade',3),('Superattribut',20),('Supertalent',8),('Superfertigkeit',3)]),
+   powers=[('Nahkampfangriff',11),('Parade',3),('Superattribut',10),('Superattribut',10),
+           ('Supertalent',8),('Superfertigkeit',3)]),  # Super Attribute 20 = 2 Stufen ≤Obergrenze
  dict(name='Verteidiger', attr=dict(Agi=6,Sma=10,Spi=8,Str=6,Vig=8),
    skills={'Athletik':6,'Allgemeinwissen':6,'Fahren':6,'Elektronik':8,'Kämpfen':6,'Fokus':10,'Hacken':10,
            'Einschüchtern':6,'Wahrnehmung':6,'Überreden':6,'Naturwissenschaften':8,'Heimlichkeit':4},

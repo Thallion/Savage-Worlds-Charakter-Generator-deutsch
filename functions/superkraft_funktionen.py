@@ -178,7 +178,14 @@ def waehle_superkraft(charakter, kraft_name, kosten=None):
 
     kraft = charakter.superkraefte[kraft_name]
 
-    if kraft.ausgewaehlt:
+    # Wiederholbare/gestufte Kräfte (Setting-Kosten im Format "X/Stufe", z.B. Superattribut,
+    # Superfertigkeit, Supertalent, Panzerung) dürfen mehrfach gewählt werden — laut Kompendium
+    # ("fünfmal Superattribut auswählen → 5 Stufen in dieser Kraft"). Jede zusätzliche Stufe wird
+    # einzeln gegen die Kraftobergrenze geprüft und auf die Kraft aufaddiert. So lassen sich die
+    # offiziellen PL-III-Archetypen mit Einzelkräften > Obergrenze (z.B. Super Attribute 20) bauen.
+    ist_wiederholbar = '/stufe' in str(kraft.basis_kosten).lower()
+
+    if kraft.ausgewaehlt and not ist_wiederholbar:
         Logger.warning(f"Superkraft '{kraft_name}' ist bereits ausgewählt")
         return False
 
@@ -189,7 +196,7 @@ def waehle_superkraft(charakter, kraft_name, kosten=None):
     # Kosten bestimmen
     effektive_kosten = kosten if kosten is not None else kraft.get_feste_kosten()
 
-    # Kraftobergrenze prüfen
+    # Kraftobergrenze prüfen (gilt pro Stufe/Wahl, nicht für die kumulierte wiederholbare Kraft)
     if effektive_kosten > charakter.kraftobergrenze:
         Logger.warning(f"Superkraft '{kraft_name}' ({effektive_kosten} SKP) überschreitet "
                       f"Kraftobergrenze ({charakter.kraftobergrenze} SKP)")
@@ -202,9 +209,12 @@ def waehle_superkraft(charakter, kraft_name, kosten=None):
                       f"verfügbar {verbleibend}")
         return "nicht_genug_skp"
 
-    # Superkraft auswählen
-    kraft.auswaehlen(kosten=effektive_kosten)
-    charakter.selected_superkraefte = list(charakter.selected_superkraefte) + [kraft_name]
+    # Superkraft auswählen — bei wiederholbaren Kräften eine weitere Stufe aufaddieren
+    if kraft.ausgewaehlt:
+        kraft.gewaehlte_kosten += effektive_kosten
+    else:
+        kraft.auswaehlen(kosten=effektive_kosten)
+        charakter.selected_superkraefte = list(charakter.selected_superkraefte) + [kraft_name]
 
     # SKP aktualisieren
     _aktualisiere_skp(charakter)
