@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 10,
+                "value": 12,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -503,6 +503,12 @@
             }
         },
         "talente": {
+            "Der Beste": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
             "Superkräfte": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -510,12 +516,6 @@
                 "machtpunkte": 0
             },
             "Attraktiv": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Der Beste": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -537,6 +537,11 @@
             "Fliegen": {
                 "ausgewaehlt": true,
                 "gewaehlte_kosten": 8,
+                "gewaehlte_modifikatoren": []
+            },
+            "Fernkampfangriff": {
+                "ausgewaehlt": true,
+                "gewaehlte_kosten": 20,
                 "gewaehlte_modifikatoren": []
             },
             "Superattribut": {
@@ -564,15 +569,16 @@
         "Umweltschwäche"
     ],
     "selected_talente": [
+        "Der Beste",
         "Superkräfte",
-        "Attraktiv",
-        "Der Beste"
+        "Attraktiv"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [
         "Ausweichen",
         "Umweltresistenz",
         "Fliegen",
+        "Fernkampfangriff",
         "Superattribut",
         "Superfertigkeit",
         "Robustheit"
@@ -606,7 +612,7 @@
     "machtpunkte": 0,
     "machtstufe": "III",
     "superkraft_punkte_gesamt": 45,
-    "superkraft_punkte_verbraucht": 25,
+    "superkraft_punkte_verbraucht": 45,
     "kraftobergrenze": 22,
     "vermoegen": 500,
     "erschoepfung": 0,
@@ -756,12 +762,6 @@
                 "kosten": 1
             },
             {
-                "typ": "talent",
-                "name": "Der Beste",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
                 "typ": "fertigkeit",
                 "name": "Fokus",
                 "wert": 10,
@@ -771,6 +771,13 @@
             {
                 "typ": "fertigkeit",
                 "name": "Fokus",
+                "wert": 12,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
                 "wert": 12,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1.0

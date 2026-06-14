@@ -175,8 +175,20 @@ Stand 2026-06-14: schließt 7/11 Lücken (Exorcist, Witch, Magician, Mummy). Off
 
 `build_supers.py` nutzt **nicht** das normale Punktesystem, sondern **Superkraftpunkte (SKP)**
 über `functions/superkraft_funktionen.py` (nicht im `driver` gekapselt). Machtstufe I–V =
-15/30/45/60/75 SKP. Attribute/Fertigkeiten/Handicaps/Talente laufen weiter über die normalen
-Treiber-Methoden. Details: `.claude/skills/archetyp-erstellen/SKILL.md` (Abschnitt Superkräfte).
+15/30/45/60/75 SKP, Kraftobergrenze je Kraft = 1/3 (Stufe III = 15). Attribute/Fertigkeiten/
+Handicaps/Talente laufen weiter über die normalen Treiber-Methoden. Details:
+`.claude/skills/archetyp-erstellen/SKILL.md` (Abschnitt Superkräfte). Quelle: englische
+„Super Powers Archetype Cards" (alle POWER LEVEL III), 11 von 37 Karten gebaut.
+
+**Obergrenze-Fix + offene App-Themen (2026-06-14):**
+- **Behoben:** Das Hintergrundtalent **„Der Beste"** hebt die Obergrenze auf 1/2 (Stufe III = 22).
+  Es muss VOR der Kräfte-Wahl gesetzt werden — `build_supers.py` tat das zu spät (D-Advances),
+  wodurch Feuervogel (Fire Bird) seinen 20-SKP-Fernkampf verlor. Jetzt in Schritt 5 gesetzt → 45/45.
+- **Offen (Regel-Engine-Entscheidung):** Panzer/Schlaeger (`Superattribut` 20) und Sprinter
+  (`Geschwindigkeit` 16) — die PL-III-Karten haben Einzelkräfte >15 OHNE „Der Beste". Die App lehnt
+  zudem eine zweite Instanz derselben Kraft ab (`superkraft_funktionen.py`), obwohl das Kompendium
+  Superattribut explizit als mehrfach wählbar beschreibt. → nicht originalgetreu baubar ohne
+  App-Änderung (wiederholbare Kräfte zulassen bzw. Obergrenze für Archetypen lockern).
 
 ---
 

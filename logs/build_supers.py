@@ -127,9 +127,12 @@ def build(spec):
             if iv < z:
                 rep['trait_shortfall'].append(f'{f} W{iv}<W{z}')
 
-        # 5) Superkräfte-Edge (free per Setting-Beschreibung) während CharGen setzen
+        # 5) Obergrenze-relevante Edges VOR der Kräfte-Wahl setzen:
+        #    'Superkräfte' (gewährt SKP) und 'Der Beste' (hebt Kraftobergrenze 1/3->1/2 an).
+        #    'Der Beste' MUSS vor Schritt 6 stehen, sonst gilt bei der Kräfte-Wahl noch die
+        #    niedrige Obergrenze und teure Bogen-Kräfte (Fire Bird: Fernkampf 20) werden geblockt.
         for key, label in spec['edges']:
-            if key == 'Superkräfte':
+            if key in ('Superkräfte', 'Der Beste'):
                 s.ch.selected_talente.append(key)
 
         # 6) Superkräfte wählen (verbrauchen SKP)
