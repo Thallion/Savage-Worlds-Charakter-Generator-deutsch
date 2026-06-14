@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "SWAE",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -537,12 +537,12 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kampfstab": {
+            "Abenteurerpaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Abenteurerpaket": {
+            "Kampfstab": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -578,7 +578,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kampfstab",
         "Abenteurerpaket"
     ],
     "selected_waffen": [
@@ -587,15 +586,14 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kampfstab": 1,
-        "Abenteurerpaket": 1
+        "Abenteurerpaket": 1,
+        "Kampfstab": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 17,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 15,

@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Aventurien",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -501,12 +501,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Armbrust": {
+            "Diebeswerkzeuge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Diebeswerkzeuge": {
+            "Schwere Armbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -542,7 +542,6 @@
     "selected_allgemeine_ausruestung": [
         "Kettenhemd",
         "Abenteurerausrüstung",
-        "Schwere Armbrust",
         "Diebeswerkzeuge"
     ],
     "selected_waffen": [
@@ -555,8 +554,8 @@
     "ausruestung_mengen": {
         "Kettenhemd": 1,
         "Abenteurerausrüstung": 1,
-        "Schwere Armbrust": 1,
-        "Diebeswerkzeuge": 1
+        "Diebeswerkzeuge": 1,
+        "Schwere Armbrust": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,

@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Aventurien",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -475,17 +475,17 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
+            "Abenteurerpaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Schwert, Langschwert": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Mittlerer Schild": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Abenteurerpaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -516,8 +516,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Schwert, Langschwert",
-        "Mittlerer Schild",
         "Abenteurerpaket"
     ],
     "selected_waffen": [
@@ -528,9 +526,9 @@
         "Mittlerer Schild"
     ],
     "ausruestung_mengen": {
+        "Abenteurerpaket": 1,
         "Schwert, Langschwert": 1,
-        "Mittlerer Schild": 1,
-        "Abenteurerpaket": 1
+        "Mittlerer Schild": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,

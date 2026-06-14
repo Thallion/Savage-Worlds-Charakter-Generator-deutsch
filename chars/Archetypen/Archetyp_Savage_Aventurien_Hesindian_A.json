@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Aventurien",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -447,11 +447,6 @@
             }
         },
         "handicaps": {
-            "Behindernde Rüstung_jede": {
-                "ausgewaehlt": true,
-                "stufe": "schwer",
-                "punkte": 2
-            },
             "Neugierig": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -530,12 +525,12 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Stab": {
+            "Abenteurerpaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Abenteurerpaket": {
+            "Stab": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -543,7 +538,6 @@
         }
     },
     "selected_handicaps": [
-        "Behindernde Rüstung_jede",
         "Neugierig",
         "Schlechte Augen_leicht",
         "Tick",
@@ -576,7 +570,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Stab",
         "Abenteurerpaket"
     ],
     "selected_waffen": [
@@ -585,8 +578,8 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Stab": 1,
-        "Abenteurerpaket": 1
+        "Abenteurerpaket": 1,
+        "Stab": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,

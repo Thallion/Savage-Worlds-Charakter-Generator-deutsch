@@ -14,11 +14,11 @@
 
 ### Agent ↔ AGENT
 
-- **🔴 FEHLT_KATALOG** (2): `Marke der Agency (+1 Überreden bei gesetzestreuen Typen)`, `Ersatz-GatlingTrommel`
+- **🔴 FEHLT_KATALOG** (2): `Ersatz-GatlingTrommel`, `Marke der Agency (+1 Überreden bei gesetzestreuen Typen)`
 
 ### Chi-Meisterin ↔ CHI-MEISTERIN
 
-- **🔴 FEHLT_KATALOG** (4): `Seidenfächer`, `Umhängetasche`, `Mantel`, `Deine Fäuste (Stä+W4)`
+- **🔴 FEHLT_KATALOG** (4): `Deine Fäuste (Stä+W4)`, `Mantel`, `Seidenfächer`, `Umhängetasche`
 - **⚠ ZUVIEL** (1): `Messer`
 
 ### Cowgirl ↔ COWGIRL
@@ -32,7 +32,7 @@
 
 ### Entdecker ↔ ENTDECKER
 
-- **🔴 FEHLT_KATALOG** (4): `Jägerkleidung und -hut`, `Pfeife`, `Vergrößerungsglas`, `elegantes Monokel`
+- **🔴 FEHLT_KATALOG** (4): `elegantes Monokel`, `Jägerkleidung und -hut`, `Vergrößerungsglas`, `Pfeife`
 - **⚠ ZUVIEL** (1): `Munition Gewehr (klein) .38-44 (50 Stück)`
 
 ### Gepeinigter ↔ GEPEINIGTER
@@ -41,7 +41,7 @@
 
 ### Gesegneter ↔ GESEGNETER
 
-- **🔴 FEHLT_KATALOG** (2): `Heiliges Kreuz und Ornat`, `abgewetzte Bibel`
+- **🔴 FEHLT_KATALOG** (2): `abgewetzte Bibel`, `Heiliges Kreuz und Ornat`
 
 ### Hexe ↔ HEXE
 
@@ -49,7 +49,7 @@
 
 ### Investigativer Journalist ↔ INVESTIGATIVER JOURNALIST
 
-- **🔴 FEHLT_KATALOG** (3): `verschiedene Stifte und Griffel`, `Notizbuch`, `Tasche für Equipment`
+- **🔴 FEHLT_KATALOG** (3): `Tasche für Equipment`, `Notizbuch`, `verschiedene Stifte und Griffel`
 - **⚠ ZUVIEL** (1): `Colt Lightning (.38)`
 
 ### Kopfgeldjäger ↔ KOPFGELDJÄGER
@@ -59,7 +59,7 @@
 
 ### Medizinfrau ↔ MEDIZINFRAU
 
-- **🔴 FEHLT_KATALOG** (2): `Medizinbeutel`, `Knochenhalskette`
+- **🔴 FEHLT_KATALOG** (2): `Knochenhalskette`, `Medizinbeutel`
 
 ### Metallmagier ↔ METALLMAGIER
 
@@ -76,12 +76,12 @@
 
 ### Territorialer Ranger ↔ TERRITORIALER RANGER
 
-- **🔴 FEHLT_KATALOG** (2): `Buch „Flüchtige vor der Justiz in den US-Territorien"`, `Rangerabzeichen (+1 Überreden bei gesetzestreuen Typen)`
+- **🔴 FEHLT_KATALOG** (2): `Rangerabzeichen (+1 Überreden bei gesetzestreuen Typen)`, `Buch „Flüchtige vor der Justiz in den US-Territorien"`
 
 ### US-Marshal ↔ US-MARSHAL
 
 - **🔴 FEHLT_KATALOG** (1): `US Marshal Marke`
-- **⚠ ZUVIEL** (2): `Winchester '73 (.44-40)`, `Munition Gewehr (klein) .38-44 (50 Stück)`
+- **⚠ ZUVIEL** (2): `Munition Gewehr (klein) .38-44 (50 Stück)`, `Winchester '73 (.44-40)`
 
 ### Vaquero ↔ VAQUERO
 
@@ -90,7 +90,7 @@
 
 ### Verrückte Wissenschaftlerin ↔ VERRÜCKTE WISSENSCHAFTLERIN
 
-- **🔴 FEHLT_KATALOG** (3): `diverse Notizbücher und Schreibutensilien`, `verschiedene Spielereien`, `Laborkittel`
+- **🔴 FEHLT_KATALOG** (3): `diverse Notizbücher und Schreibutensilien`, `Laborkittel`, `verschiedene Spielereien`
 
 ### Voodoopraktikerin ↔ VOODOOPRAKTIKERIN
 
@@ -98,13 +98,13 @@
 
 ### Wundarzt ↔ WUNDARZT
 
-- **🔴 FEHLT_KATALOG** (2): `2× dehydrierte Luft-Tabletten (10 Min. Luft im Mund)`, `2× taktiler Desensibilisator (–2 Wundabzüge, 10 Min.)`
+- **🔴 FEHLT_KATALOG** (2): `2× taktiler Desensibilisator (–2 Wundabzüge, 10 Min.)`, `2× dehydrierte Luft-Tabletten (10 Min. Luft im Mund)`
 
 ### Zauberschützin ↔ ZAUBERSCHÜTZIN
 
 - **🔴 FEHLT_KATALOG** (2): `Groschenroman „Die Abenteuer von Doc Holliday"`, `Munitionspresse`
 
-## Fantasy Kompendium (32 Chars vs. 32 Bögen)
+## Fantasy Kompendium (36 Chars vs. 32 Bögen)
 
 ### Akrobatin ↔ ACROBAT
 
@@ -138,6 +138,11 @@
 
 - **⚠ ZUVIEL** (1): `Ledertunika`
 
+### Walküre ↔ VALKYRIE
+
+- **🟢 FEHLT_OFFEN** (3): `medium shield (Parry +2, Cover –2)` (→`Mittlerer Schild`), `Trident (Str+d6, Reach 1)` (→`Dreizack`), `mercenary’s pack` (→`Söldnerpaket`)
+- **🔴 FEHLT_KATALOG** (1): `masterwork plate mail armor and helmet (+4)`
+
 ### Zauberer ↔ SORCERER
 
 - **⚠ ZUVIEL** (1): `Umhang mit Kapuze`
@@ -167,9 +172,9 @@
 | Setting | Chars | FEHLT_OFFEN (Schritt 1) | FEHLT_KATALOG (Schritt 2) |
 |---|---|---|---|
 | Deadlands | 24 | **0** | **37** |
-| Fantasy Kompendium | 32 | **0** | **2** |
+| Fantasy Kompendium | 36 | **3** | **3** |
 | SciFi Kompendium | 36 | **0** | **0** |
-| **Gesamt** | – | **0** | **39** |
+| **Gesamt** | – | **3** | **40** |
 
 **Schritt 1 (offen):** Diese Items sind im Katalog vorhanden — Build-Skripte können sie per `s.kaufen(name)` einbauen.
 **Schritt 2 (Katalog):** Diese Items fehlen im Katalog — User-Freigabe + Katalog-Erweiterung erforderlich.

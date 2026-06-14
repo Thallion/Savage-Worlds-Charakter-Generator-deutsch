@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Pathfinder",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -526,21 +526,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Kurzschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Leichte Armbrust": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Bolzen (10)": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -551,12 +536,27 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
+            "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Abenteurerausrüstung": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Trank: schwache Heilung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kurzschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Leichte Armbrust": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -604,11 +604,9 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Kurzschwert",
-        "Leichte Armbrust",
-        "Bolzen (10)",
         "Ledertunika",
         "Lederbeinlinge",
+        "Bolzen (10)",
         "Abenteurerausrüstung",
         "Trank: schwache Heilung"
     ],
@@ -622,13 +620,13 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Kurzschwert": 1,
-        "Leichte Armbrust": 1,
-        "Bolzen (10)": 2,
         "Ledertunika": 1,
         "Lederbeinlinge": 1,
+        "Bolzen (10)": 2,
         "Abenteurerausrüstung": 1,
-        "Trank: schwache Heilung": 1
+        "Trank: schwache Heilung": 1,
+        "Kurzschwert": 1,
+        "Leichte Armbrust": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,

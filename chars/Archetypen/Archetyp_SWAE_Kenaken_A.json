@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "SWAE",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -554,12 +554,11 @@
     "ausruestung_mengen": {
         "Abenteurerpaket": 1
     },
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,

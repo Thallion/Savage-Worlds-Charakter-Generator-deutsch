@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "SWAE",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -552,9 +552,7 @@
         "Zwerg": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [
-        "Pistole"
-    ],
+    "selected_allgemeine_ausruestung": [],
     "selected_waffen": [
         "Pistole"
     ],

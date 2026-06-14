@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "HeXXen 1773",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -468,12 +468,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwert, Langschwert": {
+            "Abenteurerpaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Abenteurerpaket": {
+            "Schwert, Langschwert": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -497,7 +497,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Pferd",
-        "Schwert, Langschwert",
         "Abenteurerpaket"
     ],
     "selected_waffen": [
@@ -507,8 +506,8 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Pferd": 1,
-        "Schwert, Langschwert": 1,
-        "Abenteurerpaket": 1
+        "Abenteurerpaket": 1,
+        "Schwert, Langschwert": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,

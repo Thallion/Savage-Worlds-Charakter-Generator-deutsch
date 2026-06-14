@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "SWAE",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -587,6 +587,7 @@
         "Saurianer": false,
         "Zwerg": false
     },
+    "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Hemd (Kette)",
         "Abenteurerpaket"
@@ -598,12 +599,16 @@
         "Hemd (Kette)"
     ],
     "selected_schilde": [],
-    "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 0,
-    "maximale_attributsteigerungen": 5,
-    "maximale_fertigkeitssteigerungen": 12,
+    "ausruestung_mengen": {
+        "Hemd (Kette)": 1,
+        "Abenteurerpaket": 1,
+        "Kriegshammer": 1
+    },
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 3,
     "machtpunkte": 10,

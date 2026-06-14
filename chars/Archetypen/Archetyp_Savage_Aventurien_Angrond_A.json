@@ -7,7 +7,7 @@
         "Sprachen": ""
     },
     "active_setting_name": "Savage Aventurien",
-    "char_gen_completed": false,
+    "char_gen_completed": true,
     "settingregeln": {
         "dynamischer_rueckschlag": false,
         "entschlossenheit": false,
@@ -476,17 +476,17 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
+            "Abenteurerpaket": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
             "Wurf-Dolch/Messer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Kurzschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Abenteurerpaket": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -517,8 +517,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Wurf-Dolch/Messer",
-        "Kurzschwert",
         "Abenteurerpaket"
     ],
     "selected_waffen": [
@@ -528,9 +526,9 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
+        "Abenteurerpaket": 1,
         "Wurf-Dolch/Messer": 5,
-        "Kurzschwert": 1,
-        "Abenteurerpaket": 1
+        "Kurzschwert": 1
     },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
