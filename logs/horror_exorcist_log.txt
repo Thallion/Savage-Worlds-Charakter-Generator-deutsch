@@ -1,11 +1,13 @@
 # Archetyp-Erstellung: Exorcist (Horror Kompendium)
-# Stand: 2026-06-05T12:55:54
-# 4 Anomalie(n) von 45 Schritten
+# Stand: 2026-06-14T09:40:09
+# 6 Anomalie(n) von 45 Schritten
 
 ## ANOMALIEN
   [!] handicap(Schwur_schwer): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Mut): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Elan): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Schutzkreis): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
+  [!] macht(Kriegersegen): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
   [!] SOLL/IST-DIFF: ok=False warnung=handicaps: "Schwur_schwer" FEHLT; handicaps: "Schwur_leicht" ZUVIEL; maechte: "Kriegersegen" FEHLT kosten=0 None
 
 ## ALLE SCHRITTE
@@ -47,8 +49,8 @@
   - macht(Heilung): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Schutz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Linderung): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Schutzkreis): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Kriegersegen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Schutzkreis): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Kriegersegen): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Silberdolchx1): ok=True kosten=100 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400
   - kaufen(Weihwasser (Flasche)x1): ok=True kosten=10 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=390
   - talent_mit_aufstieg(Mut): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=390

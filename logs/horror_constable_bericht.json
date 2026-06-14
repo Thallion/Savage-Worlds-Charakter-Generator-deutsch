@@ -510,7 +510,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Block)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +519,7 @@
         "handicap": 0
       },
       "vermoegen": 446,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: not_duplicatable)"
     },
     {
       "aktion": "speichern(chars/Archetypen/Archetyp_Horror_Constable.json)",
@@ -552,9 +552,22 @@
       },
       "vermoegen": 500,
       "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "talent_mit_aufstieg(Block)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 446,
+      "warnung": "nicht angewendet (Sentinel: not_duplicatable)"
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 3,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

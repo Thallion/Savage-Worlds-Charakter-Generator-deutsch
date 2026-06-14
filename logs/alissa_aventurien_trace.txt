@@ -1,0 +1,27 @@
+  Setting: Savage Aventurien
+{'aktion': 'handicap(Impulsiv)', 'ok': True, 'kosten': -2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(AH (Wunder: Rahja))', 'ok': True, 'kosten': 2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Pazifist_leicht)', 'ok': True, 'kosten': -1, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'volk_freies_talent(Mensch,Gassenwissen)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+  Nach Aktivierungen: {'attribut': 0, 'fertigkeit': 7, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+  Nach Verstand-Fert: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+  Nach Glaube W6: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+  Nach Grund: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+{'aktion': 'talent(Attraktiv)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 1000, 'warnung': 'Aktion lieferte False/None'}
+  Nach Talenten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 1, 'handicap_gesamt': 3, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 10}
+{'aktion': 'macht(Eigenschaft erhöhen/senken)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'macht(Empathie)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'macht(Linderung)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 1}, 'vermoegen': 1000, 'warnung': None}
+  -> chargen abgeschlossen, 3 Aufstiege, Rang=Anfänger
+  Ve: W10, Wi: W10
+  Sehr Attraktiv (Aufstieg): ok=False
+  Willenskraft -> W10
+  Rang: Anfänger, MP: 10
+  Talente: ['AH (Wunder: Rahja)', 'Durchhaltevermögen (Rahja)', 'Gassenwissen', 'Geschenk der Freude (Rahja)']
+  Handicaps: ['Impulsiv', 'Pazifist_leicht', 'Schwur_schwer']
+  Maechte: ['Eigenschaft erhöhen/senken', 'Empathie', 'Linderung']
+DIFF: ['fertigkeiten: Allgemeinwissen soll W8, ist W4', 'fertigkeiten: Athletik soll W8, ist W4', 'fertigkeiten: Überreden soll W8, ist W4', 'fertigkeiten: Wahrnehmung soll W8, ist W4', 'fertigkeiten: Darbietung soll W4, ist FEHLT', 'fertigkeiten: Glaube soll W8, ist W4', 'fertigkeiten: Heilen soll W8, ist W6', 'fertigkeiten: Geisteswissenschaften soll W8, ist FEHLT', 'talente: "Attraktiv" FEHLT', 'talente: "Sehr Attraktiv" FEHLT']
+FERTIG anomalien=5

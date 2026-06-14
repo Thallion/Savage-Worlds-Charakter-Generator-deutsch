@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Party Animal (Horror Kompendium)
-# Stand: 2026-06-05T12:55:54
+# Stand: 2026-06-14T09:40:09
 # 4 Anomalie(n) von 37 Schritten
 
 ## ANOMALIEN

@@ -1,0 +1,26 @@
+  Setting: Savage Aventurien
+{'aktion': 'handicap(Impulsiv)', 'ok': True, 'kosten': -2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Große Klappe)', 'ok': True, 'kosten': -1, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Sanftmütig)', 'ok': True, 'kosten': -1, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Nach Handicaps: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+{'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'volk_freies_talent(Mensch,Aufmerksamkeit)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Nach Volk: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Attributen: {'attribut': 1, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Aktivierungen: {'attribut': 1, 'fertigkeit': 7, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Kämpfen W8: {'attribut': 1, 'fertigkeit': 3, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 1, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  -> chargen abgeschlossen, 13 Aufstiege, Rang=Anfänger
+  St: W8, Ge: W8, Kämpfen: W10, Wissen (Götter): W6
+  Talent Beidhändig: ok=True
+  Talent Schnell: ok=True
+  Talent Block: ok=True
+  Talent Schneller Angriff: ok=True
+  Talent Riposte: ok=True
+  Talent Harter Block: ok=True
+  Talent Beidhändiger Kampf: ok=True
+  Talent Blitzschneller Angriff: ok=True
+  Talente: ['Aufmerksamkeit', 'Beidhändig', 'Beidhändiger Kampf', 'Blitzschneller Angriff', 'Block', 'Harter Block', 'Riposte', 'Schnell', 'Schneller Angriff']
+  Handicaps: ['Große Klappe', 'Impulsiv', 'Sanftmütig']
+DIFF: ['fertigkeiten: Überleben soll W4, ist FEHLT']
+FERTIG anomalien=1

@@ -1,0 +1,193 @@
+{
+ "handicaps": {
+  "Feind": [
+   "Feind_leicht",
+   "Feind_schwer"
+  ],
+  "Schwur": [
+   "Schwur_leicht",
+   "Schwur_schwer"
+  ],
+  "Behindernde Rüstung": "MISSING",
+  "Materialkomponenten": [
+   "Materialkomponenten"
+  ],
+  "Talisman": [
+   "Talisman_leicht",
+   "Talisman_schwer"
+  ],
+  "Alt": [
+   "Alt"
+  ]
+ },
+ "talente": {
+  "Druide": [
+   "AH (Druide)",
+   "Bevorzugte Mächte (Druide)",
+   "Dolch des Druiden",
+   "Göttliche Meisterschaft (Druide)"
+  ],
+  "Arkaner Hintergrund": "MISSING",
+  "AH": [
+   "AH (Alchemist)",
+   "AH (Barde)",
+   "AH (Begabt)",
+   "AH (Druide)",
+   "AH (Dämonologe)",
+   "AH (Elementarist)",
+   "AH (Fey)",
+   "AH (Geode)",
+   "AH (Goblinzauberin)",
+   "AH (Golembauer)",
+   "AH (Hexe)",
+   "AH (Illusionist)",
+   "AH (Kristallomant)",
+   "AH (Magier)",
+   "AH (Nekromant)",
+   "AH (Runenschöpfer)",
+   "AH (Schamane)",
+   "AH (Scharlatan)",
+   "AH (Schelm)",
+   "AH (Wunder: Aves)",
+   "AH (Wunder: Boron)",
+   "AH (Wunder: Efferd)",
+   "AH (Wunder: Firun)",
+   "AH (Wunder: Hesinde)",
+   "AH (Wunder: Ifirn)",
+   "AH (Wunder: Ingerimm)",
+   "AH (Wunder: Kor)",
+   "AH (Wunder: Nandus)",
+   "AH (Wunder: Peraine)",
+   "AH (Wunder: Phex)",
+   "AH (Wunder: Praios)",
+   "AH (Wunder: Rahja)",
+   "AH (Wunder: Rondra)",
+   "AH (Wunder: Swafnir)",
+   "AH (Wunder: Travia)",
+   "AH (Wunder: Tsa)",
+   "AH (Zaubertänzer)",
+   "AH (Zibilja)",
+   "Durchhaltevermögen (Rahja)",
+   "Geschenk der Freude (Rahja)",
+   "Nahbereichskämpfer",
+   "Nahschussmeister",
+   "Wahre Form",
+   "Wahrer Schwertmagier",
+   "Wahres Urteil"
+  ],
+  "Neue Mächte": [
+   "Neue Mächte"
+  ],
+  "Machtpunkte": [
+   "Machtpunkte"
+  ],
+  "Chemiker": [
+   "Chemiker"
+  ]
+ },
+ "maechte": {
+  "Eigenschaft": [
+   "Eigenschaft erhöhen/senken"
+  ],
+  "Schutz vor Naturgewalten": [
+   "Schutz vor Naturgewalten"
+  ],
+  "Geschoss": [
+   "Geschoss"
+  ],
+  "Aufspüren": [
+   "Aufspüren"
+  ],
+  "Elementarmanipulation": [
+   "Elementarmanipulation"
+  ],
+  "Verstricken": [
+   "Verstricken"
+  ],
+  "Furcht": [
+   "Furcht"
+  ],
+  "Betäuben": [
+   "Betäuben"
+  ],
+  "Barriere": [
+   "Barriere"
+  ]
+ },
+ "fertigkeiten": {
+  "Allgemeinwissen": [
+   "Allgemeinwissen"
+  ],
+  "Athletik": [
+   "Athletik"
+  ],
+  "Heimlichkeit": [
+   "Heimlichkeit"
+  ],
+  "Überreden": [
+   "Überreden"
+  ],
+  "Wahrnehmung": [
+   "Wahrnehmung"
+  ],
+  "Kämpfen": [
+   "Kämpfen"
+  ],
+  "Überleben": [
+   "Überleben"
+  ],
+  "Reiten": [
+   "Reiten"
+  ],
+  "Einschüchtern": [
+   "Einschüchtern"
+  ],
+  "Recherche": [
+   "Recherche"
+  ],
+  "Okkultismus": [
+   "Okkultismus"
+  ],
+  "Naturwissenschaften": [
+   "Naturwissenschaften"
+  ],
+  "Sprache": [
+   "Sprache"
+  ],
+  "Zaubern": [
+   "Zaubern"
+  ],
+  "Alchemie": [
+   "Alchemie"
+  ]
+ },
+ "ausruestung": {
+  "Alchemist": [
+   "Alchemistenfeuer",
+   "Alchemistenfreundlichkeit",
+   "Alchemistenpaket",
+   "Alchemistentasche",
+   "Alchemistische Kartusche, Drachenatem",
+   "Alchemistische Kartusche, Fesselschuss",
+   "Alchemistische Kartusche, Leuchtspur",
+   "Alchemistische Kartusche, Metall",
+   "Alchemistische Kartusche, Salzschrot"
+  ],
+  "Abenteurerpaket": [
+   "Abenteurerpaket"
+  ],
+  "Tunika": [
+   "Ledertunika",
+   "Ledertunika (Gehärtetes Leder)",
+   "Tunika"
+  ],
+  "Alchemistenfeuer": [
+   "Alchemistenfeuer"
+  ]
+ },
+ "voelker": {
+  "Mensch": [
+   "Mensch"
+  ]
+ }
+}

@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Burglar (Horror Kompendium)
-# Stand: 2026-06-05T12:55:55
+# Stand: 2026-06-14T09:40:10
 # 5 Anomalie(n) von 43 Schritten
 
 ## ANOMALIEN

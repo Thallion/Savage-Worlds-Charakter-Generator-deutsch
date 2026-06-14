@@ -484,7 +484,7 @@
     },
     {
       "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 25,
       "kostenart": "Vermögen",
       "punkte": {
@@ -503,7 +503,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Trank: schwache Heilungx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 25,
       "kostenart": "Vermögen",
       "punkte": {

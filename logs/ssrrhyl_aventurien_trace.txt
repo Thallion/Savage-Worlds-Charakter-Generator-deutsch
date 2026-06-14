@@ -1,0 +1,48 @@
+  Setting: Savage Aventurien
+{'aktion': 'volk(Achaz)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+  Nach Volk: HP=0, T=[], H=[], Wahrn=6
+{'aktion': 'handicap(Feige)', 'ok': True, 'kosten': -2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Schwur_schwer)', 'ok': True, 'kosten': -2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Chauvinistisch_leicht)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Große Klappe)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Nach Handicaps: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Attributen: {'attribut': 1, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Aktivierungen: {'attribut': 1, 'fertigkeit': 8, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach AW: {'attribut': 1, 'fertigkeit': 5, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Wahrn: {'attribut': 1, 'fertigkeit': 3, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Glaube: {'attribut': 1, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Wissen (Geschichtswissen): {'attribut': 1, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Ueb: {'attribut': 1, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Reiten: {'attribut': 1, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 1, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  -> chargen abgeschlossen, 10 Aufstiege, Rang=Anfänger
+  Ve: W8, Wi: W8
+{'aktion': 'talent(AH (Wunder: Hesinde))', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Auto nach AH (Hesinde): T=['AH (Wunder: Hesinde)', 'Klarer Verstand (Hesinde)', 'Scharfe Sinne (Hesinde)'], H=['Chauvinistisch_leicht', 'Feige', 'Große Klappe', 'Schwur_schwer'], MP=10
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Gnade)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Schnelle Machtregeneration)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Kühler Kopf)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Machtpunkte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Talente: ['AH (Wunder: Hesinde)', 'Gnade', 'Klarer Verstand (Hesinde)', 'Kühler Kopf', 'Machtpunkte', 'Neue Mächte', 'Neue Mächte_2', 'Neue Mächte_3', 'Scharfe Sinne (Hesinde)', 'Schnelle Machtregeneration']
+  Handicaps: ['Chauvinistisch_leicht', 'Feige', 'Große Klappe', 'Schwur_schwer']
+  Verfuegbare Maechte: 9, MP: 15
+  Macht Arkanes entdecken/verbergen: ok=True
+  Macht Verwirrung: ok=True
+  Macht Abwehren: ok=True
+  Macht Linderung: ok=True
+  Macht Schutz: ok=True
+  Macht Sprachen sprechen: ok=True
+  Macht Verbündeten beschwören: ok=True
+  Macht Tier Beschwören: ok=True
+  Macht Eigenschaft erhöhen/senken: ok=True
+  Macht Barriere: ok=False
+  Macht Aufheben: ok=False
+  Macht Segen: ok=False
+  Macht Aufspüren: ok=False
+  Maechte: ['Abwehren', 'Arkanes entdecken/verbergen', 'Eigenschaft erhöhen/senken', 'Linderung', 'Schutz', 'Sprachen sprechen', 'Tier Beschwören', 'Verbündeten beschwören', 'Verwirrung']
+  Rang: Veteran, MP: 15
+DIFF: ['fertigkeiten: Überreden soll W6, ist W4', 'fertigkeiten: Überleben soll W4, ist FEHLT', 'fertigkeiten: Reiten soll W6, ist W4', 'fertigkeiten: Recherche soll W4, ist FEHLT', 'fertigkeiten: Wissen (Geschichtswissen) soll W8, ist W4', 'handicaps: "Außenseiter_leicht" FEHLT', 'maechte: "Barriere" FEHLT', 'maechte: "Aufheben" FEHLT', 'maechte: "Segen" FEHLT', 'maechte: "Aufspüren" FEHLT']
+FERTIG anomalien=6

@@ -1,6 +1,6 @@
 # Archetyp-Erstellung: Demonologist (Monstrous) (Horror Kompendium)
-# Stand: 2026-06-05T12:56:05
-# 16 Anomalie(n) von 65 Schritten
+# Stand: 2026-06-14T09:40:19
+# 20 Anomalie(n) von 65 Schritten
 
 ## ANOMALIEN
   [!] attribut_mit_hc(Geschicklichkeit): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -8,6 +8,10 @@
   [!] talent(Kanalisieren): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Höllenfeuer): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Bedrohlich): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Bannung): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
+  [!] macht(Flächenschlag): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
+  [!] macht(Aufheben): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
+  [!] macht(Kriegersegen): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless (dark magic): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Ageless (dark magic) kosten=0 None
   [!] NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Gifts of the Night (14 pts): ok=True warnung=MONSTROeSE KRAFT (nicht simulierbar): Gifts of the Night (14 pts) kosten=0 None
   [!] fertigkeit_mit_aufstieg(Zaubern): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -58,12 +62,12 @@
   - talent(Kanalisieren): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Höllenfeuer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Bedrohlich): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Bannung): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Bannung): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Strahl): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Flächenschlag): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Aufheben): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Flächenschlag): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Aufheben): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Chaos): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Kriegersegen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Kriegersegen): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Verbündeten beschwören): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Silberdolchx1): ok=True kosten=100 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400
   - attribut_mit_aufstieg(Geschicklichkeit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400

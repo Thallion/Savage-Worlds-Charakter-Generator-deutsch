@@ -1,0 +1,38 @@
+  Setting: Savage Aventurien
+{'aktion': 'handicap(Neugierig)', 'ok': True, 'kosten': -2, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 2}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Pazifist_leicht)', 'ok': True, 'kosten': -1, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 3}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'handicap(Schwur_leicht)', 'ok': True, 'kosten': -1, 'kostenart': 'Handicap-Punkte', 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Nach Handicaps: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+{'aktion': 'volk(Mensch)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'volk_freies_talent(Mensch,Aufmerksamkeit)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Nach Volk: {'attribut': 5, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Aktivierungen: {'attribut': 0, 'fertigkeit': 9, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Kämpfen: {'attribut': 0, 'fertigkeit': 7, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Athletik: {'attribut': 0, 'fertigkeit': 5, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Glaube: {'attribut': 0, 'fertigkeit': 2, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Grund W6: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 4, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  -> chargen abgeschlossen, 9 Aufstiege, Rang=Anfänger
+  Ge: W10, Wi: W8
+{'aktion': 'talent(AH (Wunder: Tsa))', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Auto-Talente/Handicaps nach AH: T=['AH (Wunder: Tsa)', 'Aufmerksamkeit', 'Flexible Wunder (Tsa)', 'Schnelle Heilung'], H=['Neugierig', 'Pazifist_leicht', 'Schwur_leicht', 'Schwur_schwer'], MP=10
+  Macht Heilung (AH): ok=True
+  Macht Dunkelsicht (AH): ok=True
+  Macht Schutz vor Naturgewalten (AH): ok=True
+{'aktion': 'talent(Gnade)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Beziehungen)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Tierempathie)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 0, 'handicap': 4}, 'vermoegen': 1000, 'warnung': None}
+  Talente: ['AH (Wunder: Tsa)', 'Aufmerksamkeit', 'Beziehungen', 'Flexible Wunder (Tsa)', 'Gnade', 'Neue Mächte', 'Neue Mächte_2', 'Neue Mächte_3', 'Schnelle Heilung', 'Tierempathie']
+  Handicaps: ['Neugierig', 'Pazifist_leicht', 'Schwur_leicht', 'Schwur_schwer']
+  Macht Linderung (NM): ok=True
+  Macht Arkaner Schutz (NM): ok=True
+  Macht Aufspüren (D-Advance): ok=True
+  Macht Gedankenlesen (D-Advance): ok=True
+  Maechte: ['Arkaner Schutz', 'Aufspüren', 'Dunkelsicht', 'Gedankenlesen', 'Heilung', 'Linderung', 'Schutz vor Naturgewalten']
+  Rang: Veteran, MP: 10
+DIFF: ['fertigkeiten: Allgemeinwissen soll W6, ist W4', 'fertigkeiten: Überleben soll W6, ist FEHLT', 'fertigkeiten: Reiten soll W6, ist FEHLT', 'fertigkeiten: Darbietung soll W4, ist FEHLT', 'fertigkeiten: Heilen soll W6, ist W4']
+FERTIG anomalien=1

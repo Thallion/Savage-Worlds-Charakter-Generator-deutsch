@@ -406,7 +406,7 @@
     },
     {
       "aktion": "macht(Fluchwort)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -415,7 +415,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Schutz)",
@@ -593,6 +593,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "macht(Fluchwort)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "macht(Geisterruf)",
       "ok": false,
       "kosten": 0,
@@ -669,7 +682,7 @@
       "vermoegen": 350
     }
   ],
-  "anomalien_anzahl": 7,
+  "anomalien_anzahl": 8,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

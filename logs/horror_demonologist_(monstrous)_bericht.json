@@ -484,7 +484,7 @@
     },
     {
       "aktion": "macht(Bannung)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -493,7 +493,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Strahl)",
@@ -510,7 +510,7 @@
     },
     {
       "aktion": "macht(Flächenschlag)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,11 +519,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Aufheben)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -532,7 +532,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Chaos)",
@@ -549,7 +549,7 @@
     },
     {
       "aktion": "macht(Kriegersegen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -558,7 +558,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Verbündeten beschwören)",
@@ -918,6 +918,58 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "macht(Bannung)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
+      "aktion": "macht(Flächenschlag)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
+      "aktion": "macht(Aufheben)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
+      "aktion": "macht(Kriegersegen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "NOTIZ: MONSTROeSE KRAFT (nicht simulierbar): Ageless (dark magic)",
       "ok": true,
       "warnung": "MONSTROeSE KRAFT (nicht simulierbar): Ageless (dark magic)",
@@ -1047,7 +1099,7 @@
       "vermoegen": 400
     }
   ],
-  "anomalien_anzahl": 16,
+  "anomalien_anzahl": 20,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

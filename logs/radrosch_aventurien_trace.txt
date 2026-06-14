@@ -1,0 +1,37 @@
+  Setting: Savage Aventurien
+{'aktion': 'volk(Zwerg)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 5, 'fertigkeit': 12, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+  Nach Volk: HP=0, T=['Arkane Resistenz'], H=['Langsam_leicht', 'Phobie_schwer', 'Stur'], Konst=6
+  Nach Attributen: {'attribut': 1, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Aktivierungen: {'attribut': 1, 'fertigkeit': 5, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Ueberleben: {'attribut': 1, 'fertigkeit': 2, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Einschüchtern: {'attribut': 1, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Athletik: {'attribut': 1, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Ueberreden: {'attribut': 1, 'fertigkeit': 1, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Kämpfen: {'attribut': 1, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Heilen: {'attribut': 1, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Zaubern: {'attribut': 1, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  Nach Fertigkeiten: {'attribut': 1, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 0, 'aufstiege': 0, 'vermoegen': 1000, 'machtpunkte': 0}
+  -> chargen abgeschlossen, 9 Aufstiege, Rang=Anfänger
+  Ve: W8, Wi: W8
+{'aktion': 'talent(AH (Elementarist))', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+  Auto nach AH: MP=10, verfuegbare_maechte=5
+{'aktion': 'talent(Tiermeister)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Machtpunkte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Tierempathie)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Naturbursche)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Neue Mächte)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+{'aktion': 'talent(Elementarer Meister)', 'ok': True, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 1, 'fertigkeit': 0, 'handicap': 0}, 'vermoegen': 1000, 'warnung': None}
+  Talente: ['AH (Elementarist)', 'Arkane Resistenz', 'Elementarer Meister', 'Machtpunkte', 'Naturbursche', 'Neue Mächte', 'Tierempathie', 'Tiermeister']
+  Handicaps: ['Behindernde_Rüstung_schwer', 'Langsam_leicht', 'Phobie_schwer', 'Stur']
+  Verfuegbare Maechte: 7, MP: 15
+  Macht Elementarmanipulation: ok=True
+  Macht Schutz vor Naturgewalten: ok=True
+  Macht Eigenschaft erhöhen/senken: ok=True
+  Macht Graben: ok=True
+  Macht Verbündeten beschwören: ok=True
+  Macht Barriere: ok=True
+  Macht Wachsen/Schrumpfen: ok=True
+  Maechte: ['Barriere', 'Eigenschaft erhöhen/senken', 'Elementarmanipulation', 'Graben', 'Schutz vor Naturgewalten', 'Verbündeten beschwören', 'Wachsen/Schrumpfen']
+  Rang: Veteran, MP: 15
+DIFF: ['fertigkeiten: Reiten soll W4, ist FEHLT', 'fertigkeiten: Einschüchtern soll W8, ist W6', 'fertigkeiten: Heilen soll W6, ist W4', 'fertigkeiten: Zaubern soll W6, ist W4']
+FERTIG anomalien=2

@@ -33,7 +33,7 @@
 9 Musikinstrument/Flöte (Musikinstrument): ok=True Geld=150
 9 Unterhalterkleidung→Unterhalterpaket: ok=True Geld=30
 9 Zündholz x5: ok=True Geld=25
-9 Trank schwache Heilung: ok=False Geld=0
+9 Trank schwache Heilung: ok=True Geld=0
 9 Endvermögen: 0 (Bogen: 18 GM)
 === ERGEBNIS ===
   MP=10  Bennys=5  Parade=5  Robustheit=6  Bewegung=5

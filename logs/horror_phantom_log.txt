@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Phantom (Horror Kompendium)
-# Stand: 2026-06-05T12:56:03
+# Stand: 2026-06-14T09:40:18
 # 5 Anomalie(n) von 30 Schritten
 
 ## ANOMALIEN

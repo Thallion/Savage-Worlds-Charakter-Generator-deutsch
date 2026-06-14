@@ -1,11 +1,12 @@
 # Archetyp-Erstellung: Magician (Horror Kompendium)
-# Stand: 2026-06-05T12:56:03
-# 7 Anomalie(n) von 47 Schritten
+# Stand: 2026-06-14T09:40:17
+# 8 Anomalie(n) von 47 Schritten
 
 ## ANOMALIEN
   [!] talent(Elan): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Bekannt): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Geisterfreund): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Bannung): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
   [!] fertigkeit_mit_aufstieg(Überreden): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Bekannt): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Elan): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -43,7 +44,7 @@
   - talent(Elan): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Bekannt): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Geisterfreund): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Bannung): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Bannung): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Arkanes entdecken/verbergen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Empathie): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Silberdolchx1): ok=True kosten=100 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400

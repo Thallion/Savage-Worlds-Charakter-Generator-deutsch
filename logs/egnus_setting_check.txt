@@ -1,0 +1,111 @@
+{
+ "mensch": {
+  "name": "Mensch",
+  "handicaps": [],
+  "talente": [],
+  "besonderheiten": [
+   "Anpassungsfähig (Freies Anfängertalent nach Wahl)"
+  ],
+  "sprachen": [
+   "Gemeinsprache"
+  ],
+  "altersspanne": "Erwachsen mit 18, Alt mit 55, maximales Alter 70-110",
+  "groesse_maennlich": "1,60-1,95m, 60-100kg (Durchschnitt 1,77m, 80kg)",
+  "groesse_weiblich": "1,50-1,85m, 45-85kg (Durchschnitt 1,67m, 65kg)",
+  "aktiv": true,
+  "custom": false,
+  "effects": {
+   "attribute_bonuses": {},
+   "robustheit_bonus": 0,
+   "bewegungsweite_bonus": 0,
+   "fertigkeits_startboni": {},
+   "auto_talente": [],
+   "auto_handicaps": [],
+   "spezielle_effekte": {},
+   "wahlmoeglichkeiten": {
+    "freies_talent": true
+   }
+  }
+ },
+ "ah_druide": {
+  "name": "AH (Druide)",
+  "kategorie": "Hintergrund",
+  "rang": "A",
+  "voraussetzungen": [
+   "WIL W6",
+   "Überleben W6"
+  ],
+  "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft)",
+  "neue_maechte": 5,
+  "machtpunkte": 10,
+  "ausgewaehlt": false,
+  "aktiv": true,
+  "auto_talente": [
+   "Bindung mit der Natur",
+   "Naturgespür"
+  ],
+  "auto_handicaps": [
+   "Schwur_schwer",
+   "Behindernde_Rüstung_leicht",
+   "Materialkomponenten"
+  ]
+ },
+ "machtpunkte": {
+  "name": "Machtpunkte",
+  "kategorie": "Macht",
+  "rang": "A",
+  "voraussetzungen": [
+   "AH"
+  ],
+  "beschreibung": "Erhalte 5 zusätzliche Machtpunkte, nur einmal pro Rang.",
+  "neue_maechte": 0,
+  "machtpunkte": 5,
+  "ausgewaehlt": false,
+  "aktiv": true
+ },
+ "neue_maechte": {
+  "name": "Neue Mächte",
+  "kategorie": "Macht",
+  "rang": "A",
+  "voraussetzungen": [
+   "AH"
+  ],
+  "beschreibung": "Dein Charakter kennt zwei neue Mächte.",
+  "neue_maechte": 2,
+  "machtpunkte": 0,
+  "ausgewaehlt": false,
+  "aktiv": true
+ },
+ "chemiker": {
+  "name": "Chemiker",
+  "kategorie": "Alchemist",
+  "rang": "A",
+  "voraussetzungen": [
+   "AH (Alchemist)",
+   "Alchemie W8"
+  ],
+  "beschreibung": "Die Gebräue des Alchemisten halten eine Woche statt 48 Stunden, wenn sie an andere weitergegeben werden.",
+  "neue_maechte": 0,
+  "machtpunkte": 0,
+  "ausgewaehlt": false,
+  "aktiv": true
+ },
+ "alt_handicap": {
+  "name": "Alt",
+  "stufe": "schwer",
+  "punkte": 2,
+  "beschreibung": "–1 auf Bewegungsweite, Sprintwürfel, Geschicklichkeit, Stärke und Konstitution. 5 zusätzliche Fertigkeitspunkte für verstandsbasierte Fertigkeiten.",
+  "ausgewaehlt": false,
+  "aktiv": true,
+  "custom": false
+ },
+ "feind": {
+  "name": "Feind",
+  "stufe": "schwer",
+  "punkte": 2,
+  "beschreibung": "Der Charakter hat einen mächtigen Feind, der kontinuierlich versucht, ihm zu schaden.",
+  "ausgewaehlt": false,
+  "aktiv": true,
+  "custom": false
+ }
+}

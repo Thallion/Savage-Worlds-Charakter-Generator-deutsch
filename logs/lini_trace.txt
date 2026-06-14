@@ -29,7 +29,7 @@ Nach Talenten: HP=0
 9 Kauf Donnerstein x1: ok=True Geld=173
 9 Kauf Zauberkomponentenbeutel x1: ok=True Geld=168
 9 Kauf Rauchstab x5: ok=True Geld=68
-9 Kauf Trank: schwache Heilung x1: ok=False Geld=0
+9 Kauf Trank: schwache Heilung x1: ok=True Geld=0
 === ERGEBNIS ===
   MP=11  Bennys=3  Parade=5  Robustheit=6  Bewegung=5
   Talente: ['AH (Druide)', 'Bindung mit der Natur', 'Gnomenmagie', 'Naturgespür', 'Neue Mächte', 'Tiermeister']

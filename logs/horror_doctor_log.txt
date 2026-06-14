@@ -1,11 +1,12 @@
 # Archetyp-Erstellung: Doctor (Horror Kompendium)
-# Stand: 2026-06-05T12:55:55
-# 5 Anomalie(n) von 41 Schritten
+# Stand: 2026-06-14T09:40:10
+# 6 Anomalie(n) von 41 Schritten
 
 ## ANOMALIEN
   [!] talent(Berserker): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Schwer zu töten): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Unerbittlich): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] talent_mit_aufstieg(Schwer zu töten): ok=False warnung=nicht angewendet (Sentinel: not_duplicatable) kosten=0 None
   [!] NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen: ok=True warnung=1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen kosten=0 None
   [!] SOLL/IST-DIFF: ok=False warnung=attribute: Stärke soll W4, ist W6 kosten=0 None
 
@@ -49,5 +50,5 @@
   - talent_mit_aufstieg(Schwer zu töten): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440
   - talent_mit_aufstieg(Heiler): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440
   - talent_mit_aufstieg(Unerbittlich): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440
-  - talent_mit_aufstieg(Schwer zu töten): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440
+  - talent_mit_aufstieg(Schwer zu töten): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440
   - talent_mit_aufstieg(Unerbittlich): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=440

@@ -185,7 +185,7 @@
     },
     {
       "aktion": "talent(Killerinstinkt)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -194,7 +194,7 @@
         "handicap": 0
       },
       "vermoegen": 250,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "fertigkeit(Athletik)",
@@ -526,8 +526,31 @@
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "talent(Killerinstinkt)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 250,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
+      "aktion": "NOTIZ: Talent \"Killerinstinkt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "ok": true,
+      "warnung": "Talent \"Killerinstinkt\" während CharGen fehlgeschlagen (Voraussetzung nicht erfüllt?)",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 250
+    }
+  ],
+  "anomalien_anzahl": 2,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

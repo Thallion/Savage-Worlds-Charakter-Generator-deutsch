@@ -497,7 +497,7 @@
     },
     {
       "aktion": "macht(Schutzkreis)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +506,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "macht(Kriegersegen)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +519,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "kaufen(Silberdolchx1)",
@@ -632,6 +632,32 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "macht(Schutzkreis)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
+      "aktion": "macht(Kriegersegen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
       "warnung": "handicaps: \"Schwur_schwer\" FEHLT; handicaps: \"Schwur_leicht\" ZUVIEL; maechte: \"Kriegersegen\" FEHLT",
@@ -647,7 +673,7 @@
       "vermoegen": 390
     }
   ],
-  "anomalien_anzahl": 4,
+  "anomalien_anzahl": 6,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

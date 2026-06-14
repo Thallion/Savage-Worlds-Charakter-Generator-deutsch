@@ -1,0 +1,631 @@
+{
+  "name": "Radrosch",
+  "setting": "Savage Aventurien",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Radrosch, Savage Aventurien)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 1000
+    },
+    {
+      "aktion": "volk(Zwerg)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Stärke)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 11,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 10,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 9,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 8,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 7,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Athletik)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 6,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 5,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 4,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überleben)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 2,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit(Kämpfen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Heilen) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Zaubern) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_aufstieg(Verstand)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_aufstieg(Willenskraft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(AH (Elementarist))",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Tiermeister)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Machtpunkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Tierempathie)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Naturbursche)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Elementarer Meister)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Elementarmanipulation)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Schutz vor Naturgewalten)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Eigenschaft erhöhen/senken)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Graben)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Verbündeten beschwören)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Barriere)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Wachsen/Schrumpfen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Aventurien_Radrosch_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [
+    {
+      "aktion": "fertigkeit(Einschüchtern)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 1,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Reiten soll W4, ist FEHLT; fertigkeiten: Einschüchtern soll W8, ist W6; fertigkeiten: Heilen soll W6, ist W4; fertigkeiten: Zaubern soll W6, ist W4",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 1000
+    }
+  ],
+  "anomalien_anzahl": 2,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Kämpfen": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Überleben": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Einschüchtern": {
+        "wert": 6,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Heilen": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Zaubern": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Langsam_leicht",
+      "Phobie_schwer",
+      "Stur",
+      "Behindernde_Rüstung_schwer"
+    ],
+    "talente": [
+      "Arkane Resistenz",
+      "AH (Elementarist)",
+      "Tiermeister",
+      "Machtpunkte",
+      "Tierempathie",
+      "Naturbursche",
+      "Neue Mächte",
+      "Elementarer Meister"
+    ],
+    "maechte": [
+      "Elementarmanipulation",
+      "Schutz vor Naturgewalten",
+      "Eigenschaft erhöhen/senken",
+      "Graben",
+      "Verbündeten beschwören",
+      "Barriere",
+      "Wachsen/Schrumpfen"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 1,
+      "fertigkeit": 0,
+      "handicap": 0,
+      "handicap_gesamt": 0,
+      "aufstiege": 0
+    },
+    "machtpunkte": 15,
+    "vermoegen": 1000,
+    "rang": "Veteran",
+    "volk": "Zwerg"
+  }
+}

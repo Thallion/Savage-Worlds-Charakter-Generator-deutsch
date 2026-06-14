@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Slayer (Horror Kompendium)
-# Stand: 2026-06-05T12:56:05
+# Stand: 2026-06-14T09:40:19
 # 19 Anomalie(n) von 61 Schritten
 
 ## ANOMALIEN

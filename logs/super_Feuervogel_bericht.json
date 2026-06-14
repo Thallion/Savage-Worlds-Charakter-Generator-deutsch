@@ -431,19 +431,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Der Beste)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
       "aktion": "fertigkeit_mit_aufstieg(Fokus)",
       "ok": true,
       "kosten": 0,
@@ -458,6 +445,32 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -474,8 +487,22 @@
       "ok": true
     }
   ],
-  "anomalien": [],
-  "anomalien_anzahl": 0,
+  "anomalien": [
+    {
+      "aktion": "fertigkeit_mit_aufstieg(Fokus)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 500,
+      "warnung": "Aktion lieferte False/None"
+    }
+  ],
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -507,7 +534,7 @@
         "ausgewaehlt": true
       },
       "Athletik": {
-        "wert": 10,
+        "wert": 12,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
@@ -555,9 +582,9 @@
       "Umweltschwäche"
     ],
     "talente": [
+      "Der Beste",
       "Superkräfte",
-      "Attraktiv",
-      "Der Beste"
+      "Attraktiv"
     ],
     "maechte": [],
     "ausruestung": {},

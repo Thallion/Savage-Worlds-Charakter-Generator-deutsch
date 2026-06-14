@@ -1,9 +1,10 @@
 # Archetyp-Erstellung: Witch (Horror Kompendium)
-# Stand: 2026-06-05T12:55:55
-# 7 Anomalie(n) von 44 Schritten
+# Stand: 2026-06-14T09:40:10
+# 8 Anomalie(n) von 44 Schritten
 
 ## ANOMALIEN
   [!] talent(Bedrohlich): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] macht(Fluchwort): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
   [!] macht(Geisterruf): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent_mit_aufstieg(Neue Mächte): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] macht(Fluchwort): ok=False warnung=Aktion lieferte False/None kosten=0 None
@@ -43,7 +44,7 @@
   - talent(Bedrohlich): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Tierfreund): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Eigenschaft erhöhen/senken): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Fluchwort): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Fluchwort): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Schutz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Geisterruf): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - kaufen(Silberdolchx1): ok=True kosten=100 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=400

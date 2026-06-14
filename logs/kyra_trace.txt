@@ -25,7 +25,7 @@
 9 Kauf Heiliges Wasser: ok=True Geld=82
 9 Kauf Abenteurerausrüstung: ok=True Geld=32
 9 Helm=Lederkappe: ok=True Geld=22
-9 Klerikerpaket (statt Gewandung): ok=False Geld=0
+9 Klerikerpaket (statt Gewandung): ok=True Geld=0
 9 Endvermögen: 0 (Bogen: 29 GM)
 === ERGEBNIS ===
   MP=10  Bennys=3  Parade=5  Robustheit=7  Bewegung=6

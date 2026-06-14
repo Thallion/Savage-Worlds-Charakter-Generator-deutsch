@@ -1,5 +1,5 @@
 # Archetyp-Erstellung: Angel (Horror Kompendium)
-# Stand: 2026-06-05T12:56:03
+# Stand: 2026-06-14T09:40:18
 # 10 Anomalie(n) von 41 Schritten
 
 ## ANOMALIEN

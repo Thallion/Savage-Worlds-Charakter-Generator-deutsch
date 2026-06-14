@@ -1,0 +1,794 @@
+{
+  "name": "Ssrrhyl",
+  "setting": "Savage Aventurien",
+  "schritte": [
+    {
+      "aktion": "neuer_charakter(Ssrrhyl, Savage Aventurien)",
+      "ok": true,
+      "nachher_punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0,
+        "handicap_gesamt": 0,
+        "aufstiege": 0
+      },
+      "vermoegen": 1000
+    },
+    {
+      "aktion": "volk(Achaz)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 0
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Feige)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Schwur_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Chauvinistisch_leicht)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Große Klappe)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Verstand)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 4,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Willenskraft)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 3,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Geschicklichkeit)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 2,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut(Konstitution)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Attributpunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 11,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reiten)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 10,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wissen (Geschichtswissen))",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 9,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Sprache)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 8,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 7,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Allgemeinwissen)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 5,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wahrnehmung)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 3,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 2,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Glaube)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Wissen (Geschichtswissen)) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Überreden) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Reiten) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_aufstieg(Verstand)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "attribut_mit_aufstieg(Willenskraft)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(AH (Wunder: Hesinde))",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Neue Mächte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Gnade)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Schnelle Machtregeneration)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Kühler Kopf)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Machtpunkte)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Arkanes entdecken/verbergen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Verwirrung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Abwehren)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Linderung)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Schutz)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Sprachen sprechen)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Verbündeten beschwören)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Tier Beschwören)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Eigenschaft erhöhen/senken)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": null
+    },
+    {
+      "aktion": "macht(Barriere)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Aufheben)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Segen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Aufspüren)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "speichern(chars/Archetypen/Archetyp_Savage_Aventurien_Ssrrhyl_A.json)",
+      "ok": true
+    }
+  ],
+  "anomalien": [
+    {
+      "aktion": "NOTIZ: Bogen sagt \"Saurianer\", im Setting-JSON existiert nur \"Achaz\" (die DSA-Echsenmenschen). Beide Begriffe bezeichnen dasselbe Volk. Anfaelligkeit Naturgewalten + Aussenseiter sind als spezielle Effekte gesetzt, werden aber NICHT automatisch als Handicaps aktiviert (Setting-Luecke?).",
+      "ok": true,
+      "warnung": "Bogen sagt \"Saurianer\", im Setting-JSON existiert nur \"Achaz\" (die DSA-Echsenmenschen). Beide Begriffe bezeichnen dasselbe Volk. Anfaelligkeit Naturgewalten + Aussenseiter sind als spezielle Effekte gesetzt, werden aber NICHT automatisch als Handicaps aktiviert (Setting-Luecke?).",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {},
+      "vermoegen": 1000
+    },
+    {
+      "aktion": "macht(Barriere)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Aufheben)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Segen)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "macht(Aufspüren)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4
+      },
+      "vermoegen": 1000,
+      "warnung": "Aktion lieferte False/None"
+    },
+    {
+      "aktion": "SOLL/IST-DIFF",
+      "ok": false,
+      "warnung": "fertigkeiten: Überreden soll W6, ist W4; fertigkeiten: Überleben soll W4, ist FEHLT; fertigkeiten: Reiten soll W6, ist W4; fertigkeiten: Recherche soll W4, ist FEHLT; fertigkeiten: Wissen (Geschichtswissen) soll W8, ist W4; handicaps: \"Außenseiter_leicht\" FEHLT; maechte: \"Barriere\" FEHLT; maechte: \"Aufheben\" FEHLT; maechte: \"Segen\" FEHLT; maechte: \"Aufspüren\" FEHLT",
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 1,
+        "fertigkeit": 0,
+        "handicap": 4,
+        "handicap_gesamt": 4,
+        "aufstiege": 0
+      },
+      "vermoegen": 1000
+    }
+  ],
+  "anomalien_anzahl": 6,
+  "endzustand": {
+    "attribute": {
+      "Geschicklichkeit": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Verstand": {
+        "wert": 8,
+        "modifier": 0
+      },
+      "Stärke": {
+        "wert": 4,
+        "modifier": 0
+      },
+      "Konstitution": {
+        "wert": 6,
+        "modifier": 0
+      },
+      "Willenskraft": {
+        "wert": 8,
+        "modifier": 0
+      }
+    },
+    "fertigkeiten": {
+      "Allgemeinwissen": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Athletik": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Heimlichkeit": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Überreden": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Wahrnehmung": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": true,
+        "ausgewaehlt": true
+      },
+      "Reiten": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Glaube": {
+        "wert": 8,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Sprache": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      },
+      "Wissen (Geschichtswissen)": {
+        "wert": 4,
+        "modifier": 0,
+        "grundfertigkeit": false,
+        "ausgewaehlt": false
+      }
+    },
+    "handicaps": [
+      "Feige",
+      "Große Klappe",
+      "Schwur_schwer",
+      "Chauvinistisch_leicht"
+    ],
+    "talente": [
+      "AH (Wunder: Hesinde)",
+      "Scharfe Sinne (Hesinde)",
+      "Klarer Verstand (Hesinde)",
+      "Neue Mächte",
+      "Neue Mächte_2",
+      "Neue Mächte_3",
+      "Gnade",
+      "Schnelle Machtregeneration",
+      "Kühler Kopf",
+      "Machtpunkte"
+    ],
+    "maechte": [
+      "Arkanes entdecken/verbergen",
+      "Verwirrung",
+      "Abwehren",
+      "Linderung",
+      "Schutz",
+      "Sprachen sprechen",
+      "Verbündeten beschwören",
+      "Tier Beschwören",
+      "Eigenschaft erhöhen/senken"
+    ],
+    "ausruestung": {},
+    "punkte": {
+      "attribut": 1,
+      "fertigkeit": 0,
+      "handicap": 4,
+      "handicap_gesamt": 4,
+      "aufstiege": 0
+    },
+    "machtpunkte": 15,
+    "vermoegen": 1000,
+    "rang": "Veteran",
+    "volk": "Achaz"
+  }
+}

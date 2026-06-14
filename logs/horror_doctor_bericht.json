@@ -510,7 +510,7 @@
     },
     {
       "aktion": "talent_mit_aufstieg(Schwer zu töten)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +519,7 @@
         "handicap": 0
       },
       "vermoegen": 440,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: not_duplicatable)"
     },
     {
       "aktion": "talent_mit_aufstieg(Unerbittlich)",
@@ -580,6 +580,19 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
+      "aktion": "talent_mit_aufstieg(Schwer zu töten)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 0,
+        "handicap": 0
+      },
+      "vermoegen": 440,
+      "warnung": "nicht angewendet (Sentinel: not_duplicatable)"
+    },
+    {
       "aktion": "NOTIZ: 1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
       "ok": true,
       "warnung": "1 zusätzliche Aufstiege um alle Bogen-Talente zu bezahlen",
@@ -604,7 +617,7 @@
       "vermoegen": 440
     }
   ],
-  "anomalien_anzahl": 5,
+  "anomalien_anzahl": 6,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

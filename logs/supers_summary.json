@@ -40,13 +40,7 @@
  {
   "name": "Panzer",
   "missing": [],
-  "powers": [
-   [
-    "Superattribut",
-    20,
-    "ueber_obergrenze"
-   ]
-  ],
+  "powers": [],
   "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
@@ -57,11 +51,12 @@
   ],
   "errors": [],
   "edges_auto_present": [],
-  "skp": "25/45",
+  "skp": "45/45",
   "selected_superkraefte": [
    "Panzerung",
    "Springen",
-   "Nahkampfangriff"
+   "Nahkampfangriff",
+   "Superattribut"
   ],
   "selected_talente": [
    "Superkräfte",
@@ -159,13 +154,7 @@
  {
   "name": "Feuervogel",
   "missing": [],
-  "powers": [
-   [
-    "Fernkampfangriff",
-    20,
-    "ueber_obergrenze"
-   ]
-  ],
+  "powers": [],
   "edges_false": [],
   "hind_false": [],
   "trait_shortfall": [
@@ -176,25 +165,28 @@
    "Heimlichkeit W4<W6"
   ],
   "errors": [],
-  "edges_auto_present": [],
-  "skp": "25/45",
+  "edges_auto_present": [
+   "Der Beste"
+  ],
+  "skp": "45/45",
   "selected_superkraefte": [
    "Ausweichen",
    "Umweltresistenz",
    "Fliegen",
+   "Fernkampfangriff",
    "Superattribut",
    "Superfertigkeit",
    "Robustheit"
   ],
   "selected_talente": [
+   "Der Beste",
    "Superkräfte",
-   "Attraktiv",
-   "Der Beste"
+   "Attraktiv"
   ],
   "rang": "Fortgeschritten",
   "aufstiege_gesamt": 4,
   "verbleibende_aufstiege": 0.0,
-  "anomalien": 0
+  "anomalien": 1
  },
  {
   "name": "Hexe",
@@ -273,13 +265,7 @@
  {
   "name": "Schlaeger",
   "missing": [],
-  "powers": [
-   [
-    "Superattribut",
-    20,
-    "ueber_obergrenze"
-   ]
-  ],
+  "powers": [],
   "edges_false": [
    [
     "Humiliate",
@@ -296,10 +282,11 @@
   ],
   "errors": [],
   "edges_auto_present": [],
-  "skp": "25/45",
+  "skp": "45/45",
   "selected_superkraefte": [
    "Nahkampfangriff",
    "Parade",
+   "Superattribut",
    "Supertalent",
    "Superfertigkeit"
   ],

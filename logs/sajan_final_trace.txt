@@ -5,7 +5,7 @@ kaufen 6x Shuriken: ok=True
 kaufen 1x Krähenfüße: ok=True 
 kaufen 3x Alchemistenfeuer: ok=True 
 kaufen Abenteurerausrüstung: ok=True
-kaufen Trank: schwache Heilung: ok=False
+kaufen Trank: schwache Heilung: ok=True
 Vermögen nach Kauf: 0 (Bogen-Soll Restgeld: 21 GM)
 PARADE=7 BEWEGUNG=8 ROBUSTHEIT=7
 DIFF: []

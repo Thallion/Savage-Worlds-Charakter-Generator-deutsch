@@ -1,0 +1,1435 @@
+{
+    "profil_daten": {
+        "Name": "Tallula",
+        "Alter": "25",
+        "Geschlecht": "weiblich",
+        "Konzept": "maraskanische TSA-Geweihte",
+        "Sprachen": "Garethie, Maraskani"
+    },
+    "active_setting_name": "Savage Aventurien",
+    "char_gen_completed": true,
+    "settingregeln": {
+        "dynamischer_rueckschlag": false,
+        "entschlossenheit": false,
+        "fanatiker": false,
+        "fertigkeitsspezialisierungen": false,
+        "fieser_schaden": false,
+        "geborener_held": false,
+        "grosse_abenteuer": false,
+        "helden_sterben_nie": false,
+        "keine_machtpunkte": false,
+        "kreativer_kampf": false,
+        "mehr_fertigkeitspunkte": false,
+        "mehr_sprachen": false,
+        "narrenglueck": false,
+        "schnelle_genesung": false,
+        "schwere_entscheidungen": false,
+        "ungepanzerter_held": false,
+        "wundobergrenze": false,
+        "strahlschablone": false,
+        "große_hoehen": false,
+        "verrat": false,
+        "schwierige_heilung": false,
+        "freizeit": false,
+        "riesige_feinde,": false,
+        "schurkische_entschlossenheit": false
+    },
+    "attribute": {
+        "Geschicklichkeit": {
+            "attribut_name": "Geschicklichkeit",
+            "wert": 10,
+            "modifier": 0
+        },
+        "Verstand": {
+            "attribut_name": "Verstand",
+            "wert": 6,
+            "modifier": 0
+        },
+        "Stärke": {
+            "attribut_name": "Stärke",
+            "wert": 4,
+            "modifier": 0
+        },
+        "Konstitution": {
+            "attribut_name": "Konstitution",
+            "wert": 6,
+            "modifier": 0
+        },
+        "Willenskraft": {
+            "attribut_name": "Willenskraft",
+            "wert": 8,
+            "modifier": 0
+        }
+    },
+    "fertigkeiten": {
+        "Allgemeinwissen": {
+            "fertigkeit_name": "Allgemeinwissen",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Athletik": {
+            "fertigkeit_name": "Athletik",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Heimlichkeit": {
+            "fertigkeit_name": "Heimlichkeit",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Überreden": {
+            "fertigkeit_name": "Überreden",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Wahrnehmung": {
+            "fertigkeit_name": "Wahrnehmung",
+            "grundfertigkeit": true,
+            "ausgewaehlt": true,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Kämpfen": {
+            "fertigkeit_name": "Kämpfen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Schießen": {
+            "fertigkeit_name": "Schießen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Diebeskunst": {
+            "fertigkeit_name": "Diebeskunst",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Überleben": {
+            "fertigkeit_name": "Überleben",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Reiten": {
+            "fertigkeit_name": "Reiten",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Fahren": {
+            "fertigkeit_name": "Fahren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Seefahrt": {
+            "fertigkeit_name": "Seefahrt",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Pilot": {
+            "fertigkeit_name": "Pilot",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Geschicklichkeit",
+            "custom": false
+        },
+        "Darbietung": {
+            "fertigkeit_name": "Darbietung",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Einschüchtern": {
+            "fertigkeit_name": "Einschüchtern",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Glaube": {
+            "fertigkeit_name": "Glaube",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 8,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Heilen": {
+            "fertigkeit_name": "Heilen",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Provozieren": {
+            "fertigkeit_name": "Provozieren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Reparieren": {
+            "fertigkeit_name": "Reparieren",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Glücksspiel": {
+            "fertigkeit_name": "Glücksspiel",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Kriegskunst": {
+            "fertigkeit_name": "Kriegskunst",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Zaubern": {
+            "fertigkeit_name": "Zaubern",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Alchemie": {
+            "fertigkeit_name": "Alchemie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Recherche": {
+            "fertigkeit_name": "Recherche",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Sprache": {
+            "fertigkeit_name": "Sprache",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Magie": {
+            "fertigkeit_name": "Magie",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Willenskraft",
+            "custom": false
+        },
+        "Wissen (Geschichtswissen)": {
+            "fertigkeit_name": "Wissen (Geschichtswissen)",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Wissen (Götter & Kulte)": {
+            "fertigkeit_name": "Wissen (Götter & Kulte)",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 6,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Wissen (Sagen & Legenden)": {
+            "fertigkeit_name": "Wissen (Sagen & Legenden)",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": 0,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Wissen (Magie & Sphärenkunde)": {
+            "fertigkeit_name": "Wissen (Magie & Sphärenkunde)",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        },
+        "Wissen (Rechtskunde)": {
+            "fertigkeit_name": "Wissen (Rechtskunde)",
+            "grundfertigkeit": false,
+            "ausgewaehlt": false,
+            "aktiv": true,
+            "wuerfel": {
+                "value": 4,
+                "modifier": -2,
+                "typ": "fertigkeit"
+            },
+            "attribut": "Verstand",
+            "custom": false
+        }
+    },
+    "selected_elements": {
+        "voelker": {
+            "Mensch": {
+                "ausgewaehlt": true
+            }
+        },
+        "handicaps": {
+            "Große Klappe": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Neugierig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Schwur_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Aufopferungsvoll_leicht": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            }
+        },
+        "talente": {
+            "Beziehungen": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "AH (Wunder: Tsa)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 3,
+                "machtpunkte": 10
+            },
+            "Schnelle Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Flexible Wunder (Tsa)": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Gnade": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Neue Mächte": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
+            },
+            "Neue Mächte_2": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 2,
+                "machtpunkte": 0
+            },
+            "Tierempathie": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            }
+        },
+        "maechte": {
+            "Einfluss": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "VER 5",
+                "dauer": "—"
+            },
+            "Trägheit/Beschleunigung": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 2,
+                "reichweite": "VER",
+                "dauer": "Sofort/5"
+            },
+            "Linderung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER",
+                "dauer": "Sofort"
+            },
+            "Gedankenverbindung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 1,
+                "reichweite": "VER 30m",
+                "dauer": "—"
+            },
+            "Aufspüren": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "Selbst",
+                "dauer": "10 Minuten"
+            },
+            "Heilung": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 3,
+                "reichweite": "B",
+                "dauer": "Sofort"
+            },
+            "Segen": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "machtpunkte": 10,
+                "reichweite": "Eine Stadt/Gemeinde",
+                "dauer": "Ein Jahr"
+            }
+        },
+        "superkraefte": {},
+        "cyberware": {},
+        "ausruestung": {
+            "Kampfstab": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Diskus": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Beinschienen, Leder": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
+    },
+    "selected_handicaps": [
+        "Große Klappe",
+        "Neugierig",
+        "Schwur_schwer",
+        "Aufopferungsvoll_leicht"
+    ],
+    "selected_talente": [
+        "Beziehungen",
+        "AH (Wunder: Tsa)",
+        "Schnelle Heilung",
+        "Flexible Wunder (Tsa)",
+        "Gnade",
+        "Neue Mächte",
+        "Neue Mächte_2",
+        "Tierempathie"
+    ],
+    "selected_maechte": [
+        "Einfluss",
+        "Trägheit/Beschleunigung",
+        "Linderung",
+        "Gedankenverbindung",
+        "Aufspüren",
+        "Heilung",
+        "Segen"
+    ],
+    "selected_superkraefte": [],
+    "selected_cyberware": [],
+    "voelker_selected": {
+        "Elf": false,
+        "Halbelf": false,
+        "Halbork": false,
+        "Mensch": true,
+        "Zwerg": false,
+        "Goblin": false,
+        "Ork": false,
+        "Achaz": false,
+        "Holberker": false
+    },
+    "voelker_auswahlen": {},
+    "selected_allgemeine_ausruestung": [
+        "Kampfstab",
+        "Diskus",
+        "Beinschienen, Leder",
+        "Ledertunika"
+    ],
+    "selected_waffen": [
+        "Kampfstab",
+        "Diskus"
+    ],
+    "selected_ruestungen": [
+        "Beinschienen, Leder",
+        "Ledertunika"
+    ],
+    "selected_schilde": [],
+    "ausruestung_mengen": {
+        "Kampfstab": 1,
+        "Diskus": 1,
+        "Beinschienen, Leder": 1,
+        "Ledertunika": 1
+    },
+    "rang": "Veteran",
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 9,
+    "verbleibende_attributsteigerungen": 0,
+    "verbleibende_fertigkeitssteigerungen": 0,
+    "verfuegbare_maechte": 0,
+    "anzahl_maechte": 7,
+    "machtpunkte": 10,
+    "machtstufe": "III",
+    "superkraft_punkte_gesamt": 0,
+    "superkraft_punkte_verbraucht": 0,
+    "kraftobergrenze": 15,
+    "vermoegen": 865.0,
+    "erschoepfung": 0,
+    "zusaetzliche_talente": 0,
+    "gesamt_handicap_punkte": 4,
+    "verbleibende_handicap_punkte": 0,
+    "pathfinder_kostenlose_talente_gewaehlt": 0,
+    "steigerungs_journal": {
+        "session_start": "2026-06-13T13:08:51.719646",
+        "entries": [
+            {
+                "timestamp": "2026-06-13 13:09:45",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Geschicklichkeit",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:09:46",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Stärke",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:09:47",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Konstitution",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:09:48",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Willenskraft",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:09:53",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Geschicklichkeit",
+                    "von": 6,
+                    "nach": 8,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:13",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Verstand",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Attributspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:18",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Allgemeinwissen",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:23",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Athletik",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:23",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Athletik",
+                    "von": 6,
+                    "nach": 8,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:35",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Überreden",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:46",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Reiten",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:47",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Reiten",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:52",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Überleben",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:53",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Überleben",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:10:59",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Kämpfen",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:11:00",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Kämpfen",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:11:02",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Kämpfen",
+                    "von": 6,
+                    "nach": 8,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:11:09",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Wahrnehmung",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 1,
+                    "kosten_typ": "Fertigkeitspunkte"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:11:23",
+                "type": "handicap_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Neugierig",
+                    "stufe": "schwer",
+                    "punkte": 2
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:11:49",
+                "type": "talent_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "AH (Wunder: Tsa)",
+                    "kosten": 2,
+                    "voraussetzungen": ""
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:15:26",
+                "type": "handicap_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Große Klappe",
+                    "stufe": "leicht",
+                    "punkte": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:16:50",
+                "type": "handicap_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Aufopferungsvoll_leicht",
+                    "stufe": "leicht",
+                    "punkte": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 13:24:13",
+                "type": "talent_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Gnade",
+                    "kosten": 2,
+                    "voraussetzungen": ""
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:40:12",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Einfluss",
+                    "rang": "A",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:40:28",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Trägheit/Beschleunigung",
+                    "rang": "F",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:40:43",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Linderung",
+                    "rang": "A",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:41:13",
+                "type": "talent_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Neue Mächte",
+                    "kosten": 1,
+                    "voraussetzungen": ""
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:42:25",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Gedankenverbindung",
+                    "rang": "A",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:43:21",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Aufspüren",
+                    "rang": "A",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:43:41",
+                "type": "talent_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Neue Mächte_2",
+                    "kosten": 1,
+                    "voraussetzungen": ""
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:43:41",
+                "type": "talent_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Neue Mächte",
+                    "kosten": 1,
+                    "voraussetzungen": ""
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:43:58",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Heilung",
+                    "rang": "A",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:44:10",
+                "type": "macht_hinzugefuegt",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Segen",
+                    "rang": "F",
+                    "kosten": 1
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:08",
+                "type": "attribut_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Geschicklichkeit",
+                    "von": 8,
+                    "nach": 10,
+                    "kosten": 1,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:18",
+                "type": "fertigkeit_steigerung",
+                "rang": "Anfänger",
+                "details": {
+                    "name": "Glaube",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:19",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Glaube",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:29",
+                "type": "attribut_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Willenskraft",
+                    "von": 6,
+                    "nach": 8,
+                    "kosten": 1,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:33",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Glaube",
+                    "von": 6,
+                    "nach": 8,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:56",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Heilen",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:49:57",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Glücksspiel",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:50:23",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Heilen",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:50:39",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Wissen (Götter & Kulte)",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:50:45",
+                "type": "fertigkeit_steigerung",
+                "rang": "Fortgeschritten",
+                "details": {
+                    "name": "Wissen (Götter & Kulte)",
+                    "von": 4,
+                    "nach": 6,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:50:54",
+                "type": "fertigkeit_steigerung",
+                "rang": "Veteran",
+                "details": {
+                    "name": "Wissen (Sagen & Legenden)",
+                    "von": 4,
+                    "nach": 4,
+                    "kosten": 0.5,
+                    "kosten_typ": "Aufstiege"
+                }
+            },
+            {
+                "timestamp": "2026-06-13 15:51:52",
+                "type": "talent_hinzugefuegt",
+                "rang": "Veteran",
+                "details": {
+                    "name": "Tierempathie",
+                    "kosten": 1,
+                    "voraussetzungen": ""
+                }
+            }
+        ],
+        "cost_entries": [
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Allgemeinwissen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überreden",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reiten",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "AH (Wunder: Tsa)",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Gnade",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "talent",
+                "name": "Neue Mächte_2",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Glaube",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heilen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wissen (Götter & Kulte)",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wissen (Götter & Kulte)",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wissen (Sagen & Legenden)",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "talent",
+                "name": "Tierempathie",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            }
+        ]
+    }
+}

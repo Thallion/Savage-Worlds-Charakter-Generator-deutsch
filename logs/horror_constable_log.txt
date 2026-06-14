@@ -1,10 +1,11 @@
 # Archetyp-Erstellung: Constable (Horror Kompendium)
-# Stand: 2026-06-05T12:55:55
-# 2 Anomalie(n) von 29 Schritten
+# Stand: 2026-06-14T09:40:10
+# 3 Anomalie(n) von 40 Schritten
 
 ## ANOMALIEN
   [!] talent(Block): ok=False warnung=Aktion lieferte False/None kosten=0 None
   [!] talent(Eisenkiefer): ok=False warnung=Aktion lieferte False/None kosten=0 None
+  [!] talent_mit_aufstieg(Block): ok=False warnung=nicht angewendet (Sentinel: not_duplicatable) kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Constable, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -36,3 +37,14 @@
   - fertigkeit_mit_hc(Schießen): ok=True kosten=1 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Block): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - talent(Eisenkiefer): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - kaufen(Schlagstockx1): ok=True kosten=10 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=490
+  - kaufen(Handschellenx1): ok=True kosten=15 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=475
+  - kaufen(Laternex1): ok=True kosten=25 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=450
+  - kaufen(Trillerpfeifex1): ok=True kosten=2 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=448
+  - kaufen(Laternen-Ölx1): ok=True kosten=2 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - fertigkeit_mit_aufstieg(Schießen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - fertigkeit_mit_aufstieg(Heimlichkeit): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - talent_mit_aufstieg(Block): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - talent_mit_aufstieg(Eisenkiefer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - talent_mit_aufstieg(Schmerzresistenz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446
+  - talent_mit_aufstieg(Block): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=446

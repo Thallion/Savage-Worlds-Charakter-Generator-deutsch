@@ -137,7 +137,7 @@ Gepeinigter
   TALENT-LOOP: versuche 'Flicken', bereits_gewählt=False
   TALENT('Flicken'): ok=True, kosten=2, kostenart=Handicap-Punkte
   TALENT-LOOP: versuche 'Killerinstinkt', bereits_gewählt=False
-  TALENT('Killerinstinkt'): ok=True, kosten=0, kostenart=None
+  TALENT('Killerinstinkt'): ok=False, kosten=0, kostenart=None
   Nach Talenten: punkte={'attribut': 0, 'fertigkeit': 12, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}, talente=['Übernatürliches Attribut (Geschicklichkeit)', 'Flicken']
   Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
   Nach HP-Verbrauch (Talente+Fert-Fallback): {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 250, 'machtpunkte': 0}
@@ -151,7 +151,7 @@ Gepeinigter
     attribut Konstitution auf 8
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 212, 'machtpunkte': 0}
   DIFF: []
-  → Gepeinigter anomalien=0
+  → Gepeinigter anomalien=2
 
 ============================================================
 Zauberschützin
@@ -407,7 +407,7 @@ Kopfgeldjäger
   → Kopfgeldjäger anomalien=0
 
 ============================================================
-Salonschönheit
+Saloonschönheit
 ============================================================
   Auto nach handicaps: {'talente_neu': [], 'handicaps_neu': ['Heldenhaft (schwer)', 'Neugierig (schwer)'], 'maechte_neu': []}
   Volkswahlen: {'freies_talent': True, 'freies_attribut': False, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Keine Attribute verfügbar'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': [], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}]}}}
@@ -429,7 +429,7 @@ Salonschönheit
     fertigkeit Wahrnehmung auf 6
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 241, 'machtpunkte': 0}
   DIFF: []
-  → Salonschönheit anomalien=0
+  → Saloonschönheit anomalien=0
 
 ============================================================
 Wundarzt
@@ -579,7 +579,7 @@ Hexe
     macht Verwirrung: ok=True
   Endpunktestand: {'attribut': 0, 'fertigkeit': 0, 'handicap': 0, 'handicap_gesamt': 4, 'aufstiege': 0.0, 'vermoegen': 0, 'machtpunkte': 15}
   DIFF: []
-  → Hexe anomalien=2
+  → Hexe anomalien=3
 
 ============================================================
 Investigativer Journalist

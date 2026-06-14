@@ -523,7 +523,7 @@
     },
     {
       "aktion": "kaufen(Klerikerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 22,
       "kostenart": "Vermögen",
       "punkte": {
@@ -542,7 +542,7 @@
   "anomalien": [
     {
       "aktion": "kaufen(Klerikerpaketx1) FORCE",
-      "ok": false,
+      "ok": true,
       "kosten": 22,
       "kostenart": "Vermögen",
       "punkte": {

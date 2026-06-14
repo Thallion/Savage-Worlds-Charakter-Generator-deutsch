@@ -120,7 +120,7 @@
     },
     {
       "aktion": "macht(Flächenschlag)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -129,7 +129,7 @@
         "handicap": 2
       },
       "vermoegen": 250,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "attribut(Geschicklichkeit)",
@@ -593,6 +593,19 @@
   ],
   "anomalien": [
     {
+      "aktion": "macht(Flächenschlag)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 250,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "kaufen(Pferdx1) FORCE",
       "ok": true,
       "kosten": 11,
@@ -619,7 +632,7 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Munition Pistole (groß) .40-.50 (50 Stück) zum Preis 0 gekauft"
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 3,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
