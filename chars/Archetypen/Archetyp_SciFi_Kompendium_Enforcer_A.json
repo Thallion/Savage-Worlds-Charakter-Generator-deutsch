@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
@@ -52,12 +52,12 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 10,
             "modifier": 0
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         }
     },
@@ -483,17 +483,17 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Gyrojet-Pistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Taschencomputer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gyrojet-Pistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -534,7 +534,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Gyrojet-Pistole",
         "Commlink",
         "Taschencomputer"
     ],
@@ -544,13 +543,13 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Gyrojet-Pistole": 1,
         "Commlink": 1,
-        "Taschencomputer": 1
+        "Taschencomputer": 1,
+        "Gyrojet-Pistole": 1
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -704,6 +703,34 @@
             {
                 "typ": "talent",
                 "name": "Kräftig",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 10,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

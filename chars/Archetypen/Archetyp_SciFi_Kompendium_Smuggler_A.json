@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -315,8 +315,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -506,16 +506,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Blasterpistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Vibro-Klinge": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Rucksack": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -532,6 +522,16 @@
                 "zustand": "neu"
             },
             "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Blasterpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Vibro-Klinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -576,8 +576,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Schwere Blasterpistole",
-        "Vibro-Klinge",
         "Rucksack",
         "Taschenlampe",
         "Dietriche",
@@ -593,16 +591,16 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Schwere Blasterpistole": 1,
-        "Vibro-Klinge": 1,
         "Rucksack": 1,
         "Taschenlampe": 1,
         "Dietriche": 1,
-        "Werkzeugkoffer": 1
+        "Werkzeugkoffer": 1,
+        "Schwere Blasterpistole": 1,
+        "Vibro-Klinge": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 2,
-    "aufstiege_gesamt": 4,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 1,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -742,6 +740,48 @@
                 "name": "Hinterhältiger Angriff",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Provozieren",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

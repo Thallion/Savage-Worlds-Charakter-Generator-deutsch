@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -276,8 +276,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -520,11 +520,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Energie-Kampfaxt": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Universalübersetzer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -536,6 +531,11 @@
                 "zustand": "neu"
             },
             "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Energie-Kampfaxt": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -583,7 +583,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Synth-Mesh",
-        "Energie-Kampfaxt",
         "Universalübersetzer",
         "Persönliche Datenassistenz",
         "Batterie, Universal-"
@@ -597,14 +596,14 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Synth-Mesh": 1,
-        "Energie-Kampfaxt": 1,
         "Universalübersetzer": 1,
         "Persönliche Datenassistenz": 1,
-        "Batterie, Universal-": 1
+        "Batterie, Universal-": 1,
+        "Energie-Kampfaxt": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -773,6 +772,34 @@
                 "name": "Drohnen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Naturwissenschaften",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Naturwissenschaften",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

@@ -342,7 +342,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -354,8 +354,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -523,16 +523,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Molekularmesser": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Laserpistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Waffensperre": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -549,6 +539,16 @@
                 "zustand": "neu"
             },
             "Biolink": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Molekularmesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Laserpistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -596,8 +596,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Molekularmesser",
-        "Laserpistole",
         "Waffensperre",
         "Batterie, Universal-",
         "Persönliche Datenassistenz",
@@ -613,16 +611,16 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Molekularmesser": 1,
-        "Laserpistole": 1,
         "Waffensperre": 1,
         "Batterie, Universal-": 1,
         "Persönliche Datenassistenz": 1,
-        "Biolink": 1
+        "Biolink": 1,
+        "Molekularmesser": 1,
+        "Laserpistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -795,6 +793,27 @@
                 "name": "Geborener Anführer",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reparieren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

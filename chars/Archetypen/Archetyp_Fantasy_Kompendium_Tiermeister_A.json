@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -489,18 +489,6 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Tiermeister_2": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Tiermeister_3": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
             "Tierempathie": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -518,21 +506,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Entermesser": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Kompositbogen": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -559,6 +532,21 @@
                 "zustand": "neu"
             },
             "Trank: Fertigkeitssteigerung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Entermesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kompositbogen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -617,9 +605,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Entermesser",
-        "Kompositbogen",
-        "Dolch",
         "Ledertunika",
         "Wildnispaket",
         "Pfeile (20)",
@@ -637,19 +622,19 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Entermesser": 2,
-        "Kompositbogen": 1,
-        "Dolch": 1,
         "Ledertunika": 1,
         "Wildnispaket": 1,
         "Pfeile (20)": 1,
         "Rauchstab": 1,
         "Fallenherstellungsset": 1,
-        "Trank: Fertigkeitssteigerung": 1
+        "Trank: Fertigkeitssteigerung": 1,
+        "Entermesser": 2,
+        "Kompositbogen": 1,
+        "Dolch": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -813,6 +798,13 @@
             {
                 "typ": "talent",
                 "name": "Beidhändiger Kampf",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -120,8 +120,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -433,7 +433,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -489,21 +489,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Schwere Blasterpistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Blastergewehr": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Betäubungspike": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Sprungpack": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -515,6 +500,21 @@
                 "zustand": "neu"
             },
             "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Blasterpistole": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Blastergewehr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Betäubungspike": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -555,9 +555,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Raumanzug, Kampf-",
-        "Schwere Blasterpistole",
-        "Blastergewehr",
-        "Betäubungspike",
         "Sprungpack",
         "Fernglas",
         "Batterie, Universal-"
@@ -573,16 +570,16 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Raumanzug, Kampf-": 1,
-        "Schwere Blasterpistole": 1,
-        "Blastergewehr": 1,
-        "Betäubungspike": 1,
         "Sprungpack": 1,
         "Fernglas": 1,
-        "Batterie, Universal-": 1
+        "Batterie, Universal-": 1,
+        "Schwere Blasterpistole": 1,
+        "Blastergewehr": 1,
+        "Betäubungspike": 1
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -744,6 +741,41 @@
                 "wert": 8,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1.0
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Recherche",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

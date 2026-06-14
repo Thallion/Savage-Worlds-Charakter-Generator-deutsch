@@ -1,0 +1,91 @@
+
+===== SciFi Kompendium =====
+  AI_Controller          aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Reparieren->d6(Cap)', 'Skill Schießen->d8(Cap)', 'Skill Heimlichkeit->d6(Cap)']
+  Ambassador             aus 5.5->5.5 rang=Fortgeschritten
+  Analyst                aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Heimlichkeit->d6(Cap)']
+  Bounty_Hunter          aus 7->7 rang=Fortgeschritten
+  Chronomancer           aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Reparieren->d8(Cap)', 'Skill Heimlichkeit->d6(Cap)', 'Skill Provozieren->d6(Cap)']
+  Commander              aus 5.5->5.5 rang=Fortgeschritten
+  Commando               aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Einschüchtern->d4(Cap)', 'Skill Reparieren->d4(Cap)', 'Skill Heimlichkeit->d6(Cap)']
+  Cyborg                 aus 7.5->7.5 rang=Fortgeschritten
+  Enforcer               aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Reparieren->d4(Cap)']
+  Engineer               aus 7->7 rang=Fortgeschritten
+  Envoy                  aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Fahren->d4(Cap)', 'Skill Elektronik->d4(Cap)', 'Skill Kämpfen->d4(Cap)', 'Skill Wahrnehmung->d6(Cap)']
+  Gladiator              aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Heilen->d4(Cap)', 'Skill Heimlichkeit->d6(Cap)', 'Skill Überleben->d4(Cap)', 'Skill Provozieren->d4(Cap)']
+  Gravlock               aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Kämpfen->d4(Cap)', 'Skill Diebeskunst->d8(Cap)']
+  Grunt                  aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Einschüchtern->d4(Cap)', 'Skill Reparieren->d4(Cap)', 'Skill Überleben->d4(Cap)']
+  Hacker                 aus 4->4 rang=Fortgeschritten
+  Hardlight_Conjurer     aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Attr Konstitution->d6(Cap)', 'Skill Kämpfen->d4(Cap)', 'Skill Hacken->d4(Cap)', 'Skill Pilot->d4(Cap)', 'Skill Recherche->d6(Cap)']
+  Infiltrator            aus 4.5->4.5 rang=Fortgeschritten
+  Influencer             aus 4.5->4.5 rang=Fortgeschritten
+  Medic                  aus 7.5->7.5 rang=Fortgeschritten
+  Mercenary              aus 4->4 rang=Fortgeschritten
+  Morpher                aus 5.5->5.5 rang=Fortgeschritten
+  Mystic                 aus 4.5->4.5 rang=Fortgeschritten
+  Pilot                  aus 7.5->7.5 rang=Fortgeschritten
+  Psyker                 aus 6->6 rang=Fortgeschritten
+  Road_Warrior           aus 7->7 rang=Fortgeschritten
+  Roughneck              aus 6->6 rang=Fortgeschritten
+  Scavenger              aus 7->7 rang=Fortgeschritten
+  Scrapper               aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Überreden->d6(Cap)', 'Skill Reparieren->d4(Cap)', 'Skill Heimlichkeit->d6(Cap)', 'Skill Überleben->d4(Cap)']
+  Shepherd               aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Kämpfen->d6(Cap)', 'Skill Einschüchtern->d4(Cap)', 'Skill Schießen->d4(Cap)']
+  Smuggler               aus 5.5->5.5 rang=Fortgeschritten
+  Spacer                 aus 6->6 rang=Fortgeschritten
+  Squad_Leader           aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Schießen->d8(Cap)', 'Skill Heimlichkeit->d6(Cap)', 'Skill Überleben->d4(Cap)']
+  Star_Knight            aus 7.5->7.5 rang=Fortgeschritten
+  Surveyor               aus 5.5->5.5 rang=Fortgeschritten
+  Technomancer           aus 6.5->6.5 rang=Fortgeschritten
+  Warper                 aus 7.5->7.5 rang=Fortgeschritten
+      ~ offen: ['Skill Elektronik->d6(Cap)', 'Skill Kämpfen->d6(Cap)', 'Skill Wahrnehmung->d6(Cap)', 'Skill Überreden->d6(Cap)']
+
+===== Fantasy Kompendium =====
+  Akrobatin              aus 4->4 rang=Fortgeschritten
+  Alchemist              aus 4->4 rang=Fortgeschritten
+  Amazone                aus 4->4 rang=Fortgeschritten
+  Aristokrat             aus 4->4 rang=Fortgeschritten
+  Assassinin             aus 5->5 rang=Fortgeschritten
+  Barbarin               aus 4.5->4.5 rang=Fortgeschritten
+  Barde                  aus 4.0->4.0 rang=Fortgeschritten
+  Bogenschuetze          aus 4->4 rang=Fortgeschritten
+  Champion               aus 4->4 rang=Fortgeschritten
+  Diebin                 aus 4.0->4.0 rang=Fortgeschritten
+  Drachenkmpf            aus 6->6 rang=Fortgeschritten
+  Druidin                aus 4->4 rang=Fortgeschritten
+  Hexe                   aus 4->4 rang=Fortgeschritten
+  Klerikerin             aus 4->4 rang=Fortgeschritten
+  Krieger                aus 4->4 rang=Fortgeschritten
+  Loremaster             aus 4->4 rang=Fortgeschritten
+  Magier                 aus 4->4 rang=Fortgeschritten
+  Moench                 aus 4->4 rang=Fortgeschritten
+  Narr                   aus 4->4 rang=Fortgeschritten
+  Paladin                aus 4->4 rang=Fortgeschritten
+  Piratenkpt             aus 4->4 rang=Fortgeschritten
+  Ritter                 aus 4.0->4.0 rang=Fortgeschritten
+  Ruepel                 aus 4->4 rang=Fortgeschritten
+  Schamane               aus 4->4 rang=Fortgeschritten
+  Schatzjgr              aus 5->5 rang=Fortgeschritten
+  Schwertmag             aus 4->4 rang=Fortgeschritten
+  Schwerttzn             aus 4->4 rang=Fortgeschritten
+  Soldat                 aus 4->4 rang=Fortgeschritten
+  Tiermeister            aus 5->5 rang=Fortgeschritten
+  Titanentgr             aus 4->4 rang=Fortgeschritten
+  Totemkmpf              aus 4->4 rang=Fortgeschritten
+  Tueftler               aus 4->5.0 rang=Fortgeschritten
+      + ['Geisteswissenschaften(akt)->d4', 'Geisteswissenschaften->d6']
+  Verteidiger            aus 4->4 rang=Fortgeschritten
+  Waldlaeuf              aus 4.0->4.0 rang=Fortgeschritten
+  Walkuere               aus 4->4 rang=Fortgeschritten
+  Zauberer               aus 4->4 rang=Fortgeschritten

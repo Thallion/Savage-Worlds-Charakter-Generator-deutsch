@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Stärke": {
@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -264,7 +264,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -510,11 +510,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Gyrojet-Gewehr": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Standard-Gyrojet": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -556,6 +551,11 @@
                 "zustand": "neu"
             },
             "Wasserbehälter": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gyrojet-Gewehr": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -601,7 +601,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Synth-Mesh",
-        "Gyrojet-Gewehr",
         "Standard-Gyrojet",
         "Rauch-Gyrojet",
         "Spreng-Gyrojet",
@@ -621,7 +620,6 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Synth-Mesh": 1,
-        "Gyrojet-Gewehr": 1,
         "Standard-Gyrojet": 26,
         "Rauch-Gyrojet": 2,
         "Spreng-Gyrojet": 2,
@@ -630,11 +628,12 @@
         "Taschenlampe": 1,
         "Schutzbrille": 1,
         "Nahrungsriegel": 10,
-        "Wasserbehälter": 1
+        "Wasserbehälter": 1,
+        "Gyrojet-Gewehr": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
@@ -781,6 +780,41 @@
                 "name": "Kampfreflexe",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kriegskunst",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

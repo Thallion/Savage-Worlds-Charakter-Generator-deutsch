@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -212,7 +212,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -250,8 +250,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 8,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -564,22 +564,12 @@
             }
         },
         "ausruestung": {
-            "Gyrojet-Gewehr": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Rotpunktvisier": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Standard-Gyrojet": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Vibro-Klinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -615,6 +605,16 @@
                 "zustand": "neu"
             },
             "Cyberware: Zielsystem": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Gyrojet-Gewehr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Vibro-Klinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -661,10 +661,8 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Gyrojet-Gewehr",
         "Rotpunktvisier",
         "Standard-Gyrojet",
-        "Vibro-Klinge",
         "Commlink",
         "Persönliche Datenassistenz",
         "Batterie, Universal-",
@@ -680,21 +678,21 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Gyrojet-Gewehr": 1,
         "Rotpunktvisier": 1,
         "Standard-Gyrojet": 30,
-        "Vibro-Klinge": 1,
         "Commlink": 1,
         "Persönliche Datenassistenz": 1,
         "Batterie, Universal-": 1,
         "Cyberware: Verbesserte Sicht": 1,
         "Cyberware: Panzerung": 1,
         "Cyberware: Robustheit": 1,
-        "Cyberware: Zielsystem": 1
+        "Cyberware: Zielsystem": 1,
+        "Gyrojet-Gewehr": 1,
+        "Vibro-Klinge": 1
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -864,6 +862,55 @@
                 "name": "Schnell",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Hacken",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

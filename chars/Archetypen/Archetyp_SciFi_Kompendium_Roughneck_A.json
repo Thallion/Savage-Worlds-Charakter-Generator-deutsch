@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -277,7 +277,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -354,8 +354,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -547,11 +547,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Plasmapistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Rucksack": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -588,6 +583,11 @@
                 "zustand": "neu"
             },
             "Cyberware: Klauen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Plasmapistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -636,7 +636,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Plasmapistole",
         "Rucksack",
         "Taschenlampe (10\" Strahl)",
         "Persönliche Datenassistenz",
@@ -655,7 +654,6 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Plasmapistole": 1,
         "Rucksack": 1,
         "Taschenlampe (10\" Strahl)": 1,
         "Persönliche Datenassistenz": 1,
@@ -663,11 +661,12 @@
         "Batterie, Universal-": 1,
         "Schutzbrille": 1,
         "Cyberware: Ersatzgliedmaße": 1,
-        "Cyberware: Klauen": 1
+        "Cyberware: Klauen": 1,
+        "Plasmapistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
@@ -834,6 +833,34 @@
                 "name": "Rohling",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Naturwissenschaften",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

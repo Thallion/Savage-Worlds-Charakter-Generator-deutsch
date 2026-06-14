@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -354,8 +354,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -500,12 +500,7 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Molekularmesser": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schwere Blasterpistole": {
+            "Raumanzug": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -525,12 +520,17 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Raumanzug": {
+            "Klebstoffpflaster": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Klebstoffpflaster": {
+            "Molekularmesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Blasterpistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -574,12 +574,10 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Molekularmesser",
-        "Schwere Blasterpistole",
+        "Raumanzug",
         "Laser-/Rotpunktvisier",
         "Commlink",
         "Batterie, Universal-",
-        "Raumanzug",
         "Klebstoffpflaster"
     ],
     "selected_waffen": [
@@ -593,17 +591,17 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Molekularmesser": 1,
-        "Schwere Blasterpistole": 1,
+        "Raumanzug": 1,
         "Laser-/Rotpunktvisier": 1,
         "Commlink": 1,
         "Batterie, Universal-": 1,
-        "Raumanzug": 1,
-        "Klebstoffpflaster": 3
+        "Klebstoffpflaster": 3,
+        "Molekularmesser": 1,
+        "Schwere Blasterpistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -786,6 +784,34 @@
                 "name": "Ausweichen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

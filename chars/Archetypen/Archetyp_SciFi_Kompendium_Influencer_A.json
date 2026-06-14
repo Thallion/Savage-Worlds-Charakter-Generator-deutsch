@@ -251,7 +251,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -523,16 +523,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Springmesser": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Pistole": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Persönliche Datenassistenz": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -544,6 +534,16 @@
                 "zustand": "neu"
             },
             "Drohne, Kommerziell": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Springmesser": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pistole": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -591,8 +591,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Kevlarjacke & Jeans",
-        "Springmesser",
-        "Pistole",
         "Persönliche Datenassistenz",
         "Kleidung, formell",
         "Drohne, Kommerziell"
@@ -607,15 +605,15 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Kevlarjacke & Jeans": 1,
-        "Springmesser": 1,
-        "Pistole": 1,
         "Persönliche Datenassistenz": 2,
         "Kleidung, formell": 1,
-        "Drohne, Kommerziell": 1
+        "Drohne, Kommerziell": 1,
+        "Springmesser": 1,
+        "Pistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -788,6 +786,13 @@
                 "name": "Täuscher",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
@@ -68,7 +68,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -108,7 +108,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -251,7 +251,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -522,22 +522,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Granatwerfer": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Granate": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
             "Bienenstock-Granate": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Rohr": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -568,6 +558,16 @@
                 "zustand": "neu"
             },
             "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Granatwerfer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Rohr": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -615,10 +615,8 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Kevlarjacke & Jeans",
-        "Granatwerfer",
         "Granate",
         "Bienenstock-Granate",
-        "Rohr",
         "Kaugummi",
         "Panzertape",
         "Schutzbrille",
@@ -636,20 +634,20 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Kevlarjacke & Jeans": 1,
-        "Granatwerfer": 1,
         "Granate": 6,
         "Bienenstock-Granate": 2,
-        "Rohr": 1,
         "Kaugummi": 1,
         "Panzertape": 1,
         "Schutzbrille": 1,
         "Dietriche": 1,
         "Seil": 1,
-        "Werkzeugkoffer": 1
+        "Werkzeugkoffer": 1,
+        "Granatwerfer": 1,
+        "Rohr": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -795,6 +793,41 @@
                 "name": "Panzertape & Kaugummi",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Allgemeinwissen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Diebeskunst",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

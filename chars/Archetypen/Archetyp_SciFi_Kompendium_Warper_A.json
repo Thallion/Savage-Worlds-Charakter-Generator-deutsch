@@ -42,12 +42,12 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -57,7 +57,7 @@
         },
         "Willenskraft": {
             "attribut_name": "Willenskraft",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         }
     },
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -515,16 +515,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Browning Automatic Rifle": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Vibro-Klinge": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Rotpunktvisier": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -536,6 +526,16 @@
                 "zustand": "neu"
             },
             "Persönliche Datenassistenz": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Browning Automatic Rifle": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Vibro-Klinge": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -582,8 +582,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Browning Automatic Rifle",
-        "Vibro-Klinge",
         "Rotpunktvisier",
         "Commlink",
         "Persönliche Datenassistenz"
@@ -598,15 +596,15 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Browning Automatic Rifle": 1,
-        "Vibro-Klinge": 1,
         "Rotpunktvisier": 1,
         "Commlink": 1,
-        "Persönliche Datenassistenz": 1
+        "Persönliche Datenassistenz": 1,
+        "Browning Automatic Rifle": 1,
+        "Vibro-Klinge": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -754,6 +752,34 @@
                 "name": "Bevorzugte Macht",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

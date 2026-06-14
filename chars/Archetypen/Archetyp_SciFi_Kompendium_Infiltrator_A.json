@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -552,11 +552,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Molekularschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Tarnanzug": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -587,11 +582,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Betäubungsschlagstock": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Betäubungsgranate": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -613,6 +603,16 @@
                 "zustand": "neu"
             },
             "Cyberware: Verborgenes Fach": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Molekularschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Betäubungsschlagstock": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -661,14 +661,12 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Körperpanzerung +4",
-        "Molekularschwert",
         "Tarnanzug",
         "Persönliche Datenassistenz",
         "Universalübersetzer",
         "Cyberdeck",
         "Direktionales Mikrofon",
         "Kreislaufatemgerät",
-        "Betäubungsschlagstock",
         "Betäubungsgranate",
         "Dietriche",
         "Schweißbrenner",
@@ -686,23 +684,23 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Körperpanzerung +4": 1,
-        "Molekularschwert": 2,
         "Tarnanzug": 1,
         "Persönliche Datenassistenz": 1,
         "Universalübersetzer": 1,
         "Cyberdeck": 1,
         "Direktionales Mikrofon": 1,
         "Kreislaufatemgerät": 1,
-        "Betäubungsschlagstock": 1,
         "Betäubungsgranate": 4,
         "Dietriche": 1,
         "Schweißbrenner": 1,
         "Linienprojektor": 1,
-        "Cyberware: Verborgenes Fach": 2
+        "Cyberware: Verborgenes Fach": 2,
+        "Molekularschwert": 2,
+        "Betäubungsschlagstock": 1
     },
-    "rang": "Anfänger",
+    "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -874,6 +872,13 @@
             {
                 "typ": "talent",
                 "name": "Ausweichen",
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

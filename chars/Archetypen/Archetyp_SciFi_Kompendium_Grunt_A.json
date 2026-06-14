@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -147,7 +147,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -264,7 +264,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -500,12 +500,6 @@
                 "rang": "F",
                 "neue_maechte": 0,
                 "machtpunkte": 0
-            },
-            "Soldat_2": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
             }
         },
         "maechte": {},
@@ -513,11 +507,6 @@
         "cyberware": {},
         "ausruestung": {
             "Infanteriekampfanzug": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Lasergewehr": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -538,6 +527,11 @@
                 "zustand": "neu"
             },
             "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lasergewehr": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -584,7 +578,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Infanteriekampfanzug",
-        "Lasergewehr",
         "Biolink",
         "Medi-Gel",
         "Zielfernrohr",
@@ -599,15 +592,15 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Infanteriekampfanzug": 1,
-        "Lasergewehr": 1,
         "Biolink": 1,
         "Medi-Gel": 1,
         "Zielfernrohr": 1,
-        "Batterie, Universal-": 1
+        "Batterie, Universal-": 1,
+        "Lasergewehr": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 3,
     "verfuegbare_maechte": 0,
@@ -753,6 +746,41 @@
                 "name": "Soldat_2",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kriegskunst",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Fahren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

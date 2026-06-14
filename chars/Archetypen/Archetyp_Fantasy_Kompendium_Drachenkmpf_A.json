@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -512,22 +512,7 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Krummschwert": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Schwere Armbrust": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Plattenbrustharnisch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Mittlerer Schild": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -538,6 +523,21 @@
                 "zustand": "neu"
             },
             "Bolzen (10)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Krummschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Schwere Armbrust": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Mittlerer Schild": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -595,10 +595,7 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Krummschwert",
-        "Schwere Armbrust",
         "Plattenbrustharnisch",
-        "Mittlerer Schild",
         "Abenteurerpaket",
         "Bolzen (10)"
     ],
@@ -613,16 +610,16 @@
         "Mittlerer Schild"
     ],
     "ausruestung_mengen": {
+        "Plattenbrustharnisch": 1,
+        "Abenteurerpaket": 1,
+        "Bolzen (10)": 2,
         "Krummschwert": 1,
         "Schwere Armbrust": 1,
-        "Plattenbrustharnisch": 1,
-        "Mittlerer Schild": 1,
-        "Abenteurerpaket": 1,
-        "Bolzen (10)": 2
+        "Mittlerer Schild": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -767,6 +764,20 @@
                 "name": "Versengen",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Geschicklichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
             }
         ]
     }

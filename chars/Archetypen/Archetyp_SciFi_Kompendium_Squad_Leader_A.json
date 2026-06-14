@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -147,7 +147,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -419,7 +419,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -489,18 +489,6 @@
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
-            "Anführer_2": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Soldat_2": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
             "Volles Rohr!": {
                 "ausgewaehlt": true,
                 "rang": "F",
@@ -518,11 +506,6 @@
                 "zustand": "neu"
             },
             "Infanterie-Kampfanzugshelm +6": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Mikro-Flugkörperwerfer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -548,6 +531,11 @@
                 "zustand": "neu"
             },
             "Batterie, Universal-": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Mikro-Flugkörperwerfer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -595,7 +583,6 @@
     "selected_allgemeine_ausruestung": [
         "Infanteriekampfanzug",
         "Infanterie-Kampfanzugshelm +6",
-        "Mikro-Flugkörperwerfer",
         "Leichte Flugkörper",
         "Biolink",
         "Taschencomputer",
@@ -613,16 +600,16 @@
     "ausruestung_mengen": {
         "Infanteriekampfanzug": 1,
         "Infanterie-Kampfanzugshelm +6": 1,
-        "Mikro-Flugkörperwerfer": 1,
         "Leichte Flugkörper": 6,
         "Biolink": 1,
         "Taschencomputer": 1,
         "Rotpunktvisier": 1,
-        "Batterie, Universal-": 1
+        "Batterie, Universal-": 1,
+        "Mikro-Flugkörperwerfer": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -782,6 +769,41 @@
                 "name": "Volles Rohr!",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Fahren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

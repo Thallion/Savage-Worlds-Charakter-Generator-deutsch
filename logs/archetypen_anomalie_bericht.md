@@ -694,3 +694,39 @@ datengetriebenen Volk/Talent-Refaktorierung. PDF-Text-Export liegt in `Texte/...
 
 **Fazit:** Refaktorierung ohne Auswirkung auf die Fantasy-Builds. Einziger offener echter Code-Bug
 (Barbarin/Berserker-Stärke) ist pre-existing und liegt außerhalb des Refaktorierungs-Scopes.
+
+---
+
+## Budget-Lücken via Zusatz-Aufstiege geschlossen — SciFi + Fantasy (2026-06-13)
+
+**Auftrag:** Verbliebene Budget-Lücken (IST < Bogen) in allen SciFi- (~35) und Fantasy-Archetypen
+(36) durch zusätzliche Aufstiege schließen — innerhalb des Seasoned-Caps.
+
+**Methode:** `logs/fill_budget_gaps.py` (idempotent). Lädt jeden gespeicherten Archetyp, liest die
+Soll-Skills+Attribute aus dem PDF-Bogen (Text-Export in `Texte/*.txt`), und hebt Defizite per Aufstieg
+an: 1 Attribut-Schritt = 1.0 Aufstieg, 1 Fertigkeits-Schritt = 0.5 Aufstieg. Strikte Schranke:
+ausgegebene Aufstiege < 8 (bleibt Seasoned). Hebt NUR an, senkt nie; kann nie über den Bogenwert
+hinaus. Report: `logs/budget_gapfill_report.txt`.
+
+**⚠️ Form-Feed-Falle (Lektion):** Erste Fassung mappte Archetyp→PDF-Zeile per `grep -n` (zählt nur
+`\n`), las die PDF aber mit Pythons `splitlines()` (trennt AUCH bei `\f`-Seitenumbrüchen, 19 Stück).
+→ Fenster um bis zu 19 Zeilen versetzt, spätere Archetypen mit falschen Bogenwerten gefüllt. **Fix:**
+Header werden jetzt DYNAMISCH per `splitlines()`-Suche (EN-Name + Validierung über eine „ATTRIBUTES"-
+Zeile) gefunden — kein Zeilennummern-Mapping mehr; Stat-Block am ersten `AdvAnces`/`RANK:` begrenzt
+(kein Bleed aus Nachbarblöcken). EN→DE: u.a. Controller=AI_Controller, Tinkerer=Tueftler.
+
+**Ergebnis (39 von 72 Archetypen angepasst, Rest war schon lückenlos):**
+- **Alle 72 jetzt Seasoned/Fortgeschritten** — keiner kippt auf Veteran (max. ausgegeben 7.5).
+- Mehrere SciFi-Builds standen fälschlich auf **Anfänger** (unter-aufgestiegen, z.B. Star_Knight 1.5,
+  Pilot 2.5, Smuggler 2.0, AI_Controller 3.5) → jetzt korrekt Seasoned (Bogen = RANK: SEASONED).
+- Attribut-Lücken praktisch geschlossen (1 Cap-bedingte Restlücke: Hardlight_Conjurer Kon d4).
+- Skill-Lücken gefüllt, soweit das Seasoned-Budget reicht; verbleibende sind **Cap-bedingt**
+  (struktureller 12-Punkte-Skill-Mangel des SciFi-Settings + Bögen, die >7 Aufstiege bräuchten),
+  14 Archetypen mit Resten, im Report als „offen (Cap)" gelistet.
+- **52 vorbestehende Über-Werte** (IST > geparster Bogen) blieben unangetastet und wurden NICHT vom
+  Filler erzeugt (stichprobenverifiziert gegen `e6efa26`): u.a. Barbarin Stärke d10 (Berserker-Code-
+  Bug), Schatzjgr Willenskraft d6 (Halbling-Spirited, regelkonform), Mercenary Wahrnehmung d10
+  (Cyberware), sowie advance-gehobene Skills, die der bounded-Parser bewusst unterliest.
+
+**Workflow-Hinweis:** Die originalen `build_*`-Skripte erzeugen den Basis-Char; `fill_budget_gaps.py`
+hebt anschließend auf Bogenniveau an. Nach erneutem Build einfach den Filler nachlaufen lassen.

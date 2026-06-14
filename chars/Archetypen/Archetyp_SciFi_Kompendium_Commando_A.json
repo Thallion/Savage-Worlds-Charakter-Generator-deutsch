@@ -47,12 +47,12 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Willenskraft": {
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -250,8 +250,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -506,12 +506,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Gatling-Laser": {
+            "Universalübersetzer": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Universalübersetzer": {
+            "Gatling-Laser": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -556,7 +556,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Infanteriekampfanzug",
-        "Gatling-Laser",
         "Universalübersetzer"
     ],
     "selected_waffen": [
@@ -568,12 +567,12 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Infanteriekampfanzug": 1,
-        "Gatling-Laser": 1,
-        "Universalübersetzer": 1
+        "Universalübersetzer": 1,
+        "Gatling-Laser": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -726,6 +725,41 @@
                 "name": "Volles Rohr!",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

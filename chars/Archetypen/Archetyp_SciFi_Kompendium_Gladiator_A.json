@@ -47,12 +47,12 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 10,
+            "wert": 12,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Willenskraft": {
@@ -81,7 +81,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -134,7 +134,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -264,7 +264,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -505,12 +505,12 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Energie-Kampfaxt": {
+            "Commlink": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Commlink": {
+            "Energie-Kampfaxt": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -555,7 +555,6 @@
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
         "Infanteriekampfanzug",
-        "Energie-Kampfaxt",
         "Commlink"
     ],
     "selected_waffen": [
@@ -567,12 +566,12 @@
     "selected_schilde": [],
     "ausruestung_mengen": {
         "Infanteriekampfanzug": 1,
-        "Energie-Kampfaxt": 1,
-        "Commlink": 1
+        "Commlink": 1,
+        "Energie-Kampfaxt": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.5,
+    "aufstiege_gesamt": 8,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 4,
     "verfuegbare_maechte": 0,
@@ -698,6 +697,41 @@
                 "name": "Raserei",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 12,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 10,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kriegskunst",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Elektronik",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

@@ -94,7 +94,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -159,8 +159,8 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
-                "modifier": -2,
+                "value": 6,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -521,21 +521,6 @@
         "superkraefte": {},
         "cyberware": {},
         "ausruestung": {
-            "Dolch": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Blasrohr": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Totschläger": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Ledertunika": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -582,6 +567,21 @@
                 "zustand": "neu"
             },
             "Grüner Schleimextrakt": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Dolch": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Blasrohr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Totschläger": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -641,9 +641,6 @@
     },
     "voelker_auswahlen": {},
     "selected_allgemeine_ausruestung": [
-        "Dolch",
-        "Blasrohr",
-        "Totschläger",
         "Ledertunika",
         "Umhang mit Kapuze",
         "Bandolier",
@@ -666,9 +663,6 @@
     ],
     "selected_schilde": [],
     "ausruestung_mengen": {
-        "Dolch": 1,
-        "Blasrohr": 1,
-        "Totschläger": 1,
         "Ledertunika": 1,
         "Umhang mit Kapuze": 1,
         "Bandolier": 1,
@@ -678,11 +672,14 @@
         "Mörderbräu": 1,
         "Äther": 1,
         "Lotusstaub": 1,
-        "Grüner Schleimextrakt": 1
+        "Grüner Schleimextrakt": 1,
+        "Dolch": 1,
+        "Blasrohr": 1,
+        "Totschläger": 1
     },
-    "rang": "Anfänger",
-    "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 4,
+    "rang": "Fortgeschritten",
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 1,
@@ -842,6 +839,27 @@
                 "name": "Dieb",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Diebeskunst",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Diebeskunst",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

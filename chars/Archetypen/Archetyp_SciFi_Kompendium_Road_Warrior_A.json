@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Konstitution": {
@@ -121,7 +121,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -251,7 +251,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -393,7 +393,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -500,16 +500,6 @@
                 "anzahl": 1,
                 "zustand": "neu"
             },
-            "Jagdgewehr": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
-            "Glock 9mm": {
-                "ausgewaehlt": true,
-                "anzahl": 1,
-                "zustand": "neu"
-            },
             "Rucksack": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
@@ -521,6 +511,16 @@
                 "zustand": "neu"
             },
             "Werkzeugkoffer": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Jagdgewehr": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Glock 9mm": {
                 "ausgewaehlt": true,
                 "anzahl": 1,
                 "zustand": "neu"
@@ -563,8 +563,6 @@
     "selected_allgemeine_ausruestung": [
         "Kevlarjacke & Jeans",
         "Motorradhelm",
-        "Jagdgewehr",
-        "Glock 9mm",
         "Rucksack",
         "Medikit",
         "Werkzeugkoffer"
@@ -581,15 +579,15 @@
     "ausruestung_mengen": {
         "Kevlarjacke & Jeans": 1,
         "Motorradhelm": 1,
-        "Jagdgewehr": 1,
-        "Glock 9mm": 1,
         "Rucksack": 1,
         "Medikit": 1,
-        "Werkzeugkoffer": 1
+        "Werkzeugkoffer": 1,
+        "Jagdgewehr": 1,
+        "Glock 9mm": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 1,
     "verfuegbare_maechte": 0,
@@ -743,6 +741,34 @@
                 "name": "Ruhige Hände",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 8,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 1.0
             }
         ]
     }
