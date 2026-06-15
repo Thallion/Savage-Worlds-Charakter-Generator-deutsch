@@ -5,27 +5,15 @@ pro Archetyp Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/Ran
 fehlende Ausrüstung.
 
 Datenquellen:
-- chars/Archetypen/Archetyp_*.json  -> AKTUELLE Wahrheit: Setting, Name, Handicap-Punkte,
-  Aufstiege, Rang, SKP (Superkräfte), char_gen_completed.
-- logs/**/*_bericht.json            -> Build-Zeit: Attribut-/Fertigkeitspunkte-Rest
-  (Chargen-Pools werden nach Abschluss nicht im Char-JSON gespeichert).
+- chars/Archetypen/Archetyp_*.json  -> AKTUELLE Wahrheit (ALLE Pools aus dem Endzustand):
+  Setting, Name, Attribut-/Fertigkeitspunkte-Rest (verbleibende_*steigerungen), Handicap-Punkte,
+  Aufstiege, Rang, SKP (Superkräfte), Mächte-Slots, char_gen_completed.
 - logs/soll_ist_ausruestung.md      -> fehlende Ausrüstung (FEHLT_KATALOG/FEHLT_OFFEN).
 """
 import json, glob, os, re, collections
 
 def norm(s):
     return re.sub(r'[^a-z0-9äöü]', '', (s or '').lower())
-
-# --- Build-Berichte: (setting_norm, name_norm) -> punkte (attribut/fertigkeit-Rest) ---
-ber = {}
-for f in glob.glob('logs/**/*_bericht.json', recursive=True):
-    try:
-        d = json.load(open(f, encoding='utf-8'))
-    except Exception:
-        continue
-    p = d.get('endzustand', {}).get('punkte') if isinstance(d.get('endzustand'), dict) else None
-    if p:
-        ber[(norm(d.get('setting')), norm(d.get('name')))] = p
 
 # --- Ausrüstungs-Analyzer: (setting_norm, name_norm) -> [fehlende Items] ---
 fehlt = {}
@@ -63,10 +51,12 @@ for fn in sorted(glob.glob('chars/Archetypen/Archetyp_*.json')):
     setting = d.get('active_setting_name') or setting_aus_datei(fn)
     name = (d.get('profil_daten') or {}).get('Name') or os.path.basename(fn)
     key = (norm(setting), norm(name))
-    # Attr/Fert aus Bericht (Rest) -> ausgegeben/Standard (5/12)
-    p = ber.get(key, {})
-    attr = stufe(int(p.get('attribut', 0)), 5) if 'attribut' in p else '?/5'
-    fert = stufe(int(p.get('fertigkeit', 0)), 12) if 'fertigkeit' in p else '?/12'
+    # Attr/Fert aus dem ENDZUSTAND des Char-JSON (Rest-Chargen-Pools), Standard 5/12.
+    # Spiegelt damit auch von fill_budget Phase 0 nachträglich verbrauchte Restpunkte korrekt.
+    attr_rest = min(d.get('verbleibende_attributsteigerungen', 0) or 0, 5)
+    fert_rest = min(d.get('verbleibende_fertigkeitssteigerungen', 0) or 0, 12)
+    attr = stufe(attr_rest, 5)
+    fert = stufe(fert_rest, 12)
     # Handicap-Punkte aus JSON
     hp_max = d.get('gesamt_handicap_punkte', 0) or 0
     hp_rest = d.get('verbleibende_handicap_punkte', 0) or 0
@@ -110,8 +100,8 @@ L.append("**Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punk
          "Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · "
          "Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. "
          "`⚠` = Pool nicht voll ausgegeben. `(unfertig)` = `char_gen_completed=false`.\n")
-L.append("Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/Rang/SKP "
-         "aus den aktuellen Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` "
+L.append("Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktuellen "
+         "Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` "
          "(FEHLT_KATALOG = bewusste Flavor-/Quest-Items ohne Spielwerte).\n")
 
 gesamt = sum(len(v) for v in rows.values())

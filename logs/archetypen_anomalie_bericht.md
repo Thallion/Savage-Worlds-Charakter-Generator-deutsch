@@ -6,7 +6,7 @@ Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/
 
 **Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punkte (ausgegeben/erworben, Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. `⚠` = Pool nicht voll ausgegeben. `(unfertig)` = `char_gen_completed=false`.
 
-Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/Rang/SKP aus den aktuellen Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` (FEHLT_KATALOG = bewusste Flavor-/Quest-Items ohne Spielwerte).
+Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktuellen Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` (FEHLT_KATALOG = bewusste Flavor-/Quest-Items ohne Spielwerte).
 
 
 **Bestand:** 226 Archetypen über 11 Settings · 0 mit `char_gen_completed=false` (unfertig).
@@ -188,7 +188,7 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 |---|---|---|---|---|---|---|---|
 | Aidan | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Arthan | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
-| Arthan, der Priester | ?/5 | ?/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
+| Arthan, der Priester | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
 | Asera | 5/5 | 12/12 | 2/4 ⚠ | — | 0/0 | Anfänger | — |
 | Beatriz | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Clementine | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
@@ -221,7 +221,7 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 |---|---|---|---|---|---|---|---|
 | Alahazra | 5/5 | 12/12 | 2/4 ⚠ | 4/5 ⚠ | 3/3 | Anfänger | — |
 | Alain | 5/5 | 12/12 | 4/4 | — | 3/3 | Anfänger | — |
-| Archetyp_Savage_Pathfinder_Barbarin_Amiri_A.json | ?/5 | ?/12 | 0/0 | — | 0/0 | Anfänger | — |
+| Archetyp_Savage_Pathfinder_Barbarin_Amiri_A.json | 5/5 | 7/12 ⚠ | 0/0 | — | 0/0 | Anfänger | — |
 | Balazar | 5/5 | 12/12 | 1/4 ⚠ | 3/3 | 2/2 | Anfänger | — |
 | Brokar | 5/5 | 12/12 | 2/4 ⚠ | 5/5 | 3/3 | Anfänger | — |
 | Damiel | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/3 | Anfänger | — |
@@ -230,7 +230,7 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 | Ezren | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
 | Fariel | 5/5 | 12/12 | 4/4 | 5/5 | 4/4 | Fortgeschritten | — |
 | Feiya | 5/5 | 12/12 | 4/4 | 6/6 | 2.5/3 ⚠ | Anfänger | — |
-| Gnorr | ?/5 | ?/12 | 4/4 | 4/4 | 5/5 | Fortgeschritten | — |
+| Gnorr | 5/5 | 11/12 ⚠ | 4/4 | 4/4 | 5/5 | Fortgeschritten | — |
 | Harsk | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Imrijka | 5/5 | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
 | Kira | 5/5 | 12/12 | 2/4 ⚠ | — | 4/4 | Fortgeschritten | — |
@@ -240,34 +240,34 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 | Lini | 5/5 | 12/12 | 4/4 | 5/5 | 0/0 | Anfänger | — |
 | Madda | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Marn | 5/5 | 11/12 ⚠ | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Merisiel, die Schurkin | ?/5 | ?/12 | 4/4 | — | 0/0 | Anfänger | — |
+| Merisiel, die Schurkin | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Paelie | 5/5 | 12/12 | 4/4 | 5/6 ⚠ | 4/4 | Fortgeschritten | — |
 | Sajan | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
-| Seelah, die Paladinin | ?/5 | ?/12 | 4/4 | — | 0/0 | Anfänger | — |
+| Seelah, die Paladinin | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Seoni | 5/5 | 11/12 ⚠ | 4/4 | 4/4 | 0/0 | Anfänger | — |
 | Sil | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Teller | 5/5 | 12/12 | 4/4 | 5/5 | 6/6 | Fortgeschritten | — |
-| Valeros, der Kämpfer | ?/5 | ?/12 | 4/4 | — | 0/0 | Anfänger | — |
+| Valeros, der Kämpfer | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Zyril | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 
 ## SciFi Kompendium (36 Chars)
 
 | Char | Attr | Fert | HP | Mächte | Aufst | Rang | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|---|
-| AIController | 4/5 ⚠ | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| AIController | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Ambassador | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
-| Analyst | 4/5 ⚠ | 11/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Analyst | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | BountyHunter | 5/5 | 12/12 | 0/0 | — | 7/7 | Fortgeschritten | — |
 | Chronomancer | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Commander | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Commando | 5/5 | 12/12 | 2/2 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Cyborg | 5/5 | 12/12 | 2/2 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Enforcer | 5/5 | 12/12 | 0/0 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Engineer | 5/5 | 11/12 ⚠ | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
-| Envoy | 5/5 | 11/12 ⚠ | 3/3 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Gladiator | 5/5 | 8/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Engineer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
+| Envoy | 5/5 | 12/12 | 3/3 | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Gladiator | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Gravlock | 5/5 | 12/12 | 4/4 | 2/4 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
-| Grunt | 5/5 | 9/12 ⚠ | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| Grunt | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Hacker | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | HardlightConjurer | 5/5 | 12/12 | 1/1 | 3/7 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
 | Infiltrator | 5/5 | 12/12 | 3/4 ⚠ | — | 4.5/5 ⚠ | Fortgeschritten | — |
@@ -277,13 +277,13 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 | Morpher | 5/5 | 12/12 | 4/4 | 4/4 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Mystic | 5/5 | 12/12 | 4/4 | 3/3 | 4.5/5 ⚠ | Fortgeschritten | — |
 | Pilot | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
-| Psyker | 5/5 | 11/12 ⚠ | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
-| RoadWarrior | 5/5 | 11/12 ⚠ | 0/0 | — | 6.5/7 ⚠ | Fortgeschritten | — |
-| Roughneck | 5/5 | 11/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Psyker | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
+| RoadWarrior | 5/5 | 12/12 | 0/0 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| Roughneck | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Scavenger | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Scrapper | 5/5 | 10/12 ⚠ | 3/3 | — | 7/7 | Fortgeschritten | — |
+| Scrapper | 5/5 | 12/12 | 3/3 | — | 7/7 | Fortgeschritten | — |
 | Shepherd | 5/5 | 12/12 | 4/4 | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
-| Smuggler | 4/5 ⚠ | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
+| Smuggler | 5/5 | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
 | Spacer | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | SquadLeader | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | StarKnight | 5/5 | 12/12 | 0/0 | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
