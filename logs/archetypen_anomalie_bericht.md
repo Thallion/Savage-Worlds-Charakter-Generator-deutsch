@@ -137,7 +137,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Exorcist | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/4 ⚠ | Anfänger | — |
 | Explorer | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Gamer | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Ghost Hunter | 5/5 | 12/12 | 3/4 ⚠ | — | 4.5/5 ⚠ | Fortgeschritten | — |
+| Ghost Hunter | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
 | Gumshoe | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Jock | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Journalist | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
@@ -148,7 +148,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Nemesis | 5/5 | 12/12 | 3/3 | — | 11/11 | Veteran | — |
 | Nerd | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Occultist | 5/5 | 12/12 | 2/2 | 3/5 ⚠ | 4/4 | Fortgeschritten | — |
-| Party Animal | 5/5 | 12/12 | 3/4 ⚠ | — | 4.5/5 ⚠ | Fortgeschritten | — |
+| Party Animal | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
 | Patchwork Man | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Phantom | 5/5 | 12/12 | 4/4 | — | 3/4 ⚠ | Anfänger | — |
 | Psychic | 5/5 | 12/12 | 4/4 | 3/3 | 3/4 ⚠ | Anfänger | — |

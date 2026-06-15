@@ -616,7 +616,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 5,
+    "aufstiege_gesamt": 4.5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -630,7 +630,7 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 1,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -771,8 +771,8 @@
                 "typ": "fertigkeit",
                 "name": "Provozieren",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "talent",

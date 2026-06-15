@@ -15,6 +15,8 @@ sys.path.insert(0, os.path.abspath('.'))
 
 import driver as d
 from functions.character_advancement import increase_aufstiege
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # gemeinsamer HP-Ökonomie-Helfer (Aufstiege -> freie Chargen-Währung)
 
 SETTING = 'Horror Kompendium'
 OUTDIR = 'chars/Archetypen'
@@ -314,6 +316,10 @@ def build_seasoned_direct(name, data):
 
         save_path = os.path.join(OUTDIR, f'Archetyp_Horror_{name.replace(" ", "_").replace("/","_")}.json')
         s.speichern(save_path)
+        # HP-Ökonomie: ungenutzte Handicap-Punkte auf per Aufstieg finanzierte Trait-Schritte umbuchen
+        _hp = hp_oekonomie.verbrauche_hp(save_path)
+        if _hp:
+            m(f'  HP-Ökonomie: {_hp["hp"]} HP, Aufstiege {_hp["aufst"]} | {", ".join(_hp["schritte"])}')
         m(f'  GESPEICHERT: {save_path}')
 
         bericht = s.bericht(bericht_pfad)
@@ -540,6 +546,10 @@ def build_monstrous(name, data, has_superkraefte=False):
 
         save_path = os.path.join(OUTDIR, f'Archetyp_Horror_{name.replace(" ", "_").replace("/","_")}.json')
         s.speichern(save_path)
+        # HP-Ökonomie: ungenutzte Handicap-Punkte auf per Aufstieg finanzierte Trait-Schritte umbuchen
+        _hp = hp_oekonomie.verbrauche_hp(save_path)
+        if _hp:
+            m(f'  HP-Ökonomie: {_hp["hp"]} HP, Aufstiege {_hp["aufst"]} | {", ".join(_hp["schritte"])}')
         m(f'  GESPEICHERT: {save_path}')
 
         bericht = s.bericht(bericht_pfad)
