@@ -3,6 +3,8 @@ import sys
 sys.path.insert(0, '.claude/skills/archetyp-erstellen')
 import driver as d
 from functions.character_advancement import increase_aufstiege
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # gemeinsamer HP-Ökonomie-Helfer
 
 tlog = open('logs/build_50f_trace.txt', 'w', encoding='utf-8')
 def m(x): tlog.write(str(x)+'\n'); tlog.flush()
@@ -66,6 +68,8 @@ def baue(setting, name, soll, manual_handicaps, manual_talente,
     diff = s.diff(soll)
     m(f'  [{name}] DIFF: {diff.get("abweichungen", diff)}')
     s.speichern(save_path)
+    _hp = hp_oekonomie.verbrauche_hp(save_path, edges=True)
+    if _hp: m(f'  [{name}] HP-Ökonomie: {_hp["hp"]} HP, Aufstiege {_hp["aufst"]} | {", ".join(_hp["schritte"])}')
     b = s.bericht(bericht_path)
     m(f'  [{name}] FERTIG anomalien={b["anomalien_anzahl"]}')
 

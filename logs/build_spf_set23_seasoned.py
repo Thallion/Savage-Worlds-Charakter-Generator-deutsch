@@ -15,6 +15,8 @@ import sys, json, glob, re
 sys.path.insert(0, '.claude/skills/archetyp-erstellen')
 import driver as d
 from functions.character_advancement import increase_aufstiege
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # gemeinsamer HP-Ökonomie-Helfer
 
 TRAITS = json.load(open('Texte/SWPF_Archetype_Cards_target.json', encoding='utf-8'))
 EDGES = json.load(open('Texte/SWPF_Archetype_Cards_edges.json', encoding='utf-8'))
@@ -166,6 +168,8 @@ for stub in sorted(TRAITS):
         else: missing.append(f"POW:{key}(fail)")
 
     s.speichern(jp)
+    _hp = hp_oekonomie.verbrauche_hp(jp, edges=True)
+    if _hp: m(f"{stub:10} HP-Ökonomie: {_hp['hp']} HP, Aufstiege {_hp['aufst']} | {', '.join(_hp['schritte'])}")
     m(f"{stub:10} aus={ausgeg(ch):<4} rang={ch.rang:14} +[{', '.join(filled)}]"
       + (f"  MISSING[{', '.join(missing)}]" if missing else ""))
 

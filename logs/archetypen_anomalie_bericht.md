@@ -30,7 +30,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 
 | Char | Attr | Fert | HP | Mächte | Aufst | Rang | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|---|
-| Atani-Kundschafter | 5/5 | 12/12 | 0/3 ⚠ | — | 4/4 | Fortgeschritten | — |
+| Atani-Kundschafter | 5/5 | 12/12 | 2/3 ⚠ | — | 3/3 | Anfänger | — |
 | Büchsenmacher | 5/5 | 9/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
 | Doreen-Infiltrator | 5/5 | 9/12 ⚠ | 2/2 | — | 4/4 | Fortgeschritten | — |
 | Elementarmagier | 5/5 | 6/12 ⚠ | 0/3 ⚠ | 3/3 | 2/4 ⚠ | Anfänger | — |
@@ -41,8 +41,8 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Schwarzpulver-Musketier | 5/5 | 11/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
 | Scurillian-Schmuggler | 5/5 | 10/12 ⚠ | 2/2 | — | 4/4 | Fortgeschritten | — |
 | Seeoffizier | 5/5 | 12/12 | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
-| Walfänger | 5/5 | 12/12 | 0/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
-| Windmagier | 5/5 | 8/12 ⚠ | 0/2 ⚠ | 3/3 | 3/4 ⚠ | Anfänger | — |
+| Walfänger | 5/5 | 12/12 | 2/3 ⚠ | — | 2/3 ⚠ | Anfänger | — |
+| Windmagier | 5/5 | 8/12 ⚠ | 2/2 | 3/3 | 2/3 ⚠ | Anfänger | — |
 
 ## Deadlands (24 Chars)
 
@@ -93,7 +93,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Klerikerin | 5/5 | 12/12 | 4/4 | 5/5 | 4/4 | Fortgeschritten | — |
 | Krieger | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Loremaster | 5/5 | 12/12 | 4/4 | 6/6 | 4/4 | Fortgeschritten | — |
-| Magier | 5/5 | 12/12 | 0/4 ⚠ | 9/10 ⚠ | 4/4 | Fortgeschritten | — |
+| Magier | 5/5 | 12/12 | 4/4 | 9/10 ⚠ | 2/2 | Anfänger | — |
 | Mönch | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | Bite/claws (Str+d8) |
 | Narr | 5/5 | 12/12 | 4/4 | 3/3 | 4/4 | Fortgeschritten | — |
 | Paladin | 5/5 | 12/12 | 4/4 | 5/5 | 4/4 | Fortgeschritten | — |
@@ -102,8 +102,8 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Rüpel | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Schamane | 5/5 | 12/12 | 4/4 | 7/7 | 4/4 | Fortgeschritten | — |
 | Schatzjäger | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Schwertmagier | 5/5 | 12/12 | 2/4 ⚠ | 5/8 ⚠ | 4/4 | Fortgeschritten | — |
-| Schwerttänzerin | 5/5 | 12/12 | 2/4 ⚠ | 5/5 | 4/4 | Fortgeschritten | — |
+| Schwertmagier | 5/5 | 12/12 | 4/4 | 5/8 ⚠ | 3/3 | Anfänger | — |
+| Schwerttänzerin | 5/5 | 12/12 | 4/4 | 5/5 | 3/3 | Anfänger | — |
 | Soldat | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Tiermeister | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Titanentöter | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
@@ -212,14 +212,14 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Leomara | 5/5 | 12/12 | 2/4 ⚠ | — | 0/0 | Anfänger | — |
 | Radrosch | 4/5 ⚠ | 12/12 | 0/0 | 7/7 | 9/9 | Veteran | — |
 | Romoxosch | 5/5 | 11/12 ⚠ | 4/4 | — | 0/0 | Anfänger | — |
-| Ssrrhyl | 4/5 ⚠ | 12/12 | 0/4 ⚠ | 9/9 | 10/10 | Veteran | — |
-| Tallula | 5/5 | 12/12 | 0/4 ⚠ | 7/9 ⚠ | 9/9 | Veteran | — |
+| Ssrrhyl | 5/5 | 12/12 | 4/4 | 9/9 | 7/7 | Fortgeschritten | — |
+| Tallula | 5/5 | 12/12 | 4/4 | 7/9 ⚠ | 7/7 | Fortgeschritten | — |
 
 ## Savage Pathfinder (30 Chars)
 
 | Char | Attr | Fert | HP | Mächte | Aufst | Rang | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|---|
-| Alahazra | 5/5 | 12/12 | 2/4 ⚠ | 4/5 ⚠ | 3/3 | Anfänger | — |
+| Alahazra | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 2/2 | Anfänger | — |
 | Alain | 5/5 | 12/12 | 4/4 | — | 3/3 | Anfänger | — |
 | Archetyp_Savage_Pathfinder_Barbarin_Amiri_A.json | 5/5 | 7/12 ⚠ | 0/0 | — | 0/0 | Anfänger | — |
 | Balazar | 5/5 | 12/12 | 4/4 | 3/3 | 0.5/1 ⚠ | Anfänger | — |

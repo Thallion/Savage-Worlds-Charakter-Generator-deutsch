@@ -19,6 +19,8 @@ import sys, traceback
 sys.path.insert(0, '.claude/skills/archetyp-erstellen')
 import driver as d
 from functions.character_advancement import increase_aufstiege
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # gemeinsamer HP-Ökonomie-Helfer
 
 
 def abschliessen(s, n_aufstiege, log):
@@ -165,6 +167,7 @@ def build_tallula():
         diff = s.diff(soll)
         m('DIFF: ' + str(diff['abweichungen']))
         s.speichern(f'chars/Archetypen/Archetyp_Savage_Aventurien_{name}_A.json')
+        hp_oekonomie.verbrauche_hp(f'chars/Archetypen/Archetyp_Savage_Aventurien_{name}_A.json', edges=True)
         b = s.bericht(f'logs/{name.lower()}_aventurien_bericht.json')
         m('FERTIG anomalien=%d' % b['anomalien_anzahl'])
     except BaseException as e:
