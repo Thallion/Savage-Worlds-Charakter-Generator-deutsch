@@ -81,7 +81,7 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 | Alchemist | 5/5 | 12/12 | 4/4 | 7/7 | 4/4 | Fortgeschritten | — |
 | Amazone | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Aristokrat | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
-| Assassinin | 5/5 | 12/12 | 2/4 ⚠ | 1/2 ⚠ | 5/5 | Fortgeschritten | — |
+| Assassinin | 5/5 | 12/12 | 4/4 | 1/2 ⚠ | 4/4 | Fortgeschritten | — |
 | Barbarin | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Barde | 5/5 | 12/12 | 4/4 | 3/3 | 4/5 ⚠ | Fortgeschritten | — |
 | Bogenschütze | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
@@ -256,40 +256,40 @@ Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/
 |---|---|---|---|---|---|---|---|
 | AIController | 4/5 ⚠ | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Ambassador | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
-| Analyst | 4/5 ⚠ | 11/12 ⚠ | 2/4 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Analyst | 4/5 ⚠ | 11/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | BountyHunter | 5/5 | 12/12 | 0/0 | — | 7/7 | Fortgeschritten | — |
-| Chronomancer | 5/5 | 12/12 | 0/4 ⚠ | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
+| Chronomancer | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Commander | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Commando | 5/5 | 12/12 | 2/2 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Cyborg | 5/5 | 12/12 | 0/2 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Cyborg | 5/5 | 12/12 | 2/2 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Enforcer | 5/5 | 12/12 | 0/0 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Engineer | 5/5 | 11/12 ⚠ | 0/4 ⚠ | — | 7/7 | Fortgeschritten | — |
-| Envoy | 5/5 | 11/12 ⚠ | 0/3 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Gladiator | 5/5 | 8/12 ⚠ | 0/4 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Gravlock | 5/5 | 12/12 | 2/4 ⚠ | 2/4 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
-| Grunt | 5/5 | 9/12 ⚠ | 2/4 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Engineer | 5/5 | 11/12 ⚠ | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
+| Envoy | 5/5 | 11/12 ⚠ | 3/3 | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Gladiator | 5/5 | 8/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Gravlock | 5/5 | 12/12 | 4/4 | 2/4 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
+| Grunt | 5/5 | 9/12 ⚠ | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Hacker | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
-| HardlightConjurer | 5/5 | 12/12 | 0/1 ⚠ | 3/7 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
+| HardlightConjurer | 5/5 | 12/12 | 1/1 | 3/7 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
 | Infiltrator | 5/5 | 12/12 | 3/4 ⚠ | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Influencer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Medic | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Mercenary | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Morpher | 5/5 | 12/12 | 4/4 | 4/4 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Mystic | 5/5 | 12/12 | 4/4 | 3/3 | 4.5/5 ⚠ | Fortgeschritten | — |
-| Pilot | 5/5 | 12/12 | 2/4 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Psyker | 5/5 | 11/12 ⚠ | 4/4 | 5/5 | 6/6 | Fortgeschritten | — |
-| RoadWarrior | 5/5 | 11/12 ⚠ | 0/0 | — | 7/7 | Fortgeschritten | — |
-| Roughneck | 5/5 | 11/12 ⚠ | 4/4 | — | 6/6 | Fortgeschritten | — |
-| Scavenger | 5/5 | 12/12 | 0/4 ⚠ | — | 7/7 | Fortgeschritten | — |
-| Scrapper | 5/5 | 10/12 ⚠ | 0/3 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Shepherd | 5/5 | 12/12 | 0/4 ⚠ | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
-| Smuggler | 4/5 ⚠ | 12/12 | 2/4 ⚠ | — | 5.5/6 ⚠ | Fortgeschritten | — |
-| Spacer | 5/5 | 12/12 | 3/4 ⚠ | — | 6/6 | Fortgeschritten | — |
-| SquadLeader | 5/5 | 12/12 | 2/4 ⚠ | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Pilot | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| Psyker | 5/5 | 11/12 ⚠ | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
+| RoadWarrior | 5/5 | 11/12 ⚠ | 0/0 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| Roughneck | 5/5 | 11/12 ⚠ | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Scavenger | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
+| Scrapper | 5/5 | 10/12 ⚠ | 3/3 | — | 7/7 | Fortgeschritten | — |
+| Shepherd | 5/5 | 12/12 | 4/4 | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
+| Smuggler | 4/5 ⚠ | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
+| Spacer | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| SquadLeader | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | StarKnight | 5/5 | 12/12 | 0/0 | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Surveyor | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
-| Technomancer | 5/5 | 12/12 | 0/2 ⚠ | 2/2 | 6.5/7 ⚠ | Fortgeschritten | — |
-| Warper | 5/5 | 12/12 | 0/4 ⚠ | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
+| Technomancer | 5/5 | 12/12 | 2/2 | 2/2 | 5.5/6 ⚠ | Fortgeschritten | — |
+| Warper | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 
 ## Superkräfte Kompendium (11 Chars)
 
