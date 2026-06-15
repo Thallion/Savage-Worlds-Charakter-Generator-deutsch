@@ -317,7 +317,7 @@ def build_seasoned_direct(name, data):
         save_path = os.path.join(OUTDIR, f'Archetyp_Horror_{name.replace(" ", "_").replace("/","_")}.json')
         s.speichern(save_path)
         # HP-Ökonomie: ungenutzte Handicap-Punkte auf per Aufstieg finanzierte Trait-Schritte umbuchen
-        _hp = hp_oekonomie.verbrauche_hp(save_path)
+        _hp = hp_oekonomie.verbrauche_hp(save_path, edges=True)
         if _hp:
             m(f'  HP-Ökonomie: {_hp["hp"]} HP, Aufstiege {_hp["aufst"]} | {", ".join(_hp["schritte"])}')
         m(f'  GESPEICHERT: {save_path}')
@@ -547,7 +547,7 @@ def build_monstrous(name, data, has_superkraefte=False):
         save_path = os.path.join(OUTDIR, f'Archetyp_Horror_{name.replace(" ", "_").replace("/","_")}.json')
         s.speichern(save_path)
         # HP-Ökonomie: ungenutzte Handicap-Punkte auf per Aufstieg finanzierte Trait-Schritte umbuchen
-        _hp = hp_oekonomie.verbrauche_hp(save_path)
+        _hp = hp_oekonomie.verbrauche_hp(save_path, edges=True)
         if _hp:
             m(f'  HP-Ökonomie: {_hp["hp"]} HP, Aufstiege {_hp["aufst"]} | {", ".join(_hp["schritte"])}')
         m(f'  GESPEICHERT: {save_path}')

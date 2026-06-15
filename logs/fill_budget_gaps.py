@@ -210,7 +210,7 @@ def apply_gaps(setting, name, jsonpath, sheet_a, sheet_s):
     # HP-Ökonomie: per Aufstieg finanzierte Trait-Schritte, die der Build NICHT als Lücke
     # gefüllt hat (sondern direkt per Aufstieg setzte), nachträglich auf freie Chargen-Währung
     # umbuchen. Phase 0 deckt nur Lücken; das hier fängt z.B. SciFi Infiltrator ab.
-    hp = hp_oekonomie.verbrauche_hp(jsonpath)
+    hp = hp_oekonomie.verbrauche_hp(jsonpath, edges=True)
     tag = '' if ch.rang == start_rang else f'  <<{start_rang}->{ch.rang}'
     w(f"  {name:22} aus {start_aus}->{ausgeg()} rang={ch.rang}{tag}")
     if filled:  w(f"      + {filled}")

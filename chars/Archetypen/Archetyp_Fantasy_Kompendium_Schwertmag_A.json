@@ -616,9 +616,9 @@
     "selected_ruestungen": [],
     "selected_schilde": [],
     "ausruestung_mengen": {},
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
-    "aufstiege_gesamt": 4,
+    "aufstiege_gesamt": 3.0,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 3,
@@ -632,7 +632,7 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 4,
-    "verbleibende_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -751,8 +751,8 @@
             {
                 "typ": "talent",
                 "name": "Machtpunkte",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "talent",

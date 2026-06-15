@@ -42,12 +42,33 @@ def _cost_entries(d):
     return []
 
 
-def verbrauche_hp(jsonpath, pin_rang=False):
+_SETTING_TALENTE = {}
+
+
+def _edge_rang(setting, name):
+    """Rang-Voraussetzung eines Edges aus dem Setting-JSON ('A'=Anfänger, 'F'=Fortgeschritten …).
+    None, wenn unbekannt. Gecacht."""
+    if setting not in _SETTING_TALENTE:
+        try:
+            _SETTING_TALENTE[setting] = json.load(
+                open(f'settings/{setting}.json', encoding='utf-8')).get('talente', {}) or {}
+        except Exception:
+            _SETTING_TALENTE[setting] = {}
+    t = _SETTING_TALENTE[setting].get(name)
+    return t.get('rang') if isinstance(t, dict) else None
+
+
+def verbrauche_hp(jsonpath, pin_rang=False, edges=False):
     """Bucht im gespeicherten Char Aufstiege auf freie Chargen-Währung um. Mutiert die Datei.
     pin_rang=True: reduziert Aufstiege nur soweit, dass der aktuelle Rang erhalten bleibt
     (für Seasoned-Karten, die nicht auf Anfänger fallen sollen).
+    edges=True: bucht zusätzlich per Aufstieg gekaufte ANFÄNGER-Edges ('A') auf je 2 Handicap-
+    Punkte um (Voraussetzungen werden — wie in den Builds — ignoriert; Rang 'A' bleibt aber
+    Pflicht, da Seasoned-Edges nicht chargen-finanzierbar sind). Standard aus, weil das Seasoned-
+    Karten an der Rang-Grenze auf Anfänger fallen lassen kann.
     Gibt ein Report-Dict zurück oder None, wenn nichts umgebucht wurde."""
     d = json.load(open(jsonpath, encoding='utf-8'))
+    setting = d.get('active_setting_name') or ''
     ce = _cost_entries(d)
     attr_pts = d.get('verbleibende_attributsteigerungen', 0) or 0
     fert_pts = d.get('verbleibende_fertigkeitssteigerungen', 0) or 0
@@ -101,6 +122,20 @@ def verbrauche_hp(jsonpath, pin_rang=False):
             continue
         freed += adv
         schritte.append(f"{e['name']}(fert d{e['wert']}) -{adv}A")
+
+    # 3) Edges (Talent-Aufstiege): nur Anfänger-Edges ('A') auf 2 Handicap-Punkte umbuchen.
+    if edges:
+        for e in ce:
+            if e.get('typ') != 'talent' or e.get('zahlungsquelle') != 'Aufstiege':
+                continue
+            rg = _edge_rang(setting, e.get('name'))
+            if rg not in ('A', 'Anfänger', None):   # Seasoned+ Edge -> nicht chargen-fähig
+                continue
+            if not darf_frei(1) or hp < 2:
+                continue
+            hp -= 2; e['zahlungsquelle'] = 'Handicap-Punkte'; e['kosten'] = 2
+            freed += 1
+            schritte.append(f"{e['name']}(edge) -1A")
 
     if freed <= 0:
         return None
