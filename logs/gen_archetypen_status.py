@@ -81,10 +81,14 @@ for fn in sorted(glob.glob('chars/Archetypen/Archetyp_*.json')):
     skp_g = d.get('superkraft_punkte_gesamt', 0) or 0
     skp_v = d.get('superkraft_punkte_verbraucht', 0) or 0
     skp = f"{skp_v}/{skp_g}" if skp_g else None
+    # Mächte-Slots: gewählt / (gewählt + verfügbar). verfuegbare_maechte = noch offene Slots.
+    m_sel = len(d.get('selected_maechte') or [])
+    m_verf = d.get('verfuegbare_maechte', 0) or 0
+    maechte = f"{m_sel}/{m_sel + m_verf}" if (m_sel or m_verf) else None
     miss = fehlt.get(key, [])
     rows[setting].append({
         'name': name, 'attr': attr, 'fert': fert, 'hp': hp, 'au': au, 'rang': rang,
-        'cg': cg, 'skp': skp, 'miss': miss,
+        'cg': cg, 'skp': skp, 'maechte': maechte, 'miss': miss,
     })
 
 # --- Markdown ---
@@ -103,7 +107,8 @@ L.append(f"**Stand:** {datetime.date.today().isoformat()} · automatisch erzeugt
 L.append("Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/Rang, "
          "fehlende Ausrüstung.**\n")
 L.append("**Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punkte (ausgegeben/erworben, "
-         "Max 4) · Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. "
+         "Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · "
+         "Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. "
          "`⚠` = Pool nicht voll ausgegeben. `(unfertig)` = `char_gen_completed=false`.\n")
 L.append("Attr/Fert aus Build-Berichten (Chargen-Pools, nicht im Char-JSON); HP/Aufstiege/Rang/SKP "
          "aus den aktuellen Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` "
@@ -123,16 +128,20 @@ for setting in sorted(rows):
 for setting in sorted(rows):
     rs = sorted(rows[setting], key=lambda r: r['name'])
     has_skp = any(r['skp'] for r in rs)
+    has_m = any(r['maechte'] for r in rs)
     L.append(f"\n## {setting} ({len(rs)} Chars)\n")
-    head = "| Char | Attr | Fert | HP | " + ("SKP | " if has_skp else "") + "Aufst | Rang | Fehlende Ausrüstung |"
-    sep = "|---|---|---|---|" + ("---|" if has_skp else "") + "---|---|---|"
+    head = ("| Char | Attr | Fert | HP | " + ("Mächte | " if has_m else "")
+            + ("SKP | " if has_skp else "") + "Aufst | Rang | Fehlende Ausrüstung |")
+    sep = ("|---|---|---|---|" + ("---|" if has_m else "") + ("---|" if has_skp else "")
+           + "---|---|---|")
     L.append(head); L.append(sep)
     for r in rs:
         nm = r['name'] + (' *(unfertig)*' if r['cg'] is False else '')
+        mcell = (f" {flag(r['maechte'], '') if r['maechte'] else '—'} |" if has_m else "")
         skpcell = (f" {flag(r['skp'], '') if r['skp'] else '—'} |" if has_skp else "")
         miss = ', '.join(r['miss']) if r['miss'] else '—'
         L.append(f"| {nm} | {flag(r['attr'],'5')} | {flag(r['fert'],'12')} | {flag(r['hp'],'4')} |"
-                 f"{skpcell} {flag(r['au'],'')} | {r['rang']} | {miss} |")
+                 f"{mcell}{skpcell} {flag(r['au'],'')} | {r['rang']} | {miss} |")
 
 open('logs/archetypen_anomalie_bericht.md', 'w', encoding='utf-8').write('\n'.join(L) + '\n')
 print(f"OK: {gesamt} Archetypen, {len(rows)} Settings, {unfertig} unfertig -> logs/archetypen_anomalie_bericht.md")
