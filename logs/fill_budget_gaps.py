@@ -14,6 +14,8 @@ import sys, re, os, traceback
 sys.path.insert(0, '.claude/skills/archetyp-erstellen')
 import driver as d
 from functions.character_advancement import increase_aufstiege
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # gemeinsamer HP-Ökonomie-Helfer (Aufstiege -> freie Chargen-Währung)
 
 LOG = open('/tmp/gapfill_report.txt', 'w', encoding='utf-8')
 def w(x): LOG.write(str(x) + '\n'); LOG.flush()
@@ -205,10 +207,15 @@ def apply_gaps(setting, name, jsonpath, sheet_a, sheet_s):
 
     if filled or skipped:
         s.speichern(jsonpath)
+    # HP-Ökonomie: per Aufstieg finanzierte Trait-Schritte, die der Build NICHT als Lücke
+    # gefüllt hat (sondern direkt per Aufstieg setzte), nachträglich auf freie Chargen-Währung
+    # umbuchen. Phase 0 deckt nur Lücken; das hier fängt z.B. SciFi Infiltrator ab.
+    hp = hp_oekonomie.verbrauche_hp(jsonpath)
     tag = '' if ch.rang == start_rang else f'  <<{start_rang}->{ch.rang}'
     w(f"  {name:22} aus {start_aus}->{ausgeg()} rang={ch.rang}{tag}")
     if filled:  w(f"      + {filled}")
     if skipped: w(f"      ~ offen: {skipped}")
+    if hp:      w(f"      HP-Ökonomie: {hp['hp']} HP, Aufstiege {hp['aufst']} | {', '.join(hp['schritte'])}")
 
 PDF = {'SciFi Kompendium': 'Texte/Science_Fiction_Companion_Archetypes_(SWADE).txt',
        'Fantasy Kompendium': 'Texte/SW Fantasy Kompendium Archetypen.txt'}

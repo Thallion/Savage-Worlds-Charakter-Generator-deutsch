@@ -270,7 +270,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Grunt | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Hacker | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | HardlightConjurer | 5/5 | 12/12 | 1/1 | 3/7 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
-| Infiltrator | 5/5 | 12/12 | 3/4 ⚠ | — | 4.5/5 ⚠ | Fortgeschritten | — |
+| Infiltrator | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
 | Influencer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Medic | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Mercenary | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
