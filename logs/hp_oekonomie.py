@@ -58,6 +58,28 @@ def _edge_rang(setting, name):
     return t.get('rang') if isinstance(t, dict) else None
 
 
+def konvertierbar(d):
+    """Nicht-mutierend: True, wenn der Char ungenutzte Handicap-Punkte hat, die sich regelkonform
+    auf einen per Aufstieg finanzierten Schritt umbuchen ließen (Skill/Attribut ODER Anfänger-Edge).
+    Dient dem Status-Bericht, um „echten" HP-Rest (Bug) von legitimem (Seasoned-Edge/keine Aufstiege/
+    1-HP-Rest) zu trennen."""
+    hp = d.get('verbleibende_handicap_punkte', 0) or 0
+    if hp < 1:
+        return False
+    setting = d.get('active_setting_name') or ''
+    for e in _cost_entries(d):
+        if e.get('zahlungsquelle') != 'Aufstiege':
+            continue
+        typ = e.get('typ')
+        if typ == 'attribut' and hp >= 2:
+            return True
+        if typ == 'fertigkeit' and hp >= int(round((e.get('kosten', 0.5) or 0.5) * 2)):
+            return True
+        if typ == 'talent' and hp >= 2 and _edge_rang(setting, e.get('name')) in ('A', 'Anfänger', None):
+            return True
+    return False
+
+
 def verbrauche_hp(jsonpath, pin_rang=False, edges=False):
     """Bucht im gespeicherten Char Aufstiege auf freie Chargen-Währung um. Mutiert die Datei.
     pin_rang=True: reduziert Aufstiege nur soweit, dass der aktuelle Rang erhalten bleibt

@@ -4,7 +4,7 @@
 
 Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/Rang, fehlende Ausrüstung.**
 
-**Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punkte (ausgegeben/erworben, Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. `⚠` = Pool nicht voll ausgegeben. `(unfertig)` = `char_gen_completed=false`.
+**Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punkte (ausgegeben/erworben, Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. `⚠` = Pool nicht voll ausgegeben. Bei HP: `⚠` = regelkonform umbuchbarer Rest (Potenzial), `ℹ` = legitimer Rest (nur Seasoned-Edges / 1-HP-Rest / keine Aufstiege). `(unfertig)` = `char_gen_completed=false`.
 
 Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktuellen Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` (FEHLT_KATALOG = bewusste Flavor-/Quest-Items ohne Spielwerte).
 
@@ -30,18 +30,18 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 
 | Char | Attr | Fert | HP | Mächte | Aufst | Rang | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|---|
-| Atani-Kundschafter | 5/5 | 12/12 | 2/3 ⚠ | — | 3/3 | Anfänger | — |
-| Büchsenmacher | 5/5 | 9/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
+| Atani-Kundschafter | 5/5 | 12/12 | 2/3 ℹ | — | 3/3 | Anfänger | — |
+| Büchsenmacher | 5/5 | 9/12 ⚠ | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
 | Doreen-Infiltrator | 5/5 | 9/12 ⚠ | 2/2 | — | 4/4 | Fortgeschritten | — |
-| Elementarmagier | 5/5 | 6/12 ⚠ | 0/3 ⚠ | 3/3 | 2/4 ⚠ | Anfänger | — |
-| Krakenkrieger | 5/5 | 11/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
-| Matrose | 5/5 | 9/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
+| Elementarmagier | 5/5 | 6/12 ⚠ | 0/3 ℹ | 3/3 | 2/4 ⚠ | Anfänger | — |
+| Krakenkrieger | 5/5 | 11/12 ⚠ | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
+| Matrose | 5/5 | 9/12 ⚠ | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
 | Pirat | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
-| Schatzjäger | 5/5 | 12/12 | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
-| Schwarzpulver-Musketier | 5/5 | 11/12 ⚠ | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
+| Schatzjäger | 5/5 | 12/12 | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
+| Schwarzpulver-Musketier | 5/5 | 11/12 ⚠ | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
 | Scurillian-Schmuggler | 5/5 | 10/12 ⚠ | 2/2 | — | 4/4 | Fortgeschritten | — |
-| Seeoffizier | 5/5 | 12/12 | 2/3 ⚠ | — | 3/4 ⚠ | Anfänger | — |
-| Walfänger | 5/5 | 12/12 | 2/3 ⚠ | — | 2/3 ⚠ | Anfänger | — |
+| Seeoffizier | 5/5 | 12/12 | 2/3 ℹ | — | 3/4 ⚠ | Anfänger | — |
+| Walfänger | 5/5 | 12/12 | 2/3 ℹ | — | 2/3 ⚠ | Anfänger | — |
 | Windmagier | 5/5 | 8/12 ⚠ | 2/2 | 3/3 | 2/3 ⚠ | Anfänger | — |
 
 ## Deadlands (24 Chars)
@@ -178,7 +178,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | James Denton | 5/5 | 12/12 | 4/4 | — | 3/4 ⚠ | Anfänger | — |
 | Jonathan Williams | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Mustapha El-Amin | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
-| Tara LaGrange | 5/5 | 12/12 | 2/3 ⚠ | — | 4/4 | Fortgeschritten | — |
+| Tara LaGrange | 5/5 | 12/12 | 2/3 ℹ | — | 4/4 | Fortgeschritten | — |
 | Vater Frederick Hartell | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 2/4 ⚠ | Anfänger | — |
 | Vater McBain | 5/5 | 12/12 | 4/4 | 5/5 | 3/4 ⚠ | Anfänger | — |
 
@@ -189,14 +189,14 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Aidan | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Arthan | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
 | Arthan, der Priester | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
-| Asera | 5/5 | 12/12 | 2/4 ⚠ | — | 0/0 | Anfänger | — |
+| Asera | 5/5 | 12/12 | 2/4 ℹ | — | 0/0 | Anfänger | — |
 | Beatriz | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Clementine | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Elsiara | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Kenaken | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Nachtfinder | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
-| Samael | 5/5 | 12/12 | 2/3 ⚠ | — | 0/0 | Anfänger | — |
-| Sozius | 5/5 | 12/12 | 2/3 ⚠ | — | 0/0 | Anfänger | — |
+| Samael | 5/5 | 12/12 | 2/3 ℹ | — | 0/0 | Anfänger | — |
+| Sozius | 5/5 | 12/12 | 2/3 ℹ | — | 0/0 | Anfänger | — |
 | The_Shroud | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Zoetta | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 
@@ -204,12 +204,12 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 
 | Char | Attr | Fert | HP | Mächte | Aufst | Rang | Fehlende Ausrüstung |
 |---|---|---|---|---|---|---|---|
-| Alissa | 5/5 | 12/12 | 2/3 ⚠ | 3/3 | 3/3 | Anfänger | — |
+| Alissa | 5/5 | 12/12 | 2/3 ℹ | 3/3 | 3/3 | Anfänger | — |
 | Angrond | 4/5 ⚠ | 12/12 | 3/3 | — | 0/0 | Anfänger | — |
 | Egnus | 5/5 | 12/12 | 4/4 | 9/9 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Furun | 4/5 ⚠ | 12/12 | 4/4 | — | 12.5/13 ⚠ | Heroisch | — |
-| Hesindian | 5/5 | 12/12 | 1/4 ⚠ | 3/6 ⚠ | 0/0 | Anfänger | — |
-| Leomara | 5/5 | 12/12 | 2/4 ⚠ | — | 0/0 | Anfänger | — |
+| Hesindian | 5/5 | 12/12 | 1/4 ℹ | 3/6 ⚠ | 0/0 | Anfänger | — |
+| Leomara | 5/5 | 12/12 | 2/4 ℹ | — | 0/0 | Anfänger | — |
 | Radrosch | 4/5 ⚠ | 12/12 | 0/0 | 7/7 | 9/9 | Veteran | — |
 | Romoxosch | 5/5 | 11/12 ⚠ | 4/4 | — | 0/0 | Anfänger | — |
 | Ssrrhyl | 5/5 | 12/12 | 4/4 | 9/9 | 7/7 | Fortgeschritten | — |
@@ -225,7 +225,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Balazar | 5/5 | 12/12 | 4/4 | 3/3 | 0.5/1 ⚠ | Anfänger | — |
 | Brokar | 5/5 | 12/12 | 4/4 | 5/5 | 2/2 | Anfänger | — |
 | Damiel | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/3 | Anfänger | — |
-| Darla | 5/5 | 12/12 | 2/4 ⚠ | 3/3 | 0/0 | Anfänger | — |
+| Darla | 5/5 | 12/12 | 2/4 ℹ | 3/3 | 0/0 | Anfänger | — |
 | Darla_ohneKlasse | 5/5 | 12/12 | 4/4 | 3/3 | 4/4 | Fortgeschritten | — |
 | Ezren | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
 | Fariel | 5/5 | 12/12 | 4/4 | 5/5 | 4/4 | Fortgeschritten | — |

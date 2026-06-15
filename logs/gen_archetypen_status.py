@@ -10,7 +10,9 @@ Datenquellen:
   Aufstiege, Rang, SKP (Superkräfte), Mächte-Slots, char_gen_completed.
 - logs/soll_ist_ausruestung.md      -> fehlende Ausrüstung (FEHLT_KATALOG/FEHLT_OFFEN).
 """
-import json, glob, os, re, collections
+import json, glob, os, re, collections, sys
+sys.path.insert(0, 'logs')
+import hp_oekonomie  # für konvertierbar() — legitimer vs. echter HP-Rest
 
 def norm(s):
     return re.sub(r'[^a-z0-9äöü]', '', (s or '').lower())
@@ -61,6 +63,10 @@ for fn in sorted(glob.glob('chars/Archetypen/Archetyp_*.json')):
     hp_max = d.get('gesamt_handicap_punkte', 0) or 0
     hp_rest = d.get('verbleibende_handicap_punkte', 0) or 0
     hp = stufe(hp_rest, hp_max) if hp_max else '0/0'
+    # HP-Rest markieren: ⚠ nur wenn regelkonform umbuchbar (echtes Potenzial), sonst ℹ (legitim:
+    # Seasoned-Edge / 1-HP-Rest / keine Aufstiege). Fertig markiert (kein Flag) bei hp_rest==0.
+    if hp_max and hp_rest > 0:
+        hp = hp + (' ⚠' if hp_oekonomie.konvertierbar(d) else ' ℹ')
     # Aufstiege/Rang aus JSON
     au_max = d.get('aufstiege_gesamt', 0) or 0
     au_rest = d.get('verbleibende_aufstiege', 0) or 0
@@ -99,7 +105,9 @@ L.append("Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), 
 L.append("**Pools:** Attr (Chargen 5) · Fert (Chargen 12) · HP = Handicap-Punkte (ausgegeben/erworben, "
          "Max 4) · Mächte = gewählte/verfügbare Macht-Slots (Arkaner Hintergrund) · "
          "Aufst = Aufstiege (ausgegeben/gesamt, rangabhängig) · SKP nur Superkräfte. "
-         "`⚠` = Pool nicht voll ausgegeben. `(unfertig)` = `char_gen_completed=false`.\n")
+         "`⚠` = Pool nicht voll ausgegeben. Bei HP: `⚠` = regelkonform umbuchbarer Rest (Potenzial), "
+         "`ℹ` = legitimer Rest (nur Seasoned-Edges / 1-HP-Rest / keine Aufstiege). "
+         "`(unfertig)` = `char_gen_completed=false`.\n")
 L.append("Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktuellen "
          "Char-JSONs; fehlende Ausrüstung aus `logs/soll_ist_ausruestung.md` "
          "(FEHLT_KATALOG = bewusste Flavor-/Quest-Items ohne Spielwerte).\n")
@@ -130,7 +138,7 @@ for setting in sorted(rows):
         mcell = (f" {flag(r['maechte'], '') if r['maechte'] else '—'} |" if has_m else "")
         skpcell = (f" {flag(r['skp'], '') if r['skp'] else '—'} |" if has_skp else "")
         miss = ', '.join(r['miss']) if r['miss'] else '—'
-        L.append(f"| {nm} | {flag(r['attr'],'5')} | {flag(r['fert'],'12')} | {flag(r['hp'],'4')} |"
+        L.append(f"| {nm} | {flag(r['attr'],'5')} | {flag(r['fert'],'12')} | {r['hp']} |"
                  f"{mcell}{skpcell} {flag(r['au'],'')} | {r['rang']} | {miss} |")
 
 open('logs/archetypen_anomalie_bericht.md', 'w', encoding='utf-8').write('\n'.join(L) + '\n')
