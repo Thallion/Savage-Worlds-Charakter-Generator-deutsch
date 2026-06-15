@@ -117,6 +117,15 @@ SDL_VIDEODRIVER=dummy python3 logs/finalize_spf_iconics.py      2>/dev/null  # c
 - `build_spf_set23_seasoned.py`: lädt committete Novice-Basis (= Novice-Karte, verifiziert), hebt
   Traits auf Seasoned, ergänzt Seasoned-Edges/-Mächte (EN→DE-Map im Skript), backfillt fehlende
   Novice-Mächte. Idempotent, Seasoned-Cap. **17/17 trait-deckungsgleich.**
+  - **HP-Ökonomie (Phase 0) + Doppelkosten-Fix** (wie `fill_budget_gaps.py`): Seasoned-Lücken werden
+    ZUERST aus Rest-Punkten + ungenutzten Handicap-Punkten gefüllt (solange char_gen offen), erst der
+    Rest per Aufstieg (mit `while < kosten`-Top-up für Doppelschritte). Senkt die Aufstiege bei Chars
+    mit HP-Resten (Balazar/Brokar/Kira: je 1 Aufstieg gespart; Kira Fortgeschritten→Anfänger).
+  - ⚠ **Re-Run-Falle:** Das Skript ist idempotent gegenüber dem committeten (Seasoned-)Stand → ein
+    erneuter Lauf füllt KEINE Lücken (keine Gaps mehr) und die HP-Ökonomie greift NICHT. Um die
+    Phase-0-Wirkung zu reproduzieren, zuerst die **Novice-Basis** der betroffenen Chars
+    wiederherstellen: `git show 0500a55~1:<pfad> > <pfad>` (Stand VOR der Sanierung, char_gen=False),
+    dann `build_spf_set23_seasoned.py` laufen lassen.
 - `finalize_spf_iconics.py`: 11 Ikonen, nur Abschluss + Rang (Daten waren korrekt, 10/11 Attr = Quelle).
 
 **Per Render+Crop der Originalkarten gelöst (Methode: [pdf-bogen-audit]):**

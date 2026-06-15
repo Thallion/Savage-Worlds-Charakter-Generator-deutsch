@@ -54,6 +54,12 @@ EDGES['Feiya']['delta'] = {'edges': ['Hex (Cackle)'], 'powers': []}  # Hex(Cackl
 DIE = [4, 6, 8, 10, 12]
 def didx(v): return DIE.index(v) if v in DIE else 0
 def ausgeg(ch): return round(ch.aufstiege_gesamt - ch.verbleibende_aufstiege, 2)
+def skill_step_kosten(f):
+    """Aufstiegskosten des NÄCHSTEN Fertigkeitsschritts: 1.0 wenn Fertigkeit das regierende
+    Attribut erreicht/übersteigt (doppelt), sonst 0.5."""
+    fe = f.wuerfel.value + f.wuerfel.modifier
+    ae = (f.attribut.wuerfel.value + f.attribut.wuerfel.modifier) if f.attribut else 0
+    return 1.0 if fe >= ae else 0.5
 def norm(s): return re.sub(r'\s+', ' ', re.sub(r'\(.*?\)', '', s).strip(' .,').lower())
 
 def jpath(stub):
@@ -76,16 +82,42 @@ for stub in sorted(TRAITS):
     if not s.controller.lade_charakter_von_json(jp):
         m(f"{stub}: LADEN FEHLGESCHLAGEN"); continue
     ch = s.ch
-    if not ch.char_gen_completed:
-        ch.char_gen_completed = True
     sea_t = TRAITS[stub]['Seasoned']
     delta = EDGES.get(stub, {}).get('delta', {'edges': [], 'powers': []})
     filled, missing = [], []
 
-    # 2. Trait-Anhebungen
+    # ── Phase 0: Seasoned-Trait-Lücken ZUERST aus freier Chargen-Währung schließen ──
+    # Solange char_gen noch offen ist (Novice-Basis): übrige Attribut-/Fertigkeitspunkte und
+    # ungenutzte Handicap-Punkte einsetzen (2 HP/Attribut, 1–2 HP/Fertigkeit), BEVOR Aufstiege
+    # fließen. Sonst werden Handicap-Punkte verschenkt (nach char_gen eingefroren).
+    if not ch.char_gen_completed:
+        for de, tgt in sea_t['attribute'].items():
+            while didx(ch.attribute[de].wert) < didx(tgt):
+                if ch.verbleibende_attributsteigerungen <= 0 and ch.verbleibende_handicap_punkte < 2:
+                    break
+                b = ch.attribute[de].wert; s.controller.steigere_attribut(de)
+                if ch.attribute[de].wert == b: break
+                filled.append(f"{de}(chg)W{ch.attribute[de].wert}")
+        for de, tgt in sea_t['fertigkeiten'].items():
+            if de not in ch.fertigkeiten: continue
+            f = ch.fertigkeiten[de]; g0 = 0
+            while g0 < 6:
+                g0 += 1
+                unt = f.wuerfel.modifier < 0
+                cur = -1 if unt else didx(f.wuerfel.value)
+                if cur >= didx(tgt): break
+                if ch.verbleibende_fertigkeitssteigerungen <= 0 and ch.verbleibende_handicap_punkte < 1:
+                    break
+                b = (f.wuerfel.value, f.wuerfel.modifier)
+                s.controller.steigere_fertigkeit(de, confirm_double_cost=True)
+                if (f.wuerfel.value, f.wuerfel.modifier) == b: break
+                filled.append(f"{de}(chg)W{f.wuerfel.value}")
+        ch.char_gen_completed = True
+
+    # 2. Trait-Anhebungen — verbleibende Lücken per Aufstieg (Seasoned-Cap <8)
     for de, tgt in sea_t['attribute'].items():
         while didx(ch.attribute[de].wert) < didx(tgt) and ausgeg(ch) + 1.0 < 8.0:
-            if ch.verbleibende_aufstiege < 1.0: increase_aufstiege(ch)
+            while ch.verbleibende_aufstiege < 1.0: increase_aufstiege(ch)
             b = ch.attribute[de].wert; s.attribut(de, nur_freie_punkte=False)
             if ch.attribute[de].wert == b: break
             filled.append(f"{de}W{ch.attribute[de].wert}")
@@ -96,8 +128,9 @@ for stub in sorted(TRAITS):
             g += 1
             unt = f.wuerfel.modifier < 0
             cur = -1 if unt else didx(f.wuerfel.value)
-            if cur >= didx(tgt) or ausgeg(ch) + 0.5 >= 8.0: break
-            if ch.verbleibende_aufstiege < 0.5: increase_aufstiege(ch)
+            kosten = skill_step_kosten(f)   # 0.5 oder 1.0 (doppelt wenn Fert >= Attribut)
+            if cur >= didx(tgt) or ausgeg(ch) + kosten >= 8.0: break
+            while ch.verbleibende_aufstiege < kosten: increase_aufstiege(ch)
             nxt = 4 if unt else DIE[min(didx(f.wuerfel.value) + 1, 4)]
             b = (f.wuerfel.value, f.wuerfel.modifier); s.fertigkeit_mit_aufstieg(de, nxt)
             if (f.wuerfel.value, f.wuerfel.modifier) == b: break

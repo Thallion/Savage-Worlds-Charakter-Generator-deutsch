@@ -222,8 +222,8 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Alahazra | 5/5 | 12/12 | 2/4 ⚠ | 4/5 ⚠ | 3/3 | Anfänger | — |
 | Alain | 5/5 | 12/12 | 4/4 | — | 3/3 | Anfänger | — |
 | Archetyp_Savage_Pathfinder_Barbarin_Amiri_A.json | 5/5 | 7/12 ⚠ | 0/0 | — | 0/0 | Anfänger | — |
-| Balazar | 5/5 | 12/12 | 1/4 ⚠ | 3/3 | 2/2 | Anfänger | — |
-| Brokar | 5/5 | 12/12 | 2/4 ⚠ | 5/5 | 3/3 | Anfänger | — |
+| Balazar | 5/5 | 12/12 | 4/4 | 3/3 | 0.5/1 ⚠ | Anfänger | — |
+| Brokar | 5/5 | 12/12 | 4/4 | 5/5 | 2/2 | Anfänger | — |
 | Damiel | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/3 | Anfänger | — |
 | Darla | 5/5 | 12/12 | 2/4 ⚠ | 3/3 | 0/0 | Anfänger | — |
 | Darla_ohneKlasse | 5/5 | 12/12 | 4/4 | 3/3 | 4/4 | Fortgeschritten | — |
@@ -233,7 +233,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Gnorr | 5/5 | 11/12 ⚠ | 4/4 | 4/4 | 5/5 | Fortgeschritten | — |
 | Harsk | 5/5 | 12/12 | 4/4 | — | 0/0 | Anfänger | — |
 | Imrijka | 5/5 | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
-| Kira | 5/5 | 12/12 | 2/4 ⚠ | — | 4/4 | Fortgeschritten | — |
+| Kira | 5/5 | 12/12 | 4/4 | — | 3/3 | Anfänger | — |
 | Korva | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Kyra | 5/5 | 12/12 | 4/4 | 3/3 | 0/0 | Anfänger | — |
 | Lem | 5/5 | 11/12 ⚠ | 4/4 | 3/3 | 0/0 | Anfänger | — |
