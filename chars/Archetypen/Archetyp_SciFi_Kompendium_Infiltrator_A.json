@@ -511,7 +511,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "92216782-9e47-48ab-b0f7-4bcbb49abe81": {
+            "ad1b7436-6ea3-436d-89cd-2d88b93e522f": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -524,11 +524,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "92216782-9e47-48ab-b0f7-4bcbb49abe81",
-                "installations_datum": "2026-06-04",
+                "installations_id": "ad1b7436-6ea3-436d-89cd-2d88b93e522f",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "e9ed1e1e-03f0-4dd6-b79a-5b13eb877621": {
+            "ec71e932-f0d9-47d4-adc2-6ecb994de29d": {
                 "name": "Cyberware: Verborgenes Fach",
                 "beschreibung": "Internes verstecktes Fach, fasst bis zu 1 kg. Wahrnehmungsprobe bei -4 zum Entdecken.",
                 "unterkategorie": "Körper",
@@ -541,8 +541,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "e9ed1e1e-03f0-4dd6-b79a-5b13eb877621",
-                "installations_datum": "2026-06-04",
+                "installations_id": "ec71e932-f0d9-47d4-adc2-6ecb994de29d",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             }
         },

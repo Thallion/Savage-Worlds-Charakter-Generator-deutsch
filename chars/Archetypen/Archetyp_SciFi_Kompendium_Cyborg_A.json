@@ -488,7 +488,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "9f3ee567-70c3-4d03-8f3f-c7c9073e977c": {
+            "b0c7c3a4-a2dc-418f-bf38-ffe1db4d8c64": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -501,11 +501,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "9f3ee567-70c3-4d03-8f3f-c7c9073e977c",
-                "installations_datum": "2026-06-04",
+                "installations_id": "b0c7c3a4-a2dc-418f-bf38-ffe1db4d8c64",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "10b16e3a-dab8-4bad-8567-563d1f340c9e": {
+            "07433d11-8138-4528-9c33-1b639dc2b7cc": {
                 "name": "Cyberware: Panzerung",
                 "beschreibung": "Subdermale Platten oder Fasern unter der Haut. +2 Panzerung am gesamten Körper. Zählt als natürliche Panzerung, kumulativ mit getragener Panzerung bis +10.",
                 "unterkategorie": "Defensiv",
@@ -519,11 +519,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "10b16e3a-dab8-4bad-8567-563d1f340c9e",
-                "installations_datum": "2026-06-04",
+                "installations_id": "07433d11-8138-4528-9c33-1b639dc2b7cc",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "32fb158f-55af-4854-84dc-d6bca9c87f5a": {
+            "2ef13906-e2d6-4665-9cb3-89971a73f578": {
                 "name": "Cyberware: Robustheit",
                 "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
                 "unterkategorie": "Defensiv",
@@ -535,11 +535,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "32fb158f-55af-4854-84dc-d6bca9c87f5a",
-                "installations_datum": "2026-06-04",
+                "installations_id": "2ef13906-e2d6-4665-9cb3-89971a73f578",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "523528c1-6fec-4f23-b6b9-d04cbda930a5": {
+            "3d8c41a1-ac42-4555-927f-81430bf267ce": {
                 "name": "Cyberware: Zielsystem",
                 "beschreibung": "Integriertes Ziel-/Verfolgungssystem reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe und Geschwindigkeit um 2 Punkte beim direkten Schießen.",
                 "unterkategorie": "Offensiv",
@@ -558,8 +558,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "523528c1-6fec-4f23-b6b9-d04cbda930a5",
-                "installations_datum": "2026-06-04",
+                "installations_id": "3d8c41a1-ac42-4555-927f-81430bf267ce",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             }
         },
@@ -692,7 +692,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "aufstiege_gesamt": 7,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -706,7 +706,7 @@
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
     "gesamt_handicap_punkte": 2,
-    "verbleibende_handicap_punkte": 2,
+    "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
@@ -867,8 +867,8 @@
                 "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",

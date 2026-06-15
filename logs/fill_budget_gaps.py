@@ -135,10 +135,51 @@ def apply_gaps(setting, name, jsonpath, sheet_a, sheet_s):
     start_rang, start_aus = ch.rang, ausgeg()
     filled, skipped = [], []
 
+    def skill_step_kosten(f):
+        """Aufstiegskosten des NÄCHSTEN Schritts: 1.0 wenn Fertigkeit das regierende
+        Attribut erreicht/übersteigt (doppelte Kosten), sonst 0.5."""
+        fe = f.wuerfel.value + f.wuerfel.modifier
+        ae = (f.attribut.wuerfel.value + f.attribut.wuerfel.modifier) if f.attribut else 0
+        return 1.0 if fe >= ae else 0.5
+
+    # ── Phase 0: Bogenlücken zuerst aus FREIER Chargen-Währung schließen ──
+    # Übrige Attribut-/Fertigkeitspunkte UND ungenutzte Handicap-Punkte werden eingesetzt,
+    # BEVOR Aufstiege vergeben werden. Sonst zahlt der Build Lücken unnötig per Aufstieg und
+    # verschenkt freie Chargen-Währung (Handicap-Punkte sind nach char_gen eingefroren).
+    # Bei wiedereröffneter Chargen zieht steigere_* den Punkt-Pool zuerst, sonst Handicap-Punkte
+    # (2 HP/Attribut, 1–2 HP/Fertigkeit). Reihenfolge Attribute→Fertigkeiten (keine Doppelkosten).
+    war_fertig = ch.char_gen_completed
+    ch.char_gen_completed = False
+    for de, tgt in sheet_a.items():
+        while didx(ch.attribute[de].wert) < didx(tgt):
+            if ch.verbleibende_attributsteigerungen <= 0 and ch.verbleibende_handicap_punkte < 2:
+                break
+            b = ch.attribute[de].wert
+            s.controller.steigere_attribut(de)
+            if ch.attribute[de].wert == b: break
+            filled.append(f"{de}(chg) d{b}->d{ch.attribute[de].wert}")
+    for de, tgt in sheet_s.items():
+        if de not in ch.fertigkeiten: continue
+        f = ch.fertigkeiten[de]; guard = 0
+        while guard < 8:
+            guard += 1
+            untrained = f.wuerfel.modifier < 0
+            cur_idx = -1 if untrained else didx(f.wuerfel.value)
+            if cur_idx >= didx(tgt): break
+            if ch.verbleibende_fertigkeitssteigerungen <= 0 and ch.verbleibende_handicap_punkte < 1:
+                break
+            b = (f.wuerfel.value, f.wuerfel.modifier)
+            s.controller.steigere_fertigkeit(de, confirm_double_cost=True)
+            if (f.wuerfel.value, f.wuerfel.modifier) == b: break  # kein Fortschritt (z.B. HP<Kosten)
+            akt = '(akt)' if b[1] < 0 and f.wuerfel.modifier == 0 else ''
+            filled.append(f"{de}(chg){akt}->d{f.wuerfel.value}")
+    ch.char_gen_completed = war_fertig
+
+    # ── Phase 1/2: verbleibende Lücken per Aufstieg (Seasoned-Cap <8) ──
     for de, tgt in sheet_a.items():
         while didx(ch.attribute[de].wert) < didx(tgt):
             if ausgeg() + 1.0 >= 8.0: skipped.append(f"Attr {de}->d{tgt}(Cap)"); break
-            if ch.verbleibende_aufstiege < 1.0: increase_aufstiege(ch)
+            while ch.verbleibende_aufstiege < 1.0: increase_aufstiege(ch)
             b = ch.attribute[de].wert
             s.attribut(de, nur_freie_punkte=False)
             if ch.attribute[de].wert == b: skipped.append(f"Attr {de} stuck@d{b}"); break
@@ -152,8 +193,9 @@ def apply_gaps(setting, name, jsonpath, sheet_a, sheet_s):
             untrained = f.wuerfel.modifier < 0
             cur_idx = -1 if untrained else didx(f.wuerfel.value)
             if cur_idx >= didx(tgt): break
-            if ausgeg() + 0.5 >= 8.0: skipped.append(f"Skill {de}->d{tgt}(Cap)"); break
-            if ch.verbleibende_aufstiege < 0.5: increase_aufstiege(ch)
+            kosten = skill_step_kosten(f)   # 0.5 oder 1.0 (doppelt, wenn Fert >= Attribut)
+            if ausgeg() + kosten >= 8.0: skipped.append(f"Skill {de}->d{tgt}(Cap)"); break
+            while ch.verbleibende_aufstiege < kosten: increase_aufstiege(ch)  # genug für DOPPELkosten
             nxt = 4 if untrained else DIE[min(didx(f.wuerfel.value) + 1, 4)]
             b = (f.wuerfel.value, f.wuerfel.modifier)
             s.fertigkeit_mit_aufstieg(de, nxt)

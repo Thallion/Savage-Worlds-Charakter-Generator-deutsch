@@ -499,7 +499,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "5fb0b52b-f3ce-4433-ba6b-aa943a0803c6": {
+            "cbeae25e-f49e-412b-9625-9cebdbf9f7d7": {
                 "name": "Cyberware: Adrenalindrüse",
                 "beschreibung": "Chirurgisch vergrößerte Nebenniere. +2 auf Erholungswurf gegen Angeschlagen oder Benommen. Kumulativ mit Kampfstählung.",
                 "unterkategorie": "Defensiv",
@@ -514,11 +514,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "5fb0b52b-f3ce-4433-ba6b-aa943a0803c6",
-                "installations_datum": "2026-06-04",
+                "installations_id": "cbeae25e-f49e-412b-9625-9cebdbf9f7d7",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "cf64cdd6-7235-4027-8fae-f97db9072b31": {
+            "ee2c1ac0-b864-4f84-b35c-c69b34aae409": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -531,11 +531,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "cf64cdd6-7235-4027-8fae-f97db9072b31",
-                "installations_datum": "2026-06-04",
+                "installations_id": "ee2c1ac0-b864-4f84-b35c-c69b34aae409",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "05af1851-df89-4f92-92c7-ce800cdf284a": {
+            "7ab6feaa-5ea4-4fd9-a19b-dd9d494c31c6": {
                 "name": "Cyberware: Robustheit",
                 "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
                 "unterkategorie": "Defensiv",
@@ -547,8 +547,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "05af1851-df89-4f92-92c7-ce800cdf284a",
-                "installations_datum": "2026-06-04",
+                "installations_id": "7ab6feaa-5ea4-4fd9-a19b-dd9d494c31c6",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             }
         },

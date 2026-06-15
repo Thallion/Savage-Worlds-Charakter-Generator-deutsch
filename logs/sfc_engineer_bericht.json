@@ -68,7 +68,7 @@
     },
     {
       "aktion": "talent(Panzertape & Kaugummi)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -77,7 +77,7 @@
         "handicap": 4
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "attribut_mit_hc(Verstand)",
@@ -424,6 +424,19 @@
   ],
   "anomalien": [
     {
+      "aktion": "talent(Panzertape & Kaugummi)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "kaufen(Materieschneiderx1) FORCE",
       "ok": true,
       "kosten": 300,
@@ -520,7 +533,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 8,
+  "anomalien_anzahl": 9,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

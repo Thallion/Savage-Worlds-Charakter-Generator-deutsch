@@ -94,7 +94,7 @@
     },
     {
       "aktion": "talent(Panzertape & Kaugummi)",
-      "ok": true,
+      "ok": false,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -103,7 +103,7 @@
         "handicap": 4
       },
       "vermoegen": 500,
-      "warnung": null
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
     },
     {
       "aktion": "attribut_mit_hc(Konstitution)",
@@ -511,6 +511,19 @@
       "vermoegen": 500
     },
     {
+      "aktion": "talent(Panzertape & Kaugummi)",
+      "ok": false,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+    },
+    {
       "aktion": "kaufen(Granatex6) FORCE",
       "ok": true,
       "kosten": 0,
@@ -624,7 +637,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 10,
+  "anomalien_anzahl": 11,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {

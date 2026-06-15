@@ -460,6 +460,11 @@
             }
         },
         "handicaps": {
+            "Außenseiter": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
             "Aufopferungsvoll (schwer)": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -519,6 +524,7 @@
         }
     },
     "selected_handicaps": [
+        "Außenseiter",
         "Aufopferungsvoll (schwer)",
         "Trennungsangst"
     ],

@@ -135,16 +135,30 @@ SDL_VIDEODRIVER=dummy python3 logs/finalize_spf_iconics.py      2>/dev/null  # c
 
 ## 3. Gemeinsamer Finalizer: `fill_budget_gaps.py`
 
-Schließt **Budget-Lücken** (Bogen-Werte, die der reguläre Punkte-Build nicht erreicht)
-durch **zusätzliche Aufstiege**. Eigenschaften:
+Schließt **Budget-Lücken** (Bogen-Werte, die der reguläre Punkte-Build nicht erreicht).
+Eigenschaften:
 
 - **Idempotent**, hebt **nur an** (senkt nie, überschreitet nie den Bogenwert).
+- **Phase 0 — freie Chargen-Währung zuerst:** Lücken werden ERST aus übrigen Attribut-/
+  Fertigkeitspunkten UND ungenutzten **Handicap-Punkten** gefüllt (Chargen wird kurz
+  wiedereröffnet, `steigere_*` zieht Pkt-Pool, sonst HP: 2 HP/Attribut, 1–2 HP/Fertigkeit),
+  erst der Rest per **Aufstieg** (Phase 1/2). So werden keine Handicap-Punkte verschenkt
+  (sie sind nach char_gen eingefroren) und es bleibt mehr Aufstiegs-Budget, um bogentreue
+  Fertigkeiten zu erreichen, die sonst am Cap hängen blieben.
+- **Doppelkosten-bewusster Aufstiegs-Top-up:** Vor jedem Fertigkeitsschritt wird geprüft, ob er
+  doppelt kostet (Fertigkeit ≥ regierendes Attribut → 1.0 statt 0.5 Aufstiege); der Pool wird
+  per `while < kosten: increase_aufstiege` aufgefüllt. (Früher nur `< 0.5` → ein Doppelschritt
+  bei genau 0.5 Restaufstieg blieb „stuck"; das verlor z.B. Road_Warrior Überleben d8.)
 - Strikt im **Seasoned-/Fortgeschritten-Cap** (ausgegebene Aufstiege < 8).
 - Vergleicht jeden gespeicherten Archetyp gegen den jeweiligen **PDF-Bogen**.
 - Deckt aktuell **SciFi Kompendium, Fantasy Kompendium** (englische Bögen, `agility d8`-Muster)
   **und Deadlands** (deutscher Bogen, `Geschicklichkeit W8`, eigener Parser `parse_german_sheets`).
 - Report: `/tmp/gapfill_report.txt` (pro Archetyp: angehobene Werte / offene Reste).
 - **Reihenfolge:** immer **als LETZTE Stufe** nach dem jeweiligen Roh-Build laufen lassen.
+
+> ⚠️ `parse_sheet` (pdftotext) liest Würfelwerte **nicht zuverlässig** (d4/d6/d8-Verwischung,
+> s. [[pdf-bogen-audit-methode]]). Es taugt als Build-Ziel, aber NICHT als Verifikations-Orakel.
+> Bogen-Treue final immer per **Render+Crop** der Original-PDF prüfen (`pdftoppm -r 200` + crop+zoom).
 
 Neues Setting hinzufügen: PDF-Bogen + Header-Mapping ergänzen; bei deutschem Bogen die
 `parse_german_sheets`-Schleife wiederverwenden (Header = Archetypname in Großbuchstaben).

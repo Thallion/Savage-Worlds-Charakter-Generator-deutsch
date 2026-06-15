@@ -505,7 +505,7 @@
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "52cba24a-d6a9-4409-aa7e-218f23e9390f": {
+            "9316f6e1-0f74-4ae7-aea8-95380a79f19b": {
                 "name": "Cyberware: Ersatzgliedmaße",
                 "beschreibung": "Elektronische Prothese für verlorene Gliedmaße. Kann Cyberware-Verbesserung (bis 1 Stress) ohne zusätzliche Stresskosten aufnehmen. Hebt permanente Verstümmelung auf.",
                 "unterkategorie": "Körper",
@@ -518,11 +518,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "52cba24a-d6a9-4409-aa7e-218f23e9390f",
-                "installations_datum": "2026-06-04",
+                "installations_id": "9316f6e1-0f74-4ae7-aea8-95380a79f19b",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             },
-            "ca2ddc3e-908c-4a83-863c-195f719621f6": {
+            "7c1c4e17-cbe7-453a-b803-058ad41e4a54": {
                 "name": "Cyberware: Klauen",
                 "beschreibung": "Klingen oder Klauen verursachen Stä+W4 Schaden. Zweiter Kauf: Stä+W6 Schaden mit PB 2. Als begrenzte freie Aktion ein-/ausfahrbar.",
                 "unterkategorie": "Offensiv",
@@ -536,8 +536,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "ca2ddc3e-908c-4a83-863c-195f719621f6",
-                "installations_datum": "2026-06-04",
+                "installations_id": "7c1c4e17-cbe7-453a-b803-058ad41e4a54",
+                "installations_datum": "2026-06-15",
                 "konfiguration": {}
             }
         },
@@ -665,10 +665,10 @@
         "Plasmapistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "verbleibende_aufstiege": 0.5,
     "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 1,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -838,8 +838,8 @@
                 "typ": "fertigkeit",
                 "name": "Athletik",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
