@@ -1,6 +1,6 @@
 # Archetypen-Status-Bericht
 
-**Stand:** 2026-06-15 · automatisch erzeugt von `logs/gen_archetypen_status.py`.
+**Stand:** 2026-06-16 · automatisch erzeugt von `logs/gen_archetypen_status.py`.
 
 Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/Rang, fehlende Ausrüstung.**
 
@@ -257,12 +257,12 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | AIController | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Ambassador | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Analyst | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
-| BountyHunter | 5/5 | 12/12 | 0/0 | — | 7/7 | Fortgeschritten | — |
+| BountyHunter | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Chronomancer | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Commander | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Commando | 5/5 | 12/12 | 2/2 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Cyborg | 5/5 | 12/12 | 2/2 | — | 6.5/7 ⚠ | Fortgeschritten | — |
-| Enforcer | 5/5 | 12/12 | 0/0 | — | 7.5/8 ⚠ | Fortgeschritten | — |
+| Enforcer | 5/5 | 12/12 | 4/4 | — | 6/6 | Fortgeschritten | — |
 | Engineer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Envoy | 5/5 | 12/12 | 3/3 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | Gladiator | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
@@ -278,7 +278,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Mystic | 5/5 | 12/12 | 4/4 | 3/3 | 4.5/5 ⚠ | Fortgeschritten | — |
 | Pilot | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Psyker | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
-| RoadWarrior | 5/5 | 12/12 | 0/0 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| RoadWarrior | 5/5 | 12/12 | 3/3 | — | 6/6 | Fortgeschritten | — |
 | Roughneck | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Scavenger | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Scrapper | 5/5 | 12/12 | 3/3 | — | 7/7 | Fortgeschritten | — |
@@ -286,7 +286,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Smuggler | 5/5 | 12/12 | 4/4 | — | 3.5/4 ⚠ | Anfänger | — |
 | Spacer | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | SquadLeader | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| StarKnight | 5/5 | 12/12 | 0/0 | 3/3 | 7.5/8 ⚠ | Fortgeschritten | — |
+| StarKnight | 5/5 | 12/12 | 4/4 | 3/3 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Surveyor | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Technomancer | 5/5 | 12/12 | 2/2 | 2/2 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Warper | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |

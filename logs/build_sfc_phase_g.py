@@ -181,6 +181,8 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'BountyHunter', protokoll='logs/sfc_bountyhunter.log')
+    s.handicap('Gierig_schwer')      # Greedy (Major)
+    s.handicap('Skrupellos_schwer')  # Ruthless (Major)
     s.volk('Mensch')
     s.volk_freies_talent('Mensch', 'Soldat', ignore_voraussetzungen=True)  # free
     s.attribut_auf('Geschicklichkeit', 8)
@@ -203,7 +205,7 @@ try:
                  ('Betäubungspike', 1), ('Sprungpack', 1), ('Fernglas', 1),
                  ('Batterie, Universal-', 1)]:
         s.kaufen(*item)
-    s.notiz('Bogen: keine Handicaps → 0HP. Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8')
+    s.notiz('Bogen-Handicaps: Greedy(Major)+Ruthless(Major)=4HP (im ersten Build fälschlich als "keine" transkribiert). Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8')
     s.notiz('MISSING: Betäubungspike (kein SciFi-Item im DE-Setting)')
     save_char(s, 'Bounty_Hunter')
 except BaseException as e:
@@ -270,8 +272,13 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'Enforcer', protokoll='logs/sfc_enforcer.log')
+    # Spieler-Handicaps des Bogens (Major zuerst). Roboter-Auto-HC (Pazifist_schwer+Programmiert)
+    # sind RASSISCH → 0 HP und verbrauchen das 4-HP-Spielerbudget NICHT.
+    s.handicap('Misstrauisch_schwer')   # Suspicious (Major)
+    s.handicap('Große Klappe')          # Big Mouth (Minor)
+    s.handicap('Kann nicht schwimmen')  # Can't Swim (Minor)
     s.volk('Roboter')
-    s.notiz('Bogen-Handicaps (Big Mouth, Kann nicht schwimmen, Misstrauisch schwer) NICHT anwendbar: Roboter-Auto-HC (Pazifist_schwer + Programmiert) = 4HP = Limit')
+    s.notiz('Spieler-Handicaps Big Mouth+Can not Swim+Suspicious(Major)=4HP; Roboter-Auto-HC (Pazifist_schwer+Programmiert) rassisch (0 HP)')
     s.attribut_auf('Geschicklichkeit', 8)
     s.attribut_auf('Verstand', 4)
     s.attribut_auf('Willenskraft', 4)
@@ -288,7 +295,7 @@ try:
     for item in [('Gyrojet-Pistole', 1), ('Zielfernrohr, Erweitert', 1),
                  ('Commlink', 1), ('Taschencomputer', 1)]:
         s.kaufen(*item)
-    s.notiz('Bogen-Edges (1): Kräftig (Brawny). Bogen-Handicaps weggelassen wegen Roboter-Auto-Budget')
+    s.notiz('Bogen-Edges (1): Kräftig (Brawny).')
     s.notiz('MISSING: Zielfernrohr, Erweitert (4 Punkte Reichweite-Abzug ignorieren) — nicht im DE-Setting')
     save_char(s, 'Enforcer')
 except BaseException as e:
@@ -539,6 +546,9 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'RoadWarrior', protokoll='logs/sfc_roadwarrior.log')
+    s.handicap('Heldenhaft')         # Heroic (Major)
+    s.handicap('Low Tech (leicht)')  # Low Tech (Minor)
+    s.notiz('Bogen-Handicap Ailment (Minor) = MISSING im DE-Setting → nur Heroic+Low Tech = 3HP')
     s.volk('Mensch')
     s.volk_freies_talent('Mensch', 'Ass am Steuer', ignore_voraussetzungen=True)  # free
     s.talent('Raketen-Ass', ignore_voraussetzungen=True)  # 2HP (Bogen-Raketen-Ass, Bogen-Pilot fehlt → voraussetzung ignoriert)
@@ -1034,6 +1044,10 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'StarKnight', protokoll='logs/sfc_starknight.log')
+    # Bogen-Handicaps: Arrogant/Heroic/Vow(Major)/Code of Honor (über Budget). Code of Honor (Ehrenkodex)
+    # kommt automatisch über den AH (Sternenritter) = 0 HP → Spieler nimmt Heroic+Vow(Major) = 4HP.
+    s.handicap('Heldenhaft')      # Heroic (Major)
+    s.handicap('Schwur_schwer')   # Vow (Major)
     s.volk('Mensch')
     s.volk_freies_talent('Mensch', 'AH (Sternenritter)', ignore_voraussetzungen=True)  # free magic AH
     # Markenwaffe = Trademark Weapon → NICHT im DE-Setting → MISSING

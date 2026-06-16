@@ -342,7 +342,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -460,6 +460,16 @@
             }
         },
         "handicaps": {
+            "Große Klappe": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Misstrauisch_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
             "Pazifist_schwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -469,6 +479,11 @@
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
+            },
+            "Kann nicht schwimmen": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
             }
         },
         "talente": {
@@ -501,8 +516,11 @@
         }
     },
     "selected_handicaps": [
+        "Große Klappe",
+        "Misstrauisch_schwer",
         "Pazifist_schwer",
-        "Programmiert"
+        "Programmiert",
+        "Kann nicht schwimmen"
     ],
     "selected_talente": [
         "Kräftig"
@@ -548,8 +566,8 @@
         "Gyrojet-Pistole": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -562,7 +580,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -710,15 +728,15 @@
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",
@@ -733,6 +751,13 @@
                 "wert": 10,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Reparieren",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             }
         ]
     }

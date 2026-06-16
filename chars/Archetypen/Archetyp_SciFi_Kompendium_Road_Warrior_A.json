@@ -459,9 +459,26 @@
                 "ausgewaehlt": true
             }
         },
-        "handicaps": {},
+        "handicaps": {
+            "Heldenhaft": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Low Tech (leicht)": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            }
+        },
         "talente": {
             "Ass am Steuer": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Raketen-Ass": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
@@ -527,9 +544,13 @@
             }
         }
     },
-    "selected_handicaps": [],
+    "selected_handicaps": [
+        "Heldenhaft",
+        "Low Tech (leicht)"
+    ],
     "selected_talente": [
         "Ass am Steuer",
+        "Raketen-Ass",
         "Ausweichmanöver",
         "Naturbursche",
         "Ruhige Hände"
@@ -586,8 +607,8 @@
         "Glock 9mm": 1
     },
     "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 7,
+    "verbleibende_aufstiege": 0.0,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -600,11 +621,17 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 3,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "Raketen-Ass",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Konstitution",
@@ -750,18 +777,18 @@
                 "kosten": 1
             },
             {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
+            },
+            {
                 "typ": "attribut",
                 "name": "Stärke",
                 "wert": 6,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",

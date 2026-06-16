@@ -15,6 +15,32 @@
       "vermoegen": 500
     },
     {
+      "aktion": "handicap(Heldenhaft)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Low Tech (leicht))",
+      "ok": true,
+      "kosten": -1,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 3
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "volk(Mensch)",
       "ok": true,
       "kosten": 0,
@@ -22,7 +48,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 3
       },
       "vermoegen": 500,
       "warnung": null
@@ -35,23 +61,23 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 3
       },
       "vermoegen": 500,
       "warnung": null
     },
     {
       "aktion": "talent(Raketen-Ass)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "attribut_mit_hc(Konstitution)",
@@ -61,7 +87,7 @@
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -74,7 +100,7 @@
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -87,7 +113,7 @@
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -100,7 +126,7 @@
       "punkte": {
         "attribut": 1,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -113,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -126,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -139,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -152,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -165,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -178,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": "Aktion lieferte False/None"
@@ -295,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -334,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 400,
       "warnung": null
@@ -360,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 300,
       "warnung": null
@@ -373,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": null
@@ -386,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Glock 9mm zum Preis 0 gekauft"
@@ -399,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Rucksack zum Preis 0 gekauft"
@@ -412,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Medikit zum Preis 0 gekauft"
@@ -425,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Werkzeugkoffer zum Preis 0 gekauft"
@@ -437,17 +463,13 @@
   ],
   "anomalien": [
     {
-      "aktion": "talent(Raketen-Ass)",
-      "ok": false,
+      "aktion": "NOTIZ: Bogen-Handicap Ailment (Minor) = MISSING im DE-Setting → nur Heroic+Low Tech = 3HP",
+      "ok": true,
+      "warnung": "Bogen-Handicap Ailment (Minor) = MISSING im DE-Setting → nur Heroic+Low Tech = 3HP",
       "kosten": 0,
       "kostenart": null,
-      "punkte": {
-        "attribut": 5,
-        "fertigkeit": 12,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "punkte": {},
+      "vermoegen": 500
     },
     {
       "aktion": "fertigkeit(Überleben)",
@@ -457,15 +479,15 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 500,
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "NOTIZ: SKILL FEHLER Überleben: [{'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 2, 'handicap': 0}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 0}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}]",
+      "aktion": "NOTIZ: SKILL FEHLER Überleben: [{'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 2, 'handicap': 1}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 1}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 1}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}]",
       "ok": true,
-      "warnung": "SKILL FEHLER Überleben: [{'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 2, 'handicap': 0}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 0}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 0}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}]",
+      "warnung": "SKILL FEHLER Überleben: [{'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 2, 'handicap': 1}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': True, 'kosten': 1, 'kostenart': 'Fertigkeitspunkte', 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 1}, 'vermoegen': 500, 'warnung': None}, {'aktion': 'fertigkeit(Überleben)', 'ok': False, 'kosten': 0, 'kostenart': None, 'punkte': {'attribut': 0, 'fertigkeit': 1, 'handicap': 1}, 'vermoegen': 500, 'warnung': 'Aktion lieferte False/None'}]",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -479,7 +501,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Glock 9mm zum Preis 0 gekauft"
@@ -492,7 +514,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Rucksack zum Preis 0 gekauft"
@@ -505,7 +527,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Medikit zum Preis 0 gekauft"
@@ -518,7 +540,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 1
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Werkzeugkoffer zum Preis 0 gekauft"
@@ -622,9 +644,13 @@
         "ausgewaehlt": true
       }
     },
-    "handicaps": [],
+    "handicaps": [
+      "Heldenhaft",
+      "Low Tech (leicht)"
+    ],
     "talente": [
       "Ass am Steuer",
+      "Raketen-Ass",
       "Ausweichmanöver",
       "Naturbursche",
       "Ruhige Hände"
@@ -634,8 +660,8 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 1,
-      "handicap": 0,
-      "handicap_gesamt": 0,
+      "handicap": 1,
+      "handicap_gesamt": 3,
       "aufstiege": 0
     },
     "machtpunkte": 0,

@@ -15,6 +15,32 @@
       "vermoegen": 500
     },
     {
+      "aktion": "handicap(Gierig_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "handicap(Skrupellos_schwer)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "volk(Mensch)",
       "ok": true,
       "kosten": 0,
@@ -22,7 +48,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -35,7 +61,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -48,7 +74,7 @@
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -61,7 +87,7 @@
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -74,7 +100,7 @@
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -87,7 +113,7 @@
       "punkte": {
         "attribut": 1,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -100,7 +126,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -113,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -126,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -139,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -152,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -165,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -178,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -334,7 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -360,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -373,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug, Kampf- zum Preis 0 gekauft"
@@ -386,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwere Blasterpistole zum Preis 0 gekauft"
@@ -399,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Blastergewehr zum Preis 0 gekauft"
@@ -412,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Betäubungspike zum Preis 0 gekauft"
@@ -425,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Sprungpack zum Preis 0 gekauft"
@@ -438,7 +464,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Fernglas zum Preis 0 gekauft"
@@ -451,7 +477,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
@@ -470,7 +496,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Raumanzug, Kampf- zum Preis 0 gekauft"
@@ -483,7 +509,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Schwere Blasterpistole zum Preis 0 gekauft"
@@ -496,7 +522,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Blastergewehr zum Preis 0 gekauft"
@@ -509,7 +535,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Betäubungspike zum Preis 0 gekauft"
@@ -522,7 +548,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Sprungpack zum Preis 0 gekauft"
@@ -535,7 +561,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Fernglas zum Preis 0 gekauft"
@@ -548,15 +574,15 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: Bogen: keine Handicaps → 0HP. Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8",
+      "aktion": "NOTIZ: Bogen-Handicaps: Greedy(Major)+Ruthless(Major)=4HP (im ersten Build fälschlich als \"keine\" transkribiert). Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8",
       "ok": true,
-      "warnung": "Bogen: keine Handicaps → 0HP. Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8",
+      "warnung": "Bogen-Handicaps: Greedy(Major)+Ruthless(Major)=4HP (im ersten Build fälschlich als \"keine\" transkribiert). Soldat + Gassenwissen + Schnell Ziehen = 3 Bogen-Edges. 4. Advance: Wahrnehmung d8",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -670,7 +696,10 @@
         "ausgewaehlt": true
       }
     },
-    "handicaps": [],
+    "handicaps": [
+      "Gierig_schwer",
+      "Skrupellos_schwer"
+    ],
     "talente": [
       "Soldat",
       "Gassenwissen",
@@ -681,8 +710,8 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 0,
-      "handicap_gesamt": 0,
+      "handicap": 4,
+      "handicap_gesamt": 4,
       "aufstiege": 0.0
     },
     "machtpunkte": 0,

@@ -464,6 +464,16 @@
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
+            },
+            "Heldenhaft": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Schwur_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
@@ -535,7 +545,9 @@
         }
     },
     "selected_handicaps": [
-        "Ehrenkodex"
+        "Ehrenkodex",
+        "Heldenhaft",
+        "Schwur_schwer"
     ],
     "selected_talente": [
         "AH (Sternenritter)",
@@ -592,7 +604,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -605,7 +617,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -732,15 +744,15 @@
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "attribut",

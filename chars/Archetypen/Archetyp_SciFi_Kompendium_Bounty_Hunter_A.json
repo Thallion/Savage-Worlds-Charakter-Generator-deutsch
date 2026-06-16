@@ -459,7 +459,18 @@
                 "ausgewaehlt": true
             }
         },
-        "handicaps": {},
+        "handicaps": {
+            "Gierig_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Skrupellos_schwer": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            }
+        },
         "talente": {
             "Soldat": {
                 "ausgewaehlt": true,
@@ -521,7 +532,10 @@
             }
         }
     },
-    "selected_handicaps": [],
+    "selected_handicaps": [
+        "Gierig_schwer",
+        "Skrupellos_schwer"
+    ],
     "selected_talente": [
         "Soldat",
         "Gassenwissen",
@@ -579,7 +593,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -592,7 +606,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -746,22 +760,22 @@
                 "typ": "attribut",
                 "name": "Stärke",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
                 "name": "Einschüchtern",
                 "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Einschüchtern",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
