@@ -15,6 +15,19 @@
       "vermoegen": 500
     },
     {
+      "aktion": "handicap(Verpeilt)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
       "aktion": "handicap(Eifersüchtig)",
       "ok": true,
       "kosten": -1,
@@ -22,7 +35,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 1
+        "handicap": 3
       },
       "vermoegen": 500,
       "warnung": null
@@ -35,7 +48,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -48,7 +61,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -61,7 +74,7 @@
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -74,7 +87,7 @@
       "punkte": {
         "attribut": 4,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -87,7 +100,7 @@
       "punkte": {
         "attribut": 3,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -100,7 +113,7 @@
       "punkte": {
         "attribut": 2,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -113,7 +126,7 @@
       "punkte": {
         "attribut": 1,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -126,7 +139,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -139,7 +152,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 12,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -152,7 +165,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 11,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -165,7 +178,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 10,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -178,7 +191,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 9,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -191,7 +204,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 8,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -204,7 +217,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 7,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -217,7 +230,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 6,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -230,7 +243,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 5,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -243,7 +256,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 4,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -256,7 +269,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 3,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -269,7 +282,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 2,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -282,7 +295,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 1,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -295,7 +308,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -308,7 +321,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -321,7 +334,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -334,7 +347,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -347,20 +360,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Reparieren)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -373,7 +373,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -386,7 +386,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 500,
       "warnung": null
@@ -399,7 +399,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 400,
       "warnung": null
@@ -412,7 +412,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Energie-Kampfaxt zum Preis 0 gekauft"
@@ -425,7 +425,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
@@ -438,7 +438,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
@@ -451,7 +451,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
@@ -463,18 +463,9 @@
   ],
   "anomalien": [
     {
-      "aktion": "NOTIZ: Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting) — stattdessen Eifersüchtig (1HP) als gleichwertiges 1pt HC",
+      "aktion": "NOTIZ: Spieler-HC: Verpeilt(2)+Eifersüchtig(1)+Sanftmütig(1) = 4HP. Abhängigkeit (Wasser) ist rassisch (Aquatic-Ancestry, 0 HP). Clueless = Verpeilt im DE-Setting",
       "ok": true,
-      "warnung": "Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting) — stattdessen Eifersüchtig (1HP) als gleichwertiges 1pt HC",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
-    },
-    {
-      "aktion": "NOTIZ: Auto-HC Aquatische Spezies: Abhängigkeit (Wasser, 1HP) + Eifersüchtig (1HP) + Sanftmütig (1HP) = 3HP",
-      "ok": true,
-      "warnung": "Auto-HC Aquatische Spezies: Abhängigkeit (Wasser, 1HP) + Eifersüchtig (1HP) + Sanftmütig (1HP) = 3HP",
+      "warnung": "Spieler-HC: Verpeilt(2)+Eifersüchtig(1)+Sanftmütig(1) = 4HP. Abhängigkeit (Wasser) ist rassisch (Aquatic-Ancestry, 0 HP). Clueless = Verpeilt im DE-Setting",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -497,7 +488,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Energie-Kampfaxt zum Preis 0 gekauft"
@@ -510,7 +501,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Universalübersetzer zum Preis 0 gekauft"
@@ -523,7 +514,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Persönliche Datenassistenz zum Preis 0 gekauft"
@@ -536,7 +527,7 @@
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 2
+        "handicap": 4
       },
       "vermoegen": 0,
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Batterie, Universal- zum Preis 0 gekauft"
@@ -569,7 +560,7 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 10,
+  "anomalien_anzahl": 9,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -631,7 +622,7 @@
         "ausgewaehlt": false
       },
       "Reparieren": {
-        "wert": 10,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
         "ausgewaehlt": false
@@ -658,6 +649,7 @@
     "handicaps": [
       "Eifersüchtig",
       "Sanftmütig",
+      "Verpeilt",
       "Abhängigkeit (Wasser)"
     ],
     "talente": [
@@ -673,13 +665,13 @@
     "punkte": {
       "attribut": 0,
       "fertigkeit": 0,
-      "handicap": 2,
-      "handicap_gesamt": 2,
-      "aufstiege": 0.0
+      "handicap": 4,
+      "handicap_gesamt": 4,
+      "aufstiege": 1.0
     },
     "machtpunkte": 10,
     "vermoegen": 0,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Aquatische Spezies"
   }
 }

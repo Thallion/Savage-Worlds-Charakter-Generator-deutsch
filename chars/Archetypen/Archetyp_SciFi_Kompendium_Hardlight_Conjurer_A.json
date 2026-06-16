@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Verstand": {
@@ -47,12 +47,12 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 4,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -212,7 +212,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -303,7 +303,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -432,7 +432,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -455,17 +455,22 @@
     },
     "selected_elements": {
         "voelker": {
-            "Insektoide": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Außenseiter": {
+            "Neugierig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Klein": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Trennungsangst": {
+            "Blutarm": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -556,8 +561,9 @@
         }
     },
     "selected_handicaps": [
-        "Außenseiter",
-        "Trennungsangst"
+        "Neugierig",
+        "Klein",
+        "Blutarm"
     ],
     "selected_talente": [
         "AH (Hartlichtformer)",
@@ -574,7 +580,7 @@
     "selected_superkraefte": [],
     "selected_cyberware": [],
     "voelker_selected": {
-        "Mensch": false,
+        "Mensch": true,
         "Amorphe": false,
         "Centaux": false,
         "Draken": false,
@@ -582,7 +588,7 @@
         "Floraner": false,
         "Gen-Schufter": false,
         "Gen-Soldaten": false,
-        "Insektoide": true,
+        "Insektoide": false,
         "Leerlinge": false,
         "Orakel": false,
         "Parasiten": false,
@@ -619,7 +625,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 4,
@@ -632,29 +638,15 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 1,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -669,6 +661,20 @@
                 "typ": "attribut",
                 "name": "Verstand",
                 "wert": 8,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Verstand",
+                "wert": 10,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -698,7 +704,7 @@
                 "name": "Naturwissenschaften",
                 "wert": 10,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
@@ -732,13 +738,6 @@
                 "typ": "fertigkeit",
                 "name": "Reparieren",
                 "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
-                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -746,6 +745,13 @@
                 "typ": "fertigkeit",
                 "name": "Recherche",
                 "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Recherche",
+                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -774,36 +780,43 @@
                 "kosten": 1
             },
             {
-                "typ": "fertigkeit",
-                "name": "Geisteswissenschaften",
-                "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
-                "wert": 10,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Geisteswissenschaften",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Hacken",
+                "wert": 4,
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Pilot",
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5

@@ -42,7 +42,7 @@
         },
         "Verstand": {
             "attribut_name": "Verstand",
-            "wert": 6,
+            "wert": 4,
             "modifier": 0
         },
         "Stärke": {
@@ -121,7 +121,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Willenskraft",
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -302,7 +302,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -342,7 +342,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -393,7 +393,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -419,7 +419,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -466,6 +466,11 @@
                 "punkte": 1
             },
             "Aufopferungsvoll (schwer)": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Ehemalige Drohne": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
@@ -526,6 +531,7 @@
     "selected_handicaps": [
         "Außenseiter",
         "Aufopferungsvoll (schwer)",
+        "Ehemalige Drohne",
         "Trennungsangst"
     ],
     "selected_talente": [
@@ -578,7 +584,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 8,
+    "aufstiege_gesamt": 6,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -591,7 +597,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 2,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -604,21 +610,7 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Geschicklichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Verstand",
                 "wert": 6,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
@@ -627,6 +619,20 @@
                 "typ": "attribut",
                 "name": "Willenskraft",
                 "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -663,13 +669,6 @@
                 "name": "Wahrnehmung",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Wahrnehmung",
-                "wert": 8,
-                "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 2
             },
             {
@@ -681,6 +680,27 @@
             },
             {
                 "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Kämpfen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Heimlichkeit",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
                 "name": "Pilot",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -688,22 +708,8 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Pilot",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
+                "name": "Reparieren",
                 "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -734,35 +740,28 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
                 "name": "Konstitution",
                 "wert": 10,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
+                "name": "Elektronik",
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 6,
+                "name": "Einschüchtern",
+                "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
-                "name": "Elektronik",
+                "name": "Überleben",
                 "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5

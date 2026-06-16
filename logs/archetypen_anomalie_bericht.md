@@ -260,8 +260,8 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | BountyHunter | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Chronomancer | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 | Commander | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
-| Commando | 5/5 | 12/12 | 2/2 | — | 7.5/8 ⚠ | Fortgeschritten | — |
-| Cyborg | 5/5 | 12/12 | 2/2 | — | 6.5/7 ⚠ | Fortgeschritten | — |
+| Commando | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
+| Cyborg | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Enforcer | 5/5 | 12/12 | 4/4 | — | 6/6 | Fortgeschritten | — |
 | Engineer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Envoy | 5/5 | 12/12 | 3/3 | — | 7.5/8 ⚠ | Fortgeschritten | — |
@@ -269,7 +269,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Gravlock | 5/5 | 12/12 | 4/4 | 2/4 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
 | Grunt | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Hacker | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
-| HardlightConjurer | 5/5 | 12/12 | 1/1 | 3/7 ⚠ | 7.5/8 ⚠ | Fortgeschritten | — |
+| HardlightConjurer | 5/5 | 12/12 | 4/4 | 3/7 ⚠ | 5.5/6 ⚠ | Fortgeschritten | — |
 | Infiltrator | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
 | Influencer | 5/5 | 12/12 | 4/4 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Medic | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
@@ -278,7 +278,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Mystic | 5/5 | 12/12 | 4/4 | 3/3 | 4.5/5 ⚠ | Fortgeschritten | — |
 | Pilot | 5/5 | 12/12 | 4/4 | — | 6.5/7 ⚠ | Fortgeschritten | — |
 | Psyker | 5/5 | 12/12 | 4/4 | 5/5 | 5.5/6 ⚠ | Fortgeschritten | — |
-| RoadWarrior | 5/5 | 12/12 | 3/3 | — | 6/6 | Fortgeschritten | — |
+| RoadWarrior | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Roughneck | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
 | Scavenger | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Scrapper | 5/5 | 12/12 | 3/3 | — | 7/7 | Fortgeschritten | — |
@@ -288,7 +288,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | SquadLeader | 5/5 | 12/12 | 4/4 | — | 7.5/8 ⚠ | Fortgeschritten | — |
 | StarKnight | 5/5 | 12/12 | 4/4 | 3/3 | 5.5/6 ⚠ | Fortgeschritten | — |
 | Surveyor | 5/5 | 12/12 | 4/4 | — | 5.5/6 ⚠ | Fortgeschritten | — |
-| Technomancer | 5/5 | 12/12 | 2/2 | 2/2 | 5.5/6 ⚠ | Fortgeschritten | — |
+| Technomancer | 5/5 | 12/12 | 4/4 | 2/2 | 3.5/4 ⚠ | Anfänger | — |
 | Warper | 5/5 | 12/12 | 4/4 | 2/2 | 7.5/8 ⚠ | Fortgeschritten | — |
 
 ## Superkräfte Kompendium (11 Chars)

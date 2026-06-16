@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 10,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
@@ -302,7 +302,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 10,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 8,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -455,26 +455,32 @@
     },
     "selected_elements": {
         "voelker": {
-            "Gen-Soldaten": {
+            "Mensch": {
                 "ausgewaehlt": true
             }
         },
         "handicaps": {
-            "Arrogant": {
+            "Übermütig": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
                 "punkte": 2
             },
-            "Skrupellos": {
+            "Verpeilt": {
                 "ausgewaehlt": true,
-                "stufe": "leicht",
-                "punkte": 1
+                "stufe": "schwer",
+                "punkte": 2
             }
         },
         "talente": {
-            "Kampfreflexe": {
+            "Cyborg": {
                 "ausgewaehlt": true,
-                "rang": "F",
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
+            },
+            "Gut Ausgerüstet": {
+                "ausgewaehlt": true,
+                "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
             },
@@ -483,12 +489,18 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Trickschuss": {
+                "ausgewaehlt": true,
+                "rang": "F",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {
-            "b0c7c3a4-a2dc-418f-bf38-ffe1db4d8c64": {
+            "7d51ed92-0edc-4bd4-87ff-5e1e106f616e": {
                 "name": "Cyberware: Verbesserte Sicht",
                 "beschreibung": "50× Vergrößerung und Restlichtverstärker. Hebt bis zu 4 Punkte Beleuchtungsabzüge auf. +2 auf entsprechende Wahrnehmungsproben.",
                 "unterkategorie": "Körper",
@@ -501,11 +513,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "b0c7c3a4-a2dc-418f-bf38-ffe1db4d8c64",
-                "installations_datum": "2026-06-15",
+                "installations_id": "7d51ed92-0edc-4bd4-87ff-5e1e106f616e",
+                "installations_datum": "2026-06-16",
                 "konfiguration": {}
             },
-            "07433d11-8138-4528-9c33-1b639dc2b7cc": {
+            "50b5f6da-9765-4126-a4c8-298c8a9c62ff": {
                 "name": "Cyberware: Panzerung",
                 "beschreibung": "Subdermale Platten oder Fasern unter der Haut. +2 Panzerung am gesamten Körper. Zählt als natürliche Panzerung, kumulativ mit getragener Panzerung bis +10.",
                 "unterkategorie": "Defensiv",
@@ -519,11 +531,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "07433d11-8138-4528-9c33-1b639dc2b7cc",
-                "installations_datum": "2026-06-15",
+                "installations_id": "50b5f6da-9765-4126-a4c8-298c8a9c62ff",
+                "installations_datum": "2026-06-16",
                 "konfiguration": {}
             },
-            "2ef13906-e2d6-4665-9cb3-89971a73f578": {
+            "871ecbc3-4d80-4317-94e7-71bf2703d46c": {
                 "name": "Cyberware: Robustheit",
                 "beschreibung": "Verstärktes Muskel- und Knochengitter erhöht die Körperdichte. +1 Robustheit pro Installation.",
                 "unterkategorie": "Defensiv",
@@ -535,11 +547,11 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "2ef13906-e2d6-4665-9cb3-89971a73f578",
-                "installations_datum": "2026-06-15",
+                "installations_id": "871ecbc3-4d80-4317-94e7-71bf2703d46c",
+                "installations_datum": "2026-06-16",
                 "konfiguration": {}
             },
-            "3d8c41a1-ac42-4555-927f-81430bf267ce": {
+            "0a5cd31a-116d-445f-968f-c24ad526a623": {
                 "name": "Cyberware: Zielsystem",
                 "beschreibung": "Integriertes Ziel-/Verfolgungssystem reduziert Abzüge für Angesagte Ziele, Deckung, Reichweite, Größe und Geschwindigkeit um 2 Punkte beim direkten Schießen.",
                 "unterkategorie": "Offensiv",
@@ -558,8 +570,8 @@
                 },
                 "installiert": true,
                 "aktiv": true,
-                "installations_id": "3d8c41a1-ac42-4555-927f-81430bf267ce",
-                "installations_datum": "2026-06-15",
+                "installations_id": "0a5cd31a-116d-445f-968f-c24ad526a623",
+                "installations_datum": "2026-06-16",
                 "konfiguration": {}
             }
         },
@@ -622,12 +634,14 @@
         }
     },
     "selected_handicaps": [
-        "Arrogant",
-        "Skrupellos"
+        "Übermütig",
+        "Verpeilt"
     ],
     "selected_talente": [
-        "Kampfreflexe",
-        "Schnell"
+        "Cyborg",
+        "Gut Ausgerüstet",
+        "Schnell",
+        "Trickschuss"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -638,14 +652,14 @@
         "Cyberware: Zielsystem"
     ],
     "voelker_selected": {
-        "Mensch": false,
+        "Mensch": true,
         "Amorphe": false,
         "Centaux": false,
         "Draken": false,
         "Elementare": false,
         "Floraner": false,
         "Gen-Schufter": false,
-        "Gen-Soldaten": true,
+        "Gen-Soldaten": false,
         "Insektoide": false,
         "Leerlinge": false,
         "Orakel": false,
@@ -692,7 +706,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 7,
+    "aufstiege_gesamt": 5,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -705,11 +719,17 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 2,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
         "cost_entries": [
+            {
+                "typ": "talent",
+                "name": "Gut Ausgerüstet",
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
             {
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
@@ -721,13 +741,6 @@
                 "typ": "attribut",
                 "name": "Geschicklichkeit",
                 "wert": 8,
-                "zahlungsquelle": "Attributspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Geschicklichkeit",
-                "wert": 10,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -746,58 +759,79 @@
                 "kosten": 1
             },
             {
+                "typ": "attribut",
+                "name": "Konstitution",
+                "wert": 6,
+                "zahlungsquelle": "Attributspunkte",
+                "kosten": 1
+            },
+            {
                 "typ": "fertigkeit",
-                "name": "Pilot",
+                "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Pilot",
+                "name": "Kämpfen",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Pilot",
+                "name": "Kämpfen",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Pilot",
-                "wert": 10,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
+                "name": "Heimlichkeit",
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Reparieren",
+                "name": "Heimlichkeit",
                 "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 2
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Athletik",
                 "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Athletik",
+                "wert": 8,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Schießen",
+                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -817,45 +851,17 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Athletik",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Athletik",
                 "wert": 10,
                 "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Schießen",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "kosten": 1.0
             },
             {
                 "typ": "fertigkeit",
                 "name": "Schießen",
                 "wert": 10,
                 "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "kosten": 1.0
             },
             {
                 "typ": "talent",
@@ -864,51 +870,29 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
-                "wert": 6,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 2
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 4,
+                "typ": "talent",
+                "name": "Trickschuss",
                 "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Kämpfen",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Hacken",
                 "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "name": "Pilot",
+                "wert": 4,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 8,
+                "name": "Reparieren",
+                "wert": 4,
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 0.5
             }

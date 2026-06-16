@@ -546,9 +546,10 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'RoadWarrior', protokoll='logs/sfc_roadwarrior.log')
-    s.handicap('Heldenhaft')         # Heroic (Major)
-    s.handicap('Low Tech (leicht)')  # Low Tech (Minor)
-    s.notiz('Bogen-Handicap Ailment (Minor) = MISSING im DE-Setting → nur Heroic+Low Tech = 3HP')
+    s.handicap('Heldenhaft')         # Heroic (Major, 2)
+    s.handicap('Totkrank (leicht)')  # Ailment (Minor, 1): -1 gegen Erschöpfung, Krit→schwer (= Bogen-Strahlendosis)
+    s.handicap('Low Tech (leicht)')  # Low Tech (Minor, 1)
+    s.notiz('Spieler-HC: Heldenhaft(2)+Totkrank leicht(1)+Low Tech(1) = 4HP. Ailment(Minor) = Totkrank (leicht) im DE-Setting')
     s.volk('Mensch')
     s.volk_freies_talent('Mensch', 'Ass am Steuer', ignore_voraussetzungen=True)  # free
     s.talent('Raketen-Ass', ignore_voraussetzungen=True)  # 2HP (Bogen-Raketen-Ass, Bogen-Pilot fehlt → voraussetzung ignoriert)
@@ -559,9 +560,9 @@ try:
     s.attribut_auf('Konstitution', 6)
     s.attribut_auf('Stärke', 6)
     skills_setzen(s, [('Fahren', 8), ('Wahrnehmung', 6), ('Reparieren', 6),
-                      ('Schießen', 6), ('Heimlichkeit', 6), ('Überleben', 8)])
+                      ('Schießen', 6), ('Heimlichkeit', 4), ('Überleben', 8)])  # Bogen Heimlichkeit d4
     abschliessen(s, 4)
-    advance_attr(s, 'Konstitution')          # Bogen Vig d6
+    # Vig d6 wird via steigere_mit_handicap_attribut (HP) erreicht — KEIN Attr-Advance (Bogen Vig d6, nicht d8)
     advance_edge(s, 'Ausweichmanöver')       # Bogen-Edge
     advance_edge(s, 'Naturbursche')          # Woodsman
     advance_edge(s, 'Ruhige Hände')          # Steady Hands
@@ -849,8 +850,8 @@ except BaseException as e:
 
 
 # ═══════════════════════════════════════════════════════
-# 17. HARDLIGHT CONJURER  Pace 6 Parry 4 Toughness 8(4)
-# Ancestry: Insektoide (360° Vision, Armor+2, Cannot Speak, Claws, Communal, Separation)
+# 17. HARDLIGHT CONJURER  Pace 6 Parry 4 Toughness 8(4) — Mensch (Bogen hat KEINE Ancestry)
+# Bogen-HCs: Anemic(Blutarm,1)+Curious(Neugierig,2)+Small(Klein,1) = 4HP. Attr: Agi d6, Sma d10, Spi d8, Str d4, Vig d6
 # Auto-HCs Insektoide: Außenseiter (leicht, 1HP) + Trennungsangst = 1HP+?
 #   Trennungsangst NICHT im DE-Setting → MISSING
 #   Plan: Outsider (leicht, 1HP) statt Trennungsangst (Insektoide-wahlmoeglichkeit)
@@ -872,17 +873,17 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'HardlightConjurer', protokoll='logs/sfc_hardlightconjurer.log')
-    s.handicap('Außenseiter')
-    s.notiz('Insektoide Auto-HC Trennungsangst = MISSING (nicht im DE-Setting)')
-    s.volk('Insektoide')
-    s.volk_freies_talent('Insektoide', 'AH (Hartlichtformer)', ignore_voraussetzungen=True)  # free magic AH
-    s.steigere_mit_handicap_attribut('Stärke')  # d4→d6 (2HP)
-    s.attribut_auf('Geschicklichkeit', 8)
-    s.attribut_auf('Verstand', 10)
-    s.attribut_auf('Willenskraft', 6)
-    s.attribut_auf('Konstitution', 8)
-    s.attribut_auf('Stärke', 6)
-    skills_setzen(s, [('Naturwissenschaften', 10), ('Elektronik', 8), ('Reparieren', 8), ('Recherche', 6)])
+    s.handicap('Neugierig')   # Curious (Major, 2)
+    s.handicap('Blutarm')     # Anemic (Minor, 1): -1 Konstitutionsproben
+    s.handicap('Klein')       # Small (Minor, 1): Größe & Robustheit -1
+    s.volk('Mensch')          # Bogen hat KEINE Ancestry — Toughness 8(4) = Mensch + Klein + Körperpanzerung+4
+    s.volk_freies_talent('Mensch', 'AH (Hartlichtformer)', ignore_voraussetzungen=True)  # freies Mensch-Talent = AH
+    s.attribut_auf('Geschicklichkeit', 6)    # Agi d6 (Bogen)
+    s.attribut_auf('Verstand', 10)           # Sma d10 ZUERST (Punkte) → Naturwissenschaft d10 ohne Doppelkosten
+    s.attribut_auf('Willenskraft', 8)        # Spi d8 (fill_budget HP)
+    s.attribut_auf('Konstitution', 6)        # Vig d6 (fill_budget HP)
+    # Stärke bleibt d4 (Bogen)
+    skills_setzen(s, [('Naturwissenschaften', 10), ('Elektronik', 8), ('Reparieren', 6), ('Recherche', 6)])
     s.macht('Barriere', ignore_rang_check=True)
     s.macht('Abwehren', ignore_rang_check=True)
     s.macht('Schutz', ignore_rang_check=True)
@@ -899,8 +900,9 @@ try:
                  ('Schwerkraftharnisch', 1),
                  ('Persönliche Datenassistenz', 1), ('Batterie, Universal-', 1)]:
         s.kaufen(*item)
+    s.notiz('Spieler-HC: Neugierig(2)+Blutarm(1)+Klein(1) = 4HP → 2 Attribut-Steps (Spi d8, Vig d6). Anemic=Blutarm, Curious=Neugierig, Small=Klein im DE-Setting')
     s.notiz('Bogen-Item Schwertharnisch = MISSING (nicht im SciFi-Setting); ersetzt durch zusätzlichen Schwerkraftharnisch')
-    s.notiz('Bogen-Edges (5): AH (free), Neue Mächte x2, Mutig, Exo-Wissenschaftler. Insektoide: Klauen, Panzerung+2, Rundumsicht, Gemeinschaft, Kann nicht sprechen, Außenseiter/Trennungsangst')
+    s.notiz('Bogen-Edges (5): AH (free Mensch), Neue Mächte x2, Mutig, Exo-Wissenschaftler. Mensch (KEINE Insektoide-Ancestry im Bogen)')
     save_char(s, 'Hardlight_Conjurer')
 except BaseException as e:
     m(f'Hardlight_Conjurer CRASH: {e}\n{traceback.format_exc()}')
@@ -1114,20 +1116,19 @@ print('=' * 60)
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'Commando', protokoll='logs/sfc_commando.log')
-    s.handicap('Aufopferungsvoll (schwer)')  # Bogen Selfless Major (2HP)
-    # Außenseiter (leicht) + Trennungsangst (leicht) werden auto via Insektoide-Volk hinzugefügt
+    s.handicap('Aufopferungsvoll (schwer)')  # Selfless (Major, 2)
+    s.handicap('Ehemalige Drohne')           # Ex-Drone (Major, 2): -2 Willenskraft wenn kein Verbündeter in 5''
+    # Außenseiter + Trennungsangst = rassisch via Insektoide-Volk (0 HP, kein Budget-Verbrauch)
     s.volk('Insektoide')
-    s.talent('Soldat', ignore_voraussetzungen=True)  # CharGen 2HP (HC-Budget: 4HP - 2HP Bogen-Aufopferungsvoll - 2HP auto = 0HP → Soldat als CharGen via freien Edge)
-    # 4HP HCs: 2HP auto (Außenseiter+Trennungsangst) + 2HP Aufopferungsvoll = 4HP. 0HP für Soldat → Soldat kostenlos (interpretieren als Auto-Edge)
-    s.steigere_mit_handicap_attribut('Stärke')  # d4→d6 (2HP) — HC-Budget 0 → kann nicht klappen
-    # Korrektur: 4HP HCs (auto+auto+Aufopferungsvoll), KEIN attr-step, KEIN CharGen-Edge (Soldat als MISSING/notiert)
+    s.talent('Soldat', ignore_voraussetzungen=True)  # Chargen-Edge (2 HP) — mit 4HP jetzt finanzierbar
     s.attribut_auf('Geschicklichkeit', 6)
-    s.attribut_auf('Verstand', 6)
+    s.attribut_auf('Verstand', 4)            # Sma d4 (Bogen)
     s.attribut_auf('Willenskraft', 6)
-    s.attribut_auf('Konstitution', 10)
-    s.attribut_auf('Stärke', 4)
-    skills_setzen(s, [('Schießen', 8), ('Wahrnehmung', 8), ('Athletik', 6), ('Pilot', 6),
-                      ('Überleben', 6), ('Reparieren', 6)])
+    s.attribut_auf('Stärke', 8)              # Str d8 (Bogen, Soldat Min-Str)
+    s.attribut_auf('Konstitution', 10)       # Vig d10 final (Chargen d8 via HP → Advance d10)
+    skills_setzen(s, [('Schießen', 8), ('Wahrnehmung', 6), ('Athletik', 6), ('Kämpfen', 6),
+                      ('Heimlichkeit', 6), ('Pilot', 4), ('Reparieren', 4), ('Überleben', 4),
+                      ('Elektronik', 4)])   # Bogenwerte (Wahrn d6 > Sma d4 = inhärent doppelt)
     abschliessen(s, 4)
     advance_attr(s, 'Konstitution')              # Bogen Vig d10 final
     advance_edge(s, 'Atmosphärische Anpassung', ignore_voraussetzungen=True)  # Atmospheric Acclimation
@@ -1136,8 +1137,7 @@ try:
     for item in [('Infanteriekampfanzug', 1), ('Gatling-Laser', 1),
                  ('Partikel-Pack', 4), ('Universalübersetzer', 1)]:
         s.kaufen(*item)
-    s.notiz('Bogen-HC Ex-Drone = MISSING (custom, nicht im SciFi-Setting)')
-    s.notiz('Bogen-Edge Soldat = MISSING CharGen (HC-Budget ausgeschöpft: 2HP auto-HC + 2HP Bogen-HC = 4HP)')
+    s.notiz('Spieler-HC: Aufopferungsvoll schwer(2)+Ehemalige Drohne(2) = 4HP → Soldat-Edge(2HP) + Vig-Step(2HP). Ex-Drone = Ehemalige Drohne im DE-Setting')
     s.notiz('Bogen-Item Gatling-Blaster → ersetzt durch Gatling-Laser (closest)')
     s.notiz('Bogen-Item Partikelpack → Partikel-Pack (closest)')
     save_char(s, 'Commando')
@@ -1146,9 +1146,8 @@ except BaseException as e:
 
 
 # ═══════════════════════════════════════════════════════
-# 22. CYBORG  Pace 5 Parry 6 Toughness 10(4) — Gen-Soldaten
-# Auto-HC Gen-Soldaten: Skrupellos (2HP)
-# Auto-Talent Gen-Soldaten: Kampfreflexe (free)
+# 22. CYBORG  Pace 5 Parry 6 Toughness 10(4) — Mensch (Bogen-Ancestry Flight/Low-G/Reduced Pace = kein DE-Volk)
+# Bogen-HCs: Clueless(Verpeilt,2)+Overconfident(Übermütig,2) = 4HP. Attr: Agi d8, Sma d6, Spi d6, Str d4, Vig d6
 # Bogen-HCs: Clueless (1HP) + Overconfident (2HP) = 3HP Bogen
 #   2HP auto + 3HP Bogen = 5HP → 4HP-Limit! Drop 1HP.
 #   Plan: Skrupellos (2HP auto) + Überheblich (2HP Bogen Overconfident) = 4HP ✓ (Clueless = MISSING)
@@ -1165,21 +1164,18 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'Cyborg', protokoll='logs/sfc_cyborg.log')
-    s.handicap('Arrogant')  # Bogen Overconfident (2HP) — Überheblich NICHT im DE-Setting
-    # Skrupellos (2HP) auto via Gen-Soldaten
-    s.volk('Gen-Soldaten')
-    # Kampfreflexe ist auto-Talent des Gen-Soldaten-Volkes, wird automatisch hinzugefügt (kein volk_freies_talent nötig)
-    s.notiz('Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)')
-    s.notiz('Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)')
-    s.notiz('Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓')
-    s.notiz('Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)')
-    s.attribut_auf('Geschicklichkeit', 10)
+    s.handicap('Verpeilt')    # Clueless (Major, 2): -1 Allgemeinwissen & Wahrnehmung
+    s.handicap('Übermütig')   # Overconfident (Major, 2)
+    s.volk('Mensch')          # Bogen-Ancestry Flight/Low-G/Reduced Pace hat KEIN passendes DE-Volk → dokumentiert
+    s.volk_freies_talent('Mensch', 'Cyborg', ignore_voraussetzungen=True)  # Cyborg-Edge (freies Mensch-Talent)
+    s.talent('Gut Ausgerüstet', ignore_voraussetzungen=True)               # Geared Up (Chargen-Edge, 2HP)
+    s.attribut_auf('Geschicklichkeit', 8)    # Agi d8 (Bogen)
     s.attribut_auf('Verstand', 6)
     s.attribut_auf('Willenskraft', 6)
     s.attribut_auf('Konstitution', 6)
-    s.attribut_auf('Stärke', 8)
-    skills_setzen(s, [('Pilot', 10), ('Reparieren', 8), ('Athletik', 6), ('Elektronik', 6),
-                      ('Schießen', 6)])
+    # Stärke bleibt d4 (Bogen, Low-G Worlder)
+    skills_setzen(s, [('Kämpfen', 8), ('Heimlichkeit', 8), ('Athletik', 8), ('Schießen', 8),
+                      ('Elektronik', 6), ('Wahrnehmung', 6)])
     abschliessen(s, 4)
     advance_skill(s, 'Athletik', 10)             # Bogen Athletics d10
     advance_skill(s, 'Schießen', 10)             # Bogen Shooting d10
@@ -1191,8 +1187,8 @@ try:
                  ('Cyberware: Verbesserte Sicht', 1), ('Cyberware: Panzerung', 1),
                  ('Cyberware: Robustheit', 1), ('Cyberware: Zielsystem', 1)]:
         s.kaufen(*item)
-    s.notiz('Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt')
-    s.notiz('Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)')
+    s.notiz('Spieler-HC: Verpeilt(2)+Übermütig(2) = 4HP → Cyborg-Edge (frei via Mensch) + Gut Ausgerüstet(2HP). Clueless=Verpeilt, Overconfident=Übermütig im DE-Setting')
+    s.notiz('Bogen-Ancestry Flight(Pace12)/Low-G Worlder(-1 Str)/Reduced Pace = kein DE-Volk vorhanden → als Mensch gebaut (Flug/Low-G nicht modellierbar)')
     s.notiz('Bogen-Item Magnetstiefel = MISSING (nicht im SciFi-Setting)')
     save_char(s, 'Cyborg')
 except BaseException as e:
@@ -1272,11 +1268,11 @@ except BaseException as e:
 # ═══════════════════════════════════════════════════════
 try:
     s = d.Sitzung('SciFi Kompendium', 'Technomancer', protokoll='logs/sfc_technomancer.log')
-    s.handicap('Eifersüchtig')  # Bogen Jealous Minor (1HP)
-    s.handicap('Sanftmütig')  # Bogen Mild Mannered (1HP)
+    s.handicap('Verpeilt')      # Clueless (Major, 2): -1 Allgemeinwissen & Wahrnehmung
+    s.handicap('Eifersüchtig')  # Jealous (Minor, 1)
+    s.handicap('Sanftmütig')    # Mild Mannered (Minor, 1)
     s.volk('Aquatische Spezies')
-    s.notiz('Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting) — stattdessen Eifersüchtig (1HP) als gleichwertiges 1pt HC')
-    s.notiz('Auto-HC Aquatische Spezies: Abhängigkeit (Wasser, 1HP) + Eifersüchtig (1HP) + Sanftmütig (1HP) = 3HP')
+    s.notiz('Spieler-HC: Verpeilt(2)+Eifersüchtig(1)+Sanftmütig(1) = 4HP. Abhängigkeit (Wasser) ist rassisch (Aquatic-Ancestry, 0 HP). Clueless = Verpeilt im DE-Setting')
     s.volk_freies_talent('Aquatische Spezies', 'AH (Technomancer)', ignore_voraussetzungen=True)  # free magic AH
     s.attribut_auf('Geschicklichkeit', 6)
     s.attribut_auf('Verstand', 8)
@@ -1290,7 +1286,7 @@ try:
     s.notiz('Bogen-3-Powers: AH (Technomancer) gibt 2 starting. Verbündeten beschwören = MISSING (Neue Mächte-Edge zu teuer)')
     abschliessen(s, 4)
     advance_skill(s, 'Kämpfen', 6)               # Bogen Fighting d6
-    advance_skill(s, 'Reparieren', 10)           # Bogen Repair d10 (post-advance)
+    advance_skill(s, 'Reparieren', 8)            # Bogen Repair d8 (Chargen d8 → kein weiterer Schritt; war fälschlich d10)
     advance_edge(s, 'Brecher', ignore_voraussetzungen=True)  # Breaker
     advance_edge(s, 'Drohnen', ignore_voraussetzungen=True)   # Drones
     for item in [('Synth-Mesh', 1), ('Energie-Kampfaxt', 1),  # Energie-Kampfaxt als Speer-Ersatz

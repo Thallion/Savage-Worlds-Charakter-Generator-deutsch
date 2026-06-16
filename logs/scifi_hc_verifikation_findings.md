@@ -1,56 +1,70 @@
 # SciFi-Kompendium — Handicap-Verifikation gegen die offiziellen Bögen
 
-**Stand:** 2026-06-16 · Quelle: `Texte/Science_Fiction_Companion_Archetypes_(SWADE).txt`
-(+ Render der englischen Archetypen-Bögen). Geprüft: alle SciFi-Chars mit `HP < 4` bzw. `0/0`.
+**Stand:** 2026-06-16 (2. Durchlauf) · Quelle: `Texte/Science_Fiction_Companion_Archetypes_(SWADE).pdf`
+(Render+Crop der Attribut-/Fertigkeits-/Hindrance-Blöcke; Hindrance-Text zusätzlich via `pdftotext -layout`).
 
-**Befund (Wurzel):** `build_sfc_phase_g.py` lässt bei mehreren Chars die **Spieler-Handicaps des
-Bogens weg** — teils weil rassische Auto-Handicaps fälschlich aufs 4-HP-Budget angerechnet wurden
-(Roboter/AB), teils schlicht falsch transkribiert ("keine Handicaps"). Rassische Handicaps geben
-0 HP UND zählen nicht gegen das Spieler-Budget → diese Chars hätten je 4 HP eigene Handicaps.
+## Kern-Erkenntnis (korrigiert die 1.-Durchlauf-Annahme!)
 
-## A) BEHOBEN (2026-06-16) — Spieler-Handicaps in `build_sfc_phase_g.py` ergänzt
+Die im 1. Durchlauf als **„MISSING im DE-Setting"** abgetanen Handicaps existieren **alle** — nur
+unter anderem deutschen Namen. Dadurch erreichen **alle 5 Problem-Chars die vollen 4 HP** mit
+existierenden Keys:
 
-Build neu gelaufen (`build_sfc_phase_g.py` → `fill_budget_gaps.py`). Attribute/Fertigkeiten/Mächte
-**byte-identisch** zum vorherigen Stand — nur Finanzierung (HP statt Aufstieg) + korrekte Handicaps.
-Rang bleibt überall Fortgeschritten.
+| Bogen (EN) | DE-Key (verifiziert per Beschreibung) | Punkte |
+|---|---|---|
+| Clueless (–1 Common Knowledge & Notice) | **Verpeilt** | 2 |
+| Overconfident | **Übermütig** | 2 |
+| Ex-Drone (–2 Spirit wenn kein Verbündeter in 5'') | **Ehemalige Drohne** | 2 |
+| Ailment Minor (–1 vs. Erschöpfung, Krit→schwer) | **Totkrank (leicht)** | 1 |
+| Anemic / Curious / Small | **Blutarm / Neugierig / Klein** | 1 / 2 / 1 |
 
-| Char | Volk | Fix (DE-Keys) | HP | Aufstiege |
-|---|---|---|---|---|
-| **Enforcer** | Roboter | `Misstrauisch_schwer`(2)+`Große Klappe`(1)+`Kann nicht schwimmen`(1) | 0→**4/4** | 8→**6** |
-| **Bounty Hunter** | Mensch | `Gierig_schwer`(2)+`Skrupellos_schwer`(2) | 0→**4/4** | 7→**5** |
-| **Star Knight** | Mensch | `Heldenhaft`(2)+`Schwur_schwer`(2) (Ehrenkodex via AB, 0 HP) | 0→**4/4** | 8→**6** |
-| **Road Warrior** | Mensch | `Heldenhaft`(2)+`Low Tech (leicht)`(1) — Ailment fehlt im DE-Setting | 0→**3/3** | 7→**6** (+`Raketen-Ass`) |
+Außerdem existieren die im 1. Durchlauf als MISSING geführten Edges **Cyborg** und **Gut Ausgerüstet**
+(Geared Up). **Regel bestätigt:** „rassische Auto-Handicaps geben 0 HP und verbrauchen das 4-HP-Budget
+NICHT" — die ANCESTRY-Blöcke der Bögen (Aquatic, Insektoide, Low-G/Flight) sind rassisch.
 
-Roboter-Auto-HC (Pazifist_schwer+Programmiert) sind **rassisch** (0 HP, kein Budget-Verbrauch) →
-koexistieren mit den 4 Spieler-HP. Beide Major-HC bei Star Knight wurden akzeptiert (Limit ok).
+## BEHOBEN (2026-06-16, 2. Durchlauf) — alle 5 auf 4 HP, render-verifiziert
 
-## B) Durch fehlende DE-Keys begrenzt (legitim unter 4 HP)
+Build neu gelaufen (`build_sfc_phase_g.py` → `fill_budget_gaps.py`). Attribute jetzt **bogentreu**
+(Render+Crop), HP voll genutzt, keine vermeidbaren Doppelkosten mehr.
 
-| Char | Volk | Bogen | Max erreichbar | Anmerkung |
-|---|---|---|---|---|
-| **Technomancer** | Aquatisch | Clueless(Major)+Jealous+Mild Mannered | 2 | `Clueless` fehlt im DE-Setting → nur 2 HP; aktuell 2/2 ~ok (Abhängigkeit sollte rassisch sein) |
-| **Cyborg** | Bogen: Mensch+Cyborg-Edge | Clueless+Overconfident | ~2 | `Clueless` fehlt; **Identität falsch** (gebaut: Arrogant+Skrupellos statt Übermütig) |
+| Char | Volk | Spieler-HC (4 HP) | Korrektur ggü. altem Build |
+|---|---|---|---|
+| **Road Warrior** | Mensch | Heldenhaft(2)+Totkrank leicht(1)+Low Tech(1) | Ailment ergänzt (war 3 HP); Vig d8→**d6** (Über-Advance entfernt) |
+| **Technomancer** | Aquatische Spezies | Verpeilt(2)+Eifersüchtig(1)+Sanftmütig(1) | Verpeilt ergänzt (war 2 HP); Repair-Advance d10→**d8** |
+| **Commando** | Insektoide | Aufopferungsvoll schwer(2)+Ehemalige Drohne(2) | Ehemalige Drohne ergänzt (war 2 HP); Verstand d6→**d4**; Skill-Overshoots (Wahrn/Pilot/Überl/Rep) korrigiert |
+| **Cyborg** | Mensch* | Verpeilt(2)+Übermütig(2) | War Arrogant+Skrupellos (falsch, 2 HP) → Verpeilt+Übermütig; Volk Gen-Soldaten→Mensch; Agi d10→**d8**; Skills komplett neu (Pilot/Repair waren Fremd-Bogen) |
+| **Hardlight Conjurer** | Mensch | Neugierig(2)+Blutarm(1)+Klein(1) | War Insektoide+Außenseiter (falsch, 1 HP) → Mensch+Blutarm/Neugierig/Klein; Agi d8→**d6**, Spi d6→**d8**, Vig d8→**d6** |
 
-## C) Legitim / korrekt
+Alle: **HP 4/4, Rest 0**. Rang Fortgeschritten (Technomancer fällt auf **Anfänger** — bewusste „beste
+Ökonomie", HP statt Aufstiege, User-Regel „Rang fällt ok").
 
-| Char | Begründung |
-|---|---|
-| **Envoy** | Bogen hat nur 3 Spieler-HC (Suspicious+Tongue-Tied+Zero-G) → 3/3 korrekt |
-| **Commando** | Ex-Drone fehlt im DE-Setting → Selfless(Major)=2 ist Maximum |
-| **Scrapper** | Curious+Stubborn+Quirk; gebaut 3 HP (Wuchtig statt Tick — Identitäts-Quirk, HP korrekt) |
-| **Morpher** | 4/4, Spieler-HC vollständig |
+\* **Cyborg-Volk:** Der Bogen zeigt eine Ancestry **Flight (Pace 12) + Low-G Worlder (–1 Str) +
+Reduced Pace** — dafür gibt es **kein** passendes DE-Volk (keines hat „Fliegen"). Als **Mensch**
+gebaut (sauberer als das alte Gen-Soldaten mit fälschlichem rassischem Skrupellos+Kampfreflexe);
+Flug/Low-G sind nicht modellierbar → dokumentiert.
 
-## D) Offen, NUR dokumentiert (User-Entscheidung 2026-06-16: „so lassen")
+## Doppelkosten
 
-Beide Chars sind **deutsche-Kompendium-only**; ihre Bögen liegen hier nur als **spaltenverschmolzener
-englischer Text-Export** + **un-OCR'tes Scan-PDF** (304 S.) vor → kein sauberer Render+Crop möglich,
-daher **kein** Umbau (Restunsicherheit zu hoch). Korrigierte Lesart vs. Build:
+- **Vermeidbar & behoben:** Hardlight `Naturwissenschaften d10` war doppelt, weil der alte Build
+  Verstand erst per **Aufstieg** (nach den Skills) auf d10 zog. Jetzt Verstand d10 in der Chargen
+  **vor** dem Skill → einfache Kosten.
+- **Inhärent (nicht behebbar):** Commando `Schießen d8`(>Agi d6) & `Wahrnehmung d6`(>Sma d4),
+  RoadWarrior `Überleben d8`(>Sma d6) — Skill übersteigt das regierende Attribut by Bogen-Design;
+  billiger nur durch Attribut-Abweichung vom Bogen.
 
-- **Cyborg**: Bogen zeigt Ahnen-Merkmale (Low G Worlder −1 Str, Reduced Pace) → eher
-  **Niedergravitationsweltler**-Spezies mit *Cyborg-Edge* (gebaut: Gen-Soldaten + Arrogant/Skrupellos).
-  `Clueless` fehlt im DE-Setting → Aufwärtspotenzial ohnehin gering. Aktuell HP 0/2.
-- **Hardlight Conjurer**: Bogen liest sich als **Mensch** mit Anemic + Curious + **Small (Handicap,
-  keine Spezies)** = 4 HP (gebaut: Insektoide + Außenseiter/Trennungsangst = 1 HP). Fixbar, aber
-  Rasse + abgeleitete Werte (Insektoide-Panzerung/Klauen) müssten neu aufgebaut werden. Aktuell HP 0/1.
+## Offene Daten-/Modellierungs-Notiz (vorbestehend, NICHT HP-bezogen)
 
-- **Fehlende DE-Keys** (als MISSING dokumentiert, nicht ersetzt): `Clueless`, `Ailment`, `Ex-Drone`.
+- **Cyborg `Wahrnehmung` zeigt d8 statt Bogen-d6.** Ursache: das Implantat **`Cyberware: Verbesserte
+  Sicht`** trägt `effekte.wahrnehmung_bonus: 2` → hebt den Wahrnehmungs-**Würfel** dauerhaft um +2
+  (Basis d4 → d8). Der gedruckte Bogen-Notice d6 ist der Basiswert; das Implantat-„+2 auf Notice" ist
+  **situativ** (Beleuchtung) und sollte den Würfel nicht permanent erhöhen. Das ist eine
+  Setting-Daten-Modellierung (app-weit, betrifft jeden Char mit dem Implantat) und war schon im
+  committeten Cyborg so — **nicht** im Rahmen der HP-Aufgabe geändert. Kandidat für späteren Daten-Fix:
+  `wahrnehmung_bonus` als situativen Roll-Bonus statt Würfel-Boost behandeln.
+- **Hardlight `Mächte 3/7`:** Bogen hat 7 Powers (16 PP), AH-Budget 15 PP → 4 Powers passen nicht ins
+  Macht-Budget (wie bisher dokumentiert, kein HP-Thema).
+
+## Verifikations-Methode
+
+Render: `pdftoppm -r 150` der Seiten 10/14/18 → `convert -crop` je Archetyp-Quadrant → Read-Tool.
+`fill_budget_gaps.parse_sheet` auf dem TXT-Export reproduziert dieselben Würfelwerte (hier zuverlässig,
+da die Archetypen vertikal gestapelt sind) und wird nur zum **Anheben** (nie Senken) genutzt.

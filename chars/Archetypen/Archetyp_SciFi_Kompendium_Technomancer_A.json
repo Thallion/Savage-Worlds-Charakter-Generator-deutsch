@@ -341,7 +341,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 10,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -470,6 +470,11 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
+            "Verpeilt": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
             "Abhängigkeit (Wasser)": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
@@ -545,6 +550,7 @@
     "selected_handicaps": [
         "Eifersüchtig",
         "Sanftmütig",
+        "Verpeilt",
         "Abhängigkeit (Wasser)"
     ],
     "selected_talente": [
@@ -601,9 +607,9 @@
         "Batterie, Universal-": 1,
         "Energie-Kampfaxt": 1
     },
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "verbleibende_aufstiege": 0.5,
-    "aufstiege_gesamt": 6,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -616,7 +622,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 2,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -755,13 +761,6 @@
                 "kosten": 0.5
             },
             {
-                "typ": "fertigkeit",
-                "name": "Reparieren",
-                "wert": 10,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
-            },
-            {
                 "typ": "talent",
                 "name": "Brecher",
                 "zahlungsquelle": "Aufstiege",
@@ -784,15 +783,15 @@
                 "typ": "fertigkeit",
                 "name": "Athletik",
                 "wert": 6,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",
                 "name": "Naturwissenschaften",
                 "wert": 4,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 0.5
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 1
             },
             {
                 "typ": "fertigkeit",

@@ -15,7 +15,7 @@
       "vermoegen": 500
     },
     {
-      "aktion": "handicap(Arrogant)",
+      "aktion": "handicap(Verpeilt)",
       "ok": true,
       "kosten": -2,
       "kostenart": "Handicap-Punkte",
@@ -28,10 +28,49 @@
       "warnung": null
     },
     {
-      "aktion": "volk(Gen-Soldaten)",
+      "aktion": "handicap(Übermütig)",
+      "ok": true,
+      "kosten": -2,
+      "kostenart": "Handicap-Punkte",
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk(Mensch)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "volk_freies_talent(Mensch,Cyborg)",
+      "ok": true,
+      "kosten": 0,
+      "kostenart": null,
+      "punkte": {
+        "attribut": 5,
+        "fertigkeit": 12,
+        "handicap": 4
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "talent(Gut Ausgerüstet)",
+      "ok": true,
+      "kosten": 2,
+      "kostenart": "Handicap-Punkte",
       "punkte": {
         "attribut": 5,
         "fertigkeit": 12,
@@ -67,7 +106,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Geschicklichkeit)",
+      "aktion": "attribut(Verstand)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -80,7 +119,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Verstand)",
+      "aktion": "attribut(Willenskraft)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -93,7 +132,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Willenskraft)",
+      "aktion": "attribut(Konstitution)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Attributpunkte",
@@ -106,33 +145,7 @@
       "warnung": null
     },
     {
-      "aktion": "attribut(Konstitution) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "attribut(Stärke) ÜBERSPRUNGEN (keine Attr-Punkte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 12,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -145,7 +158,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -158,7 +171,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Kämpfen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -171,7 +184,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Pilot)",
+      "aktion": "fertigkeit(Heimlichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -184,7 +197,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Heimlichkeit)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -197,7 +210,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Athletik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -210,9 +223,22 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Reparieren)",
+      "aktion": "fertigkeit(Athletik)",
       "ok": true,
-      "kosten": 2,
+      "kosten": 1,
+      "kostenart": "Fertigkeitspunkte",
+      "punkte": {
+        "attribut": 0,
+        "fertigkeit": 5,
+        "handicap": 2
+      },
+      "vermoegen": 500,
+      "warnung": null
+    },
+    {
+      "aktion": "fertigkeit(Schießen)",
+      "ok": true,
+      "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
       "punkte": {
         "attribut": 0,
@@ -223,7 +249,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Athletik)",
+      "aktion": "fertigkeit(Schießen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -236,7 +262,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Elektronik)",
+      "aktion": "fertigkeit(Schießen)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -262,7 +288,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen)",
+      "aktion": "fertigkeit(Elektronik)",
       "ok": true,
       "kosten": 1,
       "kostenart": "Fertigkeitspunkte",
@@ -275,7 +301,7 @@
       "warnung": null
     },
     {
-      "aktion": "fertigkeit(Schießen) ÜBERSPRUNGEN (keine Fert-Punkte)",
+      "aktion": "fertigkeit(Wahrnehmung) ÜBERSPRUNGEN (keine Fert-Punkte)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -289,45 +315,6 @@
     },
     {
       "aktion": "fertigkeit_mit_aufstieg(Athletik)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Athletik)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": null
-    },
-    {
-      "aktion": "fertigkeit_mit_aufstieg(Schießen)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -367,7 +354,7 @@
     },
     {
       "aktion": "talent(Trickschuss)",
-      "ok": false,
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -376,7 +363,7 @@
         "handicap": 2
       },
       "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
+      "warnung": null
     },
     {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
@@ -541,55 +528,6 @@
   ],
   "anomalien": [
     {
-      "aktion": "NOTIZ: Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)",
-      "ok": true,
-      "warnung": "Bogen-HC Clueless (1HP) = MISSING (nicht im DE-Setting)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
-    },
-    {
-      "aktion": "NOTIZ: Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)",
-      "ok": true,
-      "warnung": "Bogen-HC Überheblich/Overconfident (2HP) → ersetzt durch Arrogant (2HP, schwer)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
-    },
-    {
-      "aktion": "NOTIZ: Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓",
-      "ok": true,
-      "warnung": "Auto-HC Gen-Soldaten: Skrupellos (2HP, auto) + Arrogant (2HP, Bogen) = 4HP ✓",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
-    },
-    {
-      "aktion": "NOTIZ: Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)",
-      "ok": true,
-      "warnung": "Auto-Talent Gen-Soldaten: Kampfreflexe (free, auto)",
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {},
-      "vermoegen": 500
-    },
-    {
-      "aktion": "talent(Trickschuss)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 2
-      },
-      "vermoegen": 500,
-      "warnung": "Aktion lieferte False/None"
-    },
-    {
       "aktion": "kaufen(Gyrojet-Gewehrx1) FORCE",
       "ok": true,
       "kosten": 500,
@@ -746,18 +684,18 @@
       "warnung": "Geld reichte nicht – auf 0 gesetzt und Cyberware: Zielsystem zum Preis 0 gekauft"
     },
     {
-      "aktion": "NOTIZ: Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt",
+      "aktion": "NOTIZ: Spieler-HC: Verpeilt(2)+Übermütig(2) = 4HP → Cyborg-Edge (frei via Mensch) + Gut Ausgerüstet(2HP). Clueless=Verpeilt, Overconfident=Übermütig im DE-Setting",
       "ok": true,
-      "warnung": "Bogen-Edge Cyborg = MISSING im CharGen (HC-Budget ausgeschöpft). Gen-Soldaten ist das Volk, das Cyborg-Konzept trägt",
+      "warnung": "Spieler-HC: Verpeilt(2)+Übermütig(2) = 4HP → Cyborg-Edge (frei via Mensch) + Gut Ausgerüstet(2HP). Clueless=Verpeilt, Overconfident=Übermütig im DE-Setting",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
       "vermoegen": 0
     },
     {
-      "aktion": "NOTIZ: Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)",
+      "aktion": "NOTIZ: Bogen-Ancestry Flight(Pace12)/Low-G Worlder(-1 Str)/Reduced Pace = kein DE-Volk vorhanden → als Mensch gebaut (Flug/Low-G nicht modellierbar)",
       "ok": true,
-      "warnung": "Bogen-Edge Geared Up = MISSING (HC-Budget, nicht CharGen)",
+      "warnung": "Bogen-Ancestry Flight(Pace12)/Low-G Worlder(-1 Str)/Reduced Pace = kein DE-Volk vorhanden → als Mensch gebaut (Flug/Low-G nicht modellierbar)",
       "kosten": 0,
       "kostenart": null,
       "punkte": {},
@@ -773,11 +711,11 @@
       "vermoegen": 0
     }
   ],
-  "anomalien_anzahl": 20,
+  "anomalien_anzahl": 15,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
-        "wert": 10,
+        "wert": 8,
         "modifier": 0
       },
       "Verstand": {
@@ -789,7 +727,7 @@
         "modifier": 0
       },
       "Konstitution": {
-        "wert": 4,
+        "wert": 6,
         "modifier": 0
       },
       "Willenskraft": {
@@ -817,18 +755,12 @@
         "ausgewaehlt": false
       },
       "Heimlichkeit": {
-        "wert": 4,
+        "wert": 8,
         "modifier": 0,
         "grundfertigkeit": true,
         "ausgewaehlt": true
       },
-      "Pilot": {
-        "wert": 10,
-        "modifier": 0,
-        "grundfertigkeit": false,
-        "ausgewaehlt": false
-      },
-      "Reparieren": {
+      "Kämpfen": {
         "wert": 8,
         "modifier": 0,
         "grundfertigkeit": false,
@@ -854,12 +786,14 @@
       }
     },
     "handicaps": [
-      "Arrogant",
-      "Skrupellos"
+      "Übermütig",
+      "Verpeilt"
     ],
     "talente": [
-      "Kampfreflexe",
-      "Schnell"
+      "Cyborg",
+      "Gut Ausgerüstet",
+      "Schnell",
+      "Trickschuss"
     ],
     "maechte": [],
     "ausruestung": {},
@@ -867,12 +801,12 @@
       "attribut": 0,
       "fertigkeit": 0,
       "handicap": 2,
-      "handicap_gesamt": 2,
-      "aufstiege": 0.5
+      "handicap_gesamt": 4,
+      "aufstiege": 0.0
     },
     "machtpunkte": 0,
     "vermoegen": 0,
-    "rang": "Anfänger",
-    "volk": "Gen-Soldaten"
+    "rang": "Fortgeschritten",
+    "volk": "Mensch"
   }
 }

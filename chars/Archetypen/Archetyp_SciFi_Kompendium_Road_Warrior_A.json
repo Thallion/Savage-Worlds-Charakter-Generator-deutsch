@@ -52,7 +52,7 @@
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 8,
+            "wert": 6,
             "modifier": 0
         },
         "Willenskraft": {
@@ -237,7 +237,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 4,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -469,6 +469,11 @@
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
+            },
+            "Totkrank (leicht)": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
             }
         },
         "talente": {
@@ -546,7 +551,8 @@
     },
     "selected_handicaps": [
         "Heldenhaft",
-        "Low Tech (leicht)"
+        "Low Tech (leicht)",
+        "Totkrank (leicht)"
     ],
     "selected_talente": [
         "Ass am Steuer",
@@ -608,7 +614,7 @@
     },
     "rang": "Fortgeschritten",
     "verbleibende_aufstiege": 0.0,
-    "aufstiege_gesamt": 6,
+    "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
@@ -621,7 +627,7 @@
     "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 3,
+    "gesamt_handicap_punkte": 4,
     "verbleibende_handicap_punkte": 0,
     "pathfinder_kostenlose_talente_gewaehlt": 0,
     "steigerungs_journal": {
@@ -725,13 +731,6 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Heimlichkeit",
-                "wert": 6,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
                 "name": "Überleben",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -745,11 +744,11 @@
                 "kosten": 1
             },
             {
-                "typ": "attribut",
-                "name": "Konstitution",
+                "typ": "fertigkeit",
+                "name": "Überleben",
                 "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
             },
             {
                 "typ": "talent",
@@ -770,32 +769,25 @@
                 "kosten": 1
             },
             {
+                "typ": "attribut",
+                "name": "Stärke",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
+            },
+            {
                 "typ": "fertigkeit",
                 "name": "Kämpfen",
                 "wert": 4,
-                "zahlungsquelle": "Fertigkeitspunkte",
-                "kosten": 1
+                "zahlungsquelle": "Aufstiege",
+                "kosten": 0.5
             },
             {
                 "typ": "fertigkeit",
                 "name": "Einschüchtern",
                 "wert": 4,
-                "zahlungsquelle": "Handicap-Punkte",
-                "kosten": 1
-            },
-            {
-                "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
                 "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "fertigkeit",
-                "name": "Überleben",
-                "wert": 8,
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1.0
+                "kosten": 0.5
             }
         ]
     }
