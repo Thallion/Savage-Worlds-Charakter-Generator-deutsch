@@ -1,0 +1,22 @@
+Auto nach Klassentalent: {'talente_neu': ['Barbar', 'Berserker', 'Behände', 'Kampfrausch'], 'handicaps_neu': ['Rüstungsbeschränkung_mittelschwer'], 'maechte_neu': []}
+handicap(Blutrünstig): ok=True kosten=-2
+handicap(Lebensaufgabe): ok=True kosten=-1
+handicap(Arm): ok=True kosten=-1
+Volkswahlen: {'freies_talent': True, 'freies_attribut': True, 'freie_fertigkeit': False, 'magieaffin': False, 'attribut_malus': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'zusatzelemente': {'freie_talente': True, 'freie_attribute': False, 'freie_fertigkeiten': False, 'attribut_optionen': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft'], 'halbelf_entweder_oder': False, 'menschen_vielseitig': False, 'beide_optionen': False, 'slots': {'freies_talent': [{'index': 0, 'value': None}], 'freies_attribut': [{'index': 0, 'value': None, 'options': ['Geschicklichkeit', 'Konstitution', 'Stärke', 'Verstand', 'Willenskraft']}]}, 'freies_attribut': 'Geschicklichkeit'}}
+freies_talent(Rohling): ok=True
+freies_attribut(Stärke): ok=True
+Nach Attributen: {'attribut': 0, 'fertigkeit': 12, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 0}
+  Attr-Ist: {'Geschicklichkeit': 8, 'Konstitution': 8, 'Stärke': 10, 'Verstand': 4, 'Willenskraft': 6}
+Nach Fertigkeiten: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 150, 'machtpunkte': 0}
+  Fert-Ist: {'Allgemeinwissen': (4, 0), 'Athletik': (6, 0), 'Einschüchtern': (6, 0), 'Heimlichkeit': (4, 0), 'Kämpfen': (8, 0), 'Reiten': (4, 0), 'Schießen': (6, 0), 'Überleben': (4, 0), 'Überreden': (4, 0), 'Wahrnehmung': (6, 0)}
+kaufen(Bastardschwert): ok=True verm=115
+kaufen(Handaxt): ok=True verm=109
+kaufen(Kurzbogen): ok=True verm=79
+kaufen(Pfeile (20)): ok=True verm=78
+kaufen(Ledertunika): ok=True verm=58
+kaufen(Lederbeinlinge): ok=True verm=38
+kaufen(Abenteurerausrüstung): ok=True verm=0
+Restpunkte: {'attribut': 0, 'fertigkeit': 0, 'handicap': 2, 'handicap_gesamt': 4, 'aufstiege': 0, 'vermoegen': 0, 'machtpunkte': 0}
+DIFF: []
+finalisiert: cg=True rang=Anfänger
+FERTIG anomalien=2

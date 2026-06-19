@@ -1,10 +1,9 @@
 # Archetyp-Erstellung: Occultist (Horror Kompendium)
-# Stand: 2026-06-14T09:40:10
-# 2 Anomalie(n) von 29 Schritten
+# Stand: 2026-06-19T19:07:57
+# 1 Anomalie(n) von 35 Schritten
 
 ## ANOMALIEN
-  [!] macht(Aufheben): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
-  [!] macht(Schutzkreis): ok=False warnung=nicht angewendet (Sentinel: needs_rang_confirmation) kosten=0 None
+  [!] SOLL/IST-DIFF: ok=False warnung=maechte: "Aufheben" ZUVIEL kosten=0 None
 
 ## ALLE SCHRITTE
   - neuer_charakter(Occultist, Horror Kompendium): ok=True kosten=None  | Pkt=None Geld=500
@@ -33,6 +32,12 @@
   - fertigkeit(Zaubern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - fertigkeit(Zaubern) ÜBERSPRUNGEN (keine Fert-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
   - macht(Arkanes entdecken/verbergen): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Aufheben): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Schutz): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
-  - macht(Schutzkreis): ok=False kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Verriegeln/Entriegeln): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - macht(Zuflucht): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=500
+  - kaufen(Kleidung, Alltagx1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=480
+  - kaufen(Taschenlampe (10" Strahl)x1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460
+  - attribut_mit_aufstieg(Konstitution): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460
+  - fertigkeit_mit_aufstieg(Zaubern): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460
+  - fertigkeit_mit_aufstieg(Zaubern): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460
+  - talent_mit_aufstieg(Stillzauberer): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460
+  - macht(Aufheben): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 0} Geld=460

@@ -2272,7 +2272,7 @@
       "rang": "A",
       "voraussetzungen": [],
       "beschreibung": "Arkane Fertigkeit: Fokus (Willenskraft). Der Charakter wurde von einer dunklen Macht berührt oder verflucht.",
-      "neue_maechte": 3,
+      "neue_maechte": 2,
       "machtpunkte": 15,
       "auto_handicaps": [
         "Verderbnis"
@@ -2328,7 +2328,7 @@
         "VER W6"
       ],
       "beschreibung": "Arkane Fertigkeit: Okkultismus (Verstand). Gelehrter der verborgenen Künste.",
-      "neue_maechte": 3,
+      "neue_maechte": 5,
       "machtpunkte": 10,
       "auto_handicaps": [
         "Materialkomponenten"
@@ -2373,8 +2373,8 @@
         "WIL W6"
       ],
       "beschreibung": "Arkane Fertigkeit: Glaube (Willenskraft). Praktiziert Voodoo-Rituale und kommuniziert mit den Loa.",
-      "neue_maechte": 3,
-      "machtpunkte": 10,
+      "neue_maechte": 2,
+      "machtpunkte": 15,
       "auto_handicaps": [
         "Materialkomponenten"
       ],

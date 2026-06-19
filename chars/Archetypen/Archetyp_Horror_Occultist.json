@@ -522,19 +522,13 @@
             "AH (Okkultist)": {
                 "ausgewaehlt": true,
                 "rang": "A",
-                "neue_maechte": 3,
+                "neue_maechte": 5,
                 "machtpunkte": 10
             },
             "Stillzauberer": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "neue_maechte": 0,
-                "machtpunkte": 0
-            },
-            "Neue Mächte": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 2,
                 "machtpunkte": 0
             }
         },
@@ -546,12 +540,19 @@
                 "reichweite": "VER S",
                 "dauer": "—"
             },
-            "Schutz": {
+            "Verriegeln/Entriegeln": {
                 "ausgewaehlt": true,
                 "rang": "A",
                 "machtpunkte": 1,
-                "reichweite": "VER 5",
-                "dauer": "—"
+                "reichweite": "Verstand",
+                "dauer": "Permanent (Verriegeln); Sofort (Entriegeln)"
+            },
+            "Zuflucht": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "machtpunkte": 2,
+                "reichweite": "Berührung",
+                "dauer": "5"
             },
             "Aufheben": {
                 "ausgewaehlt": true,
@@ -581,12 +582,12 @@
     ],
     "selected_talente": [
         "AH (Okkultist)",
-        "Stillzauberer",
-        "Neue Mächte"
+        "Stillzauberer"
     ],
     "selected_maechte": [
         "Arkanes entdecken/verbergen",
-        "Schutz",
+        "Verriegeln/Entriegeln",
+        "Zuflucht",
         "Aufheben"
     ],
     "selected_superkraefte": [],
@@ -614,12 +615,12 @@
         "Kleidung, Alltag": 1,
         "Taschenlampe (10\" Strahl)": 1
     },
-    "rang": "Fortgeschritten",
-    "verbleibende_aufstiege": 0.0,
+    "rang": "Anfänger",
+    "verbleibende_aufstiege": 1.0,
     "aufstiege_gesamt": 4,
     "verbleibende_attributsteigerungen": 0,
     "verbleibende_fertigkeitssteigerungen": 0,
-    "verfuegbare_maechte": 2,
+    "verfuegbare_maechte": 1,
     "anzahl_maechte": 5,
     "machtpunkte": 10,
     "machtstufe": "III",
@@ -784,12 +785,6 @@
             {
                 "typ": "talent",
                 "name": "Stillzauberer",
-                "zahlungsquelle": "Aufstiege",
-                "kosten": 1
-            },
-            {
-                "typ": "talent",
-                "name": "Neue Mächte",
                 "zahlungsquelle": "Aufstiege",
                 "kosten": 1
             }

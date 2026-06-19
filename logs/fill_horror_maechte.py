@@ -17,7 +17,6 @@ from functions.character_advancement import increase_aufstiege
 
 # Aus den Build-Diffs (logs/horror_all_trace.txt): Bogen-Mächte, die im JSON FEHLEN.
 FEHLENDE_MAECHTE = {
-    'Exorcist':                 ['Kriegersegen'],
     'Witch':                    ['Fluchwort', 'Geisterruf'],
     'Magician':                 ['Bannung'],
     'Mummy':                    ['Eigenschaft erhöhen/senken', 'Heilung', 'Schutz'],

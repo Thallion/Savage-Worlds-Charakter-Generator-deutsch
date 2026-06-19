@@ -684,12 +684,15 @@ exorcist = {
         'Okkultismus': 6, 'Überreden': 6, 'Recherche': 6, 'Heimlichkeit': 6,
     },
     'talente_novice': ['Mut', 'Elan'],
-    'powers': ['Heilung', 'Schutz', 'Linderung', 'Schutzkreis', 'Kriegersegen'],
+    # Bogen (Horror Companion): Healing, protection, relief, sanctuary, smite.
+    # sanctuary = Zuflucht (rang A, Dauer 5, schützt einen Empfänger) — NICHT Schutzkreis/
+    # Boden weihen (das sind Fortgeschritten-Flächenweihen = consecrate/sanctify).
+    'powers': ['Heilung', 'Schutz', 'Linderung', 'Zuflucht', 'Waffe verbessern'],
     'gear': [('Silberdolch', 1), ('Weihwasser (Flasche)', 1)],
 
     'advances': [
-        ('talent', None),  # Aura of Courage - MISSING
-        ('talent', None),  # Mercy - MISSING
+        ('talent', None),  # Aura of Courage - MISSING im Setting
+        ('talent', None),  # Mercy - MISSING im Setting
         ('talent', 'Mut'),  # already at novice
         ('attribute', 'Verstand', 8),
     ],
@@ -833,16 +836,20 @@ occultist = {
         'Okkultismus': 8, 'Überreden': 8, 'Recherche': 6, 'Zaubern': 8, 'Heimlichkeit': 4,
     },
     'talente_novice': [],
-    'powers': ['Arkanes entdecken/verbergen', 'Aufheben', 'Schutz', 'Schutzkreis'],
+    # Bogen (Horror Companion): Detect/conceal arcana, dispel, lock/unlock, sanctuary.
+    # = Arkanes entdecken/verbergen, Aufheben, Verriegeln/Entriegeln, Zuflucht.
+    # Aufheben (dispel) ist im Setting rang Fortgeschritten → kein CharGen-Slot,
+    # wird als Seasoned-Macht in den freien AB-Slot eingetragen (siehe advances).
+    'powers': ['Arkanes entdecken/verbergen', 'Verriegeln/Entriegeln', 'Zuflucht'],
     'gear': [('Kleidung, Alltag', 1), ('Taschenlampe (10" Strahl)', 1)],
 
     'advances': [
         ('attribute', 'Stärke', 6),
         ('skill', 'Überreden', 8),
         ('skill', 'Zaubern', 8),
-        ('talent', 'Stillzauberer'),
-        ('talent', 'Neue Mächte'),
-        ('power', 'Aufheben'),
+        ('talent', 'Stillzauberer'),   # Silent Caster
+        ('talent', None),              # Universal Ward - MISSING im Setting
+        ('power', 'Aufheben'),         # dispel — Fortgeschritten, freier AB-Slot
     ],
 }
 
@@ -962,7 +969,8 @@ mambo = {
         'Okkultismus': 6, 'Darbietung': 4, 'Überreden': 8, 'Heimlichkeit': 6,
     },
     'talente_novice': [],
-    'powers': [],
+    # AH (Voodooist) gewährt neue_maechte: 2 + 15 MP → die beiden Voodoo-Loa-Mächte
+    'powers': ['Aspekt der Rada Loa', 'Zorn der Petro Loa'],
     'gear': [('Schlagstock', 1), ('Silberdolch', 1), ('Kerze', 1),
                ('Weihwasser (Flasche)', 1)],
 

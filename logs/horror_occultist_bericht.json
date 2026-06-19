@@ -340,20 +340,7 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Aufheben)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
-    },
-    {
-      "aktion": "macht(Schutz)",
+      "aktion": "macht(Verriegeln/Entriegeln)",
       "ok": true,
       "kosten": 0,
       "kostenart": null,
@@ -366,8 +353,8 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Schutzkreis)",
-      "ok": false,
+      "aktion": "macht(Zuflucht)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -376,7 +363,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+      "warnung": null
     },
     {
       "aktion": "kaufen(Kleidung, Alltagx1)",
@@ -457,19 +444,6 @@
       "warnung": null
     },
     {
-      "aktion": "talent_mit_aufstieg(Neue Mächte)",
-      "ok": true,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 460,
-      "warnung": null
-    },
-    {
       "aktion": "macht(Aufheben)",
       "ok": true,
       "kosten": 0,
@@ -489,33 +463,22 @@
   ],
   "anomalien": [
     {
-      "aktion": "macht(Aufheben)",
+      "aktion": "SOLL/IST-DIFF",
       "ok": false,
+      "warnung": "maechte: \"Aufheben\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
         "attribut": 0,
         "fertigkeit": 0,
-        "handicap": 0
+        "handicap": 0,
+        "handicap_gesamt": 2,
+        "aufstiege": 1.0
       },
-      "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
-    },
-    {
-      "aktion": "macht(Schutzkreis)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+      "vermoegen": 460
     }
   ],
-  "anomalien_anzahl": 2,
+  "anomalien_anzahl": 1,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -600,12 +563,12 @@
     ],
     "talente": [
       "AH (Okkultist)",
-      "Stillzauberer",
-      "Neue Mächte"
+      "Stillzauberer"
     ],
     "maechte": [
       "Arkanes entdecken/verbergen",
-      "Schutz",
+      "Verriegeln/Entriegeln",
+      "Zuflucht",
       "Aufheben"
     ],
     "ausruestung": {},
@@ -614,11 +577,11 @@
       "fertigkeit": 0,
       "handicap": 0,
       "handicap_gesamt": 2,
-      "aufstiege": 0.0
+      "aufstiege": 1.0
     },
     "machtpunkte": 10,
     "vermoegen": 460,
-    "rang": "Fortgeschritten",
+    "rang": "Anfänger",
     "volk": "Mensch"
   }
 }

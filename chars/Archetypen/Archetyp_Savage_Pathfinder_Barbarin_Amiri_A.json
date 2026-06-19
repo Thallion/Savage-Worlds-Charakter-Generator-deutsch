@@ -1,6 +1,6 @@
 {
     "profil_daten": {
-        "Name": "",
+        "Name": "Barbarin_Amiri",
         "Alter": "",
         "Geschlecht": "",
         "Konzept": "",
@@ -37,7 +37,7 @@
     "attribute": {
         "Geschicklichkeit": {
             "attribut_name": "Geschicklichkeit",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Verstand": {
@@ -47,12 +47,12 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 8,
+            "wert": 10,
             "modifier": 0
         },
         "Konstitution": {
             "attribut_name": "Konstitution",
-            "wert": 6,
+            "wert": 8,
             "modifier": 0
         },
         "Willenskraft": {
@@ -120,7 +120,7 @@
             "ausgewaehlt": true,
             "aktiv": true,
             "wuerfel": {
-                "value": 4,
+                "value": 6,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -133,7 +133,7 @@
             "ausgewaehlt": false,
             "aktiv": true,
             "wuerfel": {
-                "value": 6,
+                "value": 8,
                 "modifier": 0,
                 "typ": "fertigkeit"
             },
@@ -173,7 +173,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Verstand",
@@ -186,7 +186,7 @@
             "aktiv": true,
             "wuerfel": {
                 "value": 4,
-                "modifier": -2,
+                "modifier": 0,
                 "typ": "fertigkeit"
             },
             "attribut": "Geschicklichkeit",
@@ -447,6 +447,21 @@
             }
         },
         "handicaps": {
+            "Arm": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
+            "Blutrünstig": {
+                "ausgewaehlt": true,
+                "stufe": "schwer",
+                "punkte": 2
+            },
+            "Lebensaufgabe": {
+                "ausgewaehlt": true,
+                "stufe": "leicht",
+                "punkte": 1
+            },
             "Rüstungsbeschränkung_mittelschwer": {
                 "ausgewaehlt": true,
                 "stufe": "schwer",
@@ -454,12 +469,6 @@
             }
         },
         "talente": {
-            "Rohling": {
-                "ausgewaehlt": true,
-                "rang": "A",
-                "neue_maechte": 0,
-                "machtpunkte": 0
-            },
             "Barbar": {
                 "ausgewaehlt": true,
                 "rang": "A",
@@ -483,22 +492,67 @@
                 "rang": "A",
                 "neue_maechte": 0,
                 "machtpunkte": 0
+            },
+            "Rohling": {
+                "ausgewaehlt": true,
+                "rang": "A",
+                "neue_maechte": 0,
+                "machtpunkte": 0
             }
         },
         "maechte": {},
         "superkraefte": {},
         "cyberware": {},
-        "ausruestung": {}
+        "ausruestung": {
+            "Bastardschwert": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Handaxt": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Kurzbogen": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Pfeile (20)": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Ledertunika": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Lederbeinlinge": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            },
+            "Abenteurerausrüstung": {
+                "ausgewaehlt": true,
+                "anzahl": 1,
+                "zustand": "neu"
+            }
+        }
     },
     "selected_handicaps": [
+        "Arm",
+        "Blutrünstig",
+        "Lebensaufgabe",
         "Rüstungsbeschränkung_mittelschwer"
     ],
     "selected_talente": [
-        "Rohling",
         "Barbar",
         "Berserker",
         "Behände",
-        "Kampfrausch"
+        "Kampfrausch",
+        "Rohling"
     ],
     "selected_maechte": [],
     "selected_superkraefte": [],
@@ -523,16 +577,39 @@
         "Goblin": false
     },
     "voelker_auswahlen": {},
-    "selected_allgemeine_ausruestung": [],
-    "selected_waffen": [],
-    "selected_ruestungen": [],
+    "selected_allgemeine_ausruestung": [
+        "Bastardschwert",
+        "Handaxt",
+        "Kurzbogen",
+        "Pfeile (20)",
+        "Ledertunika",
+        "Lederbeinlinge",
+        "Abenteurerausrüstung"
+    ],
+    "selected_waffen": [
+        "Bastardschwert",
+        "Handaxt",
+        "Kurzbogen"
+    ],
+    "selected_ruestungen": [
+        "Ledertunika",
+        "Lederbeinlinge"
+    ],
     "selected_schilde": [],
-    "ausruestung_mengen": {},
+    "ausruestung_mengen": {
+        "Bastardschwert": 1,
+        "Handaxt": 1,
+        "Kurzbogen": 1,
+        "Pfeile (20)": 1,
+        "Ledertunika": 1,
+        "Lederbeinlinge": 1,
+        "Abenteurerausrüstung": 1
+    },
     "rang": "Anfänger",
     "verbleibende_aufstiege": 0,
     "aufstiege_gesamt": 0,
     "verbleibende_attributsteigerungen": 0,
-    "verbleibende_fertigkeitssteigerungen": 5,
+    "verbleibende_fertigkeitssteigerungen": 0,
     "verfuegbare_maechte": 0,
     "anzahl_maechte": 0,
     "machtpunkte": 0,
@@ -540,11 +617,11 @@
     "superkraft_punkte_gesamt": 0,
     "superkraft_punkte_verbraucht": 0,
     "kraftobergrenze": 15,
-    "vermoegen": 300,
+    "vermoegen": 0,
     "erschoepfung": 0,
     "zusaetzliche_talente": 0,
-    "gesamt_handicap_punkte": 0,
-    "verbleibende_handicap_punkte": 0,
+    "gesamt_handicap_punkte": 4,
+    "verbleibende_handicap_punkte": 2,
     "pathfinder_kostenlose_talente_gewaehlt": 1,
     "steigerungs_journal": {
         "cost_entries": [
@@ -557,8 +634,8 @@
             },
             {
                 "typ": "attribut",
-                "name": "Stärke",
-                "wert": 6,
+                "name": "Geschicklichkeit",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
@@ -571,17 +648,24 @@
             },
             {
                 "typ": "attribut",
-                "name": "Willenskraft",
-                "wert": 6,
+                "name": "Konstitution",
+                "wert": 8,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
             },
             {
                 "typ": "attribut",
                 "name": "Stärke",
-                "wert": 8,
+                "wert": 10,
                 "zahlungsquelle": "Attributspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "attribut",
+                "name": "Willenskraft",
+                "wert": 6,
+                "zahlungsquelle": "Handicap-Punkte",
+                "kosten": 2
             },
             {
                 "typ": "fertigkeit",
@@ -592,6 +676,20 @@
             },
             {
                 "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Einschüchtern",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
                 "name": "Kämpfen",
                 "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
@@ -606,15 +704,15 @@
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 4,
+                "name": "Kämpfen",
+                "wert": 8,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
             {
                 "typ": "fertigkeit",
-                "name": "Einschüchtern",
-                "wert": 6,
+                "name": "Reiten",
+                "wert": 4,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
             },
@@ -631,6 +729,20 @@
                 "wert": 6,
                 "zahlungsquelle": "Fertigkeitspunkte",
                 "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Überleben",
+                "wert": 4,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 1
+            },
+            {
+                "typ": "fertigkeit",
+                "name": "Wahrnehmung",
+                "wert": 6,
+                "zahlungsquelle": "Fertigkeitspunkte",
+                "kosten": 2
             }
         ]
     }

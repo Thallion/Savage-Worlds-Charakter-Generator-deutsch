@@ -1,6 +1,6 @@
 # Archetypen-Status-Bericht
 
-**Stand:** 2026-06-16 · automatisch erzeugt von `logs/gen_archetypen_status.py`.
+**Stand:** 2026-06-19 · automatisch erzeugt von `logs/gen_archetypen_status.py`.
 
 Pro Archetyp: **Setting, Name, alle Punktepools (ausgegeben/Maximum), Aufstiege/Rang, fehlende Ausrüstung.**
 
@@ -134,7 +134,7 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Demon | 5/5 | 12/12 | 3/3 | — | 4.5/5 ⚠ | Fortgeschritten | — |
 | Demonologist (Monstrous) | 5/5 | 12/12 | 3/3 | 3/3 | 11/11 | Veteran | — |
 | Doctor | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Exorcist | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/4 ⚠ | Anfänger | — |
+| Exorcist | 5/5 | 12/12 | 4/4 | 5/5 | 3/4 ⚠ | Anfänger | — |
 | Explorer | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Gamer | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Ghost Hunter | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
@@ -143,11 +143,11 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 | Journalist | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Librarian | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
 | Magician | 5/5 | 12/12 | 4/4 | 3/3 | 4/4 | Fortgeschritten | — |
-| Mambo | 5/5 | 12/12 | 4/4 | 0/3 ⚠ | 4/4 | Fortgeschritten | — |
+| Mambo | 5/5 | 12/12 | 4/4 | 2/2 | 4/4 | Fortgeschritten | — |
 | Mummy | 5/5 | 12/12 | 4/4 | 5/5 | 5/5 | Fortgeschritten | — |
 | Nemesis | 5/5 | 12/12 | 3/3 | — | 11/11 | Veteran | — |
 | Nerd | 5/5 | 12/12 | 4/4 | — | 5/5 | Fortgeschritten | — |
-| Occultist | 5/5 | 12/12 | 2/2 | 3/5 ⚠ | 4/4 | Fortgeschritten | — |
+| Occultist | 5/5 | 12/12 | 2/2 | 4/5 ⚠ | 3/4 ⚠ | Anfänger | — |
 | Party Animal | 5/5 | 12/12 | 4/4 | — | 4/4.5 ⚠ | Fortgeschritten | — |
 | Patchwork Man | 5/5 | 12/12 | 4/4 | — | 4/4 | Fortgeschritten | — |
 | Phantom | 5/5 | 12/12 | 4/4 | — | 3/4 ⚠ | Anfänger | — |
@@ -221,8 +221,8 @@ Alle Pools (Attr/Fert/HP/Aufstiege/Rang/SKP/Mächte) aus dem ENDZUSTAND der aktu
 |---|---|---|---|---|---|---|---|
 | Alahazra | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 2/2 | Anfänger | — |
 | Alain | 5/5 | 12/12 | 4/4 | — | 3/3 | Anfänger | — |
-| Archetyp_Savage_Pathfinder_Barbarin_Amiri_A.json | 5/5 | 7/12 ⚠ | 0/0 | — | 0/0 | Anfänger | — |
 | Balazar | 5/5 | 12/12 | 4/4 | 3/3 | 0.5/1 ⚠ | Anfänger | — |
+| Barbarin_Amiri | 5/5 | 12/12 | 2/4 ℹ | — | 0/0 | Anfänger | — |
 | Brokar | 5/5 | 12/12 | 4/4 | 5/5 | 2/2 | Anfänger | — |
 | Damiel | 5/5 | 12/12 | 4/4 | 4/5 ⚠ | 3/3 | Anfänger | — |
 | Darla | 5/5 | 12/12 | 2/4 ℹ | 3/3 | 0/0 | Anfänger | — |

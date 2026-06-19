@@ -1,0 +1,42 @@
+# Archetyp-Erstellung: Barbarin_Amiri (Savage Pathfinder)
+# Stand: 2026-06-19T19:16:57
+# 2 Anomalie(n) von 33 Schritten
+
+## ANOMALIEN
+  [!] kaufen(Abenteurerausrüstungx1) FORCE: ok=True warnung=Geld reichte nicht – auf 0 gesetzt und Abenteurerausrüstung zum Preis 0 gekauft kosten=38 Vermögen
+  [!] NOTIZ: Bogen: "beschlagene Ledertunika und -beinlinge (+2)" — beschlagene/studded Variante nicht im Katalog, Standard-Leder verwendet: ok=True warnung=Bogen: "beschlagene Ledertunika und -beinlinge (+2)" — beschlagene/studded Variante nicht im Katalog, Standard-Leder verwendet kosten=0 None
+
+## ALLE SCHRITTE
+  - neuer_charakter(Barbarin_Amiri, Savage Pathfinder): ok=True kosten=None  | Pkt=None Geld=300
+  - pathfinder_klassentalent(Barbar): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 0} Geld=300
+  - handicap(Blutrünstig): ok=True kosten=-2 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 2} Geld=300
+  - handicap(Lebensaufgabe): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 3} Geld=300
+  - handicap(Arm): ok=True kosten=-1 Handicap-Punkte | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - volk(Mensch): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - volk_freies_talent(Mensch,Rohling): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - volk_freies_attribut(Mensch,Stärke): ok=True kosten=0  | Pkt={'attribut': 5, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 4, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Geschicklichkeit): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 3, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 2, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Konstitution): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 1, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Stärke): ok=True kosten=1 Attributpunkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut(Willenskraft) ÜBERSPRUNGEN (keine Attr-Punkte): ok=True kosten=0  | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 4} Geld=150
+  - attribut_mit_hc(Willenskraft): ok=True kosten=2 Handicap-Punkte | Pkt={'attribut': 0, 'fertigkeit': 12, 'handicap': 2} Geld=150
+  - fertigkeit(Athletik): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 11, 'handicap': 2} Geld=150
+  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 10, 'handicap': 2} Geld=150
+  - fertigkeit(Einschüchtern): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 9, 'handicap': 2} Geld=150
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 8, 'handicap': 2} Geld=150
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 7, 'handicap': 2} Geld=150
+  - fertigkeit(Kämpfen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 6, 'handicap': 2} Geld=150
+  - fertigkeit(Reiten): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 5, 'handicap': 2} Geld=150
+  - fertigkeit(Schießen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 4, 'handicap': 2} Geld=150
+  - fertigkeit(Schießen): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 3, 'handicap': 2} Geld=150
+  - fertigkeit(Überleben): ok=True kosten=1 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 2, 'handicap': 2} Geld=150
+  - fertigkeit(Wahrnehmung): ok=True kosten=2 Fertigkeitspunkte | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=150
+  - kaufen(Bastardschwertx1): ok=True kosten=35 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=115
+  - kaufen(Handaxtx1): ok=True kosten=6 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=109
+  - kaufen(Kurzbogenx1): ok=True kosten=30 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=79
+  - kaufen(Pfeile (20)x1): ok=True kosten=1 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=78
+  - kaufen(Ledertunikax1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=58
+  - kaufen(Lederbeinlingex1): ok=True kosten=20 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=38
+  - kaufen(Abenteurerausrüstungx1) FORCE: ok=True kosten=38 Vermögen | Pkt={'attribut': 0, 'fertigkeit': 0, 'handicap': 2} Geld=0

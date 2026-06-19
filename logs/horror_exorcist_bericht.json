@@ -496,8 +496,8 @@
       "warnung": null
     },
     {
-      "aktion": "macht(Schutzkreis)",
-      "ok": false,
+      "aktion": "macht(Zuflucht)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -506,11 +506,11 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+      "warnung": null
     },
     {
-      "aktion": "macht(Kriegersegen)",
-      "ok": false,
+      "aktion": "macht(Waffe verbessern)",
+      "ok": true,
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -519,7 +519,7 @@
         "handicap": 0
       },
       "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
+      "warnung": null
     },
     {
       "aktion": "kaufen(Silberdolchx1)",
@@ -632,35 +632,9 @@
       "warnung": "Aktion lieferte False/None"
     },
     {
-      "aktion": "macht(Schutzkreis)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
-    },
-    {
-      "aktion": "macht(Kriegersegen)",
-      "ok": false,
-      "kosten": 0,
-      "kostenart": null,
-      "punkte": {
-        "attribut": 0,
-        "fertigkeit": 0,
-        "handicap": 0
-      },
-      "vermoegen": 500,
-      "warnung": "nicht angewendet (Sentinel: needs_rang_confirmation)"
-    },
-    {
       "aktion": "SOLL/IST-DIFF",
       "ok": false,
-      "warnung": "handicaps: \"Schwur_schwer\" FEHLT; handicaps: \"Schwur_leicht\" ZUVIEL; maechte: \"Kriegersegen\" FEHLT",
+      "warnung": "handicaps: \"Schwur_schwer\" FEHLT; handicaps: \"Schwur_leicht\" ZUVIEL",
       "kosten": 0,
       "kostenart": null,
       "punkte": {
@@ -673,7 +647,7 @@
       "vermoegen": 390
     }
   ],
-  "anomalien_anzahl": 6,
+  "anomalien_anzahl": 4,
   "endzustand": {
     "attribute": {
       "Geschicklichkeit": {
@@ -780,7 +754,9 @@
     "maechte": [
       "Heilung",
       "Schutz",
-      "Linderung"
+      "Linderung",
+      "Zuflucht",
+      "Waffe verbessern"
     ],
     "ausruestung": {},
     "punkte": {

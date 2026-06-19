@@ -187,7 +187,8 @@
       "WebFetch(domain:dsa.ulisses-regelwiki.de)",
       "Bash(pdfinfo \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\")",
       "Bash(pdftoppm -png -r 150 \"Texte/Horror_Companion_Archetypes_\\(SWADE\\).pdf\" /tmp/horror_pdf_png/p)",
-      "Bash(SKIP_DIST_CLEANUP=1 timeout 280 python build_linux.py)"
+      "Bash(SKIP_DIST_CLEANUP=1 timeout 280 python build_linux.py)",
+      "Bash(SDL_VIDEODRIVER=dummy timeout 200 python3 logs/build_exorcist_check.py)"
     ],
     "deny": []
   }
