@@ -1,0 +1,70 @@
+{
+  "handicap_effects": {
+    "Alt": {
+      "schwer": {
+        "fertigkeitssteigerungen_bonus": 5,
+        "bewegungsweite_malus": 1,
+        "beschreibung": "Alter Charakter mit mehr Erfahrung aber körperlichen Einschränkungen"
+      }
+    },
+    "Arm": {
+      "leicht": {
+        "vermoegen_modifikator": 0.5,
+        "beschreibung": "Charakter mit halbiertem Startkapital"
+      }
+    },
+    "Jung": {
+      "leicht": {
+        "attributsteigerungen": 4,
+        "fertigkeitssteigerungen": 10,
+        "beschreibung": "Junger Charakter mit weniger Erfahrung"
+      },
+      "schwer": {
+        "attributsteigerungen": 3,
+        "fertigkeitssteigerungen": 10,
+        "beschreibung": "Sehr junger Charakter mit deutlich weniger Erfahrung"
+      }
+    },
+    "Langsam": {
+      "leicht": {
+        "bewegungsweite_malus": 1,
+        "beschreibung": "Reduzierte Bewegungsgeschwindigkeit"
+      },
+      "schwer": {
+        "bewegungsweite_malus": 2,
+        "beschreibung": "Stark reduzierte Bewegungsgeschwindigkeit"
+      }
+    },
+    "Fettleibig": {
+      "leicht": {
+        "bewegungsweite_malus": 1,
+        "beschreibung": "Übergewicht behindert die Bewegung"
+      }
+    }
+  },
+  "standard_werte": {
+    "max_handicap_punkte": 4,
+    "punkte_leicht": 1,
+    "punkte_schwer": 2,
+    "standard_attributsteigerungen": 5,
+    "standard_fertigkeitssteigerungen": 12
+  },
+  "nicht_duplizierbare_handicaps": [
+    "Alt",
+    "Arm",
+    "Jung",
+    "Blind",
+    "Einarmig",
+    "Einäugig",
+    "Stumm",
+    "Analphabet",
+    "Klein",
+    "Fettleibig",
+    "Langsam"
+  ],
+  "kosten_entfernung": {
+    "leicht": 1,
+    "schwer": 2,
+    "schwer_zu_leicht": 1
+  }
+}

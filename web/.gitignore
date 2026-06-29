@@ -1,0 +1,9 @@
+# Backend
+backend/data/
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+
+# Frontend
+frontend/node_modules/
+frontend/dist/

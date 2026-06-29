@@ -1,0 +1,58 @@
+{
+  "_kommentar": [
+    "Datengetriebene Effekte auf abgeleitete Werte (Parade, Bewegungsweite,",
+    "Größe, Robustheit, Bennys, Traglast). Wird von functions/effekt_registry.py",
+    "geladen und in functions/abgeleitete_werte.py sowie der Traglast-Berechnung",
+    "angewendet. Neue Talente/Handicaps mit solchen Effekten gehören HIERHER,",
+    "nicht in den Code.",
+    "Semantik: Talent-Boni sind additiv; innerhalb einer nicht_kumulativ_gruppe",
+    "zählt nur das Maximum (bildet sowohl elif- als auch oder-Logik ab).",
+    "Das Block-Paar ist BEWUSST ohne Gruppe (additiv, Ist-Verhalten).",
+    "bedingung ist eine im Code ausgewertete geschlossene Menge,",
+    "derzeit nur: keine_getragene_ruestung (Torso-Rüstungsschutz == 0).",
+    "Handicaps: exakter name- und stufe-Lookup; alle_stufen = stufenunabhängig."
+  ],
+  "talente": {
+    "Block": { "parade": 1 },
+    "Harter Block": { "parade": 1 },
+    "Meister aller Waffen": { "parade": 1 },
+    "Waffenmeister": { "parade": 1 },
+    "Herdritter": { "parade": 1 },
+    "Lieblingswaffe": { "parade": 1, "nicht_kumulativ_gruppe": "lieblingswaffe" },
+    "Absolute Lieblingswaffe": { "parade": 2, "nicht_kumulativ_gruppe": "lieblingswaffe" },
+    "Behände": { "bewegungsweite": 2, "nicht_kumulativ_gruppe": "flink" },
+    "Flink": { "bewegungsweite": 2, "nicht_kumulativ_gruppe": "flink" },
+    "Kräftig": { "groesse": 1, "traglast_kg": 20 },
+    "Raufbold": { "robustheit": 1 },
+    "Schläger": { "robustheit": 1 },
+    "Jünger Erthas": { "robustheit": 1 },
+    "AH (Zauberer) Abnorme Blutlinie": { "robustheit": 1 },
+    "AH (Zauberer) Dämonische Blutlinie": { "robustheit": 1 },
+    "AH (Zauberer) Drachenblutlinie": { "robustheit": 2 },
+    "Kämpferische Disziplin": { "robustheit": 1, "bedingung": "keine_getragene_ruestung" },
+    "Glück": { "bennys": 1 },
+    "Großes Glück": { "bennys": 1 }
+  },
+  "handicaps": {
+    "Langsam": {
+      "leicht": { "bewegungsweite": -1 },
+      "schwer": { "bewegungsweite": -2 }
+    },
+    "Fettleibig": {
+      "leicht": { "bewegungsweite": -1, "robustheit": 1 }
+    },
+    "Alt": {
+      "schwer": { "bewegungsweite": -1 }
+    },
+    "Klein": {
+      "leicht": { "groesse": -1 }
+    },
+    "Schlank": {
+      "alle_stufen": { "robustheit": -1 }
+    },
+    "Jung": {
+      "leicht": { "bennys": 1 },
+      "schwer": { "bennys": 2 }
+    }
+  }
+}

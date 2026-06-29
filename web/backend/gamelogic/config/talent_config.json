@@ -1,0 +1,60 @@
+{
+    "kosten": {
+        "handicap_punkte": 2,
+        "min_handicap_punkte": 1.5,
+        "aufstieg": 1,
+        "pathfinder_max_kostenlose": 1
+    },
+    
+    "nicht_duplizierbare_talente": [
+        "Glück",
+        "Großes Glück",
+        "Reich",
+        "Stinkreich",
+        "Kräftig",
+        "Riesenwuchs",
+        "Klein",
+        "Zäh",
+        "Sehr zäh",
+        "Arkaner Hintergrund: Gaben",
+        "Arkaner Hintergrund: Magie",
+        "Arkaner Hintergrund: Psionik",
+        "Arkaner Hintergrund: Wunder",
+        "Arkaner Widerstand",
+        "Verbesserte Arkane Resistenz",
+        "Meister aller Waffen",
+        "Waffenmeister",
+        "Block",
+        "Harter Block",
+        "Schwer zu töten",
+        "Schwerer zu töten",
+        "Schnell",
+        "Flink",
+        "Raufbold",
+        "Schläger",
+        "Attraktiv",
+        "Sehr attraktiv"
+    ],
+    
+    "pathfinder_kostenlose_kategorien": [
+        "Klasse",
+        "Hintergrund",
+        "Experte",
+        "Class",
+        "Background",
+        "Expert"
+    ],
+    
+    "rang_hierarchie": {
+        "A": 1,
+        "F": 2,
+        "V": 3,
+        "H": 4,
+        "L": 5
+    },
+    
+    "spezial_talente": {
+        "vermoegen_talente": ["Reich", "Stinkreich"],
+        "arkane_hintergruende": ["Arkaner Hintergrund: Gaben", "Arkaner Hintergrund: Magie", "Arkaner Hintergrund: Psionik", "Arkaner Hintergrund: Wunder"]
+    }
+}
