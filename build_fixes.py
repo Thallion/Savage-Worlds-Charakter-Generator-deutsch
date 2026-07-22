@@ -6,6 +6,10 @@ Zusätzlich: 16 KB Page Size Alignment für Android (Google Play Pflicht ab 31.0
 für Updates / 01.11.2025 für neue Apps; gilt nur für 64-Bit Libraries).
 Patches: pythonforandroid/archs.py common_ldflags und SDL2-Bootstrap Application.mk.
 
+Zusätzlich: Predictive-Back-Opt-out für targetSdk 36 (Android 16) —
+android:enableOnBackInvokedCallback="false" im <application>-Tag, damit
+SDL2/Kivy weiterhin KEYCODE_BACK erhalten (Zurück-Taste schließt Popups).
+
 Wird automatisch von build_android.py / build_all.py aufgerufen, BEVOR buildozer startet.
 Kann auch manuell ausgeführt werden: python build_fixes.py
 """
@@ -202,6 +206,99 @@ def fix_android_manifest_fileprovider():
 
         except Exception as e:
             print(f"P4A Hook: Error fixing manifest {manifest_file}: {e}")
+
+    return fixed_any
+
+
+def _find_manifest_files():
+    """Sammelt alle AndroidManifest-Kandidaten: gerenderte Manifeste in den
+    Build-/Dist-Verzeichnissen UND die p4a-Templates (AndroidManifest.tmpl.xml),
+    aus denen p4a das Manifest bei jedem Build neu rendert.
+
+    Templates mitzupatchen ist wichtig: Patches nur am gerenderten Manifest
+    gehen bei einem Re-Render verloren.
+    """
+    manifest_files = []
+
+    # 1) p4a-Bootstrap-Templates (venv + buildozer-extrahierte Kopie)
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        for tmpl in [
+            p4a_dir / "bootstraps" / "sdl2" / "build" / "templates" / "AndroidManifest.tmpl.xml",
+            p4a_dir / "bootstraps" / "common" / "build" / "templates" / "AndroidManifest.tmpl.xml",
+        ]:
+            if tmpl.exists():
+                manifest_files.append(tmpl)
+
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        # 2) Templates, die bereits in die Dists kopiert wurden
+        manifest_files += list(platform_dir.glob("build-*/dists/*/templates/AndroidManifest.tmpl.xml"))
+        # 3) Gerenderte Manifeste (verschiedene p4a-Versionen, verschiedene Pfade)
+        manifest_files += list(platform_dir.glob("build-*/dists/*/src/main/AndroidManifest.xml"))
+        manifest_files += list(platform_dir.glob("build-*/dists/*/AndroidManifest.xml"))
+
+    # Duplikate (Symlinks/mehrfache Globs) entfernen
+    seen = set()
+    unique = []
+    for f in manifest_files:
+        resolved = f.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(f)
+    return unique
+
+
+def fix_android_manifest_predictive_back():
+    """Injiziert android:enableOnBackInvokedCallback="false" in das
+    <application>-Tag des AndroidManifest.xml (und der p4a-Templates).
+
+    Hintergrund: Ab targetSdk 36 (Android 16) ist "Predictive Back"
+    standardmäßig aktiviert. Das System liefert dann KEIN KEYCODE_BACK
+    mehr an die Activity — SDL2/Kivy sehen die Zurück-Taste/-Geste nicht
+    mehr (kein ESC-Event, Popups mit auto_dismiss schließen nicht, die
+    App wird stattdessen sofort minimiert). Da SDL2 keinen
+    OnBackInvokedCallback registriert, ist der Manifest-Opt-out der
+    einzige Weg, das bisherige Back-Verhalten zu erhalten.
+
+    Idempotent: Attribut wird nur eingefügt, wenn es noch fehlt.
+    """
+    print("P4A Hook: Checking AndroidManifest for predictive-back opt-out...")
+
+    manifest_files = _find_manifest_files()
+    if not manifest_files:
+        print("P4A Hook: No AndroidManifest files found, skipping predictive-back fix")
+        return False
+
+    fixed_any = False
+    for manifest_file in manifest_files:
+        try:
+            with open(manifest_file, 'r') as f:
+                content = f.read()
+
+            if 'enableOnBackInvokedCallback' in content:
+                print(f"P4A Hook: predictive-back opt-out already present in {manifest_file}")
+                continue
+
+            new_content, count = re.subn(
+                r'<application\b',
+                '<application android:enableOnBackInvokedCallback="false"',
+                content,
+                count=1,
+            )
+            if count == 0:
+                print(f"P4A Hook: <application> tag not found in {manifest_file}")
+                continue
+
+            with open(manifest_file, 'w') as f:
+                f.write(new_content)
+            print(f"P4A Hook: predictive-back opt-out added to {manifest_file}")
+            fixed_any = True
+
+        except Exception as e:
+            print(f"P4A Hook: Error fixing manifest {manifest_file}: {e}")
+
+    if not fixed_any:
+        print("P4A Hook: All manifests already have the predictive-back opt-out")
 
     return fixed_any
 
@@ -615,6 +712,7 @@ def before_apk_build(toolchain):
     fix_kivy_python3_compatibility()
     fix_pyjnius_python3_compatibility()
     fix_android_manifest_fileprovider()
+    fix_android_manifest_predictive_back()
     fix_p4a_ldflags_for_16kb_alignment()
     fix_sdl2_bootstrap_16kb_alignment()
     fix_sqlite3_recipe_16kb_alignment()
@@ -635,6 +733,10 @@ if __name__ == "__main__":
     if manifest_fixed:
         print("P4A Hook: FileProvider in AndroidManifest.xml eingefügt")
 
+    back_fixed = fix_android_manifest_predictive_back()
+    if back_fixed:
+        print("P4A Hook: Predictive-Back-Opt-out in AndroidManifest.xml eingefügt")
+
     archs_fixed = fix_p4a_ldflags_for_16kb_alignment()
     if archs_fixed:
         print("P4A Hook: archs.py mit 16 KB LDFLAGS gepatcht")
@@ -647,7 +749,7 @@ if __name__ == "__main__":
     if sqlite3_fixed:
         print("P4A Hook: sqlite3 Android.mk mit 16 KB LOCAL_LDFLAGS gepatcht")
 
-    if any([kivy_fixed, pyjnius_fixed, manifest_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
+    if any([kivy_fixed, pyjnius_fixed, manifest_fixed, back_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")
