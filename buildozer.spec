@@ -106,7 +106,15 @@ android.permissions = android.permission.INTERNET, android.permission.WRITE_EXTE
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 35
+# Android 16 (API 36). ACHTUNG:
+#   - SDK Platform 36 + Build-Tools müssen lokal installiert sein
+#     (android.skip_update = True verhindert den Auto-Download!)
+#   - Ab targetSdk 36 ist "Predictive Back" standardmäßig aktiv, wodurch
+#     SDL2/Kivy KEIN KEYCODE_BACK mehr erhalten würde (Zurück-Taste/-Geste
+#     würde die App minimieren statt Popups zu schließen). Der Opt-out
+#     (android:enableOnBackInvokedCallback="false") wird über den
+#     build_fixes.py Hook ins Manifest injiziert — siehe p4a.hook unten.
+android.api = 36
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
@@ -359,6 +367,9 @@ p4a.branch = master
 # build_fixes.py macht u.a.:
 #   - Cython-3.x-Patches für Kivy & PyJNIus (long → int)
 #   - FileProvider-Manifest-Korrektur
+#   - Predictive-Back-Opt-out (enableOnBackInvokedCallback="false") im
+#     Manifest — PFLICHT ab targetSdk 36, sonst erhält Kivy kein
+#     KEYCODE_BACK mehr (Zurück-Taste schließt keine Popups mehr)
 #   - 16-KB-Page-Size-Alignment via archs.py common_ldflags
 #     und SDL2-Bootstrap APP_LDFLAGS (nur arm64-v8a / x86_64)
 p4a.hook = ./build_fixes.py

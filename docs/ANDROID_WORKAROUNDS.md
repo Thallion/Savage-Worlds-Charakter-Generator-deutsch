@@ -298,6 +298,28 @@ main_layout = MDBoxLayout(orientation="vertical", size_hint_y=None, height=main_
 - Integrated search field with filtered list
 - Used for race/species selection and other searchable lists
 
+## Android 16 / targetSdk 36 (`buildozer.spec` + `build_fixes.py`)
+
+Die App zielt auf **Android 16 (API 36)** (`android.api = 36` in `buildozer.spec`). Zwei Verhaltensänderungen von targetSdk 36 sind relevant — beide sind abgedeckt, die Absicherungen dürfen NICHT entfernt werden:
+
+### Predictive Back (KRITISCH)
+**Problem:** Ab targetSdk 36 aktiviert Android "Predictive Back" standardmäßig. Das System liefert dann **kein `KEYCODE_BACK` mehr an die Activity**. SDL2 registriert keinen `OnBackInvokedCallback` — Kivy bekommt also kein ESC-Event mehr: Popups/Overlays mit `auto_dismiss` schließen nicht mehr per Zurück-Taste/-Geste, stattdessen wird die App sofort minimiert.
+
+**Solution:** `build_fixes.py` → `fix_android_manifest_predictive_back()` injiziert `android:enableOnBackInvokedCallback="false"` in das `<application>`-Tag — sowohl in die gerenderten Manifeste als auch in die p4a-Templates (`AndroidManifest.tmpl.xml`), damit der Patch ein Re-Rendern überlebt. Der Fix ist idempotent und läuft automatisch über den `p4a.hook`.
+
+**Regel:** Dieser Opt-out muss bestehen bleiben, solange die App auf SDL2-Back-Key-Events angewiesen ist (d.h. solange kein eigener `OnBackInvokedCallback` implementiert wird).
+
+### Edge-to-Edge
+Seit targetSdk 35 erzwingt Android Edge-to-Edge-Darstellung; ab targetSdk 36 ist der Manifest-Opt-out (`windowOptOutEdgeToEdgeEnforcement`) abgeschaltet. Die App verwendet diesen Opt-out **nicht** — sie behandelt die Insets selbst:
+- `main.py` ermittelt Statusbar-/Notch-Höhe (`_android_top_padding`) und Navigationsleisten-Höhe (`_android_bottom_padding`) via jnius
+- Overlays/Views verwenden Top-Spacer für Statusbar/Notch (siehe `views/app_navigation_mixin.py`, `views/*_overlay.py`)
+
+Dieses Insets-Handling darf bei UI-Änderungen nicht entfernt werden — ohne die Spacer liegt der Inhalt unter der Statusbar.
+
+### Build-Voraussetzungen für API 36
+- SDK Platform 36 + passende Build-Tools müssen lokal installiert sein (`android.skip_update = True` verhindert den Auto-Download durch buildozer)
+- Die 16-KB-Page-Size-Fixes in `build_fixes.py` bleiben nötig (Google-Play-Pflicht, unabhängig vom API-Level)
+
 ## Archetypen-Synchronisation & jtar-Mojibake (`utils/archetypen_sync.py`)
 **Problem 1:** Die mitgelieferten Archetypen (`chars/Archetypen/`) liegen nach der APK-Installation im App-Verzeichnis (`files/app/`), das bei jedem Update gelöscht und neu entpackt wird. Sie müssen ins persistente Verzeichnis (`files/chars/Archetypen/`) kopiert werden. Wählt man dabei den **ersten existierenden** Quellpfad, kann ein veraltetes oder falsches Verzeichnis das echte Bundle verdecken — die Kopie läuft dann scheinbar erfolgreich, aber ohne neue Dateien.
 

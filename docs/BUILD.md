@@ -21,3 +21,9 @@ python build_windows_wine.py
 - `savage_worlds_generator_linux.spec` (Linux)
 - `savage_worlds_generator_wine.spec` (Wine)
 - `buildozer.spec` (Android)
+
+## Android: API-Level & Voraussetzungen
+
+- **targetSdk / `android.api` = 36** (Android 16), `android.minapi = 21`
+- SDK Platform 36 + Build-Tools müssen im lokalen SDK (`android.sdk_path`) installiert sein — `android.skip_update = True` verhindert den Auto-Download durch buildozer
+- `build_fixes.py` (p4a.hook) injiziert u.a. den **Predictive-Back-Opt-out** (`android:enableOnBackInvokedCallback="false"`) ins Manifest — ohne ihn erhält Kivy ab targetSdk 36 kein `KEYCODE_BACK` mehr. Details: [ANDROID_WORKAROUNDS.md](ANDROID_WORKAROUNDS.md)
