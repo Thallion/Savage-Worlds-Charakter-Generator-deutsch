@@ -120,6 +120,36 @@ class TestAbleitungAusTalenten(unittest.TestCase):
         charakter = FakeCharakter(volk, talente=['Wilde Klauen'])
         self.assertEqual(abgeleitete_waffen(charakter), ["Klauen (Stä+W6, PB 2)"])
 
+    def test_raufbold_steigert_waffen_der_abstammung(self):
+        """Wer schon natürliche Waffen hat, steigert sie statt der Fäuste"""
+        volk = FakeVolk(
+            effects={'spezielle_effekte': {'klauen': True, 'biss': True}},
+            besonderheiten=["Klauen (Stä+W4 Schaden, PB 2)", "Biss (Stä+W4 Schaden)"],
+        )
+        charakter = FakeCharakter(volk, talente=['Raufbold'])
+        self.assertEqual(abgeleitete_waffen(charakter),
+                         ["Klauen (Stä+W6, PB 2)", "Biss (Stä+W6)"])
+
+        charakter.selected_talente.append('Schläger')
+        self.assertEqual(abgeleitete_waffen(charakter),
+                         ["Klauen (Stä+W8, PB 2)", "Biss (Stä+W8)"])
+
+    def test_raufbold_ohne_natuerliche_waffen_gibt_faeuste(self):
+        """Ohne vorhandene Waffe bleibt es beim Grundwürfel für die Fäuste"""
+        self.assertEqual(abgeleitete_waffen(FakeCharakter(talente=['Raufbold'])),
+                         ["Waffenloser Schlag (Stä+W4)"])
+        self.assertEqual(abgeleitete_waffen(FakeCharakter(talente=['Raufbold', 'Schläger'])),
+                         ["Waffenloser Schlag (Stä+W6)"])
+        self.assertEqual(abgeleitete_waffen(FakeCharakter(talente=['Schläger'])), [])
+
+    def test_raufbold_steigert_auch_die_faeuste_des_kampfkuenstlers(self):
+        """Kampfkünstler verleiht die Fäuste, danach steigert Raufbold beides"""
+        volk = FakeVolk(effects={'spezielle_effekte': {'biss': True}},
+                        besonderheiten=["Biss (Stä+W4 Schaden)"])
+        charakter = FakeCharakter(volk, talente=['Kampfkünstler', 'Raufbold'])
+        self.assertEqual(abgeleitete_waffen(charakter),
+                         ["Biss (Stä+W6)", "Waffenloser Schlag (Stä+W6)"])
+
 
 class TestSynchronisation(unittest.TestCase):
 
