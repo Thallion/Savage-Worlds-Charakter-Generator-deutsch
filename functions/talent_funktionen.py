@@ -301,11 +301,15 @@ class TalentManager:
             # Spezial-Effekte von Talenten rückgängig machen (z.B. Rohling → Athletik-Link)
             self._remove_talent_spezial_effekte(talent_name_key)
 
-            # Attribut-Würfel-Effekt rückgängig machen (z.B. Berserker → Stärke -1 Würfeltyp)
+            # Attribut-Würfel-Effekt rückgängig machen (effekt.attribut_bonus aus dem Setting)
             self._remove_talent_attribut_wuerfel_effekt(talent_name_key)
 
             if talent_name_key in self.charakter.selected_talente:
                 self.charakter.selected_talente.remove(talent_name_key)
+
+            # Natürliche Waffen neu ableiten (nach dem Entfernen aus selected_talente)
+            self._synchronisiere_natuerliche_waffen()
+
             Logger.debug(f"Talent '{talent_name_key}' entfernt.")
         
         # Hauptlogik
@@ -407,8 +411,12 @@ class TalentManager:
                     # Spezial-Effekte von Talenten anwenden (z.B. Rohling → Athletik-Link)
                     self._apply_talent_spezial_effekte(talent_name_key)
 
-                    # Attribut-Würfel-Effekt anwenden (z.B. Berserker → Stärke +1 Würfeltyp)
+                    # Attribut-Würfel-Effekt anwenden (effekt.attribut_bonus aus dem Setting)
                     self._apply_talent_attribut_wuerfel_effekt(talent_name_key)
+
+                    # Talente wie Kampfkünstler oder Wilde Klauen verleihen bzw.
+                    # verbessern natürliche Waffen im Inventar
+                    self._synchronisiere_natuerliche_waffen()
 
                     # Abgeleitete Werte neu berechnen (ohne Vermögensberechnung)
                     self.charakter.berechne_abgeleitete_werte()
@@ -527,10 +535,17 @@ class TalentManager:
         "Naturgespür": [("Überleben", "Verstand")],
     }
 
-    # Talente die den Würfeltyp eines Attributs erhöhen
-    TALENT_ATTRIBUT_WUERFEL_EFFEKTE = {
-        "Berserker": "Stärke",  # Erhöht Stärke um einen Würfeltyp
-    }
+    # Talente die den Würfeltyp eines Attributs DAUERHAFT erhöhen.
+    # Nur dauerhafte Effekte gehören hierher: "Berserker" etwa gibt +1 Würfeltyp
+    # Stärke ausschließlich während des Berserkerrauschs, die Basiswerte bleiben
+    # unverändert (Bestandscharaktere korrigiert functions/charakter_migration.py).
+    # Zeitlich begrenzte Boni aus dem Setting-JSON laufen über effekt.attribut_bonus.
+    TALENT_ATTRIBUT_WUERFEL_EFFEKTE = {}
+
+    def _synchronisiere_natuerliche_waffen(self):
+        """Gleicht die kostenlosen natürlichen Waffen mit den Talenten ab."""
+        from functions.natuerliche_waffen import synchronisiere
+        synchronisiere(self.charakter)
 
     def _apply_talent_spezial_effekte(self, talent_name_key):
         """
@@ -576,7 +591,7 @@ class TalentManager:
         """
         Erhöht den Würfeltyp eines Attributs um eine oder mehr Stufen, wenn das Talent ausgewählt wird.
         Unterstützt zwei Quellen:
-        1. Statisches TALENT_ATTRIBUT_WUERFEL_EFFEKTE Dict (z.B. Berserker: Stärke)
+        1. Statisches TALENT_ATTRIBUT_WUERFEL_EFFEKTE Dict (dauerhafte Effekte)
         2. JSON effekt.attribut_bonus aus dem Talent (z.B. Übernatürliches Attribut: +2 Stufen)
         """
         bonus_angewendet = False

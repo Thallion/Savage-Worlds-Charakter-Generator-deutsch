@@ -683,6 +683,34 @@ class CharakterVerwaltungWidget(CharakterVersandMixin, CharakterbogenExportMixin
         except Exception as e:
             Logger.error(f"Fehler beim Erhöhen des Startkapitals: {e}")
 
+    def senke_startkapital(self):
+        """Nimmt eine Startkapital-Einlösung zurück und erstattet den Handicap-Punkt"""
+        try:
+            if not self.app.controller:
+                Logger.warning("Controller nicht verfügbar für Startkapital-Rücknahme")
+                return
+
+            char = self.app.controller.charakter
+            if not char:
+                return
+
+            if getattr(char, 'startgeld_einloesungen', 0) <= 0:
+                self._show_warning(
+                    "Nichts zurückzunehmen",
+                    "Für dieses Setting wurden keine Handicap-Punkte in Startkapital "
+                    "umgewandelt."
+                )
+                return
+
+            erfolg, meldung = self.app.controller.senke_startkapital_mit_handicap()
+            if not erfolg:
+                self._show_warning("Rücknahme nicht möglich", meldung)
+                return
+
+            Logger.info("Startkapital-Einlösung zurückgenommen")
+        except Exception as e:
+            Logger.error(f"Fehler beim Zurücknehmen des Startkapitals: {e}")
+
     def toggle_char_gen_completed(self):
         """Umschaltet den Charakter-Generierungsstatus"""
         try:

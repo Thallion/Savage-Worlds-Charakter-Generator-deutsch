@@ -258,6 +258,42 @@ class TestAbgeleiteteWerte(unittest.TestCase):
             self.berechne(charakter)
             self.assertEqual(charakter.robustheit_basis, 3)
 
+    def test_zerbrechlich_ist_settingabhaengig(self):
+        """Zerbrechlich: -1 Robustheit nur schwer — in Savage Pathfinder leicht"""
+        # SWAE: leicht bedeutet +1 Schaden, nicht -1 Robustheit
+        charakter = FakeCharakter()
+        charakter.add_handicap("Zerbrechlich", "leicht")
+        self.berechne(charakter)
+        self.assertEqual(charakter.robustheit_basis, 4)
+
+        # Fantasy Kompendium & Co. führen Zerbrechlich als schweres Handicap
+        charakter = FakeCharakter()
+        charakter.active_setting_name = 'Fantasy Kompendium'
+        charakter.add_handicap("Zerbrechlich", "schwer")
+        self.berechne(charakter)
+        self.assertEqual(charakter.robustheit_basis, 3)
+
+        # Savage Pathfinder: dort ist es ein leichtes Handicap mit -1 Robustheit
+        charakter = FakeCharakter()
+        charakter.active_setting_name = 'Savage Pathfinder'
+        charakter.add_handicap("Zerbrechlich", "leicht")
+        self.berechne(charakter)
+        self.assertEqual(charakter.robustheit_basis, 3)
+
+    def test_verringerte_vitalitaet_und_groesse_handicap(self):
+        """Verringerte Vitalität: -1 Robustheit; Größe -1: -1 Größe (und damit Robustheit)"""
+        charakter = FakeCharakter()
+        charakter.add_handicap("Verringerte Vitalität", "leicht")
+        werte = self.berechne(charakter)
+        self.assertEqual(charakter.robustheit_basis, 3)
+        self.assertEqual(werte['Größe'], 0)
+
+        charakter = FakeCharakter()
+        charakter.add_handicap("Größe -1", "leicht")
+        werte = self.berechne(charakter)
+        self.assertEqual(werte['Größe'], -1)
+        self.assertEqual(charakter.robustheit_basis, 3)
+
     def test_kaempferische_disziplin_nur_ohne_ruestung(self):
         """Kämpferische Disziplin: +1 Robustheit nur bei Torso == 0"""
         charakter = FakeCharakter()
@@ -384,10 +420,11 @@ class TestEffektRegistry(unittest.TestCase):
         "Glück": {"bennys": 1},
         "Großes Glück": {"bennys": 1},
     }
-    ERWARTETE_HANDICAPS = {"Langsam", "Fettleibig", "Alt", "Klein", "Schlank", "Jung"}
+    ERWARTETE_HANDICAPS = {"Langsam", "Fettleibig", "Alt", "Klein", "Schlank", "Jung",
+                           "Zerbrechlich", "Verringerte Vitalität", "Größe -1"}
 
     def test_registry_laedt_und_ist_vollstaendig(self):
-        """Alle 19 Talente und 6 Handicaps mit erwarteten Werten vorhanden"""
+        """Alle 19 Talente und 9 Handicaps mit erwarteten Werten vorhanden"""
         from functions.effekt_registry import lade_abgeleitete_effekte
         registry = lade_abgeleitete_effekte()
 

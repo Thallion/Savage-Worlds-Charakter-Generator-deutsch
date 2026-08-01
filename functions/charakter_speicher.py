@@ -17,6 +17,7 @@ from models.attribut import Attribut
 from models.fertigkeit import Fertigkeit
 from models.superkraft import Superkraft
 from models.cyberware import CyberwareInstallation
+from functions.charakter_migration import MIGRATIONS_IDS, migriere_charakter_daten
 
 class SetEncoder(json.JSONEncoder):
     """Ermöglicht das Serialisieren von Sets in JSON."""
@@ -89,6 +90,8 @@ def to_dict(charakter):
         'selected_waffen': [item.name for item in charakter.selected_waffen],
         'selected_ruestungen': [item.name for item in charakter.selected_ruestungen],
         'selected_schilde': [item.name for item in charakter.selected_schilde],
+        # Kostenlos gestellte natürliche Waffen (functions/natuerliche_waffen.py)
+        'natuerliche_waffen': list(getattr(charakter, 'natuerliche_waffen', []) or []),
         # Stückzahlen pro Ausrüstungsgegenstand (Name -> menge). Zusätzliches,
         # optionales Feld – die obigen Namenslisten bleiben abwärtskompatibel.
         'ausruestung_mengen': {
@@ -116,6 +119,8 @@ def to_dict(charakter):
         'superkraft_punkte_verbraucht': charakter.superkraft_punkte_verbraucht,
         'kraftobergrenze': charakter.kraftobergrenze,
         'vermoegen': charakter.vermoegen,
+        # Eingelöste Handicap-Punkte für Startkapital (für die Rücknahme)
+        'startgeld_einloesungen': getattr(charakter, 'startgeld_einloesungen', 0),
         'erschoepfung': charakter.erschoepfung,
         'zusaetzliche_talente': charakter.zusaetzliche_talente,
         'gesamt_handicap_punkte': charakter.gesamt_handicap_punkte,
@@ -123,7 +128,11 @@ def to_dict(charakter):
         'pathfinder_kostenlose_talente_gewaehlt': pathfinder_kostenlose_talente_gewaehlt,
 
         # === STEIGERUNGS-JOURNAL ===
-        'steigerungs_journal': charakter.steigerungs_journal
+        'steigerungs_journal': charakter.steigerungs_journal,
+
+        # === DATENMIGRATIONEN ===
+        # Bereits angewendete Wertkorrekturen, damit sie nicht doppelt laufen
+        'migrationen': list(getattr(charakter, 'migrationen', MIGRATIONS_IDS))
     }
 
 def _get_selected_elements_with_data(charakter):
@@ -239,6 +248,10 @@ def from_dict(self, data):
         data (dict): Ein Dictionary mit Charakterdaten
     """
     try:
+        # Fällige Datenmigrationen anwenden, bevor Handicaps/Talente gegen das
+        # Setting aufgelöst werden (functions/charakter_migration.py)
+        migriere_charakter_daten(data)
+
         # Profildaten setzen
         for key, value in data.get('profil_daten', {}).items():
             self.set_profil_daten(key, value)
@@ -593,6 +606,7 @@ def _finalize_character_loading(charakter, data):
     charakter.anzahl_maechte = data.get('anzahl_maechte', charakter.anzahl_maechte)
     charakter.machtpunkte = data.get('machtpunkte', charakter.machtpunkte)
     charakter.vermoegen = data.get('vermoegen', charakter.vermoegen)
+    charakter.startgeld_einloesungen = data.get('startgeld_einloesungen', 0)
     charakter.erschoepfung = data.get('erschoepfung', charakter.erschoepfung)
     charakter.machtstufe = data.get('machtstufe', getattr(charakter, 'machtstufe', 'III'))
     charakter.superkraft_punkte_gesamt = data.get('superkraft_punkte_gesamt', getattr(charakter, 'superkraft_punkte_gesamt', 0))
@@ -637,6 +651,16 @@ def _finalize_character_loading(charakter, data):
 
     # Steigerungs-Journal laden (falls vorhanden)
     charakter.steigerungs_journal = data.get('steigerungs_journal', None)
+
+    # Bereits angewendete Migrationen übernehmen (migriere_charakter_daten hat
+    # die Liste in from_dict aufgefüllt), damit sie beim Speichern erhalten bleiben
+    charakter.migrationen = list(data.get('migrationen') or [])
+
+    # Natürliche Waffen: gespeicherten Stand übernehmen und neu abgleichen —
+    # so bekommen auch Charaktere von vor diesem Feature ihre Klauen & Co.
+    charakter.natuerliche_waffen = list(data.get('natuerliche_waffen') or [])
+    from functions.natuerliche_waffen import synchronisiere as synchronisiere_natuerliche_waffen
+    synchronisiere_natuerliche_waffen(charakter)
 
     # Setting-Einstellungen
     if 'settingregeln' in data:

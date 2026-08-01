@@ -75,6 +75,9 @@ TEST_MODULE = [
     'test_volk_funktionen',
     'test_volkseigenarten_multi_slot',
     'test_volkseigenarten_stufen_migration',
+    'test_charakter_migration',
+    'test_natuerliche_waffen',
+    'test_statblock_generator',
 ]
 
 # Doppelte entfernen

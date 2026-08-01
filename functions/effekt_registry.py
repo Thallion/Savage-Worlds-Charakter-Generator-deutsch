@@ -15,6 +15,9 @@ Semantik (siehe auch _kommentar in der JSON):
   der Effekt zählt nur, wenn die Bedingung als erfüllt übergeben wird.
 - Handicap-Effekte werden über exakten name- und stufe-Lookup ermittelt;
   der Schlüssel alle_stufen gilt stufenunabhängig.
+- pro_setting ersetzt für das genannte Setting den kompletten Stufen-Block,
+  weil gleichnamige Handicaps settingabhängig anderes bedeuten können
+  (SWAE: Zerbrechlich = +1 Schaden, Savage Pathfinder: -1 Robustheit).
 """
 
 import json
@@ -92,6 +95,7 @@ def summiere_handicap_bonus(charakter, wert):
         int: Gesamtbonus (kann negativ sein)
     """
     handicap_effekte = lade_abgeleitete_effekte().get('handicaps', {})
+    setting_name = getattr(charakter, 'active_setting_name', '') or ''
     summe = 0
 
     for handicap_key in charakter.selected_handicaps:
@@ -101,6 +105,8 @@ def summiere_handicap_bonus(charakter, wert):
         eintrag = handicap_effekte.get(handicap.name)
         if not eintrag:
             continue
+        # Gleichnamige Handicaps bedeuten je nach Setting Verschiedenes
+        eintrag = (eintrag.get('pro_setting') or {}).get(setting_name) or eintrag
         effekt = eintrag.get(handicap.stufe) or eintrag.get('alle_stufen') or {}
         summe += effekt.get(wert, 0)
 

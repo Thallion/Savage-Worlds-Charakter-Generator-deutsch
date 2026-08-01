@@ -472,7 +472,7 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Größe -1 (Reduzierte Robustheit)": {
+            "Größe -1": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -573,7 +573,7 @@
         "Feind_schwer",
         "Geheimnis_leicht",
         "Langsam_leicht",
-        "Größe -1 (Reduzierte Robustheit)",
+        "Größe -1",
         "Zwanghaft"
     ],
     "selected_talente": [
@@ -797,5 +797,8 @@
                 "kosten": 0.5
             }
         ]
-    }
+    },
+    "migrationen": [
+        "berserker_temporaer"
+    ]
 }

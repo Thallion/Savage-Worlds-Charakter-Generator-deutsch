@@ -161,9 +161,43 @@ def erhoehe_startkapital(charakter):
         setting_startgeld = _get_setting_startgeld(charakter)
         charakter.vermoegen += setting_startgeld
         charakter.verbleibende_handicap_punkte -= 1
+        charakter.startgeld_einloesungen = getattr(charakter, 'startgeld_einloesungen', 0) + 1
         Logger.info(f"Startkapital um {setting_startgeld} erhöht. Neues Vermögen: {charakter.vermoegen}")
+        return True
     else:
         Logger.warning("Keine Handicap-Punkte mehr verfügbar.")
+        return False
+
+
+def senke_startkapital(charakter):
+    """
+    Nimmt eine Startkapital-Einlösung zurück und erstattet den Handicap-Punkt.
+
+    Gegenstück zu erhoehe_startkapital(). Geht nur, solange das eingelöste Geld
+    noch nicht ausgegeben ist — sonst müsste der Charakter Ausrüstung verkaufen.
+
+    Args:
+        charakter: Das Charakterobjekt
+
+    Returns:
+        (bool, str): (Erfolg, Meldung bei Fehlschlag)
+    """
+    if getattr(charakter, 'startgeld_einloesungen', 0) <= 0:
+        Logger.warning("Es wurden keine Handicap-Punkte für Startkapital eingelöst.")
+        return False, "Es wurden keine Handicap-Punkte für Startkapital eingelöst."
+
+    setting_startgeld = _get_setting_startgeld(charakter)
+    if charakter.vermoegen < setting_startgeld:
+        Logger.warning("Das eingelöste Startkapital ist bereits ausgegeben.")
+        return False, ("Das eingelöste Startkapital ist bereits ausgegeben — "
+                       "verkaufe zuerst Ausrüstung.")
+
+    charakter.vermoegen -= setting_startgeld
+    charakter.verbleibende_handicap_punkte += 1
+    charakter.startgeld_einloesungen -= 1
+    Logger.info(f"Startkapital um {setting_startgeld} zurückgenommen. "
+                f"Neues Vermögen: {charakter.vermoegen}")
+    return True, ""
 
 
 def _get_setting_startgeld(charakter):

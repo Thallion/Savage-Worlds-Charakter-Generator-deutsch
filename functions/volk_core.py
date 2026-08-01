@@ -169,8 +169,13 @@ def waehle_volk(charakter, volk_name):
         # Volk-Effekte anwenden
         Logger.info(f"Wende Effekte von neuem Volk an: {volk_name}")
         success = neues_volk.apply_effects_to_charakter(charakter)
-        
+
         if success:
+            # Klauen, Biss & Co. der Abstammung kostenlos ins Inventar (auch die
+            # von auto_talente mitgebrachten, deshalb erst nach den Effekten)
+            from functions.natuerliche_waffen import synchronisiere as synchronisiere_natuerliche_waffen
+            synchronisiere_natuerliche_waffen(charakter)
+
             # Abgeleitete Werte neu berechnen
             if hasattr(charakter, 'berechne_abgeleitete_werte'):
                 charakter.berechne_abgeleitete_werte()
@@ -287,7 +292,11 @@ def abwaehlen_volk(charakter, volk_name):
             # Volk abwählen
             volk.ausgewaehlt = False
             charakter.voelker_selected[volk_name] = False
-            
+
+            # Natürliche Waffen der Abstammung wieder einsammeln
+            from functions.natuerliche_waffen import synchronisiere as synchronisiere_natuerliche_waffen
+            synchronisiere_natuerliche_waffen(charakter)
+
             # Abgeleitete Werte neu berechnen
             if hasattr(charakter, 'berechne_abgeleitete_werte'):
                 charakter.berechne_abgeleitete_werte()

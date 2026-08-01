@@ -467,7 +467,7 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Größe -1 (Reduzierte Robustheit)": {
+            "Größe -1": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -595,7 +595,7 @@
         "Behindernde Rüstung_jede",
         "Beschämt_schwer",
         "Gierig_leicht",
-        "Größe -1 (Reduzierte Robustheit)"
+        "Größe -1"
     ],
     "selected_talente": [
         "AH (Magier)",
@@ -847,5 +847,8 @@
                 "kosten": 1
             }
         ]
-    }
+    },
+    "migrationen": [
+        "berserker_temporaer"
+    ]
 }

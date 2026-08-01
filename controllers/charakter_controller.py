@@ -924,6 +924,30 @@ class CharakterController(EventDispatcher):
             self.dispatch('on_charakter_error', f"Startkapital-Erhöhung fehlgeschlagen: {str(e)}")
             return False
 
+    def senke_startkapital_mit_handicap(self):
+        """
+        Nimmt eine Startkapital-Einlösung zurück und erstattet den Handicap-Punkt
+
+        Returns:
+            (bool, str): (Erfolg, Meldung bei Fehlschlag)
+        """
+        try:
+            self._snapshot("Startkapital-Einlösung zurücknehmen")
+            erfolg, meldung = self.charakter.senke_startkapital()
+            if not erfolg:
+                return False, meldung
+
+            # UI aktualisieren
+            self.dispatch('on_charakter_updated')
+            Logger.info(f"Startkapital-Einlösung zurückgenommen. "
+                        f"Neues Vermögen: {self.charakter.vermoegen}")
+            return True, ""
+
+        except Exception as e:
+            Logger.error(f"Fehler beim Zurücknehmen des Startkapitals: {str(e)}")
+            self.dispatch('on_charakter_error', f"Rücknahme fehlgeschlagen: {str(e)}")
+            return False, str(e)
+
     # ============================
     # UI-Update-Methoden
     # ============================

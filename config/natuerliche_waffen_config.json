@@ -1,0 +1,87 @@
+{
+    "_kommentar": "Natürliche/waffenlose Waffen aus Abstammung und Talenten. gruppen: Anzeigename je Waffengruppe (ergibt mit Würfel und PB den Namen des Ausrüstungs-Eintrags, z. B. 'Klauen (Stä+W6, PB 2)'). wuerfel_kette: Reihenfolge für 'steigert'. volkseigenarten: spezielle_effekte-Schlüssel -> Gruppe. talente: pro gewählter Kopie angewendet, in dieser Reihenfolge. grundwuerfel = nur setzen, wenn die Gruppe noch keinen Würfel hat; setzt = mindestens dieser Würfel; steigert = um n Würfeltypen erhöhen (nur wenn schon ein Würfel da ist); pb = Panzerbrechend mindestens auf diesen Wert; wiederholung = gilt ab der zweiten gewählten Kopie.",
+    "gruppen": {
+        "unbewaffnet": "Waffenloser Schlag",
+        "klauen": "Klauen",
+        "biss": "Biss",
+        "biss_klauen": "Biss/Klauen",
+        "hoerner": "Hörner"
+    },
+    "wuerfel_kette": ["W4", "W6", "W8", "W10"],
+    "volkseigenarten": {
+        "klauen": "klauen",
+        "biss": "biss",
+        "biss_klauen": "biss_klauen",
+        "biss_klaue": "biss_klauen",
+        "hoerner": "hoerner",
+        "horn_waffe": "hoerner"
+    },
+    "talente": {
+        "Kampfkünstler": {
+            "gruppe": "unbewaffnet",
+            "grundwuerfel": "W4",
+            "steigert": 1
+        },
+        "Raufbold": {
+            "gruppe": "unbewaffnet",
+            "grundwuerfel": "W4",
+            "steigert": 1
+        },
+        "Waffenloser Schlag": {
+            "gruppe": "unbewaffnet",
+            "grundwuerfel": "W4"
+        },
+        "Kampfkunstmeister": {
+            "gruppe": "unbewaffnet",
+            "steigert": 1
+        },
+        "Schläger": {
+            "gruppe": "unbewaffnet",
+            "steigert": 1
+        },
+        "Klauen": {
+            "gruppe": "klauen",
+            "grundwuerfel": "W4",
+            "wiederholung": {"setzt": "W6", "pb": 2}
+        },
+        "Wilde Klauen": {
+            "gruppe": "klauen",
+            "setzt": "W6",
+            "pb": 2
+        },
+        "AH (Zauberer) Drachenblutlinie": {
+            "gruppe": "klauen",
+            "grundwuerfel": "W4"
+        },
+        "AH (Zauberer) Dämonische Blutlinie": {
+            "gruppe": "klauen",
+            "grundwuerfel": "W4"
+        },
+        "Klingenzahn": {
+            "gruppe": "biss",
+            "grundwuerfel": "W4"
+        },
+        "Dämonischer Biss": {
+            "gruppe": "biss",
+            "grundwuerfel": "W6",
+            "wiederholung": {"pb": 2}
+        },
+        "Biestling": {
+            "gruppe": "biss_klauen",
+            "grundwuerfel": "W4"
+        },
+        "Drachenmacht": {
+            "gruppe": "biss_klauen",
+            "setzt": "W6"
+        },
+        "Drachenerbe": {
+            "gruppe": "biss_klauen",
+            "setzt": "W8"
+        },
+        "Biss/Klauen": {
+            "gruppe": "biss_klauen",
+            "setzt": "W8",
+            "pb": 4
+        }
+    }
+}

@@ -71,7 +71,14 @@ def generate_character_statblock(charakter):
             
         if talente_text:
             statblock_lines.append(f"Talente: {talente_text}")
-            
+
+        # Abstammungs-Talente/-Handicaps/Besonderheiten stehen nur am Volk und
+        # nicht in selected_talente/selected_handicaps — sonst fehlen sie im Export
+        for label, text in _format_volk_zeilen(charakter):
+            if text:
+                statblock_lines.append(f"{label}: {text}")
+
+
         if maechte_text:
             statblock_lines.append(f"Mächte: {maechte_text}")
 
@@ -110,6 +117,64 @@ def _format_race(charakter):
     except Exception as e:
         Logger.error(f"Fehler beim Formatieren des Volkes: {str(e)}")
         return ""
+
+
+def _gewaehltes_volk(charakter):
+    """Das ausgewählte Volk-Objekt (oder None)"""
+    try:
+        for volk_name, selected in getattr(charakter, 'voelker_selected', {}).items():
+            if selected and volk_name in charakter.voelker:
+                return charakter.voelker[volk_name]
+
+        for volk in getattr(charakter, 'voelker', {}).values():
+            if getattr(volk, 'ausgewaehlt', False):
+                return volk
+    except Exception as e:
+        Logger.error(f"Fehler beim Ermitteln des Volkes: {str(e)}")
+    return None
+
+
+def _basisname(eintrag):
+    """
+    Vergleichsname ohne Stufen-Suffix und erklärenden Klammerzusatz —
+    "Schwur_schwer" und "Schwur (schwer: ...)" sind dasselbe Handicap.
+    """
+    if eintrag.endswith(("_leicht", "_schwer")):
+        eintrag = eintrag[:-7]
+    return eintrag.split(" (", 1)[0].strip()
+
+
+def _format_volk_zeilen(charakter):
+    """
+    Talente, Handicaps und Besonderheiten der Abstammung.
+
+    Sie stehen nur am Volk und fehlten deshalb im Statblock. Einträge, die als
+    Auto-Talent/-Handicap ohnehin schon in den Zeilen darüber stehen, werden
+    nicht doppelt gelistet.
+
+    Returns:
+        list: [(Label, Text), ...] — leere Texte filtert der Aufrufer
+    """
+    volk = _gewaehltes_volk(charakter)
+    if not volk:
+        return []
+
+    try:
+        zeilen = []
+        for attribut, label, gewaehlt in (
+            ('talente', "Abstammungs-Talente", getattr(charakter, 'selected_talente', [])),
+            ('handicaps', "Abstammungs-Handicaps", getattr(charakter, 'selected_handicaps', [])),
+            ('besonderheiten', "Besonderheiten", []),
+        ):
+            bekannt = {_basisname(e) for e in gewaehlt}
+            eintraege = [e for e in getattr(volk, attribut, []) or []
+                         if _basisname(e) not in bekannt]
+            zeilen.append((label, ", ".join(eintraege)))
+        return zeilen
+
+    except Exception as e:
+        Logger.error(f"Fehler beim Formatieren der Abstammungs-Zeilen: {str(e)}")
+        return []
 
 
 def _format_attributes(charakter):

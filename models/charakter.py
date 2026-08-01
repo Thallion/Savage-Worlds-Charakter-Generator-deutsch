@@ -316,7 +316,10 @@ class Charakter(EventDispatcher, CharakterProperties, CharakterPersistence,
         character_advancement.increase_aufstiege(self)
 
     def erhoehe_startkapital(self):
-        character_advancement.erhoehe_startkapital(self)
+        return character_advancement.erhoehe_startkapital(self)
+
+    def senke_startkapital(self):
+        return character_advancement.senke_startkapital(self)
 
     def decrease_aufstiege(self):
         character_advancement.decrease_aufstiege(self)

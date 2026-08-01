@@ -27,6 +27,7 @@ from functions.character_advancement import (
     increase_aufstiege,
     decrease_aufstiege,
     erhoehe_startkapital,
+    senke_startkapital,
 )
 
 # Identisch zu models/charakter.py
@@ -72,6 +73,7 @@ class FakeCharakter:
         self.gesamt_handicap_punkte = 4
         self.char_gen_completed = False
         self.vermoegen = 0
+        self.startgeld_einloesungen = 0
         self.attribute = {'Stärke': FakeAttribut()}
         self.update_char_gen_status = Mock()
 
@@ -308,6 +310,59 @@ class TestStartkapital(CharacterAdvancementTestBasis):
         charakter.verbleibende_handicap_punkte = 0
         erhoehe_startkapital(charakter)
         self.assertEqual(charakter.vermoegen, 0)
+        self.assertEqual(charakter.startgeld_einloesungen, 0)
+
+    def test_zuruecknehmen_erstattet_handicap_punkt(self):
+        """Rücknahme: Geld weg, Handicap-Punkt zurück"""
+        charakter = FakeCharakter()
+        charakter.verbleibende_handicap_punkte = 1
+        erhoehe_startkapital(charakter)
+        self.assertEqual(charakter.startgeld_einloesungen, 1)
+
+        erfolg, meldung = senke_startkapital(charakter)
+        self.assertTrue(erfolg)
+        self.assertEqual(meldung, "")
+        self.assertEqual(charakter.vermoegen, 0)
+        self.assertEqual(charakter.verbleibende_handicap_punkte, 1)
+        self.assertEqual(charakter.startgeld_einloesungen, 0)
+
+    def test_zuruecknehmen_ohne_einloesung(self):
+        """Nichts eingelöst → Rücknahme schlägt fehl"""
+        charakter = FakeCharakter()
+        charakter.vermoegen = 500
+        erfolg, meldung = senke_startkapital(charakter)
+        self.assertFalse(erfolg)
+        self.assertIn("keine Handicap-Punkte", meldung)
+        self.assertEqual(charakter.vermoegen, 500)
+
+    def test_zuruecknehmen_wenn_geld_ausgegeben(self):
+        """Geld schon ausgegeben → Rücknahme schlägt fehl, nichts ändert sich"""
+        charakter = FakeCharakter()
+        charakter.verbleibende_handicap_punkte = 1
+        erhoehe_startkapital(charakter)
+        charakter.vermoegen -= 100  # Ausrüstung gekauft
+
+        erfolg, meldung = senke_startkapital(charakter)
+        self.assertFalse(erfolg)
+        self.assertIn("bereits ausgegeben", meldung)
+        self.assertEqual(charakter.vermoegen, 400)
+        self.assertEqual(charakter.verbleibende_handicap_punkte, 0)
+        self.assertEqual(charakter.startgeld_einloesungen, 1)
+
+    def test_zuruecknehmen_nutzt_setting_startgeld(self):
+        """Zurückgenommen wird genau das Setting-Startgeld"""
+        charakter = FakeCharakter()
+        charakter.verbleibende_handicap_punkte = 2
+        charakter.custom_element_manager = Mock()
+        charakter.custom_element_manager.get_active_setting.return_value = {'startgeld': 250}
+        erhoehe_startkapital(charakter)
+        erhoehe_startkapital(charakter)
+        self.assertEqual(charakter.vermoegen, 500)
+
+        senke_startkapital(charakter)
+        self.assertEqual(charakter.vermoegen, 250)
+        self.assertEqual(charakter.verbleibende_handicap_punkte, 1)
+        self.assertEqual(charakter.startgeld_einloesungen, 1)
 
 
 if __name__ == '__main__':
