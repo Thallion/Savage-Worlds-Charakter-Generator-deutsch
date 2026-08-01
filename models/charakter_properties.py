@@ -4,9 +4,11 @@ Eigenschaften und Properties für die Charakter-Klasse.
 Definiert alle Kivy Properties, die von der Hauptklasse verwendet werden.
 """
 from kivy.properties import (
-    NumericProperty, StringProperty, BooleanProperty, 
+    NumericProperty, StringProperty, BooleanProperty,
     ObjectProperty, DictProperty, ListProperty
 )
+
+from functions.charakter_migration import MIGRATIONS_IDS
 
 class CharakterProperties:
     """Mixin-Klasse für alle Charakter Properties"""
@@ -45,6 +47,8 @@ class CharakterProperties:
     
     # Vermögen
     vermoegen = NumericProperty(500)
+    # Wie oft Handicap-Punkte in Startkapital umgewandelt wurden (für die Rücknahme)
+    startgeld_einloesungen = NumericProperty(0)
     waehrungseinheit = StringProperty("Gold")
     vermoegen_text = StringProperty("Vermögen: 500 Gold")
     
@@ -82,6 +86,9 @@ class CharakterProperties:
     selected_waffen = ListProperty([])
     selected_ruestungen = ListProperty([])
     selected_schilde = ListProperty([])
+    # Kostenlos aus Abstammung/Talenten gestellte natürliche Waffen
+    # (functions/natuerliche_waffen.py) — nur diese werden wieder eingesammelt
+    natuerliche_waffen = ListProperty([])
     
     # Abgeleitete Werte
     bewegungsweite = NumericProperty(6)
@@ -104,6 +111,11 @@ class CharakterProperties:
     cyberware_budget = NumericProperty(0)
     cyberware_nebenwirkungen = ListProperty([])
     selected_cyberware = ListProperty([])
+
+    # Bereits angewendete Datenmigrationen (siehe functions/charakter_migration.py).
+    # Neue Charaktere haben nichts nachzuholen und tragen deshalb alle IDs;
+    # beim Laden wird die Liste aus der Save-Datei übernommen.
+    migrationen = ListProperty(list(MIGRATIONS_IDS))
 
     # Steigerungs-Journal (kein Kivy-Property, da keine UI-Bindung nötig)
     steigerungs_journal = None

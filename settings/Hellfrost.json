@@ -6377,6 +6377,424 @@
         }
     },
     "ausruestung": {
+        "Biss (Stä+W4)": {
+            "name": "Biss (Stä+W4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Reißzähne als natürliche Waffe (Volkseigenart Biss).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Biss (Stä+W6)": {
+            "name": "Biss (Stä+W6)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Verstärkter Biss (z. B. Talent Dämonischer Biss).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Biss (Stä+W6, PB 2)": {
+            "name": "Biss (Stä+W6, PB 2)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Panzerbrechender Biss (z. B. Talent Dämonischer Biss, zweite Wahl).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "2"
+            }
+        },
+        "Biss (Stä+W8, PB 4)": {
+            "name": "Biss (Stä+W8, PB 4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Biss einer verwandelten Kreatur (z. B. Werwolf-Talent Biss/Klauen).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "4"
+            }
+        },
+        "Biss/Klauen (Stä+W4)": {
+            "name": "Biss/Klauen (Stä+W4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Biss oder Klaue als natürliche Waffe (z. B. Kehana, Insektoide).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Biss/Klauen (Stä+W4, PB 2)": {
+            "name": "Biss/Klauen (Stä+W4, PB 2)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Panzerbrechender Biss- oder Klauenangriff (z. B. Drachenvolk).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "2"
+            }
+        },
+        "Biss/Klauen (Stä+W6)": {
+            "name": "Biss/Klauen (Stä+W6)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Verstärkter Biss- oder Klauenangriff (z. B. Talent Drachenmacht).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Biss/Klauen (Stä+W8)": {
+            "name": "Biss/Klauen (Stä+W8)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Biss- oder Klauenangriff einer mächtigen Gestalt (z. B. Talent Drachenerbe).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Biss/Klauen (Stä+W8, PB 4)": {
+            "name": "Biss/Klauen (Stä+W8, PB 4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Biss- und Klauenangriffe einer verwandelten Kreatur (z. B. Werwolf-Talent Biss/Klauen).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "4"
+            }
+        },
+        "Fäuste": {
+            "name": "Fäuste",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Waffenloser Angriff mit Fäusten. Ein unbewaffneter Verteidiger gibt bewaffneten Angreifern +2 auf Kämpfen (Regel Unbewaffneter Verteidiger).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Hörner (Stä+W4)": {
+            "name": "Hörner (Stä+W4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Hörner als natürliche Waffe (Volkseigenart Hörner).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Hörner (Stä+W6)": {
+            "name": "Hörner (Stä+W6)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Verbesserte Hörner (Volkseigenart Hörner, zweite Stufe).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Klauen (Stä+W4)": {
+            "name": "Klauen (Stä+W4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Natürliche Waffe aus der Volkseigenart Klauen oder einem entsprechenden Talent.",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Klauen (Stä+W4, PB 2)": {
+            "name": "Klauen (Stä+W4, PB 2)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Panzerbrechende Klauen (z. B. Rakashaner, Rattlinge, Insektoide).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "2"
+            }
+        },
+        "Klauen (Stä+W6)": {
+            "name": "Klauen (Stä+W6)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Verbesserte Klauen (Volkseigenart Klauen, zweite Stufe).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Klauen (Stä+W6, PB 2)": {
+            "name": "Klauen (Stä+W6, PB 2)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Panzerbrechende Klauen (Volkseigenart Klauen, dritte Stufe, bzw. Talent Wilde Klauen).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "2"
+            }
+        },
+        "Klauen (Stä+W8, PB 4)": {
+            "name": "Klauen (Stä+W8, PB 4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Klauen einer verwandelten Kreatur (z. B. Werwolf-Talent Biss/Klauen).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "4"
+            }
+        },
+        "Tritte": {
+            "name": "Tritte",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Waffenloser Angriff mit Tritten. Ein unbewaffneter Verteidiger gibt bewaffneten Angreifern +2 auf Kämpfen (Regel Unbewaffneter Verteidiger).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Waffenloser Schlag (Stä+W10)": {
+            "name": "Waffenloser Schlag (Stä+W10)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Waffenloser Schaden eines Mönchs auf höchstem Rang.",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W10",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Waffenloser Schlag (Stä+W4)": {
+            "name": "Waffenloser Schlag (Stä+W4)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Fäuste und Füße zählen als natürliche Waffen (Talent Kampfkünstler, Mönchs-Talent Waffenloser Schlag).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W4",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Waffenloser Schlag (Stä+W6)": {
+            "name": "Waffenloser Schlag (Stä+W6)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Gesteigerter waffenloser Schaden (Talent Kampfkunstmeister; der Schadenswürfel des Mönchs steigt mit dem Rang).",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W6",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
+        "Waffenloser Schlag (Stä+W8)": {
+            "name": "Waffenloser Schlag (Stä+W8)",
+            "kategorie": "Waffe",
+            "unterkategorie": "Natürliche Waffe",
+            "gewicht": 0,
+            "kosten": 0,
+            "setting": "",
+            "beschreibung": "Waffenloser Schaden eines Mönchs auf höherem Rang.",
+            "aktiv": true,
+            "typ": "Nahkampf",
+            "mindeststaerke": "-",
+            "eigenschaften": {
+                "Schaden": "Stä+W8",
+                "Reichweite": "nah",
+                "FR": "-",
+                "Schuss": "-",
+                "PB": "-"
+            }
+        },
         "Alchemistentasche": {
             "name": "Alchemistentasche",
             "kategorie": "Allgemein",

@@ -341,6 +341,16 @@
                         MDButtonText:
                             text: 'Erhöhe Startkapital mit Handicap-Punkten'
 
+                    MDButton:
+                        style: "outlined"
+                        size_hint: None, None
+                        size: dp(300), dp(40)
+                        pos_hint: {"left": 1}
+                        on_release: root.senke_startkapital()
+
+                        MDButtonText:
+                            text: 'Startkapital-Einlösung zurücknehmen'
+
                     # Generierungsstatus und Aufstiege
                     MDBoxLayout:
                         orientation: 'vertical'

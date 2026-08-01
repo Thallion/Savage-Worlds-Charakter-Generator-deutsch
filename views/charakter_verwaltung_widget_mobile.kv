@@ -293,6 +293,14 @@
                     MDButtonText:
                         text: 'Startkapital + Handicap-Pkt.'
 
+                MDButton:
+                    style: "outlined"
+                    size_hint_x: 1
+                    on_release: root.senke_startkapital()
+
+                    MDButtonText:
+                        text: 'Startkapital zurücknehmen'
+
                 MDLabel:
                     text: "Schließe die Erstellung ab, um Aufstiege freizuschalten."
                     size_hint_y: None

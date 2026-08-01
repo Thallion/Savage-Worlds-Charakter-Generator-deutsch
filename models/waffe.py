@@ -150,7 +150,8 @@ class Waffe(Ausruestung):
             ausgewaehlt=data.get('ausgewaehlt', False),
             aktiv=data.get('aktiv', True),
             angelegt=data.get('angelegt', False),
-            kategorie=data.get('kategorie', 'Waffe')
+            kategorie=data.get('kategorie', 'Waffe'),
+            unterkategorie=data.get('unterkategorie', '')
         )
 
     def to_dict(self):
@@ -162,6 +163,8 @@ class Waffe(Ausruestung):
             'eigenschaften': self.eigenschaften,
             'angelegt': self.angelegt
         })
+        if self.unterkategorie:
+            data['unterkategorie'] = self.unterkategorie
         return data
 
     def to_setting_dict(self):
@@ -173,6 +176,10 @@ class Waffe(Ausruestung):
             'eigenschaften': self.eigenschaften,
             # Fügen Sie weitere waffenrelevante Attribute hinzu
         })
+        # Unterkategorie kennzeichnet z.B. natürliche Waffen und darf beim
+        # Speichern eigener Settings nicht verloren gehen
+        if self.unterkategorie:
+            data['unterkategorie'] = self.unterkategorie
         return data
 
     @classmethod
@@ -187,5 +194,6 @@ class Waffe(Ausruestung):
             beschreibung=data.get('beschreibung', ''),
             eigenschaften=data.get('eigenschaften', {}),
             kategorie=data.get('kategorie', 'Waffe'),
+            unterkategorie=data.get('unterkategorie', ''),
             # Charakterbezogene Daten werden nicht geladen
         )

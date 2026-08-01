@@ -477,7 +477,7 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Größe -1 (Reduzierte Robustheit)": {
+            "Größe -1": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -625,7 +625,7 @@
         "Schwur_schwer",
         "Tick",
         "Zwei linke Hände",
-        "Größe -1 (Reduzierte Robustheit)",
+        "Größe -1",
         "Zwanghaft"
     ],
     "selected_talente": [
@@ -848,5 +848,8 @@
                 "kosten": 2
             }
         ]
-    }
+    },
+    "migrationen": [
+        "berserker_temporaer"
+    ]
 }

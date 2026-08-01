@@ -1012,10 +1012,13 @@ class AusruestungWidget(MDBoxLayout):
             self.ids.recycleview.data = []
             return
 
+        # Kostenlos aus Abstammung/Talenten gestellte Waffen (functions/natuerliche_waffen.py)
+        natuerliche_waffen = set(getattr(self.controller.charakter, 'natuerliche_waffen', []) or [])
+
         try:
             # Daten filtern
             filtered_items = []
-            
+
             for name, item in alle_ausruestung.items():
                 # Debug-Ausgabe für jedes Item
                 #Logger.debug(f"Verarbeite Item: {name}, Typ: {type(item).__name__}")
@@ -1035,12 +1038,19 @@ class AusruestungWidget(MDBoxLayout):
                     name_match = search_term in name.lower()
                     beschreibung = getattr(item, 'beschreibung', '')
                     beschreibung_match = search_term in beschreibung.lower() if beschreibung else False
-                    if not (name_match or beschreibung_match):
+                    unterkategorie = getattr(item, 'unterkategorie', '')
+                    unterkategorie_match = search_term in unterkategorie.lower() if unterkategorie else False
+                    if not (name_match or beschreibung_match or unterkategorie_match):
                         continue
-                
+
                 # Extrahiere detaillierte Informationen je nach Ausrüstungstyp
                 details = self._get_detail_text(item)
-                
+
+                # Aus Abstammung/Talenten kostenlos gestellte Waffen kennzeichnen
+                if name in natuerliche_waffen:
+                    details = " | ".join(filter(None, ["natürlich (kostenlos)", details]))
+
+
                 # RecycleView-Zeilendaten erstellen
                 item_data = {
                     'viewclass': 'AusruestungItemRow',

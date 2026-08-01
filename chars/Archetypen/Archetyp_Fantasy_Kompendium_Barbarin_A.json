@@ -47,7 +47,7 @@
         },
         "Stärke": {
             "attribut_name": "Stärke",
-            "wert": 10,
+            "wert": 8,
             "modifier": 0
         },
         "Konstitution": {
@@ -794,5 +794,8 @@
                 "kosten": 0.5
             }
         ]
-    }
+    },
+    "migrationen": [
+        "berserker_temporaer"
+    ]
 }

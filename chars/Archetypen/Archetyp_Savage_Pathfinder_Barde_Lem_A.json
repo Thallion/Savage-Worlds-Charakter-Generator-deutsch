@@ -467,7 +467,7 @@
                 "stufe": "leicht",
                 "punkte": 1
             },
-            "Größe -1 (Reduzierte Robustheit)": {
+            "Größe -1": {
                 "ausgewaehlt": true,
                 "stufe": "leicht",
                 "punkte": 1
@@ -582,7 +582,7 @@
         "Impulsiv",
         "Sanftmütig",
         "Tick",
-        "Größe -1 (Reduzierte Robustheit)"
+        "Größe -1"
     ],
     "selected_talente": [
         "AH (Barde)",
@@ -794,5 +794,8 @@
                 "kosten": 2
             }
         ]
-    }
+    },
+    "migrationen": [
+        "berserker_temporaer"
+    ]
 }

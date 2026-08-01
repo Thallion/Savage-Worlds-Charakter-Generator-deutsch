@@ -110,6 +110,19 @@ class CharacterHandler:
         except Exception as e:
             Logger.error(f"Fehler beim Erhöhen des Startkapitals: {e}")
 
+    def senke_startkapital(self):
+        """Nimmt eine Startkapital-Einlösung zurück"""
+        try:
+            if not self.controller:
+                Logger.warning("Controller nicht verfügbar für Startkapital-Rücknahme")
+                return
+
+            self.controller.senke_startkapital_mit_handicap()
+            self._update_ui_fields()
+            Logger.info("Startkapital-Einlösung zurückgenommen")
+        except Exception as e:
+            Logger.error(f"Fehler beim Zurücknehmen des Startkapitals: {e}")
+
     def erhoehe_aufstieg(self):
         """Erhöht die Aufstiege"""
         try:

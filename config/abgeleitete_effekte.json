@@ -10,7 +10,14 @@
     "Das Block-Paar ist BEWUSST ohne Gruppe (additiv, Ist-Verhalten).",
     "bedingung ist eine im Code ausgewertete geschlossene Menge,",
     "derzeit nur: keine_getragene_ruestung (Torso-Rüstungsschutz == 0).",
-    "Handicaps: exakter name- und stufe-Lookup; alle_stufen = stufenunabhängig."
+    "Handicaps: exakter name- und stufe-Lookup; alle_stufen = stufenunabhängig.",
+    "pro_setting überschreibt für das genannte Setting den kompletten Stufen-Block,",
+    "weil gleichnamige Handicaps settingabhängig anderes bedeuten können",
+    "(SWAE: Zerbrechlich = +1 Schaden, Fantasy Kompendium: -1 Robustheit).",
+    "Achtung Doppelzählung: Größe wirkt entweder über groesse_modifikator des",
+    "Volkes ODER über das Handicap 'Größe -1', nie über beides. Savage Pathfinder",
+    "und Savage Aventurien modellieren kleine Völker als Handicap, deren",
+    "groesse_modifikator ist daher 0."
   ],
   "talente": {
     "Block": { "parade": 1 },
@@ -49,6 +56,18 @@
     },
     "Schlank": {
       "alle_stufen": { "robustheit": -1 }
+    },
+    "Zerbrechlich": {
+      "schwer": { "robustheit": -1 },
+      "pro_setting": {
+        "Savage Pathfinder": { "leicht": { "robustheit": -1 } }
+      }
+    },
+    "Verringerte Vitalität": {
+      "leicht": { "robustheit": -1 }
+    },
+    "Größe -1": {
+      "leicht": { "groesse": -1 }
     },
     "Jung": {
       "leicht": { "bennys": 1 },
