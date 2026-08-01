@@ -1,5 +1,5 @@
 {
-    "_kommentar": "Natürliche/waffenlose Waffen aus Abstammung und Talenten. gruppen: Anzeigename je Waffengruppe (ergibt mit Würfel und PB den Namen des Ausrüstungs-Eintrags, z. B. 'Klauen (Stä+W6, PB 2)'). wuerfel_kette: Reihenfolge für 'steigert'. volkseigenarten: spezielle_effekte-Schlüssel -> Gruppe. talente: pro gewählter Kopie angewendet, in dieser Reihenfolge. grundwuerfel = nur setzen, wenn die Gruppe noch keinen Würfel hat; setzt = mindestens dieser Würfel; steigert = um n Würfeltypen erhöhen (nur wenn schon ein Würfel da ist); pb = Panzerbrechend mindestens auf diesen Wert; wiederholung = gilt ab der zweiten gewählten Kopie.",
+    "_kommentar": "Natürliche/waffenlose Waffen aus Abstammung und Talenten. gruppen: Anzeigename je Waffengruppe (ergibt mit Würfel und PB den Namen des Ausrüstungs-Eintrags, z. B. 'Klauen (Stä+W6, PB 2)'). wuerfel_kette: Reihenfolge für 'steigert'. volkseigenarten: spezielle_effekte-Schlüssel -> Gruppe. talente: pro gewählter Kopie angewendet, in dieser Reihenfolge. grundwuerfel = nur setzen, wenn die Gruppe noch keinen Würfel hat; setzt = mindestens dieser Würfel; steigert = um n Würfeltypen erhöhen (nur wenn schon ein Würfel da ist); steigert_alle = steigert jede Gruppe, die bereits einen Würfel hat (Raufbold/Schläger: 'oder erhöhe Würfeltyp bei Kombination mit Kampfkünstler, Klauen o. ä.'), und greift erst auf gruppe/grundwuerfel zurück, wenn der Charakter gar keine natürliche Waffe hat; pb = Panzerbrechend mindestens auf diesen Wert; wiederholung = gilt ab der zweiten gewählten Kopie.",
     "gruppen": {
         "unbewaffnet": "Waffenloser Schlag",
         "klauen": "Klauen",
@@ -25,7 +25,8 @@
         "Raufbold": {
             "gruppe": "unbewaffnet",
             "grundwuerfel": "W4",
-            "steigert": 1
+            "steigert": 1,
+            "steigert_alle": true
         },
         "Waffenloser Schlag": {
             "gruppe": "unbewaffnet",
@@ -37,7 +38,8 @@
         },
         "Schläger": {
             "gruppe": "unbewaffnet",
-            "steigert": 1
+            "steigert": 1,
+            "steigert_alle": true
         },
         "Klauen": {
             "gruppe": "klauen",

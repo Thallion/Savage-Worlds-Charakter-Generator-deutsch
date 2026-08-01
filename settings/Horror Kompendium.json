@@ -5951,6 +5951,291 @@
         "PB": "-"
       }
     },
+    "Biss (Stä+W8)": {
+      "name": "Biss (Stä+W8)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Biss (Stä+W8, PB 2)": {
+      "name": "Biss (Stä+W8, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Biss (Stä+W10)": {
+      "name": "Biss (Stä+W10)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Biss (Stä+W10, PB 2)": {
+      "name": "Biss (Stä+W10, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Biss/Klauen (Stä+W6, PB 2)": {
+      "name": "Biss/Klauen (Stä+W6, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss- oder Klauenangriff, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W6",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Biss/Klauen (Stä+W8, PB 2)": {
+      "name": "Biss/Klauen (Stä+W8, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss- oder Klauenangriff, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Biss/Klauen (Stä+W10)": {
+      "name": "Biss/Klauen (Stä+W10)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss- oder Klauenangriff, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Biss/Klauen (Stä+W10, PB 2)": {
+      "name": "Biss/Klauen (Stä+W10, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss- oder Klauenangriff, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Biss/Klauen (Stä+W10, PB 4)": {
+      "name": "Biss/Klauen (Stä+W10, PB 4)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Biss- oder Klauenangriff, dessen Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "4"
+      }
+    },
+    "Hörner (Stä+W8)": {
+      "name": "Hörner (Stä+W8)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Hörner, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Hörner (Stä+W10)": {
+      "name": "Hörner (Stä+W10)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Hörner, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Klauen (Stä+W8)": {
+      "name": "Klauen (Stä+W8)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Klauen, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Klauen (Stä+W8, PB 2)": {
+      "name": "Klauen (Stä+W8, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Klauen, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W8",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
+    "Klauen (Stä+W10)": {
+      "name": "Klauen (Stä+W10)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Klauen, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "-"
+      }
+    },
+    "Klauen (Stä+W10, PB 2)": {
+      "name": "Klauen (Stä+W10, PB 2)",
+      "kategorie": "Waffe",
+      "unterkategorie": "Natürliche Waffe",
+      "gewicht": 0,
+      "kosten": 0,
+      "setting": "",
+      "beschreibung": "Klauen, deren Würfeltyp durch Talente gesteigert wurde (z. B. Raufbold, Schläger).",
+      "aktiv": true,
+      "typ": "Nahkampf",
+      "mindeststaerke": "-",
+      "eigenschaften": {
+        "Schaden": "Stä+W10",
+        "Reichweite": "nah",
+        "FR": "-",
+        "Schuss": "-",
+        "PB": "2"
+      }
+    },
     "Silberkugeln (10)": {
       "name": "Silberkugeln (10)",
       "kategorie": "Munition",
