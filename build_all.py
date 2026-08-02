@@ -487,6 +487,21 @@ def build_android(dist_dir):
         except Exception as e:
             print(f"⚠️  Alignment-Verifikation fehlgeschlagen: {e}")
 
+    # R8-Keep-Regeln verifizieren (nur der Release-Build minifiziert).
+    # Ohne diese Prüfung fiele eine R8-Regression erst auf dem Gerät auf —
+    # der Java-Layer wird ausschließlich über JNI/pyjnius erreicht.
+    if aab_ok:
+        try:
+            from build_fixes import verify_r8_keep_rules
+            r8_probleme = verify_r8_keep_rules()
+            if r8_probleme:
+                print("\n" + "!"*70)
+                print("!! AAB NICHT HOCHLADEN — R8 hat Keep-Regeln verletzt.")
+                print("!! Details siehe oben; src/android/proguard-rules.pro ergänzen.")
+                print("!"*70)
+        except Exception as e:
+            print(f"⚠️  R8-Verifikation fehlgeschlagen: {e}")
+
     if apk_ok and aab_ok:
         print("\n✅ Beide Android-Artefakte erstellt (APK + AAB)")
     elif apk_ok or aab_ok:

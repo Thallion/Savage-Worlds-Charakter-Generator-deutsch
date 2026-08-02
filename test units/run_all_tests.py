@@ -78,6 +78,7 @@ TEST_MODULE = [
     'test_charakter_migration',
     'test_natuerliche_waffen',
     'test_statblock_generator',
+    'test_r8_verifikation',
 ]
 
 # Doppelte entfernen

@@ -623,21 +623,26 @@ class TalentItemRow(MDBoxLayout):
             message (str): Die anzuzeigende Fehlermeldung
         """
         try:
+            # WICHTIG: Kinder per add_widget() hinzufügen. Ein children=[...]
+            # im Konstruktor setzt zwar die Liste, parentet das Widget aber
+            # nicht und hängt seinen Canvas nicht ein — die Meldung bliebe
+            # unsichtbar.
+            message_label = MDLabel(
+                text=message,
+                size_hint_y=None,
+                height=dp(60)
+            )
+            message_box = MDBoxLayout(
+                orientation="vertical",
+                spacing=dp(10),
+                padding=dp(20),
+                adaptive_height=True,
+            )
+            message_box.add_widget(message_label)
+
             error_dialog = MDDialog(
                 MDDialogHeadlineText(text="Fehler"),
-                MDBoxLayout(
-                    orientation="vertical",
-                    spacing=dp(10),
-                    padding=dp(20),
-                    adaptive_height=True,
-                    children=[
-                        MDLabel(
-                            text=message,
-                            size_hint_y=None,
-                            height=dp(60)
-                        )
-                    ]
-                ),
+                MDDialogContentContainer(message_box),
                 MDDialogButtonContainer(
                     MDButton(
                         MDButtonText(text="OK"),
@@ -646,6 +651,7 @@ class TalentItemRow(MDBoxLayout):
                     ),
                     spacing="8dp",
                 ),
+                size_hint=(0.85, None),
                 auto_dismiss=False,
             )
             error_dialog.open()

@@ -24,6 +24,29 @@ scroll.add_widget(content_with_textfields)
 
 **Important:** Always use `TextFieldScrollView` instead of `MDScrollView` when the scroll area contains `MDTextField` widgets. This applies to all popups, overlays, and wizard dialogs.
 
+## Scrollbalken-Breite (`utils/scrollbar_defaults.py`)
+**Problem:** Kivys `ScrollView` hat als Default `bar_width = 2dp`. Ein 2dp-Balken ist auf einem Smartphone weder sichtbar noch mit dem Finger greifbar. Rund 50 ScrollViews im Projekt setzten keinen eigenen Wert und blieben deshalb bei 2dp.
+
+**Solution:** `apply_scrollbar_defaults()` hebt in `main.py` — vor dem Erzeugen der ersten Widgets — den **Default** der Kivy-Property an:
+
+| | mobil | Desktop |
+|---|---|---|
+| `bar_width` | `dp(20)` | `dp(15)` |
+| `bar_margin` | `dp(8)` | `dp(4)` |
+| `scroll_type` | `['bars', 'content']` | unverändert |
+
+```python
+# main.py, direkt nach den Kivy-Imports
+from utils.scrollbar_defaults import apply_scrollbar_defaults
+apply_scrollbar_defaults()
+```
+
+**Wichtig:**
+- Explizit gesetzte Werte (Konstruktor oder KV-Datei) gewinnen weiterhin — bewusst schmale Balken wie `dp(6)` in den Desktop-Listen bleiben unverändert.
+- Neue ScrollViews brauchen daher **kein** `bar_width` mehr. Nur setzen, wenn bewusst vom Standard abgewichen wird.
+- Wer explizit setzt, muss den Mobile-Fall mitdenken: `bar_width=dp(20) if _mobile else dp(15)`.
+- `MDScrollView` und `RecycleView` erben dieselbe Property-Instanz, der Patch wirkt also auch für den `CustomFileManager` (dessen `rv` zusätzlich rechtes Padding für den breiteren Balken bekommt).
+
 ## Checkbox/Button Debounce Pattern (Android Touch Bounce)
 **Problem:** On Android, touch events on `MDListItemTrailingCheckbox` and `MDButton` can fire multiple times for a single tap. This causes talents to be selected twice, checkboxes to toggle back, or actions to execute twice.
 
@@ -289,6 +312,17 @@ main_layout_height = Window.height * 0.95 - dp(80)
 main_layout = MDBoxLayout(orientation="vertical", size_hint_y=None, height=main_layout_height)
 ```
 
+**Achtung — die feste Höhe gehört NICHT an das Scroll-Kind.** Der Scrollbereich reicht nur so weit wie sein Kind hoch ist. Bekam der Inhalt eine feste Höhe (`height=dp(400)`), war längerer Text nicht mehr erreichbar — gemessen: 2323dp Text in einem auf 400dp gedeckelten Container, 83 % unscrollbar. Richtig ist:
+
+```python
+content.bind(minimum_height=content.setter('height'))   # Inhalt waechst mit dem Text
+scroll = MDScrollView(size_hint=(1, None), height=max_scroll_height)
+```
+
+**Chrome einrechnen:** Kopfzeile, Button-Leiste und Padding belegen ~200dp (mit zusätzlichem Content-Padding ~240dp). Ein Deckel von `Window.height * 0.6` ohne diesen Abzug sprengt im Landscape-Modus (Höhe ~360dp) den Bildschirm. Referenz: `services/dialog_service.py` — `show_info_dialog()`.
+
+**MDLabel und `text_size`:** `MDLabel` koppelt `text_size` an die eigene Breite und überschreibt einen im Konstruktor gesetzten Wert beim ersten Layout. `text_size=(dp(400), None)` ist dort also wirkungslos — der Umbruch folgt automatisch der Dialogbreite. Nur beim reinen Kivy-`Label` bleibt ein fester Wert stehen und läuft dann über den Rand hinaus.
+
 ## SearchBottomSheet (`views/ui_components.py`)
 **Problem:** `MDDialog` with search fields has severe touch issues on Android — the dialog's touch handling conflicts with the TextField and list scrolling.
 
@@ -336,6 +370,38 @@ Dieses Insets-Handling darf bei UI-Änderungen nicht entfernt werden — ohne di
 **Kein visueller Unterschied heute:** `presplash.filename` ist `assets/icon_512.png` (512×512). Auf üblichen Displays ergibt die Rechnung `inSampleSize = 1`, der Splash wird also unverändert in voller Qualität geladen. Der Fix ist eine Absicherung für den Fall, dass später ein größeres Presplash-Asset hinterlegt wird.
 
 **Regel:** Kein `BitmapFactory.decode*()` ohne `Options`-Parameter mit gesetztem `inSampleSize` ergänzen — sonst kehrt die Play-Console-Meldung zurück.
+
+### R8-Optimierung im Release-Build (KRITISCH)
+**Problem:** Die Play Console meldet "Deine App ist nicht optimiert — aktiviere ein Optimierungstool wie R8". Die p4a-Gradle-Vorlage lässt den `release`-Block leer, R8 lief also gar nicht.
+
+**Solution:** `build_fixes.py` → `fix_gradle_r8_optimization()` setzt `minifyEnabled true` + `proguardFiles` in den `release`-Block (p4a-Vorlagen `build.tmpl.gradle` auf allen drei Ebenen + gerenderte `build.gradle`) und kopiert `src/android/proguard-rules.pro` in jedes Bootstrap-/Dist-Verzeichnis. p4a kopiert beim Dist-Bau das komplette Bootstrap-Build-Verzeichnis (`sh.cp -r`, siehe `bootstraps/sdl2/__init__.py`), dadurch landet die Regeldatei automatisch in jeder neu erzeugten Dist. Idempotent über den Marker `R8-OPTIMIZATION-FIX`.
+
+**Warum die Keep-Regeln existenziell sind:** In dieser App ist praktisch KEINE Java-Klasse statisch erreichbar. Einstiegspunkt ist natives C (SDL2 + CPython), die App-Logik ist Python. Java wird nur über JNI (SDL2 → `org.libsdl.app`, `start.c` → `PythonActivity`) und Reflection (pyjnius `autoclass()`/`PythonJavaClass`) angefasst — beide Wege sind für R8 unsichtbar. Ohne `src/android/proguard-rules.pro` entfernt bzw. umbenennt R8 den halben Bootstrap, und die App stürzt beim Start ab — **aber nur im Release-Build**.
+
+**`shrinkResources` bleibt bewusst AUS.** p4a sucht Ressourcen zur Laufzeit über `ResourceManager.getIdentifier("presplash", "drawable")` per Name. Resource-Shrinking sieht diese Zugriffe nicht und würde Presplash, Layouts und `res/xml/file_paths.xml` (FileProvider!) entfernen.
+
+**Wirkung (gemessen, `assembleDebug` vs. `assembleRelease`):** DEX 6,36 MB in 6 Dateien → 183 KB in einer einzigen Datei (−97 %, kein Multidex mehr → schnelleres Klassenladen beim Start). APK 24,8 MB → 22,6 MB (−9 %). Der Rest sind Python-Bundle und `.so`-Dateien, die R8 grundsätzlich nicht anfasst.
+
+**Regel — Fallstrick beim Testen:** `minifyEnabled` gilt nur für den `release`-Build. `build_android.py` baut `buildozer android debug`, läuft also KOMPLETT ohne R8. Ein grüner lokaler Debug-Build beweist über R8 gar nichts. Wer die Keep-Regeln ändert, muss einen Release-Build auf einem echten Gerät starten und mindestens Splash, Intent-Empfang ("Teilen an" die App) sowie PDF-/HTML-Export durchtesten.
+
+**Verifikation ohne Gerät — automatisiert:** `build_fixes.py` → `verify_r8_keep_rules()` läuft in `build_all.py` nach jedem erfolgreichen AAB-Build und ist einzeln aufrufbar:
+
+```bash
+python build_fixes.py --verify-r8      # Exit-Code 1 bei Verletzung
+```
+
+Die Prüfung nutzt **zwei Quellen, und das ist notwendig**:
+
+1. **Umbenennung → `mapping.txt`.** Jede von einer Keep-Regel abgedeckte Klasse muss auf sich selbst gemappt sein. Die Keep-Regeln werden dabei aus `src/android/proguard-rules.pro` *gelesen* statt im Prüfcode dupliziert — sonst laufen Regelwerk und Prüfung auseinander.
+2. **Existenz → DEX des Release-Artefakts.** `mapping.txt` taugt dafür NICHT: R8 listet dort nicht jedes überlebende Member. `PythonActivity.mActivity` fehlt z.B. im Mapping, steht aber im DEX — ein Presence-Check über `mapping.txt` würde Fehlalarme erzeugen. Geprüft wird die Liste `R8_REFLEKTIONS_EINSTIEGSPUNKTE` (best-effort; übersprungen, wenn Artefakt oder `dexdump` fehlen).
+
+**Zwei Fallen, die in der Prüflogik berücksichtigt sind:**
+- **R8-Synthetik.** Klassen mit `$$ExternalSynthetic`/`$$InternalSynthetic`/`$$Lambda` und Member mit `$r8$lambda$`/`lambda$`/`access$` erzeugt R8 selbst und benennt sie um. Das ist unbedenklich und wird ausgefiltert — ohne diesen Filter meldet jeder echte Release-Build Fehlalarme.
+- **Inline-Frames in `mapping.txt`.** Zeilen mit voll qualifiziertem Member-Namen (`… foo.Fremd.methode(…) -> x`) stammen aus einer anderen Klasse und dürfen nicht der umgebenden zugeordnet werden.
+
+**`usage.txt` ist KEIN Alarmsignal.** R8 listet dort auch weg-inlinete Methoden als "entfernt" — z.B. `FileProvider$SimplePathStrategy.getUriForFile`, die in den öffentlichen Einstiegspunkt inlinet wurde und einwandfrei funktioniert.
+
+Abgesichert durch `test units/test_r8_verifikation.py` (17 Tests): konstruierte Verletzungen (umbenannte Klasse/Member, fehlende DEX-Klasse/-Methode) müssen gemeldet, Synthetik-Namen und ungeschützte Klassen dürfen NICHT gemeldet werden.
 
 ### Build-Voraussetzungen für API 36
 - SDK Platform 36 + passende Build-Tools müssen lokal installiert sein (`android.skip_update = True` verhindert den Auto-Download durch buildozer)

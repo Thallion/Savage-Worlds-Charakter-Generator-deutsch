@@ -19,6 +19,10 @@ Zusätzlich: Bitmap-Downsampling (BitmapFactory.Options.inSampleSize) in
 PythonActivity.getLoadingScreen und launcher.Project.scanDirectory —
 von Google Play als "BitmapFactory ohne Downsampling" gemeldet.
 
+Zusätzlich: R8-Optimierung für den Release-Build (minifyEnabled + Keep-Regeln
+aus src/android/proguard-rules.pro) — von Google Play als "Deine App ist nicht
+optimiert" gemeldet.
+
 Wird automatisch von build_android.py / build_all.py aufgerufen, BEVOR buildozer startet.
 Kann auch manuell ausgeführt werden: python build_fixes.py
 """
@@ -674,6 +678,200 @@ def fix_p4a_bitmap_downsampling():
     return fixed_any
 
 
+R8_FIX_MARKER = "R8-OPTIMIZATION-FIX"
+
+PROGUARD_RULES_NAME = "proguard-rules.pro"
+
+# Quelle der Wahrheit im Repo (build_fixes.py liegt im Projekt-Root).
+# Absolut auflösen: der p4a-Hook läuft mit cwd = dist_dir, dort gibt es ein
+# eigenes src/-Verzeichnis, ein relativer Pfad würde also ins Leere greifen.
+PROGUARD_RULES_QUELLE = Path(__file__).resolve().parent / "src" / "android" / PROGUARD_RULES_NAME
+
+# Der release-Block der p4a-Gradle-Vorlage ist leer bzw. enthält nur den
+# optionalen signingConfig. Wir hängen die R8-Aktivierung direkt hinter die
+# öffnende Klammer. Das Muster ist bewusst eng an buildTypes{debug{}release{}
+# verankert, damit kein anderer "release {"-Block getroffen wird.
+_R8_RELEASE_BLOCK_RE = re.compile(
+    r'(buildTypes\s*\{\s*debug\s*\{\s*\}\s*release\s*\{)'
+)
+
+_R8_RELEASE_BLOCK_REPLACEMENT = (
+    f'''\\g<1>
+            // {R8_FIX_MARKER}: R8 aktivieren (Google Play "App-Optimierung").
+            // Verkleinert und optimiert NUR den Java-Layer (p4a-Bootstrap, SDL2,
+            // pyjnius-Glue) — Python-Code und .so-Dateien bleiben unberührt.
+            minifyEnabled true
+            // shrinkResources bleibt BEWUSST aus: p4a sucht Ressourcen zur
+            // Laufzeit über ResourceManager.getIdentifier("presplash", "drawable")
+            // per Name. Das Resource-Shrinking sieht diese Zugriffe nicht und
+            // würde Presplash, Layouts und res/xml/file_paths.xml entfernen.
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '{PROGUARD_RULES_NAME}\''''
+)
+
+
+def _find_gradle_files():
+    """Sammelt die Gradle-Build-Dateien: p4a-Vorlagen (build.tmpl.gradle) UND
+    bereits gerenderte build.gradle in den Dists.
+
+    Die Vorlagen sind der wichtigere Teil — p4a rendert build.gradle bei jedem
+    Build neu, ein Patch nur an der gerenderten Datei ginge verloren.
+    """
+    gradle_files = []
+
+    # 1) p4a-Bootstrap-Vorlagen (venv + buildozer-extrahierte Kopie)
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        for tmpl in [
+            p4a_dir / "bootstraps" / "common" / "build" / "templates" / "build.tmpl.gradle",
+            p4a_dir / "bootstraps" / "sdl2" / "build" / "templates" / "build.tmpl.gradle",
+        ]:
+            if tmpl.exists():
+                gradle_files.append(tmpl)
+
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        # 2) Zwischenstände der Bootstrap-Builds
+        gradle_files += list(platform_dir.glob(
+            "build-*/build/bootstrap_builds/*/templates/build.tmpl.gradle"))
+        # 3) In die Dists kopierte Vorlagen + gerenderte build.gradle
+        gradle_files += list(platform_dir.glob("build-*/dists/*/templates/build.tmpl.gradle"))
+        gradle_files += list(platform_dir.glob("build-*/dists/*/build.gradle"))
+
+    # 4) cwd, falls der p4a-Hook bereits im Dist-Verzeichnis läuft
+    for kandidat in [Path("templates/build.tmpl.gradle"), Path("build.gradle")]:
+        if kandidat.exists() and Path("build.py").exists():
+            gradle_files.append(kandidat)
+
+    seen = set()
+    unique = []
+    for f in gradle_files:
+        resolved = f.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(f)
+    return unique
+
+
+def _find_proguard_ziel_dirs():
+    """Verzeichnisse, in die proguard-rules.pro gehört — überall dort, wo auch
+    build.gradle landet.
+
+    p4a kopiert beim Dist-Bau das komplette Bootstrap-Build-Verzeichnis
+    (`sh.cp -r build_dir dist_dir`, siehe bootstraps/sdl2/__init__.py). Die
+    Datei im Bootstrap-Verzeichnis wandert dadurch automatisch in jede neu
+    erzeugte Dist — nur die Dist zu bestücken würde ein `buildozer android
+    clean` nicht überleben.
+    """
+    ziele = []
+
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        bootstrap_build = p4a_dir / "bootstraps" / "sdl2" / "build"
+        if bootstrap_build.exists():
+            ziele.append(bootstrap_build)
+
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        ziele += [d for d in platform_dir.glob("build-*/build/bootstrap_builds/*") if d.is_dir()]
+        ziele += [d for d in platform_dir.glob("build-*/dists/*") if d.is_dir()]
+
+    # cwd, falls der p4a-Hook bereits im Dist-Verzeichnis läuft
+    if Path("build.py").exists() and Path("templates").is_dir():
+        ziele.append(Path("."))
+
+    seen = set()
+    unique = []
+    for d in ziele:
+        resolved = d.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(d)
+    return unique
+
+
+def fix_gradle_r8_optimization():
+    """Aktiviert R8 für den Release-Build und hinterlegt die Keep-Regeln.
+
+    Hintergrund: Google Play meldet "Deine App ist nicht optimiert — aktiviere
+    ein Optimierungstool wie R8". Die p4a-Gradle-Vorlage lässt den
+    release-Block leer, R8 läuft also gar nicht.
+
+    Zwei Teile:
+      1. `minifyEnabled true` + `proguardFiles` im release-Block (Vorlagen UND
+         gerenderte build.gradle).
+      2. `src/android/proguard-rules.pro` in jedes Dist-/Bootstrap-Verzeichnis
+         kopieren. Ohne diese Keep-Regeln zerlegt R8 die App: der komplette
+         Java-Layer wird nur über JNI (SDL2, CPython) und Reflection (pyjnius)
+         erreicht und ist für die statische Analyse unsichtbar.
+
+    `shrinkResources` bleibt bewusst deaktiviert — siehe Kommentar im
+    eingefügten Gradle-Block.
+
+    Idempotent: erkennt den bereits gepatchten Zustand am Marker.
+    """
+    print("P4A Hook: Checking Gradle build for R8 optimization...")
+
+    if not PROGUARD_RULES_QUELLE.exists():
+        print(
+            f"P4A Hook: WARNUNG — {PROGUARD_RULES_QUELLE} fehlt. R8 wird NICHT "
+            "aktiviert (ohne Keep-Regeln würde der Release-Build abstürzen)."
+        )
+        return False
+
+    regeln = PROGUARD_RULES_QUELLE.read_text()
+    fixed_any = False
+
+    # --- Teil 1: Keep-Regeln verteilen -------------------------------------
+    ziel_dirs = _find_proguard_ziel_dirs()
+    for ziel_dir in ziel_dirs:
+        ziel = ziel_dir / PROGUARD_RULES_NAME
+        try:
+            if ziel.exists() and ziel.read_text() == regeln:
+                continue
+            ziel.write_text(regeln)
+            print(f"P4A Hook: {PROGUARD_RULES_NAME} geschrieben nach {ziel}")
+            fixed_any = True
+        except Exception as e:
+            print(f"P4A Hook: Error writing {ziel}: {e}")
+
+    # --- Teil 2: R8 im release-Block aktivieren ----------------------------
+    gradle_files = _find_gradle_files()
+    if not gradle_files:
+        print("P4A Hook: No Gradle build files found, skipping R8 fix")
+        return fixed_any
+
+    for gradle_file in gradle_files:
+        try:
+            content = gradle_file.read_text()
+
+            if R8_FIX_MARKER in content:
+                print(f"P4A Hook: R8 already enabled in {gradle_file}")
+                continue
+
+            new_content, count = _R8_RELEASE_BLOCK_RE.subn(
+                _R8_RELEASE_BLOCK_REPLACEMENT, content, count=1
+            )
+            if count == 0:
+                if 'minifyEnabled' in content:
+                    print(f"P4A Hook: {gradle_file} enables minify already (fremder Patch?)")
+                else:
+                    print(
+                        f"P4A Hook: WARNUNG — release-Block in {gradle_file} nicht "
+                        "gefunden (p4a-Version geändert?)"
+                    )
+                continue
+
+            gradle_file.write_text(new_content)
+            print(f"P4A Hook: R8 enabled in {gradle_file}")
+            fixed_any = True
+
+        except Exception as e:
+            print(f"P4A Hook: Error fixing {gradle_file}: {e}")
+
+    if not fixed_any:
+        print("P4A Hook: R8 already enabled everywhere")
+
+    return fixed_any
+
+
 def fix_pyjnius_python3_compatibility():
     """Fix Python 3+ / Cython 3.x compatibility issues in ALL pyjnius .pxi files"""
     print("P4A Hook: Searching for pyjnius build directories...")
@@ -1076,6 +1274,278 @@ def verify_so_alignment(libs_dir: Path = None):
     return bad
 
 
+# ===========================================================================
+# R8-Verifikation (nach dem Release-Build)
+# ===========================================================================
+
+# Von R8/D8 selbst erzeugte Klassen (Desugaring: Lambda- und API-Model-Outlining).
+# Sie existieren im Quellcode nicht und werden nie über JNI/Reflection per Name
+# angesprochen — ihre Umbenennung ist unbedenklich und KEIN Fehler.
+_R8_SYNTHETIK_MARKER = ("$$ExternalSynthetic", "$$InternalSynthetic", "$$Lambda")
+
+# Dasselbe auf Member-Ebene: von R8 erzeugte Lambda-Bridges ($r8$lambda$…),
+# javac-Lambda-Rümpfe (lambda$methode$0) und synthetische Zugriffsmethoden
+# (access$000). Alle existieren im Quellcode nicht und werden nie per Name
+# aufgerufen — ihre Umbenennung ist unbedenklich.
+_R8_SYNTHETIK_MEMBER_PRAEFIXE = ("$r8$lambda$", "lambda$", "access$")
+
+# Einstiegspunkte, die ausschließlich über JNI oder pyjnius erreicht werden.
+# Sie MÜSSEN im DEX vorhanden und unbenannt sein — kein Java-Code referenziert
+# sie, R8 kann ihren Wegfall also nicht selbst bemerken.
+R8_REFLEKTIONS_EINSTIEGSPUNKTE = {
+    # manager/html_manager.py, utils/share_utils.py -> Teilen/Export
+    "androidx.core.content.FileProvider": ["getUriForFile"],
+    # views/app_navigation_mixin.py, main.py, android.activity.bind()
+    "org.kivy.android.PythonActivity": [
+        "mActivity", "registerNewIntentListener", "onNewIntent", "getLoadingScreen",
+    ],
+    "org.kivy.android.PythonUtil": ["loadLibraries"],
+    # Presplash-Lookup zur Laufzeit (getIdentifier statt R.drawable)
+    "org.renpy.android.ResourceManager": ["getIdentifier"],
+    # PythonJavaClass-Brücke (NewIntentListener)
+    "org.jnius.NativeInvocationHandler": ["invoke"],
+    # SDL2 ruft seine Java-Seite komplett aus nativem Code auf
+    "org.libsdl.app.SDLActivity": ["nativeSetenv", "onNativeResize"],
+    # Entpackt das Python-Bundle beim ersten Start
+    "org.kamranzafar.jtar.TarInputStream": ["getNextEntry"],
+}
+
+
+def _lies_keep_regeln(proguard_datei=None):
+    """Liest die Keep-Regeln aus proguard-rules.pro.
+
+    Returns:
+        (praefixe, exakte) — Paketpräfixe aus `-keep class foo.bar.** { *; }`
+        (inkl. abschließendem Punkt) und exakte Klassennamen aus
+        `-keep class foo.Bar { *; }`.
+
+    Die Regeln werden aus der Datei gelesen statt hier dupliziert, damit
+    Prüfung und Regelwerk nicht auseinanderlaufen können.
+    """
+    if proguard_datei is None:
+        proguard_datei = PROGUARD_RULES_QUELLE
+    proguard_datei = Path(proguard_datei)
+
+    praefixe, exakte = set(), set()
+    if not proguard_datei.exists():
+        return praefixe, exakte
+
+    for zeile in proguard_datei.read_text().splitlines():
+        zeile = zeile.split('#', 1)[0].strip()
+        m = re.match(r'-keep(?:\w*)\s+class\s+([\w.$*]+)\s*\{', zeile)
+        if not m:
+            continue
+        ziel = m.group(1)
+        if ziel.endswith('.**') or ziel.endswith('.*'):
+            praefixe.add(ziel.rstrip('*').rstrip('.') + '.')
+        elif '*' not in ziel:
+            exakte.add(ziel)
+    return praefixe, exakte
+
+
+def _ist_geschuetzt(klasse, praefixe, exakte):
+    """True, wenn die Klasse von einer Keep-Regel abgedeckt ist."""
+    return klasse in exakte or any(klasse.startswith(p) for p in praefixe)
+
+
+def _parse_mapping(mapping_datei):
+    """Parst mapping.txt zu {original_klasse: (obf_klasse, {orig_member: obf_member})}.
+
+    Format je Klasse:  `orig.Klasse -> obf.Klasse:`
+    Format je Member:  `    [n:m:]<Typ> <name>[(args)][:zeile[:zeile]] -> <obf>`
+
+    Zeilen mit voll qualifiziertem Member-Namen (`... Fremd.Klasse.methode(...)`)
+    sind Inline-Frames aus einer ANDEREN Klasse und werden übersprungen — sonst
+    würden sie fälschlich der umgebenden Klasse zugeordnet.
+    """
+    ergebnis = {}
+    aktuell = None
+
+    for zeile in Path(mapping_datei).read_text(errors="replace").splitlines():
+        if not zeile.strip() or zeile.lstrip().startswith('#'):
+            continue
+
+        if not zeile[0].isspace():
+            m = re.match(r'^([\w.$]+)\s+->\s+([\w.$]+):$', zeile)
+            if m:
+                aktuell = m.group(1)
+                ergebnis[aktuell] = (m.group(2), {})
+            else:
+                aktuell = None
+            continue
+
+        if aktuell is None or ' -> ' not in zeile:
+            continue
+
+        links, _, obf = zeile.strip().rpartition(' -> ')
+        # führende Zeilennummern "12:34:" entfernen
+        links = re.sub(r'^\d+:\d+:', '', links)
+        if ' ' not in links:
+            continue
+        _typ, _, rest = links.partition(' ')
+        name = rest.split('(', 1)[0].split(':', 1)[0].strip()
+        if '.' in name:      # Inline-Frame aus fremder Klasse
+            continue
+        ergebnis[aktuell][1].setdefault(name, obf.strip())
+
+    return ergebnis
+
+
+def _finde_mapping_dateien():
+    """Sucht mapping.txt aller Release-Builds in den Dists."""
+    platform_dir = Path(".buildozer/android/platform")
+    if not platform_dir.exists():
+        return []
+    return sorted(platform_dir.glob(
+        "build-*/dists/*/build/outputs/mapping/release/mapping.txt"))
+
+
+def _finde_release_dex():
+    """Extrahiert classes.dex aus dem Release-AAB/-APK und liefert die
+    dexdump-Ausgabe. Best-effort: None, wenn Artefakt oder dexdump fehlen.
+    """
+    import subprocess as _sp
+    import tempfile
+    import zipfile
+
+    artefakte = []
+    for muster in [
+        ".buildozer/android/platform/build-*/dists/*/build/outputs/bundle/release/*.aab",
+        ".buildozer/android/platform/build-*/dists/*/build/outputs/apk/release/*.apk",
+        "bin/*-release*.aab",
+        "bin/*-release*.apk",
+    ]:
+        artefakte += list(Path('.').glob(muster))
+    if not artefakte:
+        return None
+
+    artefakt = max(artefakte, key=lambda p: p.stat().st_mtime)
+
+    dexdumps = sorted(Path("/home/jean/Android/Sdk/build-tools").glob("*/dexdump"))
+    if not dexdumps:
+        sdk = os.environ.get("ANDROID_HOME") or os.environ.get("ANDROIDSDK")
+        if sdk:
+            dexdumps = sorted(Path(sdk).glob("build-tools/*/dexdump"))
+    if not dexdumps:
+        return None
+
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            with zipfile.ZipFile(artefakt) as z:
+                dex_eintraege = [n for n in z.namelist() if n.endswith("classes.dex")]
+                if not dex_eintraege:
+                    return None
+                ziel = Path(tmp) / "classes.dex"
+                ziel.write_bytes(z.read(dex_eintraege[0]))
+            aus = _sp.run([str(dexdumps[-1]), "-d", str(ziel)],
+                          capture_output=True, text=True, timeout=300)
+        except Exception:
+            return None
+
+    if aus.returncode != 0:
+        return None
+
+    klassen, akt = {}, None
+    for zeile in aus.stdout.splitlines():
+        m = re.match(r"\s*Class descriptor\s*:\s*'L([^;]+);'", zeile)
+        if m:
+            akt = m.group(1).replace("/", ".")
+            klassen.setdefault(akt, set())
+            continue
+        m = re.match(r"\s*name\s*:\s*'([^']+)'", zeile)
+        if m and akt:
+            klassen[akt].add(m.group(1))
+    return (artefakt, klassen)
+
+
+def verify_r8_keep_rules(mapping_datei=None):
+    """Prüft nach einem Release-Build, ob R8 die Keep-Regeln eingehalten hat.
+
+    Zwei Prüfungen mit unterschiedlichen Quellen — das ist Absicht:
+
+    1. UMBENENNUNG (mapping.txt): Jede von einer Keep-Regel abgedeckte Klasse
+       muss auf sich selbst gemappt sein. Von R8 erzeugte Synthetik-Klassen
+       ($$ExternalSynthetic…) sind ausgenommen.
+    2. EXISTENZ (DEX): Die nur über JNI/pyjnius erreichten Einstiegspunkte
+       müssen im Artefakt vorhanden sein. Das lässt sich NICHT über mapping.txt
+       prüfen — R8 listet dort nicht jedes überlebende Member (z.B. fehlt
+       PythonActivity.mActivity, obwohl es im DEX steht). Der DEX-Teil ist
+       best-effort und wird übersprungen, wenn Artefakt oder dexdump fehlen.
+
+    Bricht den Build NICHT ab — meldet nur. Gibt die Liste der Probleme zurück.
+    """
+    probleme = []
+
+    dateien = [Path(mapping_datei)] if mapping_datei else _finde_mapping_dateien()
+    if not dateien or not dateien[0].exists():
+        print("\nP4A Hook: Keine mapping.txt gefunden — R8 lief nicht "
+              "(Debug-Build?). R8-Verifikation übersprungen.")
+        return probleme
+
+    praefixe, exakte = _lies_keep_regeln()
+    if not praefixe and not exakte:
+        print(f"P4A Hook: WARNUNG — keine Keep-Regeln aus {PROGUARD_RULES_QUELLE} "
+              "gelesen. R8-Verifikation nicht aussagekräftig.")
+        return ["Keep-Regeln nicht lesbar"]
+
+    mapping = dateien[-1]
+    print(f"\nP4A Hook: Prüfe R8-Keep-Regeln gegen {mapping}...")
+    print("-" * 70)
+
+    # --- 1. Umbenennung ---------------------------------------------------
+    eintraege = _parse_mapping(mapping)
+    geprueft = 0
+    for orig, (obf, member) in sorted(eintraege.items()):
+        if not _ist_geschuetzt(orig, praefixe, exakte):
+            continue
+        if any(marker in orig for marker in _R8_SYNTHETIK_MARKER):
+            continue
+        geprueft += 1
+        if orig != obf:
+            probleme.append(f"Klasse umbenannt: {orig} -> {obf}")
+            continue
+        for m_orig, m_obf in sorted(member.items()):
+            if m_orig == m_obf:
+                continue
+            if m_orig.startswith(_R8_SYNTHETIK_MEMBER_PRAEFIXE):
+                continue
+            probleme.append(f"Member umbenannt: {orig}.{m_orig} -> {m_obf}")
+
+    print(f"  Keep-Regeln: {len(praefixe)} Paketpräfixe, {len(exakte)} Einzelklassen")
+    print(f"  {geprueft} geschützte Klassen im Mapping geprüft")
+
+    # --- 2. Existenz der Reflection-Einstiegspunkte ------------------------
+    dex = _finde_release_dex()
+    if dex is None:
+        print("  ⏭️  DEX-Prüfung übersprungen (kein Release-Artefakt oder "
+              "dexdump nicht gefunden)")
+    else:
+        artefakt, klassen = dex
+        print(f"  DEX aus {artefakt.name}: {len(klassen)} Klassen")
+        for klasse, noetig in sorted(R8_REFLEKTIONS_EINSTIEGSPUNKTE.items()):
+            if klasse not in klassen:
+                probleme.append(f"Klasse fehlt im DEX: {klasse}")
+                continue
+            fehlend = [m for m in noetig if m not in klassen[klasse]]
+            if fehlend:
+                probleme.append(
+                    f"Member fehlt im DEX: {klasse} -> {', '.join(fehlend)}")
+
+    # --- Ergebnis ---------------------------------------------------------
+    print("-" * 70)
+    if probleme:
+        print(f"❌ R8 hat {len(probleme)} Keep-Regel-Verletzung(en) produziert:")
+        for p in probleme:
+            print(f"     - {p}")
+        print("    Die App wird im Release-Build sehr wahrscheinlich abstürzen.")
+        print(f"    Lösung: {PROGUARD_RULES_QUELLE} ergänzen und neu bauen.")
+    else:
+        print("✅ R8-Keep-Regeln eingehalten (keine Umbenennung, "
+              "alle Reflection-Einstiegspunkte vorhanden).")
+
+    return probleme
+
+
 # p4a Hook-Funktionen (werden von python-for-android aufgerufen)
 def before_apk_build(toolchain):
     """p4a Hook: Wird vor dem APK-Build aufgerufen"""
@@ -1087,12 +1557,19 @@ def before_apk_build(toolchain):
     fix_android_manifest_large_screens()
     fix_p4a_activity_orientation_restriction()
     fix_p4a_bitmap_downsampling()
+    fix_gradle_r8_optimization()
     fix_p4a_ldflags_for_16kb_alignment()
     fix_sdl2_bootstrap_16kb_alignment()
     fix_sqlite3_recipe_16kb_alignment()
 
 
 if __name__ == "__main__":
+    # Reiner Prüfmodus: nach einem Release-Build die R8-Keep-Regeln validieren.
+    # Exit-Code 1 bei Verletzung, damit der Aufruf in einer Pipeline greift.
+    if "--verify-r8" in sys.argv:
+        _probleme = verify_r8_keep_rules()
+        sys.exit(1 if _probleme else 0)
+
     print("P4A Hook: Starting build fixes...")
 
     kivy_fixed = fix_kivy_python3_compatibility()
@@ -1123,6 +1600,10 @@ if __name__ == "__main__":
     if bitmap_fixed:
         print("P4A Hook: Bitmap-Downsampling in p4a-Bootstrap-Klassen ergänzt")
 
+    r8_fixed = fix_gradle_r8_optimization()
+    if r8_fixed:
+        print("P4A Hook: R8-Optimierung für den Release-Build aktiviert")
+
     archs_fixed = fix_p4a_ldflags_for_16kb_alignment()
     if archs_fixed:
         print("P4A Hook: archs.py mit 16 KB LDFLAGS gepatcht")
@@ -1136,7 +1617,7 @@ if __name__ == "__main__":
         print("P4A Hook: sqlite3 Android.mk mit 16 KB LOCAL_LDFLAGS gepatcht")
 
     if any([kivy_fixed, pyjnius_fixed, manifest_fixed, back_fixed, large_screen_fixed,
-            orientation_fixed, bitmap_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
+            orientation_fixed, bitmap_fixed, r8_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")

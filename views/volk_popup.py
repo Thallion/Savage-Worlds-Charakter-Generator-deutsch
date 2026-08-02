@@ -359,7 +359,8 @@ class VolkGeneratorWizard:
             layout.add_widget(items_label)
 
             row_height = dp(48) if _mobile else dp(42)
-            items_scroll = MDScrollView(size_hint_y=1, bar_width=dp(12), bar_margin=dp(4))
+            items_scroll = MDScrollView(size_hint_y=1, bar_width=dp(20) if _mobile else dp(12),
+                                        bar_margin=dp(8) if _mobile else dp(4))
             items_content = MDBoxLayout(
                 orientation="vertical",
                 spacing=dp(6),
@@ -423,7 +424,8 @@ class VolkGeneratorWizard:
         remove_btn = MDIconButton(
             icon="close",
             size_hint=(None, None),
-            size=(dp(32), dp(32)),
+            # Android-Mindestgröße für Touch-Ziele: 48dp
+            size=(dp(48), dp(48)) if _mobile else (dp(32), dp(32)),
             pos_hint={"center_y": 0.5}
         )
         e = eigenart
@@ -563,7 +565,8 @@ class VolkGeneratorWizard:
                             icon="delete",
                             style="tonal",
                             size_hint=(None, None),
-                            size=(dp(32), dp(32)),
+                            # Android-Mindestgröße für Touch-Ziele: 48dp
+                            size=(dp(48), dp(48)) if _mobile else (dp(32), dp(32)),
                             pos_hint={"center_y": 0.5}
                         )
                         del_id = eigenart_id
@@ -1805,7 +1808,9 @@ class VolkGeneratorWizard:
             rang_list_layout.add_widget(list_item)
             rang_radio_checkboxes[idx] = radio_cb
 
-        rang_scroll = MDScrollView(size_hint_y=None, bar_width=dp(15), bar_margin=dp(4), height=dp(150))
+        rang_scroll = MDScrollView(size_hint_y=None, height=dp(150),
+                                   bar_width=dp(20) if _mobile else dp(15),
+                                   bar_margin=dp(8) if _mobile else dp(4))
         rang_scroll.add_widget(rang_list_layout)
         content.add_widget(rang_scroll)
 

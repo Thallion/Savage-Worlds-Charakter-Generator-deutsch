@@ -129,7 +129,7 @@ class HTMLManager:
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True)
         scroll.add_widget(checkbox_list)
         content.add_widget(scroll)
 
@@ -206,7 +206,7 @@ class HTMLManager:
         steigerungen_item.add_widget(self.show_steigerungen_checkbox)
         checkbox_list.add_widget(steigerungen_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True)
         scroll.add_widget(checkbox_list)
         content.add_widget(scroll)
 

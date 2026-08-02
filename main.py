@@ -31,6 +31,12 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition, NoTransition
 
+# Scrollbalken-Defaults anheben, BEVOR die ersten Widgets erzeugt werden.
+# Kivy-Default ist 2dp — auf Android nicht greifbar. Explizite Werte in
+# Views/KV-Dateien gewinnen weiterhin.
+from utils.scrollbar_defaults import apply_scrollbar_defaults
+apply_scrollbar_defaults()
+
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField

@@ -866,27 +866,26 @@ class DialogContentBase(MDBoxLayout):
         self.size_hint_y = None
         self.height = DIALOG_HEIGHT
         
+        # HinweisTexte als positionale Kinder übergeben — ein children=[...]
+        # im Konstruktor parentet die Labels nicht, dadurch blieben die
+        # Feldbeschriftungen leer (auf Android besonders verwirrend).
         self.anzahl_field = MDTextField(
+            MDTextFieldHintText(
+                text="Anzahl"
+            ),
             mode="outlined",
             text="1",
             input_filter="int",
-            children=[
-                MDTextFieldHintText(
-                    text="Anzahl"
-                )
-            ]
         )
         self.add_widget(self.anzahl_field)
 
         self.preis_field = MDTextField(
+            MDTextFieldHintText(
+                text="Preis pro Stück (optional)"
+            ),
             mode="outlined",
             text=str(preis),
             input_filter="float",
-            children=[
-                MDTextFieldHintText(
-                    text="Preis pro Stück (optional)"
-                )
-            ]
         )
         self.add_widget(self.preis_field)
 

@@ -255,11 +255,18 @@ class SuperkraftKonfigContent(MDBoxLayout):
 
     def _on_mod_toggle(self, mod_name, active):
         """Callback wenn ein Modifikator an/abgewählt wird."""
-        # Android Touch-Bounce Debounce
+        # Android Touch-Bounce Debounce PRO Modifikator (Solution 4, siehe
+        # docs/ANDROID_WORKAROUNDS.md). Ein gemeinsamer Timer für alle
+        # Checkboxen würde beim schnellen Auswählen mehrerer Modifikatoren
+        # den zweiten Klick verwerfen — die Checkbox zeigt dann "aktiv",
+        # gewaehlte_mods enthält den Modifikator aber nicht.
         now = time.monotonic()
-        if hasattr(self, '_last_mod_toggle_time') and (now - self._last_mod_toggle_time) < 0.5:
+        if not hasattr(self, '_last_mod_toggle_times'):
+            self._last_mod_toggle_times = {}
+        letzter = self._last_mod_toggle_times.get(mod_name)
+        if letzter is not None and (now - letzter) < 0.5:
             return
-        self._last_mod_toggle_time = now
+        self._last_mod_toggle_times[mod_name] = now
         if active:
             mod_data = self.kraft_data.get('modifikatoren', {}).get(mod_name, {})
             self.gewaehlte_mods[mod_name] = mod_data

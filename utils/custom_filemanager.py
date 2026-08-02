@@ -20,10 +20,33 @@ class CustomFileManager(MDFileManager):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Scrollbalken auf Projekt-Standard bringen (KivyMD-Default ist nur dp(4))
+        self._apply_scrollbar_style()
         # Auf Android: Bottom-Padding der Dateiliste erhöhen,
         # damit letzte Einträge nicht hinter FAB/Navigationsleiste verschwinden
         if platform == 'android':
             Clock.schedule_once(self._apply_android_padding, 0.1)
+
+    def _apply_scrollbar_style(self, *args):
+        """Verbreitert den Scrollbalken der Dateiliste auf den Projekt-Standard.
+
+        Der KivyMD-FileManager nutzt bar_width dp(4) — auf Android per Finger
+        praktisch nicht greifbar. Wie in den übrigen Widgets: dp(20) mobil,
+        dp(15) am Desktop, mobil zusätzlich mit ziehbarem Balken.
+        """
+        try:
+            rv = self.ids.get('rv')
+            if not rv:
+                return
+            mobile = platform == 'android'
+            rv.bar_width = dp(20) if mobile else dp(15)
+            rv.bar_margin = dp(8) if mobile else dp(4)
+            if mobile:
+                rv.scroll_type = ['bars', 'content']
+                rv.scroll_timeout = 200
+                rv.scroll_distance = dp(20)
+        except Exception as e:
+            Logger.warning(f"CustomFileManager: Scrollbalken-Stil nicht gesetzt: {e}")
 
     def _apply_android_padding(self, *args):
         """Setzt Bottom-Padding auf der RecycleGridLayout für Android"""
@@ -35,7 +58,8 @@ class CustomFileManager(MDFileManager):
                 # Standard ist "10dp" (alle Seiten gleich)
                 # Top auf 20dp für Pfadanzeige-Abstand, Bottom auf 100dp
                 # (FAB dp(72) + Navigationsleiste + Puffer)
-                grid.padding = [dp(10), dp(20), dp(10), dp(100)]
+                # Rechts Platz für den breiten Scrollbalken (dp(20) + dp(8) Margin)
+                grid.padding = [dp(10), dp(20), dp(36), dp(100)]
                 Logger.info("CustomFileManager: Android Bottom-Padding gesetzt")
         except Exception as e:
             Logger.warning(f"CustomFileManager: Bottom-Padding konnte nicht gesetzt werden: {e}")

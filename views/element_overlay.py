@@ -253,7 +253,7 @@ class ElementOverlay(MDBoxLayout):
         self._content_scroll = TextFieldScrollView(
             do_scroll_x=False,
             do_scroll_y=True,
-            bar_width=dp(15),
+            bar_width=dp(20) if _mobile else dp(15),
             bar_margin=dp(12),
         )
 

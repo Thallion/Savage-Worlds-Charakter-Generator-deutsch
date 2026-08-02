@@ -244,7 +244,7 @@ class SettingAssistentWizard:
     def _create_step_name(self):
         """Schritt 1: Name & Beschreibung"""
         if _mobile:
-            bar_width = dp(8)
+            bar_width = dp(20)
             bar_margin = dp(8)
             content_height = dp(180)
             content_spacing = dp(4)
@@ -300,8 +300,8 @@ class SettingAssistentWizard:
     def _create_step_modus(self):
         """Schritt 2: Modus & Basis-Setting Auswahl"""
         if _mobile:
-            bar_width = dp(12)
-            bar_margin = dp(12)
+            bar_width = dp(20)
+            bar_margin = dp(8)
             content_height = dp(350)
             content_spacing = dp(4)
             mode_label_text = "Modus:"
@@ -662,8 +662,8 @@ class SettingAssistentWizard:
     def _create_step_elemente(self):
         """Schritt 2: Elemente konfigurieren (Tab-basiert)"""
         if _mobile:
-            bar_width = dp(8)
-            bar_margin = dp(4)
+            bar_width = dp(20)
+            bar_margin = dp(8)
             content_height = dp(550)
             content_spacing = dp(6)
         else:
@@ -980,7 +980,8 @@ class SettingAssistentWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15), bar_margin=dp(8))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True,
+                              bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
         
@@ -1035,7 +1036,8 @@ class SettingAssistentWizard:
             list_item.add_widget(checkbox)
             list_layout.add_widget(list_item)
         
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15), bar_margin=dp(8))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True,
+                              bar_width=dp(20) if _mobile else dp(15), bar_margin=dp(8))
         scroll.add_widget(list_layout)
         content.add_widget(scroll)
         
@@ -1094,8 +1096,8 @@ class SettingAssistentWizard:
     def _create_step_vorschau(self):
         """Schritt 4: Vorschau & Speichern"""
         if _mobile:
-            bar_width = dp(8)
-            bar_margin = dp(4)
+            bar_width = dp(20)
+            bar_margin = dp(8)
             content_height = dp(350)
             content_spacing = dp(6)
         else:

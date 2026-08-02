@@ -379,7 +379,7 @@ class VolkDialogHandler:
             list_item.add_widget(MDListItemSupportingText(text=item_name))
             content.add_widget(list_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True, bar_width=dp(15))
+        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True)
         scroll.add_widget(content)
 
         list_height = min(dp(48) * len(selected_items), dp(200))

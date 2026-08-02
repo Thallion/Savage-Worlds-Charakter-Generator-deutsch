@@ -166,35 +166,56 @@ class DialogService:
             title (str): Dialog-Titel
         """
         self._dismiss_dialog('info')
-        
-        # ScrollView für längere Texte
-        scroll_view = MDScrollView(
-            size_hint=(1, 1),
-            do_scroll_x=False,
-            do_scroll_y=True
+
+        from kivy.core.window import Window
+
+        # Kein text_size setzen: MDLabel koppelt text_size an die eigene
+        # Breite und überschreibt einen hier gesetzten Wert beim ersten
+        # Layout-Durchlauf. Der Umbruch erfolgt dadurch automatisch an der
+        # Dialogbreite.
+        info_label = MDLabel(
+            text=message,
+            size_hint_y=None,
+            halign="left",
+            valign="top"
         )
-        
+        # Nur die Höhe aus der Textur übernehmen — ein setter('size') würde
+        # auch die Breite überschreiben und mit dem Layout kollidieren.
+        info_label.bind(texture_size=lambda inst, ts: setattr(inst, 'height', ts[1]))
+
+        # Der Inhalt wächst mit dem Text. Eine feste Höhe würde den
+        # Scrollbereich deckeln, längere Texte wären nicht erreichbar.
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(10),
             padding=dp(20),
             size_hint_y=None,
-            height=dp(400)  # Feste Höhe für bessere Kontrolle
         )
-        
-        info_label = MDLabel(
-            text=message,
-            size_hint_y=None,
-            text_size=(dp(400), None),  # Definiere Textbreite für Umbrüche
-            halign="left",
-            valign="top"
-        )
-        # Höhe basierend auf Textinhalt berechnen
-        info_label.bind(texture_size=info_label.setter('size'))
-        
+        content.bind(minimum_height=content.setter('height'))
         content.add_widget(info_label)
+
+        # ScrollView mit fester Höhe statt size_hint_y=1: MDDialog lässt
+        # size_hint_y=1 für Kinder des ContentContainers nicht zu, der Inhalt
+        # rutscht sonst mit großer Lücke an den unteren Dialogrand.
+        # Siehe docs/ANDROID_WORKAROUNDS.md ("MDDialog Fixed Height").
+        # Kopfzeile, Button-Leiste und Dialog-Padding belegen zusammen rund
+        # 200dp. Ohne diesen Abzug wird der Dialog im Landscape-Modus
+        # (Höhe ~360dp) höher als der Bildschirm.
+        max_scroll_height = max(dp(100), min(dp(400), Window.height * 0.95 - dp(200)))
+        scroll_view = MDScrollView(
+            size_hint=(1, None),
+            height=max_scroll_height,
+            do_scroll_x=False,
+            do_scroll_y=True
+        )
         scroll_view.add_widget(content)
-        
+
+        # Kurze Meldungen bekommen einen kompakten Dialog, lange werden
+        # bei max_scroll_height gedeckelt und scrollbar.
+        def _passe_scroll_hoehe_an(instance, hoehe):
+            scroll_view.height = min(hoehe, max_scroll_height)
+        content.bind(height=_passe_scroll_hoehe_an)
+
         info_dialog = MDDialog(
             MDDialogHeadlineText(text=title),
             MDDialogContentContainer(scroll_view),
@@ -206,7 +227,7 @@ class DialogService:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.85, 0.6),
+            size_hint=(0.85, None),
             auto_dismiss=False,
         )
         
@@ -787,16 +808,22 @@ CHARAKTER-STATUS:
             title (str): Dialog-Titel
         """
         self._dismiss_dialog('info')
-        
-        # Container für den Dialog-Inhalt
+
+        from kivy.core.window import Window
+
+        # Container für den Dialog-Inhalt. Feste dp(500) passen auf einem
+        # Smartphone nicht mehr in den Dialog, deshalb an die Fensterhöhe
+        # koppeln. Chrome (Kopfzeile, Buttons, Padding) braucht hier durch
+        # das zusätzliche Content-Padding rund 240dp.
+        max_content_height = max(dp(120), min(dp(500), Window.height * 0.95 - dp(240)))
         content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(16),
             padding=dp(20),
             size_hint_y=None,
-            height=dp(500)  # Ausreichend Höhe für den Inhalt
+            height=max_content_height
         )
-        
+
         # Scrollbarer Textbereich
         scroll_view = MDScrollView(
             size_hint=(1, 1),
@@ -813,11 +840,11 @@ CHARAKTER-STATUS:
         )
         text_container.bind(minimum_height=text_container.setter('height'))
         
-        # Text-Label mit fester Breite und adaptiver Höhe
+        # Kein text_size setzen — MDLabel leitet es aus der eigenen Breite ab
+        # (siehe show_info_dialog), der Umbruch folgt so der Dialogbreite.
         info_label = MDLabel(
             text=message,
             size_hint_y=None,
-            text_size=(dp(450), None),  # Feste Textbreite für Umbrüche
             halign="left",
             valign="top",
             markup=False,  # Kein Markup für bessere Darstellung
@@ -834,7 +861,12 @@ CHARAKTER-STATUS:
         text_container.add_widget(info_label)
         scroll_view.add_widget(text_container)
         content.add_widget(scroll_view)
-        
+
+        # Kurze Texte sollen den Dialog nicht auf volle Höhe aufblähen
+        def _passe_content_hoehe_an(instance, hoehe):
+            content.height = min(hoehe + dp(40), max_content_height)
+        text_container.bind(height=_passe_content_hoehe_an)
+
         # Dialog erstellen
         info_dialog = MDDialog(
             MDDialogHeadlineText(text=title),
@@ -847,7 +879,7 @@ CHARAKTER-STATUS:
                 )
             ),
             md_bg_color=self.theme_cls.surfaceColor,
-            size_hint=(0.9, 0.6),
+            size_hint=(0.9, None),
             auto_dismiss=False,
         )
         
