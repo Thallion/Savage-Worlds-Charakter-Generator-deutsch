@@ -15,6 +15,10 @@ android:resizeableActivity="true" im <application>-Tag und Entfernen der
 setRequestedOrientation()-Aufrufe aus PythonActivity.UnpackFilesTask
 (von Google Play als "Einschränkung für Größenänderung und Ausrichtung" gemeldet).
 
+Zusätzlich: Bitmap-Downsampling (BitmapFactory.Options.inSampleSize) in
+PythonActivity.getLoadingScreen und launcher.Project.scanDirectory —
+von Google Play als "BitmapFactory ohne Downsampling" gemeldet.
+
 Wird automatisch von build_android.py / build_all.py aufgerufen, BEVOR buildozer startet.
 Kann auch manuell ausgeführt werden: python build_fixes.py
 """
@@ -386,32 +390,34 @@ _LAUNCHER_ORIENTATION_REPLACEMENT = (
 )
 
 
-def _find_python_activity_files():
-    """Sammelt alle PythonActivity.java-Kandidaten: p4a-Bootstrap-Quellen UND
-    bereits nach bootstrap_builds/dists kopierte Fassungen.
+def _find_bootstrap_java_files(java_rel_path):
+    """Sammelt alle Fassungen einer Bootstrap-Java-Datei: p4a-Bootstrap-Quellen
+    UND die bereits nach bootstrap_builds/dists kopierten Kopien.
 
     Die Bootstrap-Quelle mitzupatchen ist wichtig: ein Patch nur in der Dist
     geht verloren, sobald p4a die Dist neu erzeugt (`buildozer android clean`).
+
+    Args:
+        java_rel_path: Pfad unterhalb von `src/main/java/`,
+            z.B. "org/kivy/android/PythonActivity.java"
     """
     java_files = []
 
     # 1) p4a-Bootstrap-Quellen (venv + buildozer-extrahierte Kopie)
     for p4a_dir in _find_all_pythonforandroid_dirs():
         java_files += list(
-            (p4a_dir / "bootstraps").glob(
-                "*/build/src/main/java/org/kivy/android/PythonActivity.java"
-            )
+            (p4a_dir / "bootstraps").glob(f"*/build/src/main/java/{java_rel_path}")
         )
 
     platform_dir = Path(".buildozer/android/platform")
     if platform_dir.exists():
         # 2) Zwischenstände der Bootstrap-Builds
         java_files += list(platform_dir.glob(
-            "build-*/build/bootstrap_builds/*/src/main/java/org/kivy/android/PythonActivity.java"
+            f"build-*/build/bootstrap_builds/*/src/main/java/{java_rel_path}"
         ))
         # 3) Fertige Dists (das, was tatsächlich kompiliert wird)
         java_files += list(platform_dir.glob(
-            "build-*/dists/*/src/main/java/org/kivy/android/PythonActivity.java"
+            f"build-*/dists/*/src/main/java/{java_rel_path}"
         ))
 
     # Duplikate (Symlinks/mehrfache Globs) entfernen
@@ -440,7 +446,7 @@ def fix_p4a_activity_orientation_restriction():
     """
     print("P4A Hook: Checking PythonActivity.java for orientation restrictions...")
 
-    java_files = _find_python_activity_files()
+    java_files = _find_bootstrap_java_files("org/kivy/android/PythonActivity.java")
     if not java_files:
         print("P4A Hook: No PythonActivity.java found, skipping orientation fix")
         return False
@@ -478,6 +484,192 @@ def fix_p4a_activity_orientation_restriction():
 
     if not fixed_any:
         print("P4A Hook: All PythonActivity.java files are already free of orientation locks")
+
+    return fixed_any
+
+
+BITMAP_FIX_MARKER = "BITMAP-DOWNSAMPLING-FIX"
+
+# Google-Standardimplementierung (developer.android.com "Große Bitmaps effizient laden"),
+# als private Hilfsmethode in die jeweilige Klasse eingefügt.
+_INSAMPLESIZE_HELPER = """
+    /**
+     * %(marker)s: Berechnet inSampleSize (Zweierpotenz), sodass das dekodierte
+     * Bitmap die geforderte Anzeigegröße nicht überschreitet. Ohne Downsampling
+     * meldet Google Play "BitmapFactory ohne Downsampling"; bei größeren Assets
+     * würde das Vollauflösungs-Bitmap unnötig viel Speicher belegen.
+     */
+    private static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (reqWidth <= 0 || reqHeight <= 0) {
+            return inSampleSize;
+        }
+
+        while ((height / inSampleSize) > reqHeight || (width / inSampleSize) > reqWidth) {
+            inSampleSize *= 2;
+        }
+
+        return inSampleSize;
+    }
+""" % {"marker": BITMAP_FIX_MARKER}
+
+# --- PythonActivity.getLoadingScreen: Presplash in voller Auflösung dekodiert ---
+# Whitespace-tolerant, damit auch die abweichend eingerückte webview-Variante passt.
+_PRESPLASH_DECODE_RE = re.compile(
+    r'([ \t]*)int presplashId = this\.resourceManager\.getIdentifier\("presplash", "drawable"\);\s*'
+    r'InputStream is = this\.getResources\(\)\.openRawResource\(presplashId\);\s*'
+    r'Bitmap bitmap = null;\s*'
+    r'try \{\s*'
+    r'bitmap = BitmapFactory\.decodeStream\(is\);\s*'
+    r'\} finally \{\s*'
+    r'try \{\s*'
+    r'is\.close\(\);\s*'
+    r'\} catch \(IOException e\) \{\};\s*'
+    r'\}\n'
+)
+
+_PRESPLASH_DECODE_REPLACEMENT = f'''\\g<1>int presplashId = this.resourceManager.getIdentifier("presplash", "drawable");
+
+\\g<1>// {BITMAP_FIX_MARKER}: Presplash zweistufig laden — erst nur die Maße
+\\g<1>// (inJustDecodeBounds), dann passend heruntergerechnet. Das Bild wird
+\\g<1>// ohnehin nur bildschirmfüllend (FIT_CENTER) angezeigt.
+\\g<1>BitmapFactory.Options presplashOptions = new BitmapFactory.Options();
+\\g<1>presplashOptions.inJustDecodeBounds = true;
+\\g<1>InputStream boundsStream = this.getResources().openRawResource(presplashId);
+\\g<1>try {{
+\\g<1>    BitmapFactory.decodeStream(boundsStream, null, presplashOptions);
+\\g<1>}} finally {{
+\\g<1>    try {{
+\\g<1>        boundsStream.close();
+\\g<1>    }} catch (IOException e) {{}};
+\\g<1>}}
+\\g<1>presplashOptions.inSampleSize = calculateInSampleSize(
+\\g<1>    presplashOptions,
+\\g<1>    getResources().getDisplayMetrics().widthPixels,
+\\g<1>    getResources().getDisplayMetrics().heightPixels);
+\\g<1>presplashOptions.inJustDecodeBounds = false;
+
+\\g<1>InputStream is = this.getResources().openRawResource(presplashId);
+\\g<1>Bitmap bitmap = null;
+\\g<1>try {{
+\\g<1>    bitmap = BitmapFactory.decodeStream(is, null, presplashOptions);
+\\g<1>}} finally {{
+\\g<1>    try {{
+\\g<1>        is.close();
+\\g<1>    }} catch (IOException e) {{}};
+\\g<1>}}
+'''
+
+# --- Project.scanDirectory: Launcher-Icon in voller Auflösung dekodiert ---
+_PROJECT_ICON_DECODE_RE = re.compile(
+    r'([ \t]*)rv\.icon = BitmapFactory\.decodeFile\('
+    r'new File\(dir, "icon\.png"\)\.getAbsolutePath\(\)\);\n'
+)
+
+_PROJECT_ICON_DECODE_REPLACEMENT = f'''\\g<1>// {BITMAP_FIX_MARKER}: Icon zweistufig laden (erst Maße, dann herunterge-
+\\g<1>// rechnet). Es wird nur als Listen-Icon im Kivy-Launcher angezeigt.
+\\g<1>String iconPath = new File(dir, "icon.png").getAbsolutePath();
+\\g<1>BitmapFactory.Options iconOptions = new BitmapFactory.Options();
+\\g<1>iconOptions.inJustDecodeBounds = true;
+\\g<1>BitmapFactory.decodeFile(iconPath, iconOptions);
+\\g<1>iconOptions.inSampleSize = calculateInSampleSize(iconOptions, ICON_MAX_PX, ICON_MAX_PX);
+\\g<1>iconOptions.inJustDecodeBounds = false;
+\\g<1>rv.icon = BitmapFactory.decodeFile(iconPath, iconOptions);
+'''
+
+# Zielkantenlänge des Launcher-Icons in px (Listeneintrag, ~48dp bei xhdpi)
+_PROJECT_ICON_KONSTANTE = (
+    "\n"
+    f"    /** {BITMAP_FIX_MARKER}: Zielkantenlänge des Listen-Icons in Pixeln. */\n"
+    "    private static final int ICON_MAX_PX = 96;\n"
+)
+
+
+def _fuege_java_methode_an(content, methode):
+    """Hängt eine Methode ans Ende der Klasse (vor die letzte schließende Klammer)."""
+    stripped = content.rstrip()
+    if not stripped.endswith("}"):
+        return None
+    rumpf = stripped[:-1].rstrip("\n")
+    return f"{rumpf}\n{methode}}}\n"
+
+
+def fix_p4a_bitmap_downsampling():
+    """Ergänzt BitmapFactory.Options mit inSampleSize in den p4a-Bootstrap-Klassen.
+
+    Hintergrund: Google Play meldet "BitmapFactory ohne Downsampling" für
+    `PythonActivity.getLoadingScreen` (Presplash) und
+    `launcher.Project.scanDirectory` (Launcher-Icon). Beide dekodieren ihr Bild
+    in voller Auflösung. Der Presplash ist aktuell klein (512x512, siehe
+    `presplash.filename` in buildozer.spec), aber ein größeres Asset in einem
+    späteren Update würde ungebremst Speicher belegen.
+
+    Beide Stellen laden nun zweistufig: erst nur die Maße (inJustDecodeBounds),
+    dann heruntergerechnet auf die tatsächliche Anzeigegröße.
+
+    Idempotent: erkennt den bereits gepatchten Zustand am Marker.
+    """
+    print("P4A Hook: Checking p4a bootstrap classes for bitmap downsampling...")
+
+    ziele = [
+        ("org/kivy/android/PythonActivity.java", _PRESPLASH_DECODE_RE,
+         _PRESPLASH_DECODE_REPLACEMENT, None),
+        ("org/kivy/android/launcher/Project.java", _PROJECT_ICON_DECODE_RE,
+         _PROJECT_ICON_DECODE_REPLACEMENT, _PROJECT_ICON_KONSTANTE),
+    ]
+
+    fixed_any = False
+    gefunden = False
+
+    for java_rel_path, muster, ersatz, konstante in ziele:
+        for java_file in _find_bootstrap_java_files(java_rel_path):
+            gefunden = True
+            try:
+                with open(java_file, 'r') as f:
+                    content = f.read()
+
+                if BITMAP_FIX_MARKER in content:
+                    print(f"P4A Hook: bitmap downsampling already present in {java_file}")
+                    continue
+
+                new_content, count = muster.subn(ersatz, content, count=1)
+                if count == 0:
+                    if 'BitmapFactory' in content:
+                        print(
+                            f"P4A Hook: WARNUNG — BitmapFactory in {java_file} gefunden, "
+                            "aber Decode-Muster passt nicht (p4a-Version geändert?)"
+                        )
+                    else:
+                        print(f"P4A Hook: no BitmapFactory decode in {java_file}")
+                    continue
+
+                # Hilfsmethode (+ ggf. Konstante) ans Klassenende hängen
+                mit_helper = _fuege_java_methode_an(
+                    new_content,
+                    (konstante + _INSAMPLESIZE_HELPER) if konstante else _INSAMPLESIZE_HELPER,
+                )
+                if mit_helper is None:
+                    print(f"P4A Hook: WARNUNG — Klassenende in {java_file} nicht gefunden")
+                    continue
+
+                with open(java_file, 'w') as f:
+                    f.write(mit_helper)
+                print(f"P4A Hook: bitmap downsampling added to {java_file}")
+                fixed_any = True
+
+            except Exception as e:
+                print(f"P4A Hook: Error fixing {java_file}: {e}")
+
+    if not gefunden:
+        print("P4A Hook: No bootstrap Java files found, skipping bitmap fix")
+        return False
+
+    if not fixed_any:
+        print("P4A Hook: All bootstrap classes already downsample their bitmaps")
 
     return fixed_any
 
@@ -894,6 +1086,7 @@ def before_apk_build(toolchain):
     fix_android_manifest_predictive_back()
     fix_android_manifest_large_screens()
     fix_p4a_activity_orientation_restriction()
+    fix_p4a_bitmap_downsampling()
     fix_p4a_ldflags_for_16kb_alignment()
     fix_sdl2_bootstrap_16kb_alignment()
     fix_sqlite3_recipe_16kb_alignment()
@@ -926,6 +1119,10 @@ if __name__ == "__main__":
     if orientation_fixed:
         print("P4A Hook: Ausrichtungs-Sperre aus PythonActivity.java entfernt")
 
+    bitmap_fixed = fix_p4a_bitmap_downsampling()
+    if bitmap_fixed:
+        print("P4A Hook: Bitmap-Downsampling in p4a-Bootstrap-Klassen ergänzt")
+
     archs_fixed = fix_p4a_ldflags_for_16kb_alignment()
     if archs_fixed:
         print("P4A Hook: archs.py mit 16 KB LDFLAGS gepatcht")
@@ -939,7 +1136,7 @@ if __name__ == "__main__":
         print("P4A Hook: sqlite3 Android.mk mit 16 KB LOCAL_LDFLAGS gepatcht")
 
     if any([kivy_fixed, pyjnius_fixed, manifest_fixed, back_fixed, large_screen_fixed,
-            orientation_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
+            orientation_fixed, bitmap_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")

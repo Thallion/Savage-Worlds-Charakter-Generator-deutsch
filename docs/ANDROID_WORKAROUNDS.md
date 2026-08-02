@@ -328,6 +328,15 @@ Dieses Insets-Handling darf bei UI-Änderungen nicht entfernt werden — ohne di
 
 **Regel:** Keine `setRequestedOrientation()`-Aufrufe mit fixen Richtungen (`PORTRAIT`, `LANDSCAPE`, `SENSOR_PORTRAIT`, `SENSOR_LANDSCAPE`) und kein `android:screenOrientation` mit fixer Richtung, kein `resizeableActivity="false"` und kein `maxAspectRatio` ergänzen — sonst kehrt die Play-Console-Warnung zurück.
 
+### Bitmap-Downsampling im p4a-Bootstrap
+**Problem:** Die Play Console meldet "BitmapFactory ohne Downsampling" (fehlender `BitmapFactory.Options`-Parameter) für zwei p4a-Bootstrap-Stellen: `PythonActivity.getLoadingScreen` (dekodiert den Presplash aus `drawable/presplash`) und `org.kivy.android.launcher.Project.scanDirectory` (dekodiert `icon.png` für die Kivy-Launcher-Liste). Beide laden das Bild in voller Auflösung.
+
+**Solution:** `build_fixes.py` → `fix_p4a_bitmap_downsampling()` stellt beide Stellen auf zweistufiges Laden um — erst nur die Maße (`inJustDecodeBounds = true`), dann der eigentliche Decode mit berechnetem `inSampleSize` — und fügt der jeweiligen Klasse die Google-Standardhilfsmethode `calculateInSampleSize()` an. Zielgröße ist beim Presplash die Displayauflösung (`getResources().getDisplayMetrics()`, das Bild wird FIT_CENTER bildschirmfüllend gezeigt), beim Launcher-Icon `ICON_MAX_PX = 96`. Gepatcht werden dieselben Pfade wie beim Ausrichtungs-Fix (Bootstrap-Quellen, `bootstrap_builds/`, Dists); idempotent über den Marker `BITMAP-DOWNSAMPLING-FIX`.
+
+**Kein visueller Unterschied heute:** `presplash.filename` ist `assets/icon_512.png` (512×512). Auf üblichen Displays ergibt die Rechnung `inSampleSize = 1`, der Splash wird also unverändert in voller Qualität geladen. Der Fix ist eine Absicherung für den Fall, dass später ein größeres Presplash-Asset hinterlegt wird.
+
+**Regel:** Kein `BitmapFactory.decode*()` ohne `Options`-Parameter mit gesetztem `inSampleSize` ergänzen — sonst kehrt die Play-Console-Meldung zurück.
+
 ### Build-Voraussetzungen für API 36
 - SDK Platform 36 + passende Build-Tools müssen lokal installiert sein (`android.skip_update = True` verhindert den Auto-Download durch buildozer)
 - Die 16-KB-Page-Size-Fixes in `build_fixes.py` bleiben nötig (Google-Play-Pflicht, unabhängig vom API-Level)
