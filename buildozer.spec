@@ -56,7 +56,10 @@ icon.filename = %(source.dir)s/assets/icon_512.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
-orientation = landscape, portrait
+# ALLE vier Richtungen: Tablets/Foldables werden auch "kopfüber" gehalten.
+# Daraus baut p4a den SDL-Hint KIVY_ORIENTATION; sind Portrait UND Landscape
+# erlaubt, fordert SDL SCREEN_ORIENTATION_FULL_SENSOR an — keine Sperre.
+orientation = landscape, portrait, landscape-reverse, portrait-reverse
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
@@ -268,8 +271,11 @@ android.manifest.launch_mode = singleTask
 
 # (str) screenOrientation to set for the main activity.
 # Valid values can be found at https://developer.android.com/guide/topics/manifest/activity-element
-# "user" respektiert die Ausrichtungssperre des Nutzers (Auto-Rotate an/aus)
-android.manifest.orientation = user
+# "fullUser" respektiert die Ausrichtungssperre des Nutzers (Auto-Rotate an/aus)
+# und erlaubt bei aktivierter Rotation ALLE vier Richtungen — wichtig für
+# Tablets/Foldables, die auch um 180° gedreht benutzt werden ("user" schließt
+# reverse-Portrait auf vielen Geräten aus).
+android.manifest.orientation = fullUser
 
 # (list) Android additional libraries to copy into libs/armeabi
 #android.add_libs_armeabi = libs/android/*.so

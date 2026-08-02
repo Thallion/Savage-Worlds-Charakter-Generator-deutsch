@@ -316,6 +316,18 @@ Seit targetSdk 35 erzwingt Android Edge-to-Edge-Darstellung; ab targetSdk 36 ist
 
 Dieses Insets-Handling darf bei UI-Änderungen nicht entfernt werden — ohne die Spacer liegt der Inhalt unter der Statusbar.
 
+### Große Displays: keine Größen-/Ausrichtungs-Einschränkungen (KRITISCH)
+**Problem:** Ab Android 16 ignoriert das System auf großen Displays (Tablets, Foldables, sw ≥ 600dp) sämtliche Einschränkungen für Größenänderung und Ausrichtung. Die Play Console meldet solche Einschränkungen als Warnung — konkret gemeldet wurde `org.kivy.android.PythonActivity$UnpackFilesTask.onPostExecute`. Dort erzwingt der p4a-Bootstrap per `setRequestedOrientation()` Landscape bzw. Portrait. Der Code stammt aus dem alten Kivy-Launcher (er greift nur bei einem Intent mit Action `org.kivy.LAUNCH`) und ist für eine eigenständige App toter Code — die statische Analyse von Play sieht ihn trotzdem.
+
+**Solution — vier Stellen:**
+
+1. `build_fixes.py` → `fix_p4a_activity_orientation_restriction()` entfernt den `setRequestedOrientation()`-Block aus `PythonActivity.java`. Gepatcht werden die p4a-Bootstrap-Quellen (venv **und** buildozer-extrahierte Kopie), die `bootstrap_builds/`-Zwischenstände **und** die fertigen Dists — nur die Dist zu patchen reicht nicht, der Patch ginge bei `buildozer android clean` verloren. Idempotent über den Marker `LARGE-SCREEN-FIX`.
+2. `build_fixes.py` → `fix_android_manifest_large_screens()` injiziert `android:resizeableActivity="true"` in das `<application>`-Tag (gerenderte Manifeste **und** p4a-Templates, analog zum Predictive-Back-Fix). Die p4a-Vorlage setzt das Attribut gar nicht; der Default (`true` ab targetSdk 24) greift zwar, die explizite Deklaration ist aber das, was Play und die Multi-Window-/Freeform-Modi auswerten.
+3. `buildozer.spec`: `android.manifest.orientation = fullUser` (vorher `user`) — respektiert weiterhin die Rotationssperre des Nutzers, erlaubt bei aktivierter Rotation aber **alle vier** Richtungen. `orientation = landscape, portrait, landscape-reverse, portrait-reverse` listet alle Richtungen für den SDL-Hint (`KIVY_ORIENTATION`); sind Portrait und Landscape erlaubt, fordert SDL `SCREEN_ORIENTATION_FULL_SENSOR` an — also keine Sperre.
+4. `views/app_navigation_mixin.py` → `set_screen_orientation()` fordert auf großen Displays **keine** Sperre mehr an (`ist_grosses_display()` prüft `smallestScreenWidthDp >= 600`), sondern `SCREEN_ORIENTATION_FULL_USER` (13, vorher `USER` = 2). Die Methode gibt `False` zurück, wenn eine gewünschte Sperre übersprungen wurde; `views/einstellungen_widget.py` zeigt dann per Snackbar den Hinweis, dass Android die Sperre auf Tablets ignoriert.
+
+**Regel:** Keine `setRequestedOrientation()`-Aufrufe mit fixen Richtungen (`PORTRAIT`, `LANDSCAPE`, `SENSOR_PORTRAIT`, `SENSOR_LANDSCAPE`) und kein `android:screenOrientation` mit fixer Richtung, kein `resizeableActivity="false"` und kein `maxAspectRatio` ergänzen — sonst kehrt die Play-Console-Warnung zurück.
+
 ### Build-Voraussetzungen für API 36
 - SDK Platform 36 + passende Build-Tools müssen lokal installiert sein (`android.skip_update = True` verhindert den Auto-Download durch buildozer)
 - Die 16-KB-Page-Size-Fixes in `build_fixes.py` bleiben nötig (Google-Play-Pflicht, unabhängig vom API-Level)

@@ -458,7 +458,9 @@ class EinstellungenWidget(MDBoxLayout):
                 orientation = 'auto'
                 if config_service:
                     orientation = config_service.get('screen_orientation', 'auto')
-                app.set_screen_orientation(orientation, active)
+                angewendet = app.set_screen_orientation(orientation, active)
+                if active and angewendet is False:
+                    self._hinweis_grosses_display()
 
             Logger.info(f"Orientierung {'fixiert' if active else 'flexibel (System)'}")
         except Exception as e:
@@ -478,12 +480,27 @@ class EinstellungenWidget(MDBoxLayout):
 
             app = MDApp.get_running_app()
             if app and hasattr(app, 'set_screen_orientation'):
-                app.set_screen_orientation(orientation, locked)
+                angewendet = app.set_screen_orientation(orientation, locked)
+                if locked and angewendet is False:
+                    self._hinweis_grosses_display()
 
             labels = {'portrait': 'Portrait', 'landscape': 'Landscape', 'auto': 'Auto'}
             Logger.info(f"Orientierung auf {labels.get(orientation, orientation)} gesetzt")
         except Exception as e:
             Logger.error(f"Fehler beim Setzen der Orientierung: {e}")
+
+    def _hinweis_grosses_display(self):
+        """Weist darauf hin, dass Android auf Tablets/Foldables keine
+        Ausrichtungs-Sperre mehr zulässt (ab Android 16)."""
+        try:
+            dialog_service = service_container.get_dialog_service()
+            if dialog_service:
+                dialog_service.show_warning_dialog(
+                    "Auf Tablets und Foldables ignoriert Android die "
+                    "Ausrichtungs-Sperre — der Bildschirm dreht sich weiterhin mit."
+                )
+        except Exception as e:
+            Logger.error(f"Fehler beim Anzeigen des Displaygrößen-Hinweises: {e}")
 
     # ==================== DELEGIERTE METHODEN ====================
     # Alle Methoden delegieren an die entsprechenden Manager/Handler

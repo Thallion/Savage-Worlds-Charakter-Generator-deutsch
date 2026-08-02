@@ -10,6 +10,11 @@ Zusätzlich: Predictive-Back-Opt-out für targetSdk 36 (Android 16) —
 android:enableOnBackInvokedCallback="false" im <application>-Tag, damit
 SDL2/Kivy weiterhin KEYCODE_BACK erhalten (Zurück-Taste schließt Popups).
 
+Zusätzlich: Große Displays (Android 16, Tablets/Foldables) —
+android:resizeableActivity="true" im <application>-Tag und Entfernen der
+setRequestedOrientation()-Aufrufe aus PythonActivity.UnpackFilesTask
+(von Google Play als "Einschränkung für Größenänderung und Ausrichtung" gemeldet).
+
 Wird automatisch von build_android.py / build_all.py aufgerufen, BEVOR buildozer startet.
 Kann auch manuell ausgeführt werden: python build_fixes.py
 """
@@ -299,6 +304,180 @@ def fix_android_manifest_predictive_back():
 
     if not fixed_any:
         print("P4A Hook: All manifests already have the predictive-back opt-out")
+
+    return fixed_any
+
+
+def fix_android_manifest_large_screens():
+    """Deklariert die App explizit als frei skalierbar:
+    android:resizeableActivity="true" im <application>-Tag.
+
+    Hintergrund: Ab Android 16 ignoriert das System auf großen Displays
+    (Tablets, Foldables) Einschränkungen für Größenänderung und Ausrichtung.
+    Die p4a-Manifest-Vorlage setzt `resizeableActivity` gar nicht — der
+    Default (true ab targetSdk 24) greift zwar, aber die Play-Console-Prüfung
+    und Multi-Window-/Freeform-Modi bewerten die explizite Deklaration.
+
+    Idempotent: Attribut wird nur eingefügt, wenn es noch fehlt.
+    """
+    print("P4A Hook: Checking AndroidManifest for resizeableActivity...")
+
+    manifest_files = _find_manifest_files()
+    if not manifest_files:
+        print("P4A Hook: No AndroidManifest files found, skipping large-screen fix")
+        return False
+
+    fixed_any = False
+    for manifest_file in manifest_files:
+        try:
+            with open(manifest_file, 'r') as f:
+                content = f.read()
+
+            if 'resizeableActivity' in content:
+                print(f"P4A Hook: resizeableActivity already present in {manifest_file}")
+                continue
+
+            new_content, count = re.subn(
+                r'<application\b',
+                '<application android:resizeableActivity="true"',
+                content,
+                count=1,
+            )
+            if count == 0:
+                print(f"P4A Hook: <application> tag not found in {manifest_file}")
+                continue
+
+            with open(manifest_file, 'w') as f:
+                f.write(new_content)
+            print(f"P4A Hook: resizeableActivity=true added to {manifest_file}")
+            fixed_any = True
+
+        except Exception as e:
+            print(f"P4A Hook: Error fixing manifest {manifest_file}: {e}")
+
+    if not fixed_any:
+        print("P4A Hook: All manifests already declare resizeableActivity")
+
+    return fixed_any
+
+
+# Der Kivy-Launcher-Pfad in PythonActivity.UnpackFilesTask.onPostExecute erzwingt
+# per setRequestedOrientation() Landscape bzw. Portrait. Google Play meldet genau
+# diese Stelle als "Einschränkung für die Größenänderung und Ausrichtung".
+_LAUNCHER_ORIENTATION_BLOCK_RE = re.compile(
+    r'[ \t]*if \(p != null\) \{\s*'
+    r'if \(p\.landscape\) \{\s*'
+    r'setRequestedOrientation\(ActivityInfo\.SCREEN_ORIENTATION_LANDSCAPE\);\s*'
+    r'\} else \{\s*'
+    r'setRequestedOrientation\(ActivityInfo\.SCREEN_ORIENTATION_PORTRAIT\);\s*'
+    r'\}\s*'
+    r'\}[ \t]*\n'
+)
+
+LARGE_SCREEN_FIX_MARKER = "LARGE-SCREEN-FIX"
+
+_LAUNCHER_ORIENTATION_REPLACEMENT = (
+    f"                // {LARGE_SCREEN_FIX_MARKER}: setRequestedOrientation() entfernt.\n"
+    "                // Google Play meldet diesen Kivy-Launcher-Pfad als\n"
+    "                // \"Einschränkung für Größenänderung und Ausrichtung\"; ab Android 16\n"
+    "                // wird er auf großen Displays ohnehin ignoriert. Die Ausrichtung\n"
+    "                // steuern ausschließlich android:screenOrientation (fullUser) und\n"
+    "                // die App-Einstellung in views/app_navigation_mixin.py.\n"
+)
+
+
+def _find_python_activity_files():
+    """Sammelt alle PythonActivity.java-Kandidaten: p4a-Bootstrap-Quellen UND
+    bereits nach bootstrap_builds/dists kopierte Fassungen.
+
+    Die Bootstrap-Quelle mitzupatchen ist wichtig: ein Patch nur in der Dist
+    geht verloren, sobald p4a die Dist neu erzeugt (`buildozer android clean`).
+    """
+    java_files = []
+
+    # 1) p4a-Bootstrap-Quellen (venv + buildozer-extrahierte Kopie)
+    for p4a_dir in _find_all_pythonforandroid_dirs():
+        java_files += list(
+            (p4a_dir / "bootstraps").glob(
+                "*/build/src/main/java/org/kivy/android/PythonActivity.java"
+            )
+        )
+
+    platform_dir = Path(".buildozer/android/platform")
+    if platform_dir.exists():
+        # 2) Zwischenstände der Bootstrap-Builds
+        java_files += list(platform_dir.glob(
+            "build-*/build/bootstrap_builds/*/src/main/java/org/kivy/android/PythonActivity.java"
+        ))
+        # 3) Fertige Dists (das, was tatsächlich kompiliert wird)
+        java_files += list(platform_dir.glob(
+            "build-*/dists/*/src/main/java/org/kivy/android/PythonActivity.java"
+        ))
+
+    # Duplikate (Symlinks/mehrfache Globs) entfernen
+    seen = set()
+    unique = []
+    for f in java_files:
+        resolved = f.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(f)
+    return unique
+
+
+def fix_p4a_activity_orientation_restriction():
+    """Entfernt die setRequestedOrientation()-Aufrufe aus
+    PythonActivity.UnpackFilesTask.onPostExecute.
+
+    Hintergrund: Google Play meldet für die App eine "Einschränkung für die
+    Größenänderung und Ausrichtung" in
+    `org.kivy.android.PythonActivity$UnpackFilesTask.onPostExecute`. Der Block
+    stammt aus dem alten Kivy-Launcher (er greift nur bei einem Intent mit
+    Action `org.kivy.LAUNCH`) und ist für eine eigenständige App toter Code —
+    die statische Analyse von Play sieht ihn trotzdem.
+
+    Idempotent: erkennt den bereits gepatchten Zustand am Marker.
+    """
+    print("P4A Hook: Checking PythonActivity.java for orientation restrictions...")
+
+    java_files = _find_python_activity_files()
+    if not java_files:
+        print("P4A Hook: No PythonActivity.java found, skipping orientation fix")
+        return False
+
+    fixed_any = False
+    for java_file in java_files:
+        try:
+            with open(java_file, 'r') as f:
+                content = f.read()
+
+            if LARGE_SCREEN_FIX_MARKER in content:
+                print(f"P4A Hook: orientation restriction already removed in {java_file}")
+                continue
+
+            new_content, count = _LAUNCHER_ORIENTATION_BLOCK_RE.subn(
+                _LAUNCHER_ORIENTATION_REPLACEMENT, content, count=1
+            )
+            if count == 0:
+                if 'setRequestedOrientation' in content:
+                    print(
+                        f"P4A Hook: WARNUNG — setRequestedOrientation in {java_file} "
+                        "gefunden, aber Block-Muster passt nicht (p4a-Version geändert?)"
+                    )
+                else:
+                    print(f"P4A Hook: no orientation restriction in {java_file}")
+                continue
+
+            with open(java_file, 'w') as f:
+                f.write(new_content)
+            print(f"P4A Hook: orientation restriction removed from {java_file}")
+            fixed_any = True
+
+        except Exception as e:
+            print(f"P4A Hook: Error fixing {java_file}: {e}")
+
+    if not fixed_any:
+        print("P4A Hook: All PythonActivity.java files are already free of orientation locks")
 
     return fixed_any
 
@@ -713,6 +892,8 @@ def before_apk_build(toolchain):
     fix_pyjnius_python3_compatibility()
     fix_android_manifest_fileprovider()
     fix_android_manifest_predictive_back()
+    fix_android_manifest_large_screens()
+    fix_p4a_activity_orientation_restriction()
     fix_p4a_ldflags_for_16kb_alignment()
     fix_sdl2_bootstrap_16kb_alignment()
     fix_sqlite3_recipe_16kb_alignment()
@@ -737,6 +918,14 @@ if __name__ == "__main__":
     if back_fixed:
         print("P4A Hook: Predictive-Back-Opt-out in AndroidManifest.xml eingefügt")
 
+    large_screen_fixed = fix_android_manifest_large_screens()
+    if large_screen_fixed:
+        print("P4A Hook: resizeableActivity=true in AndroidManifest.xml eingefügt")
+
+    orientation_fixed = fix_p4a_activity_orientation_restriction()
+    if orientation_fixed:
+        print("P4A Hook: Ausrichtungs-Sperre aus PythonActivity.java entfernt")
+
     archs_fixed = fix_p4a_ldflags_for_16kb_alignment()
     if archs_fixed:
         print("P4A Hook: archs.py mit 16 KB LDFLAGS gepatcht")
@@ -749,7 +938,8 @@ if __name__ == "__main__":
     if sqlite3_fixed:
         print("P4A Hook: sqlite3 Android.mk mit 16 KB LOCAL_LDFLAGS gepatcht")
 
-    if any([kivy_fixed, pyjnius_fixed, manifest_fixed, back_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
+    if any([kivy_fixed, pyjnius_fixed, manifest_fixed, back_fixed, large_screen_fixed,
+            orientation_fixed, archs_fixed, sdl2_fixed, sqlite3_fixed]):
         print("P4A Hook: Build fixes completed successfully")
     else:
         print("P4A Hook: No fixes were needed")

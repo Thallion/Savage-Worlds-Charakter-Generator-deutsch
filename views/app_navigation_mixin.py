@@ -858,51 +858,88 @@ class AppNavigationMixin:
         except Exception as e:
             Logger.error(f"Fehler beim Setzen der Mobile-Navigation: {str(e)}")
 
+    # Ab dieser kleinsten Displaybreite (dp) gilt ein Gerät als "großes Display"
+    # (Tablet/Foldable) — Googles Standard-Schwelle für sw600dp-Layouts.
+    GROSSES_DISPLAY_SW_DP = 600
+
+    def ist_grosses_display(self):
+        """True auf Tablets/Foldables (smallestScreenWidthDp >= 600).
+
+        Ab Android 16 ignoriert das System auf solchen Geräten sämtliche
+        Einschränkungen für Größenänderung und Ausrichtung.
+        """
+        try:
+            from kivy.utils import platform as _platform
+            if _platform != 'android':
+                return False
+
+            from jnius import autoclass
+            PythonActivity = autoclass('org.kivy.android.PythonActivity')
+            config = PythonActivity.mActivity.getResources().getConfiguration()
+            return config.smallestScreenWidthDp >= self.GROSSES_DISPLAY_SW_DP
+        except Exception as e:
+            Logger.warning(f"Displaygröße nicht ermittelbar: {e}")
+            return False
+
     def set_screen_orientation(self, orientation='auto', locked=False):
         """Setzt die Bildschirm-Orientierung auf Android.
+
+        Auf großen Displays (Tablets/Foldables) wird KEINE Sperre angefordert:
+        Android 16 ignoriert sie dort ohnehin, und eine halb wirksame Sperre
+        führt zu abgeschnittenen Layouts im Multi-Window-/Freeform-Modus.
 
         Args:
             orientation: 'auto', 'portrait' oder 'landscape'
             locked: True = fixiert, False = flexibel (System-Einstellung beachten)
+
+        Returns:
+            True, wenn die gewünschte Sperre gesetzt wurde bzw. keine gewünscht
+            war; False, wenn sie wegen eines großen Displays übersprungen wurde.
         """
         try:
             from kivy.utils import platform as _platform
             if _platform != 'android':
                 Logger.info(f"Orientierung ignoriert (kein Android): {orientation}, locked={locked}")
-                return
+                return True
 
             from jnius import autoclass
             PythonActivity = autoclass('org.kivy.android.PythonActivity')
             activity = PythonActivity.mActivity
 
             # Android ActivityInfo Orientierungs-Konstanten
-            SCREEN_ORIENTATION_USER = 2           # System-Einstellung beachten
-            SCREEN_ORIENTATION_PORTRAIT = 1       # Portrait fixiert
-            SCREEN_ORIENTATION_LANDSCAPE = 0      # Landscape fixiert
+            SCREEN_ORIENTATION_FULL_USER = 13        # alle 4 Richtungen, Rotationssperre beachtet
             SCREEN_ORIENTATION_SENSOR_PORTRAIT = 7   # Portrait (beide Richtungen)
             SCREEN_ORIENTATION_SENSOR_LANDSCAPE = 6  # Landscape (beide Richtungen)
 
-            if not locked:
-                # Flexibel: System-Einstellung beachten
-                requested = SCREEN_ORIENTATION_USER
+            angewendet = True
+
+            if not locked or orientation not in ('portrait', 'landscape'):
+                # Flexibel bzw. 'auto': System-Einstellung beachten
+                requested = SCREEN_ORIENTATION_FULL_USER
                 Logger.info("Orientierung: flexibel (System-Einstellung)")
+            elif self.ist_grosses_display():
+                requested = SCREEN_ORIENTATION_FULL_USER
+                angewendet = False
+                Logger.info(
+                    f"Orientierung: Sperre '{orientation}' auf großem Display übersprungen "
+                    "(Android ignoriert sie dort)"
+                )
             elif orientation == 'portrait':
                 requested = SCREEN_ORIENTATION_SENSOR_PORTRAIT
                 Logger.info("Orientierung: Portrait fixiert")
-            elif orientation == 'landscape':
+            else:
                 requested = SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 Logger.info("Orientierung: Landscape fixiert")
-            else:
-                # auto + locked: System-Einstellung beachten
-                requested = SCREEN_ORIENTATION_USER
-                Logger.info("Orientierung: Auto (System-Einstellung)")
 
             activity.setRequestedOrientation(requested)
+            return angewendet
 
         except ImportError:
             Logger.info("jnius nicht verfügbar (kein Android)")
+            return True
         except Exception as e:
             Logger.warning(f"Fehler beim Setzen der Bildschirm-Orientierung: {e}")
+            return True
 
     def _apply_saved_orientation(self):
         """Wendet die gespeicherte Orientierungs-Einstellung an."""
