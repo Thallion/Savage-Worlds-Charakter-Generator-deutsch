@@ -219,13 +219,20 @@ class TestSynchronisation(unittest.TestCase):
 class TestSettingKatalog(unittest.TestCase):
     """Jede ableitbare Waffe muss in JEDEM Setting im Katalog stehen"""
 
+    @staticmethod
+    def _setting_dateien():
+        """Echte Setting-Dateien — ohne die lokal erzeugten custom_*.json
+        (benutzerdefinierte Handicaps/Fertigkeiten/Mächte, gitignored)."""
+        return sorted(pfad for pfad in (project_root / 'settings').glob('*.json')
+                      if not pfad.name.startswith('custom_'))
+
     def test_alle_settings_kennen_alle_natuerlichen_waffen(self):
         import json
         from functions.natuerliche_waffen import lade_config, waffen_name
 
         config = lade_config()
         gruppen = config['gruppen']
-        namen = {name for pfad in (project_root / 'settings').glob('*.json')
+        namen = {name for pfad in self._setting_dateien()
                  for name in json.loads(pfad.read_text(encoding='utf-8'))['ausruestung']}
 
         # Alle Kombinationen, die die Talent-/Eigenart-Regeln erzeugen können
@@ -237,7 +244,7 @@ class TestSettingKatalog(unittest.TestCase):
                 for pb in (0, int(regel.get('pb') or 0), int(wiederholung.get('pb') or 0)):
                     erwartet.add(waffen_name(gruppe, wuerfel, pb))
 
-        for pfad in sorted((project_root / 'settings').glob('*.json')):
+        for pfad in self._setting_dateien():
             katalog = json.loads(pfad.read_text(encoding='utf-8'))['ausruestung']
             for name in sorted(namen & erwartet):
                 with self.subTest(setting=pfad.stem, waffe=name):
