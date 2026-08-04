@@ -379,12 +379,13 @@ class TemplateWizardDialog:
                 height="45dp"
             )
             
-            # Checkbox
+            # Checkbox (on_release statt on_active: on_active ist auf Android
+            # wegen Touch-Bounce unzuverlaessig, siehe docs/ANDROID_WORKAROUNDS.md)
             checkbox = MDCheckbox(
                 size_hint_x=None,
                 width="40dp",
                 active=skill in self.template_data["skills"],
-                on_active=lambda instance, value, skill=skill: self._toggle_skill(skill, value)
+                on_release=lambda instance, skill=skill: self._toggle_skill(skill, instance.active)
             )
             
             # Label
@@ -473,7 +474,7 @@ class TemplateWizardDialog:
                 size_hint_x=None,
                 width="40dp",
                 active=is_selected,
-                on_active=lambda instance, value, k=key: self._toggle_handicap(k, value)
+                on_release=lambda instance, k=key: self._toggle_handicap(k, instance.active)
             )
 
             # Label mit Name, Stufe und Punkten
@@ -543,7 +544,7 @@ class TemplateWizardDialog:
                 size_hint_x=None,
                 width="40dp",
                 active=edge in self.template_data["edges"],
-                on_active=lambda instance, value, edge=edge: self._toggle_edge(edge, value)
+                on_release=lambda instance, edge=edge: self._toggle_edge(edge, instance.active)
             )
             
             label = MDLabel(text=edge)
@@ -606,7 +607,7 @@ class TemplateWizardDialog:
                 size_hint_x=None,
                 width="40dp",
                 active=power in self.template_data["powers"],
-                on_active=lambda instance, value, power=power: self._toggle_power(power, value)
+                on_release=lambda instance, power=power: self._toggle_power(power, instance.active)
             )
             
             label = MDLabel(text=power)

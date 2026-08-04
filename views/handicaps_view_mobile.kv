@@ -88,7 +88,7 @@
 
         RecycleBoxLayout:
             id: layout
-            default_size: None, dp(38)
+            default_size: None, dp(44)
             default_size_hint: 1, None
             size_hint_y: None
             height: self.minimum_height
@@ -100,7 +100,7 @@
 <HandicapItemRow>:
     orientation: 'horizontal'
     size_hint_y: None
-    height: dp(38)
+    height: dp(44)
     md_bg_color: self._get_background_color()
     line_color: self._get_line_color()
     line_width: 2
@@ -133,7 +133,7 @@
         icon: "plus"
         style: "small"
         size_hint: None, None
-        size: dp(30), dp(30)
+        size: dp(36), dp(36)
         pos_hint: {"center_y": 0.5}
         on_release: root.waehle_handicap()
 
@@ -141,7 +141,7 @@
         icon: "minus"
         style: "small"
         size_hint: None, None
-        size: dp(30), dp(30)
+        size: dp(36), dp(36)
         pos_hint: {"center_y": 0.5}
         on_release: root.entferne_handicap()
         disabled: not root.ausgewaehlt
@@ -150,7 +150,7 @@
         icon: "pencil"
         style: "small"
         size_hint: None, None
-        size: dp(30), dp(30)
+        size: dp(36), dp(36)
         pos_hint: {"center_y": 0.5}
         on_release: root.bearbeite_handicap()
 
@@ -159,6 +159,6 @@
         icon: "information-outline"
         style: "small"
         size_hint: None, None
-        size: dp(28), dp(28)
+        size: dp(36), dp(36)
         pos_hint: {"center_y": 0.5}
         on_release: root.show_full_description()

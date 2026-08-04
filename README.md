@@ -90,9 +90,9 @@ python main.py
 Falls die requirements.txt Installation fehlschlägt:
 
 ```bash
-# Manuell installieren:
-pip install https://github.com/kivymd/KivyMD/archive/master.zip
-pip install kivy>=2.1.0
+# Manuell installieren (gepinnter Commit wie in requirements.txt):
+pip install https://github.com/kivymd/KivyMD/archive/365aa9b96eee63e0e29c04de297dd222f478fce5.zip
+pip install "kivy>=2.3.1,<3.0"
 pip install reportlab>=3.6.0
 pip install Pillow>=8.0.0
 pip install python-dateutil>=2.8.0
@@ -178,15 +178,15 @@ Savage-Worlds-Charakter-Generator-deutsch/
 
 **"ModuleNotFoundError: No module named 'kivymd'"**
 ```bash
-# KivyMD von GitHub installieren (nicht von PyPI)
-pip install https://github.com/kivymd/KivyMD/archive/master.zip
+# KivyMD von GitHub installieren (nicht von PyPI) — gepinnter Commit:
+pip install https://github.com/kivymd/KivyMD/archive/365aa9b96eee63e0e29c04de297dd222f478fce5.zip
 ```
 
 **KivyMD Installation schlägt fehl:**
 ```bash
 # Zuerst Kivy installieren, dann KivyMD
-pip install kivy>=2.1.0
-pip install https://github.com/kivymd/KivyMD/archive/master.zip
+pip install "kivy>=2.3.1,<3.0"
+pip install https://github.com/kivymd/KivyMD/archive/365aa9b96eee63e0e29c04de297dd222f478fce5.zip
 ```
 
 **Linux: pycairo / "Python dependency not found" / "command 'gcc' failed"**

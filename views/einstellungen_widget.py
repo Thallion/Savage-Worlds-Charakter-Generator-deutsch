@@ -27,6 +27,7 @@ from manager.pdf_manager import PDFManager
 from utils.path_utils import get_application_root
 from utils.platform_utils import is_mobile_layout
 import os
+import time
 
 _base_path = str(get_application_root())
 _mobile = is_mobile_layout()
@@ -127,11 +128,16 @@ class EinstellungenWidget(MDBoxLayout):
             if not config_service:
                 return
 
+            # Guard: Das programmatische Setzen von switch.active feuert
+            # on_active. Waehrend der Initialisierung duerfen die
+            # Toggle-Handler weder Config schreiben noch Nebenwirkungen
+            # (Navigations-Umbau, Orientierungswechsel) ausloesen.
+            self._switches_initializing = True
+
             # Mobiler Modus Switch
             mobile_modus = config_service.get('mobile_modus', False)
             switch = self.ids.get('mobile_modus_switch')
             if switch:
-                switch.unbind(on_active=None)
                 switch.active = mobile_modus
                 Logger.debug(f"Mobiler Modus Switch initialisiert: {mobile_modus}")
 
@@ -154,7 +160,6 @@ class EinstellungenWidget(MDBoxLayout):
                     tablet_layout = config_service.get('tablet_layout', False)
                     tablet_switch = self.ids.get('tablet_layout_switch')
                     if tablet_switch:
-                        tablet_switch.unbind(on_active=None)
                         tablet_switch.active = tablet_layout
                         Logger.debug(f"Tablet-Layout Switch initialisiert: {tablet_layout}")
 
@@ -162,7 +167,6 @@ class EinstellungenWidget(MDBoxLayout):
             show_logger = config_service.get('show_logger', True)
             logger_switch = self.ids.get('show_logger_switch')
             if logger_switch:
-                logger_switch.unbind(on_active=None)
                 logger_switch.active = show_logger
                 Logger.debug(f"Logger Switch initialisiert: {show_logger}")
 
@@ -170,7 +174,6 @@ class EinstellungenWidget(MDBoxLayout):
             orientation_locked = config_service.get('screen_orientation_locked', False)
             lock_switch = self.ids.get('orientation_lock_switch')
             if lock_switch:
-                lock_switch.unbind(on_active=None)
                 lock_switch.active = orientation_locked
                 Logger.debug(f"Orientierung-Lock Switch initialisiert: {orientation_locked}")
 
@@ -185,6 +188,8 @@ class EinstellungenWidget(MDBoxLayout):
             self._init_scale_slider(config_service)
         except Exception as e:
             Logger.error(f"Fehler beim Initialisieren der UI-Switches: {e}")
+        finally:
+            self._switches_initializing = False
 
     def _init_orientation_segment(self, orientation):
         """Initialisiert den Orientierung-SegmentedButton aus der Config"""
@@ -289,9 +294,31 @@ class EinstellungenWidget(MDBoxLayout):
         except Exception as e:
             Logger.error(f"Fehler beim Zurücksetzen der Skalierung: {e}")
 
+    def _switch_guard_check(self, key: str) -> bool:
+        """Prueft, ob ein Switch-Event verarbeitet werden darf.
+
+        Blockiert zwei Faelle:
+        1. Programmatisches Setzen waehrend der Initialisierung
+           (_switches_initializing) — wuerde sonst Config zurueckschreiben
+           und Nebenwirkungen ausloesen.
+        2. Android Touch-Bounce: aufeinanderfolgende Events desselben
+           Switches innerhalb von 500 ms (siehe docs/ANDROID_WORKAROUNDS.md).
+        """
+        if getattr(self, '_switches_initializing', False):
+            return False
+        now = time.monotonic()
+        if not hasattr(self, '_last_switch_times'):
+            self._last_switch_times = {}
+        if key in self._last_switch_times and (now - self._last_switch_times[key]) < 0.5:
+            return False
+        self._last_switch_times[key] = now
+        return True
+
     def toggle_logger(self, active):
         """Wechselt die Logger-Leiste Sichtbarkeit und speichert die Einstellung"""
         try:
+            if not self._switch_guard_check('logger'):
+                return
             config_service = service_container.get_config_service()
             if config_service:
                 config_service.set('show_logger', active)
@@ -315,6 +342,8 @@ class EinstellungenWidget(MDBoxLayout):
                           False = horizontales Menü (orientierungsbasiert auf Android, Desktop-Tabs auf Desktop)
         """
         try:
+            if not self._switch_guard_check('mobile_modus'):
+                return
             # Config speichern
             config_service = service_container.get_config_service()
             if config_service:
@@ -385,6 +414,8 @@ class EinstellungenWidget(MDBoxLayout):
     def toggle_tablet_layout(self, active):
         """Wechselt auf Android zwischen Mobile- und Desktop-Layout (Neustart nötig)"""
         try:
+            if not self._switch_guard_check('tablet_layout'):
+                return
             config_service = service_container.get_config_service()
             if config_service:
                 config_service.set('tablet_layout', active)
@@ -445,6 +476,8 @@ class EinstellungenWidget(MDBoxLayout):
     def toggle_orientation_lock(self, active):
         """Wechselt zwischen fixierter und flexibler Bildschirm-Orientierung"""
         try:
+            if not self._switch_guard_check('orientation_lock'):
+                return
             config_service = service_container.get_config_service()
             if config_service:
                 config_service.set('screen_orientation_locked', active)
@@ -735,10 +768,15 @@ class EinstellungenWidget(MDBoxLayout):
     
     def _show_log_content_dialog(self, log_filepath):
         """Zeigt den Log-Inhalt in einem scrollbaren Dialog"""
-        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.dialog import (
+            MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
+            MDDialogButtonContainer
+        )
         from kivymd.uix.label import MDLabel
         from kivymd.uix.button import MDButton, MDButtonText
         from kivymd.uix.scrollview import MDScrollView
+        from kivy.core.window import Window
+        from kivy.metrics import dp
         try:
             # Log-Datei lesen (letzten 200 Zeilen für bessere Performance)
             with open(log_filepath, 'r', encoding='utf-8') as f:
@@ -748,8 +786,13 @@ class EinstellungenWidget(MDBoxLayout):
                 log_content = ''.join(recent_lines)
             
             # Dialog mit scrollbarem Inhalt
-            content = MDBoxLayout(orientation="vertical", spacing="12dp")
-            
+            content = MDBoxLayout(
+                orientation="vertical",
+                spacing="12dp",
+                size_hint_y=None,
+            )
+            content.bind(minimum_height=content.setter('height'))
+
             # Info-Header
             info_label = MDLabel(
                 text=f"Log-Datei: {os.path.basename(log_filepath)}\nPfad: {log_filepath}\nZeilen: {len(recent_lines)}/{len(lines)}",
@@ -759,36 +802,63 @@ class EinstellungenWidget(MDBoxLayout):
                 halign="left"
             )
             content.add_widget(info_label)
-            
-            # Scrollbarer Log-Inhalt
-            scroll = MDScrollView()
+
+            # Scrollbarer Log-Inhalt. Kein text_size setzen: MDLabel koppelt
+            # den Umbruch automatisch an die eigene Breite (siehe
+            # docs/ANDROID_WORKAROUNDS.md "MDDialog Fixed Height").
             log_label = MDLabel(
                 text=log_content,
                 theme_text_color="Primary",
                 halign="left",
                 valign="top",
-                text_size=(None, None),
+                size_hint_y=None,
                 font_name='RobotoMono'  # Monospace für bessere Lesbarkeit
             )
-            log_label.bind(texture_size=log_label.setter('size'))
+            # Nur die Höhe aus der Textur übernehmen — ein setter('size')
+            # würde auch die Breite überschreiben und mit dem Layout kollidieren.
+            log_label.bind(texture_size=lambda inst, ts: setattr(inst, 'height', ts[1]))
+
+            # Feste Scroll-Höhe statt size_hint_y=1: MDDialog lässt
+            # size_hint_y=1 für Kinder des ContentContainers nicht zu.
+            # Kopfzeile, Info-Header, Button-Leiste und Padding ~300dp abziehen,
+            # sonst sprengt der Dialog im Landscape-Modus den Bildschirm.
+            max_scroll_height = max(dp(100), Window.height * 0.8 - dp(300))
+            scroll = MDScrollView(
+                size_hint=(1, None),
+                height=max_scroll_height,
+                do_scroll_x=False,
+                do_scroll_y=True,
+            )
             scroll.add_widget(log_label)
+
+            # Kurze Logs bekommen einen kompakten Dialog, lange werden
+            # bei max_scroll_height gedeckelt und scrollbar.
+            def _passe_scroll_hoehe_an(instance, hoehe):
+                scroll.height = min(hoehe, max_scroll_height)
+            log_label.bind(height=_passe_scroll_hoehe_an)
             content.add_widget(scroll)
-            
+
             # Dialog erstellen
             dialog = MDDialog(
-                title="Log-Datei Inhalt",
-                content_cls=content,
-                size_hint=(0.9, 0.8),
-                buttons=[
+                MDDialogHeadlineText(text="Log-Datei Inhalt"),
+                MDDialogContentContainer(
+                    content,
+                    orientation="vertical",
+                ),
+                MDDialogButtonContainer(
                     MDButton(
                         MDButtonText(text="Log-Pfad Info"),
+                        style="text",
                         on_release=lambda x: self._show_log_path_info(log_filepath)
                     ),
                     MDButton(
                         MDButtonText(text="Schließen"),
+                        style="text",
                         on_release=lambda x: dialog.dismiss()
-                    )
-                ],
+                    ),
+                    spacing="8dp",
+                ),
+                size_hint=(0.9, None),
                 auto_dismiss=False,
             )
             dialog.open()
@@ -800,13 +870,10 @@ class EinstellungenWidget(MDBoxLayout):
     def _show_log_path_info(self, log_filepath):
         """Zeigt detaillierte Pfad-Informationen für die Log-Datei"""
         from kivy.utils import platform
-        from kivymd.uix.dialog import MDDialog
-        from kivymd.uix.label import MDLabel
-        from kivymd.uix.button import MDButton, MDButtonText
-        
+
         log_dir = os.path.dirname(log_filepath)
         content_text = f"Log-Datei:\n{log_filepath}\n\nLog-Ordner:\n{log_dir}"
-        
+
         if platform == 'android':
             content_text += "\n\nSo findest du die Logs auf Android:\n"
             content_text += "1. Dateimanager öffnen\n"
@@ -814,28 +881,8 @@ class EinstellungenWidget(MDBoxLayout):
             content_text += "3. Ordner 'SavageWorldsCharGen' suchen\n"
             content_text += "4. Unterordner 'logs' öffnen\n"
             content_text += "\nAlternativer Pfad:\n/sdcard/SavageWorldsCharGen/logs/"
-        
-        content = MDLabel(
-            text=content_text,
-            theme_text_color="Primary",
-            halign="left",
-            valign="top"
-        )
-        content.bind(texture_size=content.setter('size'))
-        
-        dialog = MDDialog(
-            title="Log-Datei Pfad",
-            content_cls=content,
-            buttons=[
-                MDButton(
-                    MDButtonText(text="OK"),
-                    on_release=lambda x: dialog.dismiss()
-                )
-            ],
-            size_hint=(0.85, None),
-            auto_dismiss=False,
-        )
-        dialog.open()
+
+        self._show_simple_dialog("Log-Datei Pfad", content_text)
     
     def _show_simple_dialog(self, title, message):
         """Zeigt einen einfachen Dialog"""

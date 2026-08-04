@@ -36,10 +36,10 @@ buildozer android debug
 ### buildozer.spec Requirements
 
 ```ini
-requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip,materialyoucolor,pillow,reportlab,requests,android
+requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/365aa9b96eee63e0e29c04de297dd222f478fce5.zip,materialyoucolor,pillow,reportlab,requests,android
 ```
 
-**Wichtig:** KivyMD wird als GitHub master.zip geladen für die neueste Entwicklerversion.
+**Wichtig:** KivyMD wird als GitHub-Archiv geladen, aber auf einen festen **Commit gepinnt** (reproduzierbare Builds; `master.zip` zöge bei jedem Build einen anderen Stand). Begründung und Update-Regel: `docs/ANDROID_WORKAROUNDS.md` Abschnitt "KivyMD-Versionspinning".
 
 ### Build-Bereinigung
 

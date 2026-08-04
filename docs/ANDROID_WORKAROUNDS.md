@@ -47,6 +47,32 @@ apply_scrollbar_defaults()
 - Wer explizit setzt, muss den Mobile-Fall mitdenken: `bar_width=dp(20) if _mobile else dp(15)`.
 - `MDScrollView` und `RecycleView` erben dieselbe Property-Instanz, der Patch wirkt also auch für den `CustomFileManager` (dessen `rv` zusätzlich rechtes Padding für den breiteren Balken bekommt).
 
+## KivyMD-Versionspinning (Stand 2026-08)
+**Problem:** `requirements.txt` und `buildozer.spec` bezogen KivyMD als ungepinntes `master.zip`. Jeder Neu-Build (Desktop wie APK) zog einen anderen Stand — nicht reproduzierbar, Desktop-Tests validierten nicht die APK-Version, und der KivyMD-Master war 2026 mehrfach kaputt (theming.py-Umbau kivymd/KivyMD#1877, MDDataTable).
+
+**Lösung:** KivyMD ist auf Commit `365aa9b96eee63e0e29c04de297dd222f478fce5` (2026-03-07) gepinnt — in `requirements.txt` und `buildozer.spec`. Der Commit enthält gegenüber dem vorherigen Stand (2025-08-21) den Android-Touch-Fix **#1850** (MDScrollView↔MDDialog: Crash/Fehlverhalten, wenn ein Dialog mit MDTextField geöffnet wurde, bevor die darunterliegende ScrollView eine Touch-Interaktion hatte).
+
+**WARNUNG — neuere KivyMD-Stände derzeit UNBRAUCHBAR für diese App:** Der `M3CommonRipple`-Umbau (04/2026) erzeugt in `ripple_behavior.init_fbos()` ein `Fbo(size=self.size)` zum Zeitpunkt, da die Widget-Höhe noch 0 ist → `Exception: FBO Initialization failed: Incomplete attachment` bei jedem `MDTabsItem` (verifiziert 2026-08 mit Master `57b1b8b0`, NVIDIA/X11). Die App bekäme damit **keine einzige Tab-Leiste** aufgebaut. Erst wieder updaten, wenn dieser Bug upstream gefixt ist (vorher Minimal-Test: `MDTabsItem()` instanziieren).
+
+**Pflicht-Kopplungen:**
+- `materialyoucolor>=2.0.7,<3.0` — bei diesem KivyMD-Stand auf 2.x bleiben (alte theming-API); `>=3.0` ist erst ab dem theming.py-Umbau (07/2026, #1877) nötig.
+- Kivy `2.3.1` (letzter stabiler 2.x-Bugfix-Stand). Kivy 3.0/SDL3 ist nicht produktionsreif (kein Release-Termin, instabiler Master) — kein Upgrade.
+- `MDRecycleView` hat in diesem Stand `StretchOverScrollBehavior` eingebaut: Die Mächte-/Handicaps-/Talent-Listen scrollen jetzt mit demselben Stretch-Overscroll wie `MDScrollView` (kein alter DampedScrollEffect-Bounce mehr).
+
+**MDScrollView-Monkey-Patch entfernt:** Der frühere Patch in `views/ui_components.py` (TypeError in `convert_overscroll` bei `last_touch_pos=None`) ist mit #1850 upstream gefixt und wurde entfernt — er umging die komplette KivyMD-Implementierung und hätte deren Stretch-Verhalten blockiert. Bei einem Downgrade unter den gepinnten Commit muss er wiederhergestellt werden (git-Historie von `views/ui_components.py`).
+
+**Regel:** KivyMD-Updates nur bewusst: Commit in beiden Dateien anheben + `materialyoucolor`-Kompatibilität prüfen + komplette Testsuite + App-Start-Test (Tabs!). Niemals wieder `master.zip`.
+
+## Kein on_press für Aktions-Buttons in Listen
+**Problem:** `on_press` feuert bei `touch_down` — eine Scroll-Geste, die auf dem Button beginnt, löst die Aktion trotzdem aus. Betraf die Charakterbogen-Zeilen (WeaponItem/ArmorItem/EquipmentItem in `views/charakterbogen_view*.kv`).
+
+**Regel:** Aktions-Buttons in scrollbaren Listen immer `on_release`. Touch-Targets auf Mobile mindestens ~dp(36–40) hoch (Material-Minimum wäre 48dp; dp(40) ist der pragmatische Kompromiss für Listenzeilen).
+
+## MDSwitch: Init-Guard + Debounce
+**Problem:** `on_active` auf `MDSwitch` hat dasselbe Touch-Bounce-Risiko wie bei Checkboxen. Zusätzlich feuert `on_active` auch beim programmatischen Setzen (`switch.active = ...`) während der Initialisierung — ein `unbind(on_active=None)` half nicht (No-Op ohne Callback): Beim bloßen Öffnen der Einstellungen wurde die Config zurückgeschrieben und Nebenwirkungen (z.B. Navigations-Umbau) liefen ungewollt.
+
+**Lösung:** `views/einstellungen_widget.py` → `_switch_guard_check(key)`: blockiert Events während `_switches_initializing` (gesetzt in `_init_mobile_modus_switch`) und wiederholte Events desselben Switches innerhalb von 500 ms. Genutzt von `toggle_mobile_modus`, `toggle_tablet_layout`, `toggle_orientation_lock`, `toggle_logger`.
+
 ## Checkbox/Button Debounce Pattern (Android Touch Bounce)
 **Problem:** On Android, touch events on `MDListItemTrailingCheckbox` and `MDButton` can fire multiple times for a single tap. This causes talents to be selected twice, checkboxes to toggle back, or actions to execute twice.
 
@@ -214,11 +240,9 @@ def _on_checkbox_toggled(self, checkbox, item_name):
 
 **Where this pattern is used (checkboxes with debounce):**
 
-*Exaktes Pattern (`_last_checkbox_time`):*
-- `views/template_wizard.py` — skill/handicap/edge/power checkboxes
-
 *Per-Item Debounce (`_last_checkbox_times[key]` — Dictionary-Variante, siehe unten):*
 - `views/element_overlay.py` — multi-select checkboxes (Vorlage!)
+- `views/template_wizard.py` — skill/handicap/edge/power checkboxes (`on_release` + `_checkbox_debounce_check()`; bis 2026-08 `on_active` — unzuverlässig auf Android)
 
 *Variante mit eigener Tracking-Variable je Use-Case:*
 - `views/setting_assistent_view.py` — `_last_template_checkbox_time` (basis/merge selection, Elemente-Auswahl)

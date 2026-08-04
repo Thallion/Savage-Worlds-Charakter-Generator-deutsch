@@ -265,7 +265,7 @@
     MDButton:
         text: root.button_text
         size_hint_x: 0.2
-        on_press: root.on_button_press()
+        on_release: root.on_button_press()
 
 <ArmorItem@MDBoxLayout>:
     armor: None
@@ -280,7 +280,7 @@
     MDButton:
         text: root.button_text
         size_hint_x: 0.2
-        on_press: root.on_button_press()
+        on_release: root.on_button_press()
 
 <EquipmentItem@MDBoxLayout>:
     item: None
@@ -298,4 +298,4 @@
     MDButton:
         text: root.button_text
         size_hint_x: 0.2
-        on_press: root.on_button_press()
+        on_release: root.on_button_press()

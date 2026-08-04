@@ -16,23 +16,15 @@ from utils.platform_utils import is_mobile_layout, landscape_height
 
 _mobile = is_mobile_layout()
 
-# --- Monkey-Patch: KivyMD MDScrollView.on_touch_move crasht mit TypeError ---
-# Bug: last_touch_pos ist None wenn convert_overscroll aufgerufen wird,
-# get_component() versucht pos[-1] auf None → TypeError.
-# KivyMD fängt nur AttributeError ab, nicht TypeError.
-_orig_mdscrollview_on_touch_move = MDScrollView.on_touch_move
-
-def _patched_on_touch_move(self, touch):
-    try:
-        self.effect_x.convert_overscroll(touch)
-        self.effect_y.convert_overscroll(touch)
-    except (AttributeError, TypeError):
-        pass
-    # super().on_touch_move aufrufen — umgeht die originale Methode
-    from kivy.uix.scrollview import ScrollView
-    ScrollView.on_touch_move(self, touch)
-
-MDScrollView.on_touch_move = _patched_on_touch_move
+# --- Hinweis: Der fruehere Monkey-Patch fuer MDScrollView.on_touch_move ---
+# (TypeError in convert_overscroll bei last_touch_pos=None) ist seit dem
+# gepinnten KivyMD-Commit 365aa9b9 ENTFERNT. Der Root Cause ist upstream
+# gefixt: kivymd/KivyMD#1850 ("fix touch in scrollview") — convert_overscroll()
+# prueft jetzt selbst auf None und on_touch_down initialisiert
+# last_touch_pos. Der Patch hatte die komplette KivyMD-Implementierung
+# umgangen und wuerde deren Stretch-Verhalten blockieren.
+# Bei einem KivyMD-Downgrade unter den Fix-Stand muss der Patch wiederher-
+# gestellt werden (siehe git-Historie dieser Datei).
 
 
 # --- Monkey-Patch: Android TextInput Bubble/Handles deaktivieren ---

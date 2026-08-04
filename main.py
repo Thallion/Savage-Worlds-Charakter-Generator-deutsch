@@ -1083,7 +1083,10 @@ class SW_Charakter_GeneratorApp(AppNavigationMixin, AppTabAufbauMixin, MDApp):
     
     def show_log_info(self):
         """Zeigt Informationen über die Log-Dateien in einem Dialog."""
-        from kivymd.uix.dialog import MDDialog
+        from kivymd.uix.dialog import (
+            MDDialog, MDDialogHeadlineText, MDDialogContentContainer,
+            MDDialogButtonContainer
+        )
         from kivymd.uix.label import MDLabel
         from kivymd.uix.button import MDButton, MDButtonText
         from kivymd.uix.boxlayout import MDBoxLayout
@@ -1123,14 +1126,19 @@ class SW_Charakter_GeneratorApp(AppNavigationMixin, AppTabAufbauMixin, MDApp):
             content.add_widget(error_label)
         
         dialog = MDDialog(
-            title="Log-Dateien Information",
-            content_cls=content,
-            buttons=[
+            MDDialogHeadlineText(text="Log-Dateien Information"),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
                 MDButton(
                     MDButtonText(text="Schließen"),
-                    on_release=lambda x: dialog.dismiss()
-                )
-            ],
+                    style="text",
+                    on_release=lambda x: dialog.dismiss(),
+                ),
+                spacing="8dp",
+            ),
             size_hint=(0.85, None),
             auto_dismiss=False,
         )
