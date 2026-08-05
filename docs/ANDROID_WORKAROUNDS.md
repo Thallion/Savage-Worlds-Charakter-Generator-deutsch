@@ -283,23 +283,33 @@ else:
 **Problem:** Die "Löschen"-Dialoge in Einstellungen (Volk, Talent, Macht, etc.) haben Checkboxen im ElementOverlay, die auf Android Touch-Bounce-Probleme haben. Das funktioniert schlechter als die Setting-Auswahl in "Neuer Charakter".
 
 **Two-Phase Pattern (IMPLEMENTIERT — STANDARD für Delete-Dialoge):**
-1. **Phase 1:** ElementOverlay öffnen mit Checkboxen (mit Debounce)
-2. **Phase 2:** Wenn der Benutzer auf "Löschen" klickt, ein SEPARATES Bestätigungs-Popup öffnen
+1. **Phase 1:** `SearchBottomSheet(multi_select=True)` öffnen — Suchfeld + Checkboxen mit Per-Item-Debounce
+2. **Phase 2:** Nach dem Bestätigen ein SEPARATES Bestätigungs-Popup (`MDDialog`) öffnen
    - Keine Checkboxen im Bestätigungs-Popup
    - Das Bestätigungs-Popup zeigt die ausgewählten Elemente als Text-Liste
    - Einheitlicher Methodenname: `_show_delete_confirmation_popup(selected_items)`
+   - Erst per `Clock.schedule_once(..., 0.1)` öffnen — das Sheet schließt gerade mit Animation
 
-**Setting-Auswahl Pattern als Referenz:**
-Die Setting-Auswahl bei "Neuer Charakter" in `charakter_verwaltung_widget.py` ist das Vorbild:
-- MDListItem mit on_release auf dem Item (nicht auf der Checkbox)
-- Checkbox nur zur visuellen Anzeige, nicht für Event-Handling
-- Beim Klick auf das Item wird die Selection-Logik ausgeführt
+**Phase 1 gehört NICHT in einen MDDialog (Fix 2026-08):** Die Auswahlliste lag früher als
+`MDScrollView` in einem `MDDialog`. Auf Android war die Liste dadurch **nicht scrollbar**
+(der Dialog fängt die Touch-Events ab, dasselbe Problem, das zur Entstehung von
+`SearchBottomSheet` geführt hat), und der breite Scrollbalken lag über den Checkboxen.
+Phase 1 läuft deshalb über `SearchBottomSheet` (ModalView) — dort sind Scrollverhalten,
+Balken-Padding (`padding=[0, 0, dp(32), 0]`) und Debounce bereits gelöst.
 
 **Vorlage:**
 ```python
-def _show_delete_options_popup(self):
-    """Phase 1: Optionen-Popup mit Checkboxen (ElementOverlay mit Debounce)"""
-    pass
+def show_delete_dialog(self):
+    """Phase 1: Auswahl-Sheet mit Suche + Checkboxen"""
+    from views.ui_components import SearchBottomSheet
+    self._delete_popup = SearchBottomSheet(
+        title=f"{self.element_name} löschen",
+        items=sorted(elemente),
+        multi_select=True,
+        on_confirm=self._on_delete_action_clicked,   # bekommt die Namensliste
+        search_hint=f"{self.element_name} suchen...",
+    )
+    self._delete_popup.open()
 
 def _show_delete_confirmation_popup(self, selected_items):
     """Phase 2: Bestätigungs-Popup OHNE Checkboxen"""
@@ -307,6 +317,11 @@ def _show_delete_confirmation_popup(self, selected_items):
     # Ausgewählte Items als Text anzeigen
     pass
 ```
+
+**Scroll-Geometrie im Bestätigungs-Popup:** Die Deckelung (`min(48dp * n, 200dp)`) gehört an
+den `MDScrollView` (`size_hint=(1, None), height=...`), **nicht** an die `MDList` — deren Höhe
+muss über `minimum_height` mitwachsen. Früher war es umgekehrt: ab ~5 gewählten Einträgen
+waren die restlichen weder sichtbar noch erreichbar.
 
 **Wo dieses Two-Phase Pattern bereits implementiert ist (9 Popups):**
 - `views/talent_popup.py` — Talent löschen
@@ -355,6 +370,16 @@ scroll = MDScrollView(size_hint=(1, None), height=max_scroll_height)
 - Slide-up/down animation
 - Integrated search field with filtered list
 - Used for race/species selection and other searchable lists
+
+**Zwei Modi:**
+
+| Modus | Verhalten | `on_confirm` bekommt |
+|---|---|---|
+| Einfachauswahl (Default) | Tippen auf einen Eintrag wählt aus und schließt sofort | den Namen (oder `None`) |
+| `multi_select=True` | Jeder Eintrag hat eine Checkbox (Per-Item-Debounce, Solution 4); der Titel zeigt die Anzahl; geschlossen wird erst über ✓ (bestätigen) bzw. ✕ (abbrechen) | die sortierte Liste der Namen |
+
+Die Mehrfachauswahl ist der Phase-1-Schritt der Lösch-Dialoge (siehe *Delete Dialogs mit
+Checkboxen*). `selected=` nimmt dort eine Liste bereits vorausgewählter Namen entgegen.
 
 ## Android 16 / targetSdk 36 (`buildozer.spec` + `build_fixes.py`)
 

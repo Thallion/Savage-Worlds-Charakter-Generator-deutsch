@@ -90,7 +90,7 @@ Die häufigsten Fallen auf Android — **vollständige Begründung und Code-Beis
 - **`MDDialog` IMMER mit `size_hint=(0.85, None)`** — nicht `(1, 1)`, sonst Vollbild-Popup auf Android.
 - **`MDDialogContentContainer` benötigt feste Höhe** (`size_hint_y=None`, berechnete `height`).
 - **`TextFieldScrollView` statt `MDScrollView`** wenn `MDTextField` enthalten ist.
-- **`SearchBottomSheet` statt `MDDialog`** für Such-/Filterlisten.
+- **`SearchBottomSheet` statt `MDDialog`** für Such-/Filterlisten — auch für Mehrfachauswahl (`multi_select=True`, z.B. Phase 1 der Lösch-Dialoge). In einem `MDDialog` scrollen solche Listen auf Android nicht.
 
 ## Technology Stack
 

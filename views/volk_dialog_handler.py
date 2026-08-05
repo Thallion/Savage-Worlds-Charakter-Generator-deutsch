@@ -7,8 +7,6 @@ volk_popup importiert (vermeidet Import-Zyklus, lädt dabei dessen KV-Datei).
 volk_popup re-exportiert VolkDialogHandler für bestehende Importe.
 """
 
-import time
-
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.logger import Logger
@@ -16,9 +14,8 @@ from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
+from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText
 from kivymd.uix.scrollview import MDScrollView
-from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
 
 from models.volk import Volk
 from utils.platform_utils import is_mobile_layout
@@ -105,119 +102,48 @@ class VolkDialogHandler:
             Logger.error(f"Fehler beim Erzwingen des Eigenschaften-Refresh: {e}")
 
     def show_delete_dialog(self):
-        """Zeigt das Two-Phase Popup zum Löschen von Völkern."""
-        import time
-        from kivymd.uix.list import MDListItemTrailingCheckbox
+        """Zeigt das Two-Phase Popup zum Löschen von Völkern (Phase 1).
 
+        Die Auswahl läuft über `SearchBottomSheet` (ModalView), NICHT über
+        einen `MDDialog`: Such-/Filterlisten in einem MDDialog scrollen auf
+        Android nicht (der Dialog stiehlt die Touch-Events), und der
+        Scrollbalken lag über den Checkboxen. Siehe
+        docs/ANDROID_WORKAROUNDS.md → SearchBottomSheet.
+        """
         voelker = self.get_all_voelker()
         if not voelker:
             self.show_error("Keine Abstammungen zum Löschen verfügbar.")
             return
 
-        self._volk_checkboxes = {}
-        self._volk_last_cb_times = {}
+        from views.ui_components import SearchBottomSheet
 
-        content = MDList(size_hint_y=None)
-        content.bind(minimum_height=content.setter('height'))
-
-        def create_checkbox(item_name):
-            item = MDListItem(size_hint_y=None, height=dp(48))
-            item.add_widget(MDListItemSupportingText(text=item_name))
-
-            checkbox = MDListItemTrailingCheckbox()
-            cb = checkbox
-
-            def on_release_checkbox(inst, cb=cb, name=item_name):
-                now = time.monotonic()
-                key = f"cb_{name}"
-                if key in self._volk_last_cb_times and (now - self._volk_last_cb_times[key]) < 0.5:
-                    return
-                self._volk_last_cb_times[key] = now
-
-            checkbox.bind(on_release=on_release_checkbox)
-            item.add_widget(checkbox)
-            content.add_widget(item)
-            self._volk_checkboxes[item_name] = checkbox
-
-        for volk_name in sorted(voelker):
-            create_checkbox(volk_name)
-
-        scroll_height = min(len(voelker) * dp(48), dp(250))
-        scroll = MDScrollView(
-            size_hint=(1, None),
-            height=scroll_height,
-            do_scroll_x=False,
-            do_scroll_y=True,
-            bar_width=dp(20) if _mobile else dp(15),
-            bar_margin=dp(8) if _mobile else dp(4),
-        )
-        if _mobile:
-            scroll.scroll_type = ['bars', 'content']
-        scroll.add_widget(content)
-
-        main_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(8),
-            size_hint_y=None,
-            padding=dp(16),
-            height=scroll_height + dp(80),
-        )
-
-        search_field = MDTextField(
-            mode="outlined",
-            size_hint_y=None,
-            height=dp(56),
-            hint_text="Suchen...",
-        )
-        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
-        main_content.add_widget(search_field)
-        main_content.add_widget(scroll)
-
-        def populate_list(search_text):
-            content.clear_widgets()
-            for volk_name in sorted(voelker):
-                if search_text and search_text.lower() not in volk_name.lower():
-                    continue
-                if volk_name in self._volk_checkboxes:
-                    item = MDListItem(size_hint_y=None, height=dp(48))
-                    item.add_widget(MDListItemSupportingText(text=volk_name))
-                    cb_existing = self._volk_checkboxes[volk_name]
-                    if cb_existing.parent:
-                        cb_existing.parent.remove_widget(cb_existing)
-                    item.add_widget(cb_existing)
-                    content.add_widget(item)
-                else:
-                    create_checkbox(volk_name)
-
-        search_field.bind(text=lambda instance, value: populate_list(value))
-        populate_list("")
-
-        self._delete_popup = MDDialog(
-            MDDialogHeadlineText(text="Abstammung löschen"),
-            MDDialogContentContainer(main_content),
-            MDDialogButtonContainer(
-                MDButton(MDButtonText(text="Abbrechen"), style="text",
-                         on_release=lambda x: self._delete_popup.dismiss()),
-                MDButton(MDButtonText(text="Weiter"), style="filled",
-                         on_release=self._on_delete_action_clicked),
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self._delete_popup = SearchBottomSheet(
+            title="Abstammung löschen",
+            items=sorted(voelker),
+            multi_select=True,
+            on_confirm=self._on_delete_action_clicked,
+            search_hint="Abstammung suchen...",
         )
         self._delete_popup.open()
 
-    def _on_delete_action_clicked(self, *args):
-        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
-        selected = [name for name, cb in self._volk_checkboxes.items() if cb.active]
+    def _on_delete_action_clicked(self, selected=None, *args):
+        """Phase 1: Übernimmt die Auswahl und zeigt das Bestätigungs-Popup."""
+        selected = list(selected) if selected else []
 
         if not selected:
             self.show_error("Bitte wähle mindestens eine Abstammung zum Löschen aus.")
             return
 
         self._pending_delete_items = selected
-        self._delete_popup.dismiss()
-        self._show_delete_confirmation_popup(
-            selected_items=selected, item_type="Abstammung", on_confirm=self._confirm_delete_volk
+        # Erst im nächsten Frame öffnen: das Auswahl-Sheet schließt sich
+        # gerade, ein sofort geöffneter Dialog kann auf Android in dessen
+        # Dismiss-Animation hängenbleiben.
+        Clock.schedule_once(
+            lambda dt: self._show_delete_confirmation_popup(
+                selected_items=selected, item_type="Abstammung",
+                on_confirm=self._confirm_delete_volk,
+            ),
+            0.1,
         )
 
     def save_volk(self, *args):
@@ -372,25 +298,32 @@ class VolkDialogHandler:
         from kivy.metrics import dp
 
         content = MDList(size_hint_y=None)
+        # Die feste Höhe gehört an den ScrollView, NICHT an sein Kind — sonst
+        # sind Einträge jenseits der Deckelung nicht erreichbar.
         content.bind(minimum_height=content.setter('height'))
+        if _mobile:
+            # Platz für den breiten Scrollbalken, sonst liegt er über dem Text
+            content.padding = [0, 0, dp(32), 0]
 
         for item_name in selected_items:
             list_item = MDListItem(size_hint_y=None, height=dp(48))
             list_item.add_widget(MDListItemSupportingText(text=item_name))
             content.add_widget(list_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True)
-        scroll.add_widget(content)
-
         list_height = min(dp(48) * len(selected_items), dp(200))
-        content.size_hint_y = None
-        content.height = list_height
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height=list_height,
+            do_scroll_x=False,
+            do_scroll_y=True,
+        )
+        scroll.add_widget(content)
 
         main_content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(8),
             size_hint_y=None,
-            height=dp(80) + list_height,
+            height=list_height + dp(32),
             padding=dp(16)
         )
         main_content.add_widget(scroll)
