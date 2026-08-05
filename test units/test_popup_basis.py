@@ -74,41 +74,57 @@ class TestDismissDialog(unittest.TestCase):
 
 
 class TestDeleteFlowPhase1(unittest.TestCase):
-    def _handler_mit_checkboxen(self, aktiv):
+    """Phase 1 bekommt die Auswahl als Namensliste vom SearchBottomSheet."""
+
+    def _handler(self):
         handler = _TestHandler(Mock())
-        handler._delete_checkboxes = {}
-        for name, ist_aktiv in aktiv.items():
-            cb = Mock()
-            cb.active = ist_aktiv
-            handler._delete_checkboxes[name] = cb
         handler._delete_popup = Mock()
         handler.show_error = Mock()
         handler._show_delete_confirmation_popup = Mock()
         return handler
 
     def test_keine_auswahl_zeigt_fehler(self):
-        handler = self._handler_mit_checkboxen({"Schwert": False, "Dolch": False})
+        handler = self._handler()
 
-        handler._on_delete_action_clicked()
+        handler._on_delete_action_clicked([])
 
         handler.show_error.assert_called_once()
         meldung = handler.show_error.call_args[0][0]
         self.assertIn("mindestens eine Waffe", meldung)
-        handler._delete_popup.dismiss.assert_not_called()
         handler._show_delete_confirmation_popup.assert_not_called()
 
     def test_auswahl_oeffnet_bestaetigung(self):
-        handler = self._handler_mit_checkboxen({"Schwert": True, "Dolch": False})
+        handler = self._handler()
 
-        handler._on_delete_action_clicked()
+        with patch('views.popup_basis.Clock') as mock_clock:
+            handler._on_delete_action_clicked(["Schwert"])
 
-        handler.show_error.assert_not_called()
-        handler._delete_popup.dismiss.assert_called_once()
-        self.assertEqual(handler._pending_delete_items, ["Schwert"])
+            handler.show_error.assert_not_called()
+            self.assertEqual(handler._pending_delete_items, ["Schwert"])
+            # Phase 2 erst im nächsten Frame (Sheet schließt gerade)
+            handler._show_delete_confirmation_popup.assert_not_called()
+            mock_clock.schedule_once.assert_called_once()
+            mock_clock.schedule_once.call_args[0][0](0)
+
         kwargs = handler._show_delete_confirmation_popup.call_args[1]
         self.assertEqual(kwargs['selected_items'], ["Schwert"])
         self.assertEqual(kwargs['item_type'], "Waffe")
         self.assertEqual(kwargs['on_confirm'], handler._confirm_delete_elemente)
+
+    def test_show_delete_dialog_oeffnet_bottomsheet(self):
+        """Phase 1 nutzt SearchBottomSheet (ModalView), nicht MDDialog."""
+        handler = _TestHandler(Mock())
+        sheet = Mock()
+        sheet_cls = Mock(return_value=sheet)
+
+        with patch.dict(sys.modules, {'views.ui_components': MagicMock(SearchBottomSheet=sheet_cls)}):
+            handler.show_delete_dialog()
+
+        sheet.open.assert_called_once()
+        kwargs = sheet_cls.call_args[1]
+        self.assertTrue(kwargs['multi_select'])
+        self.assertEqual(kwargs['items'], ["Dolch", "Schwert"])
+        self.assertEqual(kwargs['on_confirm'], handler._on_delete_action_clicked)
 
     def test_show_delete_dialog_ohne_elemente_zeigt_fehler(self):
         handler = _TestHandler(Mock())

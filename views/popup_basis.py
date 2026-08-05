@@ -6,12 +6,13 @@ Ausrüstung, Talent, Handicap, Macht, Fertigkeit).
 Bündelt das in allen Handlern identische Gerüst:
 - Overlay-Beschaffung und Dialog-Schließen
 - Fehler-/Erfolgsmeldungen über den Dialog-Service
-- Two-Phase-Lösch-Flow: Auswahl-Popup mit Checkboxen + Suchfeld (Phase 1)
-  → separates Bestätigungs-Popup ohne Checkboxen (Phase 2)
+- Two-Phase-Lösch-Flow: Auswahl über das `SearchBottomSheet` mit Suchfeld
+  und Checkboxen (Phase 1) → separates Bestätigungs-Popup ohne Checkboxen
+  (Phase 2)
 
-Die Android-Workarounds (on_release + 500ms-Debounce für Checkboxen,
-separates Bestätigungs-Popup, Clock-verzögertes dismiss) sind unverändert
-aus den Einzeldateien übernommen — siehe docs/ANDROID_WORKAROUNDS.md.
+Die Android-Workarounds (SearchBottomSheet statt MDDialog für die Suchliste,
+on_release + 500ms-Debounce für Checkboxen, separates Bestätigungs-Popup,
+Clock-verzögertes dismiss) — siehe docs/ANDROID_WORKAROUNDS.md.
 Historisch existieren zwei Dismiss-Timing-Varianten für das Bestätigungs-
 Popup; die Basis liefert die gestaffelte Variante (Waffe/Rüstung/Schild/
 Ausrüstung), `SofortDismissMixin` die sofortige Variante (Talent/Handicap/
@@ -21,12 +22,14 @@ Element-spezifisch bleiben in den Subklassen: Hinzufügen/Bearbeiten/Speichern,
 das tatsächliche Löschen (`_confirm_delete_elemente`) und der View-Refresh.
 """
 
-import time
-
 from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
+
+from utils.platform_utils import is_mobile_layout
+
+_mobile = is_mobile_layout()
 
 
 class BasisDialogHandler:
@@ -112,110 +115,33 @@ class BasisDialogHandler:
     # Two-Phase-Lösch-Flow
     # ------------------------------------------------------------------
     def show_delete_dialog(self):
-        """Zeigt das Two-Phase Popup zum Löschen von Elementen (Phase 1)."""
-        from kivymd.uix.dialog import MDDialog, MDDialogHeadlineText, MDDialogContentContainer, MDDialogButtonContainer
-        from kivymd.uix.button import MDButton, MDButtonText
-        from kivymd.uix.list import MDList, MDListItem, MDListItemSupportingText, MDListItemTrailingCheckbox
-        from kivymd.uix.scrollview import MDScrollView
-        from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
+        """Zeigt das Two-Phase Popup zum Löschen von Elementen (Phase 1).
 
+        Die Auswahl läuft über `SearchBottomSheet` (ModalView), NICHT über
+        einen `MDDialog`: Such-/Filterlisten in einem MDDialog scrollen auf
+        Android nicht (der Dialog stiehlt die Touch-Events), und der
+        Scrollbalken lag über den Checkboxen. Siehe
+        docs/ANDROID_WORKAROUNDS.md → SearchBottomSheet.
+        """
         elemente = self._get_loeschbare_elemente()
         if not elemente:
             self.show_error(f"Keine {self.element_name_plural} zum Löschen verfügbar.")
             return
 
-        self._delete_checkboxes = {}
-        self._delete_last_cb_times = {}
+        from views.ui_components import SearchBottomSheet
 
-        content = MDList(size_hint_y=None)
-        content.bind(minimum_height=content.setter('height'))
-
-        def create_checkbox(item_name):
-            item = MDListItem(size_hint_y=None, height=dp(48))
-            item.add_widget(MDListItemSupportingText(text=item_name))
-
-            checkbox = MDListItemTrailingCheckbox()
-            cb = checkbox
-
-            def on_release_checkbox(inst, cb=cb, name=item_name):
-                now = time.monotonic()
-                key = f"cb_{name}"
-                if key in self._delete_last_cb_times and (now - self._delete_last_cb_times[key]) < 0.5:
-                    return
-                self._delete_last_cb_times[key] = now
-
-            checkbox.bind(on_release=on_release_checkbox)
-            item.add_widget(checkbox)
-            content.add_widget(item)
-            self._delete_checkboxes[item_name] = checkbox
-
-        for element_name in sorted(elemente):
-            create_checkbox(element_name)
-
-        scroll_height = min(len(elemente) * dp(48), dp(250))
-        scroll = MDScrollView(
-            size_hint=(1, None),
-            height=scroll_height,
-            do_scroll_x=False,
-            do_scroll_y=True,
-        )
-        scroll.add_widget(content)
-
-        main_content = MDBoxLayout(
-            orientation="vertical",
-            spacing=dp(8),
-            size_hint_y=None,
-            padding=dp(16),
-            height=scroll_height + dp(80),
-        )
-
-        search_field = MDTextField(
-            mode="outlined",
-            size_hint_y=None,
-            height=dp(56),
-            hint_text="Suchen...",
-        )
-        search_field.add_widget(MDTextFieldHintText(text="Suchen..."))
-        main_content.add_widget(search_field)
-        main_content.add_widget(scroll)
-
-        def populate_list(search_text):
-            content.clear_widgets()
-            for element_name in sorted(elemente):
-                if search_text and search_text.lower() not in element_name.lower():
-                    continue
-                # Bestehende Checkbox wiederverwenden statt neue zu erstellen
-                if element_name in self._delete_checkboxes:
-                    item = MDListItem(size_hint_y=None, height=dp(48))
-                    item.add_widget(MDListItemSupportingText(text=element_name))
-                    cb_existing = self._delete_checkboxes[element_name]
-                    if cb_existing.parent:
-                        cb_existing.parent.remove_widget(cb_existing)
-                    item.add_widget(cb_existing)
-                    content.add_widget(item)
-                else:
-                    create_checkbox(element_name)
-
-        search_field.bind(text=lambda instance, value: populate_list(value))
-        populate_list("")
-
-        self._delete_popup = MDDialog(
-            MDDialogHeadlineText(text=f"{self.element_name} löschen"),
-            MDDialogContentContainer(main_content),
-            MDDialogButtonContainer(
-                MDButton(MDButtonText(text="Abbrechen"), style="text",
-                         on_release=lambda x: self._delete_popup.dismiss()),
-                MDButton(MDButtonText(text="Weiter"), style="filled",
-                         on_release=self._on_delete_action_clicked),
-            ),
-            size_hint=(0.85, None),
-            auto_dismiss=False,
+        self._delete_popup = SearchBottomSheet(
+            title=f"{self.element_name} löschen",
+            items=sorted(elemente),
+            multi_select=True,
+            on_confirm=self._on_delete_action_clicked,
+            search_hint=f"{self.element_name} suchen...",
         )
         self._delete_popup.open()
 
-    def _on_delete_action_clicked(self, *args):
-        """Phase 1: Sammelt ausgewählte Items und zeigt Bestätigungs-Popup."""
-        selected = [name for name, cb in self._delete_checkboxes.items() if cb.active]
+    def _on_delete_action_clicked(self, selected=None, *args):
+        """Phase 1: Übernimmt die Auswahl und zeigt das Bestätigungs-Popup."""
+        selected = list(selected) if selected else []
 
         if not selected:
             self.show_error(
@@ -224,11 +150,16 @@ class BasisDialogHandler:
             return
 
         self._pending_delete_items = selected
-        self._delete_popup.dismiss()
-        self._show_delete_confirmation_popup(
-            selected_items=selected,
-            item_type=self.element_name,
-            on_confirm=self._confirm_delete_elemente,
+        # Erst im nächsten Frame öffnen: das Auswahl-Sheet schließt sich
+        # gerade, ein sofort geöffneter Dialog kann auf Android in dessen
+        # Dismiss-Animation hängenbleiben.
+        Clock.schedule_once(
+            lambda dt: self._show_delete_confirmation_popup(
+                selected_items=selected,
+                item_type=self.element_name,
+                on_confirm=self._confirm_delete_elemente,
+            ),
+            0.1,
         )
 
     def _confirm_popup_callbacks(self, dismiss_fn, on_confirm):
@@ -258,25 +189,32 @@ class BasisDialogHandler:
         from kivymd.uix.button import MDButton, MDButtonText
 
         content = MDList(size_hint_y=None)
+        # Die feste Höhe gehört an den ScrollView, NICHT an sein Kind — sonst
+        # sind Einträge jenseits der Deckelung nicht erreichbar.
         content.bind(minimum_height=content.setter('height'))
+        if _mobile:
+            # Platz für den breiten Scrollbalken, sonst liegt er über dem Text
+            content.padding = [0, 0, dp(32), 0]
 
         for item_name in selected_items:
             list_item = MDListItem(size_hint_y=None, height=dp(48))
             list_item.add_widget(MDListItemSupportingText(text=item_name))
             content.add_widget(list_item)
 
-        scroll = MDScrollView(do_scroll_x=False, do_scroll_y=True)
-        scroll.add_widget(content)
-
         list_height = min(dp(48) * len(selected_items), dp(200))
-        content.size_hint_y = None
-        content.height = list_height
+        scroll = MDScrollView(
+            size_hint=(1, None),
+            height=list_height,
+            do_scroll_x=False,
+            do_scroll_y=True,
+        )
+        scroll.add_widget(content)
 
         main_content = MDBoxLayout(
             orientation="vertical",
             spacing=dp(8),
             size_hint_y=None,
-            height=dp(80) + list_height,
+            height=list_height + dp(32),
             padding=dp(16)
         )
         main_content.add_widget(scroll)

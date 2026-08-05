@@ -3,6 +3,8 @@
 UI-Komponenten und Tab-Klassen extrahiert aus main.py
 """
 
+import time
+
 from kivy.clock import Clock
 from kivy.properties import StringProperty, BooleanProperty, NumericProperty
 from kivy.uix.screenmanager import ScreenManager, SlideTransition
@@ -198,7 +200,13 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDIconButton
 from kivymd.uix.textfield import MDTextField, MDTextFieldHintText
-from kivymd.uix.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon
+from kivymd.uix.list import (
+    MDList,
+    MDListItem,
+    MDListItemHeadlineText,
+    MDListItemLeadingIcon,
+    MDListItemTrailingCheckbox,
+)
 from kivymd.uix.scrollview import MDScrollView
 from kivy.uix.modalview import ModalView
 from kivy.uix.widget import Widget
@@ -243,11 +251,24 @@ class SearchBottomSheet(ModalView):
             search_hint="Volk suchen...",
         )
         sheet.open()
+
+    Mehrfachauswahl (`multi_select=True`): jeder Eintrag bekommt eine
+    Checkbox (mit Per-Item-Debounce, siehe docs/ANDROID_WORKAROUNDS.md
+    Solution 4), das Sheet schliesst erst beim Bestaetigen und
+    `on_confirm` erhaelt die Liste der gewaehlten Namen:
+
+        sheet = SearchBottomSheet(
+            title="Fertigkeit löschen",
+            items=["Fahren", "Fokus"],
+            multi_select=True,
+            on_confirm=lambda namen: print(namen),
+        )
     """
 
     def __init__(self, title="Auswählen", items=None, selected=None,
                  on_confirm=None, on_cancel=None, search_hint="Suchen...",
-                 allow_none=False, none_label="Keine Auswahl", **kwargs):
+                 allow_none=False, none_label="Keine Auswahl",
+                 multi_select=False, **kwargs):
         # ModalView-Einstellungen: transparenter Hintergrund, kein auto_dismiss-Bereich-Problem
         kwargs.setdefault('size_hint', (1, 1))
         kwargs.setdefault('background_color', (0, 0, 0, 0))
@@ -261,6 +282,13 @@ class SearchBottomSheet(ModalView):
         self._on_cancel = on_cancel
         self._allow_none = allow_none
         self._none_label = none_label
+        self._multi_select = multi_select
+        self._title = title
+        # Mehrfachauswahl: gewaehlte Namen + Per-Item-Debounce (Android)
+        self._selected_items = set()
+        if multi_select and selected:
+            self._selected_items = set(selected)
+        self._last_checkbox_times = {}
 
         # Scrim (halbtransparenter Hintergrund) - Klick schließt das Sheet
         scrim = Widget(size_hint=(1, 1))
@@ -316,14 +344,15 @@ class SearchBottomSheet(ModalView):
             on_release=lambda x: self._cancel(),
             pos_hint={'center_y': 0.5},
         ))
-        header.add_widget(MDLabel(
+        self._title_label = MDLabel(
             text=title,
             font_style="Title",
             role="medium",
             bold=True,
             size_hint_x=1,
             pos_hint={'center_y': 0.5},
-        ))
+        )
+        header.add_widget(self._title_label)
         confirm_btn = MDIconButton(
             icon="check",
             on_release=lambda x: self._confirm(),
@@ -400,6 +429,10 @@ class SearchBottomSheet(ModalView):
         self._items_list.clear_widgets()
         search_text = self._search_field.text.lower() if self._search_field.text else ""
 
+        if self._multi_select:
+            self._populate_multi_select(search_text)
+            return
+
         from kivymd.app import MDApp
         app = MDApp.get_running_app()
         theme = app.theme_cls if app else None
@@ -449,6 +482,46 @@ class SearchBottomSheet(ModalView):
             item.add_widget(headline)
             self._items_list.add_widget(item)
 
+    def _populate_multi_select(self, search_text):
+        """Befüllt die Liste mit Checkboxen (Mehrfachauswahl)."""
+        for name in self._items:
+            if search_text and search_text not in name.lower():
+                continue
+
+            item = MDListItem(size_hint_y=None, height=dp(48))
+            item.add_widget(MDListItemHeadlineText(text=name))
+
+            checkbox = MDListItemTrailingCheckbox(active=name in self._selected_items)
+            cb = checkbox  # Intermediate Variable gegen den Closure-Bug
+            checkbox.bind(
+                on_release=lambda x, cb=cb, n=name: self._on_checkbox_toggled(n, cb)
+            )
+            item.add_widget(checkbox)
+            self._items_list.add_widget(item)
+
+        self._update_title()
+
+    def _on_checkbox_toggled(self, name, checkbox):
+        """Übernimmt eine Checkbox-Änderung — mit Per-Item-Debounce (Android)."""
+        now = time.monotonic()
+        key = f"cb_{name}"
+        if key in self._last_checkbox_times and (now - self._last_checkbox_times[key]) < 0.5:
+            return  # Touch-Bounce für DIESEN Eintrag ignorieren
+        self._last_checkbox_times[key] = now
+
+        if checkbox.active:
+            self._selected_items.add(name)
+        else:
+            self._selected_items.discard(name)
+        self._update_title()
+
+    def _update_title(self):
+        """Zeigt die Anzahl der gewählten Einträge im Titel (Mehrfachauswahl)."""
+        if not self._multi_select or not self._title_label:
+            return
+        anzahl = len(self._selected_items)
+        self._title_label.text = f"{self._title} ({anzahl})" if anzahl else self._title
+
     def _filter_list(self, *args):
         """Filtert die Liste bei Texteingabe."""
         self._populate_list()
@@ -467,7 +540,10 @@ class SearchBottomSheet(ModalView):
     def _finish_confirm(self):
         self.dismiss()
         if self._on_confirm:
-            self._on_confirm(self._selected)
+            if self._multi_select:
+                self._on_confirm(sorted(self._selected_items))
+            else:
+                self._on_confirm(self._selected)
 
     def _cancel(self):
         """Bricht ab und schließt das Sheet."""
